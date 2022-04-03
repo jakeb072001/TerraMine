@@ -1,9 +1,0 @@
-{
-  "type": "minecraft:smelting",
-  "ingredient": {
-    "item": "artifacts:corrupted_sand_block"
-  },
-  "result": "artifacts:corrupted_glass_block",
-  "experience": 0.1,
-  "cookingtime": 200
-}

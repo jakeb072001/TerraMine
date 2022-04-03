@@ -1,6 +1,0 @@
-{
-  "parent": "fabricshieldlib:item/fabric_shield_blocking",
-  "textures":{
-    "shield":"artifacts:item/cobalt_shield"
-  }
-}

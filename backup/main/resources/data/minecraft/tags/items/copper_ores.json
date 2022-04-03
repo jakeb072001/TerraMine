@@ -1,7 +1,0 @@
-{
-  "replace": false,
-  "values": [
-    "artifacts:corrupted_copper_ore_block",
-    "artifacts:corrupted_deepslate_copper_ore_block"
-  ]
-}
