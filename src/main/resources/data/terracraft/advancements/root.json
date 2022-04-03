@@ -1,0 +1,23 @@
+{
+    "display": {
+        "title": {
+            "translate": "terracraft.advancements.root.title"
+        },
+        "description": {
+            "translate": "terracraft.advancements.root.description"
+        },
+        "icon": {
+            "item": "terracraft:terraspark_boots"
+        },
+        "frame": "task",
+        "show_toast": true,
+        "announce_to_chat": true,
+        "hidden": false,
+        "background": "terracraft:textures/block/corrupt_stone.png"
+    },
+    "criteria": {
+        "impossible": {
+            "trigger": "minecraft:impossible"
+        }
+    }
+}

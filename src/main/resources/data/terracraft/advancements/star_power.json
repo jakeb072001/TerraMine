@@ -1,0 +1,25 @@
+{
+  "parent": "terracraft:root",
+  "display": {
+    "icon": {
+      "item": "terracraft:mana_crystal"
+    },
+    "title": {
+      "translate": "terracraft.advancements.star_power.title"
+    },
+    "description": {
+      "translate": "terracraft.advancements.star_power.description"
+    }
+  },
+  "criteria": {
+    "consume_mana_crystal": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item":
+          {
+            "item": "terracraft:mana_crystal"
+          }
+      }
+    }
+  }
+}

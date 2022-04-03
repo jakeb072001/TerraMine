@@ -1,5 +1,5 @@
 {
-  "parent": "terracraft:amateur_archaeologist",
+  "parent": "terracraft:i_am_loot",
   "display": {
     "icon": {
       "item": "terracraft:mimic_spawn_egg"

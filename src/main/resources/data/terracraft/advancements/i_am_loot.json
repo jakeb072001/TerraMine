@@ -1,14 +1,14 @@
 {
-  "parent": "minecraft:adventure/root",
+  "parent": "terracraft:root",
   "display": {
     "icon": {
-      "item": "terracraft:terraspark_boots"
+      "item": "terracraft:aglet"
     },
     "title": {
-      "translate": "terracraft.advancements.amateur_archaeologist.title"
+      "translate": "terracraft.advancements.i_am_loot.title"
     },
     "description": {
-      "translate": "terracraft.advancements.amateur_archaeologist.description"
+      "translate": "terracraft.advancements.i_am_loot.description"
     }
   },
   "criteria": {
