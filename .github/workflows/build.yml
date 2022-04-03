@@ -1,6 +1,3 @@
-name: Make gradlew executable
-run: chmod +x ./gradlew
-
 name: Java CI
 
 on: [push]
@@ -14,5 +11,7 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 17
+      - name: Make gradlew executable
+        run: chmod +x ./gradlew
       - name: Build with Gradle
         run: ./gradlew clean build --refresh-dependencies --stacktrace
