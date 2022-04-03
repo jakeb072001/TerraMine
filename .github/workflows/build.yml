@@ -16,5 +16,5 @@ jobs:
           arguments: build --stacktrace
       - uses: actions/upload-artifact@v2
         with:
-          name: Artifacts
+          name: TerraCraft
           path: build/libs/
