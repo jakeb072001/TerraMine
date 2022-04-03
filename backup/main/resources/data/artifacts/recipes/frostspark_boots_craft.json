@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "artifacts:lightning_boots"
+    },
+    {
+      "item": "artifacts:ice_skates"
+    }
+  ],
+  "result": {
+    "item": "artifacts:frostspark_boots",
+    "count": 1
+  }
+}

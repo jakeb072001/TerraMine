@@ -1,0 +1,26 @@
+{
+  "parent": "minecraft:adventure/root",
+  "display": {
+    "icon": {
+      "item": "terracraft:terraspark_boots"
+    },
+    "title": {
+      "translate": "terracraft.advancements.amateur_archaeologist.title"
+    },
+    "description": {
+      "translate": "terracraft.advancements.amateur_archaeologist.description"
+    }
+  },
+  "criteria": {
+    "find_accessory": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "terracraft:accessory"
+          }
+        ]
+      }
+    }
+  }
+}

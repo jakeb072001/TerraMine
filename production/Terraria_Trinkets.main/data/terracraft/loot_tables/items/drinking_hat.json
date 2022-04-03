@@ -1,0 +1,19 @@
+{
+  "pools": [
+    {
+      "name": "main",
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "weight": 3,
+          "name": "terracraft:plastic_drinking_hat"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "terracraft:novelty_drinking_hat"
+        }
+      ]
+    }
+  ]
+}

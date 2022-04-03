@@ -1,0 +1,23 @@
+{
+  "layers": [
+    {
+      "textures": {
+        "top": "artifacts:block/corrupt_snow",
+        "side": "artifacts:block/corrupt_grass_block_snow"
+      }
+    },
+    {
+      "textures": {
+        "top": "artifacts:block/snow_outline",
+        "side": "artifacts:block/transparent",
+		"overrides": {
+          "connect": "artifacts:block/transparent"
+        }
+      },
+      "masks": {
+        "blend_up": "artifacts:bettergrass/mask/snowy_grass_block_side_outline_blend_up",
+        "arch": "artifacts:bettergrass/mask/snowy_grass_block_side_outline_arch_blend"
+      }
+    }
+  ]
+}

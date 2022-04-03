@@ -1,0 +1,11 @@
+{
+  "type": "grass",
+  "variants": {
+    "snowy=false": {
+      "data": "terracraft:bettergrass/data/corrupted_grass_block"
+    },
+    "snowy=true": {
+      "data": "terracraft:bettergrass/data/snowy_corrupted_grass_block"
+    }
+  }
+}

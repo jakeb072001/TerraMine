@@ -1,0 +1,21 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "terracraft:block/corrupted_dirt"
+      },
+      {
+        "model": "terracraft:block/corrupted_dirt",
+        "y": 90
+      },
+      {
+        "model": "terracraft:block/corrupted_dirt",
+        "y": 180
+      },
+      {
+        "model": "terracraft:block/corrupted_dirt",
+        "y": 270
+      }
+    ]
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "replace": false,
+  "values": [
+    "artifacts:corrupted_diamond_ore",
+    "artifacts:corrupted_deepslate_diamond_ore",
+    "artifacts:corrupted_emerald_ore",
+    "artifacts:corrupted_deepslate_emerald_ore",
+    "artifacts:corrupted_gold_ore",
+    "artifacts:corrupted_deepslate_gold_ore",
+    "artifacts:corrupted_redstone_ore",
+    "artifacts:corrupted_deepslate_redstone_ore",
+	"artifacts:demonite_ore",
+    "artifacts:deepslate_demonite_ore"
+  ]
+}

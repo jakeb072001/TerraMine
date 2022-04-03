@@ -1,0 +1,12 @@
+{
+  "entities": [
+    "player"
+  ],
+  "slots": [
+    "terraria/accessory1",
+    "terraria/accessory2",
+    "terraria/accessory3",
+    "terraria/accessory4",
+    "terraria/accessory5"
+  ]
+}

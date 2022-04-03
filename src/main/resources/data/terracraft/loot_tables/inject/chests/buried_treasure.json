@@ -1,0 +1,66 @@
+{
+  "pools": [
+    {
+      "name": "main",
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "weight": 5,
+          "name": "terracraft:snorkel"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 5,
+          "name": "terracraft:flippers"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 5,
+          "name": "terracraft:umbrella"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 5,
+          "name": "terracraft:golden_hook"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 3,
+          "name": "terracraft:feral_claws"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 3,
+          "name": "terracraft:digging_claws"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 3,
+          "name": "terracraft:kitty_slippers"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 3,
+          "name": "terracraft:lucky_scarf"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 3,
+          "name": "terracraft:lava_waders"
+        },
+        {
+          "type": "minecraft:loot_table",
+          "weight": 3,
+          "name": "terracraft:items/drinking_hat"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "terracraft:configurable_random_chance",
+          "default_probability": 0.25
+        }
+      ]
+    }
+  ]
+}

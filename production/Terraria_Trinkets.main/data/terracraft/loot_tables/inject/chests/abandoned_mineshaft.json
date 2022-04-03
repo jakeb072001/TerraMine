@@ -1,0 +1,106 @@
+{
+  "pools": [
+    {
+      "name": "main",
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "weight": 2,
+          "name": "terracraft:night_vision_goggles"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 2,
+          "name": "terracraft:panic_necklace"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 2,
+          "name": "terracraft:obsidian_skull"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "terracraft:obsidian_rose"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "terracraft:magma_stone"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "terracraft:lucky_horseshoe"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "terracraft:shiny_red_balloon"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "terracraft:lava_charm"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "terracraft:water_walking_boots"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 2,
+          "name": "terracraft:superstitious_hat"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 2,
+          "name": "terracraft:digging_claws"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 2,
+          "name": "terracraft:cloud_in_a_bottle"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 2,
+          "name": "terracraft:vampiric_glove"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 2,
+          "name": "terracraft:aglet"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 2,
+          "name": "terracraft:anklet"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 2,
+          "name": "terracraft:ice_skates"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 2,
+          "name": "terracraft:rocket_boots"
+        },
+        {
+          "type": "minecraft:loot_table",
+          "weight": 2,
+          "name": "terracraft:items/drinking_hat"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "terracraft:configurable_random_chance",
+          "default_probability": 0.3
+        }
+      ]
+    }
+  ]
+}

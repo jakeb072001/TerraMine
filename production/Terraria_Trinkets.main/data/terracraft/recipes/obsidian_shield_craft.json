@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "terracraft:cobalt_shield"
+    },
+    {
+      "item": "terracraft:obsidian_skull"
+    }
+  ],
+  "result": {
+    "item": "terracraft:obsidian_shield",
+    "count": 1
+  }
+}

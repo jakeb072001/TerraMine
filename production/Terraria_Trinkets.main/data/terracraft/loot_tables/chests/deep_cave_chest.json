@@ -1,0 +1,26 @@
+{
+  "pools": [
+    {
+      "name": "accessories",
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:loot_table",
+          "name": "terracraft:chests/chest_loot/deep_cave",
+          "weight": 100
+        }
+      ]
+    },
+    {
+      "name": "extra",
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:loot_table",
+          "name": "terracraft:chests/chest_loot/deep_cave_extra",
+          "weight": 100
+        }
+      ]
+    }
+  ]
+}

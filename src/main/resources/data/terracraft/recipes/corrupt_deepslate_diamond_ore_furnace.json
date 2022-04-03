@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:smelting",
+  "group": "diamond",
+  "ingredient": {
+    "item": "terracraft:corrupted_deepslate_diamond_ore_block"
+  },
+  "result": "minecraft:diamond",
+  "experience": 1.0,
+  "cookingtime": 200
+}

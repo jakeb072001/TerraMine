@@ -1,0 +1,20 @@
+{
+  "pools": [
+    {
+      "name": "main",
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "terracraft:everlasting_beef"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "terracraft:configurable_random_chance",
+          "default_probability": 0.02
+        }
+      ]
+    }
+  ]
+}

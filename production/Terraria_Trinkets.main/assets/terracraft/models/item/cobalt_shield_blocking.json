@@ -1,0 +1,6 @@
+{
+  "parent": "fabricshieldlib:item/fabric_shield_blocking",
+  "textures":{
+    "shield":"terracraft:item/cobalt_shield"
+  }
+}

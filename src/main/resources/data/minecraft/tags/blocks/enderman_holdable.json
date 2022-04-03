@@ -1,0 +1,7 @@
+{
+  "replace": false,
+  "values": [
+    "terracraft:corrupted_sand",
+    "terracraft:corrupted_gravel"
+  ]
+}

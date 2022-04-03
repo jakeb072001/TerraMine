@@ -1,0 +1,7 @@
+{
+  "replace": false,
+  "values": [
+    "terracraft:corrupted_redstone_ore",
+    "terracraft:corrupted_deepslate_redstone_ore"
+  ]
+}

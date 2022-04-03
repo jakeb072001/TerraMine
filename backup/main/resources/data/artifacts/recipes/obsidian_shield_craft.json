@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "artifacts:cobalt_shield"
+    },
+    {
+      "item": "artifacts:obsidian_skull"
+    }
+  ],
+  "result": {
+    "item": "artifacts:obsidian_shield",
+    "count": 1
+  }
+}

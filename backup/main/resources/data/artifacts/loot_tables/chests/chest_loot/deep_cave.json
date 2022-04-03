@@ -1,0 +1,30 @@
+{
+  "pools": [
+    {
+      "name": "main",
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:loot_table",
+          "weight": 50,
+          "name": "artifacts:chests/chest_loot/cave"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 30,
+          "name": "artifacts:lucky_horseshoe"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 20,
+          "name": "artifacts:lava_charm"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 20,
+          "name": "artifacts:metal_detector"
+        }
+      ]
+    }
+  ]
+}

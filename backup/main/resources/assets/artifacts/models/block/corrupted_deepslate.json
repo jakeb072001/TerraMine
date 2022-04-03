@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "artifacts:block/corrupt_deepslate_top",
+    "side": "artifacts:block/corrupt_deepslate"
+  }
+}

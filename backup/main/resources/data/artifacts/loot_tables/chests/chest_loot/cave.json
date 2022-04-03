@@ -1,0 +1,35 @@
+{
+  "pools": [
+    {
+      "name": "main",
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "weight": 20,
+          "name": "artifacts:hermes_boots"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 20,
+          "name": "artifacts:cloud_in_a_bottle"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 20,
+          "name": "artifacts:band_of_regeneration"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 20,
+          "name": "artifacts:shoe_spikes"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 20,
+          "name": "artifacts:magic_mirror"
+        }
+      ]
+    }
+  ]
+}

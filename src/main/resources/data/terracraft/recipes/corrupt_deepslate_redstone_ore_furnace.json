@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:smelting",
+  "group": "redstone",
+  "ingredient": {
+    "item": "terracraft:corrupted_deepslate_redstone_ore_block"
+  },
+  "result": "minecraft:redstone",
+  "experience": 0.7,
+  "cookingtime": 200
+}

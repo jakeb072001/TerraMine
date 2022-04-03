@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "artifacts:obsidian_rose"
+    },
+    {
+      "item": "artifacts:obsidian_skull"
+    }
+  ],
+  "result": {
+    "item": "artifacts:obsidian_skull_rose",
+    "count": 1
+  }
+}

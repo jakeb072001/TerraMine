@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "A",
+    "B",
+    "C"
+  ],
+  "key": {
+    "A": {
+      "tag": "artifacts:artifacts"
+    },
+	"B": {
+      "item": "minecraft:book"
+    },
+    "C": {
+      "item": "minecraft:crafting_table"
+    }
+  },
+  "result": {
+    "item": "artifacts:tinkerer_workshop_block"
+  }
+}

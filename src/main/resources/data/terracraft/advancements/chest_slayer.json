@@ -1,0 +1,30 @@
+{
+  "parent": "terracraft:amateur_archaeologist",
+  "display": {
+    "icon": {
+      "item": "terracraft:mimic_spawn_egg"
+    },
+    "title": {
+      "translate": "terracraft.advancements.chest_slayer.title"
+    },
+    "description": {
+      "translate": "terracraft.advancements.chest_slayer.description"
+    }
+  },
+  "criteria": {
+    "kill_mimic": {
+      "trigger": "minecraft:player_killed_entity",
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "predicate": {
+              "type": "terracraft:mimic"
+            },
+            "entity": "this"
+          }
+        ]
+      }
+    }
+  }
+}

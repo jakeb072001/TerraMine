@@ -1,0 +1,20 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "artifacts:block/corrupted_stone"
+      },
+      {
+        "model": "artifacts:block/corrupted_stone_mirrored"
+      },
+      {
+        "model": "artifacts:block/corrupted_stone",
+        "y": 180
+      },
+      {
+        "model": "artifacts:block/corrupted_stone_mirrored",
+        "y": 180
+      }
+    ]
+  }
+}

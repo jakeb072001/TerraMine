@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "artifacts:spectre_boots"
+    },
+    {
+      "item": "artifacts:anklet"
+    },
+    {
+      "item": "artifacts:aglet"
+    }
+  ],
+  "result": {
+    "item": "artifacts:lightning_boots",
+    "count": 1
+  }
+}

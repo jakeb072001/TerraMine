@@ -1,0 +1,34 @@
+{
+  "pools": [
+    {
+      "name": "main",
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "weight": 3,
+          "name": "artifacts:umbrella"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 2,
+          "name": "artifacts:whoopee_cushion"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "artifacts:kitty_slippers"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "artifacts:scarf_of_invisibility"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "artifacts:configurable_random_chance",
+          "default_probability": 0.2
+        }
+      ]
+    }
+  ]
+}

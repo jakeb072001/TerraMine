@@ -1,0 +1,350 @@
+{
+  "pools": [
+    {
+      "name": "main",
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "artifacts:snorkel"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "artifacts:night_vision_goggles"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "artifacts:panic_necklace"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "artifacts:shock_pendant"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "artifacts:magma_stone"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "artifacts:lucky_horseshoe"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "artifacts:shiny_red_balloon"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "artifacts:flame_pendant"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "artifacts:thorn_pendant"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "artifacts:flippers"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "artifacts:obsidian_skull"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "artifacts:obsidian_rose"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "artifacts:rocket_boots"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "artifacts:lava_charm"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "artifacts:water_walking_boots"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "artifacts:feral_claws"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "artifacts:pocket_piston"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "artifacts:power_glove"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "artifacts:depth_meter"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "artifacts:compass"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "artifacts:weather_radio"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "artifacts:sextant"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "artifacts:metal_detector"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "artifacts:stopwatch"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "artifacts:dps_meter"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "artifacts:cross_necklace"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "artifacts:antidote_vessel"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "artifacts:lucky_scarf"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "artifacts:superstitious_hat"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "artifacts:scarf_of_invisibility"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "artifacts:digging_claws"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "artifacts:steadfast_spikes"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "artifacts:universal_attractor"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "artifacts:kitty_slippers"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "artifacts:hermes_boots"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "artifacts:aglet"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "artifacts:anklet"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "artifacts:ice_skates"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "artifacts:crystal_heart"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "artifacts:villager_hat"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "artifacts:cloud_in_a_bottle"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "artifacts:ranger_emblem"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "artifacts:warrior_emblem"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "artifacts:sorcerer_emblem"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "artifacts:titan_glove"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "artifacts:mechanical_glove"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "artifacts:band_of_regeneration"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "artifacts:band_of_starpower"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "artifacts:flower_boots"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "artifacts:toolbelt"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "artifacts:toolbox"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "artifacts:extendo_grip"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "artifacts:ancient_chisel"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "artifacts:cobalt_shield"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "artifacts:shackle"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "artifacts:shoe_spikes"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "artifacts:climbing_claws"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "artifacts:tabi"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "artifacts:black_belt"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "artifacts:vampiric_glove"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "artifacts:golden_hook"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "artifacts:charm_of_sinking"
+        },
+        {
+          "type": "minecraft:loot_table",
+          "weight": 8,
+          "name": "artifacts:items/drinking_hat"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 5,
+          "name": "artifacts:umbrella"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 5,
+          "name": "artifacts:whoopee_cushion"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 4,
+          "name": "artifacts:helium_flamingo"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 2,
+          "name": "artifacts:everlasting_beef"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 2,
+          "name": "artifacts:magic_mirror"
+        }
+      ]
+    }
+  ]
+}

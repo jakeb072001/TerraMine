@@ -1,0 +1,10 @@
+{
+    "variants": {
+        "": [ 
+            { "model": "terracraft:block/corrupted_sand" },
+            { "model": "terracraft:block/corrupted_sand", "y": 90 },
+            { "model": "terracraft:block/corrupted_sand", "y": 180 },
+            { "model": "terracraft:block/corrupted_sand", "y": 270 }
+        ]
+    }
+}

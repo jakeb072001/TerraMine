@@ -1,0 +1,10 @@
+{
+    "variants": {
+        "": [ 
+            { "model": "artifacts:block/corrupted_sand" },
+            { "model": "artifacts:block/corrupted_sand", "y": 90 },
+            { "model": "artifacts:block/corrupted_sand", "y": 180 },
+            { "model": "artifacts:block/corrupted_sand", "y": 270 }
+        ]
+    }
+}

@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:smelting",
+  "group": "gold_ingot",
+  "ingredient": {
+    "item": "terracraft:corrupted_gold_ore_block"
+  },
+  "result": "minecraft:gold_ingot",
+  "experience": 1.0,
+  "cookingtime": 200
+}

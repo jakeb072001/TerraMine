@@ -1,0 +1,7 @@
+{
+  "replace": false,
+  "values": [
+    "terracraft:corrupted_coal_ore_block",
+    "terracraft:corrupted_deepslate_coal_ore_block"
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "artifacts:obsidian_rose"
+    },
+    {
+      "item": "artifacts:obsidian_water_walking_boots"
+    },
+    {
+      "item": "artifacts:molten_charm"
+    }
+  ],
+  "result": {
+    "item": "artifacts:lava_waders",
+    "count": 1
+  }
+}

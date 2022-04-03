@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "terracraft:gps"
+    },
+    {
+      "item": "terracraft:fish_finder"
+    },
+    {
+      "item": "terracraft:goblin_tech"
+    }
+  ],
+  "result": {
+    "item": "terracraft:pda",
+    "count": 1
+  }
+}

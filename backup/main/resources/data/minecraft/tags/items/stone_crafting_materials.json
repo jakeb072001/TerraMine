@@ -1,0 +1,7 @@
+{
+  "replace": false,
+  "values": [
+    "artifacts:corrupted_cobblestone_block",
+    "artifacts:corrupted_cobbled_deepslate_block"
+  ]
+}

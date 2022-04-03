@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "terracraft:mechanical_glove"
+    },
+    {
+      "item": "terracraft:magma_stone"
+    }
+  ],
+  "result": {
+    "item": "terracraft:fire_gauntlet",
+    "count": 1
+  }
+}

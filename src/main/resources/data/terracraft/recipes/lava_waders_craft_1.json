@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "terracraft:obsidian_rose"
+    },
+    {
+      "item": "terracraft:water_walking_boots"
+    },
+    {
+      "item": "terracraft:molten_charm"
+    }
+  ],
+  "result": {
+    "item": "terracraft:lava_waders",
+    "count": 1
+  }
+}

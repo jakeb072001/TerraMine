@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "terracraft:corrupted_iron_ore",
+    "terracraft:corrupted_deepslate_iron_ore",
+    "terracraft:corrupted_lapis_ore",
+    "terracraft:corrupted_deepslate_lapis_ore",
+    "terracraft:corrupted_copper_ore",
+    "terracraft:corrupted_deepslate_copper_ore"
+  ]
+}

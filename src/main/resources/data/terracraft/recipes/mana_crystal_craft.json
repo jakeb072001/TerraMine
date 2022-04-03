@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "terracraft:fallen_star"
+    },
+    {
+      "item": "terracraft:fallen_star"
+    },
+    {
+      "item": "terracraft:fallen_star"
+    },
+    {
+      "item": "terracraft:fallen_star"
+    },
+    {
+      "item": "terracraft:fallen_star"
+    }
+  ],
+  "result": {
+    "item": "terracraft:mana_crystal",
+    "count": 1
+  }
+}

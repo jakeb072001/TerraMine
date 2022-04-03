@@ -1,0 +1,11 @@
+{
+  "parent": "terracraft:item/umbrella_base",
+  "overrides": [
+    {
+      "predicate": {
+        "blocking": 1
+      },
+      "model": "terracraft:item/umbrella_blocking"
+    }
+  ]
+}

@@ -1,0 +1,56 @@
+{
+  "pools": [
+    {
+      "name": "main",
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "weight": 2,
+          "name": "terracraft:flame_pendant"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 2,
+          "name": "terracraft:thorn_pendant"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 2,
+          "name": "terracraft:whoopee_cushion"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 2,
+          "name": "terracraft:charm_of_sinking"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "terracraft:shock_pendant"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "terracraft:umbrella"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "terracraft:scarf_of_invisibility"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "terracraft:universal_attractor"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "terracraft:vampiric_glove"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "terracraft:configurable_random_chance",
+          "default_probability": 0.2
+        }
+      ]
+    }
+  ]
+}

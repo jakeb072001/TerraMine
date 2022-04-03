@@ -1,0 +1,52 @@
+{
+  "pools": [
+    {
+      "name": "main",
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:loot_table",
+          "weight": 6,
+          "name": "terracraft:accessory"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 3,
+          "name": "terracraft:golden_hook"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 3,
+          "name": "terracraft:cross_necklace"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 2,
+          "name": "terracraft:fire_gauntlet"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "terracraft:steadfast_spikes"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "terracraft:panic_necklace"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "terracraft:crystal_heart"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "terracraft:antidote_vessel"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "terracraft:configurable_random_chance",
+          "default_probability": 0.65
+        }
+      ]
+    }
+  ]
+}

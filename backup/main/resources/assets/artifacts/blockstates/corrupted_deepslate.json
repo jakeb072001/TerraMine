@@ -1,0 +1,62 @@
+{
+  "variants": {
+    "axis=x": [
+      {
+        "model": "artifacts:block/corrupted_deepslate",
+        "x": 90,
+        "y": 90
+      },
+      {
+        "model": "artifacts:block/corrupted_deepslate_mirrored",
+        "x": 90,
+        "y": 90
+      },
+      {
+        "model": "artifacts:block/corrupted_deepslate",
+        "y": 90,
+        "x": 90
+      },
+      {
+        "model": "artifacts:block/corrupted_deepslate_mirrored",
+        "y": 90,
+        "x": 90
+      }
+    ],
+    "axis=y": [
+      {
+        "model": "artifacts:block/corrupted_deepslate"
+      },
+      {
+        "model": "artifacts:block/corrupted_deepslate_mirrored"
+      },
+      {
+        "model": "artifacts:block/corrupted_deepslate",
+        "y": 180
+      },
+      {
+        "model": "artifacts:block/corrupted_deepslate_mirrored",
+        "y": 180
+      }
+    ],
+    "axis=z": [
+      {
+        "model": "artifacts:block/corrupted_deepslate",
+        "x": 90
+      },
+      {
+        "model": "artifacts:block/corrupted_deepslate_mirrored",
+        "x": 90
+      },
+      {
+        "model": "artifacts:block/corrupted_deepslate",
+        "y": 180,
+        "x": 90
+      },
+      {
+        "model": "artifacts:block/corrupted_deepslate_mirrored",
+        "y": 180,
+        "x": 90
+      }
+    ]
+  }
+}

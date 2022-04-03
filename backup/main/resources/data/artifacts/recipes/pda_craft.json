@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "artifacts:gps"
+    },
+    {
+      "item": "artifacts:fish_finder"
+    },
+    {
+      "item": "artifacts:goblin_tech"
+    }
+  ],
+  "result": {
+    "item": "artifacts:pda",
+    "count": 1
+  }
+}

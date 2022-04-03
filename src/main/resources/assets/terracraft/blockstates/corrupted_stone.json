@@ -1,0 +1,20 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "terracraft:block/corrupted_stone"
+      },
+      {
+        "model": "terracraft:block/corrupted_stone_mirrored"
+      },
+      {
+        "model": "terracraft:block/corrupted_stone",
+        "y": 180
+      },
+      {
+        "model": "terracraft:block/corrupted_stone_mirrored",
+        "y": 180
+      }
+    ]
+  }
+}

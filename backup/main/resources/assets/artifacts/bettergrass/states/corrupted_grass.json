@@ -1,0 +1,11 @@
+{
+  "type": "grass",
+  "variants": {
+    "snowy=false": {
+      "data": "artifacts:bettergrass/data/corrupted_grass_block"
+    },
+    "snowy=true": {
+      "data": "artifacts:bettergrass/data/snowy_corrupted_grass_block"
+    }
+  }
+}

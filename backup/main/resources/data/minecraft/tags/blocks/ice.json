@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "artifacts:corrupted_ice",
+    "artifacts:corrupted_packed_ice",
+    "artifacts:corrupted_blue_ice"
+  ]
+}

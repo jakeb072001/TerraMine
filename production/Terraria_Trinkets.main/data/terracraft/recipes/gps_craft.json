@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "terracraft:gold_watch"
+    },
+    {
+      "item": "terracraft:depth_meter"
+    },
+    {
+      "item": "terracraft:compass"
+    }
+  ],
+  "result": {
+    "item": "terracraft:gps",
+    "count": 1
+  }
+}

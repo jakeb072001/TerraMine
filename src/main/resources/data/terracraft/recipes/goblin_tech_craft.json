@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "terracraft:metal_detector"
+    },
+    {
+      "item": "terracraft:stopwatch"
+    },
+    {
+      "item": "terracraft:dps_meter"
+    }
+  ],
+  "result": {
+    "item": "terracraft:goblin_tech",
+    "count": 1
+  }
+}

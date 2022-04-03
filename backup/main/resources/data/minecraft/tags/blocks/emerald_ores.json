@@ -1,0 +1,7 @@
+{
+  "replace": false,
+  "values": [
+    "artifacts:corrupted_emerald_ore",
+    "artifacts:corrupted_deepslate_emerald_ore"
+  ]
+}

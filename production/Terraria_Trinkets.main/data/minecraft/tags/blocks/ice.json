@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "terracraft:corrupted_ice",
+    "terracraft:corrupted_packed_ice",
+    "terracraft:corrupted_blue_ice"
+  ]
+}

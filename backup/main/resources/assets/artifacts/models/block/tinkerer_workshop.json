@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "particle": "artifacts:block/tinkerer_workshop_front",
+    "north": "artifacts:block/tinkerer_workshop_front",
+    "south": "artifacts:block/tinkerer_workshop_front",
+    "east": "artifacts:block/tinkerer_workshop_side",
+    "west": "artifacts:block/tinkerer_workshop_side",
+    "up": "artifacts:block/tinkerer_workshop_top",
+    "down": "minecraft:block/oak_planks"
+  }
+}

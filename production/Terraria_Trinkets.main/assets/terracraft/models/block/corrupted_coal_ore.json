@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "terracraft:block/corrupt_coal_ore"
+  }
+}

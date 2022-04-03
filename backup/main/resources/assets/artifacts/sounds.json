@@ -1,0 +1,123 @@
+{
+  "generic.pop": {
+    "sounds": [
+      "random/pop"
+    ]
+  },
+  "item.rocket_boots.flame": {
+    "sounds": [
+      "artifacts:boots/rocketbootsflame"
+    ]
+  },
+  "item.spectre_boots.flame": {
+    "sounds": [
+      "artifacts:boots/spectrebootsflame"
+    ]
+  },
+  "item.spectre_boots.run": {
+    "sounds": [
+      "artifacts:boots/spectrebootsrun"
+    ]
+  },
+  "generic.double_jump": {
+    "sounds": [
+      "artifacts:doublejump"
+    ]
+  },
+  "item.magic_mirror.use": {
+    "sounds": [
+      "artifacts:magicmirroruse"
+    ]
+  },
+  "item.magicmissile.use": {
+    "sounds": [
+      "artifacts:mana/missile/magicshoot"
+    ]
+  },
+  "item.flamelash.use": {
+    "sounds": [
+      "artifacts:mana/missile/flameshoot"
+    ]
+  },
+  "item.rainbowrod.use": {
+    "sounds": [
+      "artifacts:mana/missile/rainbowshoot"
+    ]
+  },
+  "mana.full": {
+    "sounds": [
+      "artifacts:mana/full"
+    ]
+  },
+  "item.mana_crystal.use": {
+    "sounds": [
+      "artifacts:mana/crystaluse"
+    ]
+  },
+  "fallingstar.fall": {
+    "sounds": [
+      "artifacts:fallingstar/starfall"
+    ]
+  },
+  "fallingstar.crash": {
+    "sounds": [
+      "artifacts:fallingstar/starcrash"
+    ]
+  },
+  "entity.mimic.close": {
+    "sounds": [
+      "block/chest/close",
+      "block/chest/close2",
+      "block/chest/close3"
+    ],
+    "subtitle": "artifacts.subtitles.entity.mimic.close"
+  },
+  "entity.mimic.open": {
+    "sounds": [
+      "block/chest/open"
+    ],
+    "subtitle": "artifacts.subtitles.entity.mimic.open"
+  },
+  "entity.mimic.hurt": {
+    "sounds": [
+      "artifacts:mimic/hurt1",
+      "artifacts:mimic/hurt2",
+      "artifacts:mimic/hurt3"
+    ],
+    "subtitle": "artifacts.subtitles.entity.mimic.hurt"
+  },
+  "entity.mimic.death": {
+    "sounds": [
+      "artifacts:mimic/death1",
+      "artifacts:mimic/death2"
+    ],
+    "subtitle": "artifacts.subtitles.entity.mimic.death"
+  },
+  "entity.demoneye.hurt": {
+    "sounds": [
+      "artifacts:enemies/mobhurt"
+    ]
+  },
+  "entity.demoneye.death": {
+    "sounds": [
+      "artifacts:enemies/mobkilled"
+    ]
+  },
+  "item.whoopee_cushion.fart": {
+    "sounds": [
+      "artifacts:fart1",
+      "artifacts:fart2",
+      "artifacts:fart3"
+    ],
+    "subtitle": "artifacts.subtitles.item.whoopee_cushion.fart"
+  },
+  "block.water.step": {
+    "sounds": [
+      "entity/fish/flop1",
+      "entity/fish/flop2",
+      "entity/fish/flop3",
+      "entity/fish/flop4"
+    ],
+    "subtitle": "subtitles.block.generic.footsteps"
+  }
+}

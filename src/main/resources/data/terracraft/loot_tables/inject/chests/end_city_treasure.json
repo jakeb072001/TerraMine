@@ -1,0 +1,34 @@
+{
+  "pools": [
+    {
+      "name": "main",
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:loot_table",
+          "weight": 3,
+          "name": "terracraft:accessory"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "terracraft:crystal_heart"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "terracraft:cloud_in_a_bottle"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 4,
+          "name": "terracraft:helium_flamingo"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "terracraft:configurable_random_chance",
+          "default_probability": 0.3
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:smelting",
+  "group": "emerald",
+  "ingredient": {
+    "item": "artifacts:corrupted_emerald_ore_block"
+  },
+  "result": "minecraft:emerald",
+  "experience": 1.0,
+  "cookingtime": 200
+}

@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "minecraft:clock"
+    }
+  ],
+  "result": {
+    "item": "artifacts:gold_watch",
+    "count": 1
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "artifacts:ranger_emblem"
+    },
+    {
+      "item": "artifacts:warrior_emblem"
+    },
+    {
+      "item": "artifacts:sorcerer_emblem"
+    }
+  ],
+  "result": {
+    "item": "artifacts:avenger_emblem",
+    "count": 1
+  }
+}

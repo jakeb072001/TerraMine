@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:blasting",
+  "group": "diamond",
+  "ingredient": {
+    "item": "artifacts:corrupted_deepslate_diamond_ore_block"
+  },
+  "result": "minecraft:diamond",
+  "experience": 1.0,
+  "cookingtime": 100
+}

@@ -1,0 +1,23 @@
+{
+  "layers": [
+    {
+      "textures": {
+        "top": "terracraft:block/corrupt_snow",
+        "side": "terracraft:block/corrupt_grass_block_snow"
+      }
+    },
+    {
+      "textures": {
+        "top": "terracraft:block/snow_outline",
+        "side": "terracraft:block/transparent",
+		"overrides": {
+          "connect": "terracraft:block/transparent"
+        }
+      },
+      "masks": {
+        "blend_up": "terracraft:bettergrass/mask/snowy_grass_block_side_outline_blend_up",
+        "arch": "terracraft:bettergrass/mask/snowy_grass_block_side_outline_arch_blend"
+      }
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "terracraft:spectre_boots"
+    },
+    {
+      "item": "terracraft:anklet"
+    },
+    {
+      "item": "terracraft:aglet"
+    }
+  ],
+  "result": {
+    "item": "terracraft:lightning_boots",
+    "count": 1
+  }
+}

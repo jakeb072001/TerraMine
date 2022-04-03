@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:blasting",
+  "group": "demonite_ingot",
+  "ingredient": {
+    "item": "terracraft:deepslate_demonite_ore_block"
+  },
+  "result": "terracraft:demonite_ingot",
+  "experience": 0.8,
+  "cookingtime": 100
+}

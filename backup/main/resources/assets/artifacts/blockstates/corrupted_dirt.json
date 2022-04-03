@@ -1,0 +1,21 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "artifacts:block/corrupted_dirt"
+      },
+      {
+        "model": "artifacts:block/corrupted_dirt",
+        "y": 90
+      },
+      {
+        "model": "artifacts:block/corrupted_dirt",
+        "y": 180
+      },
+      {
+        "model": "artifacts:block/corrupted_dirt",
+        "y": 270
+      }
+    ]
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "replace": false,
+  "values": [
+    "terracraft:demonite_ore",
+    "terracraft:deepslate_demonite_ore"
+  ]
+}

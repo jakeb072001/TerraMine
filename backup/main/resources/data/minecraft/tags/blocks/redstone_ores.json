@@ -1,0 +1,7 @@
+{
+  "replace": false,
+  "values": [
+    "artifacts:corrupted_redstone_ore",
+    "artifacts:corrupted_deepslate_redstone_ore"
+  ]
+}

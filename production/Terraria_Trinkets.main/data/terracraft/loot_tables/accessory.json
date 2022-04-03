@@ -1,0 +1,350 @@
+{
+  "pools": [
+    {
+      "name": "main",
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "terracraft:snorkel"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "terracraft:night_vision_goggles"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "terracraft:panic_necklace"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "terracraft:shock_pendant"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "terracraft:magma_stone"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "terracraft:lucky_horseshoe"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "terracraft:shiny_red_balloon"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "terracraft:flame_pendant"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "terracraft:thorn_pendant"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "terracraft:flippers"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "terracraft:obsidian_skull"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "terracraft:obsidian_rose"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "terracraft:rocket_boots"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "terracraft:lava_charm"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "terracraft:water_walking_boots"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "terracraft:feral_claws"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "terracraft:pocket_piston"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "terracraft:power_glove"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "terracraft:depth_meter"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "terracraft:compass"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "terracraft:weather_radio"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "terracraft:sextant"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "terracraft:metal_detector"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "terracraft:stopwatch"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "terracraft:dps_meter"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "terracraft:cross_necklace"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "terracraft:antidote_vessel"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "terracraft:lucky_scarf"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "terracraft:superstitious_hat"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "terracraft:scarf_of_invisibility"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "terracraft:digging_claws"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "terracraft:steadfast_spikes"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "terracraft:universal_attractor"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "terracraft:kitty_slippers"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "terracraft:hermes_boots"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "terracraft:aglet"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "terracraft:anklet"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "terracraft:ice_skates"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "terracraft:crystal_heart"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "terracraft:villager_hat"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "terracraft:cloud_in_a_bottle"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "terracraft:ranger_emblem"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "terracraft:warrior_emblem"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "terracraft:sorcerer_emblem"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "terracraft:titan_glove"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "terracraft:mechanical_glove"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "terracraft:band_of_regeneration"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "terracraft:band_of_starpower"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "terracraft:flower_boots"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "terracraft:toolbelt"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "terracraft:toolbox"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "terracraft:extendo_grip"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "terracraft:ancient_chisel"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "terracraft:cobalt_shield"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "terracraft:shackle"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "terracraft:shoe_spikes"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "terracraft:climbing_claws"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "terracraft:tabi"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "terracraft:black_belt"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "terracraft:vampiric_glove"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "terracraft:golden_hook"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "terracraft:charm_of_sinking"
+        },
+        {
+          "type": "minecraft:loot_table",
+          "weight": 8,
+          "name": "terracraft:items/drinking_hat"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 5,
+          "name": "terracraft:umbrella"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 5,
+          "name": "terracraft:whoopee_cushion"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 4,
+          "name": "terracraft:helium_flamingo"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 2,
+          "name": "terracraft:everlasting_beef"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 2,
+          "name": "terracraft:magic_mirror"
+        }
+      ]
+    }
+  ]
+}

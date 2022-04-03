@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "artifacts:pda"
+    },
+    {
+      "item": "artifacts:magic_mirror"
+    }
+  ],
+  "result": {
+    "item": "artifacts:cell_phone",
+    "count": 1
+  }
+}

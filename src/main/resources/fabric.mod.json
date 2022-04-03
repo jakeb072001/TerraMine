@@ -1,0 +1,82 @@
+{
+  "schemaVersion": 1,
+  "id": "terracraft",
+  "version": "${version}",
+
+  "name": "TerraCraft",
+  "description": "Terraria in Minecraft, adds most of everything from terraria into minecraft in an accurate way",
+  "authors": [
+    "Jakeb Woods"
+  ],
+  "contact": {
+    "homepage": "https://www.curseforge.com/minecraft/mc-mods/terracraft",
+    "sources": "https://github.com/florensie/terracraft",
+    "issues": "https://github.com/florensie/terracraft/issues"
+  },
+  "license": "LGPL-3.0-or-later",
+  "icon": "assets/terracraft/icon.png",
+
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "terracraft.TerraCraft"
+    ],
+    "terrablender": [
+      "terracraft.TerraCraft"
+    ],
+    "client": [
+      "terracraft.TerraCraftClient"
+    ],
+    "terracraft-compathandlers": [
+      "terracraft.common.compat.HaemaCompat",
+      "terracraft.common.compat.OriginsCompat"
+    ],
+    "modmenu": [
+      "terracraft.client.integrations.ModMenuConfig"
+    ],
+    "cardinal-components": [
+      "terracraft.common.init.ModComponents"
+    ],
+    "rei_plugins": [
+      "terracraft.client.integrations.REIPlugin"
+    ],
+    "dynamiclights": [
+      "terracraft.client.integrations.DynamicLightPlugin"
+    ]
+  },
+  "mixins": [
+    "terracraft.mixins.json"
+  ],
+  "accessWidener": "terracraft.accesswidener",
+
+  "depends": {
+    "minecraft": ">=1.18.2",
+    "fabricloader": ">=0.7.0",
+    "fabric": ">=0.48.0",
+    "trinkets": ">=3.0.0",
+    "expandability": ">=6.0.0",
+    "terrablender": ">=1.1.0.0",
+    "cardinal-components-base": ">=4.0.0",
+    "cardinal-components-entity": ">=4.0.0",
+    "cloth-config2": ">=6.0",
+    "step-height-entity-attribute": "*",
+    "reach-entity-attributes": ">=2.0.0",
+    "fabricshieldlib": ">=1.5.0"
+  },
+  "suggests": {
+    "modmenu": "*"
+  },
+  "breaks": {
+    "origins": "<=1.0.0"
+  },
+
+  "custom": {
+    "cardinal-components": [
+      "terracraft:dropped_item_entity",
+      "terracraft:entity_kill_tracker",
+      "terracraft:swim_abilities",
+      "terracraft:mana_handler",
+      "terracraft:dps_meter_damage"
+    ]
+  }
+}
