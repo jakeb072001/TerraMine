@@ -1,6 +1,7 @@
 # gradle
 
 .gradle/
+backup/
 build/
 production/
 out/
