@@ -2,6 +2,7 @@
 
 .gradle/
 build/
+production/
 out/
 classes/
 
