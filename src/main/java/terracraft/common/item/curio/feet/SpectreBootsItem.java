@@ -18,6 +18,7 @@ import terracraft.common.init.ModItems;
 import terracraft.common.init.ModSoundEvents;
 import terracraft.common.item.curio.TrinketTerrariaItem;
 import terracraft.common.trinkets.TrinketsHelper;
+import terracraft.common.utility.RocketBootHelper;
 
 import java.util.Random;
 import java.util.UUID;
@@ -29,92 +30,24 @@ public class SpectreBootsItem extends TrinketTerrariaItem {
 	public static final AttributeModifier STEP_HEIGHT_MODIFIER = new AttributeModifier(UUID.fromString("7e97cede-a343-411f-b465-14cdf6df3666"),
 			"terracraft:spectre_boots_step_height", .5, AttributeModifier.Operation.ADDITION);
 	private static final Random RANDOM = new Random();
-	public double speedVert = 0.08D;
-	public double accelVert = 0.08D;
-	public double speedSide = 0.03D;
-	public double speedHover = 0.05D;
-	public double speedHoverSlow = 0.03D;
-	public double sprintSpeed = 1.0D;
-	public int timer;
-	public int soundTimer;
-	public int rocketTime = 40;
+	public RocketBootHelper rocketHelper = new RocketBootHelper();
+	public double speed = 0.08D;
+
+	public SpectreBootsItem() {
+		rocketHelper.setSoundSettings(ModSoundEvents.SPECTRE_BOOTS, 5f, 1f);
+		rocketHelper.setParticleSettings(TerraCraft.BLUE_POOF, ParticleTypes.POOF);
+	}
 
 	@Override
 	public void curioTick(LivingEntity player, ItemStack stack) {
 		if (TrinketsHelper.isEquipped(ModItems.SPECTRE_BOOTS, player) && !TrinketsHelper.isEquipped(ModItems.LIGHTNING_BOOTS, player) && !TrinketsHelper.isEquipped(ModItems.FROSTSPARK_BOOTS, player)  && !TrinketsHelper.isEquipped(ModItems.TERRASPARK_BOOTS, player)) {
-			Options settings = Minecraft.getInstance().options;
 			Minecraft mc = Minecraft.getInstance();
 			if (player.isSprinting() && player.isOnGround() && !player.isCrouching()) {
 				float random = (RANDOM.nextFloat() - 0.5F) * 0.1F;
 				mc.particleEngine.createParticle(ParticleTypes.POOF, player.getX(), player.getY() + 0.2F, player.getZ(), random, -0.2D, random);
 			}
-			if (player.isOnGround()) {
-				if (timer >= 10) {
-					((Player) player).getCooldowns().addCooldown(ModItems.SPECTRE_BOOTS, 30);
-				}
-				if (timer > 0) {
-					timer = 0;
-					soundTimer = 0;
-				}
-			}
-			if (settings != null && timer < rocketTime && player instanceof Player user && !user.getCooldowns().isOnCooldown(ModItems.SPECTRE_BOOTS)) {
-				if (settings.keyJump.isDown()) {
-					double hoverSpeed = settings.keyShift.isDown() ? this.speedHover : this.speedHoverSlow;
-					double currentAccel = this.accelVert * (player.getDeltaMovement().y() < 0.3D ? 2.5D : 1.0D);
-					double currentSpeedVertical = this.speedVert * (player.isUnderWater() ? 0.4D : 1.0D);
-					float random = (RANDOM.nextFloat() - 0.5F) * 0.1F;
-					timer += 1;
-					soundTimer += 1;
-
-					double motionY = player.getDeltaMovement().y();
-					if (settings.keyJump.isDown()) {
-						this.fly(player, Math.min(motionY + currentAccel, currentSpeedVertical));
-						if (soundTimer >= 3) {
-							player.level.playSound((Player) player, player.blockPosition(), ModSoundEvents.SPECTRE_BOOTS, SoundSource.PLAYERS, 5f, 1f);
-							soundTimer = 0;
-						}
-						Vec3 vLeft = new Vec3(-0.15, -1.5, 0).xRot(0).yRot(mc.player.yBodyRot * -0.017453292F);
-						Vec3 vRight = new Vec3(0.15, -1.5, 0).xRot(0).yRot(mc.player.yBodyRot * -0.017453292F);
-						Vec3 playerPos = mc.player.getPosition(0).add(0, 1.5, 0);
-						Vec3 v = playerPos.add(vLeft);
-						mc.particleEngine.createParticle(TerraCraft.BLUE_POOF, v.x, v.y, v.z, random, -0.2D, random);
-						mc.particleEngine.createParticle(ParticleTypes.POOF, v.x, v.y, v.z, random, -0.2D, random);
-						v = playerPos.add(vRight);
-						mc.particleEngine.createParticle(TerraCraft.BLUE_POOF, v.x, v.y, v.z, random, -0.2D, random);
-						mc.particleEngine.createParticle(ParticleTypes.POOF, v.x, v.y, v.z, random, -0.2D, random);
-					} else {
-						//this.fly(player, Math.min(motionY + currentAccel, -hoverSpeed));
-					}
-
-					float speedSideways = (float) (player.isCrouching() ? this.speedSide * 0.5F : this.speedSide);
-					float speedForward = (float) (player.isSprinting() ? speedSideways * this.sprintSpeed : speedSideways);
-
-					if (settings.keyUp.isDown()) {
-						player.moveRelative(1, new Vec3(0, 0, speedForward));
-					}
-
-					if (settings.keyDown.isDown()) {
-						player.moveRelative(1, new Vec3(0, 0, -speedSideways * 0.8F));
-					}
-
-					if (settings.keyLeft.isDown()) {
-						player.moveRelative(1, new Vec3(speedSideways, 0, 0));
-					}
-
-					if (settings.keyRight.isDown()) {
-						player.moveRelative(1, new Vec3(-speedSideways, 0, 0));
-					}
-
-					if (!player.level.isClientSide()) {
-						player.fallDistance = 0.0F;
-
-						//if (player instanceof Player) {
-						//	((ServerPlayerConnection) ((Player) player)).setFloatingTicks(0);
-						//}
-					}
-				}
-			}
 		}
+		rocketHelper.rocketFly(true, speed, 2, player, this);
 	}
 	private void fly(LivingEntity player, double y) {
 		Vec3 motion = player.getDeltaMovement();
