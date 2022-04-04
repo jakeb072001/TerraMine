@@ -28,7 +28,6 @@ public class RocketBootHelper {
     private double speedSide = 0.03D;
     private double sprintSpeed = 1.0D;
     private int rocketTime = 40;
-    private int priority;
 
     public void rocketFly(boolean hasCooldown, double speed, int priority, LivingEntity player, Item self) {
         Options settings = Minecraft.getInstance().options;
