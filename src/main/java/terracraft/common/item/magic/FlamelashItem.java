@@ -1,30 +1,25 @@
 package terracraft.common.item.magic;
 
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.level.Level;
 import terracraft.common.entity.MagicMissileEntity;
-import terracraft.common.init.ModComponents;
 import terracraft.common.init.ModEntities;
-import terracraft.common.init.ModItems;
 import terracraft.common.init.ModSoundEvents;
-import terracraft.common.item.TerrariaItem;
+import terracraft.common.item.MagicTerrariaItem;
 
-public class FlamelashItem extends TerrariaItem {
+public class FlamelashItem extends MagicTerrariaItem {
 
-    int manaUsed = 21;
+    public FlamelashItem() {
+        this.setVars(7, 21);
+    }
 
     @Override
     public ItemStack finishUsingItem(ItemStack stack, Level world, LivingEntity entity) {
         Player player = (Player)entity;
-        if (!player.getCooldowns().isOnCooldown(ModItems.FLAMELASH_ITEM)) {
-            ModComponents.MANA_HANDLER.get(player).isInUse();
-            ModComponents.MANA_HANDLER.get(player).addCurrentMana(-manaUsed);
+        if (canUse(player)) {
             MagicMissileEntity flameMissile = ModEntities.MAGIC_MISSILE.create(world);
             if (flameMissile != null) {
                 flameMissile.setPos(player.position().x(), player.position().y() + 2, player.position().z());
@@ -41,25 +36,5 @@ public class FlamelashItem extends TerrariaItem {
             }
         }
         return super.finishUsingItem(stack, world, entity);
-    }
-
-    @Override
-    public UseAnim getUseAnimation(ItemStack stack) {
-        return UseAnim.BOW;
-    }
-
-    @Override
-    public InteractionResultHolder<ItemStack> use(Level world, Player user, InteractionHand hand) {
-        ItemStack itemstack = user.getItemInHand(hand);
-        if (!(ModComponents.MANA_HANDLER.get(user).getCurrentMana() < manaUsed) || user.isCreative()) {
-            user.startUsingItem(hand);
-            return InteractionResultHolder.consume(itemstack);
-        }
-        return InteractionResultHolder.fail(itemstack);
-    }
-
-    @Override
-    public int getUseDuration(ItemStack stack) {
-        return 7;
     }
 }
