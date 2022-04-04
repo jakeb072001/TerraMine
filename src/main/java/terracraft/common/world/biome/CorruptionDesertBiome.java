@@ -5,6 +5,7 @@ import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.BiomeGenerationSettings;
 import net.minecraft.world.level.biome.BiomeSpecialEffects;
 import net.minecraft.world.level.biome.MobSpawnSettings;
+import net.minecraft.world.level.levelgen.GenerationStep;
 import terracraft.common.init.ModBiomeFeatures;
 
 public class CorruptionDesertBiome {
@@ -29,6 +30,7 @@ public class CorruptionDesertBiome {
         BiomeDefaultFeatures.addDefaultSprings(generationSettings);
         BiomeDefaultFeatures.addSurfaceFreezing(generationSettings);
         BiomeDefaultFeatures.addDefaultOres(generationSettings);
+        ModBiomeFeatures.addDefaultCorruptOres(generationSettings);
         ModBiomeFeatures.addDefaultCorruptSoftDisks(generationSettings);
         BiomeDefaultFeatures.addWaterTrees(generationSettings);
         BiomeDefaultFeatures.addDesertVegetation(generationSettings);
