@@ -2,6 +2,7 @@ package terracraft.common.item.curio.feet;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -26,7 +27,7 @@ public class TabiItem extends TrinketTerrariaItem {
 	protected void curioTick(LivingEntity livingEntity, ItemStack stack) {
 		Minecraft mc = Minecraft.getInstance();
 
-		if (mc.player == null)
+		if (mc.player == null || mc.level == null)
 			return;
 
 		Player player = mc.player;
@@ -57,17 +58,8 @@ public class TabiItem extends TrinketTerrariaItem {
 		//up
 		if (mc.options.keyUp.isDown()) {
 			if (mc.options.keyUp.isDown() && upPressed && upKeyUnpressed && !player.getCooldowns().isOnCooldown(ModItems.TABI) && !player.isInWaterOrBubble()) {
-				for (int i = 0; i < 20; ++i) {
-					double d0 = mc.level.random.nextGaussian() * 0.02D;
-					double d1 = mc.level.random.nextGaussian() * 0.02D;
-					double d2 = mc.level.random.nextGaussian() * 0.02D;
-					mc.level.addParticle(ParticleTypes.POOF, player.getX() + (double) (player.level.random.nextFloat() * player.getBbWidth() * 2.0F) - (double) player.getBbWidth() - d0 * 10.0D, player.getY() + (double) (player.level.random.nextFloat() * player.getBbHeight()) - d1 * 10.0D, player.getZ() + (double) (player.level.random.nextFloat() * player.getBbWidth() * 2.0F) - (double) player.getBbWidth() - d2 * 10.0D, d0, d1, d2);
-				}
-
+				playParticle((Player) livingEntity, mc);
 				player.moveRelative(1, new Vec3(0, 0, 10));
-
-				player.playSound(SoundEvents.PHANTOM_FLAP, 1.0F, 2.0F);
-				player.getCooldowns().addCooldown(ModItems.TABI, 20);
 				upPressed = false;
 				upKeyUnpressed = false;
 			} else {
@@ -79,17 +71,8 @@ public class TabiItem extends TrinketTerrariaItem {
 		//down
 		if (mc.options.keyDown.isDown()) {
 			if (mc.options.keyDown.isDown() && downPressed && downKeyUnpressed && !player.getCooldowns().isOnCooldown(ModItems.TABI) && !player.isInWaterOrBubble()) {
-				for (int i = 0; i < 20; ++i) {
-					double d0 = mc.level.random.nextGaussian() * 0.02D;
-					double d1 = mc.level.random.nextGaussian() * 0.02D;
-					double d2 = mc.level.random.nextGaussian() * 0.02D;
-					mc.level.addParticle(ParticleTypes.POOF, player.getX() + (double) (player.level.random.nextFloat() * player.getBbWidth() * 2.0F) - (double) player.getBbWidth() - d0 * 10.0D, player.getY() + (double) (player.level.random.nextFloat() * player.getBbHeight()) - d1 * 10.0D, player.getZ() + (double) (player.level.random.nextFloat() * player.getBbWidth() * 2.0F) - (double) player.getBbWidth() - d2 * 10.0D, d0, d1, d2);
-				}
-
+				playParticle((Player) livingEntity, mc);
 				player.moveRelative(1, new Vec3(0, 0, -10));
-
-				player.playSound(SoundEvents.PHANTOM_FLAP, 1.0F, 2.0F);
-				player.getCooldowns().addCooldown(ModItems.TABI, 20);
 				downPressed = false;
 				downKeyUnpressed = false;
 			} else {
@@ -101,17 +84,8 @@ public class TabiItem extends TrinketTerrariaItem {
 		//left
 		if (mc.options.keyLeft.isDown()) {
 			if (mc.options.keyLeft.isDown() && leftPressed && leftKeyUnpressed && !player.getCooldowns().isOnCooldown(ModItems.TABI) && !player.isInWaterOrBubble()) {
-				for (int i = 0; i < 20; ++i) {
-					double d0 = mc.level.random.nextGaussian() * 0.02D;
-					double d1 = mc.level.random.nextGaussian() * 0.02D;
-					double d2 = mc.level.random.nextGaussian() * 0.02D;
-					mc.level.addParticle(ParticleTypes.POOF, player.getX() + (double) (player.level.random.nextFloat() * player.getBbWidth() * 2.0F) - (double) player.getBbWidth() - d0 * 10.0D, player.getY() + (double) (player.level.random.nextFloat() * player.getBbHeight()) - d1 * 10.0D, player.getZ() + (double) (player.level.random.nextFloat() * player.getBbWidth() * 2.0F) - (double) player.getBbWidth() - d2 * 10.0D, d0, d1, d2);
-				}
-
+				playParticle((Player) livingEntity, mc);
 				player.moveRelative(1, new Vec3(10, 0, 0));
-
-				player.playSound(SoundEvents.PHANTOM_FLAP, 1.0F, 2.0F);
-				player.getCooldowns().addCooldown(ModItems.TABI, 20);
 				leftPressed = false;
 				leftKeyUnpressed = false;
 			} else {
@@ -123,17 +97,8 @@ public class TabiItem extends TrinketTerrariaItem {
 		//right
 		if (mc.options.keyRight.isDown()) {
 			if (mc.options.keyRight.isDown() && rightPressed && rightKeyUnpressed && !player.getCooldowns().isOnCooldown(ModItems.TABI) && !player.isInWaterOrBubble()) {
-				for (int i = 0; i < 20; ++i) {
-					double d0 = mc.level.random.nextGaussian() * 0.02D;
-					double d1 = mc.level.random.nextGaussian() * 0.02D;
-					double d2 = mc.level.random.nextGaussian() * 0.02D;
-					mc.level.addParticle(ParticleTypes.POOF, player.getX() + (double) (player.level.random.nextFloat() * player.getBbWidth() * 2.0F) - (double) player.getBbWidth() - d0 * 10.0D, player.getY() + (double) (player.level.random.nextFloat() * player.getBbHeight()) - d1 * 10.0D, player.getZ() + (double) (player.level.random.nextFloat() * player.getBbWidth() * 2.0F) - (double) player.getBbWidth() - d2 * 10.0D, d0, d1, d2);
-				}
-
+				playParticle((Player) livingEntity, mc);
 				player.moveRelative(1, new Vec3(-10, 0, 0));
-
-				player.playSound(SoundEvents.PHANTOM_FLAP, 1.0F, 2.0F);
-				player.getCooldowns().addCooldown(ModItems.TABI, 20);
 				rightPressed = false;
 				rightKeyUnpressed = false;
 			} else {
@@ -142,5 +107,19 @@ public class TabiItem extends TrinketTerrariaItem {
 		} else if (rightPressed) {
 			rightKeyUnpressed = true;
 		}
+	}
+
+	private void playParticle(Player player, Minecraft mc) {
+		for (int i = 0; i < 20; ++i) {
+			double d0 = mc.level.random.nextGaussian() * 0.02D;
+			double d1 = mc.level.random.nextGaussian() * 0.02D;
+			double d2 = mc.level.random.nextGaussian() * 0.02D;
+			float random = (player.getRandom().nextFloat() - 0.5F) * 0.1F;
+			if (!player.isLocalPlayer()) {
+				((ServerPlayer) player).getLevel().sendParticles(ParticleTypes.POOF, player.getX() + (double) (player.level.random.nextFloat() * player.getBbWidth() * 2.0F) - (double) player.getBbWidth() - d0 * 10.0D, player.getY() + (double) (player.level.random.nextFloat() * player.getBbHeight()) - d1 * 10.0D, player.getZ() + (double) (player.level.random.nextFloat() * player.getBbWidth() * 2.0F) - (double) player.getBbWidth() - d2 * 10.0D, 1, 0, -0.2D, 0, random);
+			}
+		}
+		mc.player.playSound(SoundEvents.PHANTOM_FLAP, 1.0F, 2.0F);
+		player.getCooldowns().addCooldown(ModItems.MASTER_NINJA_GEAR, 20);
 	}
 }

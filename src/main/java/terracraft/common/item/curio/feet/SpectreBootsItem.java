@@ -5,6 +5,7 @@ import dev.emi.trinkets.api.SlotReference;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.Options;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
@@ -41,10 +42,11 @@ public class SpectreBootsItem extends TrinketTerrariaItem {
 	@Override
 	public void curioTick(LivingEntity player, ItemStack stack) {
 		if (TrinketsHelper.isEquipped(ModItems.SPECTRE_BOOTS, player) && !TrinketsHelper.isEquipped(ModItems.LIGHTNING_BOOTS, player) && !TrinketsHelper.isEquipped(ModItems.FROSTSPARK_BOOTS, player)  && !TrinketsHelper.isEquipped(ModItems.TERRASPARK_BOOTS, player)) {
-			Minecraft mc = Minecraft.getInstance();
 			if (player.isSprinting() && player.isOnGround() && !player.isCrouching()) {
 				float random = (RANDOM.nextFloat() - 0.5F) * 0.1F;
-				mc.particleEngine.createParticle(ParticleTypes.POOF, player.getX(), player.getY() + 0.2F, player.getZ(), random, -0.2D, random);
+				if (player instanceof Player user && !user.isLocalPlayer()) {
+					((ServerPlayer) user).getLevel().sendParticles(ParticleTypes.POOF, player.getX(), player.getY() + 0.2F, player.getZ(), 1, 0, 0, 0, random);
+				}
 			}
 		}
 		rocketHelper.rocketFly(true, speed, 2, player, this);

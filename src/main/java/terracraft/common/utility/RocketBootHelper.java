@@ -4,6 +4,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.Options;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.particles.SimpleParticleType;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.LivingEntity;
@@ -31,7 +32,6 @@ public class RocketBootHelper {
 
     public void rocketFly(boolean hasCooldown, double speed, int priority, LivingEntity player, Item self) {
         Options settings = Minecraft.getInstance().options;
-        Minecraft mc = Minecraft.getInstance();
         if (player.isOnGround())
         {
             if (hasCooldown) {
@@ -45,7 +45,7 @@ public class RocketBootHelper {
                 soundTimer = 0;
             }
         }
-        if (settings != null && timer < rocketTime && player instanceof Player user && priorityOrder(user, priority) && !(hasCooldown && user.getCooldowns().isOnCooldown(self))) {
+        if (settings != null && timer < rocketTime && player instanceof Player user && !user.isCreative() && priorityOrder(user, priority) && !(hasCooldown && user.getCooldowns().isOnCooldown(self))) {
             if (settings.keyJump.isDown()) {
                 double currentAccel = speed * (user.getDeltaMovement().y() < 0.3D ? 2.5D : 1.0D);
                 double currentSpeedVertical = speed * (user.isUnderWater() ? 0.4D : 1.0D);
@@ -63,15 +63,17 @@ public class RocketBootHelper {
                     Vec3 vLeft = new Vec3(-0.15, -1.5, 0).xRot(0).yRot(user.yBodyRot * -0.017453292F);
                     Vec3 vRight = new Vec3(0.15, -1.5, 0).xRot(0).yRot(user.yBodyRot * -0.017453292F);
                     Vec3 playerPos = user.getPosition(0).add(0, 1.5, 0);
-                    Vec3 v = playerPos.add(vLeft);
-                    mc.particleEngine.createParticle(particle1, v.x, v.y, v.z, random, -0.2D, random);
-                    if (particle2 != null) {
-                        mc.particleEngine.createParticle(particle2, v.x, v.y, v.z, random, -0.2D, random);
-                    }
-                    v = playerPos.add(vRight);
-                    mc.particleEngine.createParticle(particle1, v.x, v.y, v.z, random, -0.2D, random);
-                    if (particle2 != null) {
-                        mc.particleEngine.createParticle(particle2, v.x, v.y, v.z, random, -0.2D, random);
+                    if (!user.isLocalPlayer()) {
+                        Vec3 v = playerPos.add(vLeft);
+                        ((ServerPlayer) user).getLevel().sendParticles(particle1, v.x, v.y, v.z, 1, 0, -0.2D, 0, random);
+                        if (particle2 != null) {
+                            ((ServerPlayer) user).getLevel().sendParticles(particle2, v.x, v.y, v.z, 1, 0, -0.2D, 0, random);
+                        }
+                        v = playerPos.add(vRight);
+                        ((ServerPlayer) user).getLevel().sendParticles(particle1, v.x, v.y, v.z, 1, 0, -0.2D, 0, random);
+                        if (particle2 != null) {
+                            ((ServerPlayer) user).getLevel().sendParticles(particle2, v.x, v.y, v.z, 1, 0, -0.2D, 0, random);
+                        }
                     }
                 }
 

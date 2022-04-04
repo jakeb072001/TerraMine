@@ -4,6 +4,7 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
@@ -79,8 +80,10 @@ public class FallingStarEntity extends Mob {
     @Environment(EnvType.CLIENT)
     private void spawnEffects() {
         float random = (rand.nextFloat() - 0.5F) * 0.1F;
-        Minecraft.getInstance().particleEngine.createParticle(ParticleTypes.FIREWORK, position().x, position().y + 0.5f, position().z, random, -0.2D, random);
-        Minecraft.getInstance().particleEngine.createParticle(ParticleTypes.ENCHANTED_HIT, position().x, position().y + 0.5f, position().z, random, -0.2D, random);
+        if (this.getServer() != null) {
+            this.getServer().getLevel(this.getLevel().dimension()).sendParticles(ParticleTypes.FIREWORK, position().x, position().y + 0.5f, position().z, 1, 0, -0.2D, 0, random);
+            this.getServer().getLevel(this.getLevel().dimension()).sendParticles(ParticleTypes.ENCHANTED_HIT, position().x, position().y + 0.5f, position().z, 1, 0, -0.2D, 0, random);
+        }
         soundTimer += 1;
         if (soundTimer >= (rand.nextInt(7)) + 5) {
             playSound(ModSoundEvents.FALLING_STAR_FALL,0.5f, 1f);

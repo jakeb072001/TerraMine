@@ -6,6 +6,7 @@ import dev.emi.trinkets.api.SlotReference;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.Options;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.world.damagesource.DamageSource;
@@ -55,10 +56,11 @@ public class TerrasparkBootsItem extends TrinketTerrariaItem {
 	@Override
 	public void curioTick(LivingEntity player, ItemStack stack) {
 		if (TrinketsHelper.isEquipped(ModItems.TERRASPARK_BOOTS, player)) {
-			Minecraft mc = Minecraft.getInstance();
 			if (player.isSprinting() && player.isOnGround() && !player.isCrouching()) {
 				float random = (RANDOM.nextFloat() - 0.5F) * 0.1F;
-				mc.particleEngine.createParticle(ParticleTypes.POOF, player.getX(), player.getY() + 0.2F, player.getZ(), random, -0.2D, random);
+				if (player instanceof Player user && !user.isLocalPlayer()) {
+					((ServerPlayer) user).getLevel().sendParticles(ParticleTypes.POOF, player.getX(), player.getY() + 0.2F, player.getZ(), 1, 0, 0, 0, random);
+				}
 			}
 		}
 		rocketHelper.rocketFly(false, speed, 6, player, this);
