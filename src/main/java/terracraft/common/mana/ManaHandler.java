@@ -37,10 +37,10 @@ public class ManaHandler implements PlayerComponent<Component>, AutoSyncedCompon
             manaRegenDelay = (0.7 * ((1 - ((double)currentMana / maxMana)) * 240 + 45)) / manaDelayBonus;
             provider.level.playSound(null, provider.blockPosition(), ModSoundEvents.MANA_FULL, SoundSource.PLAYERS, 1f, 1f);
         } else if (currentMana != maxMana) {
-            manaRegenDelay -= 10;
+            manaRegenDelay -= 1;
         }
         if (manaRegenDelay <= 0 && currentMana != maxMana) {
-            addCurrentMana((int) ((((double)maxMana / 7) + 1 + ((double)maxMana / 2) + manaBonus) * (((double)currentMana / maxMana) * 0.8 + 0.2) * 1.15) / 20);
+            addCurrentMana(Math.max((int) (Math.abs((((double)maxMana / 7) + 1 + ((double)maxMana / 2) + manaBonus) * (((double)currentMana / maxMana) * 0.8 + 0.2) * 1.15) / 20), 1));
         }
     }
 
