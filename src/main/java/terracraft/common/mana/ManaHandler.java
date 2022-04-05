@@ -86,11 +86,11 @@ public class ManaHandler implements PlayerComponent<Component>, AutoSyncedCompon
     }
 
     public void addCurrentMana(int currentMana) {
-        if (provider != null && !provider.isCreative()) {
+        if (provider != null && provider.getServer() != null && !provider.isCreative()) {
             if (currentMana > 0) {
                 this.currentMana = Math.min(currentMana + this.currentMana, maxMana);
                 provider.awardStat(Stats.CUSTOM.get(ModStatistics.MANA_USED), Math.max(currentMana, 0));
-            } else if (currentMana < 0) {
+            } else if (currentMana < 0 && !provider.getServer().getLevel(provider.level.dimension()).getGameRules().getBoolean(ModCommands.MANA_INFINITE)) {
                 this.currentMana = Math.max(currentMana + this.currentMana, 0);
             }
         }

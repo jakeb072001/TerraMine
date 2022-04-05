@@ -16,11 +16,13 @@ import net.minecraft.world.level.GameRules;
 
 public class ModCommands {
     public static GameRules.Key<GameRules.IntegerValue> MANA_REGEN_SPEED;
+    public static GameRules.Key<GameRules.BooleanValue> MANA_INFINITE;
     public static LiteralCommandNode<CommandSourceStack> SETMANA;
     public static LiteralCommandNode<CommandSourceStack> GETMANA;
 
     public static void registerRules() {
         MANA_REGEN_SPEED = GameRuleRegistry.register("manaRegenSpeed", GameRules.Category.PLAYER, GameRuleFactory.createIntRule(3, 0));
+        MANA_INFINITE = GameRuleRegistry.register("manaInfinite", GameRules.Category.PLAYER, GameRuleFactory.createBooleanRule(false));
     }
 
     public static void registerCommands(CommandDispatcher<CommandSourceStack> dispatcher) {
