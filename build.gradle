@@ -144,9 +144,9 @@ tasks.generateChangelog {
 }
 
 tasks.named("githubRelease") {
-    dependsOn(tasks.generateChangelog)
+    dependsOn tasks.named("generateChangelog")
     repository = "jakeb072001/TerraCraft"
-    changelog = tasks.generateChangelog.get().outputFile
+    changelog = tasks.named("generateChangelog").get().outputFile
     githubToken = System.getenv().GITHUB_TOKEN
     newTagRevision = System.getenv().GITHUB_SHA
 }
