@@ -57,7 +57,7 @@ public class ManaHandler implements PlayerComponent<Component>, AutoSyncedCompon
     }
 
     public void isInUse() {
-        this.manaRegenDelay = ((0.7 * ((1 - ((double)currentMana / maxMana)) * 240 + 45)) / manaDelayBonus) * 1.5;
+        this.manaRegenDelay = ((0.7 * ((1 - ((double) currentMana / maxMana)) * 240 + 45)) / manaDelayBonus) / 2;
     }
 
     public void setManaBonus(int manaBonus, boolean delayBonus) {

@@ -8,6 +8,6 @@ public class ModCommands {
     public static GameRules.Key<GameRules.IntegerValue> MANA_REGEN_SPEED;
 
     public static void registerAll() {
-        MANA_REGEN_SPEED = GameRuleRegistry.register("manaRegenSpeed", GameRules.Category.PLAYER, GameRuleFactory.createIntRule(2, 0));
+        MANA_REGEN_SPEED = GameRuleRegistry.register("manaRegenSpeed", GameRules.Category.PLAYER, GameRuleFactory.createIntRule(3, 0));
     }
 }
