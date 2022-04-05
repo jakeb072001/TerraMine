@@ -3,6 +3,9 @@ plugins {
     id 'io.github.juuxel.loom-quiltflower' version '1.6.1'
     id 'com.matthewprenger.cursegradle' version '1.4.0'
     id "com.modrinth.minotaur" version "2.+"
+    id "org.shipkit.shipkit-auto-version" version "1.+"
+    id "org.shipkit.shipkit-changelog" version "1.+"
+    id "org.shipkit.shipkit-github-release" version "1.+"
 }
 
 repositories {
@@ -132,6 +135,20 @@ jar {
     from("LICENSE") {
         rename { "${it}_${project.archivesBaseName}"}
     }
+}
+
+tasks.generateChangelog {
+    repository = "jakeb072001/TerraCraft"
+    previousRevision = project.ext["shipkit-auto-version.previous-tag"]?.toString()
+    githubToken = System.getenv().GITHUB_TOKEN
+}
+
+tasks.named("githubRelease") {
+    dependsOn(tasks.generateChangelog)
+    repository = "jakeb072001/TerraCraft"
+    changelog = tasks.generateChangelog.get().outputFile
+    githubToken = System.getenv().GITHUB_TOKEN
+    newTagRevision = System.getenv().GITHUB_SHA
 }
 
 modrinth {
