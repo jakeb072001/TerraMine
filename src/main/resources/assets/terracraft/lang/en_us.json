@@ -364,5 +364,6 @@
   "text.autoconfig.terracraft.option.worldgen.caveChest.maxCaveY": "Maximum Cave y-level",
   "text.autoconfig.terracraft.option.worldgen.caveChest.maxCaveY.@Tooltip": "Maximum y-level to generate cave chests at",
   "text.autoconfig.terracraft.option.worldgen.caveChest.deepCaveY": "Deep Cave y-level",
-  "text.autoconfig.terracraft.option.worldgen.caveChest.deepCaveY.@Tooltip": "Below this y-level cave chests are considered deep cave"
+  "text.autoconfig.terracraft.option.worldgen.caveChest.deepCaveY.@Tooltip": "Below this y-level cave chests are considered deep cave",
+  "gamerule.manaRegenSpeed": "Mana Regen Speed"
 }

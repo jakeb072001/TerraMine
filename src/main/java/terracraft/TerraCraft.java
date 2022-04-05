@@ -99,6 +99,7 @@ public class TerraCraft implements ModInitializer, TerraBlenderApi {
 		ModFeatures.register();
 		ModBiomes.registerAll();
 		ModProfessions.fillTradeData();
+		ModCommands.registerAll();
 
 		Registry.register(Registry.PARTICLE_TYPE, TerraCraft.id("blue_poof"), BLUE_POOF);
 		Registry.register(Registry.PARTICLE_TYPE, TerraCraft.id("green_spark"), GREEN_SPARK);

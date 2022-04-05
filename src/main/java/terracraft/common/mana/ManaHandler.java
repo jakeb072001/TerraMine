@@ -3,12 +3,14 @@ package terracraft.common.mana;
 import dev.onyxstudios.cca.api.v3.component.Component;
 import dev.onyxstudios.cca.api.v3.component.sync.AutoSyncedComponent;
 import dev.onyxstudios.cca.api.v3.entity.PlayerComponent;
+import net.minecraft.client.Minecraft;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.entity.player.Player;
+import terracraft.common.init.ModCommands;
 import terracraft.common.init.ModComponents;
 import terracraft.common.init.ModSoundEvents;
 import terracraft.common.init.ModStatistics;
@@ -33,14 +35,16 @@ public class ManaHandler implements PlayerComponent<Component>, AutoSyncedCompon
             currentMana = maxMana;
         }
 
-        if (currentMana == maxMana && manaRegenDelay <= 0) {
-            manaRegenDelay = (0.7 * ((1 - ((double)currentMana / maxMana)) * 240 + 45)) / manaDelayBonus;
-            provider.level.playSound(null, provider.blockPosition(), ModSoundEvents.MANA_FULL, SoundSource.PLAYERS, 1f, 1f);
-        } else if (currentMana != maxMana) {
-            manaRegenDelay -= 1;
-        }
-        if (manaRegenDelay <= 0 && currentMana != maxMana) {
-            addCurrentMana(Math.max((int) (Math.abs((((double)maxMana / 7) + 1 + ((double)maxMana / 2) + manaBonus) * (((double)currentMana / maxMana) * 0.8 + 0.2) * 1.15) / 20), 1));
+        if (provider.getServer() != null) {
+            if (currentMana == maxMana && manaRegenDelay <= 0) {
+                manaRegenDelay = (0.7 * ((1 - ((double) currentMana / maxMana)) * 240 + 45)) / manaDelayBonus;
+                provider.level.playSound(null, provider.blockPosition(), ModSoundEvents.MANA_FULL, SoundSource.PLAYERS, 1f, 1f);
+            } else if (currentMana != maxMana) {
+                manaRegenDelay -= provider.getServer().getLevel(provider.level.dimension()).getGameRules().getInt(ModCommands.MANA_REGEN_SPEED);
+            }
+            if (manaRegenDelay <= 0 && currentMana != maxMana) {
+                addCurrentMana(Math.max((int) (Math.abs((((double) maxMana / 7) + 1 + ((double) maxMana / 2) + manaBonus) * (((double) currentMana / maxMana) * 0.8 + 0.2) * 1.15) / 20), 1));
+            }
         }
     }
 
