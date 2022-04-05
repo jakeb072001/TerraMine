@@ -335,6 +335,9 @@
   "text.autoconfig.terracraft.option.general.disableCorruptionSpread.@Tooltip[0]": "Disables the spread of the Corruption Biome",
   "text.autoconfig.terracraft.option.general.disableCorruptionSpread.@Tooltip[1]": "Corruption blocks will no longer spread",
   "text.autoconfig.terracraft.option.general.disableCorruptionSpread.@Tooltip[2]": "Use this for big servers to reduce world lag",
+  "text.autoconfig.terracraft.option.general.corruptionSpreadRarity": "Corruption Spread Rarity",
+  "text.autoconfig.terracraft.option.general.corruptionSpreadRarity.@Tooltip[0]": "How rarely Corruption blocks spread",
+  "text.autoconfig.terracraft.option.general.corruptionSpreadRarity.@Tooltip[1]": "The higher the value the slower the Corruption spreads",
   "text.autoconfig.terracraft.category.worldgen": "World Gen",
   "text.autoconfig.terracraft.option.worldgen.accessoryRarity": "Accessory rarity",
   "text.autoconfig.terracraft.option.worldgen.accessoryRarity.@Tooltip[0]": "Affects how common terracraft are (does not affect mimics)",
@@ -365,5 +368,10 @@
   "text.autoconfig.terracraft.option.worldgen.caveChest.maxCaveY.@Tooltip": "Maximum y-level to generate cave chests at",
   "text.autoconfig.terracraft.option.worldgen.caveChest.deepCaveY": "Deep Cave y-level",
   "text.autoconfig.terracraft.option.worldgen.caveChest.deepCaveY.@Tooltip": "Below this y-level cave chests are considered deep cave",
-  "gamerule.manaRegenSpeed": "Mana Regen Speed"
+  "gamerule.manaRegenSpeed": "Mana Regen Speed",
+  "commands.setMaxMana.pass": "Set Max Mana of %s to %s stars",
+  "commands.setMaxMana.fail": "Failed to set Max Mana for that player to %s stars",
+  "commands.getMaxMana.pass": "%s has %s Max Mana stars",
+  "commands.getMaxMana.noMana": "%s has no mana",
+  "commands.getMaxMana.fail": "Failed to get Max Mana for that player"
 }

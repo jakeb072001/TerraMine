@@ -6,6 +6,7 @@ import me.shedaniel.autoconfig.serializer.PartitioningSerializer;
 import me.shedaniel.autoconfig.serializer.Toml4jConfigSerializer;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
+import net.fabricmc.fabric.api.command.v1.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.loot.v1.event.LootTableLoadingCallback;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.fabricmc.fabric.api.particle.v1.FabricParticleTypes;
@@ -99,7 +100,10 @@ public class TerraCraft implements ModInitializer, TerraBlenderApi {
 		ModFeatures.register();
 		ModBiomes.registerAll();
 		ModProfessions.fillTradeData();
-		ModCommands.registerAll();
+		ModCommands.registerRules();
+		CommandRegistrationCallback.EVENT.register((dispatcher, dedicated) -> {
+			ModCommands.registerCommands(dispatcher);
+		});
 
 		Registry.register(Registry.PARTICLE_TYPE, TerraCraft.id("blue_poof"), BLUE_POOF);
 		Registry.register(Registry.PARTICLE_TYPE, TerraCraft.id("green_spark"), GREEN_SPARK);

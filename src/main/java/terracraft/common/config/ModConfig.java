@@ -26,7 +26,7 @@ public final class ModConfig extends PartitioningSerializer.GlobalData {
 		// Increase this if the config format has changed in an incompatible way
 		// When the game is loaded with an older config version, it will reset all values to their defaults
 		@ConfigEntry.Gui.Excluded
-		public static final int CONFIG_VERSION = 1;
+		public static final int CONFIG_VERSION = 2;
 
 		@SuppressWarnings("unused")
 		@ConfigEntry.Gui.Excluded
@@ -39,10 +39,13 @@ public final class ModConfig extends PartitioningSerializer.GlobalData {
 		public boolean showFirstPersonGloves = true;
 		@ConfigEntry.Gui.Tooltip(count = 2)
 		public boolean showTooltips = true;
-		@ConfigEntry.Gui.Tooltip(count = 1)
+		@ConfigEntry.Gui.Tooltip
 		public boolean stopwatchMPH = false;
 		@ConfigEntry.Gui.Tooltip(count = 3)
 		public boolean disableCorruptionSpread = false;
+		@ConfigEntry.Gui.Tooltip(count = 2)
+		@ConfigEntry.BoundedDiscrete(max = 500, min = 0)
+		public int corruptionSpreadRarity = 4;
 
 		private General() {
 		}

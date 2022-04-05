@@ -132,7 +132,7 @@ public class CorruptionHelper extends SpreadingSnowyDirtBlock  {
 
     private void spreadBlock(BlockState toSpread, Block spreadTo, ServerLevel serverLevel, BlockPos blockPos, Random random) {
         for (int i = 0; i < 4; ++i) {
-            if (random.nextInt(5) == 1) {
+            if (random.nextInt(TerraCraft.CONFIG.general.corruptionSpreadRarity + 1) == 1) {
                 BlockPos blockPos2 = blockPos.offset(random.nextInt(3) - 1, random.nextInt(5) - 3, random.nextInt(3) - 1);
                 if (!serverLevel.getBlockState(blockPos2).is(spreadTo)) continue;
                 serverLevel.setBlockAndUpdate(blockPos2, toSpread.setValue(SNOWY, (serverLevel.getBlockState(blockPos2.above()).is(Blocks.SNOW) || serverLevel.getBlockState(blockPos2.above()).is(ModBlocks.CORRUPTED_SNOW_LAYER))));
