@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
+    "terracraft:gold_chest",
     "terracraft:corrupted_glass",
     "terracraft:corrupted_sandstone",
 	"terracraft:corrupted_andesite",

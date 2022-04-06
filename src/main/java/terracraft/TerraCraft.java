@@ -97,6 +97,8 @@ public class TerraCraft implements ModInitializer, TerraBlenderApi {
 		ModSoundEvents.MIMIC_CLOSE.toString();
 		ModPotions.LESSER_MANA_POTION.toString();
 		Stats.CUSTOM.get(ModStatistics.MANA_USED, StatFormatter.DEFAULT);
+		ModScreenHandlerType.register();
+		ModBlockEntityType.register();
 		ModFeatures.register();
 		ModBiomes.registerAll();
 		ModProfessions.fillTradeData();

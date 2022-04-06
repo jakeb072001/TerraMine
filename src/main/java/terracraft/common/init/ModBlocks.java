@@ -8,16 +8,16 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoundType;
-import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Material;
+import net.minecraft.world.level.material.MaterialColor;
 import terracraft.TerraCraft;
 import terracraft.common.block.*;
 import terracraft.common.block.chests.GoldChestBlock;
 
 public class ModBlocks {
-    public static final Block GOLD_CHEST = register("gold_chest", new GoldChestBlock(FabricBlockSettings.of(Material.METAL).strength(3f).sounds(SoundType.METAL), () -> BlockEntityType.CHEST));
+    public static final Block GOLD_CHEST = register("gold_chest", new GoldChestBlock(FabricBlockSettings.of(Material.METAL, MaterialColor.GOLD).strength(3.0f, 6.0f).sounds(SoundType.METAL), () -> ModBlockEntityType.GOLD_CHEST));
     public static final Block TINKERER_TABLE = register("tinkerer_workshop", new Block(BlockBehaviour.Properties.copy(Blocks.CRAFTING_TABLE).randomTicks()));
     public static final Block CORRUPTED_GRASS = register("corrupted_grass", new CorruptedGrass(BlockBehaviour.Properties.copy(Blocks.GRASS_BLOCK).randomTicks()));
     public static final Block CORRUPTED_GRAVEL = register("corrupted_gravel", new CorruptedFallingBlock(BlockBehaviour.Properties.copy(Blocks.GRAVEL).randomTicks()));

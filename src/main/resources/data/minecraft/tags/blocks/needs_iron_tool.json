@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
+    "terracraft:gold_chest",
     "terracraft:corrupted_diamond_ore",
     "terracraft:corrupted_deepslate_diamond_ore",
     "terracraft:corrupted_emerald_ore",

@@ -11,6 +11,7 @@ import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
 import terracraft.TerraCraft;
 import terracraft.common.entity.MimicEntity;
+import terracraft.common.init.ModBlocks;
 import terracraft.common.init.ModEntities;
 import terracraft.common.init.ModLootTables;
 
@@ -67,8 +68,7 @@ public class CaveChestFeature extends Feature<NoneFeatureConfiguration> {
 				this.setBlock(world, pos, Blocks.TRAPPED_CHEST.defaultBlockState().setValue(ChestBlock.FACING, Direction.Plane.HORIZONTAL.getRandomDirection(random)));
 				this.setBlock(world, pos.below(), Blocks.TNT.defaultBlockState());
 			} else {
-				// TODO: random wooden chest with tag
-				this.setBlock(world, pos, Blocks.CHEST.defaultBlockState().setValue(ChestBlock.FACING, Direction.Plane.HORIZONTAL.getRandomDirection(random)));
+				this.setBlock(world, pos, ModBlocks.GOLD_CHEST.defaultBlockState().setValue(ChestBlock.FACING, Direction.Plane.HORIZONTAL.getRandomDirection(random)));
 			}
 			if (pos.getY() <= TerraCraft.CONFIG.worldgen.caveChest.deepCaveY) {
 				RandomizableContainerBlockEntity.setLootTable(world, random, pos, ModLootTables.DEEP_CAVE_CHEST);

@@ -6,7 +6,9 @@ import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.model.ModelLoadingRegistry;
 import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
+import net.fabricmc.fabric.api.client.rendering.v1.BlockEntityRendererRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
+import net.fabricmc.fabric.api.event.client.ClientSpriteRegistryCallback;
 import net.fabricmc.fabric.api.object.builder.v1.client.model.FabricModelPredicateProviderRegistry;
 import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
 import net.fabricmc.fabric.api.resource.ResourcePackActivationType;
@@ -14,18 +16,13 @@ import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.particle.FlameParticle;
 import net.minecraft.client.particle.PlayerCloudParticle;
 import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.Sheets;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.PackType;
-import terracraft.client.render.entity.DemonEyeRenderer;
-import terracraft.client.render.entity.FallingStarRenderer;
-import terracraft.client.render.entity.MagicMissileRenderer;
-import terracraft.client.render.entity.MimicRenderer;
+import terracraft.client.render.entity.*;
 import terracraft.client.render.trinket.CurioRenderers;
-import terracraft.common.init.ModBlocks;
-import terracraft.common.init.ModEntities;
-import terracraft.common.init.ModItems;
-import terracraft.common.init.ModLayerDefinitions;
+import terracraft.common.init.*;
 
 @Environment(EnvType.CLIENT)
 public class TerraCraftClient implements ClientModInitializer {
@@ -56,9 +53,16 @@ public class TerraCraftClient implements ClientModInitializer {
 		BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.CORRUPTED_GLASS, RenderType.translucent());
 		BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.CORRUPTED_ICE, RenderType.translucent());
 
+		// Block Entity Renderer
+		BlockEntityRendererRegistry.register(ModBlockEntityType.GOLD_CHEST, ChestEntityRenderer::new);
+		registerTextures();
+
 		// Entity models
 		ModLayerDefinitions.registerAll();
 		ResourceManagerHelper.get(PackType.CLIENT_RESOURCES).registerReloadListener(new CurioRenderers());
+
+		// Screen Handler
+		ModScreenHandler.register();
 
 		// Held Umbrella model
 		ModelLoadingRegistry.INSTANCE.registerModelProvider((manager, out) -> out.accept(UMBRELLA_HELD_MODEL));
@@ -66,5 +70,11 @@ public class TerraCraftClient implements ClientModInitializer {
 		// ModelPredicateProvider for rendering of umbrella blocking
 		FabricModelPredicateProviderRegistry.register(ModItems.UMBRELLA, new ResourceLocation("blocking"), (stack, level, entity, i)
 				-> entity != null && entity.isUsingItem() && entity.getUseItem() == stack ? 1 : 0);
+	}
+
+	public static void registerTextures() {
+		ClientSpriteRegistryCallback.event(Sheets.CHEST_SHEET).register((texture, registry) -> {
+			registry.register(TerraCraft.id("block/chests/gold/gold_chest"));
+		});
 	}
 }
