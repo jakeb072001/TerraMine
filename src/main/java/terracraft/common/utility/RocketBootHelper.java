@@ -2,7 +2,6 @@ package terracraft.common.utility;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.Options;
-import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
@@ -12,7 +11,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.phys.Vec3;
 import terracraft.common.init.ModItems;
-import terracraft.common.init.ModSoundEvents;
 import terracraft.common.trinkets.TrinketsHelper;
 
 import java.util.Random;
@@ -57,7 +55,7 @@ public class RocketBootHelper {
                 if (settings.keyJump.isDown()) {
                     this.fly(user, Math.min(motionY + currentAccel, currentSpeedVertical));
                     if (soundTimer >= 3) {
-                        user.level.playSound(user, user.blockPosition(), sound, SoundSource.PLAYERS, soundVolume, soundPitch);
+                        user.level.playSound(null, user.blockPosition(), sound, SoundSource.PLAYERS, soundVolume, soundPitch);
                         soundTimer = 0;
                     }
                     Vec3 vLeft = new Vec3(-0.15, -1.5, 0).xRot(0).yRot(user.yBodyRot * -0.017453292F);

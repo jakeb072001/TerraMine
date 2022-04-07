@@ -49,7 +49,7 @@ public class TerrasparkBootsItem extends TrinketTerrariaItem {
 		//noinspection UnstableApiUsage
 		LivingFluidCollisionCallback.EVENT.register(TerrasparkBootsItem::onFluidCollision);
 		LivingEntityHurtCallback.EVENT.register(TerrasparkBootsItem::onLivingHurt);
-		rocketHelper.setSoundSettings(ModSoundEvents.SPECTRE_BOOTS, 5f, 1f);
+		rocketHelper.setSoundSettings(ModSoundEvents.SPECTRE_BOOTS, 1f, 1f);
 		rocketHelper.setParticleSettings(TerraCraft.GREEN_SPARK);
 	}
 

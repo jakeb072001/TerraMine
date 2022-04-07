@@ -314,6 +314,7 @@ public class DemonEyeEntity extends Monster implements Enemy {
         return super.hurt(source, amount);
     }
 
+
     @Override
     public void addAdditionalSaveData(CompoundTag compound) {
         super.addAdditionalSaveData(compound);
@@ -329,6 +330,11 @@ public class DemonEyeEntity extends Monster implements Enemy {
     @Override
     protected SoundEvent getDeathSound() {
         return ModSoundEvents.DEMON_EYE_DEATH;
+    }
+
+    @Override
+    protected SoundEvent getHurtSound(DamageSource damageSource) {
+        return ModSoundEvents.DEMON_EYE_HURT;
     }
 
     @Override

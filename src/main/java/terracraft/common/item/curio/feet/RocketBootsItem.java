@@ -22,7 +22,7 @@ public class RocketBootsItem extends TrinketTerrariaItem {
 	public double speed = 0.08D;
 
 	public RocketBootsItem() {
-		rocketHelper.setSoundSettings(ModSoundEvents.ROCKET_BOOTS, 0.5f, 1f);
+		rocketHelper.setSoundSettings(ModSoundEvents.ROCKET_BOOTS, 1.5f, 1f);
 		rocketHelper.setParticleSettings(ParticleTypes.FLAME, ParticleTypes.SMOKE);
 	}
 

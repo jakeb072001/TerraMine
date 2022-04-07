@@ -39,7 +39,7 @@ public class FairyBootsItem extends TrinketTerrariaItem {
 	public double speed = 0.08D;
 
 	public FairyBootsItem() {
-		rocketHelper.setSoundSettings(ModSoundEvents.SPECTRE_BOOTS, 5f, 1f);
+		rocketHelper.setSoundSettings(ModSoundEvents.SPECTRE_BOOTS, 1f, 1f);
 		rocketHelper.setParticleSettings(TerraCraft.BLUE_POOF, ParticleTypes.POOF);
 	}
 

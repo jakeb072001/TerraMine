@@ -23,37 +23,37 @@ import java.util.Optional;
 public class CellPhoneItem extends TrinketTerrariaItem {
 
 	@Override
-	public ItemStack finishUsingItem(ItemStack stack, Level world, LivingEntity entity) {
+	public ItemStack finishUsingItem(ItemStack stack, Level level, LivingEntity entity) {
 		Player player = (Player)entity;
-		if (!world.isClientSide) {
+		if (!level.isClientSide) {
 			ServerPlayer serverPlayer = (ServerPlayer)player;
-			ServerLevel serverWorld = serverPlayer.server.getLevel(serverPlayer.getRespawnDimension());
-			if (serverWorld != null) {
+			ServerLevel serverLevel = serverPlayer.server.getLevel(serverPlayer.getRespawnDimension());
+			if (serverLevel != null) {
 				BlockPos spawnpoint = serverPlayer.getRespawnPosition();
 				if (spawnpoint != null) {
-					Optional<Vec3> optionalSpawnVec = Player.findRespawnPositionAndUseSpawnBlock(serverWorld, spawnpoint, serverPlayer.getRespawnAngle(), false, false);
+					Optional<Vec3> optionalSpawnVec = Player.findRespawnPositionAndUseSpawnBlock(serverLevel, spawnpoint, serverPlayer.getRespawnAngle(), false, false);
 
 					//Player Spawn
 					BlockPos finalSpawnpoint = spawnpoint;
 					optionalSpawnVec.ifPresentOrElse(spawnVec -> {
-						serverPlayer.teleportTo(serverWorld, spawnVec.x(), spawnVec.y(), spawnVec.z(), serverPlayer.getRespawnAngle(), 0.5F);
-						serverWorld.playSound(null, finalSpawnpoint, ModSoundEvents.MAGIC_MIRROR_USE, SoundSource.PLAYERS, 0.4f, 1f);
+						serverPlayer.teleportTo(serverLevel, spawnVec.x(), spawnVec.y(), spawnVec.z(), serverPlayer.getRespawnAngle(), 0.5F);
+						serverLevel.playSound(null, finalSpawnpoint, ModSoundEvents.MAGIC_MIRROR_USE, SoundSource.PLAYERS, 0.4f, 1f);
 					}, () -> {
-						worldSpawn(serverPlayer, serverWorld);
+						worldSpawn(serverPlayer, serverLevel);
 					});
 				} else {
-					worldSpawn(serverPlayer, serverWorld);
+					worldSpawn(serverPlayer, serverLevel);
 				}
 			} else {
 				player.sendMessage(new TextComponent("magic_mirror.fail"), Util.NIL_UUID);
-				world.playSound(null, player.blockPosition(), net.minecraft.sounds.SoundEvents.SHULKER_BULLET_HURT, SoundSource.BLOCKS, 1f, 1f);
+				level.playSound(null, player.blockPosition(), net.minecraft.sounds.SoundEvents.SHULKER_BULLET_HURT, SoundSource.BLOCKS, 1f, 1f);
 			}
 		}
 		if (player != null) {
 			player.getCooldowns().addCooldown(this, 20);
 			player.awardStat(Stats.ITEM_USED.get(this));
 		}
-		return super.finishUsingItem(stack, world, entity);
+		return super.finishUsingItem(stack, level, entity);
 	}
 
 	@Override
