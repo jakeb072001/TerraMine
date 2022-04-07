@@ -25,6 +25,7 @@ import net.minecraft.world.level.block.state.properties.ChestType;
 import terracraft.TerraCraft;
 import terracraft.common.block.chests.BaseChest;
 import terracraft.common.block.chests.GoldChestBlock;
+import terracraft.common.entity.block.ChestEntity;
 
 public class ChestEntityRenderer<T extends ChestBlockEntity> extends ChestRenderer<T> {
     private static final String BOTTOM = "bottom";
@@ -52,18 +53,18 @@ public class ChestEntityRenderer<T extends ChestBlockEntity> extends ChestRender
         if (!(block instanceof ChestBlock)) {
             return;
         }
-        AbstractChestBlock abstractChestBlock = (AbstractChestBlock)block;
         BaseChest chestBlock = (BaseChest)block;
         poseStack.pushPose();
         float g = blockState.getValue(ChestBlock.FACING).toYRot();
         poseStack.translate(0.5, 0.5, 0.5);
         poseStack.mulPose(Vector3f.YP.rotationDegrees(-g));
         poseStack.translate(-0.5, -0.5, -0.5);
-        DoubleBlockCombiner.NeighborCombineResult<Object> neighborCombineResult = bl ? abstractChestBlock.combine(blockState, level, blockEntity.getBlockPos(), true) : DoubleBlockCombiner.Combiner::acceptNone;
-        float h = ((LidBlockEntity)blockEntity).getOpenNess(f);
+        DoubleBlockCombiner.NeighborCombineResult<? extends ChestEntity> properties;
+        properties = bl ? chestBlock.combine(blockState, level, blockEntity.getBlockPos(), true) : DoubleBlockCombiner.Combiner::acceptNone;
+        float h = properties.apply(BaseChest.opennessCombiner(blockEntity)).get(f);
         h = 1.0f - h;
         h = 1.0f - h * h * h;
-        int k = ((Int2IntFunction)neighborCombineResult.apply(new BrightnessCombiner())).applyAsInt(i);
+        int k = ((Int2IntFunction)properties.apply(new BrightnessCombiner())).applyAsInt(i);
         Material material = new Material(Sheets.CHEST_SHEET, chestBlock.getTexture());
         VertexConsumer vertexConsumer = material.buffer(multiBufferSource, RenderType::entityCutout);
         render(poseStack, vertexConsumer, this.lid, this.lock, this.bottom, h, k, j);

@@ -6,15 +6,17 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.entity.ChestBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import terracraft.TerraCraft;
+import terracraft.common.entity.block.ChestEntity;
 import terracraft.common.entity.block.GoldChestEntity;
 
 import java.util.function.Supplier;
 
 public class GoldChestBlock extends BaseChest {
 
-    public GoldChestBlock(Properties properties, Supplier supplier) {
+    public GoldChestBlock(Properties properties, Supplier<BlockEntityType<? extends ChestBlockEntity>> supplier) {
         super(properties, supplier);
     }
 
@@ -28,8 +30,12 @@ public class GoldChestBlock extends BaseChest {
         return new GoldChestEntity(blockPos, blockState);
     }
 
+    public BlockEntityType<? extends GoldChestEntity> blockEntityType() {
+        return (BlockEntityType)this.blockEntityType.get();
+    }
+
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState blockState, BlockEntityType<T> blockEntityType) {
-        return level.isClientSide ? createTickerHelper(blockEntityType, this.blockEntityType(), GoldChestEntity::lidAnimateTick) : null;
+        return level.isClientSide ? (world1, pos, state1, blockEntity) -> ((ChestEntity)blockEntity).clientTick() : null;
     }
 }

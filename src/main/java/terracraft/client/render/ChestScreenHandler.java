@@ -36,7 +36,7 @@ public class ChestScreenHandler extends SyncedGuiDescription {
 
         int height = 15;
         height += 18 * (size / length);
-        int width = 0;
+        int width = 9;
 
         root.add(this.createPlayerInventoryPanel(), width, height);
         root.validate(this);
