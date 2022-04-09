@@ -3,6 +3,7 @@ package terracraft.common.entity.block;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.network.protocol.Packet;
@@ -16,15 +17,13 @@ import net.minecraft.world.CompoundContainer;
 import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.inventory.AbstractContainerMenu;
-import net.minecraft.world.inventory.ChestMenu;
-import net.minecraft.world.inventory.ContainerLevelAccess;
-import net.minecraft.world.inventory.MenuType;
+import net.minecraft.world.inventory.*;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.ChestBlock;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.entity.ChestBlockEntity;
+import net.minecraft.world.level.block.entity.ChestLidController;
 import net.minecraft.world.level.block.entity.ContainerOpenersCounter;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.ChestType;
@@ -36,9 +35,7 @@ import javax.annotation.Nullable;
 public class ChestEntity extends ChestBlockEntity {
     String name;
     MenuType<ChestScreenHandler> menu;
-    static int viewerCount = 0; // this being static makes all my chests open, but if non-static doesn't change value at all
     private final ContainerOpenersCounter openersCounter = new ContainerOpenersCounter(){
-
         @Override
         protected void onOpen(Level level, BlockPos blockPos, BlockState blockState) {
             playSound(level, blockPos, blockState, SoundEvents.CHEST_OPEN);
@@ -56,8 +53,8 @@ public class ChestEntity extends ChestBlockEntity {
 
         @Override
         protected boolean isOwnContainer(Player player) {
-            if (player.containerMenu instanceof ChestMenu) {
-                Container container = ((ChestMenu)player.containerMenu).getContainer();
+            if (player.containerMenu instanceof ChestScreenHandler) {
+                Container container = ((ChestScreenHandler)player.containerMenu).getContainer();
                 return container == ChestEntity.this || container instanceof CompoundContainer && ((CompoundContainer)container).contains(ChestEntity.this);
             }
             return false;
@@ -82,19 +79,10 @@ public class ChestEntity extends ChestBlockEntity {
         return new TranslatableComponent("entity." + TerraCraft.MOD_ID + "." + name);
     }
 
-    float animationAngle;
-    float lastAnimationAngle;
+    private final ChestLidController chestLidController = new ChestLidController();
 
-    public void clientTick() {
-        if (level != null && level.isClientSide) {
-            int viewerCount = this.countViewers();
-            lastAnimationAngle = animationAngle;
-            if (viewerCount == 0 && animationAngle > 0.0F || viewerCount > 0 && animationAngle < 1.0F) {
-                if (viewerCount > 0) animationAngle += 0.1F;
-                else animationAngle -= 0.1F;
-                animationAngle = Mth.clamp(animationAngle, 0, 1);
-            }
-        }
+    public static void clientTick(Level level, BlockPos blockPos, BlockState blockState, ChestEntity chestBlockEntity) {
+        chestBlockEntity.chestLidController.tickLid();
     }
 
     @Nullable
@@ -103,15 +91,10 @@ public class ChestEntity extends ChestBlockEntity {
         return ClientboundBlockEntityDataPacket.create(this);
     }
 
-    public int countViewers() {
-        return viewerCount;
-    }
-
     @Override
     public void startOpen(Player player) {
         if (!this.remove && !player.isSpectator()) {
             openersCounter.incrementOpeners(player, getLevel(), getBlockPos(), getBlockState());
-            ++viewerCount;
         }
     }
 
@@ -119,13 +102,12 @@ public class ChestEntity extends ChestBlockEntity {
     public void stopOpen(Player player) {
         if (!this.remove && !player.isSpectator()) {
             openersCounter.decrementOpeners(player, getLevel(), getBlockPos(), getBlockState());
-            --viewerCount;
         }
     }
 
     @Override
     public float getOpenNess(float f) {
-        return Mth.lerp(f, lastAnimationAngle, animationAngle);
+        return this.chestLidController.getOpenness(f);
     }
 
     private void playSound(Level level, BlockPos blockPos, BlockState blockState, SoundEvent soundEvent) {
@@ -142,6 +124,21 @@ public class ChestEntity extends ChestBlockEntity {
             f += (double)direction.getStepZ() * 0.5;
         }
         level.playSound(null, d, e, f, soundEvent, SoundSource.BLOCKS, 0.5f, level.random.nextFloat() * 0.1f + 0.9f);
+    }
+
+    @Override
+    public boolean triggerEvent(int i, int j) {
+        if (i == 1) {
+            this.chestLidController.shouldBeOpen(j > 0);
+            return true;
+        }
+        return super.triggerEvent(i, j);
+    }
+
+    public void recheckOpen() {
+        if (!this.remove) {
+            this.openersCounter.recheckOpeners(this.getLevel(), this.getBlockPos(), this.getBlockState());
+        }
     }
 
     @Override

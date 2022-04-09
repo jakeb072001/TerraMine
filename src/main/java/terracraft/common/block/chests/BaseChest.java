@@ -3,6 +3,7 @@ package terracraft.common.block.chests;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.MenuProvider;
@@ -11,10 +12,9 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.ChestBlock;
-import net.minecraft.world.level.block.DoubleBlockCombiner;
-import net.minecraft.world.level.block.RenderShape;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.entity.ChestBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -26,6 +26,7 @@ import net.minecraft.world.phys.BlockHitResult;
 import terracraft.TerraCraft;
 import terracraft.common.entity.block.ChestEntity;
 
+import java.util.Random;
 import java.util.function.BiPredicate;
 import java.util.function.Supplier;
 
@@ -48,6 +49,27 @@ public class BaseChest extends ChestBlock {
         player.awardStat(this.getOpenChestStat());
         PiglinAi.angerNearbyPiglins(player, true);
         return InteractionResult.CONSUME;
+    }
+
+    @Override
+    public void tick(BlockState blockState, ServerLevel serverLevel, BlockPos blockPos, Random random) {
+        BlockEntity blockEntity = serverLevel.getBlockEntity(blockPos);
+        if (blockEntity instanceof ChestEntity) {
+            ((ChestEntity)blockEntity).recheckOpen();
+        }
+    }
+
+    @Override
+    public BlockState updateShape(BlockState blockState, Direction direction, BlockState blockState2, LevelAccessor levelAccessor, BlockPos blockPos, BlockPos blockPos2) {
+        if (direction == Direction.DOWN && !this.canSurvive(blockState, levelAccessor, blockPos)) {
+            return Blocks.AIR.defaultBlockState();
+        }
+        return super.updateShape(blockState, direction, blockState2, levelAccessor, blockPos, blockPos2);
+    }
+
+    @Override
+    public boolean canSurvive(BlockState blockState, LevelReader levelReader, BlockPos blockPos) {
+        return BaseChest.canSupportCenter(levelReader, blockPos.below(), Direction.UP);
     }
 
     @Override

@@ -13,6 +13,7 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.AbstractArrow;
+import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Explosion;
@@ -35,6 +36,7 @@ public class MagicMissileEntity extends AbstractArrow {
     public static final ResourceLocation MAGIC_MISSILE_PARTICLE_ID = TerraCraft.id("magic_missile_particle");
     private final Random rand = new Random();
     private Item wandItem;
+    private final ContainerData dataAccess;
     private float damageIncrease;
     private float speed;
     private float damage;
@@ -50,6 +52,22 @@ public class MagicMissileEntity extends AbstractArrow {
         this.setNoGravity(true);
         setKnockback(7);
         this.pickup = AbstractArrow.Pickup.DISALLOWED;
+        this.dataAccess = new ContainerData(){
+            @Override
+            public int get(int i) {
+                return MagicMissileEntity.this.changeParticleType;
+            }
+
+            @Override
+            public void set(int i, int j) {
+                MagicMissileEntity.this.changeParticleType = j;
+            }
+
+            @Override
+            public int getCount() {
+                return 1;
+            }
+        };
     }
 
     private void trinketCheck() { // replace with AttributeModifier later
@@ -195,10 +213,10 @@ public class MagicMissileEntity extends AbstractArrow {
     }
 
     private void particleController() {
-        if (this.changeParticleType == 0) {
+        if (changeParticleType == 0) {
             spawnMagicEffects();
             trailEffect();
-        } else if (this.changeParticleType == 1) {
+        } else if (changeParticleType == 1) {
             spawnFireEffects();
             trailEffect();
         } else {

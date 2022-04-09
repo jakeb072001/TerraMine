@@ -34,7 +34,7 @@ public class DemonEyeEntity extends Monster implements Enemy {
     public boolean doOnce = false;
     public double velX, velY, velZ;
     public double oldVelX, oldVelY, oldVelZ;
-    private static int eyeType;
+    private static int eyeType; // can't be static, need to sort this out
 
     public DemonEyeEntity(EntityType<? extends DemonEyeEntity> entityType, Level worldIn) {
         super(entityType, worldIn);

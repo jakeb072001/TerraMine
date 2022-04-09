@@ -4,6 +4,8 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Vector3f;
 import it.unimi.dsi.fastutil.ints.Int2IntFunction;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.client.model.geom.ModelLayers;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -27,7 +29,8 @@ import terracraft.common.block.chests.BaseChest;
 import terracraft.common.block.chests.GoldChestBlock;
 import terracraft.common.entity.block.ChestEntity;
 
-public class ChestEntityRenderer<T extends ChestBlockEntity> extends ChestRenderer<T> {
+@Environment(EnvType.CLIENT)
+public class ChestEntityRenderer<T extends ChestEntity> extends ChestRenderer<T> {
     private static final String BOTTOM = "bottom";
     private static final String LID = "lid";
     private static final String LOCK = "lock";
@@ -71,7 +74,7 @@ public class ChestEntityRenderer<T extends ChestBlockEntity> extends ChestRender
         poseStack.popPose();
     }
 
-    private void render(PoseStack poseStack, VertexConsumer vertexConsumer, ModelPart modelPart, ModelPart modelPart2, ModelPart modelPart3, float f, int i, int j) {
+    private static void render(PoseStack poseStack, VertexConsumer vertexConsumer, ModelPart modelPart, ModelPart modelPart2, ModelPart modelPart3, float f, int i, int j) {
         modelPart2.xRot = modelPart.xRot = -(f * 1.5707964f);
         modelPart.render(poseStack, vertexConsumer, i, j);
         modelPart2.render(poseStack, vertexConsumer, i, j);

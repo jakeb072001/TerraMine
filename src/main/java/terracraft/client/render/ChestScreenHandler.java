@@ -41,4 +41,8 @@ public class ChestScreenHandler extends SyncedGuiDescription {
         root.add(this.createPlayerInventoryPanel(), width, height);
         root.validate(this);
     }
+
+    public Container getContainer() {
+        return this.inventory;
+    }
 }
