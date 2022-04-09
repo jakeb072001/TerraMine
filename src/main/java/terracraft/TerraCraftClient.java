@@ -55,6 +55,7 @@ public class TerraCraftClient implements ClientModInitializer {
 
 		// Block Entity Renderer
 		BlockEntityRendererRegistry.register(ModBlockEntityType.GOLD_CHEST, ChestEntityRenderer::new);
+		BlockEntityRendererRegistry.register(ModBlockEntityType.FROZEN_CHEST, ChestEntityRenderer::new);
 		registerTextures();
 
 		// Entity models
@@ -75,6 +76,7 @@ public class TerraCraftClient implements ClientModInitializer {
 	public static void registerTextures() {
 		ClientSpriteRegistryCallback.event(Sheets.CHEST_SHEET).register((texture, registry) -> {
 			registry.register(TerraCraft.id("block/chests/gold/gold_chest"));
+			registry.register(TerraCraft.id("block/chests/frozen/frozen_chest"));
 		});
 	}
 }

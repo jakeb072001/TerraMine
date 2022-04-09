@@ -17,6 +17,7 @@ public class ModLootTables {
 	public static final ResourceLocation SURFACE_CHEST = TerraCraft.id("chests/surface_chest");
 	public static final ResourceLocation CAVE_CHEST = TerraCraft.id("chests/cave_chest");
 	public static final ResourceLocation DEEP_CAVE_CHEST = TerraCraft.id("chests/deep_cave_chest");
+	public static final ResourceLocation FROZEN_CAVE_CHEST = TerraCraft.id("chests/frozen_cave_chest");
 
 	public static final List<ResourceLocation> INJECT_TABLE_IDS = Arrays.asList(
 			new ResourceLocation("chests/village/village_armorer"),

@@ -159,6 +159,7 @@ public class ModItems {
 
 	// Blocks
 	public static final Item GOLD_CHEST_BLOCK = register("gold_chest_block", new BlockItem(ModBlocks.GOLD_CHEST, new FabricItemSettings().group(CreativeModeTab.TAB_DECORATIONS)));
+	public static final Item FROZEN_CHEST_BLOCK = register("frozen_chest_block", new BlockItem(ModBlocks.FROZEN_CHEST, new FabricItemSettings().group(CreativeModeTab.TAB_DECORATIONS)));
 	public static final Item TINKERER_TABLE_BLOCK = register("tinkerer_workshop_block", new BlockItem(ModBlocks.TINKERER_TABLE, new FabricItemSettings().group(CreativeModeTab.TAB_DECORATIONS)));
 	public static final Item CORRUPTED_GRASS_BLOCK = register("corrupted_grass_block", new BlockItem(ModBlocks.CORRUPTED_GRASS, new FabricItemSettings().group(CreativeModeTab.TAB_BUILDING_BLOCKS)));
 	public static final Item CORRUPTED_GRAVEL_BLOCK = register("corrupted_gravel_block", new BlockItem(ModBlocks.CORRUPTED_GRAVEL, new FabricItemSettings().group(CreativeModeTab.TAB_BUILDING_BLOCKS)));

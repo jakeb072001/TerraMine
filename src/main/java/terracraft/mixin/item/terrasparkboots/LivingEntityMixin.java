@@ -61,7 +61,7 @@ public abstract class LivingEntityMixin extends Entity {
 			BlockPos blockPos = this.getBlockPosBelowThatAffectsMyMovement();
 			Block block = this.level.getBlockState(blockPos).getBlock();
 			if (block.equals(Blocks.ICE) || block.equals(Blocks.BLUE_ICE) || block.equals(Blocks.FROSTED_ICE) || block.equals(Blocks.PACKED_ICE) ||
-					block.equals(ModBlocks.CORRUPTED_ICE) || block.equals(ModBlocks.CORRUPTED_BLUE_ICE) || block.equals(ModBlocks.CORRUPTED_PACKED_ICE)) {
+					block.equals(ModBlocks.CORRUPTED_ICE) || block.equals(ModBlocks.CORRUPTED_BLUE_ICE) || block.equals(ModBlocks.CORRUPTED_PACKED_ICE) || block.equals(ModBlocks.FROZEN_CHEST)) {
 				t = 0.6F;
 			}
 		}

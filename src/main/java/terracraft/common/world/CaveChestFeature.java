@@ -3,6 +3,7 @@ package terracraft.common.world;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.WorldGenLevel;
+import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.ChestBlock;
 import net.minecraft.world.level.block.entity.RandomizableContainerBlockEntity;
@@ -56,6 +57,13 @@ public class CaveChestFeature extends Feature<NoneFeatureConfiguration> {
 	}
 
 	public void generateContainer(WorldGenLevel world, BlockPos pos, Random random) { // change chest type and loot table depending on the biome. Will need to make terraria style chests first.
+		BlockPos offsetPos = pos.atY(100);
+		boolean frozen = false;
+		if (world.getBiome(offsetPos).is(Biomes.FROZEN_OCEAN) || world.getBiome(offsetPos).is(Biomes.FROZEN_PEAKS) || world.getBiome(offsetPos).is(Biomes.FROZEN_RIVER)
+			|| world.getBiome(offsetPos).is(Biomes.DEEP_FROZEN_OCEAN) || world.getBiome(offsetPos).is(Biomes.SNOWY_BEACH) || world.getBiome(offsetPos).is(Biomes.SNOWY_PLAINS)
+			|| world.getBiome(offsetPos).is(Biomes.SNOWY_SLOPES) || world.getBiome(offsetPos).is(Biomes.SNOWY_TAIGA)) {
+			frozen = true;
+		}
 		if (random.nextInt(100) < TerraCraft.CONFIG.worldgen.caveChest.mimicChance) {
 			MimicEntity mimic = ModEntities.MIMIC.create(world.getLevel());
 			if (mimic != null) {
@@ -68,12 +76,20 @@ public class CaveChestFeature extends Feature<NoneFeatureConfiguration> {
 				this.setBlock(world, pos, Blocks.TRAPPED_CHEST.defaultBlockState().setValue(ChestBlock.FACING, Direction.Plane.HORIZONTAL.getRandomDirection(random)));
 				this.setBlock(world, pos.below(), Blocks.TNT.defaultBlockState());
 			} else {
-				this.setBlock(world, pos, ModBlocks.GOLD_CHEST.defaultBlockState().setValue(ChestBlock.FACING, Direction.Plane.HORIZONTAL.getRandomDirection(random)));
+				if (frozen) {
+					this.setBlock(world, pos, ModBlocks.FROZEN_CHEST.defaultBlockState().setValue(ChestBlock.FACING, Direction.Plane.HORIZONTAL.getRandomDirection(random)));
+				} else {
+					this.setBlock(world, pos, ModBlocks.GOLD_CHEST.defaultBlockState().setValue(ChestBlock.FACING, Direction.Plane.HORIZONTAL.getRandomDirection(random)));
+				}
 			}
 			if (pos.getY() <= TerraCraft.CONFIG.worldgen.caveChest.deepCaveY) {
 				RandomizableContainerBlockEntity.setLootTable(world, random, pos, ModLootTables.DEEP_CAVE_CHEST);
 			} else {
-				RandomizableContainerBlockEntity.setLootTable(world, random, pos, ModLootTables.CAVE_CHEST);
+				if (frozen) {
+					RandomizableContainerBlockEntity.setLootTable(world, random, pos, ModLootTables.FROZEN_CAVE_CHEST);
+				} else {
+					RandomizableContainerBlockEntity.setLootTable(world, random, pos, ModLootTables.CAVE_CHEST);
+				}
 			}
 		}
 	}

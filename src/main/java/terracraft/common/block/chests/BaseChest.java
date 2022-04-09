@@ -15,6 +15,7 @@ import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.entity.ChestBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -23,8 +24,10 @@ import net.minecraft.world.level.block.state.properties.ChestType;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.BlockHitResult;
+import org.jetbrains.annotations.Nullable;
 import terracraft.TerraCraft;
 import terracraft.common.entity.block.ChestEntity;
+import terracraft.common.entity.block.FrozenChestEntity;
 
 import java.util.Random;
 import java.util.function.BiPredicate;
@@ -93,5 +96,15 @@ public class BaseChest extends ChestBlock {
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         builder.add(FACING, TYPE, WATERLOGGED);
+    }
+
+    public BlockEntityType<? extends ChestEntity> blockEntityType() {
+        return (BlockEntityType)this.blockEntityType.get();
+    }
+
+    @Override
+    @Nullable
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState blockState, BlockEntityType<T> blockEntityType) {
+        return level.isClientSide ? BaseChest.createTickerHelper(blockEntityType, this.blockEntityType(), ChestEntity::clientTick) : null;
     }
 }
