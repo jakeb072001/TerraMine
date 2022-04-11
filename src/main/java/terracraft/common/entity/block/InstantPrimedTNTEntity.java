@@ -1,0 +1,42 @@
+package terracraft.common.entity.block;
+
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.item.PrimedTnt;
+import net.minecraft.world.level.Explosion;
+import net.minecraft.world.level.Level;
+import org.jetbrains.annotations.Nullable;
+import terracraft.common.utility.ExplosionConfigurable;
+
+public class InstantPrimedTNTEntity extends PrimedTnt {
+    @Nullable
+    private LivingEntity owner;
+
+    public InstantPrimedTNTEntity(EntityType<? extends PrimedTnt> entityType, Level level) {
+        super(entityType, level);
+    }
+
+    public InstantPrimedTNTEntity(Level level, double d, double e, double f, @Nullable LivingEntity livingEntity) {
+        this((EntityType<? extends PrimedTnt>)EntityType.TNT, level);
+        this.setPos(d, e, f);
+        double g = level.random.nextDouble() * 6.2831854820251465;
+        this.setDeltaMovement(-Math.sin(g) * 0.02, 0.2f, -Math.cos(g) * 0.02);
+        this.setFuse(80);
+        this.xo = d;
+        this.yo = e;
+        this.zo = f;
+        this.owner = livingEntity;
+    }
+
+    @Override
+    public void tick() {
+        this.discard();
+        if (!this.level.isClientSide) {
+            this.explode();
+        }
+    }
+
+    private void explode() {
+        new ExplosionConfigurable(level, this, null, null, this.position().x(), this.position().y(), this.position().z(), 30F, 100f, false, false, Explosion.BlockInteraction.BREAK);
+    }
+}

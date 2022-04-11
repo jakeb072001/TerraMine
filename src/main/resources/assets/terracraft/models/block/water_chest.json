@@ -1,0 +1,7 @@
+{
+  "parent": "terracraft:block/chest_template",
+    "textures": {
+        "0": "terracraft:block/chests/water/water_chest",
+        "particle": "terracraft:block/chests/water/water_break"
+    }
+}

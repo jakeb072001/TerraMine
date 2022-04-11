@@ -1,0 +1,20 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "terracraft:block/redstone_deepslate"
+      },
+      {
+        "model": "terracraft:block/redstone_deepslate_mirrored"
+      },
+      {
+        "model": "terracraft:block/redstone_deepslate",
+        "y": 180
+      },
+      {
+        "model": "terracraft:block/redstone_deepslate_mirrored",
+        "y": 180
+      }
+    ]
+  }
+}

@@ -162,6 +162,10 @@ public class ModItems {
 	public static final Item TRAPPED_GOLD_CHEST_BLOCK = register("trapped_gold_chest_block", new BlockItem(ModBlocks.TRAPPED_GOLD_CHEST, new FabricItemSettings().group(CreativeModeTab.TAB_DECORATIONS)));
 	public static final Item FROZEN_CHEST_BLOCK = register("frozen_chest_block", new BlockItem(ModBlocks.FROZEN_CHEST, new FabricItemSettings().group(CreativeModeTab.TAB_DECORATIONS)));
 	public static final Item TRAPPED_FROZEN_CHEST_BLOCK = register("trapped_frozen_chest_block", new BlockItem(ModBlocks.TRAPPED_FROZEN_CHEST, new FabricItemSettings().group(CreativeModeTab.TAB_DECORATIONS)));
+	public static final Item WATER_CHEST_BLOCK = register("water_chest_block", new BlockItem(ModBlocks.WATER_CHEST, new FabricItemSettings().group(CreativeModeTab.TAB_DECORATIONS)));
+	public static final Item REDSTONE_STONE_BLOCK = register("redstone_stone_block", new BlockItem(ModBlocks.REDSTONE_STONE, new FabricItemSettings().group(CreativeModeTab.TAB_REDSTONE)));
+	public static final Item REDSTONE_DEEPSLATE_BLOCK = register("redstone_deepslate_block", new BlockItem(ModBlocks.REDSTONE_DEEPSLATE, new FabricItemSettings().group(CreativeModeTab.TAB_REDSTONE)));
+	public static final Item INSTANT_TNT_BLOCK = register("instant_tnt_block", new BlockItem(ModBlocks.INSTANT_TNT, new FabricItemSettings().group(CreativeModeTab.TAB_REDSTONE)));
 	public static final Item TINKERER_TABLE_BLOCK = register("tinkerer_workshop_block", new BlockItem(ModBlocks.TINKERER_TABLE, new FabricItemSettings().group(CreativeModeTab.TAB_DECORATIONS)));
 	public static final Item CORRUPTED_GRASS_BLOCK = register("corrupted_grass_block", new BlockItem(ModBlocks.CORRUPTED_GRASS, new FabricItemSettings().group(CreativeModeTab.TAB_BUILDING_BLOCKS)));
 	public static final Item CORRUPTED_GRAVEL_BLOCK = register("corrupted_gravel_block", new BlockItem(ModBlocks.CORRUPTED_GRAVEL, new FabricItemSettings().group(CreativeModeTab.TAB_BUILDING_BLOCKS)));

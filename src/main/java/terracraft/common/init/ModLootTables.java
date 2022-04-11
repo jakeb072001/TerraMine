@@ -15,6 +15,7 @@ public class ModLootTables {
 	public static final ResourceLocation MIMIC = TerraCraft.id("entities/mimic");
 	public static final ResourceLocation DEMON_EYE = TerraCraft.id("entities/demon_eye");
 	public static final ResourceLocation SURFACE_CHEST = TerraCraft.id("chests/surface_chest");
+	public static final ResourceLocation OCEAN_CHEST = TerraCraft.id("chests/ocean_chest");
 	public static final ResourceLocation CAVE_CHEST = TerraCraft.id("chests/cave_chest");
 	public static final ResourceLocation DEEP_CAVE_CHEST = TerraCraft.id("chests/deep_cave_chest");
 	public static final ResourceLocation FROZEN_CAVE_CHEST = TerraCraft.id("chests/frozen_cave_chest");

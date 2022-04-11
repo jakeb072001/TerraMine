@@ -11,6 +11,7 @@ import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
 import terracraft.TerraCraft;
 import terracraft.common.entity.MimicEntity;
+import terracraft.common.init.ModBlocks;
 import terracraft.common.init.ModEntities;
 import terracraft.common.init.ModLootTables;
 
@@ -54,27 +55,13 @@ public class SurfaceChestFeature extends Feature<NoneFeatureConfiguration> {
 		return false;
 	}
 
-	public void generateContainer(WorldGenLevel world, BlockPos pos, Random random) { // change chest type and loot table depending on the biome. Will need to make terraria style chests first.
-		boolean waterlogged = false;
-		if (world.isWaterAt(pos)) {
-			waterlogged = true;
-		}
-		if (random.nextInt(100) < TerraCraft.CONFIG.worldgen.caveChest.mimicChance) {
-			MimicEntity mimic = ModEntities.MIMIC.create(world.getLevel());
-			if (mimic != null) {
-				mimic.setDormant();
-				mimic.setPos(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5);
-				world.addFreshEntity(mimic);
-			}
+	public void generateContainer(WorldGenLevel level, BlockPos pos, Random random) {
+		if (level.isWaterAt(pos)) {
+			this.setBlock(level, pos, ModBlocks.WATER_CHEST.defaultBlockState().setValue(ChestBlock.FACING, Direction.Plane.HORIZONTAL.getRandomDirection(random)).setValue(ChestBlock.WATERLOGGED, true));
+			RandomizableContainerBlockEntity.setLootTable(level, random, pos, ModLootTables.OCEAN_CHEST);
 		} else {
-			if (random.nextInt(5) == 0) {
-				this.setBlock(world, pos, Blocks.TRAPPED_CHEST.defaultBlockState().setValue(ChestBlock.FACING, Direction.Plane.HORIZONTAL.getRandomDirection(random)).setValue(ChestBlock.WATERLOGGED, waterlogged));
-				this.setBlock(world, pos.below(), Blocks.TNT.defaultBlockState());
-			} else {
-				// TODO: random wooden chest with tag
-				this.setBlock(world, pos, Blocks.CHEST.defaultBlockState().setValue(ChestBlock.FACING, Direction.Plane.HORIZONTAL.getRandomDirection(random)).setValue(ChestBlock.WATERLOGGED, waterlogged));
-			}
-			RandomizableContainerBlockEntity.setLootTable(world, random, pos, ModLootTables.SURFACE_CHEST);
+			this.setBlock(level, pos, Blocks.CHEST.defaultBlockState().setValue(ChestBlock.FACING, Direction.Plane.HORIZONTAL.getRandomDirection(random)));
+			RandomizableContainerBlockEntity.setLootTable(level, random, pos, ModLootTables.SURFACE_CHEST);
 		}
 	}
 }

@@ -2,6 +2,10 @@
   "replace": false,
   "values": [
     "terracraft:gold_chest",
+    "terracraft:trapped_gold_chest",
+    "terracraft:frozen_chest",
+    "terracraft:trapped_frozen_chest",
+	"terracraft:water_chest",
     "terracraft:corrupted_diamond_ore",
     "terracraft:corrupted_deepslate_diamond_ore",
     "terracraft:corrupted_emerald_ore",

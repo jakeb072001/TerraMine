@@ -149,7 +149,7 @@ public class MagicMissileEntity extends AbstractArrow {
     {
         if(!this.level.isClientSide)
         {
-            new ExplosionConfigurable(this.level, this.getOwner() != null ? this.getOwner() : this, DamageSource.playerAttack((Player) this.getOwner()).setMagic(), null, this.position().x(), this.position().y(), this.position().z(), 1F, damage / 1.5f, false, Explosion.BlockInteraction.NONE);
+            new ExplosionConfigurable(this.level, this.getOwner() != null ? this.getOwner() : this, DamageSource.playerAttack((Player) this.getOwner()).setMagic(), null, this.position().x(), this.position().y(), this.position().z(), 1F, damage / 1.5f, true, false, Explosion.BlockInteraction.NONE);
             playSound(ModSoundEvents.FALLING_STAR_CRASH,0.25f, 1.7f);
             this.kill();
         }
