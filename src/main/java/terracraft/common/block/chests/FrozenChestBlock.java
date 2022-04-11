@@ -16,9 +16,11 @@ import terracraft.common.entity.block.FrozenChestEntity;
 import java.util.function.Supplier;
 
 public class FrozenChestBlock extends BaseChest {
+    boolean trapped;
 
-    public FrozenChestBlock(Properties properties, Supplier<BlockEntityType<? extends ChestBlockEntity>> supplier) {
-        super(properties, supplier);
+    public FrozenChestBlock(Properties properties, boolean trapped, Supplier<BlockEntityType<? extends ChestBlockEntity>> supplier) {
+        super(properties, trapped, supplier);
+        this.trapped = trapped;
     }
 
     @Override
@@ -28,7 +30,9 @@ public class FrozenChestBlock extends BaseChest {
 
     @Override
     public BlockEntity newBlockEntity(BlockPos blockPos, BlockState blockState) {
-        return new FrozenChestEntity(blockPos, blockState);
+        ChestEntity chest = new FrozenChestEntity(blockPos, blockState);
+        chest.setTrapped(this.trapped);
+        return chest;
     }
 
     @Override

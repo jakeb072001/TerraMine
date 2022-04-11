@@ -59,9 +59,7 @@ public class CaveChestFeature extends Feature<NoneFeatureConfiguration> {
 	public void generateContainer(WorldGenLevel world, BlockPos pos, Random random) { // change chest type and loot table depending on the biome. Will need to make terraria style chests first.
 		BlockPos offsetPos = pos.atY(100);
 		boolean frozen = false;
-		if (world.getBiome(offsetPos).is(Biomes.FROZEN_OCEAN) || world.getBiome(offsetPos).is(Biomes.FROZEN_PEAKS) || world.getBiome(offsetPos).is(Biomes.FROZEN_RIVER)
-			|| world.getBiome(offsetPos).is(Biomes.DEEP_FROZEN_OCEAN) || world.getBiome(offsetPos).is(Biomes.SNOWY_BEACH) || world.getBiome(offsetPos).is(Biomes.SNOWY_PLAINS)
-			|| world.getBiome(offsetPos).is(Biomes.SNOWY_SLOPES) || world.getBiome(offsetPos).is(Biomes.SNOWY_TAIGA)) {
+		if (world.getBiome(offsetPos).value().coldEnoughToSnow(offsetPos)) {
 			frozen = true;
 		}
 		if (random.nextInt(100) < TerraCraft.CONFIG.worldgen.caveChest.mimicChance) {
@@ -73,7 +71,11 @@ public class CaveChestFeature extends Feature<NoneFeatureConfiguration> {
 			}
 		} else {
 			if (random.nextInt(5) == 0) {
-				this.setBlock(world, pos, Blocks.TRAPPED_CHEST.defaultBlockState().setValue(ChestBlock.FACING, Direction.Plane.HORIZONTAL.getRandomDirection(random)));
+				if (frozen) {
+					this.setBlock(world, pos, ModBlocks.TRAPPED_FROZEN_CHEST.defaultBlockState().setValue(ChestBlock.FACING, Direction.Plane.HORIZONTAL.getRandomDirection(random)));
+				} else {
+					this.setBlock(world, pos, ModBlocks.TRAPPED_GOLD_CHEST.defaultBlockState().setValue(ChestBlock.FACING, Direction.Plane.HORIZONTAL.getRandomDirection(random)));
+				}
 				this.setBlock(world, pos.below(), Blocks.TNT.defaultBlockState());
 			} else {
 				if (frozen) {

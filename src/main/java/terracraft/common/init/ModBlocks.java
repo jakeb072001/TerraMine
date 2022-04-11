@@ -18,8 +18,10 @@ import terracraft.common.block.chests.FrozenChestBlock;
 import terracraft.common.block.chests.GoldChestBlock;
 
 public class ModBlocks {
-    public static final Block GOLD_CHEST = register("gold_chest", new GoldChestBlock(FabricBlockSettings.of(Material.METAL, MaterialColor.GOLD).strength(3.0f, 6.0f).sounds(SoundType.METAL), () -> ModBlockEntityType.GOLD_CHEST));
-    public static final Block FROZEN_CHEST = register("frozen_chest", new FrozenChestBlock(FabricBlockSettings.of(Material.ICE_SOLID, MaterialColor.ICE).strength(2.0f, 5.0f).sounds(SoundType.METAL).friction(0.98f), () -> ModBlockEntityType.FROZEN_CHEST));
+    public static final Block GOLD_CHEST = register("gold_chest", new GoldChestBlock(FabricBlockSettings.of(Material.METAL, MaterialColor.GOLD).strength(3.0f, 6.0f).sounds(SoundType.METAL), false, () -> ModBlockEntityType.GOLD_CHEST));
+    public static final Block TRAPPED_GOLD_CHEST = register("trapped_gold_chest", new GoldChestBlock(FabricBlockSettings.of(Material.METAL, MaterialColor.GOLD).strength(3.0f, 6.0f).sounds(SoundType.METAL), true, () -> ModBlockEntityType.GOLD_CHEST));
+    public static final Block FROZEN_CHEST = register("frozen_chest", new FrozenChestBlock(FabricBlockSettings.of(Material.ICE_SOLID, MaterialColor.ICE).strength(2.0f, 5.0f).sounds(SoundType.METAL).friction(0.98f), false, () -> ModBlockEntityType.FROZEN_CHEST));
+    public static final Block TRAPPED_FROZEN_CHEST = register("trapped_frozen_chest", new FrozenChestBlock(FabricBlockSettings.of(Material.ICE_SOLID, MaterialColor.ICE).strength(2.0f, 5.0f).sounds(SoundType.METAL).friction(0.98f), true, () -> ModBlockEntityType.FROZEN_CHEST));
     public static final Block TINKERER_TABLE = register("tinkerer_workshop", new Block(BlockBehaviour.Properties.copy(Blocks.CRAFTING_TABLE).randomTicks()));
     public static final Block CORRUPTED_GRASS = register("corrupted_grass", new CorruptedGrass(BlockBehaviour.Properties.copy(Blocks.GRASS_BLOCK).randomTicks()));
     public static final Block CORRUPTED_GRAVEL = register("corrupted_gravel", new CorruptedFallingBlock(BlockBehaviour.Properties.copy(Blocks.GRAVEL).randomTicks()));
@@ -59,13 +61,5 @@ public class ModBlocks {
 
     private static Block register(String name, Block block) {
         return Registry.register(Registry.BLOCK, TerraCraft.id(name), block);
-    }
-
-    private static Boolean never(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, EntityType<?> entityType) {
-        return false;
-    }
-
-    private static boolean never(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos) {
-        return false;
     }
 }

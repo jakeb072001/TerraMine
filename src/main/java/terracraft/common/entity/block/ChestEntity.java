@@ -19,12 +19,11 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.*;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.ChestBlock;
-import net.minecraft.world.level.block.entity.BlockEntityType;
-import net.minecraft.world.level.block.entity.ChestBlockEntity;
-import net.minecraft.world.level.block.entity.ChestLidController;
-import net.minecraft.world.level.block.entity.ContainerOpenersCounter;
+import net.minecraft.world.level.block.entity.*;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.ChestType;
 import terracraft.TerraCraft;
@@ -35,6 +34,7 @@ import javax.annotation.Nullable;
 public class ChestEntity extends ChestBlockEntity {
     String name;
     MenuType<ChestScreenHandler> menu;
+    boolean trapped;
     private final ContainerOpenersCounter openersCounter = new ContainerOpenersCounter(){
         @Override
         protected void onOpen(Level level, BlockPos blockPos, BlockState blockState) {
@@ -67,6 +67,10 @@ public class ChestEntity extends ChestBlockEntity {
         this.name = name;
         this.menu = menu;
         this.setItems(NonNullList.withSize(40, ItemStack.EMPTY));
+    }
+
+    public void setTrapped(boolean trapped) {
+        this.trapped = trapped;
     }
 
     @Override
@@ -138,6 +142,25 @@ public class ChestEntity extends ChestBlockEntity {
     public void recheckOpen() {
         if (!this.remove) {
             this.openersCounter.recheckOpeners(this.getLevel(), this.getBlockPos(), this.getBlockState());
+        }
+    }
+
+    public static int getOpenCount(BlockGetter blockGetter, BlockPos blockPos) {
+        BlockEntity blockEntity;
+        BlockState blockState = blockGetter.getBlockState(blockPos);
+        if (blockState.hasBlockEntity() && (blockEntity = blockGetter.getBlockEntity(blockPos)) instanceof ChestEntity) {
+            return ((ChestEntity)blockEntity).openersCounter.getOpenerCount();
+        }
+        return 0;
+    }
+
+    @Override
+    protected void signalOpenCount(Level level, BlockPos blockPos, BlockState blockState, int i, int j) {
+        super.signalOpenCount(level, blockPos, blockState, i, j);
+        if (i != j && trapped) {
+            Block block = blockState.getBlock();
+            level.updateNeighborsAt(blockPos, block);
+            level.updateNeighborsAt(blockPos.below(), block);
         }
     }
 

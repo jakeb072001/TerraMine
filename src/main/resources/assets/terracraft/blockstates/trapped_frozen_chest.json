@@ -1,0 +1,8 @@
+{
+  "variants": {
+        "facing=north": { "model": "terracraft:block/frozen_chest" },
+        "facing=east":  { "model": "terracraft:block/frozen_chest", "y":  90},
+        "facing=south": { "model": "terracraft:block/frozen_chest", "y": 180 },
+        "facing=west":  { "model": "terracraft:block/frozen_chest", "y": 270 }
+    }
+}
