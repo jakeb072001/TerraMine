@@ -7,11 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [1.1.0] - 2022-04-06
 ### Fixed
-- Audio being stereo (now mono, which makes positional)
+- Stereo audio (now mono, which makes positional)
 
 ### Added
-- Biome Chests (Ice, Water, Desert, etc.)
-- Trapped Biome Chests
+- Biome Chests (Ice, Water, more later)
+- Trapped Biome and Cave Chests
+- Instant TNT
+- Stone and Deepslate that work like redstone
 
 ## [1.0.2] - 2022-04-06
 ### Fixed
