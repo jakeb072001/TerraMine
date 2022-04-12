@@ -13,16 +13,19 @@ import net.minecraft.world.level.levelgen.VerticalAnchor;
 import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
+import net.minecraft.world.level.levelgen.feature.StructureFeature;
 import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
+import net.minecraft.world.level.levelgen.feature.configurations.JigsawConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
 import net.minecraft.world.level.levelgen.placement.*;
-import terracraft.TerraCraft;
 import terracraft.common.world.CaveChestFeature;
+import terracraft.common.world.FloatingIslandFeature;
 import terracraft.common.world.SurfaceChestFeature;
 
 import java.util.List;
 
 import static terracraft.TerraCraft.CONFIG;
+import static terracraft.TerraCraft.id;
 
 // Biome Modifications API is experimental, remove suppress warning when stable
 @SuppressWarnings("deprecation")
@@ -30,16 +33,17 @@ public class ModFeatures {
 
 	public static final Feature<NoneFeatureConfiguration> CAVE_CHEST = Registry.register(
 			Registry.FEATURE,
-			TerraCraft.id("cave_chest"),
+			id("cave_chest"),
 			new CaveChestFeature()
 	);
 	public static final Feature<NoneFeatureConfiguration> SURFACE_CHEST = Registry.register(
 			Registry.FEATURE,
-			TerraCraft.id("surface_chest"),
+			id("surface_chest"),
 			new SurfaceChestFeature()
 	);
 	public static final PlacedFeature PLACED_CAVE_CHEST;
 	public static final PlacedFeature PLACED_SURFACE_CHEST;
+	public static final StructureFeature<JigsawConfiguration> FLOATING_ISLAND = StructureFeature.register("floating_island", new FloatingIslandFeature(JigsawConfiguration.CODEC), GenerationStep.Decoration.SURFACE_STRUCTURES);
 
 	public static void register() {
 		if (CONFIG.worldgen.caveChest.chestRarity < 10_000) {
@@ -54,17 +58,18 @@ public class ModFeatures {
 					BuiltinRegistries.PLACED_FEATURE.getResourceKey(PLACED_SURFACE_CHEST)
 							.orElseThrow(() -> new RuntimeException("Failed to get feature from registry")));
 		}
+		FLOATING_ISLAND.toString();
 	}
 
 	static {
 		ConfiguredFeature<?, ?> configuredFeature = Registry.register(
 				BuiltinRegistries.CONFIGURED_FEATURE,
-				TerraCraft.id("cave_chest"),
+				id("cave_chest"),
 				new ConfiguredFeature<>(CAVE_CHEST, FeatureConfiguration.NONE)
 		);
 		ConfiguredFeature<?, ?> configuredFeature2 = Registry.register(
 				BuiltinRegistries.CONFIGURED_FEATURE,
-				TerraCraft.id("surface_chest"),
+				id("surface_chest"),
 				new ConfiguredFeature<>(SURFACE_CHEST, FeatureConfiguration.NONE)
 		);
 		ResourceKey<ConfiguredFeature<?, ?>> featureKey = BuiltinRegistries.CONFIGURED_FEATURE.getResourceKey(configuredFeature).orElseThrow();
@@ -74,7 +79,7 @@ public class ModFeatures {
 
 		PLACED_CAVE_CHEST = Registry.register(
 				BuiltinRegistries.PLACED_FEATURE,
-				TerraCraft.id("underground_cave_chest"),
+				id("underground_cave_chest"),
 				new PlacedFeature(featureHolder,
 						List.of(RarityFilter.onAverageOnceEvery(CONFIG.worldgen.caveChest.chestRarity),
 								InSquarePlacement.spread(),
@@ -89,7 +94,7 @@ public class ModFeatures {
 		);
 		PLACED_SURFACE_CHEST = Registry.register(
 				BuiltinRegistries.PLACED_FEATURE,
-				TerraCraft.id("surface_cave_chest"),
+				id("surface_cave_chest"),
 				new PlacedFeature(featureHolder2,
 						List.of(RarityFilter.onAverageOnceEvery(CONFIG.worldgen.caveChest.chestRarity),
 								InSquarePlacement.spread(),

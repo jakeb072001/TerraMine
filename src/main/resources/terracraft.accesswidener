@@ -3,6 +3,8 @@ accessWidener	v1	named
 
 accessible method net/minecraft/client/renderer/RenderType create (Ljava/lang/String;Lcom/mojang/blaze3d/vertex/VertexFormat;Lcom/mojang/blaze3d/vertex/VertexFormat$Mode;IZZLnet/minecraft/client/renderer/RenderType$CompositeState;)Lnet/minecraft/client/renderer/RenderType$CompositeRenderType;
 
+accessible	method	net/minecraft/world/level/levelgen/feature/StructureFeature	register	(Ljava/lang/String;Lnet/minecraft/world/level/levelgen/feature/StructureFeature;Lnet/minecraft/world/level/levelgen/GenerationStep$Decoration;)Lnet/minecraft/world/level/levelgen/feature/StructureFeature;
+
 accessible	method	net/minecraft/world/entity/ai/village/poi/PoiType	<init>	(Ljava/lang/String;Ljava/util/Set;ILjava/util/function/Predicate;I)V
 accessible	method	net/minecraft/world/entity/npc/VillagerProfession	<init>	(Ljava/lang/String;Lnet/minecraft/world/entity/ai/village/poi/PoiType;Lcom/google/common/collect/ImmutableSet;Lcom/google/common/collect/ImmutableSet;Lnet/minecraft/sounds/SoundEvent;)V
 
