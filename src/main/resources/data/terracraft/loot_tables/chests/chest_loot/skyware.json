@@ -1,0 +1,25 @@
+{
+  "pools": [
+    {
+      "name": "main",
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "weight": 33,
+          "name": "terracraft:shiny_red_balloon"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 33,
+          "name": "terracraft:shiny_red_balloon"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 33,
+          "name": "terracraft:shiny_red_balloon"
+        }
+      ]
+    }
+  ]
+}

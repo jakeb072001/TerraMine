@@ -162,7 +162,10 @@ public class ModItems {
 	public static final Item TRAPPED_GOLD_CHEST_BLOCK = register("trapped_gold_chest_block", new BlockItem(ModBlocks.TRAPPED_GOLD_CHEST, new FabricItemSettings().group(CreativeModeTab.TAB_DECORATIONS)));
 	public static final Item FROZEN_CHEST_BLOCK = register("frozen_chest_block", new BlockItem(ModBlocks.FROZEN_CHEST, new FabricItemSettings().group(CreativeModeTab.TAB_DECORATIONS)));
 	public static final Item TRAPPED_FROZEN_CHEST_BLOCK = register("trapped_frozen_chest_block", new BlockItem(ModBlocks.TRAPPED_FROZEN_CHEST, new FabricItemSettings().group(CreativeModeTab.TAB_DECORATIONS)));
+	public static final Item IVY_CHEST_BLOCK = register("ivy_chest_block", new BlockItem(ModBlocks.IVY_CHEST, new FabricItemSettings().group(CreativeModeTab.TAB_DECORATIONS)));
+	public static final Item TRAPPED_IVY_CHEST_BLOCK = register("trapped_ivy_chest_block", new BlockItem(ModBlocks.TRAPPED_IVY_CHEST, new FabricItemSettings().group(CreativeModeTab.TAB_DECORATIONS)));
 	public static final Item WATER_CHEST_BLOCK = register("water_chest_block", new BlockItem(ModBlocks.WATER_CHEST, new FabricItemSettings().group(CreativeModeTab.TAB_DECORATIONS)));
+	public static final Item SKYWARE_CHEST_BLOCK = register("skyware_chest_block", new BlockItem(ModBlocks.SKYWARE_CHEST, new FabricItemSettings().group(CreativeModeTab.TAB_DECORATIONS)));
 	public static final Item REDSTONE_STONE_BLOCK = register("redstone_stone_block", new BlockItem(ModBlocks.REDSTONE_STONE, new FabricItemSettings().group(CreativeModeTab.TAB_REDSTONE)));
 	public static final Item REDSTONE_DEEPSLATE_BLOCK = register("redstone_deepslate_block", new BlockItem(ModBlocks.REDSTONE_DEEPSLATE, new FabricItemSettings().group(CreativeModeTab.TAB_REDSTONE)));
 	public static final Item INSTANT_TNT_BLOCK = register("instant_tnt_block", new BlockItem(ModBlocks.INSTANT_TNT, new FabricItemSettings().group(CreativeModeTab.TAB_REDSTONE)));

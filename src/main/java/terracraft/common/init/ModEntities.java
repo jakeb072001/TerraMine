@@ -22,7 +22,7 @@ public class ModEntities {
 
 	public static final EntityType<DemonEyeEntity> DEMON_EYE = Registry.register( Registry.ENTITY_TYPE, TerraCraft.id("demon_eye"),
 			FabricEntityTypeBuilder.create(MobCategory.MISC, DemonEyeEntity::new)
-					.dimensions(EntityDimensions.fixed(0.25f, 0.25f))
+					.dimensions(EntityDimensions.fixed(0.5f, 0.5f))
 					.spawnGroup(MobCategory.MONSTER)
 					.build());
 

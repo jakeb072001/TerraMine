@@ -1,0 +1,7 @@
+{
+  "replace": false,
+  "values": [
+    "terracraft:ivy_chest",
+    "terracraft:trapped_ivy_chest"
+  ]
+}

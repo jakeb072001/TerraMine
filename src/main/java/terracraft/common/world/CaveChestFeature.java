@@ -2,6 +2,7 @@ package terracraft.common.world;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.tags.BiomeTags;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.block.Blocks;
@@ -59,8 +60,11 @@ public class CaveChestFeature extends Feature<NoneFeatureConfiguration> {
 	public void generateContainer(WorldGenLevel level, BlockPos pos, Random random) { // change chest type and loot table depending on the biome. Will need to make terraria style chests first.
 		BlockPos offsetPos = pos.atY(100);
 		boolean frozen = false;
+		boolean jungle = false;
 		if (level.getBiome(offsetPos).value().coldEnoughToSnow(offsetPos)) {
 			frozen = true;
+		} else if (level.getBiome(offsetPos).is(BiomeTags.IS_JUNGLE)) {
+			jungle = true;
 		}
 		if (random.nextInt(100) < TerraCraft.CONFIG.worldgen.caveChest.mimicChance) {
 			MimicEntity mimic = ModEntities.MIMIC.create(level.getLevel());
@@ -73,6 +77,8 @@ public class CaveChestFeature extends Feature<NoneFeatureConfiguration> {
 			if (random.nextInt(5) == 0) {
 				if (frozen) {
 					this.setBlock(level, pos, ModBlocks.TRAPPED_FROZEN_CHEST.defaultBlockState().setValue(ChestBlock.FACING, Direction.Plane.HORIZONTAL.getRandomDirection(random)));
+				} else if (jungle) {
+					this.setBlock(level, pos, ModBlocks.TRAPPED_IVY_CHEST.defaultBlockState().setValue(ChestBlock.FACING, Direction.Plane.HORIZONTAL.getRandomDirection(random)));
 				} else {
 					this.setBlock(level, pos, ModBlocks.TRAPPED_GOLD_CHEST.defaultBlockState().setValue(ChestBlock.FACING, Direction.Plane.HORIZONTAL.getRandomDirection(random)));
 				}
@@ -85,6 +91,8 @@ public class CaveChestFeature extends Feature<NoneFeatureConfiguration> {
 			} else {
 				if (frozen) {
 					this.setBlock(level, pos, ModBlocks.FROZEN_CHEST.defaultBlockState().setValue(ChestBlock.FACING, Direction.Plane.HORIZONTAL.getRandomDirection(random)));
+				} else if (jungle) {
+					this.setBlock(level, pos, ModBlocks.IVY_CHEST.defaultBlockState().setValue(ChestBlock.FACING, Direction.Plane.HORIZONTAL.getRandomDirection(random)));
 				} else {
 					this.setBlock(level, pos, ModBlocks.GOLD_CHEST.defaultBlockState().setValue(ChestBlock.FACING, Direction.Plane.HORIZONTAL.getRandomDirection(random)));
 				}
@@ -94,6 +102,8 @@ public class CaveChestFeature extends Feature<NoneFeatureConfiguration> {
 			} else {
 				if (frozen) {
 					RandomizableContainerBlockEntity.setLootTable(level, random, pos, ModLootTables.FROZEN_CAVE_CHEST);
+				} else if (jungle) {
+					RandomizableContainerBlockEntity.setLootTable(level, random, pos, ModLootTables.IVY_CAVE_CHEST);
 				} else {
 					RandomizableContainerBlockEntity.setLootTable(level, random, pos, ModLootTables.CAVE_CHEST);
 				}

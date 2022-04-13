@@ -1,0 +1,7 @@
+{
+  "parent": "terracraft:block/chest_template",
+    "textures": {
+        "0": "terracraft:block/chests/ivy/ivy_chest",
+        "particle": "terracraft:block/chests/ivy/ivy_break"
+    }
+}

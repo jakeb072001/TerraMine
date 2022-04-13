@@ -7,7 +7,7 @@ import me.shedaniel.autoconfig.serializer.PartitioningSerializer;
 import terracraft.TerraCraft;
 
 @Config(name = TerraCraft.MOD_ID)
-@Config.Gui.Background("minecraft:textures/block/mossy_cobblestone.png")
+@Config.Gui.Background("terracraft:textures/block/corrupt_stone.png")
 public final class ModConfig extends PartitioningSerializer.GlobalData {
 	@ConfigEntry.Category("general")
 	@ConfigEntry.Gui.TransitiveObject
@@ -57,8 +57,10 @@ public final class ModConfig extends PartitioningSerializer.GlobalData {
 		public float accessoryRarity = 1;
 		@ConfigEntry.Gui.Tooltip
 		public boolean corruptionEnabled = true;
-		@ConfigEntry.Gui.CollapsibleObject(startExpanded = true)
+		@ConfigEntry.Gui.CollapsibleObject(startExpanded = false)
 		public CaveChest caveChest = new CaveChest();
+		@ConfigEntry.Gui.CollapsibleObject(startExpanded = false)
+		public Structures structures = new Structures();
 
 		private WorldGen() {
 		}
@@ -95,6 +97,13 @@ public final class ModConfig extends PartitioningSerializer.GlobalData {
 
 			private CaveChest() {
 			}
+		}
+
+		public static final class Structures {
+			@ConfigEntry.Gui.RequiresRestart
+			@ConfigEntry.Gui.Tooltip
+			@ConfigEntry.BoundedDiscrete(max = 280, min = 80)
+			public int floatingIslandHeight = 180;
 		}
 	}
 }

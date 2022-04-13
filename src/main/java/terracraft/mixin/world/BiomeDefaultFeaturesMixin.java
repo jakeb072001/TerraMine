@@ -17,12 +17,13 @@ public class BiomeDefaultFeaturesMixin {
         int i = 80;
         Minecraft mc = Minecraft.getInstance();
         if (mc != null && mc.level != null) {
-            if (Minecraft.getInstance().level.getMoonPhase() == 4) {
+            if (mc.level.getMoonPhase() == 4) {
                 i = 100;
             }
         }
         return i;
     }
+
     @Inject(method = "monsters", at = @At("HEAD"), cancellable = true)
     private static void spawnNaturalMonsters(MobSpawnSettings.Builder builder, int i, int j, int k, boolean bl, CallbackInfo info) {
         builder.addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(ModEntities.DEMON_EYE, checkNewMoon(), 2, 6));

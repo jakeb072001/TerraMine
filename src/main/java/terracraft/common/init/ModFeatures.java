@@ -19,7 +19,7 @@ import net.minecraft.world.level.levelgen.feature.configurations.JigsawConfigura
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
 import net.minecraft.world.level.levelgen.placement.*;
 import terracraft.common.world.CaveChestFeature;
-import terracraft.common.world.FloatingIslandFeature;
+import terracraft.common.world.FloatingIslandFeatureType;
 import terracraft.common.world.SurfaceChestFeature;
 
 import java.util.List;
@@ -27,8 +27,6 @@ import java.util.List;
 import static terracraft.TerraCraft.CONFIG;
 import static terracraft.TerraCraft.id;
 
-// Biome Modifications API is experimental, remove suppress warning when stable
-@SuppressWarnings("deprecation")
 public class ModFeatures {
 
 	public static final Feature<NoneFeatureConfiguration> CAVE_CHEST = Registry.register(
@@ -43,7 +41,7 @@ public class ModFeatures {
 	);
 	public static final PlacedFeature PLACED_CAVE_CHEST;
 	public static final PlacedFeature PLACED_SURFACE_CHEST;
-	public static final StructureFeature<JigsawConfiguration> FLOATING_ISLAND = StructureFeature.register("floating_island", new FloatingIslandFeature(JigsawConfiguration.CODEC), GenerationStep.Decoration.SURFACE_STRUCTURES);
+	public static final StructureFeature<JigsawConfiguration> FLOATING_ISLAND = StructureFeature.register("floating_island", new FloatingIslandFeatureType(JigsawConfiguration.CODEC), GenerationStep.Decoration.SURFACE_STRUCTURES);
 
 	public static void register() {
 		if (CONFIG.worldgen.caveChest.chestRarity < 10_000) {

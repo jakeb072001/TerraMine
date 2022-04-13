@@ -21,7 +21,7 @@ public class BiomeManagerMixin {
     public void spreadCorruptionBiome(BlockPos pos, CallbackInfoReturnable<Holder<Biome>> info) {
         Minecraft mc = Minecraft.getInstance();
         if (mc != null && mc.level != null) {
-            for (int i = 45; i <= 100; i++) {
+            for (int i = 45; i <= 100; i++) { // checks for blocks between y 45 and 100
                 Block block = mc.level.getBlockState(pos.atY(i)).getBlock();
                 if (block instanceof CorruptionHelper && pos.getY() > i) {
                     Holder<Biome> biome;

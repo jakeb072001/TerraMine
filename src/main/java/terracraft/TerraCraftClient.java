@@ -56,7 +56,9 @@ public class TerraCraftClient implements ClientModInitializer {
 		// Block Entity Renderer
 		BlockEntityRendererRegistry.register(ModBlockEntityType.GOLD_CHEST, ChestEntityRenderer::new);
 		BlockEntityRendererRegistry.register(ModBlockEntityType.FROZEN_CHEST, ChestEntityRenderer::new);
+		BlockEntityRendererRegistry.register(ModBlockEntityType.IVY_CHEST, ChestEntityRenderer::new);
 		BlockEntityRendererRegistry.register(ModBlockEntityType.WATER_CHEST, ChestEntityRenderer::new);
+		BlockEntityRendererRegistry.register(ModBlockEntityType.SKYWARE_CHEST, ChestEntityRenderer::new);
 		registerTextures();
 
 		// Entity models
@@ -78,7 +80,9 @@ public class TerraCraftClient implements ClientModInitializer {
 		ClientSpriteRegistryCallback.event(Sheets.CHEST_SHEET).register((texture, registry) -> {
 			registry.register(TerraCraft.id("block/chests/gold/gold_chest"));
 			registry.register(TerraCraft.id("block/chests/frozen/frozen_chest"));
+			registry.register(TerraCraft.id("block/chests/ivy/ivy_chest"));
 			registry.register(TerraCraft.id("block/chests/water/water_chest"));
+			registry.register(TerraCraft.id("block/chests/skyware/skyware_chest"));
 		});
 	}
 }
