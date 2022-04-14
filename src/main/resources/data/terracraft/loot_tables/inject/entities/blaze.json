@@ -13,7 +13,7 @@
       "conditions": [
         {
           "condition": "terracraft:configurable_random_chance",
-          "default_probability": 0.067
+          "default_probability": 0.02
         },
         {
           "condition": "minecraft:killed_by_player"

@@ -27,7 +27,6 @@ import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
-import terracraft.TerraCraft;
 import terracraft.common.events.PlayHurtSoundCallback;
 import terracraft.common.item.TerrariaItem;
 import terracraft.common.trinkets.TrinketsHelper;
@@ -147,14 +146,14 @@ public class TrinketTerrariaItem extends TerrariaItem implements Trinket {
 	}
 
 	private static Optional<String> getEffectsEnabledLanguageKey(ItemStack stack) {
-		return getterracrafttatus(stack).map(status -> switch (status) {
+		return getTerracraftStatus(stack).map(status -> switch (status) {
 			case ALL_ENABLED -> "terracraft.status.allenabled";
 			case COSMETIC_ONLY -> "terracraft.status.cosmeticonly";
 			case EFFECTS_ONLY -> "terracraft.status.effectsonly";
 		});
 	}
 
-	public static Optional<terracrafttatus> getterracrafttatus(ItemStack stack) {
+	public static Optional<terracrafttatus> getTerracraftStatus(ItemStack stack) {
 		if (!(stack.getItem() instanceof TrinketTerrariaItem)) {
 			return Optional.empty();
 		}

@@ -17,6 +17,7 @@ import java.util.Collections;
 import java.util.List;
 
 public abstract class TerrariaItem extends Item {
+	private boolean showTooltip = true;
 
 	public TerrariaItem(Properties properties) {
 		super(properties.stacksTo(1).tab(TerraCraft.ITEM_GROUP).rarity(Rarity.RARE).fireResistant());
@@ -29,9 +30,13 @@ public abstract class TerrariaItem extends Item {
 	@Override
 	@Environment(EnvType.CLIENT)
 	public void appendHoverText(ItemStack stack, Level world, List<Component> tooltip, TooltipFlag flags) {
-		if (TerraCraft.CONFIG.general.showTooltips) {
+		if (TerraCraft.CONFIG.general.showTooltips && showTooltip) {
 			appendTooltipDescription(tooltip, this.getDescriptionId() + ".tooltip");
 		}
+	}
+
+	public void canShowTooltip(boolean canShow) {
+		showTooltip = canShow;
 	}
 
 	public Component getREITooltip() {

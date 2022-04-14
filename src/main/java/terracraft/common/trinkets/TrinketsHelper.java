@@ -53,13 +53,13 @@ public final class TrinketsHelper {
 	}
 
 	public static boolean areEffectsEnabled(ItemStack stack) {
-		return TrinketTerrariaItem.getterracrafttatus(stack)
+		return TrinketTerrariaItem.getTerracraftStatus(stack)
 				.map(TrinketTerrariaItem.terracrafttatus::hasEffects)
 				.orElse(false);
 	}
 
 	public static boolean areCosmeticsEnabled(ItemStack stack) {
-		return TrinketTerrariaItem.getterracrafttatus(stack)
+		return TrinketTerrariaItem.getTerracraftStatus(stack)
 				.map(TrinketTerrariaItem.terracrafttatus::hasCosmetics)
 				.orElse(false);
 	}

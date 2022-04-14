@@ -48,10 +48,10 @@ public class ModLootTables {
 			new ResourceLocation("chests/stronghold_corridor"),
 			new ResourceLocation("chests/underwater_ruin_big"),
 			new ResourceLocation("chests/woodland_mansion"),
-			new ResourceLocation("entities/cow"),
 			new ResourceLocation("entities/bat"),
 			new ResourceLocation("entities/blaze"),
-			new ResourceLocation("entities/ghast")
+			new ResourceLocation("entities/ghast"),
+			new ResourceLocation("entities/zombie")
 	);
 
 	public static void onLootTableLoad(ResourceLocation id, FabricLootSupplierBuilder supplier) {

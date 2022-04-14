@@ -15,6 +15,10 @@ import java.util.UUID;
 
 public class ShackleItem extends TrinketTerrariaItem {
 
+	public ShackleItem() {
+		canShowTooltip(false);
+	}
+
 	@Override
 	protected Multimap<Attribute, AttributeModifier> applyModifiers(ItemStack stack, SlotReference slot, LivingEntity entity, UUID uuid) {
 		Multimap<Attribute, AttributeModifier> result = super.applyModifiers(stack, slot, entity, uuid);

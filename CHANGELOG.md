@@ -14,6 +14,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     - Skyware chests will generate on Floating Islands
     - Shadow chests will generate in the nether
 
+### Changed
+- Accessories will no longer generate in other chests, such as village chests
+- Zombies now drop shackles rarely
+
+### Removed
+- All Artifacts mod trinkets
+
 ## [1.1.0] - 2022-04-06
 ### Fixed
 - Stereo audio (now mono, which makes positional)

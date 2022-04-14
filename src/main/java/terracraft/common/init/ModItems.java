@@ -28,7 +28,7 @@ public class ModItems {
 	public static final Item UMBRELLA = register("umbrella", new UmbrellaItem());
 	public static final Item WHOOPEE_CUSHION = register("whoopee_cushion", new WhoopeeCushionItem());
 	public static final Item MAGIC_MIRROR = register("magic_mirror", new MagicMirrorItem());
-	public static final Item COBALT_SHIELD = register("cobalt_shield", new FabricShieldItem(new FabricItemSettings().maxDamage(2500).fireproof().rarity(Rarity.RARE).group(TerraCraft.ITEM_GROUP), 10, 13, net.minecraft.world.item.Items.DIAMOND)); // FabricShieldItem(settings.maxDamage(durability), cooldownTicks, enchantability, repairItem)
+	public static final Item COBALT_SHIELD = register("cobalt_shield", new FabricShieldItem(new FabricItemSettings().maxDamage(2500).fireproof().rarity(Rarity.RARE).group(TerraCraft.ITEM_GROUP), 10, 13, net.minecraft.world.item.Items.DIAMOND));
 	public static final Item OBSIDIAN_SHIELD = register("obsidian_shield", new FabricShieldItem(new FabricItemSettings().maxDamage(2500).fireproof().rarity(Rarity.RARE).group(TerraCraft.ITEM_GROUP), 10, 13, net.minecraft.world.item.Items.OBSIDIAN));
 
 	// Crafting Items
@@ -61,9 +61,6 @@ public class ModItems {
 	public static final Item GOBLIN_TECH = register("goblin_tech", new TrinketTerrariaItem());
 	public static final Item PDA = register("pda", new TrinketTerrariaItem());
 	public static final Item CELL_PHONE = register("cell_phone", new CellPhoneItem());
-
-	// Head
-	public static final Item SNORKEL = register("snorkel", new SnorkelItem());
 
 	// Necklace
 	public static final Item CROSS_NECKLACE = register("cross_necklace", new CrossNecklaceItem());
@@ -113,7 +110,11 @@ public class ModItems {
 	public static final Item MANA_REGENERATION_BAND = register("mana_regeneration_band", new ManaRegenerationBandItem());
 	public static final Item MAGIC_CUFFS = register("magic_cuffs", new MagicCuffsItem());
 
+	// Head
+	public static final Item SNORKEL = register("snorkel", new SnorkelItem());
+
 	// Feet
+	public static final Item FLIPPERS = register("flippers", new TrinketTerrariaItem());
 	public static final Item AGLET = register("aglet", new AgletItem());
 	public static final Item ANKLET = register("anklet", new AnkletItem());
 	public static final Item WATER_WALKING_BOOTS = register("water_walking_boots", new WaterWalkingBootsItem());
@@ -128,7 +129,6 @@ public class ModItems {
 	public static final Item TERRASPARK_BOOTS = register("terraspark_boots", new TerrasparkBootsItem());
 	public static final Item FLOWER_BOOTS = register("flower_boots", new FlowerBootsItem());
 	public static final Item FAIRY_BOOTS = register("fairy_boots", new FairyBootsItem());
-	public static final Item FLIPPERS = register("flippers", new TrinketTerrariaItem());
 
 	// Blocks
 	public static final Item GOLD_CHEST_BLOCK = register("gold_chest_block", new BlockItem(ModBlocks.GOLD_CHEST, new FabricItemSettings().group(CreativeModeTab.TAB_DECORATIONS)));
