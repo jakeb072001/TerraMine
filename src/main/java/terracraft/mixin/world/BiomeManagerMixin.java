@@ -17,6 +17,7 @@ import terracraft.common.utility.CorruptionHelper;
 @Mixin(BiomeManager.class)
 public class BiomeManagerMixin {
 
+    //todo: currently can cause a crash randomly when the player dies, probably need to have set to corruption biome if surrounded by other corruption blocks
     @Inject(at = @At("RETURN"), method = "getBiome", cancellable = true)
     public void spreadCorruptionBiome(BlockPos pos, CallbackInfoReturnable<Holder<Biome>> info) {
         Minecraft mc = Minecraft.getInstance();

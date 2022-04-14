@@ -95,56 +95,6 @@ public class LegsModel extends HumanoidModel<LivingEntity> {
         return createShoes(delta, leftLeg, rightLeg);
     }
 
-    public static MeshDefinition createBunnyHoppers() {
-        CubeListBuilder leftLeg = CubeListBuilder.create();
-        CubeListBuilder rightLeg = CubeListBuilder.create();
-
-        // noses
-        leftLeg.texOffs(32, 9);
-        leftLeg.addBox(-0.5F, 10, -7.5F, 1, 1, 1);
-        rightLeg.texOffs(32, 25);
-        rightLeg.addBox(-0.5F, 10, -7.5F, 1, 1, 1);
-
-        // tails
-        leftLeg.texOffs(52, 6);
-        leftLeg.addBox(-1, 9, 2, 2, 2, 2);
-        rightLeg.texOffs(52, 22);
-        rightLeg.addBox(-1, 9, 2, 2, 2, 2);
-
-        MeshDefinition mesh = createSlippers(leftLeg, rightLeg);
-
-        mesh.getRoot().getChild("left_leg").addOrReplaceChild(
-                "left_ear",
-                CubeListBuilder.create()
-                        .texOffs(52, 0)
-                        .addBox(-3.15F, 3.51F, -3.01F, 2, 5, 1),
-                PartPose.rotation(0, -0.2617994F, 0)
-        );
-        mesh.getRoot().getChild("right_leg").addOrReplaceChild(
-                "left_ear",
-                CubeListBuilder.create()
-                        .texOffs(52, 16)
-                        .addBox(-3.15F, 3.51F, -3, 2, 5, 1),
-                PartPose.rotation(0, -0.2617994F, 0)
-        );
-        mesh.getRoot().getChild("left_leg").addOrReplaceChild(
-                "right_ear",
-                CubeListBuilder.create()
-                        .texOffs(58, 0)
-                        .addBox(1.15F, 3.51F, -3.01F, 2, 5, 1),
-                PartPose.rotation(0, 0.2617994F, 0)
-        );
-        mesh.getRoot().getChild("left_leg").addOrReplaceChild(
-                "right_ear",
-                CubeListBuilder.create()
-                        .texOffs(58, 16)
-                        .addBox(1.15F, 3.51F, -3, 2, 5, 1),
-                PartPose.rotation(0, 0.2617994F, 0)
-        );
-
-        return mesh;
-    }
-
     public static MeshDefinition createFlippers() {
         CubeListBuilder leftLeg = CubeListBuilder.create();
         CubeListBuilder rightLeg = CubeListBuilder.create();
@@ -157,47 +107,7 @@ public class LegsModel extends HumanoidModel<LivingEntity> {
         return createLegs(0.5F, leftLeg, rightLeg);
     }
 
-    public static MeshDefinition createKittySlippers() {
-        CubeListBuilder leftLeg = CubeListBuilder.create();
-        CubeListBuilder rightLeg = CubeListBuilder.create();
-
-        // ears
-        leftLeg.texOffs(32, 9);
-        leftLeg.addBox(-2, 7.51F, -4, 1, 1, 2);
-        rightLeg.texOffs(32, 25);
-        rightLeg.addBox(-2, 7.51F, -4, 1, 1, 2);
-        leftLeg.texOffs(38, 9);
-        leftLeg.addBox(1, 7.51F, -4, 1, 1, 2);
-        rightLeg.texOffs(38, 25);
-        rightLeg.addBox(1, 7.51F, -4, 1, 1, 2);
-
-        // noses
-        leftLeg.texOffs(44, 9);
-        leftLeg.addBox(-1.5F, 10.51F, -8, 3, 2, 1);
-        rightLeg.texOffs(44, 25);
-        rightLeg.addBox(-1.5F, 10.51F, -8, 3, 2, 1);
-
-        return createSlippers(leftLeg, rightLeg);
-    }
-
     public static MeshDefinition createRunningShoes() {
         return createShoes(0.5F, CubeListBuilder.create(), CubeListBuilder.create());
-    }
-
-    public static MeshDefinition createSteadfastSpikes() {
-        CubeListBuilder leftLeg = CubeListBuilder.create();
-        CubeListBuilder rightLeg = CubeListBuilder.create();
-
-        // claws
-        leftLeg.texOffs(32, 0);
-        leftLeg.addBox(-1.5F, 9, -7, 1, 3, 5);
-        rightLeg.texOffs(43, 0);
-        rightLeg.addBox(-1.5F, 9, -7, 1, 3, 5);
-        leftLeg.texOffs(32, 8);
-        leftLeg.addBox(0.5F, 9, -7, 1, 3, 5);
-        rightLeg.texOffs(43, 8);
-        rightLeg.addBox(0.5F, 9, -7, 1, 3, 5);
-
-        return createSleevedLegs(0.5F, leftLeg, rightLeg);
     }
 }

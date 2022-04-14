@@ -32,9 +32,6 @@ import terracraft.common.trinkets.TrinketsHelper;
 import java.util.HashSet;
 import java.util.Set;
 
-//todo: make the climbing claws and shoe spikes then make this code only work with them and the other ninja stuff
-// search todo for more stuff
-
 @Mixin(Player.class)
 public abstract class PlayerMixin extends LivingEntity {
 
@@ -219,7 +216,7 @@ public abstract class PlayerMixin extends LivingEntity {
                 this.getY(),
                 this.getZ() - 0.001,
                 this.getX() + 0.001,
-                this.getY() + this.eyeBlockPosition().getY(), // todo: maybe need to change this to another eye thing
+                this.getY() + this.eyeBlockPosition().getY(),
                 this.getZ() + 0.001
         );
 

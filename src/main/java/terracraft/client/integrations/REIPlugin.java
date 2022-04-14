@@ -16,16 +16,10 @@ public class REIPlugin implements REIClientPlugin {
 	public void registerDisplays(DisplayRegistry recipeHelper) {
 		Registry.ITEM.stream()
 				.filter(item -> item instanceof TerrariaItem)
-				.filter(item -> item != ModItems.NOVELTY_DRINKING_HAT)
 				.map(item -> {
 					DefaultInformationDisplay display = DefaultInformationDisplay.createFromEntry(EntryStack.of(VanillaEntryTypes.ITEM, new ItemStack(item)), item.getDescription());
 					display.line(((TerrariaItem) item).getREITooltip());
 					return display;
 				}).forEach(recipeHelper::add);
-
-		// Novelty Drinking Hat
-		DefaultInformationDisplay display = DefaultInformationDisplay.createFromEntry(EntryStack.of(VanillaEntryTypes.ITEM, new ItemStack(ModItems.NOVELTY_DRINKING_HAT)), ModItems.NOVELTY_DRINKING_HAT.getDescription());
-		display.line(((TerrariaItem) ModItems.PLASTIC_DRINKING_HAT).getREITooltip());
-		recipeHelper.add(display);
 	}
 }

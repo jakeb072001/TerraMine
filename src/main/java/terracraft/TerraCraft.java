@@ -93,7 +93,7 @@ public class TerraCraft implements ModInitializer, TerraBlenderApi {
 
 		// Force loading init classes
 		// Entities is loaded by items, loot tables can load lazily (no registration)
-		ModItems.ANTIDOTE_VESSEL.toString();
+		ModItems.TERRASPARK_BOOTS.toString();
 		ModSoundEvents.MIMIC_CLOSE.toString();
 		ModPotions.LESSER_MANA_POTION.toString();
 		Stats.CUSTOM.get(ModStatistics.MANA_USED, StatFormatter.DEFAULT);

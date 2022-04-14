@@ -11,7 +11,6 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
-import terracraft.common.item.curio.old.HeliumFlamingoItem;
 
 @SuppressWarnings("UnstableApiUsage")
 public class SwimAbilityComponent implements PlayerComponent<Component>, AutoSyncedComponent {
@@ -43,10 +42,6 @@ public class SwimAbilityComponent implements PlayerComponent<Component>, AutoSyn
 	}
 
 	public void setSwimming(boolean shouldSwim) {
-		if (this.shouldSwim && !shouldSwim) {
-			setSwimTime((int) (-HeliumFlamingoItem.RECHARGE_TIME * getSwimTime() / (float) HeliumFlamingoItem.MAX_FLIGHT_TIME));
-		}
-
 		this.shouldSwim = shouldSwim;
 	}
 
@@ -97,13 +92,5 @@ public class SwimAbilityComponent implements PlayerComponent<Component>, AutoSyn
 		this.setSinking(buf.readBoolean());
 		this.setWet(buf.readBoolean());
 		this.setSwimTime(buf.readInt());
-	}
-
-	// Swimming needs C2S syncing, which is not covered by AutoSyncedComponent
-	@Environment(EnvType.CLIENT)
-	public void syncSwimming() {
-		FriendlyByteBuf byteBuf = PacketByteBufs.create();
-		byteBuf.writeBoolean(this.isSwimming());
-		ClientPlayNetworking.send(HeliumFlamingoItem.C2S_AIR_SWIMMING_ID, byteBuf);
 	}
 }

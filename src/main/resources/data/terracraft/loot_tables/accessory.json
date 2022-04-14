@@ -12,17 +12,7 @@
         {
           "type": "minecraft:item",
           "weight": 8,
-          "name": "terracraft:night_vision_goggles"
-        },
-        {
-          "type": "minecraft:item",
-          "weight": 8,
           "name": "terracraft:panic_necklace"
-        },
-        {
-          "type": "minecraft:item",
-          "weight": 8,
-          "name": "terracraft:shock_pendant"
         },
         {
           "type": "minecraft:item",
@@ -38,16 +28,6 @@
           "type": "minecraft:item",
           "weight": 8,
           "name": "terracraft:shiny_red_balloon"
-        },
-        {
-          "type": "minecraft:item",
-          "weight": 8,
-          "name": "terracraft:flame_pendant"
-        },
-        {
-          "type": "minecraft:item",
-          "weight": 8,
-          "name": "terracraft:thorn_pendant"
         },
         {
           "type": "minecraft:item",
@@ -83,11 +63,6 @@
           "type": "minecraft:item",
           "weight": 8,
           "name": "terracraft:feral_claws"
-        },
-        {
-          "type": "minecraft:item",
-          "weight": 8,
-          "name": "terracraft:pocket_piston"
         },
         {
           "type": "minecraft:item",
@@ -137,42 +112,7 @@
         {
           "type": "minecraft:item",
           "weight": 8,
-          "name": "terracraft:antidote_vessel"
-        },
-        {
-          "type": "minecraft:item",
-          "weight": 8,
-          "name": "terracraft:lucky_scarf"
-        },
-        {
-          "type": "minecraft:item",
-          "weight": 8,
-          "name": "terracraft:superstitious_hat"
-        },
-        {
-          "type": "minecraft:item",
-          "weight": 8,
-          "name": "terracraft:scarf_of_invisibility"
-        },
-        {
-          "type": "minecraft:item",
-          "weight": 8,
-          "name": "terracraft:digging_claws"
-        },
-        {
-          "type": "minecraft:item",
-          "weight": 8,
-          "name": "terracraft:steadfast_spikes"
-        },
-        {
-          "type": "minecraft:item",
-          "weight": 8,
           "name": "terracraft:universal_attractor"
-        },
-        {
-          "type": "minecraft:item",
-          "weight": 8,
-          "name": "terracraft:kitty_slippers"
         },
         {
           "type": "minecraft:item",
@@ -193,16 +133,6 @@
           "type": "minecraft:item",
           "weight": 8,
           "name": "terracraft:ice_skates"
-        },
-        {
-          "type": "minecraft:item",
-          "weight": 8,
-          "name": "terracraft:crystal_heart"
-        },
-        {
-          "type": "minecraft:item",
-          "weight": 8,
-          "name": "terracraft:villager_hat"
         },
         {
           "type": "minecraft:item",
@@ -301,26 +231,6 @@
         },
         {
           "type": "minecraft:item",
-          "weight": 8,
-          "name": "terracraft:vampiric_glove"
-        },
-        {
-          "type": "minecraft:item",
-          "weight": 8,
-          "name": "terracraft:golden_hook"
-        },
-        {
-          "type": "minecraft:item",
-          "weight": 8,
-          "name": "terracraft:charm_of_sinking"
-        },
-        {
-          "type": "minecraft:loot_table",
-          "weight": 8,
-          "name": "terracraft:items/drinking_hat"
-        },
-        {
-          "type": "minecraft:item",
           "weight": 5,
           "name": "terracraft:umbrella"
         },
@@ -328,16 +238,6 @@
           "type": "minecraft:item",
           "weight": 5,
           "name": "terracraft:whoopee_cushion"
-        },
-        {
-          "type": "minecraft:item",
-          "weight": 4,
-          "name": "terracraft:helium_flamingo"
-        },
-        {
-          "type": "minecraft:item",
-          "weight": 2,
-          "name": "terracraft:everlasting_beef"
         },
         {
           "type": "minecraft:item",

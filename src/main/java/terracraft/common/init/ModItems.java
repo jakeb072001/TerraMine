@@ -17,37 +17,10 @@ import terracraft.common.item.curio.necklace.AvengerEmblemItem;
 import terracraft.common.item.curio.necklace.CrossNecklaceItem;
 import terracraft.common.item.curio.necklace.PanicNecklaceItem;
 import terracraft.common.item.curio.necklace.WarriorEmblemItem;
-import terracraft.common.item.curio.old.*;
 import terracraft.common.item.magic.*;
 
 @SuppressWarnings("unused")
 public class ModItems {
-
-	// Old
-	public static final Item PLASTIC_DRINKING_HAT = register("plastic_drinking_hat", new DrinkingHatItem());
-	public static final Item NOVELTY_DRINKING_HAT = register("novelty_drinking_hat", new DrinkingHatItem());
-	public static final Item NIGHT_VISION_GOGGLES = register("night_vision_goggles", new NightVisionGogglesItem());
-	public static final Item VILLAGER_HAT = register("villager_hat", new TrinketTerrariaItem());
-	public static final Item SUPERSTITIOUS_HAT = register("superstitious_hat", new TrinketTerrariaItem());
-	public static final Item LUCKY_SCARF = register("lucky_scarf", new TrinketTerrariaItem());
-	public static final Item SCARF_OF_INVISIBILITY = register("scarf_of_invisibility", new ScarfOfInvisibilityItem());
-	public static final Item SHOCK_PENDANT = register("shock_pendant", new ShockPendantItem());
-	public static final Item FLAME_PENDANT = register("flame_pendant", new FlamePendantItem());
-	public static final Item THORN_PENDANT = register("thorn_pendant", new ThornPendantItem());
-	public static final Item CHARM_OF_SINKING = register("charm_of_sinking", new CharmOfSinkingItem());
-	public static final Item ANTIDOTE_VESSEL = register("antidote_vessel", new AntidoteVesselItem());
-	public static final Item CRYSTAL_HEART = register("crystal_heart", new CrystalHeartItem());
-	public static final Item HELIUM_FLAMINGO = register("helium_flamingo", new HeliumFlamingoItem());
-	public static final Item DIGGING_CLAWS = register("digging_claws", new DiggingClawsItem());
-	public static final Item POCKET_PISTON = register("pocket_piston", new PocketPistonItem());
-	public static final Item VAMPIRIC_GLOVE = register("vampiric_glove", new VampiricGloveItem());
-	public static final Item GOLDEN_HOOK = register("golden_hook", new TrinketTerrariaItem());
-	public static final Item KITTY_SLIPPERS = register("kitty_slippers", new KittySlippersItem());
-	public static final Item STEADFAST_SPIKES = register("steadfast_spikes", new SteadfastSpikesItem());
-
-	// Food Old
-	public static final Item EVERLASTING_BEEF = register("everlasting_beef", new EverlastingFoodItem(Foods.BEEF));
-	public static final Item ETERNAL_STEAK = register("eternal_steak", new EverlastingFoodItem(Foods.COOKED_BEEF));
 
 	// Misc
 	public static final Item MIMIC_SPAWN_EGG = register("mimic_spawn_egg", new SpawnEggItem(ModEntities.MIMIC, 0x805113, 0x212121, new Item.Properties().tab(CreativeModeTab.TAB_MISC)));

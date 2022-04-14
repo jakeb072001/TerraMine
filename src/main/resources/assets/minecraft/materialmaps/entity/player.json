@@ -15,14 +15,6 @@
         }
       },
       "material": "canvas:emissive_transform"
-    },
-    {
-      "predicate": {
-        "materialPredicate": {
-          "texture": "terracraft:textures/entity/trinket/night_vision_goggles_glow.png"
-        }
-      },
-      "material": "canvas:emissive_transform"
     }
   ]
 }

@@ -32,10 +32,6 @@ public final class ModConfig extends PartitioningSerializer.GlobalData {
 		@ConfigEntry.Gui.Excluded
 		public int configVersion = CONFIG_VERSION;
 		@ConfigEntry.Gui.Tooltip(count = 2)
-		public int everlastingFoodCooldown = 300;
-		@ConfigEntry.Gui.Tooltip(count = 2)
-		public boolean playExtraHurtSounds = true;
-		@ConfigEntry.Gui.Tooltip(count = 2)
 		public boolean showFirstPersonGloves = true;
 		@ConfigEntry.Gui.Tooltip(count = 2)
 		public boolean showTooltips = true;

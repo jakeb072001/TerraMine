@@ -89,10 +89,6 @@ public class MimicChestLayer extends RenderLayer<MimicEntity, MimicModel> {
     }
 
     private Material getChestMaterial(MimicEntity mimic) {
-        // TODO: missing config
-        /*if (!ModConfig.client.useModdedMimicTextures.get()) {
-            return vanillaChestMaterial;
-        }*/
         if (chestMaterials.size() == 1) {
             return chestMaterials.get(0);
         }

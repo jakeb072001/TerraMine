@@ -66,49 +66,6 @@ public class HeadModel extends HumanoidModel<LivingEntity> {
         return mesh;
     }
 
-    public static MeshDefinition createDrinkingHat() {
-        CubeListBuilder head = CubeListBuilder.create();
-        CubeListBuilder straws = CubeListBuilder.create();
-
-        // hat shade
-        head.texOffs(32, 11);
-        head.addBox(-4, -6, -8, 8, 1, 4);
-
-        // cans
-        head.texOffs(32, 0);
-        head.addBox(4, -11, -1, 3, 6, 3);
-        head.texOffs(44, 0);
-        head.addBox(-7, -11, -1, 3, 6, 3);
-
-        // middle straw
-        head.texOffs(32, 9);
-        head.addBox(-6, -1, -5, 12, 1, 1);
-
-        // side straws
-        straws.texOffs(0, 16);
-        straws.addBox(5, -4, -3, 1, 1, 8);
-        straws.texOffs(18, 16);
-        straws.addBox(-6, -4, -3, 1, 1, 8);
-
-        return createDiagonalHat(head, straws, "straws");
-    }
-
-    public static MeshDefinition createNightVisionGoggles() {
-        CubeListBuilder head = CubeListBuilder.create();
-
-        // plate
-        head.texOffs(0, 21);
-        head.addBox(-4, -6, -5 + 0.05F, 8, 4, 1);
-
-        // eyeholes
-        head.texOffs(0, 16);
-        head.addBox(1.5F, -5, -8 + 0.05F, 2, 2, 3);
-        head.texOffs(10, 16);
-        head.addBox(-3.5F, -5, -8 + 0.05F, 2, 2, 3);
-
-        return createHat(head);
-    }
-
     public static MeshDefinition createSnorkel() {
         CubeListBuilder head = CubeListBuilder.create();
         CubeListBuilder tube = CubeListBuilder.create();

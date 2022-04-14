@@ -126,13 +126,11 @@ public class TrinketTerrariaItem extends TerrariaItem implements Trinket {
 		return null;
 	}
 
-	private void playExtraHurtSound(LivingEntity entity, float volume, float pitch) {
-		if (TerraCraft.CONFIG.general.playExtraHurtSounds) {
-			SoundEvent hurtSound = getExtraHurtSound();
+	private void playExtraHurtSound(LivingEntity entity, float volume, float pitch) { // keeping for now, may use for moon charm and Neptune's shell
+		SoundEvent hurtSound = getExtraHurtSound();
 
-			if (hurtSound != null && TrinketsHelper.isEquipped(this, entity, true)) {
-				entity.playSound(hurtSound, volume, pitch);
-			}
+		if (hurtSound != null && TrinketsHelper.isEquipped(this, entity, true)) {
+			entity.playSound(hurtSound, volume, pitch);
 		}
 	}
 

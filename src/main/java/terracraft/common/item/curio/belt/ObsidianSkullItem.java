@@ -13,9 +13,6 @@ import terracraft.common.item.curio.TrinketTerrariaItem;
 
 import java.util.UUID;
 
-// todo: magma block immunity doesnt fully work, it kinda works but player still takes damage after a second or two. still better than nothing but could be improved maybe
-// main problem is the gap between reapplying the fire resistance effect...
-
 public class ObsidianSkullItem extends TrinketTerrariaItem {
 
 	@Override
