@@ -45,97 +45,67 @@ public class CorruptionHelper extends SpreadingSnowyDirtBlock  {
 
     @Override
     public void randomTick(BlockState blockState, ServerLevel serverLevel, BlockPos blockPos, Random random) {
-        // needs to be redone better, right now for each corruption block i need a new for loop, need it to not do that for optimisation and better formatting
-        // also need to make spreading slower as its too fast atm, especially vertically (up and down)
-
-        BlockState grass = ModBlocks.CORRUPTED_GRASS.defaultBlockState();
-        BlockState gravel = ModBlocks.CORRUPTED_GRAVEL.defaultBlockState();
-        BlockState sand = ModBlocks.CORRUPTED_SAND.defaultBlockState();
-        BlockState glass = ModBlocks.CORRUPTED_GLASS.defaultBlockState();
-        BlockState sandstone = ModBlocks.CORRUPTED_SANDSTONE.defaultBlockState();
-        BlockState andesite = ModBlocks.CORRUPTED_ANDESITE.defaultBlockState();
-        BlockState diorite = ModBlocks.CORRUPTED_DIORITE.defaultBlockState();
-        BlockState granite = ModBlocks.CORRUPTED_GRANITE.defaultBlockState();
-        BlockState stone = ModBlocks.CORRUPTED_STONE.defaultBlockState();
-        BlockState deepslate = ModBlocks.CORRUPTED_DEEPSLATE.defaultBlockState();
-        BlockState cobblestone = ModBlocks.CORRUPTED_COBBLESTONE.defaultBlockState();
-        BlockState cobbled_deepslate = ModBlocks.CORRUPTED_COBBLED_DEEPSLATE.defaultBlockState();
-        BlockState coal_ore = ModBlocks.CORRUPTED_COAL_ORE.defaultBlockState();
-        BlockState iron_ore = ModBlocks.CORRUPTED_IRON_ORE.defaultBlockState();
-        BlockState copper_ore = ModBlocks.CORRUPTED_COPPER_ORE.defaultBlockState();
-        BlockState gold_ore = ModBlocks.CORRUPTED_GOLD_ORE.defaultBlockState();
-        BlockState lapis_ore = ModBlocks.CORRUPTED_LAPIS_ORE.defaultBlockState();
-        BlockState redstone_ore = ModBlocks.CORRUPTED_REDSTONE_ORE.defaultBlockState();
-        BlockState diamond_ore = ModBlocks.CORRUPTED_DIAMOND_ORE.defaultBlockState();
-        BlockState emerald_ore = ModBlocks.CORRUPTED_EMERALD_ORE.defaultBlockState();
-        BlockState deepslate_coal_ore = ModBlocks.CORRUPTED_DEEPSLATE_COAL_ORE.defaultBlockState();
-        BlockState deepslate_iron_ore = ModBlocks.CORRUPTED_DEEPSLATE_IRON_ORE.defaultBlockState();
-        BlockState deepslate_copper_ore = ModBlocks.CORRUPTED_DEEPSLATE_COPPER_ORE.defaultBlockState();
-        BlockState deepslate_gold_ore = ModBlocks.CORRUPTED_DEEPSLATE_GOLD_ORE.defaultBlockState();
-        BlockState deepslate_lapis_ore = ModBlocks.CORRUPTED_DEEPSLATE_LAPIS_ORE.defaultBlockState();
-        BlockState deepslate_redstone_ore = ModBlocks.CORRUPTED_DEEPSLATE_REDSTONE_ORE.defaultBlockState();
-        BlockState deepslate_diamond_ore = ModBlocks.CORRUPTED_DEEPSLATE_DIAMOND_ORE.defaultBlockState();
-        BlockState deepslate_emerald_ore = ModBlocks.CORRUPTED_DEEPSLATE_EMERALD_ORE.defaultBlockState();
-        BlockState snow_layer = ModBlocks.CORRUPTED_SNOW_LAYER.defaultBlockState();
-        BlockState snow = ModBlocks.CORRUPTED_SNOW.defaultBlockState();
-        BlockState ice = ModBlocks.CORRUPTED_ICE.defaultBlockState();
-        BlockState packed_ice = ModBlocks.CORRUPTED_PACKED_ICE.defaultBlockState();
-
         if (!TerraCraft.CONFIG.general.disableCorruptionSpread) { // allows user to disable spreading in configs
-            for (int i = 0; i < 4; ++i) {
+            BlockState grass = ModBlocks.CORRUPTED_GRASS.defaultBlockState();
+            BlockState snow_layer = ModBlocks.CORRUPTED_SNOW_LAYER.defaultBlockState();
+
+            for (int i = 0; i < 4; ++i) { // corrupted grass spread to grass
                 BlockPos blockPos2 = blockPos.offset(random.nextInt(3) - 1, random.nextInt(5) - 3, random.nextInt(3) - 1);
                 if (!serverLevel.getBlockState(blockPos2).is(Blocks.GRASS_BLOCK) || !canPropagate(grass, serverLevel, blockPos2)) continue;
                 serverLevel.setBlockAndUpdate(blockPos2, grass.setValue(SNOWY, (serverLevel.getBlockState(blockPos2.above()).is(Blocks.SNOW) || serverLevel.getBlockState(blockPos2.above()).is(ModBlocks.CORRUPTED_SNOW_LAYER))));
             }
-            for (int i = 0; i < 4; ++i) {
+            for (int i = 0; i < 4; ++i) { // normal grass spread with corrupted grass
                 BlockPos blockPos2 = blockPos.offset(random.nextInt(3) - 1, random.nextInt(5) - 3, random.nextInt(3) - 1);
                 if (!serverLevel.getBlockState(blockPos2).is(Blocks.DIRT) || !canPropagate(grass, serverLevel, blockPos2)) continue;
                 serverLevel.setBlockAndUpdate(blockPos2, grass.setValue(SNOWY, (serverLevel.getBlockState(blockPos2.above()).is(Blocks.SNOW) || serverLevel.getBlockState(blockPos2.above()).is(ModBlocks.CORRUPTED_SNOW_LAYER))));
             }
-            for (int i = 0; i < 4; ++i) {
+            for (int i = 0; i < 4; ++i) { // spread layered snow
                 BlockPos blockPos2 = blockPos.offset(random.nextInt(3) - 1, random.nextInt(5) - 3, random.nextInt(3) - 1);
                 if (!serverLevel.getBlockState(blockPos2).is(Blocks.SNOW)) continue;
                 serverLevel.setBlockAndUpdate(blockPos2, snow_layer.setValue(CorruptedSnowLayer.LAYERS, serverLevel.getBlockState(blockPos2).getValue(SnowLayerBlock.LAYERS)));
             }
-            spreadBlock(gravel, Blocks.GRAVEL, serverLevel, blockPos, random);
-            spreadBlock(sand, Blocks.SAND, serverLevel, blockPos, random);
-            spreadBlock(glass, Blocks.GLASS, serverLevel, blockPos, random);
-            spreadBlock(sandstone, Blocks.SANDSTONE, serverLevel, blockPos, random);
-            spreadBlock(andesite, Blocks.ANDESITE, serverLevel, blockPos, random);
-            spreadBlock(diorite, Blocks.DIORITE, serverLevel, blockPos, random);
-            spreadBlock(granite, Blocks.GRANITE, serverLevel, blockPos, random);
-            spreadBlock(stone, Blocks.STONE, serverLevel, blockPos, random);
-            spreadBlock(deepslate, Blocks.DEEPSLATE, serverLevel, blockPos, random);
-            spreadBlock(cobblestone, Blocks.COBBLESTONE, serverLevel, blockPos, random);
-            spreadBlock(cobbled_deepslate, Blocks.COBBLED_DEEPSLATE, serverLevel, blockPos, random);
-            spreadBlock(coal_ore, Blocks.COAL_ORE, serverLevel, blockPos, random);
-            spreadBlock(iron_ore, Blocks.IRON_ORE, serverLevel, blockPos, random);
-            spreadBlock(copper_ore, Blocks.COPPER_ORE, serverLevel, blockPos, random);
-            spreadBlock(gold_ore, Blocks.GOLD_ORE, serverLevel, blockPos, random);
-            spreadBlock(lapis_ore, Blocks.LAPIS_ORE, serverLevel, blockPos, random);
-            spreadBlock(redstone_ore, Blocks.REDSTONE_ORE, serverLevel, blockPos, random);
-            spreadBlock(diamond_ore, Blocks.DIAMOND_ORE, serverLevel, blockPos, random);
-            spreadBlock(emerald_ore, Blocks.EMERALD_ORE, serverLevel, blockPos, random);
-            spreadBlock(deepslate_coal_ore, Blocks.DEEPSLATE_COAL_ORE, serverLevel, blockPos, random);
-            spreadBlock(deepslate_iron_ore, Blocks.DEEPSLATE_IRON_ORE, serverLevel, blockPos, random);
-            spreadBlock(deepslate_copper_ore, Blocks.DEEPSLATE_COPPER_ORE, serverLevel, blockPos, random);
-            spreadBlock(deepslate_gold_ore, Blocks.DEEPSLATE_GOLD_ORE, serverLevel, blockPos, random);
-            spreadBlock(deepslate_lapis_ore, Blocks.DEEPSLATE_LAPIS_ORE, serverLevel, blockPos, random);
-            spreadBlock(deepslate_redstone_ore, Blocks.DEEPSLATE_REDSTONE_ORE, serverLevel, blockPos, random);
-            spreadBlock(deepslate_diamond_ore, Blocks.DEEPSLATE_DIAMOND_ORE, serverLevel, blockPos, random);
-            spreadBlock(deepslate_emerald_ore, Blocks.DEEPSLATE_EMERALD_ORE, serverLevel, blockPos, random);
-            spreadBlock(snow, Blocks.SNOW_BLOCK, serverLevel, blockPos, random);
-            spreadBlock(ice, Blocks.ICE, serverLevel, blockPos, random);
-            spreadBlock(packed_ice, Blocks.PACKED_ICE, serverLevel, blockPos, random);
+
+            spreadBlock(ModBlocks.CORRUPTED_GRAVEL, Blocks.GRAVEL, serverLevel, blockPos, random);
+            spreadBlock(ModBlocks.CORRUPTED_SAND, Blocks.SAND, serverLevel, blockPos, random);
+            spreadBlock(ModBlocks.CORRUPTED_GLASS, Blocks.GLASS, serverLevel, blockPos, random);
+            spreadBlock(ModBlocks.CORRUPTED_SANDSTONE, Blocks.SANDSTONE, serverLevel, blockPos, random);
+            spreadBlock(ModBlocks.CORRUPTED_ANDESITE, Blocks.ANDESITE, serverLevel, blockPos, random);
+            spreadBlock(ModBlocks.CORRUPTED_DIORITE, Blocks.DIORITE, serverLevel, blockPos, random);
+            spreadBlock(ModBlocks.CORRUPTED_GRANITE, Blocks.GRANITE, serverLevel, blockPos, random);
+            spreadBlock(ModBlocks.CORRUPTED_STONE, Blocks.STONE, serverLevel, blockPos, random);
+            spreadBlock(ModBlocks.CORRUPTED_DEEPSLATE, Blocks.DEEPSLATE, serverLevel, blockPos, random);
+            spreadBlock(ModBlocks.CORRUPTED_COBBLESTONE, Blocks.COBBLESTONE, serverLevel, blockPos, random);
+            spreadBlock(ModBlocks.CORRUPTED_COBBLED_DEEPSLATE, Blocks.COBBLED_DEEPSLATE, serverLevel, blockPos, random);
+            spreadBlock(ModBlocks.CORRUPTED_COAL_ORE, Blocks.COAL_ORE, serverLevel, blockPos, random);
+            spreadBlock(ModBlocks.CORRUPTED_IRON_ORE, Blocks.IRON_ORE, serverLevel, blockPos, random);
+            spreadBlock(ModBlocks.CORRUPTED_COPPER_ORE, Blocks.COPPER_ORE, serverLevel, blockPos, random);
+            spreadBlock(ModBlocks.CORRUPTED_GOLD_ORE, Blocks.GOLD_ORE, serverLevel, blockPos, random);
+            spreadBlock(ModBlocks.CORRUPTED_LAPIS_ORE, Blocks.LAPIS_ORE, serverLevel, blockPos, random);
+            spreadBlock(ModBlocks.CORRUPTED_REDSTONE_ORE, Blocks.REDSTONE_ORE, serverLevel, blockPos, random);
+            spreadBlock(ModBlocks.CORRUPTED_DIAMOND_ORE, Blocks.DIAMOND_ORE, serverLevel, blockPos, random);
+            spreadBlock(ModBlocks.CORRUPTED_EMERALD_ORE, Blocks.EMERALD_ORE, serverLevel, blockPos, random);
+            spreadBlock(ModBlocks.CORRUPTED_DEEPSLATE_COAL_ORE, Blocks.DEEPSLATE_COAL_ORE, serverLevel, blockPos, random);
+            spreadBlock(ModBlocks.CORRUPTED_DEEPSLATE_IRON_ORE, Blocks.DEEPSLATE_IRON_ORE, serverLevel, blockPos, random);
+            spreadBlock(ModBlocks.CORRUPTED_DEEPSLATE_COPPER_ORE, Blocks.DEEPSLATE_COPPER_ORE, serverLevel, blockPos, random);
+            spreadBlock(ModBlocks.CORRUPTED_DEEPSLATE_GOLD_ORE, Blocks.DEEPSLATE_GOLD_ORE, serverLevel, blockPos, random);
+            spreadBlock(ModBlocks.CORRUPTED_DEEPSLATE_LAPIS_ORE, Blocks.DEEPSLATE_LAPIS_ORE, serverLevel, blockPos, random);
+            spreadBlock(ModBlocks.CORRUPTED_DEEPSLATE_REDSTONE_ORE, Blocks.DEEPSLATE_REDSTONE_ORE, serverLevel, blockPos, random);
+            spreadBlock(ModBlocks.CORRUPTED_DEEPSLATE_DIAMOND_ORE, Blocks.DEEPSLATE_DIAMOND_ORE, serverLevel, blockPos, random);
+            spreadBlock(ModBlocks.CORRUPTED_DEEPSLATE_EMERALD_ORE, Blocks.DEEPSLATE_EMERALD_ORE, serverLevel, blockPos, random);
+            spreadBlock(ModBlocks.CORRUPTED_SNOW, Blocks.SNOW_BLOCK, serverLevel, blockPos, random);
+            spreadBlock(ModBlocks.CORRUPTED_ICE, Blocks.ICE, serverLevel, blockPos, random);
+            spreadBlock(ModBlocks.CORRUPTED_PACKED_ICE, Blocks.PACKED_ICE, serverLevel, blockPos, random);
+            spreadBlock(ModBlocks.CORRUPTED_BLUE_ICE, Blocks.BLUE_ICE, serverLevel, blockPos, random);
         }
     }
 
-    private void spreadBlock(BlockState toSpread, Block spreadTo, ServerLevel serverLevel, BlockPos blockPos, Random random) {
+    private void spreadBlock(Block toSpread, Block spreadTo, ServerLevel serverLevel, BlockPos blockPos, Random random) {
         for (int i = 0; i < 4; ++i) {
             if (random.nextInt(TerraCraft.CONFIG.general.corruptionSpreadRarity + 1) == 1) {
+                BlockState block = toSpread.defaultBlockState();
                 BlockPos blockPos2 = blockPos.offset(random.nextInt(3) - 1, random.nextInt(5) - 3, random.nextInt(3) - 1);
                 if (!serverLevel.getBlockState(blockPos2).is(spreadTo)) continue;
-                serverLevel.setBlockAndUpdate(blockPos2, toSpread.setValue(SNOWY, (serverLevel.getBlockState(blockPos2.above()).is(Blocks.SNOW) || serverLevel.getBlockState(blockPos2.above()).is(ModBlocks.CORRUPTED_SNOW_LAYER))));
+                serverLevel.setBlockAndUpdate(blockPos2, block.setValue(SNOWY, (serverLevel.getBlockState(blockPos2.above()).is(Blocks.SNOW) || serverLevel.getBlockState(blockPos2.above()).is(ModBlocks.CORRUPTED_SNOW_LAYER))));
             }
         }
     }

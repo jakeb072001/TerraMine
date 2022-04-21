@@ -1,4 +1,7 @@
 {
   "icon": "terracraft:gui/slots/terraria",
-  "drop_rule": "keepInventory"
+  "drop_rule": "keepInventory",
+  "tooltip_predicates": [
+    "trinkets:none"
+  ]
 }

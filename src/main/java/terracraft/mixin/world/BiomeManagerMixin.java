@@ -14,6 +14,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import terracraft.common.init.ModBiomes;
 import terracraft.common.utility.CorruptionHelper;
 
+import java.util.Random;
+
 @Mixin(BiomeManager.class)
 public class BiomeManagerMixin {
 
@@ -24,15 +26,13 @@ public class BiomeManagerMixin {
         if (mc != null && mc.level != null) {
             for (int i = 45; i <= 100; i++) { // checks for blocks between y 45 and 100
                 Block block = mc.level.getBlockState(pos.atY(i)).getBlock();
-                if (block instanceof CorruptionHelper && pos.getY() > i) {
-                    Holder<Biome> biome;
+                if (block instanceof CorruptionHelper && pos.getY() > i) { // if block is a corruption block and position is above i (y range)
+                    Holder<Biome> biome = BuiltinRegistries.BIOME.getHolderOrThrow(ModBiomes.CORRUPTION); // default biome
                     if (info.getReturnValue().is(net.minecraft.world.level.biome.Biomes.DESERT) || info.getReturnValue().is(ModBiomes.CORRUPTION_DESERT)) {
-                        biome = BuiltinRegistries.BIOME.getHolderOrThrow(ModBiomes.CORRUPTION_DESERT);
-                        info.setReturnValue(biome);
-                    } else {
-                        biome = BuiltinRegistries.BIOME.getHolderOrThrow(ModBiomes.CORRUPTION);
-                        info.setReturnValue(biome);
+                        biome = BuiltinRegistries.BIOME.getHolderOrThrow(ModBiomes.CORRUPTION_DESERT); // desert biome
                     }
+                    info.setReturnValue(biome);
+                    break;
                 }
             }
         }
