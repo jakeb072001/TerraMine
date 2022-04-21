@@ -1,19 +1,13 @@
 package terracraft.common.item;
 
-import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.level.Level;
-import terracraft.common.entity.MagicMissileEntity;
 import terracraft.common.init.ModComponents;
-import terracraft.common.init.ModEntities;
-import terracraft.common.init.ModItems;
-import terracraft.common.init.ModSoundEvents;
 
 public class MagicTerrariaItem extends TerrariaItem {
     public int useDuration;

@@ -48,6 +48,8 @@ public class TerraCraftClient implements ClientModInitializer {
 		EntityRendererRegistry.register(ModEntities.DEMON_EYE, DemonEyeRenderer::new);
 		EntityRendererRegistry.register(ModEntities.FALLING_STAR, FallingStarRenderer::new);
 		EntityRendererRegistry.register(ModEntities.MAGIC_MISSILE, MagicMissileRenderer::new);
+		EntityRendererRegistry.register(ModEntities.FLAMELASH_MISSILE, FlamelashMissileRenderer::new);
+		EntityRendererRegistry.register(ModEntities.RAINBOW_MISSILE, RainbowMissileRenderer::new);
 
 		// Block RenderLayer
 		BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.CORRUPTED_GLASS, RenderType.translucent());

@@ -21,6 +21,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
+import org.jetbrains.annotations.NotNull;
 import terracraft.common.init.ModLootTables;
 import terracraft.common.init.ModSoundEvents;
 
@@ -31,7 +32,7 @@ public class DemonEyeEntity extends Monster implements Enemy {
     public boolean doOnce = false;
     public double velX, velY, velZ;
     public double oldVelX, oldVelY, oldVelZ;
-    private static int eyeType; // can't be static, need to sort this out
+    private int eyeType;
 
     public DemonEyeEntity(EntityType<? extends DemonEyeEntity> entityType, Level worldIn) {
         super(entityType, worldIn);
@@ -54,10 +55,9 @@ public class DemonEyeEntity extends Monster implements Enemy {
             if (demonEye.isAlive()) {
                 boolean night = demonEye.level.getDayTime() <= 23999 && demonEye.level.getDayTime() >= 13000;
 
-                double motionY = demonEye.getDeltaMovement().y();
-                double motionX = demonEye.getDeltaMovement().x();
-                double motionZ = demonEye.getDeltaMovement().z();
-                motionY = 0;
+                double motionY;
+                double motionX;
+                double motionZ;
                 demonEye.setNoGravity(true);
                 demonEye.fallDistance = 0;
                 demonEye.setYRot(0);
@@ -90,10 +90,6 @@ public class DemonEyeEntity extends Monster implements Enemy {
                 }
 
                 if (demonEye.bounce) {
-                    double absX = Math.abs(motionX);
-                    double absY = Math.abs(motionY);
-                    double absZ = Math.abs(motionZ);
-
                     if (!demonEye.onGround) {
                         demonEye.velX = demonEye.oldVelX * -0.5;
                         if (demonEye.velX > 0 && demonEye.velX < 2) {
@@ -244,52 +240,64 @@ public class DemonEyeEntity extends Monster implements Enemy {
         }
     }
 
+    /**
     public static AttributeSupplier.Builder createMobAttributes() {
         return switch (eyeType) {
             case 0 -> Mob.createMobAttributes()
-                    .add(Attributes.MAX_HEALTH, 10)
+                    .add(Attributes.MAX_HEALTH, 15)
                     .add(Attributes.ARMOR, 2)
-                    .add(Attributes.FOLLOW_RANGE, 16)
+                    .add(Attributes.FOLLOW_RANGE, 24)
                     .add(Attributes.KNOCKBACK_RESISTANCE, 0.2)
                     .add(Attributes.MOVEMENT_SPEED, 1)
                     .add(Attributes.ATTACK_DAMAGE, 3.5);
             case 1 -> Mob.createMobAttributes()
-                    .add(Attributes.MAX_HEALTH, 15)
+                    .add(Attributes.MAX_HEALTH, 20)
                     .add(Attributes.ARMOR, 4)
-                    .add(Attributes.FOLLOW_RANGE, 16)
+                    .add(Attributes.FOLLOW_RANGE, 24)
                     .add(Attributes.KNOCKBACK_RESISTANCE, 0.3)
                     .add(Attributes.MOVEMENT_SPEED, 1)
                     .add(Attributes.ATTACK_DAMAGE, 3.5);
             case 2 -> Mob.createMobAttributes()
-                    .add(Attributes.MAX_HEALTH, 20)
+                    .add(Attributes.MAX_HEALTH, 25)
                     .add(Attributes.ARMOR, 2)
-                    .add(Attributes.FOLLOW_RANGE, 16)
+                    .add(Attributes.FOLLOW_RANGE, 24)
                     .add(Attributes.KNOCKBACK_RESISTANCE, 0.2)
                     .add(Attributes.MOVEMENT_SPEED, 1)
                     .add(Attributes.ATTACK_DAMAGE, 3.5);
             case 3 -> Mob.createMobAttributes()
-                    .add(Attributes.MAX_HEALTH, 15)
+                    .add(Attributes.MAX_HEALTH, 20)
                     .add(Attributes.ARMOR, 0)
-                    .add(Attributes.FOLLOW_RANGE, 16)
+                    .add(Attributes.FOLLOW_RANGE, 24)
                     .add(Attributes.KNOCKBACK_RESISTANCE, 0.2)
                     .add(Attributes.MOVEMENT_SPEED, 1)
                     .add(Attributes.ATTACK_DAMAGE, 4);
             case 4 -> Mob.createMobAttributes()
-                    .add(Attributes.MAX_HEALTH, 15)
+                    .add(Attributes.MAX_HEALTH, 20)
                     .add(Attributes.ARMOR, 4)
-                    .add(Attributes.FOLLOW_RANGE, 16)
+                    .add(Attributes.FOLLOW_RANGE, 24)
                     .add(Attributes.KNOCKBACK_RESISTANCE, 0.2)
                     .add(Attributes.MOVEMENT_SPEED, 1)
                     .add(Attributes.ATTACK_DAMAGE, 3);
             case 5 -> Mob.createMobAttributes()
-                    .add(Attributes.MAX_HEALTH, 15)
+                    .add(Attributes.MAX_HEALTH, 20)
                     .add(Attributes.ARMOR, 2)
-                    .add(Attributes.FOLLOW_RANGE, 16)
+                    .add(Attributes.FOLLOW_RANGE, 24)
                     .add(Attributes.KNOCKBACK_RESISTANCE, 0.15)
                     .add(Attributes.MOVEMENT_SPEED, 1)
                     .add(Attributes.ATTACK_DAMAGE, 3);
             default -> Mob.createMobAttributes();
         };
+    }
+     */
+
+    public static AttributeSupplier.Builder createMobAttributes() {
+        return Mob.createMobAttributes()
+                .add(Attributes.MAX_HEALTH, 25)
+                .add(Attributes.ARMOR, 2)
+                .add(Attributes.FOLLOW_RANGE, 24)
+                .add(Attributes.KNOCKBACK_RESISTANCE, 0.2)
+                .add(Attributes.MOVEMENT_SPEED, 1)
+                .add(Attributes.ATTACK_DAMAGE, 3.5);
     }
 
     public SoundSource getSoundSource() {
@@ -297,7 +305,7 @@ public class DemonEyeEntity extends Monster implements Enemy {
     }
 
     @Override
-    public void playerTouch(Player player) {
+    public void playerTouch(@NotNull Player player) {
         super.playerTouch(player);
 
         if (this.isAlive()) {
@@ -306,20 +314,20 @@ public class DemonEyeEntity extends Monster implements Enemy {
     }
 
     @Override
-    public boolean hurt(DamageSource source, float amount) {
+    public boolean hurt(@NotNull DamageSource source, float amount) {
         playSound(ModSoundEvents.DEMON_EYE_HURT, getSoundVolume(), getVoicePitch());
         return super.hurt(source, amount);
     }
 
 
     @Override
-    public void addAdditionalSaveData(CompoundTag compound) {
+    public void addAdditionalSaveData(@NotNull CompoundTag compound) {
         super.addAdditionalSaveData(compound);
         compound.putInt("eyeType", eyeType);
     }
 
     @Override
-    public void readAdditionalSaveData(CompoundTag compound) {
+    public void readAdditionalSaveData(@NotNull CompoundTag compound) {
         super.readAdditionalSaveData(compound);
         eyeType = compound.getInt("eyeType");
     }
@@ -330,7 +338,7 @@ public class DemonEyeEntity extends Monster implements Enemy {
     }
 
     @Override
-    protected SoundEvent getHurtSound(DamageSource damageSource) {
+    protected SoundEvent getHurtSound(@NotNull DamageSource damageSource) {
         return ModSoundEvents.DEMON_EYE_HURT;
     }
 
@@ -340,12 +348,12 @@ public class DemonEyeEntity extends Monster implements Enemy {
     }
 
     @Override
-    public ItemStack getItemBySlot(EquipmentSlot slot) {
+    public ItemStack getItemBySlot(@NotNull EquipmentSlot slot) {
         return ItemStack.EMPTY;
     }
 
     @Override
-    public void setItemSlotAndDropWhenKilled(EquipmentSlot slot, ItemStack stack) {
+    public void setItemSlotAndDropWhenKilled(@NotNull EquipmentSlot slot, @NotNull ItemStack stack) {
     }
 
     @Override

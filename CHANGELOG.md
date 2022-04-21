@@ -16,7 +16,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 - Accessories will no longer generate in other chests, such as village chests
+- Accessories will no longer display attributes in the tooltip
 - Zombies now drop shackles rarely
+
+### Fixed
+- Magic Missile particles not matching missile type
 
 ### Removed
 - All Artifacts mod trinkets

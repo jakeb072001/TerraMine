@@ -16,7 +16,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import terracraft.TerraCraft;
 
 public class BoneMealPacket {
-    public static final ResourceLocation ID = new ResourceLocation(TerraCraft.MOD_ID, "bone_meal");
+    public static final ResourceLocation ID = TerraCraft.id("bone_meal");
 
     public static void send(BlockPos pos) {
         FriendlyByteBuf buf = new FriendlyByteBuf(Unpooled.buffer());

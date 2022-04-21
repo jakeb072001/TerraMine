@@ -18,6 +18,7 @@ import net.minecraft.world.entity.monster.Enemy;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
+import org.jetbrains.annotations.NotNull;
 import terracraft.common.init.ModLootTables;
 import terracraft.common.init.ModSoundEvents;
 
@@ -45,7 +46,7 @@ public class MimicEntity extends Mob implements Enemy {
 	}
 
 	@Override
-	public SpawnGroupData finalizeSpawn(ServerLevelAccessor world, DifficultyInstance difficulty, MobSpawnType spawnReason, SpawnGroupData entityData, CompoundTag entityTag) {
+	public SpawnGroupData finalizeSpawn(@NotNull ServerLevelAccessor world, @NotNull DifficultyInstance difficulty, @NotNull MobSpawnType spawnReason, SpawnGroupData entityData, CompoundTag entityTag) {
 		if (getMoveControl() instanceof MimicMovementController mimicMoveControl) {
 			mimicMoveControl.setDirection(random.nextInt(4) * 90, false);
 		}
@@ -73,14 +74,14 @@ public class MimicEntity extends Mob implements Enemy {
 	}
 
 	@Override
-	public void addAdditionalSaveData(CompoundTag compound) {
+	public void addAdditionalSaveData(@NotNull CompoundTag compound) {
 		super.addAdditionalSaveData(compound);
 		compound.putInt("ticksInAir", ticksInAir);
 		compound.putBoolean("isDormant", isDormant);
 	}
 
 	@Override
-	public void readAdditionalSaveData(CompoundTag compound) {
+	public void readAdditionalSaveData(@NotNull CompoundTag compound) {
 		super.readAdditionalSaveData(compound);
 		ticksInAir = compound.getInt("ticksInAir");
 		isDormant = compound.getBoolean("isDormant");
@@ -108,7 +109,7 @@ public class MimicEntity extends Mob implements Enemy {
 	}
 
 	@Override
-	public void playerTouch(Player player) {
+	public void playerTouch(@NotNull Player player) {
 		super.playerTouch(player);
 		// noinspection ConstantConditions
 		if (attackCooldown <= 0 && player.getCommandSenderWorld().getDifficulty() != Difficulty.PEACEFUL && hasLineOfSight(player)
@@ -144,7 +145,7 @@ public class MimicEntity extends Mob implements Enemy {
 	}
 
 	@Override
-	protected SoundEvent getHurtSound(DamageSource damageSource) {
+	protected SoundEvent getHurtSound(@NotNull DamageSource damageSource) {
 		return ModSoundEvents.MIMIC_HURT;
 	}
 

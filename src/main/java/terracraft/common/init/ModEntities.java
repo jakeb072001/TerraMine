@@ -1,16 +1,14 @@
 package terracraft.common.init;
 
-import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
 import net.minecraft.core.Registry;
 import net.minecraft.world.entity.EntityDimensions;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
 import terracraft.TerraCraft;
-import terracraft.common.entity.DemonEyeEntity;
-import terracraft.common.entity.FallingStarEntity;
-import terracraft.common.entity.MagicMissileEntity;
-import terracraft.common.entity.MimicEntity;
+import terracraft.common.entity.*;
+
+import static net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry.register;
 
 public class ModEntities {
 
@@ -36,11 +34,21 @@ public class ModEntities {
 					.dimensions(EntityDimensions.fixed(0.25f, 0.25f))
 					.build());
 
+	public static final EntityType<FlamelashMissileEntity> FLAMELASH_MISSILE = Registry.register( Registry.ENTITY_TYPE, TerraCraft.id("flamelash_missile"),
+			FabricEntityTypeBuilder.create(MobCategory.MISC, FlamelashMissileEntity::new)
+					.dimensions(EntityDimensions.fixed(0.25f, 0.25f))
+					.build());
+
+	public static final EntityType<RainbowMissileEntity> RAINBOW_MISSILE = Registry.register( Registry.ENTITY_TYPE, TerraCraft.id("rainbow_missile"),
+			FabricEntityTypeBuilder.create(MobCategory.MISC, RainbowMissileEntity::new)
+					.dimensions(EntityDimensions.fixed(0.25f, 0.25f))
+					.build());
+
 	static {
 		// Register mob attributes
-		FabricDefaultAttributeRegistry.register(MIMIC, MimicEntity.createMobAttributes());
-		FabricDefaultAttributeRegistry.register(DEMON_EYE, DemonEyeEntity.createMobAttributes());
-		FabricDefaultAttributeRegistry.register(FALLING_STAR, FallingStarEntity.createMobAttributes());
+		register(MIMIC, MimicEntity.createMobAttributes());
+		register(DEMON_EYE, DemonEyeEntity.createMobAttributes());
+		register(FALLING_STAR, FallingStarEntity.createMobAttributes());
 	}
 
 	private ModEntities() {
