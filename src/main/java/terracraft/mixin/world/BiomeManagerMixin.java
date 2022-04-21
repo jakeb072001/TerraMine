@@ -14,8 +14,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import terracraft.common.init.ModBiomes;
 import terracraft.common.utility.CorruptionHelper;
 
-import java.util.Random;
-
 @Mixin(BiomeManager.class)
 public class BiomeManagerMixin {
 

@@ -124,7 +124,6 @@ public class MagicMissileEntity extends AbstractArrow {
 
     @Override
     protected void onHitEntity(EntityHitResult entityHitResult) {
-        //super.onHitEntity(entityHitResult);
         if (entityHitResult != null && entityHitResult.getEntity() != this.getOwner()) {
             entityHitResult.getEntity().hurt(DamageSource.indirectMagic(entityHitResult.getEntity(), this.getOwner()), damage * damageIncrease);
             if (canIgnite) {
@@ -136,7 +135,6 @@ public class MagicMissileEntity extends AbstractArrow {
 
     @Override
     protected void onHitBlock(BlockHitResult blockHitResult) {
-        //super.onHitBlock(blockHitResult);
         this.explode();
         this.inGround = false;
     }

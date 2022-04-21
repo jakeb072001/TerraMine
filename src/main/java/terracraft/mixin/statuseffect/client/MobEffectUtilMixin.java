@@ -15,7 +15,7 @@ import terracraft.common.trinkets.TrinketsHelper;
 public abstract class MobEffectUtilMixin {
 
 	@Inject(method = "formatDuration", at = @At("HEAD"), cancellable = true)
-	private static void setFromterracrafttring(MobEffectInstance effect, float multiplier, CallbackInfoReturnable<String> info) {
+	private static void setFromTerracraftString(MobEffectInstance effect, float multiplier, CallbackInfoReturnable<String> info) {
 		LocalPlayer player = Minecraft.getInstance().player;
 
 		if (player != null && effect.isNoCounter()) {

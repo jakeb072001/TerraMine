@@ -15,10 +15,11 @@
     "consume_mana_crystal": {
       "trigger": "minecraft:consume_item",
       "conditions": {
-        "item":
-          {
-            "item": "terracraft:mana_crystal"
-          }
+        "item": {
+          "items": [
+            "terracraft:mana_crystal"
+          ]
+        }
       }
     }
   }

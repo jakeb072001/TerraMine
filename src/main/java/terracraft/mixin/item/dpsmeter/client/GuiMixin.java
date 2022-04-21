@@ -36,10 +36,10 @@ public abstract class GuiMixin {
 	@Shadow protected abstract Font getFont();
 
 	@Inject(method = "renderPlayerHealth", require = 0, at = @At(value = "TAIL"))
-	private void renderGuiClock(PoseStack matrices, CallbackInfo ci) {
+	private void renderGuiDPS(PoseStack matrices, CallbackInfo ci) {
 		Player player = this.getCameraPlayer();
 
-		if (player == null || !getEquippedTrinkets(player) || true) { // temporary disable as it doesnt really work yet
+		if (player == null || !getEquippedTrinkets(player)) { // temporary disable as it doesnt really work yet
 			return;
 		}
 
@@ -73,14 +73,14 @@ public abstract class GuiMixin {
 		float dps = 0f;
 		if (player != null) {
 			DPSDamageCounterComponent dpsDamage = ModComponents.DPS_METER_DAMAGE.get(player);
-			float totalDamageTakenInCombat = dpsDamage.getDamageTaken() * 3;
+			float totalDamageTakenInCombat = dpsDamage.getDamageTaken();
 			if (totalDamageTakenInCombat > 0) {
 				timer++;
 				if (timer >= 400) {
 					timer = 0;
 					seconds += 1;
 				}
-				dps = totalDamageTakenInCombat / seconds;
+				dps = totalDamageTakenInCombat;
 				if (seconds >= 10) {
 					timer = 0;
 					seconds = 1;
