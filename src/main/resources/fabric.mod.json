@@ -9,9 +9,9 @@
     "Jakeb Woods"
   ],
   "contact": {
-    "homepage": "https://www.curseforge.com/minecraft/mc-mods/terracraft",
-    "sources": "https://github.com/florensie/terracraft",
-    "issues": "https://github.com/florensie/terracraft/issues"
+    "homepage": "https://modrinth.com/mod/terrariacraft",
+    "sources": "https://github.com/jakeb072001/TerraCraft",
+    "issues": "https://github.com/jakeb072001/TerraCraft/issues"
   },
   "license": "LGPL-3.0-or-later",
   "icon": "assets/terracraft/icon.png",
