@@ -3,6 +3,7 @@ package terracraft.mixin.item.blackbelt;
 import net.minecraft.core.Vec3i;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.phys.Vec3;
 import org.spongepowered.asm.mixin.Final;
@@ -16,13 +17,8 @@ import terracraft.common.trinkets.TrinketsHelper;
 
 import java.util.Random;
 
-@Mixin(Player.class)
-public abstract class PlayerMixin {
-	@Shadow public abstract boolean isLocalPlayer();
-
-	@Unique
-	@Final
-	final Random random = new Random();
+@Mixin(LivingEntity.class)
+public abstract class LivingEntityMixin {
 
 	@ModifyVariable(method = "hurt", at = @At("STORE"), ordinal = 0, argsOnly = true)
 	private float dodgeAttack(float f) {
@@ -30,7 +26,7 @@ public abstract class PlayerMixin {
 		Vec3 pos = self.position();
 		Vec3i motion = self.getMotionDirection().getNormal();
 		if (TrinketsHelper.isEquipped(ModItems.BLACK_BELT, self) || TrinketsHelper.isEquipped(ModItems.MASTER_NINJA_GEAR, self)) {
-			if (random.nextInt(101) <= 10) {
+			if (self.getRandom().nextInt(101) <= 10) {
 				f = 0;
 				if (!self.isLocalPlayer()) {
 					((ServerPlayer) self).getLevel().sendParticles(ParticleTypes.POOF, pos.x(), pos.y(), pos.z(), 1, motion.getX() * -1.0D, -1.0D, motion.getZ() * -1.0D, 0.15);

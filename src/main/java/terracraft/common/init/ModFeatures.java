@@ -20,6 +20,7 @@ import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConf
 import net.minecraft.world.level.levelgen.placement.*;
 import terracraft.common.world.CaveChestFeature;
 import terracraft.common.world.FloatingIslandFeatureType;
+import terracraft.common.world.NetherChestFeature;
 import terracraft.common.world.SurfaceChestFeature;
 
 import java.util.List;
@@ -39,21 +40,33 @@ public class ModFeatures {
 			id("surface_chest"),
 			new SurfaceChestFeature()
 	);
+	public static final Feature<NoneFeatureConfiguration> NETHER_CHEST = Registry.register(
+			Registry.FEATURE,
+			id("nether_chest"),
+			new NetherChestFeature()
+	);
 	public static final PlacedFeature PLACED_CAVE_CHEST;
 	public static final PlacedFeature PLACED_SURFACE_CHEST;
+	public static final PlacedFeature PLACED_NETHER_CHEST;
 	public static final StructureFeature<JigsawConfiguration> FLOATING_ISLAND = StructureFeature.register("floating_island", new FloatingIslandFeatureType(JigsawConfiguration.CODEC), GenerationStep.Decoration.SURFACE_STRUCTURES);
 
 	public static void register() {
-		if (CONFIG.worldgen.caveChest.chestRarity < 10_000) {
+		if (CONFIG.worldgen.caveChest.chestRarity < 10) {
 			BiomeModifications.addFeature(BiomeSelectors.foundInOverworld(),
 					GenerationStep.Decoration.UNDERGROUND_STRUCTURES,
 					BuiltinRegistries.PLACED_FEATURE.getResourceKey(PLACED_CAVE_CHEST)
 							.orElseThrow(() -> new RuntimeException("Failed to get feature from registry")));
 		}
-		if (CONFIG.worldgen.caveChest.chestRarity < 10_000) {
+		if (CONFIG.worldgen.caveChest.chestRarity < 10) {
 			BiomeModifications.addFeature(BiomeSelectors.foundInOverworld(),
 					GenerationStep.Decoration.UNDERGROUND_STRUCTURES,
 					BuiltinRegistries.PLACED_FEATURE.getResourceKey(PLACED_SURFACE_CHEST)
+							.orElseThrow(() -> new RuntimeException("Failed to get feature from registry")));
+		}
+		if (CONFIG.worldgen.caveChest.chestRarity < 10) {
+			BiomeModifications.addFeature(BiomeSelectors.foundInTheNether(),
+					GenerationStep.Decoration.SURFACE_STRUCTURES,
+					BuiltinRegistries.PLACED_FEATURE.getResourceKey(PLACED_NETHER_CHEST)
 							.orElseThrow(() -> new RuntimeException("Failed to get feature from registry")));
 		}
 		FLOATING_ISLAND.toString();
@@ -70,10 +83,17 @@ public class ModFeatures {
 				id("surface_chest"),
 				new ConfiguredFeature<>(SURFACE_CHEST, FeatureConfiguration.NONE)
 		);
+		ConfiguredFeature<?, ?> configuredFeature3 = Registry.register(
+				BuiltinRegistries.CONFIGURED_FEATURE,
+				id("nether_chest"),
+				new ConfiguredFeature<>(NETHER_CHEST, FeatureConfiguration.NONE)
+		);
 		ResourceKey<ConfiguredFeature<?, ?>> featureKey = BuiltinRegistries.CONFIGURED_FEATURE.getResourceKey(configuredFeature).orElseThrow();
 		Holder<ConfiguredFeature<?, ?>> featureHolder = BuiltinRegistries.CONFIGURED_FEATURE.getOrCreateHolder(featureKey);
 		ResourceKey<ConfiguredFeature<?, ?>> featureKey2 = BuiltinRegistries.CONFIGURED_FEATURE.getResourceKey(configuredFeature2).orElseThrow();
 		Holder<ConfiguredFeature<?, ?>> featureHolder2 = BuiltinRegistries.CONFIGURED_FEATURE.getOrCreateHolder(featureKey2);
+		ResourceKey<ConfiguredFeature<?, ?>> featureKey3 = BuiltinRegistries.CONFIGURED_FEATURE.getResourceKey(configuredFeature3).orElseThrow();
+		Holder<ConfiguredFeature<?, ?>> featureHolder3 = BuiltinRegistries.CONFIGURED_FEATURE.getOrCreateHolder(featureKey3);
 
 		PLACED_CAVE_CHEST = Registry.register(
 				BuiltinRegistries.PLACED_FEATURE,
@@ -101,6 +121,21 @@ public class ModFeatures {
 										VerticalAnchor.aboveBottom(CONFIG.worldgen.caveChest.maxSurfaceY + 64)
 								),
 								EnvironmentScanPlacement.scanningFor(Direction.DOWN, BlockPredicate.solid(), BlockPredicate.ONLY_IN_AIR_OR_WATER_PREDICATE, 32),
+								RandomOffsetPlacement.vertical(ConstantInt.of(1)),
+								BiomeFilter.biome())
+				)
+		);
+		PLACED_NETHER_CHEST = Registry.register(
+				BuiltinRegistries.PLACED_FEATURE,
+				id("nether_chest"),
+				new PlacedFeature(featureHolder3,
+						List.of(RarityFilter.onAverageOnceEvery(CONFIG.worldgen.caveChest.chestRarity),
+								InSquarePlacement.spread(),
+								HeightRangePlacement.uniform(
+										VerticalAnchor.aboveBottom(20),
+										VerticalAnchor.aboveBottom(100)
+								),
+								EnvironmentScanPlacement.scanningFor(Direction.DOWN, BlockPredicate.solid(), BlockPredicate.ONLY_IN_AIR_PREDICATE, 32),
 								RandomOffsetPlacement.vertical(ConstantInt.of(1)),
 								BiomeFilter.biome())
 				)

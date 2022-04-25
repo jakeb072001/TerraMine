@@ -5,7 +5,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 
-## [1.2.0] - 2022-04-06
+## [1.2.0] - 2022-04-23
 ### Added
 - Floating Islands
 - More Biome Chests (Ivy, Sandstone, Skyware, Shadow)
@@ -18,9 +18,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Accessories will no longer generate in other chests, such as village chests
 - Accessories will no longer display attributes in the tooltip
 - Zombies now drop shackles rarely
+- Mimics will no longer spawn in caves (will add back later correctly)
 
 ### Fixed
 - Magic Missile particles not matching missile type
+- Game crash when travelling to other dimensions
 
 ### Removed
 - All Artifacts mod trinkets

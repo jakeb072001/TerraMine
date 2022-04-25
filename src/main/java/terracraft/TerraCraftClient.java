@@ -59,8 +59,10 @@ public class TerraCraftClient implements ClientModInitializer {
 		BlockEntityRendererRegistry.register(ModBlockEntityType.GOLD_CHEST, ChestEntityRenderer::new);
 		BlockEntityRendererRegistry.register(ModBlockEntityType.FROZEN_CHEST, ChestEntityRenderer::new);
 		BlockEntityRendererRegistry.register(ModBlockEntityType.IVY_CHEST, ChestEntityRenderer::new);
+		BlockEntityRendererRegistry.register(ModBlockEntityType.SANDSTONE_CHEST, ChestEntityRenderer::new);
 		BlockEntityRendererRegistry.register(ModBlockEntityType.WATER_CHEST, ChestEntityRenderer::new);
 		BlockEntityRendererRegistry.register(ModBlockEntityType.SKYWARE_CHEST, ChestEntityRenderer::new);
+		BlockEntityRendererRegistry.register(ModBlockEntityType.SHADOW_CHEST, ChestEntityRenderer::new);
 		registerTextures();
 
 		// Entity models
@@ -83,8 +85,10 @@ public class TerraCraftClient implements ClientModInitializer {
 			registry.register(TerraCraft.id("block/chests/gold/gold_chest"));
 			registry.register(TerraCraft.id("block/chests/frozen/frozen_chest"));
 			registry.register(TerraCraft.id("block/chests/ivy/ivy_chest"));
+			registry.register(TerraCraft.id("block/chests/sandstone/sandstone_chest"));
 			registry.register(TerraCraft.id("block/chests/water/water_chest"));
 			registry.register(TerraCraft.id("block/chests/skyware/skyware_chest"));
+			registry.register(TerraCraft.id("block/chests/shadow/shadow_chest"));
 		});
 	}
 }

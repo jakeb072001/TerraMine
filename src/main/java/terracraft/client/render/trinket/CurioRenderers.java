@@ -28,7 +28,7 @@ public class CurioRenderers implements SimpleSynchronousResourceReloadListener {
         // belt
         TrinketRendererRegistry.registerRenderer(ModItems.CLOUD_IN_A_BOTTLE, new BeltCurioRenderer("cloud_in_a_bottle", BeltModel.createCloudInABottleModel()));
         TrinketRendererRegistry.registerRenderer(ModItems.OBSIDIAN_SKULL, new BeltCurioRenderer("obsidian_skull", BeltModel.createObsidianSkullModel()));
-        TrinketRendererRegistry.registerRenderer(ModItems.UNIVERSAL_ATTRACTOR, new BeltCurioRenderer("universal_attractor", BeltModel.createUniversalAttractorModel()));
+        TrinketRendererRegistry.registerRenderer(ModItems.TREASURE_MAGNET, new BeltCurioRenderer("universal_attractor", BeltModel.createUniversalAttractorModel()));
 
         // hands
         TrinketRendererRegistry.registerRenderer(ModItems.FERAL_CLAWS, new GloveCurioRenderer("claws/feral_claws", "claws/feral_claws", ArmsModel.createClawsModel(false), ArmsModel.createClawsModel(true)));
@@ -36,7 +36,7 @@ public class CurioRenderers implements SimpleSynchronousResourceReloadListener {
         TrinketRendererRegistry.registerRenderer(ModItems.FIRE_GAUNTLET, new GlowingGloveCurioRenderer("fire_gauntlet", ArmsModel.createGloveModel(false), ArmsModel.createGloveModel(true)));
 
         // feet
-        TrinketRendererRegistry.registerRenderer(ModItems.AQUA_DASHERS, new CurioRenderer("aqua_dashers", new LegsModel(bakeLayer(ModModelLayers.AQUA_DASHERS))));
+        TrinketRendererRegistry.registerRenderer(ModItems.LAVA_WADERS, new CurioRenderer("aqua_dashers", new LegsModel(bakeLayer(ModModelLayers.AQUA_DASHERS))));
         TrinketRendererRegistry.registerRenderer(ModItems.RUNNING_SHOES, new CurioRenderer("running_shoes", new LegsModel(bakeLayer(ModModelLayers.RUNNING_SHOES))));
         TrinketRendererRegistry.registerRenderer(ModItems.FLIPPERS, new CurioRenderer("flippers", new LegsModel(bakeLayer(ModModelLayers.FLIPPERS))));
 

@@ -39,7 +39,7 @@ public class LavaWadersItem extends TrinketTerrariaItem {
 	}
 
 	private static boolean onFluidCollision(LivingEntity entity, FluidState fluidState) {
-		if (TrinketsHelper.isEquipped(ModItems.AQUA_DASHERS, entity) && !entity.isCrouching()) {
+		if (TrinketsHelper.isEquipped(ModItems.LAVA_WADERS, entity) && !entity.isCrouching()) {
 			if (fluidState.is(FluidTags.LAVA) && !entity.fireImmune() && !EnchantmentHelper.hasFrostWalker(entity)) {
 				//entity.hurt(DamageSource.HOT_FLOOR, 1);
 			}
@@ -50,10 +50,10 @@ public class LavaWadersItem extends TrinketTerrariaItem {
 	}
 
 	private static void onLivingHurt(LivingEntity user, DamageSource source, float amount) {
-		if (!user.level.isClientSide && amount >= 1 && user instanceof Player player && TrinketsHelper.isEquipped(ModItems.AQUA_DASHERS, user)) {
-			if (user.isInLava() && !player.getCooldowns().isOnCooldown(ModItems.AQUA_DASHERS)) {
+		if (!user.level.isClientSide && amount >= 1 && user instanceof Player player && TrinketsHelper.isEquipped(ModItems.LAVA_WADERS, user)) {
+			if (user.isInLava() && !player.getCooldowns().isOnCooldown(ModItems.LAVA_WADERS)) {
 				user.addEffect(new MobEffectInstance(MobEffects.FIRE_RESISTANCE, 140, 0, false, true));
-				((Player) user).getCooldowns().addCooldown(ModItems.AQUA_DASHERS, 450);
+				((Player) user).getCooldowns().addCooldown(ModItems.LAVA_WADERS, 450);
 			}
 		}
 	}

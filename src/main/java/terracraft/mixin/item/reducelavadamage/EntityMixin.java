@@ -34,7 +34,7 @@ public abstract class EntityMixin {
             if (!this.fireImmune()) {
                 this.setSecondsOnFire(15);
                 if (TrinketsHelper.isEquipped(ModItems.OBSIDIAN_ROSE, entity) || TrinketsHelper.isEquipped(ModItems.OBSIDIAN_SKULL_ROSE, entity) || TrinketsHelper.isEquipped(ModItems.MOLTEN_SKULL_ROSE, entity)
-                        || TrinketsHelper.isEquipped(ModItems.AQUA_DASHERS, entity) || TrinketsHelper.isEquipped(ModItems.TERRASPARK_BOOTS, entity)) {
+                        || TrinketsHelper.isEquipped(ModItems.LAVA_WADERS, entity) || TrinketsHelper.isEquipped(ModItems.TERRASPARK_BOOTS, entity)) {
                     if (this.hurt(DamageSource.LAVA, 2.0F)) {
                         this.playSound(SoundEvents.GENERIC_BURN, 0.4F, 1.0F + this.random.nextFloat() * 0.2F);
                     }

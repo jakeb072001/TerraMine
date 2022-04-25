@@ -1,6 +1,8 @@
 {
   "replace": false,
   "values": [
+    "terracraft:sandstone_chest",
+    "terracraft:trapped_sandstone_chest",
     "terracraft:corrupted_iron_ore",
     "terracraft:corrupted_deepslate_iron_ore",
     "terracraft:corrupted_lapis_ore",

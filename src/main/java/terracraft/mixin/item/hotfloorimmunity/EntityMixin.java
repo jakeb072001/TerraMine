@@ -18,7 +18,7 @@ public abstract class EntityMixin {
         if ((Object) this instanceof LivingEntity entity) {
             if (TrinketsHelper.isEquipped(ModItems.OBSIDIAN_SKULL, entity) || TrinketsHelper.isEquipped(ModItems.OBSIDIAN_HORSESHOE, entity) || TrinketsHelper.isEquipped(ModItems.MAGMA_SKULL, entity) || TrinketsHelper.isEquipped(ModItems.OBSIDIAN_SKULL_ROSE, entity)
                     || TrinketsHelper.isEquipped(ModItems.MOLTEN_SKULL_ROSE, entity) || TrinketsHelper.isEquipped(ModItems.MOLTEN_CHARM, entity) || TrinketsHelper.isEquipped(ModItems.OBSIDIAN_WATER_WALKING_BOOTS, entity)
-                    || TrinketsHelper.isEquipped(ModItems.AQUA_DASHERS, entity) || TrinketsHelper.isEquipped(ModItems.TERRASPARK_BOOTS, entity) || entity.getMainHandItem().is(ModItems.OBSIDIAN_SHIELD)
+                    || TrinketsHelper.isEquipped(ModItems.LAVA_WADERS, entity) || TrinketsHelper.isEquipped(ModItems.TERRASPARK_BOOTS, entity) || entity.getMainHandItem().is(ModItems.OBSIDIAN_SHIELD)
                     || entity.getOffhandItem().is(ModItems.OBSIDIAN_SHIELD)) {
                 if (!damageSource.equals(DamageSource.OUT_OF_WORLD)) {
                     if (damageSource.equals(DamageSource.HOT_FLOOR)) {

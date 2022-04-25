@@ -112,7 +112,7 @@
         {
           "type": "minecraft:item",
           "weight": 8,
-          "name": "terracraft:universal_attractor"
+          "name": "terracraft:treasure_magnet"
         },
         {
           "type": "minecraft:item",

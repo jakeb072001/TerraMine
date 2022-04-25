@@ -1,4 +1,4 @@
-package terracraft.mixin.item.universalattractor;
+package terracraft.mixin.item.treasuremagnet;
 
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;

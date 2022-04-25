@@ -4,8 +4,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.tags.BiomeTags;
 import net.minecraft.world.level.WorldGenLevel;
-import net.minecraft.world.level.biome.Biomes;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.ChestBlock;
 import net.minecraft.world.level.block.entity.RandomizableContainerBlockEntity;
 import net.minecraft.world.level.levelgen.feature.Feature;
@@ -57,56 +55,56 @@ public class CaveChestFeature extends Feature<NoneFeatureConfiguration> {
 		return false;
 	}
 
-	public void generateContainer(WorldGenLevel level, BlockPos pos, Random random) { // change chest type and loot table depending on the biome. Will need to make terraria style chests first.
+	public void generateContainer(WorldGenLevel level, BlockPos pos, Random random) {
 		BlockPos offsetPos = pos.atY(100);
 		boolean frozen = false;
 		boolean jungle = false;
+		boolean desert = false;
 		if (level.getBiome(offsetPos).value().coldEnoughToSnow(offsetPos)) {
 			frozen = true;
 		} else if (level.getBiome(offsetPos).is(BiomeTags.IS_JUNGLE)) {
 			jungle = true;
+		} else if (level.getBiome(offsetPos).is(BiomeTags.HAS_VILLAGE_DESERT)) {
+			desert = true;
 		}
-		if (random.nextInt(100) < TerraCraft.CONFIG.worldgen.caveChest.mimicChance) {
-			MimicEntity mimic = ModEntities.MIMIC.create(level.getLevel());
-			if (mimic != null) {
-				mimic.setDormant();
-				mimic.setPos(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5);
-				level.addFreshEntity(mimic);
+		if (random.nextInt(5) == 0) {
+			if (frozen) {
+				this.setBlock(level, pos, ModBlocks.TRAPPED_FROZEN_CHEST.defaultBlockState().setValue(ChestBlock.FACING, Direction.Plane.HORIZONTAL.getRandomDirection(random)));
+			} else if (jungle) {
+				this.setBlock(level, pos, ModBlocks.TRAPPED_IVY_CHEST.defaultBlockState().setValue(ChestBlock.FACING, Direction.Plane.HORIZONTAL.getRandomDirection(random)));
+			} else if (desert) {
+				this.setBlock(level, pos, ModBlocks.TRAPPED_SANDSTONE_CHEST.defaultBlockState().setValue(ChestBlock.FACING, Direction.Plane.HORIZONTAL.getRandomDirection(random)));
+			} else {
+				this.setBlock(level, pos, ModBlocks.TRAPPED_GOLD_CHEST.defaultBlockState().setValue(ChestBlock.FACING, Direction.Plane.HORIZONTAL.getRandomDirection(random)));
 			}
+			if (pos.getY() >= 4) {
+				this.setBlock(level, pos.below(), ModBlocks.REDSTONE_STONE.defaultBlockState());
+			} else {
+				this.setBlock(level, pos.below(), ModBlocks.REDSTONE_DEEPSLATE.defaultBlockState());
+			}
+			this.setBlock(level, pos.below().below(), ModBlocks.INSTANT_TNT.defaultBlockState());
 		} else {
-			if (random.nextInt(5) == 0) {
-				if (frozen) {
-					this.setBlock(level, pos, ModBlocks.TRAPPED_FROZEN_CHEST.defaultBlockState().setValue(ChestBlock.FACING, Direction.Plane.HORIZONTAL.getRandomDirection(random)));
-				} else if (jungle) {
-					this.setBlock(level, pos, ModBlocks.TRAPPED_IVY_CHEST.defaultBlockState().setValue(ChestBlock.FACING, Direction.Plane.HORIZONTAL.getRandomDirection(random)));
-				} else {
-					this.setBlock(level, pos, ModBlocks.TRAPPED_GOLD_CHEST.defaultBlockState().setValue(ChestBlock.FACING, Direction.Plane.HORIZONTAL.getRandomDirection(random)));
-				}
-				if (pos.getY() >= 4) {
-					this.setBlock(level, pos.below(), ModBlocks.REDSTONE_STONE.defaultBlockState());
-				} else {
-					this.setBlock(level, pos.below(), ModBlocks.REDSTONE_DEEPSLATE.defaultBlockState());
-				}
-				this.setBlock(level, pos.below().below(), ModBlocks.INSTANT_TNT.defaultBlockState());
+			if (frozen) {
+				this.setBlock(level, pos, ModBlocks.FROZEN_CHEST.defaultBlockState().setValue(ChestBlock.FACING, Direction.Plane.HORIZONTAL.getRandomDirection(random)));
+			} else if (jungle) {
+				this.setBlock(level, pos, ModBlocks.IVY_CHEST.defaultBlockState().setValue(ChestBlock.FACING, Direction.Plane.HORIZONTAL.getRandomDirection(random)));
+			} else if (desert) {
+				this.setBlock(level, pos, ModBlocks.SANDSTONE_CHEST.defaultBlockState().setValue(ChestBlock.FACING, Direction.Plane.HORIZONTAL.getRandomDirection(random)));
 			} else {
-				if (frozen) {
-					this.setBlock(level, pos, ModBlocks.FROZEN_CHEST.defaultBlockState().setValue(ChestBlock.FACING, Direction.Plane.HORIZONTAL.getRandomDirection(random)));
-				} else if (jungle) {
-					this.setBlock(level, pos, ModBlocks.IVY_CHEST.defaultBlockState().setValue(ChestBlock.FACING, Direction.Plane.HORIZONTAL.getRandomDirection(random)));
-				} else {
-					this.setBlock(level, pos, ModBlocks.GOLD_CHEST.defaultBlockState().setValue(ChestBlock.FACING, Direction.Plane.HORIZONTAL.getRandomDirection(random)));
-				}
+				this.setBlock(level, pos, ModBlocks.GOLD_CHEST.defaultBlockState().setValue(ChestBlock.FACING, Direction.Plane.HORIZONTAL.getRandomDirection(random)));
 			}
-			if (pos.getY() <= TerraCraft.CONFIG.worldgen.caveChest.deepCaveY) {
-				RandomizableContainerBlockEntity.setLootTable(level, random, pos, ModLootTables.DEEP_CAVE_CHEST);
+		}
+		if (pos.getY() <= TerraCraft.CONFIG.worldgen.caveChest.deepCaveY) {
+			RandomizableContainerBlockEntity.setLootTable(level, random, pos, ModLootTables.DEEP_CAVE_CHEST);
+		} else {
+			if (frozen) {
+				RandomizableContainerBlockEntity.setLootTable(level, random, pos, ModLootTables.FROZEN_CAVE_CHEST);
+			} else if (jungle) {
+				RandomizableContainerBlockEntity.setLootTable(level, random, pos, ModLootTables.IVY_CAVE_CHEST);
+			} else if (desert) {
+				RandomizableContainerBlockEntity.setLootTable(level, random, pos, ModLootTables.SANDSTONE_CAVE_CHEST);
 			} else {
-				if (frozen) {
-					RandomizableContainerBlockEntity.setLootTable(level, random, pos, ModLootTables.FROZEN_CAVE_CHEST);
-				} else if (jungle) {
-					RandomizableContainerBlockEntity.setLootTable(level, random, pos, ModLootTables.IVY_CAVE_CHEST);
-				} else {
-					RandomizableContainerBlockEntity.setLootTable(level, random, pos, ModLootTables.CAVE_CHEST);
-				}
+				RandomizableContainerBlockEntity.setLootTable(level, random, pos, ModLootTables.CAVE_CHEST);
 			}
 		}
 	}

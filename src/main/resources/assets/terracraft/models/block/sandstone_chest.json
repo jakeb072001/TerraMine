@@ -1,0 +1,7 @@
+{
+  "parent": "terracraft:block/chest_template",
+    "textures": {
+        "0": "terracraft:block/chests/sandstone/sandstone_chest",
+        "particle": "terracraft:block/chests/sandstone/sandstone_break"
+    }
+}

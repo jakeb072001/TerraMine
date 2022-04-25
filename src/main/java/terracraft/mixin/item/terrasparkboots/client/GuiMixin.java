@@ -91,7 +91,7 @@ public abstract class GuiMixin {
 	private boolean getEquippedTrinkets(Player player) {
 		boolean equipped = false;
 
-		if (TrinketsHelper.isEquipped(ModItems.TERRASPARK_BOOTS, player) || TrinketsHelper.isEquipped(ModItems.AQUA_DASHERS, player) ||
+		if (TrinketsHelper.isEquipped(ModItems.TERRASPARK_BOOTS, player) || TrinketsHelper.isEquipped(ModItems.LAVA_WADERS, player) ||
 				TrinketsHelper.isEquipped(ModItems.MOLTEN_CHARM, player) || TrinketsHelper.isEquipped(ModItems.LAVA_CHARM, player)) {
 			equipped = true;
 		}

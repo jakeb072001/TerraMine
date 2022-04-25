@@ -1,4 +1,4 @@
-package terracraft.mixin.item.aquadashers;
+package terracraft.mixin.item.lavawaders;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleOptions;
@@ -47,14 +47,14 @@ public abstract class EntityMixin {
 
     @Inject(method = "playStepSound", at = @At("HEAD"))
     private void playWaterStepSound(BlockPos pos, BlockState blockState, CallbackInfo callbackInfo) {
-        if (blockState.getMaterial().isLiquid() && isRunningWithAquaDashers()) {
+        if (blockState.getMaterial().isLiquid() && isRunningWithLavaWaders()) {
             ((LivingEntity) (Object) this).playSound(ModSoundEvents.WATER_STEP, 0.15F, 1);
         }
     }
 
     @Inject(method = "spawnSprintParticle", at = @At("HEAD"))
     private void spawnWaterSprintParticle(CallbackInfo callbackInfo) {
-        if (isRunningWithAquaDashers()) {
+        if (isRunningWithLavaWaders()) {
             BlockPos pos = new BlockPos(Mth.floor(getX()), Mth.floor(getY() - 0.2), Mth.floor(getZ()));
             BlockState blockstate = level.getBlockState(pos);
             if (blockstate.getRenderShape() == RenderShape.INVISIBLE) {
@@ -84,8 +84,8 @@ public abstract class EntityMixin {
     }
 
     @Unique
-    private boolean isRunningWithAquaDashers() {
+    private boolean isRunningWithLavaWaders() {
         // noinspection ConstantConditions
-        return (Object) this instanceof LivingEntity entity && TrinketsHelper.isEquipped(ModItems.AQUA_DASHERS, entity) && LavaWadersItem.canSprintOnWater(entity);
+        return (Object) this instanceof LivingEntity entity && TrinketsHelper.isEquipped(ModItems.LAVA_WADERS, entity) && LavaWadersItem.canSprintOnWater(entity);
     }
 }
