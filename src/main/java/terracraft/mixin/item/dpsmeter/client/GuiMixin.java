@@ -4,6 +4,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.Gui;
+import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.entity.player.Player;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -11,6 +12,7 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import terracraft.TerraCraft;
 import terracraft.common.components.DPSDamageCounterComponent;
 import terracraft.common.init.ModComponents;
 import terracraft.common.init.ModItems;
@@ -23,18 +25,20 @@ public abstract class GuiMixin {
 
 	@Shadow private int screenHeight;
 	@Shadow private int screenWidth;
-	private int timer;
-	private int seconds = 1;
-	private static final DecimalFormat df = new DecimalFormat("0.00");
+	@Unique private int timer;
+	@Unique private int seconds = 1;
+	@Unique private static final DecimalFormat df = new DecimalFormat("0.00");
+	@Unique TranslatableComponent dpsText = new TranslatableComponent(TerraCraft.MOD_ID + ".ui.dps");
 
 	@Shadow protected abstract Player getCameraPlayer();
 	@Shadow public abstract Font getFont();
 
+	//todo: make DPS Meter actually work, right now it doesn't really
 	@Inject(method = "renderPlayerHealth", require = 0, at = @At(value = "TAIL"))
 	private void renderGuiDPS(PoseStack matrices, CallbackInfo ci) {
 		Player player = this.getCameraPlayer();
 
-		if (player == null || !getEquippedTrinkets(player)) { // temporary disable as it doesnt really work yet
+		if (player == null || !getEquippedTrinkets(player)) {
 			return;
 		}
 
@@ -49,12 +53,8 @@ public abstract class GuiMixin {
 	private boolean getEquippedTrinkets(Player player) {
 		boolean equipped = false;
 
-		if (TrinketsHelper.isEquipped(ModItems.DPS_METER, player) || TrinketsHelper.isEquipped(ModItems.GOBLIN_TECH, player) || TrinketsHelper.isEquipped(ModItems.PDA, player)
-				|| TrinketsHelper.isEquipped(ModItems.CELL_PHONE, player)) {
-			equipped = true;
-		}
-		if (player.getInventory().contains(ModItems.DPS_METER.getDefaultInstance()) || player.getInventory().contains(ModItems.GOBLIN_TECH.getDefaultInstance()) || player.getInventory().contains(ModItems.PDA.getDefaultInstance())
-				|| player.getInventory().contains(ModItems.CELL_PHONE.getDefaultInstance())) {
+		if (TrinketsHelper.isInInventory(ModItems.DPS_METER, player) || TrinketsHelper.isInInventory(ModItems.GOBLIN_TECH, player) || TrinketsHelper.isInInventory(ModItems.PDA, player)
+				|| TrinketsHelper.isInInventory(ModItems.CELL_PHONE, player)) {
 			equipped = true;
 		}
 
@@ -82,7 +82,7 @@ public abstract class GuiMixin {
 					dpsDamage.resetDamageTaken();
 				}
 			}
-			sb.append("DPS: ");
+			sb.append(dpsText.getString()).append(": ");
 			sb.append(df.format(dps));
 		}
 		return sb.toString();

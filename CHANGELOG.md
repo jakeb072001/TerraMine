@@ -11,9 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - Various improvements to Demon Eyes
 - Removed jump height increase while sprinting and double jumping
-
-### Fixed
-- Random crash when dying in Corruption Biome (maybe)
+- Accessory effects are now disabled in creative mode
 
 ## [1.2.0] - 2022-04-26
 ### Added

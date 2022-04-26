@@ -18,7 +18,6 @@ import terracraft.common.trinkets.TrinketsHelper;
 @Mixin(Gui.class)
 public abstract class GuiMixin {
 
-	@Shadow @Final private Minecraft minecraft;
 	@Shadow private int screenHeight;
 	@Shadow private int screenWidth;
 
@@ -44,12 +43,8 @@ public abstract class GuiMixin {
 	private boolean getEquippedTrinkets(Player player) {
 		boolean equipped = false;
 
-		if (TrinketsHelper.isEquipped(ModItems.COMPASS, player) || TrinketsHelper.isEquipped(ModItems.GPS, player) || TrinketsHelper.isEquipped(ModItems.PDA, player)
-				|| TrinketsHelper.isEquipped(ModItems.CELL_PHONE, player)) {
-			equipped = true;
-		}
-		if (player.getInventory().contains(ModItems.COMPASS.getDefaultInstance()) || player.getInventory().contains(ModItems.GPS.getDefaultInstance()) || player.getInventory().contains(ModItems.PDA.getDefaultInstance())
-				|| player.getInventory().contains(ModItems.CELL_PHONE.getDefaultInstance())) {
+		if (TrinketsHelper.isInInventory(ModItems.COMPASS, player) || TrinketsHelper.isInInventory(ModItems.GPS, player) || TrinketsHelper.isInInventory(ModItems.PDA, player)
+				|| TrinketsHelper.isInInventory(ModItems.CELL_PHONE, player)) {
 			equipped = true;
 		}
 

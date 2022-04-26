@@ -31,6 +31,20 @@ public final class TrinketsHelper {
 		return isEquipped(filter, entity, false);
 	}
 
+	public static boolean isInInventory(Item item, Player player) {
+		return isInInventory(stack -> stack.getItem().equals(item), item.getDefaultInstance(), player, false);
+	}
+
+	public static boolean isInInventory(Predicate<ItemStack> filter, ItemStack item, Player player, boolean ignoreEffectsDisabled) {
+		if (TrinketsApi.getTrinketComponent(player)
+				.map(comp -> comp.isEquipped(stack -> ((areEffectsEnabled(stack) || ignoreEffectsDisabled) && !player.isCreative()) && filter.test(stack)))
+				.orElse(false)) {
+			return true;
+		} else {
+			return areEffectsEnabled(item) && player.getInventory().contains(item);
+		}
+	}
+
 	public static List<ItemStack> getAllEquipped(LivingEntity entity) {
 		return getAllEquipped(entity, false);
 	}
@@ -55,13 +69,13 @@ public final class TrinketsHelper {
 
 	public static boolean areEffectsEnabled(ItemStack stack) {
 		return TrinketTerrariaItem.getTerracraftStatus(stack)
-				.map(TrinketTerrariaItem.terracrafttatus::hasEffects)
+				.map(TrinketTerrariaItem.terracraftStatus::hasEffects)
 				.orElse(false);
 	}
 
 	public static boolean areCosmeticsEnabled(ItemStack stack) {
 		return TrinketTerrariaItem.getTerracraftStatus(stack)
-				.map(TrinketTerrariaItem.terracrafttatus::hasCosmetics)
+				.map(TrinketTerrariaItem.terracraftStatus::hasCosmetics)
 				.orElse(false);
 	}
 

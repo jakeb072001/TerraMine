@@ -20,7 +20,6 @@ import java.text.DecimalFormat;
 @Mixin(Gui.class)
 public abstract class GuiMixin {
 
-	@Shadow @Final private Minecraft minecraft;
 	@Shadow private int screenHeight;
 	@Shadow private int screenWidth;
 	private static final DecimalFormat df = new DecimalFormat("0.00");
@@ -47,12 +46,8 @@ public abstract class GuiMixin {
 	private boolean getEquippedTrinkets(Player player) {
 		boolean equipped = false;
 
-		if (TrinketsHelper.isEquipped(ModItems.WEATHER_RADIO, player) || TrinketsHelper.isEquipped(ModItems.FISH_FINDER, player) || TrinketsHelper.isEquipped(ModItems.PDA, player)
-				|| TrinketsHelper.isEquipped(ModItems.CELL_PHONE, player)) {
-			equipped = true;
-		}
-		if (player.getInventory().contains(ModItems.WEATHER_RADIO.getDefaultInstance()) || player.getInventory().contains(ModItems.FISH_FINDER.getDefaultInstance()) || player.getInventory().contains(ModItems.PDA.getDefaultInstance())
-				|| player.getInventory().contains(ModItems.CELL_PHONE.getDefaultInstance())) {
+		if (TrinketsHelper.isInInventory(ModItems.WEATHER_RADIO, player) || TrinketsHelper.isInInventory(ModItems.FISH_FINDER, player) || TrinketsHelper.isInInventory(ModItems.PDA, player)
+				|| TrinketsHelper.isInInventory(ModItems.CELL_PHONE, player)) {
 			equipped = true;
 		}
 

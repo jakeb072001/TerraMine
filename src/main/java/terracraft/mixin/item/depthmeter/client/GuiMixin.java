@@ -4,6 +4,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.Gui;
+import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.entity.player.Player;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -12,18 +13,20 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import terracraft.TerraCraft;
 import terracraft.common.init.ModItems;
 import terracraft.common.trinkets.TrinketsHelper;
 
 @Mixin(Gui.class)
 public abstract class GuiMixin {
 
-	@Shadow @Final private Minecraft minecraft;
 	@Shadow private int screenHeight;
 	@Shadow private int screenWidth;
 
 	@Shadow protected abstract Player getCameraPlayer();
-	@Shadow protected abstract Font getFont();
+	@Shadow public abstract Font getFont();
+
+	@Unique TranslatableComponent depthText = new TranslatableComponent(TerraCraft.MOD_ID + ".ui.depth");
 
 	@Inject(method = "renderPlayerHealth", require = 0, at = @At(value = "TAIL"))
 	private void renderGuiClock(PoseStack matrices, CallbackInfo ci) {
@@ -44,12 +47,8 @@ public abstract class GuiMixin {
 	private boolean getEquippedTrinkets(Player player) {
 		boolean equipped = false;
 
-		if (TrinketsHelper.isEquipped(ModItems.DEPTH_METER, player) || TrinketsHelper.isEquipped(ModItems.GPS, player) || TrinketsHelper.isEquipped(ModItems.PDA, player)
-				|| TrinketsHelper.isEquipped(ModItems.CELL_PHONE, player)) {
-			equipped = true;
-		}
-		if (player.getInventory().contains(ModItems.DEPTH_METER.getDefaultInstance()) || player.getInventory().contains(ModItems.GPS.getDefaultInstance()) || player.getInventory().contains(ModItems.PDA.getDefaultInstance())
-				|| player.getInventory().contains(ModItems.CELL_PHONE.getDefaultInstance())) {
+		if (TrinketsHelper.isInInventory(ModItems.DEPTH_METER, player) || TrinketsHelper.isInInventory(ModItems.GPS, player) || TrinketsHelper.isInInventory(ModItems.PDA, player)
+				|| TrinketsHelper.isInInventory(ModItems.CELL_PHONE, player)) {
 			equipped = true;
 		}
 
@@ -62,7 +61,7 @@ public abstract class GuiMixin {
 		StringBuilder sb = new StringBuilder();
 		if (mc.player != null) {
 			int y = (int) mc.player.position().y();
-			sb.append("Depth: ");
+			sb.append(depthText.getString()).append(": ");
 			sb.append(y);
 		}
 		return sb.toString();

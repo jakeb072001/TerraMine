@@ -4,6 +4,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.Gui;
+import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.phys.Vec3;
 import org.spongepowered.asm.mixin.Final;
@@ -23,14 +24,15 @@ import java.util.ArrayList;
 @Mixin(Gui.class)
 public abstract class GuiMixin {
 
-	@Shadow @Final private Minecraft minecraft;
 	@Shadow private int screenHeight;
 	@Shadow private int screenWidth;
 	private static final DecimalFormat df = new DecimalFormat("0.00");
 	private static final ArrayList<Double> speeds = new ArrayList<Double>();
 
 	@Shadow protected abstract Player getCameraPlayer();
-	@Shadow protected abstract Font getFont();
+	@Shadow public abstract Font getFont();
+
+	@Unique TranslatableComponent speedText = new TranslatableComponent(TerraCraft.MOD_ID + ".ui.speed");
 
 	@Inject(method = "renderPlayerHealth", require = 0, at = @At(value = "TAIL"))
 	private void renderGuiClock(PoseStack matrices, CallbackInfo ci) {
@@ -51,12 +53,8 @@ public abstract class GuiMixin {
 	private boolean getEquippedTrinkets(Player player) {
 		boolean equipped = false;
 
-		if (TrinketsHelper.isEquipped(ModItems.STOPWATCH, player) || TrinketsHelper.isEquipped(ModItems.GOBLIN_TECH, player) || TrinketsHelper.isEquipped(ModItems.PDA, player)
-				|| TrinketsHelper.isEquipped(ModItems.CELL_PHONE, player)) {
-			equipped = true;
-		}
-		if (player.getInventory().contains(ModItems.STOPWATCH.getDefaultInstance()) || player.getInventory().contains(ModItems.GOBLIN_TECH.getDefaultInstance()) || player.getInventory().contains(ModItems.PDA.getDefaultInstance())
-				|| player.getInventory().contains(ModItems.CELL_PHONE.getDefaultInstance())) {
+		if (TrinketsHelper.isInInventory(ModItems.STOPWATCH, player) || TrinketsHelper.isInInventory(ModItems.GOBLIN_TECH, player) || TrinketsHelper.isInInventory(ModItems.PDA, player)
+				|| TrinketsHelper.isInInventory(ModItems.CELL_PHONE, player)) {
 			equipped = true;
 		}
 
@@ -76,11 +74,11 @@ public abstract class GuiMixin {
 			}
 			speeds.add(speed);
 			speed = 0;
-			for (int i = 0; i < speeds.size(); i++) {
-				speed += speeds.get(i);
+			for (Double aDouble : speeds) {
+				speed += aDouble;
 			}
 			speed = speed / speeds.size();
-			sb.append("Speed: ");
+			sb.append(speedText.getString()).append(": ");
 			if (TerraCraft.CONFIG.general.stopwatchMPH) {
 				sb.append(df.format(speed * 2.23693629));
 				sb.append(" mph");

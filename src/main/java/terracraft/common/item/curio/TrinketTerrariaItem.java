@@ -27,6 +27,7 @@ import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
+import terracraft.TerraCraft;
 import terracraft.common.events.PlayHurtSoundCallback;
 import terracraft.common.item.TerrariaItem;
 import terracraft.common.trinkets.TrinketsHelper;
@@ -48,7 +49,7 @@ public class TrinketTerrariaItem extends TerrariaItem implements Trinket {
 		// Toggle accessory status when right clicked in inventory without a stack
 		if (clickAction == ClickAction.SECONDARY && holdingStack.isEmpty()) {
 			CompoundTag tag = slotStack.getOrCreateTagElement("terracraft");
-			tag.putByte("Status", (byte) terracrafttatus.nextIndex(tag.getByte("Status")));
+			tag.putByte("Status", (byte) terracraftStatus.nextIndex(tag.getByte("Status")));
 			slotStack.addTagElement("terracraft", tag);
 			return true;
 		}
@@ -96,7 +97,7 @@ public class TrinketTerrariaItem extends TerrariaItem implements Trinket {
 		super.appendHoverText(stack, world, tooltip, flags);
 		getEffectsEnabledLanguageKey(stack).ifPresent(key -> {
 			MutableComponent enabled = new TranslatableComponent(key).withStyle(ChatFormatting.GOLD);
-			Component toggletooltip = new TranslatableComponent("terracraft.status.toggletooltip").withStyle(ChatFormatting.GRAY);
+			Component toggletooltip = new TranslatableComponent(TerraCraft.MOD_ID + ".status.toggletooltip").withStyle(ChatFormatting.GRAY);
 			tooltip.add(enabled.append(" ").append(toggletooltip));
 		});
 	}
@@ -153,20 +154,20 @@ public class TrinketTerrariaItem extends TerrariaItem implements Trinket {
 		});
 	}
 
-	public static Optional<terracrafttatus> getTerracraftStatus(ItemStack stack) {
+	public static Optional<terracraftStatus> getTerracraftStatus(ItemStack stack) {
 		if (!(stack.getItem() instanceof TrinketTerrariaItem)) {
 			return Optional.empty();
 		}
 
 		CompoundTag tag = stack.getTagElement("terracraft");
 		if (tag == null || !tag.contains("Status", 1)) {
-			return Optional.of(terracrafttatus.ALL_ENABLED);
+			return Optional.of(terracraftStatus.ALL_ENABLED);
 		}
 
-		return Optional.ofNullable(terracrafttatus.values()[tag.getByte("Status")]);
+		return Optional.ofNullable(terracraftStatus.values()[tag.getByte("Status")]);
 	}
 
-	public enum terracrafttatus {
+	public enum terracraftStatus {
 		ALL_ENABLED(true, true),
 		COSMETIC_ONLY(false, true),
 		EFFECTS_ONLY(true, false);
@@ -174,7 +175,7 @@ public class TrinketTerrariaItem extends TerrariaItem implements Trinket {
 		private final boolean hasEffects;
 		private final boolean hasCosmetics;
 
-		terracrafttatus(boolean hasEffects, boolean hasCosmetics) {
+		terracraftStatus(boolean hasEffects, boolean hasCosmetics) {
 			this.hasEffects = hasEffects;
 			this.hasCosmetics = hasCosmetics;
 		}
