@@ -43,7 +43,7 @@ public class RocketBootHelper {
                 soundTimer = 0;
             }
         }
-        if (settings != null && timer < rocketTime && player instanceof Player user && !user.isCreative() && priorityOrder(user, priority) && !(hasCooldown && user.getCooldowns().isOnCooldown(self))) {
+        if (settings != null && timer < rocketTime && player instanceof Player user && priorityOrder(user, priority) && !(hasCooldown && user.getCooldowns().isOnCooldown(self))) {
             if (settings.keyJump.isDown()) {
                 double currentAccel = speed * (user.getDeltaMovement().y() < 0.3D ? 2.5D : 1.0D);
                 double currentSpeedVertical = speed * (user.isUnderWater() ? 0.4D : 1.0D);

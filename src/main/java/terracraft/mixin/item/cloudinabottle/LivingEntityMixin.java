@@ -112,23 +112,10 @@ public abstract class LivingEntityMixin extends Entity implements LivingEntityEx
 		this.jumpWasReleased = false;
 	}
 
-	// The next three injectors modify the behaviour of the vanilla jump
-	// method if the terracraft$isDoubleJumping field is set to true
-
 	@Inject(method = "getJumpPower", cancellable = true, at = @At("HEAD"))
 	private void increaseBaseDoubleJumpVelocity(CallbackInfoReturnable<Float> info) {
 		if (this.isDoubleJumping) {
 			info.setReturnValue(0.5f);
 		}
-	}
-
-	@ModifyArg(method = "jumpFromGround", index = 1, at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/LivingEntity;setDeltaMovement(DDD)V"))
-	private double sprintingDoubleJumpUpwardVelocityMultiplier(double y) {
-		return this.isDoubleJumping && this.isSprinting() ? y * 1.5 : y;
-	}
-
-	@ModifyConstant(method = "jumpFromGround", constant = @Constant(floatValue = 0.2f))
-	private float sprintingDoubleJumpHorizontalVelocityMultiplier(float multiplier) {
-		return this.isDoubleJumping ? 0.5f : multiplier;
 	}
 }

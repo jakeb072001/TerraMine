@@ -4,6 +4,7 @@ import dev.emi.trinkets.api.TrinketComponent;
 import dev.emi.trinkets.api.TrinketsApi;
 import net.minecraft.util.Tuple;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import terracraft.common.item.curio.TrinketTerrariaItem;
@@ -40,7 +41,7 @@ public final class TrinketsHelper {
 
 	public static boolean isEquipped(Predicate<ItemStack> filter, LivingEntity entity, boolean ignoreEffectsDisabled) {
 		return TrinketsApi.getTrinketComponent(entity)
-				.map(comp -> comp.isEquipped(stack -> (areEffectsEnabled(stack) || ignoreEffectsDisabled) && filter.test(stack)))
+				.map(comp -> comp.isEquipped(stack -> ((areEffectsEnabled(stack) || ignoreEffectsDisabled) && !((Player) entity).isCreative()) && filter.test(stack)))
 				.orElse(false);
 	}
 
@@ -48,7 +49,7 @@ public final class TrinketsHelper {
 		return TrinketsApi.getTrinketComponent(entity).stream()
 				.flatMap(comp -> comp.getAllEquipped().stream())
 				.map(Tuple::getB)
-				.filter(stack -> !stack.isEmpty() && stack.getItem() instanceof TrinketTerrariaItem && (areEffectsEnabled(stack) || ignoreEffectsDisabled))
+				.filter(stack -> !stack.isEmpty() && stack.getItem() instanceof TrinketTerrariaItem && ((areEffectsEnabled(stack) || ignoreEffectsDisabled) && !((Player) entity).isCreative()))
 				.collect(Collectors.toList());
 	}
 
@@ -75,7 +76,7 @@ public final class TrinketsHelper {
 				.flatMap(invBySlot -> Optional.ofNullable(invBySlot.get(slotId)))
 				.stream()
 				.flatMap(inv -> IntStream.range(0, inv.getContainerSize()).mapToObj(inv::getItem))
-				.filter(stack -> stack.getItem() instanceof TrinketTerrariaItem && (areEffectsEnabled(stack) || ignoreEffectsDisabled))
+				.filter(stack -> stack.getItem() instanceof TrinketTerrariaItem && ((areEffectsEnabled(stack) || ignoreEffectsDisabled) && !((Player) entity).isCreative()))
 				.collect(Collectors.toList());
 	}
 }

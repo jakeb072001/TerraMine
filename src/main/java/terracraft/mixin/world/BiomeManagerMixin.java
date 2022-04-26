@@ -21,13 +21,13 @@ public class BiomeManagerMixin {
     @Inject(at = @At("RETURN"), method = "getBiome", cancellable = true)
     public void spreadCorruptionBiome(BlockPos pos, CallbackInfoReturnable<Holder<Biome>> info) {
         Minecraft mc = Minecraft.getInstance();
-        if (mc != null && mc.level != null) {
+        if (mc != null && mc.level != null && pos != null) {
             for (int i = 45; i <= 100; i++) { // checks for blocks between y 45 and 100
                 Block block = mc.level.getBlockState(pos.atY(i)).getBlock();
                 if (block instanceof CorruptionHelper && pos.getY() > i) { // if block is a corruption block and position is above i (y range)
-                    Holder<Biome> biome = BuiltinRegistries.BIOME.getHolderOrThrow(ModBiomes.CORRUPTION); // default biome
+                    Holder<Biome> biome = BuiltinRegistries.BIOME.getOrCreateHolder(ModBiomes.CORRUPTION); // default biome
                     if (info.getReturnValue().is(net.minecraft.world.level.biome.Biomes.DESERT) || info.getReturnValue().is(ModBiomes.CORRUPTION_DESERT)) {
-                        biome = BuiltinRegistries.BIOME.getHolderOrThrow(ModBiomes.CORRUPTION_DESERT); // desert biome
+                        biome = BuiltinRegistries.BIOME.getOrCreateHolder(ModBiomes.CORRUPTION_DESERT); // desert biome
                     }
                     info.setReturnValue(biome);
                     break;
