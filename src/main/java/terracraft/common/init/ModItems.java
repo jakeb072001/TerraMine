@@ -3,7 +3,6 @@ package terracraft.common.init;
 import com.github.crimsondawn45.fabricshieldlib.lib.object.FabricShieldItem;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.core.Registry;
-import net.minecraft.world.food.Foods;
 import net.minecraft.world.item.*;
 import terracraft.TerraCraft;
 import terracraft.common.item.*;
@@ -160,7 +159,7 @@ public class ModItems {
 	public static final Item CORRUPTED_COBBLED_DEEPSLATE_BLOCK = register("corrupted_cobbled_deepslate_block", new BlockItem(ModBlocks.CORRUPTED_COBBLED_DEEPSLATE, new FabricItemSettings().group(CreativeModeTab.TAB_BUILDING_BLOCKS)));
 	public static final Item CORRUPTED_COAL_ORE_BLOCK = register("corrupted_coal_ore_block", new BlockItem(ModBlocks.CORRUPTED_COAL_ORE, new FabricItemSettings().group(CreativeModeTab.TAB_BUILDING_BLOCKS)));
 	public static final Item CORRUPTED_IRON_ORE_BLOCK = register("corrupted_iron_ore_block", new BlockItem(ModBlocks.CORRUPTED_IRON_ORE, new FabricItemSettings().group(CreativeModeTab.TAB_BUILDING_BLOCKS)));
-	public static final Item CORRUPTED_DEMONITE_ORE_BLOCK = register("demonite_ore_block", new BlockItem(ModBlocks.CORRUPTED_DEMONITE_ORE, new FabricItemSettings().group(CreativeModeTab.TAB_BUILDING_BLOCKS)));
+	public static final Item CORRUPTED_DEMONITE_ORE_BLOCK = register("demonite_ore_block", new BlockItem(ModBlocks.DEMONITE_ORE, new FabricItemSettings().group(CreativeModeTab.TAB_BUILDING_BLOCKS)));
 	public static final Item CORRUPTED_COPPER_ORE_BLOCK = register("corrupted_copper_ore_block", new BlockItem(ModBlocks.CORRUPTED_COPPER_ORE, new FabricItemSettings().group(CreativeModeTab.TAB_BUILDING_BLOCKS)));
 	public static final Item CORRUPTED_GOLD_ORE_BLOCK = register("corrupted_gold_ore_block", new BlockItem(ModBlocks.CORRUPTED_GOLD_ORE, new FabricItemSettings().group(CreativeModeTab.TAB_BUILDING_BLOCKS)));
 	public static final Item CORRUPTED_LAPIS_ORE_BLOCK = register("corrupted_lapis_ore_block", new BlockItem(ModBlocks.CORRUPTED_LAPIS_ORE, new FabricItemSettings().group(CreativeModeTab.TAB_BUILDING_BLOCKS)));
@@ -169,7 +168,7 @@ public class ModItems {
 	public static final Item CORRUPTED_EMERALD_ORE_BLOCK = register("corrupted_emerald_ore_block", new BlockItem(ModBlocks.CORRUPTED_EMERALD_ORE, new FabricItemSettings().group(CreativeModeTab.TAB_BUILDING_BLOCKS)));
 	public static final Item CORRUPTED_DEEPSLATE_COAL_ORE_BLOCK = register("corrupted_deepslate_coal_ore_block", new BlockItem(ModBlocks.CORRUPTED_DEEPSLATE_COAL_ORE, new FabricItemSettings().group(CreativeModeTab.TAB_BUILDING_BLOCKS)));
 	public static final Item CORRUPTED_DEEPSLATE_IRON_ORE_BLOCK = register("corrupted_deepslate_iron_ore_block", new BlockItem(ModBlocks.CORRUPTED_DEEPSLATE_IRON_ORE, new FabricItemSettings().group(CreativeModeTab.TAB_BUILDING_BLOCKS)));
-	public static final Item CORRUPTED_DEEPSLATE_DEMONITE_ORE_BLOCK = register("deepslate_demonite_ore_block", new BlockItem(ModBlocks.CORRUPTED_DEEPSLATE_DEMONITE_ORE, new FabricItemSettings().group(CreativeModeTab.TAB_BUILDING_BLOCKS)));
+	public static final Item CORRUPTED_DEEPSLATE_DEMONITE_ORE_BLOCK = register("deepslate_demonite_ore_block", new BlockItem(ModBlocks.DEEPSLATE_DEMONITE_ORE, new FabricItemSettings().group(CreativeModeTab.TAB_BUILDING_BLOCKS)));
 	public static final Item CORRUPTED_DEEPSLATE_COPPER_ORE_BLOCK = register("corrupted_deepslate_copper_ore_block", new BlockItem(ModBlocks.CORRUPTED_DEEPSLATE_COPPER_ORE, new FabricItemSettings().group(CreativeModeTab.TAB_BUILDING_BLOCKS)));
 	public static final Item CORRUPTED_DEEPSLATE_GOLD_ORE_BLOCK = register("corrupted_deepslate_gold_ore_block", new BlockItem(ModBlocks.CORRUPTED_DEEPSLATE_GOLD_ORE, new FabricItemSettings().group(CreativeModeTab.TAB_BUILDING_BLOCKS)));
 	public static final Item CORRUPTED_DEEPSLATE_LAPIS_ORE_BLOCK = register("corrupted_deepslate_lapis_ore_block", new BlockItem(ModBlocks.CORRUPTED_DEEPSLATE_LAPIS_ORE, new FabricItemSettings().group(CreativeModeTab.TAB_BUILDING_BLOCKS)));

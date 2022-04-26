@@ -129,9 +129,7 @@ public class DemonEyeEntity extends Monster implements Enemy {
                     if (demonEye.isSunBurnTick()) {
                         //demonEye.setSecondsOnFire(8);
                     }
-                }
-                else
-                if (target != null) {
+                } else if (target != null) {
                     demonEye.doOnce = false;
                     if (demonEye.velX > -4 && demonEye.position().x > target.position().x + target.getBbWidth()) {
                         demonEye.velX -= 0.08;
@@ -235,12 +233,15 @@ public class DemonEyeEntity extends Monster implements Enemy {
         public void lookRandomly() {
             if (!demonEye.doOnce) {
                 demonEye.setYRot(rotlerp(demonEye.getYRot(), demonEye.random.nextInt(3), 360));
+                demonEye.velX = demonEye.random.nextInt(-2, 3);
+                demonEye.velZ = demonEye.random.nextInt(-2, 3);
+                demonEye.velY = demonEye.random.nextInt(-1, 2);
                 demonEye.doOnce = true;
             }
         }
     }
 
-    /**
+    /*
     public static AttributeSupplier.Builder createMobAttributes() {
         return switch (eyeType) {
             case 0 -> Mob.createMobAttributes()

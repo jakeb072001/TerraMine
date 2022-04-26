@@ -2,9 +2,7 @@ package terracraft.common.init;
 
 import net.minecraft.core.Holder;
 import net.minecraft.data.worldgen.features.FeatureUtils;
-import net.minecraft.data.worldgen.features.OreFeatures;
 import net.minecraft.data.worldgen.placement.MiscOverworldPlacements;
-import net.minecraft.data.worldgen.placement.OrePlacements;
 import net.minecraft.data.worldgen.placement.PlacementUtils;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.valueproviders.UniformInt;
@@ -30,9 +28,9 @@ public class ModBiomeFeatures {
 
     public static final RuleTest STONE_ORE_REPLACEABLES = new TagMatchTest(BlockTags.STONE_ORE_REPLACEABLES);
     public static final RuleTest DEEPSLATE_ORE_REPLACEABLES = new TagMatchTest(BlockTags.DEEPSLATE_ORE_REPLACEABLES);
-    public static final List<OreConfiguration.TargetBlockState> ORE_IRON_TARGET_LIST = List.of(OreConfiguration.target(STONE_ORE_REPLACEABLES, Blocks.IRON_ORE.defaultBlockState()), OreConfiguration.target(DEEPSLATE_ORE_REPLACEABLES, Blocks.DEEPSLATE_IRON_ORE.defaultBlockState()));
-    public static final Holder<ConfiguredFeature<OreConfiguration, ?>> ORE_DEMONITE_FEATURE = FeatureUtils.register("ore_demonite", Feature.ORE, new OreConfiguration(ORE_IRON_TARGET_LIST, 9));
-    public static final Holder<ConfiguredFeature<OreConfiguration, ?>> ORE_DEMONITE_SMALL_FEATURE = FeatureUtils.register("ore_demonite_small", Feature.ORE, new OreConfiguration(ORE_IRON_TARGET_LIST, 4));
+    public static final List<OreConfiguration.TargetBlockState> ORE_DEMONITE_TARGET_LIST = List.of(OreConfiguration.target(STONE_ORE_REPLACEABLES, ModBlocks.DEMONITE_ORE.defaultBlockState()), OreConfiguration.target(DEEPSLATE_ORE_REPLACEABLES, ModBlocks.DEEPSLATE_DEMONITE_ORE.defaultBlockState()));
+    public static final Holder<ConfiguredFeature<OreConfiguration, ?>> ORE_DEMONITE_FEATURE = FeatureUtils.register("ore_demonite", Feature.ORE, new OreConfiguration(ORE_DEMONITE_TARGET_LIST, 9));
+    public static final Holder<ConfiguredFeature<OreConfiguration, ?>> ORE_DEMONITE_SMALL_FEATURE = FeatureUtils.register("ore_demonite_small", Feature.ORE, new OreConfiguration(ORE_DEMONITE_TARGET_LIST, 4));
     public static final Holder<PlacedFeature> ORE_DEMONITE_UPPER = PlacementUtils.register("ore_demonite_upper", ORE_DEMONITE_FEATURE, commonOrePlacement(90, HeightRangePlacement.triangle(VerticalAnchor.absolute(80), VerticalAnchor.absolute(384))));
     public static final Holder<PlacedFeature> ORE_DEMONITE_MIDDLE = PlacementUtils.register("ore_demonite_middle", ORE_DEMONITE_FEATURE, commonOrePlacement(10, HeightRangePlacement.triangle(VerticalAnchor.absolute(-24), VerticalAnchor.absolute(56))));
     public static final Holder<PlacedFeature> ORE_DEMONITE_SMALL = PlacementUtils.register("ore_demonite_small", ORE_DEMONITE_SMALL_FEATURE, commonOrePlacement(10, HeightRangePlacement.uniform(VerticalAnchor.bottom(), VerticalAnchor.absolute(72))));
