@@ -2,11 +2,23 @@ plugins {
     id 'fabric-loom' version '0.11-SNAPSHOT'
     id 'io.github.juuxel.loom-quiltflower' version '1.6.1'
     id 'com.matthewprenger.cursegradle' version '1.4.0'
-    id "com.modrinth.minotaur" version "2.+"
-    id "org.shipkit.shipkit-auto-version" version "1.+"
-    id "org.shipkit.shipkit-changelog" version "1.+"
-    id "org.shipkit.shipkit-github-release" version "1.+"
+    id 'maven-publish'
+    id 'com.github.johnrengelman.shadow' version '7.0.0'
+    id 'com.modrinth.minotaur' version '2.+'
 }
+
+import com.google.gson.GsonBuilder
+import com.google.gson.JsonObject
+import com.modrinth.minotaur.dependencies.ModDependency
+import com.modrinth.minotaur.responses.ResponseError
+import net.fabricmc.loom.task.RemapJarTask
+import org.apache.http.client.config.CookieSpecs
+import org.apache.http.client.config.RequestConfig
+import org.apache.http.client.entity.EntityBuilder
+import org.apache.http.client.methods.HttpPatch
+import org.apache.http.entity.ContentType
+import org.apache.http.impl.client.HttpClientBuilder
+import org.apache.http.util.EntityUtils
 
 repositories {
     maven { url = "https://maven.terraformersmc.com" }
@@ -134,28 +146,70 @@ jar {
     }
 }
 
-tasks.generateChangelog {
-    repository = "jakeb072001/TerraCraft"
-    previousRevision = project.ext["shipkit-auto-version.previous-tag"]?.toString()
-    githubToken = System.getenv().GITHUB_TOKEN
-}
-
-tasks.named("githubRelease") {
-    dependsOn tasks.named("generateChangelog")
-    repository = "jakeb072001/TerraCraft"
-    changelog = tasks.named("generateChangelog").get().outputFile
-    githubToken = System.getenv().GITHUB_TOKEN
-    newTagRevision = System.getenv().GITHUB_SHA
-}
-
 modrinth {
-    token = System.getenv().MODRINTH_TOKEN // This is the default. Remember to have the MODRINTH_TOKEN environment variable set or else this will fail, or set it to whatever you want - just make sure it stays private!
     projectId = project.modrinth_id
-    versionNumber = project.mod_version // You don't need to set this manually. Will fail if Modrinth has this version already
-    versionType = "release" // This is the default
-    uploadFile = remapJar // With Fabric Loom or Architectury Loom, this MUST be set to `remapJar` instead of `jar`!
-    gameVersions = ["1.18.2"] // Must be an array, even with only one version
-    loaders = ["fabric"] // Must also be an array - no need to specify this if you're using Fabric Loom or ForgeGradle
+    versionName = "TerrariaCraft ${project.mod_version} (${project.minecraft_version})"
+    versionType = "beta"
+    uploadFile = tasks.remapJar
+    gameVersions = [project.minecraft_version]
+    loaders = ["fabric"]
+    dependencies = [
+    ]
+
+    // Changelog fetching
+    def changelogText = file('CHANGELOG.md').text.replaceAll('\\r\\n', '\n')
+    def regexVersion = ((String) project.mod_version).replaceAll('\\.', /\\./).replaceAll('\\+', '\\+')
+    def changelogRegex = ~"###? ${regexVersion}\\n\\n(( *- .+\\n)+)"
+    def matcher = changelogText =~ changelogRegex
+
+    if (matcher.find()) {
+        def changelogContent = matcher.group(1)
+
+        def changelogLines = changelogText.split('\n')
+        def linkRefRegex = ~'^\\[([A-z0-9 _\\-/+.]+)]: '
+        for (int i = changelogLines.length - 1; i > 0; i--) {
+            def line = changelogLines[i]
+            if ((line =~ linkRefRegex).find())
+                changelogContent += '\n' + line
+            else break
+        }
+
+        changelog = changelogContent
+    } else {
+        afterEvaluate {
+            tasks.modrinth.setEnabled(false)
+        }
+    }
+}
+
+tasks.modrinth.dependsOn(build)
+tasks.modrinth.doFirst {
+    final def client = HttpClientBuilder.create().setDefaultRequestConfig(RequestConfig.custom().setCookieSpec(CookieSpecs.IGNORE_COOKIES).build()).build()
+    final def patch = new HttpPatch((String) (modrinth.apiUrl.get() + '/project/' + project.modrinth_id))
+    patch.addHeader("Authorization", modrinth.token.get())
+
+    var json = new JsonObject()
+    json.addProperty("body", parseReadme())
+    patch.setEntity(EntityBuilder.create()
+            .setText(json.toString())
+            .setContentType(ContentType.APPLICATION_JSON)
+            .build())
+
+    final def response = client.execute(patch)
+    final int status = response.getStatusLine().getStatusCode()
+
+    final def gson = new GsonBuilder().create()
+    if (status == 200 || status == 204) {
+        project.getLogger().lifecycle("Successfully updated readme to ${modrinth.projectId.get()}.")
+    } else {
+        if (response.getEntity() == null) {
+            project.getLogger().error("Readme update failed! Status: ${status} Reason: ${response.statusLine.reasonPhrase}")
+            throw new GradleException("Readme update failed! Status: ${status} Reason: ${response.statusLine.reasonPhrase}")
+        }
+        errorInfo = gson.fromJson(EntityUtils.toString(response.getEntity()), ResponseError.class)
+        project.getLogger().error("Readme update failed! Status: ${status} Error: ${errorInfo.getError()} Reason: ${errorInfo.getDescription()}")
+        throw new GradleException("Readme failed! Status: ${status} Reason: ${errorInfo.getDescription()}")
+    }
 }
 
 curseforge {
@@ -193,5 +247,34 @@ curseforge {
 
     options {
         forgeGradleIntegration = false
+    }
+
+    publishing {
+        publications {
+            mavenJava(MavenPublication) {
+                from components.java
+
+                pom {
+                    name = 'TerrariaCraft'
+                    description = 'A WIP mod that adds everything from Terraria into Minecraft'
+                }
+            }
+        }
+
+        repositories {
+            mavenLocal()
+            maven {
+                name = 'BuildDirLocal'
+                url = "$buildDir/repo"
+            }
+            maven {
+                name = 'GithubPackages'
+                url = uri('https://github.com/jakeb072001/TerraCraft')
+                credentials {
+                    username = project.findProperty('gpr.user') ?: System.getenv('USERNAME')
+                    password = project.findProperty('gpr.key') ?: System.getenv('TOKEN')
+                }
+            }
+        }
     }
 }
