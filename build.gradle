@@ -250,13 +250,9 @@ curseforge {
 
     publishing {
         publications {
-            mavenJava(MavenPublication) {
-                from components.java
-
-                pom {
-                    name = 'TerraCraft'
-                    description = 'A WIP mod that adds everything from Terraria into Minecraft'
-                }
+            gpr(MavenPublication) {
+                artifactId='terrariacraft'
+                from(components.java)
             }
         }
 
@@ -268,10 +264,10 @@ curseforge {
             }
             maven {
                 name = 'GithubPackages'
-                url = uri('https://github.com/jakeb072001/TerraCraft')
+                url = uri('https://maven.pkg.github.com/jakeb072001/TerrariaCraft')
                 credentials {
-                    username = project.findProperty('gpr.user') ?: System.getenv('USERNAME')
-                    password = project.findProperty('gpr.key') ?: System.getenv('TOKEN')
+                    username = project.findProperty('gpr.user') ?: System.getenv('GPR_USER')
+                    password = project.findProperty('gpr.key') ?: System.getenv('GPR_API_KEY')
                 }
             }
         }
