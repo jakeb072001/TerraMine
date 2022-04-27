@@ -9,9 +9,7 @@ plugins {
 
 import com.google.gson.GsonBuilder
 import com.google.gson.JsonObject
-import com.modrinth.minotaur.dependencies.ModDependency
 import com.modrinth.minotaur.responses.ResponseError
-import net.fabricmc.loom.task.RemapJarTask
 import org.apache.http.client.config.CookieSpecs
 import org.apache.http.client.config.RequestConfig
 import org.apache.http.client.entity.EntityBuilder
@@ -147,6 +145,7 @@ jar {
 }
 
 modrinth {
+    token = System.getenv("MODRINTH_TOKEN")
     projectId = project.modrinth_id
     versionName = "TerrariaCraft ${project.mod_version} (${project.minecraft_version})"
     versionType = "beta"
@@ -255,7 +254,7 @@ curseforge {
                 from components.java
 
                 pom {
-                    name = 'TerrariaCraft'
+                    name = 'TerraCraft'
                     description = 'A WIP mod that adds everything from Terraria into Minecraft'
                 }
             }
