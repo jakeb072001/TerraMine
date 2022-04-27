@@ -24,6 +24,7 @@ public class CorruptionDesertBiome {
         BiomeGenerationSettings.Builder generationSettings = new BiomeGenerationSettings.Builder();
         BiomeDefaultFeatures.addFossilDecoration(generationSettings);
         BiomeDefaultFeatures.addDefaultCarversAndLakes(generationSettings);
+        ModBiomeFeatures.addCorruptionCaveCarver(generationSettings);
         BiomeDefaultFeatures.addDefaultCrystalFormations(generationSettings);
         BiomeDefaultFeatures.addDefaultMonsterRoom(generationSettings);
         BiomeDefaultFeatures.addDefaultUndergroundVariety(generationSettings);

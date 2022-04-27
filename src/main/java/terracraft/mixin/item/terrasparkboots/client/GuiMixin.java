@@ -27,15 +27,8 @@ public abstract class GuiMixin {
 
 	@Unique private final ResourceLocation LAVACHARM_ICONS_TEXTURE = TerraCraft.id("textures/gui/lavacharmbar.png");
 
-	@Shadow @Final private Minecraft minecraft;
 	@Shadow private int screenHeight;
 	@Shadow private int screenWidth;
-
-	@Shadow protected abstract int getVisibleVehicleHeartRows(int i);
-
-	@Shadow protected abstract LivingEntity getPlayerVehicleWithHealth();
-
-	@Shadow protected abstract int getVehicleMaxHearts(LivingEntity livingEntity);
 
 	@Shadow protected abstract Player getCameraPlayer();
 

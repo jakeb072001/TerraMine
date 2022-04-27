@@ -18,12 +18,12 @@ public class CorruptionBiome {
         // Vanilla configured features for biomes are defined in DefaultBiomeFeatures.
 
         MobSpawnSettings.Builder spawnSettings = new MobSpawnSettings.Builder();
-        //BiomeDefaultFeatures.farmAnimals(spawnSettings);
         BiomeDefaultFeatures.monsters(spawnSettings, 100, 25, 100, false);
         //spawnSettings.addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(EntityType.CORRUPTION_ENEMIES, 4, 2, 3));
 
         BiomeGenerationSettings.Builder generationSettings = new BiomeGenerationSettings.Builder();
         BiomeDefaultFeatures.addDefaultCarversAndLakes(generationSettings);
+        ModBiomeFeatures.addCorruptionCaveCarver(generationSettings);
         BiomeDefaultFeatures.addDefaultCrystalFormations(generationSettings);
         BiomeDefaultFeatures.addDefaultMonsterRoom(generationSettings);
         BiomeDefaultFeatures.addDefaultUndergroundVariety(generationSettings);

@@ -45,6 +45,9 @@ public class ModBiomeFeatures {
         builder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, ModBiomeFeatures.ORE_DEMONITE_MIDDLE);
         builder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, ModBiomeFeatures.ORE_DEMONITE_SMALL);
     }
+    public static void addCorruptionCaveCarver(BiomeGenerationSettings.Builder builder) {
+        builder.addCarver(GenerationStep.Carving.AIR, ModCarvers.CORRUPTION_PIT);
+    }
     private static List<PlacementModifier> commonOrePlacement(int i, PlacementModifier placementModifier) {
         return orePlacement(CountPlacement.of(i), placementModifier);
     }

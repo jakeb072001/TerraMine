@@ -41,7 +41,10 @@ public final class TrinketsHelper {
 				.orElse(false)) {
 			return true;
 		} else {
-			return areEffectsEnabled(item) && player.getInventory().contains(item);
+			if (item.getItem() instanceof TrinketTerrariaItem trinket && trinket.effectEnabled) {
+				return player.getInventory().contains(item);
+			}
+			return false;
 		}
 	}
 

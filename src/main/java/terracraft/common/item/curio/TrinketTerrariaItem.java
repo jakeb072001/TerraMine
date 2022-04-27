@@ -37,6 +37,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 public class TrinketTerrariaItem extends TerrariaItem implements Trinket {
+	public boolean effectEnabled = true;
 
 	public TrinketTerrariaItem() {
 		// DispenserBlock.registerBehavior(this, TrinketItem.TRINKET_DISPENSER_BEHAVIOR); TODO: bug, missing in trinkets rewrite
@@ -51,6 +52,7 @@ public class TrinketTerrariaItem extends TerrariaItem implements Trinket {
 			CompoundTag tag = slotStack.getOrCreateTagElement("terracraft");
 			tag.putByte("Status", (byte) terracraftStatus.nextIndex(tag.getByte("Status")));
 			slotStack.addTagElement("terracraft", tag);
+			effectEnabled = terracraftStatus.values()[tag.getByte("Status")].hasEffects();
 			return true;
 		}
 		return false;
