@@ -22,6 +22,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import org.jetbrains.annotations.NotNull;
+import terracraft.common.init.ModComponents;
 import terracraft.common.init.ModLootTables;
 import terracraft.common.init.ModSoundEvents;
 
@@ -318,19 +319,6 @@ public class DemonEyeEntity extends Monster implements Enemy {
     public boolean hurt(@NotNull DamageSource source, float amount) {
         playSound(ModSoundEvents.DEMON_EYE_HURT, getSoundVolume(), getVoicePitch());
         return super.hurt(source, amount);
-    }
-
-
-    @Override
-    public void addAdditionalSaveData(@NotNull CompoundTag compound) {
-        super.addAdditionalSaveData(compound);
-        compound.putInt("eyeType", eyeType);
-    }
-
-    @Override
-    public void readAdditionalSaveData(@NotNull CompoundTag compound) {
-        super.readAdditionalSaveData(compound);
-        eyeType = compound.getInt("eyeType");
     }
 
     @Override

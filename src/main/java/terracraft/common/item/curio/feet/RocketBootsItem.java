@@ -28,6 +28,6 @@ public class RocketBootsItem extends TrinketTerrariaItem {
 
 	@Override
 	public void curioTick(LivingEntity player, ItemStack stack) {
-		rocketHelper.rocketFly(true, speed, 1, player, this);
+		rocketHelper.rocketFly(speed, 1, player);
 	}
 }

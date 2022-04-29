@@ -16,6 +16,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import terracraft.common.init.ModComponents;
 import terracraft.common.init.ModItems;
 import terracraft.common.item.curio.belt.BundleOfBalloonsItem;
 import terracraft.common.trinkets.TrinketsHelper;
@@ -71,26 +72,29 @@ public abstract class LivingEntityMixin extends Entity implements LivingEntityEx
 	@Inject(method = "aiStep", at = @At("HEAD"))
 	private void invokeQuadrupleJump(CallbackInfo info) {
 		LivingEntity self = (LivingEntity) (Object) this;
-		jumpWasReleased |= !this.jumping;
+		if (self instanceof Player player) {
+			jumpWasReleased |= !this.jumping;
 
-		if ((this.isOnGround() || this.onClimbable()) && !this.isInWater()) {
-			this.hasDoubleJumped = false;
-			this.hasTripleJumped = false;
-			this.hasQuadrupleJumped = false;
-		}
+			if ((this.isOnGround() || this.onClimbable()) && !this.isInWater()) {
+				this.hasDoubleJumped = false;
+				this.hasTripleJumped = false;
+				this.hasQuadrupleJumped = false;
+				ModComponents.MOVEMENT_ORDER.get(player).setCloudFinished(false);
+			}
 
-		boolean flying = self instanceof Player player && player.getAbilities().flying;
-		if (this.jumping && this.jumpWasReleased && !this.isInWater() && !this.isOnGround() && !this.isPassenger()
-				&& !flying && TrinketsHelper.isEquipped(ModItems.BUNDLE_OF_BALLOONS, self)) {
-			if (!this.hasDoubleJumped || !this.hasTripleJumped || !this.hasQuadrupleJumped) {
-				this.terracraft$doubleJump();
-				if (this.hasDoubleJumped == true) {
-					if (this.hasTripleJumped == true) {
-						this.hasQuadrupleJumped = true;
+			boolean flying = player.getAbilities().flying;
+			if (this.jumping && this.jumpWasReleased && !this.isInWater() && !this.isOnGround() && !this.isPassenger()
+					&& !flying && TrinketsHelper.isEquipped(ModItems.BUNDLE_OF_BALLOONS, player)) {
+				if (!this.hasDoubleJumped || !this.hasTripleJumped || !this.hasQuadrupleJumped) {
+					this.terracraft$doubleJump();
+					if (this.hasDoubleJumped) {
+						if (this.hasTripleJumped) {
+							this.hasQuadrupleJumped = true;
+						}
+						this.hasTripleJumped = true;
 					}
-					this.hasTripleJumped = true;
+					this.hasDoubleJumped = true;
 				}
-				this.hasDoubleJumped = true;
 			}
 		}
 	}

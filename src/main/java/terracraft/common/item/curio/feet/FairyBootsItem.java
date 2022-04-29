@@ -64,7 +64,7 @@ public class FairyBootsItem extends TrinketTerrariaItem {
 				}
 			}
 		}
-		rocketHelper.rocketFly(true, speed, 3, player, this);
+		rocketHelper.rocketFly(speed, 3, player);
 	}
 	private void fly(LivingEntity player, double y) {
 		Vec3 motion = player.getDeltaMovement();

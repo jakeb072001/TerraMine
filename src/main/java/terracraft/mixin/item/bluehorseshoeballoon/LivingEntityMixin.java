@@ -17,6 +17,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+import terracraft.common.init.ModComponents;
 import terracraft.common.init.ModItems;
 import terracraft.common.item.curio.belt.BlueHorseshoeBalloonItem;
 import terracraft.common.trinkets.TrinketsHelper;
@@ -62,17 +63,22 @@ public abstract class LivingEntityMixin extends Entity implements LivingEntityEx
 	@Inject(method = "aiStep", at = @At("HEAD"))
 	private void invokeDoubleJump(CallbackInfo info) {
 		LivingEntity self = (LivingEntity) (Object) this;
-		jumpWasReleased |= !this.jumping;
+		if (self instanceof Player player) {
+			jumpWasReleased |= !this.jumping;
 
-		if ((this.isOnGround() || this.onClimbable()) && !this.isInWater()) {
-			this.hasDoubleJumped = false;
-		}
+			if ((this.isOnGround() || this.onClimbable()) && !this.isInWater()) {
+				this.hasDoubleJumped = false;
+				ModComponents.MOVEMENT_ORDER.get(player).setCloudFinished(false);
+			}
 
-		boolean flying = self instanceof Player player && player.getAbilities().flying;
-		if (this.jumping && this.jumpWasReleased && !this.isInWater() && !this.isOnGround() && !this.isPassenger()
-				&& !this.hasDoubleJumped && !flying && TrinketsHelper.isEquipped(ModItems.BLUE_HORSESHOE_BALLOON, self)) {
-			this.terracraft$doubleJump();
-			this.hasDoubleJumped = true;
+			boolean flying = player.getAbilities().flying;
+			if (this.jumping && this.jumpWasReleased && !this.isInWater() && !this.isOnGround() && !this.isPassenger()
+					&& !this.hasDoubleJumped && !flying && TrinketsHelper.isEquipped(ModItems.BLUE_HORSESHOE_BALLOON, player)
+					&& !TrinketsHelper.isEquipped(ModItems.BUNDLE_OF_BALLOONS, player) && !TrinketsHelper.isEquipped(ModItems.CLOUD_IN_A_BOTTLE, player)
+					&& !TrinketsHelper.isEquipped(ModItems.CLOUD_IN_A_BALLOON, player)) {
+				this.terracraft$doubleJump();
+				this.hasDoubleJumped = true;
+			}
 		}
 	}
 

@@ -51,7 +51,7 @@ public class LightningBootsItem extends TrinketTerrariaItem {
 				}
 			}
 		}
-		rocketHelper.rocketFly(true, speed, 4, player, this);
+		rocketHelper.rocketFly(speed, 4, player);
 	}
 	private void fly(LivingEntity player, double y) {
 		Vec3 motion = player.getDeltaMovement();

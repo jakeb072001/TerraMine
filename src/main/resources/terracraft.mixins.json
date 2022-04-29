@@ -54,6 +54,7 @@
     "statuseffect.MobEffectInstanceMixin",
     "world.BiomeDefaultFeaturesMixin",
     "world.BiomeManagerMixin",
+    "world.ClientLevelMixin",
     "world.entity.HopperBlockEntityMixin",
     "world.entity.ItemEntityMixin",
     "world.entity.PlayerMixin"

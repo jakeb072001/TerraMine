@@ -16,6 +16,7 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.*;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+import terracraft.common.init.ModComponents;
 import terracraft.common.init.ModItems;
 import terracraft.common.init.ModSoundEvents;
 import terracraft.common.item.curio.belt.CloudInABottleItem;
@@ -36,6 +37,9 @@ public abstract class LivingEntityMixin extends Entity implements LivingEntityEx
 	// Has entity double jumped during current airtime
 	@Unique
 	private boolean hasDoubleJumped = false;
+
+	@Unique
+	private int quadJumped = 0;
 
 	public LivingEntityMixin(EntityType<?> type, Level world) {
 		super(type, world);
@@ -70,6 +74,18 @@ public abstract class LivingEntityMixin extends Entity implements LivingEntityEx
 		}
 
 		this.isDoubleJumping = false;
+
+		if (self instanceof Player player) {
+			if (TrinketsHelper.isEquipped(ModItems.BUNDLE_OF_BALLOONS, player)) {
+				quadJumped++;
+				if (quadJumped == 3) {
+					ModComponents.MOVEMENT_ORDER.get(player).setCloudFinished(true);
+					quadJumped = 0;
+				}
+			} else {
+				ModComponents.MOVEMENT_ORDER.get(player).setCloudFinished(true);
+			}
+		}
 	}
 
 	// This code is extracted because the mixin fails to apply with the usage of client-side only classes
@@ -93,17 +109,22 @@ public abstract class LivingEntityMixin extends Entity implements LivingEntityEx
 	@Inject(method = "aiStep", at = @At("HEAD"))
 	private void invokeDoubleJump(CallbackInfo info) {
 		LivingEntity self = (LivingEntity) (Object) this;
-		jumpWasReleased |= !this.jumping;
+		if (self instanceof Player player) {
+			jumpWasReleased |= !this.jumping;
 
-		if ((this.isOnGround() || this.onClimbable()) && !this.isInWater()) {
-			this.hasDoubleJumped = false;
-		}
+			if ((this.isOnGround() || this.onClimbable()) && !this.isInWater()) {
+				quadJumped = 0;
+				this.hasDoubleJumped = false;
+				ModComponents.MOVEMENT_ORDER.get(player).setCloudFinished(false);
+			}
 
-		boolean flying = self instanceof Player player && player.getAbilities().flying;
-		if (this.jumping && this.jumpWasReleased && !this.isInWater() && !this.isOnGround() && !this.isPassenger()
-				&& !this.hasDoubleJumped && !flying && TrinketsHelper.isEquipped(ModItems.CLOUD_IN_A_BOTTLE, self)) {
-			this.terracraft$doubleJump();
-			this.hasDoubleJumped = true;
+			boolean flying = player.getAbilities().flying;
+			if (this.jumping && this.jumpWasReleased && !this.isInWater() && !this.isOnGround() && !this.isPassenger() // jumping is only client side, find alternative to fix rocket boot particles
+					&& !this.hasDoubleJumped && !flying && TrinketsHelper.isEquipped(ModItems.CLOUD_IN_A_BOTTLE, player)
+					&& !TrinketsHelper.isEquipped(ModItems.BUNDLE_OF_BALLOONS, player)) {
+				this.terracraft$doubleJump();
+				this.hasDoubleJumped = true;
+			}
 		}
 	}
 

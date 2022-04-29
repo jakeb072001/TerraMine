@@ -63,7 +63,7 @@ public class TerrasparkBootsItem extends TrinketTerrariaItem {
 				}
 			}
 		}
-		rocketHelper.rocketFly(false, speed, 6, player, this);
+		rocketHelper.rocketFly(speed, 6, player);
 	}
 
 	@Override

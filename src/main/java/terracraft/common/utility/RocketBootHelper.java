@@ -8,8 +8,8 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.phys.Vec3;
+import terracraft.common.init.ModComponents;
 import terracraft.common.init.ModItems;
 import terracraft.common.trinkets.TrinketsHelper;
 
@@ -28,70 +28,77 @@ public class RocketBootHelper {
     private double sprintSpeed = 1.0D;
     private int rocketTime = 40;
 
-    public void rocketFly(boolean hasCooldown, double speed, int priority, LivingEntity player, Item self) {
+    public void rocketFly(double speed, int priority, LivingEntity player) {
+        if (player instanceof Player user) {
+            if (CloudBottleEquippedCheck.isEquipped(user)) {
+                if (ModComponents.MOVEMENT_ORDER.get(user).getCloudFinished()) {
+                    realFly(speed, priority, user);
+                }
+            } else {
+                realFly(speed, priority, user);
+            }
+        }
+    }
+
+    private void realFly(double speed, int priority, Player player) {
         Options settings = Minecraft.getInstance().options;
         if (player.isOnGround())
         {
-            if (hasCooldown) {
-                if (timer >= 10) {
-                    ((Player) player).getCooldowns().addCooldown(ModItems.ROCKET_BOOTS, 30);
-                }
-            }
             if (timer > 0)
             {
                 timer = 0;
                 soundTimer = 0;
             }
         }
-        if (settings != null && timer < rocketTime && player instanceof Player user && priorityOrder(user, priority) && !(hasCooldown && user.getCooldowns().isOnCooldown(self))) {
+        if (settings != null && timer < rocketTime && priorityOrder(player, priority)) {
             if (settings.keyJump.isDown()) {
-                double currentAccel = speed * (user.getDeltaMovement().y() < 0.3D ? 2.5D : 1.0D);
-                double currentSpeedVertical = speed * (user.isUnderWater() ? 0.4D : 1.0D);
+                double currentAccel = speed * (player.getDeltaMovement().y() < 0.3D ? 2.5D : 1.0D);
+                double currentSpeedVertical = speed * (player.isUnderWater() ? 0.4D : 1.0D);
                 float random = (RANDOM.nextFloat() - 0.5F) * 0.1F;
                 timer += 1;
                 soundTimer += 1;
 
-                double motionY = user.getDeltaMovement().y();
+                double motionY = player.getDeltaMovement().y();
                 if (settings.keyJump.isDown()) {
-                    this.fly(user, Math.min(motionY + currentAccel, currentSpeedVertical));
+                    this.fly(player, Math.min(motionY + currentAccel, currentSpeedVertical));
                     if (soundTimer >= 3) {
-                        user.level.playSound(null, user.blockPosition(), sound, SoundSource.PLAYERS, soundVolume, soundPitch);
+                        player.level.playSound(null, player.blockPosition(), sound, SoundSource.PLAYERS, soundVolume, soundPitch);
                         soundTimer = 0;
                     }
-                    Vec3 vLeft = new Vec3(-0.15, -1.5, 0).xRot(0).yRot(user.yBodyRot * -0.017453292F);
-                    Vec3 vRight = new Vec3(0.15, -1.5, 0).xRot(0).yRot(user.yBodyRot * -0.017453292F);
-                    Vec3 playerPos = user.getPosition(0).add(0, 1.5, 0);
-                    if (!user.isLocalPlayer()) {
+                    Vec3 vLeft = new Vec3(-0.15, -1.5, 0).xRot(0).yRot(player.yBodyRot * -0.017453292F);
+                    Vec3 vRight = new Vec3(0.15, -1.5, 0).xRot(0).yRot(player.yBodyRot * -0.017453292F);
+                    Vec3 playerPos = player.getPosition(0).add(0, 1.5, 0);
+                    if (!player.isLocalPlayer()) {
                         Vec3 v = playerPos.add(vLeft);
-                        ((ServerPlayer) user).getLevel().sendParticles(particle1, v.x, v.y, v.z, 1, 0, -0.2D, 0, random);
+                        ((ServerPlayer) player).getLevel().sendParticles(particle1, v.x, v.y, v.z, 1, 0, -0.2D, 0, random);
                         if (particle2 != null) {
-                            ((ServerPlayer) user).getLevel().sendParticles(particle2, v.x, v.y, v.z, 1, 0, -0.2D, 0, random);
+                            ((ServerPlayer) player).getLevel().sendParticles(particle2, v.x, v.y, v.z, 1, 0, -0.2D, 0, random);
                         }
                         v = playerPos.add(vRight);
-                        ((ServerPlayer) user).getLevel().sendParticles(particle1, v.x, v.y, v.z, 1, 0, -0.2D, 0, random);
+                        ((ServerPlayer) player).getLevel().sendParticles(particle1, v.x, v.y, v.z, 1, 0, -0.2D, 0, random);
                         if (particle2 != null) {
-                            ((ServerPlayer) user).getLevel().sendParticles(particle2, v.x, v.y, v.z, 1, 0, -0.2D, 0, random);
+                            ((ServerPlayer) player).getLevel().sendParticles(particle2, v.x, v.y, v.z, 1, 0, -0.2D, 0, random);
                         }
                     }
                 }
 
-                float speedSideways = (float) (user.isCrouching() ? this.speedSide * 0.5F : this.speedSide);
-                float speedForward = user.isSprinting() ? (float) (speedSideways * this.sprintSpeed) : speedSideways;
+                float speedSideways = (float) (player.isCrouching() ? this.speedSide * 0.5F : this.speedSide);
+                float speedForward = player.isSprinting() ? (float) (speedSideways * this.sprintSpeed) : speedSideways;
 
                 if (settings.keyUp.isDown()) {
-                    user.moveRelative(1, new Vec3(0, 0, speedForward));
+                    player.moveRelative(1, new Vec3(0, 0, speedForward));
                 }
                 if (settings.keyDown.isDown()) {
-                    user.moveRelative(1, new Vec3(0, 0, -speedSideways * 0.8F));
+                    player.moveRelative(1, new Vec3(0, 0, -speedSideways * 0.8F));
                 }
                 if (settings.keyLeft.isDown()) {
-                    user.moveRelative(1, new Vec3(speedSideways, 0, 0));
+                    player.moveRelative(1, new Vec3(speedSideways, 0, 0));
                 }
                 if (settings.keyRight.isDown()) {
-                    user.moveRelative(1, new Vec3(-speedSideways, 0, 0));
+                    player.moveRelative(1, new Vec3(-speedSideways, 0, 0));
                 }
-                if (!user.level.isClientSide()) {
-                    user.fallDistance = 0.0F;
+                if (!player.level.isClientSide()) {
+                    player.fallDistance = 0.0F;
                 }
             }
         }

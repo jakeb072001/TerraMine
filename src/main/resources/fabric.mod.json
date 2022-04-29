@@ -73,10 +73,12 @@
   "custom": {
     "cardinal-components": [
       "terracraft:dropped_item_entity",
+      "terracraft:demon_eye_entity",
       "terracraft:entity_kill_tracker",
       "terracraft:swim_abilities",
       "terracraft:mana_handler",
-      "terracraft:dps_meter_damage"
+      "terracraft:dps_meter_damage",
+      "terracraft:movement_order"
     ]
   }
 }

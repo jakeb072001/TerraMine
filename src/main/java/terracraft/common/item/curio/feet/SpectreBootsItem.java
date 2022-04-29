@@ -49,7 +49,7 @@ public class SpectreBootsItem extends TrinketTerrariaItem {
 				}
 			}
 		}
-		rocketHelper.rocketFly(true, speed, 2, player, this);
+		rocketHelper.rocketFly(speed, 2, player);
 	}
 	private void fly(LivingEntity player, double y) {
 		Vec3 motion = player.getDeltaMovement();

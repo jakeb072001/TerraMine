@@ -53,7 +53,7 @@ public class FrostsparkBootsItem extends TrinketTerrariaItem {
 				}
 			}
 		}
-		rocketHelper.rocketFly(true, speed, 5, player, this);
+		rocketHelper.rocketFly(speed, 5, player);
 	}
 
 	@Override

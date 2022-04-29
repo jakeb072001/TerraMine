@@ -47,9 +47,9 @@ public class CorruptionBiome {
                         .waterColor(0x9966ff)
                         .waterFogColor(0x9966ff)
                         .fogColor(0x9966ff)
-                        .skyColor(0x9966ff)
-                        .grassColorOverride(0x9966ff)
-                        .foliageColorOverride(0x9966ff)
+                        .skyColor(0x9966ff) // comment out grass and foliage override for now to fix pallet crash
+                        //.grassColorOverride(0x9966ff)
+                        //.foliageColorOverride(0x9966ff)
                         .build())
                 .mobSpawnSettings(spawnSettings.build())
                 .generationSettings(generationSettings.build())
