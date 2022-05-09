@@ -54,28 +54,29 @@ public abstract class LivingEntityMixin extends Entity implements LivingEntityEx
 	@Unique
 	@Override
 	public void terracraft$doubleJump() {
-		// Call the vanilla jump method
-		// We modify the behaviour of this method in multiple places if terracraft$isDoubleJumping is true
-		this.isDoubleJumping = true;
-		this.jumpFromGround();
-
-		// Play jump sound
 		LivingEntity self = (LivingEntity) (Object) this;
-		SoundEvent jumpSound = TrinketsHelper.isEquipped(ModItems.WHOOPEE_CUSHION, self) ?
-				ModSoundEvents.FART : ModSoundEvents.DOUBLE_JUMP;
-		this.playSound(jumpSound, 1, 0.9F + self.getRandom().nextFloat() * 0.2F);
+		if (self instanceof Player player && !player.isCreative()) {
+			// Call the vanilla jump method
+			// We modify the behaviour of this method in multiple places if terracraft$isDoubleJumping is true
+			this.isDoubleJumping = true;
+			this.jumpFromGround();
 
-		// Reset fall distance for fall damage
-		this.fallDistance = 0;
+			// Play jump sound
+			SoundEvent jumpSound = TrinketsHelper.isEquipped(ModItems.WHOOPEE_CUSHION, self) ?
+					ModSoundEvents.FART : ModSoundEvents.DOUBLE_JUMP;
+			this.playSound(jumpSound, 1, 0.9F + self.getRandom().nextFloat() * 0.2F);
 
-		// Send double jump packet to server if we're on the client
-		if (this.level.isClientSide) {
-			sendDoubleJumpPacket();
-		}
+			// Reset fall distance for fall damage
+			this.fallDistance = 0;
 
-		this.isDoubleJumping = false;
+			// Send double jump packet to server if we're on the client
+			if (this.level.isClientSide) {
+				sendDoubleJumpPacket();
+			}
 
-		if (self instanceof Player player) {
+			this.isDoubleJumping = false;
+
+			// Controls order of movement accessories, allows rocket boots after double jump
 			if (TrinketsHelper.isEquipped(ModItems.BUNDLE_OF_BALLOONS, player)) {
 				quadJumped++;
 				if (quadJumped == 3) {

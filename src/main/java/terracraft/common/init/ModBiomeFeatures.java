@@ -21,11 +21,13 @@ import net.minecraft.world.level.levelgen.structure.templatesystem.TagMatchTest;
 import java.util.List;
 
 public class ModBiomeFeatures {
+    // World Gen
     public static final Holder<ConfiguredFeature<DiskConfiguration, ?>> DISK_CORRUPT_SAND_FEATURE = FeatureUtils.register("disk_corrupt_sand", Feature.DISK, new DiskConfiguration(ModBlocks.CORRUPTED_SAND.defaultBlockState(), UniformInt.of(2, 6), 2, List.of(Blocks.DIRT.defaultBlockState(), ModBlocks.CORRUPTED_GRASS.defaultBlockState())));
     public static final Holder<PlacedFeature> DISK_CORRUPT_SAND = PlacementUtils.register("disk_corrupt_sand", DISK_CORRUPT_SAND_FEATURE, CountPlacement.of(3), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP_TOP_SOLID, BiomeFilter.biome());
     public static final Holder<ConfiguredFeature<DiskConfiguration, ?>> DISK_CORRUPT_GRAVEL_FEATURE = FeatureUtils.register("disk_corrupt_gravel", Feature.DISK, new DiskConfiguration(ModBlocks.CORRUPTED_GRAVEL.defaultBlockState(), UniformInt.of(2, 5), 2, List.of(Blocks.DIRT.defaultBlockState(), ModBlocks.CORRUPTED_GRASS.defaultBlockState())));
     public static final Holder<PlacedFeature> DISK_CORRUPT_GRAVEL = PlacementUtils.register("disk_corrupt_gravel", DISK_CORRUPT_GRAVEL_FEATURE, InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP_TOP_SOLID, BiomeFilter.biome());
 
+    // Ore Gen
     public static final RuleTest STONE_ORE_REPLACEABLES = new TagMatchTest(BlockTags.STONE_ORE_REPLACEABLES);
     public static final RuleTest DEEPSLATE_ORE_REPLACEABLES = new TagMatchTest(BlockTags.DEEPSLATE_ORE_REPLACEABLES);
     public static final List<OreConfiguration.TargetBlockState> ORE_DEMONITE_TARGET_LIST = List.of(OreConfiguration.target(STONE_ORE_REPLACEABLES, ModBlocks.DEMONITE_ORE.defaultBlockState()), OreConfiguration.target(DEEPSLATE_ORE_REPLACEABLES, ModBlocks.DEEPSLATE_DEMONITE_ORE.defaultBlockState()));

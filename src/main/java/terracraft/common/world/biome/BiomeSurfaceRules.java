@@ -1,14 +1,14 @@
 package terracraft.common.world.biome;
 
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.SurfaceRules;
 import terracraft.common.init.ModBiomes;
 import terracraft.common.init.ModBlocks;
 
 public class BiomeSurfaceRules extends SurfaceRules {
-    private static final RuleSource DIRT = makeStateRule(net.minecraft.world.level.block.Blocks.DIRT); // maybe make corrupt dirt, not sure... could just be slightly tinted darker
+    private static final RuleSource DIRT = makeStateRule(Blocks.DIRT); // maybe make corrupt dirt, not sure... could just be slightly tinted darker
     private static final RuleSource CORRUPTED_STONE = makeStateRule(ModBlocks.CORRUPTED_STONE);
-    private static final RuleSource CORRUPTED_DEEPSLATE = makeStateRule(ModBlocks.CORRUPTED_DEEPSLATE);
     private static final RuleSource CORRUPTED_SANDSTONE = makeStateRule(ModBlocks.CORRUPTED_SANDSTONE);
     private static final RuleSource CORRUPTED_GRAVEL = makeStateRule(ModBlocks.CORRUPTED_GRAVEL);
     private static final RuleSource CORRUPTED_GRASS = makeStateRule(ModBlocks.CORRUPTED_GRASS);

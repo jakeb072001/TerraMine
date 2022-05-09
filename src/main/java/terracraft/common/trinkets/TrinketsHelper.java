@@ -37,7 +37,7 @@ public final class TrinketsHelper {
 
 	public static boolean isInInventory(Predicate<ItemStack> filter, ItemStack item, Player player, boolean ignoreEffectsDisabled) {
 		if (TrinketsApi.getTrinketComponent(player)
-				.map(comp -> comp.isEquipped(stack -> ((areEffectsEnabled(stack) || ignoreEffectsDisabled) && !player.isCreative()) && filter.test(stack)))
+				.map(comp -> comp.isEquipped(stack -> (areEffectsEnabled(stack) || ignoreEffectsDisabled) && filter.test(stack)))
 				.orElse(false)) {
 			return true;
 		} else {
@@ -58,7 +58,7 @@ public final class TrinketsHelper {
 
 	public static boolean isEquipped(Predicate<ItemStack> filter, LivingEntity entity, boolean ignoreEffectsDisabled) {
 		return TrinketsApi.getTrinketComponent(entity)
-				.map(comp -> comp.isEquipped(stack -> ((areEffectsEnabled(stack) || ignoreEffectsDisabled) && !((Player) entity).isCreative()) && filter.test(stack)))
+				.map(comp -> comp.isEquipped(stack -> (areEffectsEnabled(stack) || ignoreEffectsDisabled) && filter.test(stack)))
 				.orElse(false);
 	}
 
@@ -66,7 +66,7 @@ public final class TrinketsHelper {
 		return TrinketsApi.getTrinketComponent(entity).stream()
 				.flatMap(comp -> comp.getAllEquipped().stream())
 				.map(Tuple::getB)
-				.filter(stack -> !stack.isEmpty() && stack.getItem() instanceof TrinketTerrariaItem && ((areEffectsEnabled(stack) || ignoreEffectsDisabled) && !((Player) entity).isCreative()))
+				.filter(stack -> !stack.isEmpty() && stack.getItem() instanceof TrinketTerrariaItem && (areEffectsEnabled(stack) || ignoreEffectsDisabled))
 				.collect(Collectors.toList());
 	}
 
@@ -93,7 +93,7 @@ public final class TrinketsHelper {
 				.flatMap(invBySlot -> Optional.ofNullable(invBySlot.get(slotId)))
 				.stream()
 				.flatMap(inv -> IntStream.range(0, inv.getContainerSize()).mapToObj(inv::getItem))
-				.filter(stack -> stack.getItem() instanceof TrinketTerrariaItem && ((areEffectsEnabled(stack) || ignoreEffectsDisabled) && !((Player) entity).isCreative()))
+				.filter(stack -> stack.getItem() instanceof TrinketTerrariaItem && (areEffectsEnabled(stack) || ignoreEffectsDisabled))
 				.collect(Collectors.toList());
 	}
 }

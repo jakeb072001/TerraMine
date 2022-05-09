@@ -17,9 +17,6 @@ public class ModCarvers {
     public static final Holder<ConfiguredWorldCarver<CorruptionPitCarverConfigured>> CORRUPTION_PIT;
     public static final WorldCarver<CorruptionPitCarverConfigured> CORRUPTION_PIT_CARVER;
 
-    public ModCarvers() {
-    }
-
     private static <WC extends CarverConfiguration> Holder<ConfiguredWorldCarver<WC>> register(String string, ConfiguredWorldCarver<WC> configuredWorldCarver) {
         return BuiltinRegistries.registerExact(BuiltinRegistries.CONFIGURED_CARVER, string, configuredWorldCarver);
     }

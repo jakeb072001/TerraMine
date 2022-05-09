@@ -127,7 +127,6 @@ public class TerraCraft implements ModInitializer, TerraBlenderApi {
 	@Override
 	public void onTerraBlenderInitialized()
 	{
-		// Given we only add two biomes, we should keep our weight relatively low.
 		Regions.register(new BiomeAdder(id("terraria_biomes"), RegionType.OVERWORLD, 1));
 
 		SurfaceRuleManager.addToDefaultSurfaceRulesAtStage(SurfaceRuleManager.RuleCategory.OVERWORLD, SurfaceRuleManager.RuleStage.AFTER_BEDROCK,

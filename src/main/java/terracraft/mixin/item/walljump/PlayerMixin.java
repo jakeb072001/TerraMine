@@ -35,13 +35,11 @@ import java.util.Set;
 @Mixin(Player.class)
 public abstract class PlayerMixin extends LivingEntity {
 
-    @Shadow public abstract boolean isImmobile();
-
-    //@Shadow public abstract float getYaw(float tickDelta);
-
-    //@Shadow public Input input;
+    @Shadow protected abstract boolean isImmobile();
 
     @Shadow public abstract boolean isLocalPlayer();
+
+    @Shadow public abstract boolean isCreative();
 
     public int ticksWallClinged;
     private int ticksKeyDown;
@@ -60,25 +58,22 @@ public abstract class PlayerMixin extends LivingEntity {
 
     @Inject(method = "tick", at = @At("TAIL"))
     private void wallJumpTickMovement(CallbackInfo ci) {
-        if (TrinketsHelper.isEquipped(ModItems.SHOE_SPIKES, this) || TrinketsHelper.isEquipped(ModItems.CLIMBING_CLAWS, this) || TrinketsHelper.isEquipped(ModItems.TIGER_CLIMBING_GEAR, this)
-                || TrinketsHelper.isEquipped(ModItems.MASTER_NINJA_GEAR, this)) {
-            this.doWallJump();
+        if (!this.isCreative()) {
+            if (TrinketsHelper.isEquipped(ModItems.SHOE_SPIKES, this) || TrinketsHelper.isEquipped(ModItems.CLIMBING_CLAWS, this) || TrinketsHelper.isEquipped(ModItems.TIGER_CLIMBING_GEAR, this)
+                    || TrinketsHelper.isEquipped(ModItems.MASTER_NINJA_GEAR, this)) {
+                this.doWallJump();
+            }
         }
     }
 
     private boolean checkTrinkets() {
-        boolean wallHang = (TrinketsHelper.isEquipped(ModItems.SHOE_SPIKES, this) && TrinketsHelper.isEquipped(ModItems.CLIMBING_CLAWS, this)) || TrinketsHelper.isEquipped(ModItems.TIGER_CLIMBING_GEAR, this)
+        return (TrinketsHelper.isEquipped(ModItems.SHOE_SPIKES, this) && TrinketsHelper.isEquipped(ModItems.CLIMBING_CLAWS, this)) || TrinketsHelper.isEquipped(ModItems.TIGER_CLIMBING_GEAR, this)
                 || TrinketsHelper.isEquipped(ModItems.MASTER_NINJA_GEAR, this);
-        return wallHang;
     }
 
 
     private void doWallJump() {
-        if(this.onGround
-                || this.isFallFlying()
-                || !this.level.getFluidState(this.blockPosition()).isEmpty()
-                || this.isImmobile()
-        ) {
+        if(this.onGround || this.isFallFlying() || !this.level.getFluidState(this.blockPosition()).isEmpty() || this.isImmobile()) {
             this.ticksWallClinged = 0;
             this.clingX = Double.NaN;
             this.clingZ = Double.NaN;
@@ -94,13 +89,7 @@ public abstract class PlayerMixin extends LivingEntity {
 
         if(this.ticksWallClinged < 1) {
             if (!trinketCheck) {
-                if (this.ticksKeyDown > 0
-                        && this.ticksKeyDown < 4
-                        && !this.walls.isEmpty()
-                        && this.canWallCling()
-                ) {
-                    //this.limbDistance = 2.5F;
-                    //this.lastLimbDistance = 2.5F;
+                if (this.ticksKeyDown > 0 && this.ticksKeyDown < 4 && !this.walls.isEmpty() && this.canWallCling()) {
                     this.ticksWallClinged = 1;
                     this.clingX = this.getX();
                     this.clingZ = this.getZ();
@@ -108,12 +97,7 @@ public abstract class PlayerMixin extends LivingEntity {
                     this.playHitSound(this.getWallPos());
                     this.spawnWallParticle(this.getWallPos());
                 }
-            } else if (this.ticksKeyDown > 0
-                    && this.ticksKeyDown < 4
-                    && !this.walls.isEmpty()
-            ) {
-                //this.limbDistance = 2.5F;
-                //this.lastLimbDistance = 2.5F;
+            } else if (this.ticksKeyDown > 0 && this.ticksKeyDown < 4 && !this.walls.isEmpty()) {
                 this.ticksWallClinged = 1;
                 this.clingX = this.getX();
                 this.clingZ = this.getZ();
@@ -124,19 +108,10 @@ public abstract class PlayerMixin extends LivingEntity {
             return;
         }
 
-        if(!mc.options.keyShift.isDown()
-                || this.onGround
-                || !this.level.getFluidState(this.blockPosition()).isEmpty()
-                || this.walls.isEmpty()
-        ) {
-
+        if(!mc.options.keyShift.isDown() || this.onGround || !this.level.getFluidState(this.blockPosition()).isEmpty() || this.walls.isEmpty()) {
             this.ticksWallClinged = 0;
 
-            if((this.getSpeed() != 0)
-                    && !this.onGround
-                    && !this.walls.isEmpty()
-            ) {
-
+            if((this.getSpeed() != 0) && !this.onGround && !this.walls.isEmpty()) {
                 this.fallDistance = 0.0F;
 
                 FriendlyByteBuf passedData = new FriendlyByteBuf(Unpooled.buffer());
@@ -164,7 +139,7 @@ public abstract class PlayerMixin extends LivingEntity {
             } else {
                 motionY = 0.0;
             }
-        } else if (trinketCheck && mc.options.keyDown.isDown()) {
+        } else if (mc.options.keyDown.isDown()) {
             if (motionY > 0.0) {
                 motionY = 0.0;
             } else if (motionY < -0.6) {
@@ -185,7 +160,6 @@ public abstract class PlayerMixin extends LivingEntity {
         }
 
         if(this.fallDistance > 2) {
-
             this.fallDistance = 0;
 
             FriendlyByteBuf passedData = new FriendlyByteBuf(Unpooled.buffer());
@@ -210,7 +184,6 @@ public abstract class PlayerMixin extends LivingEntity {
 
 
     private void updateWalls() {
-
         AABB box = new AABB(
                 this.getX() - 0.001,
                 this.getY(),
@@ -257,7 +230,6 @@ public abstract class PlayerMixin extends LivingEntity {
 
 
     private void wallJump(float up) {
-
         float strafe = Math.signum(this.getSpeed()) * up * up;
         float forward = Math.signum(this.getSpeed()) * up * up;
 
@@ -285,21 +257,18 @@ public abstract class PlayerMixin extends LivingEntity {
 
 
     private void playHitSound(BlockPos blockPos) {
-
         BlockState blockState = this.level.getBlockState(blockPos);
         SoundType soundType = blockState.getBlock().getSoundType(blockState);
         this.playSound(soundType.getHitSound(), soundType.getVolume() * 0.25F, soundType.getPitch());
     }
 
     private void playBreakSound(BlockPos blockPos) {
-
         BlockState blockState = this.level.getBlockState(blockPos);
         SoundType soundType = blockState.getBlock().getSoundType(blockState);
         this.playSound(soundType.getFallSound(), soundType.getVolume() * 0.5F, soundType.getPitch());
     }
 
     private void spawnWallParticle(BlockPos blockPos) {
-
         BlockState blockState = this.level.getBlockState(blockPos);
         if(blockState.getRenderShape() != RenderShape.INVISIBLE) {
 

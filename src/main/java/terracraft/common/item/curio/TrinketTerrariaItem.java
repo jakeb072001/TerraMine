@@ -74,7 +74,7 @@ public class TrinketTerrariaItem extends TerrariaItem implements Trinket {
 
 	@Override
 	public void tick(ItemStack stack, SlotReference slot, LivingEntity entity) {
-		if (TrinketsHelper.areEffectsEnabled(stack) && entity instanceof Player player && !player.isCreative()) {
+		if (TrinketsHelper.areEffectsEnabled(stack) && entity instanceof Player) {
 			curioTick(entity, stack);
 		}
 	}
@@ -84,7 +84,7 @@ public class TrinketTerrariaItem extends TerrariaItem implements Trinket {
 
 	@Override
 	public final Multimap<Attribute, AttributeModifier> getModifiers(ItemStack stack, SlotReference slot, LivingEntity entity, UUID uuid) {
-		if (TrinketsHelper.areEffectsEnabled(stack) && entity instanceof Player player && !player.isCreative()) {
+		if (TrinketsHelper.areEffectsEnabled(stack) && entity instanceof Player) {
 			return this.applyModifiers(stack, slot, entity, uuid);
 		}
 		return HashMultimap.create();

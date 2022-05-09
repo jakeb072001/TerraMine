@@ -11,9 +11,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Movement Ordering System (So that Cloud in a Bottle and Rocket Boots don't happen at the same time)
 
 ### Changed
-- Various improvements to Demon Eyes
+- Various improvements to Demon Eyes // not yet done //
 - Removed jump height increase while sprinting and double jumping
-- Accessory effects are now disabled in creative mode
+- Some Accessory effects are now disabled in creative mode
+    - Flying with Boots
+    - Double/Quad jump
+    - Wall Climbing/Sliding
 - Information Accessories effects can now be toggled in inventory
 
 ### Fixed
