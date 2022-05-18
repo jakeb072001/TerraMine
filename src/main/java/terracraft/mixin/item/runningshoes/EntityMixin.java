@@ -18,7 +18,7 @@ public abstract class EntityMixin {
 
     @Inject(method = "playStepSound", at = @At("HEAD"))
     private void playSprintStepSound(BlockPos pos, BlockState blockState, CallbackInfo callbackInfo) {
-        if (isRunningWithHermesBoots()) {
+        if (blockState.getMaterial().isSolid() && isRunningWithHermesBoots()) {
             ((LivingEntity) (Object) this).playSound(ModSoundEvents.SPEEDBOOTS_RUN, 0.5F, 1);
         }
     }

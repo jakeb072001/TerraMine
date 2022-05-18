@@ -120,7 +120,7 @@ public abstract class LivingEntityMixin extends Entity implements LivingEntityEx
 			}
 
 			boolean flying = player.getAbilities().flying;
-			if (this.jumping && this.jumpWasReleased && !this.isInWater() && !this.isOnGround() && !this.isPassenger() // jumping is only client side, find alternative to fix rocket boot particles
+			if (this.jumping && this.jumpWasReleased && !this.isInWater() && !this.isOnGround() && !this.isPassenger()
 					&& !this.hasDoubleJumped && !flying && TrinketsHelper.isEquipped(ModItems.CLOUD_IN_A_BOTTLE, player)
 					&& !TrinketsHelper.isEquipped(ModItems.BUNDLE_OF_BALLOONS, player)) {
 				this.terracraft$doubleJump();

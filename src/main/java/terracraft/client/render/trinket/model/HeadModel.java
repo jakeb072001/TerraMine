@@ -66,7 +66,7 @@ public class HeadModel extends HumanoidModel<LivingEntity> {
         return mesh;
     }
 
-    public static MeshDefinition createSnorkel() {
+    public static MeshDefinition createDivingHelmet() {
         CubeListBuilder head = CubeListBuilder.create();
         CubeListBuilder tube = CubeListBuilder.create();
 

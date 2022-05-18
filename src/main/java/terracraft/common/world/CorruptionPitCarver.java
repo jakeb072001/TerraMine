@@ -34,7 +34,7 @@ public class CorruptionPitCarver extends WorldCarver<CorruptionPitCarverConfigur
         double h = corruptionPitCarverConfiguration.yScale.sample(random);
         float k = corruptionPitCarverConfiguration.shape.thickness.sample(random);
         int l = (int)((float)i * corruptionPitCarverConfiguration.shape.distanceFactor.sample(random));
-        this.doCarve(carvingContext, corruptionPitCarverConfiguration, chunkAccess, function, random.nextLong(), aquifer, d, (double)j, e, k, f, g, 0, l, h, carvingMask);
+        this.doCarve(carvingContext, corruptionPitCarverConfiguration, chunkAccess, function, random.nextLong(), aquifer, d, j, e, k, f, g, 0, l, h, carvingMask);
         return true;
     }
 

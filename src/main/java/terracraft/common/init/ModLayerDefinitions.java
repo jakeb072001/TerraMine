@@ -20,7 +20,7 @@ public class ModLayerDefinitions {
 
         register(ModModelLayers.DEMON_EYE, DemonEyeModel::createLayer);
 
-        register(ModModelLayers.SNORKEL, layer(HeadModel.createSnorkel(), 64, 32));
+        register(ModModelLayers.DIVING_HELMET, layer(HeadModel.createDivingHelmet(), 64, 32));
         register(ModModelLayers.SUPERSTITIOUS_HAT, layer(HeadModel.createSuperstitiousHat(), 64, 32));
         register(ModModelLayers.VILLAGER_HAT, layer(HeadModel.createVillagerHat(), 32, 32));
 

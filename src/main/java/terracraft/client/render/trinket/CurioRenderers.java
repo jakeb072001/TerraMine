@@ -19,7 +19,7 @@ public class CurioRenderers implements SimpleSynchronousResourceReloadListener {
     @Override
     public void onResourceManagerReload(ResourceManager resourceManager) {
         // head
-        TrinketRendererRegistry.registerRenderer(ModItems.SNORKEL, new CurioRenderer("snorkel", new HeadModel(bakeLayer(ModModelLayers.SNORKEL), RenderType::entityTranslucent)));
+        TrinketRendererRegistry.registerRenderer(ModItems.DIVING_HELMET, new CurioRenderer("diving_helmet", new HeadModel(bakeLayer(ModModelLayers.DIVING_HELMET), RenderType::entityTranslucent)));
 
         // necklace
         TrinketRendererRegistry.registerRenderer(ModItems.CROSS_NECKLACE, new CurioRenderer("cross_necklace", new NecklaceModel(bakeLayer(ModModelLayers.CROSS_NECKLACE))));

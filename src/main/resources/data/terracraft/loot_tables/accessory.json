@@ -7,7 +7,12 @@
         {
           "type": "minecraft:item",
           "weight": 8,
-          "name": "terracraft:snorkel"
+          "name": "terracraft:diving_helmet"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "terracraft:neptune_shell"
         },
         {
           "type": "minecraft:item",

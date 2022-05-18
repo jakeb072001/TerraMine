@@ -30,7 +30,7 @@ public class RocketBootHelper {
 
     public void rocketFly(double speed, int priority, LivingEntity player) {
         if (player instanceof Player user) {
-            if (!user.isCreative()) {
+            if (!user.isCreative() && !user.isInWater()) {
                 if (CloudBottleEquippedCheck.isEquipped(user)) {
                     if (ModComponents.MOVEMENT_ORDER.get(user).getCloudFinished()) {
                         realFly(speed, priority, user);

@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "terracraft:item/snorkel"
+    "layer0": "terracraft:item/diving_gear"
   }
 }

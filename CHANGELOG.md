@@ -7,11 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [1.3.0] - 2022-04-29
 ### Added
 - Demonite Ore Generation (Corruption Biomes Only)
-- Corruption Biome Pits (WIP)
+- Corruption Biome Pits (WIP, basically just extra ravines right now)
+- More Floating Island Variants
 - Movement Ordering System (So that Cloud in a Bottle and Rocket Boots don't happen at the same time)
+- New Accessories (can't be obtained in survival yet)
+    - Diving Helmet
+    - Diving Gear
+    - Neptune's Shell
 
 ### Changed
-- Various improvements to Demon Eyes // not yet done //
 - Removed jump height increase while sprinting and double jumping
 - Some Accessory effects are now disabled in creative mode
     - Flying with Boots
@@ -21,6 +25,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 - Random Corruption spread crash (maybe, at the cost of block tint gradient in corruption biome)
+
+### Removed
+- Outdated Language Files
 
 ## [1.2.0] - 2022-04-26
 ### Added

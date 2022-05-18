@@ -11,11 +11,7 @@ import terracraft.common.item.curio.WhoopeeCushionItem;
 import terracraft.common.item.curio.belt.*;
 import terracraft.common.item.curio.feet.*;
 import terracraft.common.item.curio.hands.*;
-import terracraft.common.item.curio.head.SnorkelItem;
-import terracraft.common.item.curio.necklace.AvengerEmblemItem;
-import terracraft.common.item.curio.necklace.CrossNecklaceItem;
-import terracraft.common.item.curio.necklace.PanicNecklaceItem;
-import terracraft.common.item.curio.necklace.WarriorEmblemItem;
+import terracraft.common.item.curio.necklace.*;
 import terracraft.common.item.magic.*;
 
 @SuppressWarnings("unused")
@@ -68,6 +64,7 @@ public class ModItems {
 	public static final Item WARRIOR_EMBLEM = register("warrior_emblem", new WarriorEmblemItem());
 	public static final Item SORCERER_EMBLEM = register("sorcerer_emblem", new TrinketTerrariaItem());
 	public static final Item AVENGER_EMBLEM = register("avenger_emblem", new AvengerEmblemItem());
+	public static final Item NEPTUNE_SHELL = register("neptune_shell", new NeptuneShell());
 
 	// Belt
 	public static final Item SHACKLE = register("shackle", new ShackleItem());
@@ -110,7 +107,8 @@ public class ModItems {
 	public static final Item MAGIC_CUFFS = register("magic_cuffs", new MagicCuffsItem());
 
 	// Head
-	public static final Item SNORKEL = register("snorkel", new SnorkelItem());
+	public static final Item DIVING_HELMET = register("diving_helmet", new TrinketTerrariaItem());
+	public static final Item DIVING_GEAR = register("diving_gear", new TrinketTerrariaItem());
 
 	// Feet
 	public static final Item FLIPPERS = register("flippers", new TrinketTerrariaItem());

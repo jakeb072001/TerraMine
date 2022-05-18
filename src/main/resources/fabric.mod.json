@@ -27,6 +27,9 @@
     "client": [
       "terracraft.TerraCraftClient"
     ],
+    "preLaunch": [
+      "terracraft.TerraCraftMixinExtras"
+    ],
     "terracraft-compathandlers": [
       "terracraft.common.compat.HaemaCompat",
       "terracraft.common.compat.OriginsCompat"

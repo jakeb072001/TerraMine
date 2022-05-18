@@ -9,7 +9,8 @@
     "terracraft:feral_claws",
     "terracraft:power_glove",
     "terracraft:fire_gauntlet",
-    "terracraft:snorkel",
+    "terracraft:diving_helmet",
+    "terracraft:diving_gear",
     "terracraft:obsidian_skull",
     "terracraft:treasure_magnet",
     "terracraft:cloud_in_a_bottle",
@@ -76,6 +77,7 @@
     "terracraft:goblin_tech",
     "terracraft:pda",
     "terracraft:cell_phone",
+    "terracraft:neptune_shell",
     "terracraft:whoopee_cushion"
   ]
 }

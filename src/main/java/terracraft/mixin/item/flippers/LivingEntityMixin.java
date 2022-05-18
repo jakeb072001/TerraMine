@@ -34,6 +34,11 @@ public abstract class LivingEntityMixin implements LivingEntityExtensions {
 	@Unique
 	@Override
 	public double terracraft$getIncreasedSwimSpeed(double speed) {
-		return TrinketsHelper.isEquipped(ModItems.FLIPPERS, (LivingEntity) (Object) this) ? speed * 2 : speed;
+		if (TrinketsHelper.isEquipped(ModItems.FLIPPERS, (LivingEntity) (Object) this) || TrinketsHelper.isEquipped(ModItems.DIVING_GEAR, (LivingEntity) (Object) this)
+				|| TrinketsHelper.isEquipped(ModItems.NEPTUNE_SHELL, (LivingEntity) (Object) this)) {
+			return speed * 2;
+		} else {
+			return speed;
+		}
 	}
 }
