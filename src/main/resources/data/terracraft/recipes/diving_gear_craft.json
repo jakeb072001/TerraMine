@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "terracraft:diving_helmet"
+    },
+    {
+      "item": "terracraft:flippers"
+    }
+  ],
+  "result": {
+    "item": "terracraft:diving_gear",
+    "count": 1
+  }
+}
