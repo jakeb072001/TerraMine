@@ -1,7 +1,7 @@
 package terracraft.mixin.item.walljump;
 
 import io.netty.buffer.Unpooled;
-import net.fabricmc.fabric.api.network.ClientSidePacketRegistry;
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -116,7 +116,7 @@ public abstract class PlayerMixin extends LivingEntity {
 
                 FriendlyByteBuf passedData = new FriendlyByteBuf(Unpooled.buffer());
                 passedData.writeBoolean(true);
-                ClientSidePacketRegistry.INSTANCE.sendToServer(TerraCraft.WALL_JUMP_PACKET_ID, passedData);
+                ClientPlayNetworking.send(TerraCraft.WALL_JUMP_PACKET_ID, passedData);
 
                 this.wallJump(0.55F);
                 this.staleWalls = new HashSet<>(this.walls);
@@ -164,7 +164,7 @@ public abstract class PlayerMixin extends LivingEntity {
 
             FriendlyByteBuf passedData = new FriendlyByteBuf(Unpooled.buffer());
             passedData.writeFloat((float) (motionY * motionY * 8));
-            ClientSidePacketRegistry.INSTANCE.sendToServer(TerraCraft.FALL_DISTANCE_PACKET_ID, passedData);
+            ClientPlayNetworking.send(TerraCraft.FALL_DISTANCE_PACKET_ID, passedData);
         }
 
         this.setDeltaMovement(0.0, motionY, 0.0);

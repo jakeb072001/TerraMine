@@ -1,6 +1,7 @@
 package terracraft.common.init;
 
 import net.fabricmc.fabric.api.loot.v1.FabricLootSupplierBuilder;
+import net.fabricmc.fabric.api.loot.v2.FabricLootTableBuilder;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.entries.LootPoolEntryContainer;
@@ -56,9 +57,9 @@ public class ModLootTables {
 			new ResourceLocation("entities/zombie")
 	);
 
-	public static void onLootTableLoad(ResourceLocation id, FabricLootSupplierBuilder supplier) {
+	public static void onLootTableLoad(ResourceLocation id, FabricLootTableBuilder supplier) {
 		if (INJECT_TABLE_IDS.contains(id)) {
-			supplier.withPool(LootPool.lootPool().add(getInjectEntry(id.getPath())));
+			supplier.pool(LootPool.lootPool().add(getInjectEntry(id.getPath())).build());
 		}
 	}
 

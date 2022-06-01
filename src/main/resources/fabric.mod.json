@@ -3,15 +3,15 @@
   "id": "terracraft",
   "version": "${version}",
 
-  "name": "TerraCraft",
+  "name": "TerraMine",
   "description": "Terraria in Minecraft, adds most of everything from terraria into minecraft in an accurate way",
   "authors": [
     "Jakeb Woods"
   ],
   "contact": {
-    "homepage": "https://modrinth.com/mod/terrariacraft",
-    "sources": "https://github.com/jakeb072001/TerraCraft",
-    "issues": "https://github.com/jakeb072001/TerraCraft/issues"
+    "homepage": "https://modrinth.com/mod/terramine",
+    "sources": "https://github.com/jakeb072001/TerraMine",
+    "issues": "https://github.com/jakeb072001/TerraMine/issues"
   },
   "license": "LGPL-3.0-or-later",
   "icon": "assets/terracraft/icon.png",

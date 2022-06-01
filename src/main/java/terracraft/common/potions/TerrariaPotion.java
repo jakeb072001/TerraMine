@@ -32,15 +32,15 @@ public class TerrariaPotion extends Potion {
 
     public int registerTree(String namespace, String base) {
         if (registered) return 0;
-        Registry.register(Registry.POTION, namespace+":"+base, this);
+        Registry.register(Registry.POTION, namespace + ":" + base, this);
         registered = true;
         int registeredTotal = 1;
         if (extended != null) {
-            registeredTotal += extended.registerTree(namespace, base+"_long");
+            registeredTotal += extended.registerTree(namespace, base + "_long");
         }
 
         if (empowered != null) {
-            registeredTotal += empowered.registerTree(namespace, base+"_strong");
+            registeredTotal += empowered.registerTree(namespace, base + "_strong");
         }
 
         return registeredTotal;

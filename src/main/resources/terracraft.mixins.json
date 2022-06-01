@@ -16,6 +16,7 @@
     "event.EntityMixin",
     "event.LivingEntitiesMixin",
     "event.LivingEntityMixin",
+    "item.ancientchisel.BlockBehaviourMixin",
     "item.blackbelt.LivingEntityMixin",
     "item.bluehorseshoeballoon.LivingEntityMixin",
     "item.bundleofballoons.LivingEntityMixin",

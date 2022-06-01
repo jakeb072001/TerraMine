@@ -206,11 +206,10 @@ public class DemonEyeEntity extends Monster implements Enemy {
                     lookRandomly();
                 }
 
-
                 demonEye.bounce = false;
-                demonEye.oldVelX = demonEye.velX + 0;
-                demonEye.oldVelY = demonEye.velY + 0;
-                demonEye.oldVelZ = demonEye.velZ + 0;
+                demonEye.oldVelX = demonEye.velX;
+                demonEye.oldVelY = demonEye.velY;
+                demonEye.oldVelZ = demonEye.velZ;
                 motionX = demonEye.velX * 0.075f * demonEye.getAttribute(Attributes.MOVEMENT_SPEED).getValue();
                 motionY = demonEye.velY * 0.075f * demonEye.getAttribute(Attributes.MOVEMENT_SPEED).getValue();
                 motionZ = demonEye.velZ * 0.075f * demonEye.getAttribute(Attributes.MOVEMENT_SPEED).getValue();
