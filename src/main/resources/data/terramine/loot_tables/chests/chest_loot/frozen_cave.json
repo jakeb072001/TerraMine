@@ -1,0 +1,46 @@
+{
+  "pools": [
+    {
+      "name": "main",
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "weight": 20,
+          "name": "terramine:hermes_boots"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 20,
+          "name": "terramine:cloud_in_a_bottle"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 20,
+          "name": "terramine:band_of_regeneration"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 20,
+          "name": "terramine:shoe_spikes"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 15,
+          "name": "terramine:ice_skates"
+        },
+        {
+          "type": "minecraft:tag",
+          "weight": 2,
+          "name": "minecraft:fishes",
+          "expand": true
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 20,
+          "name": "terramine:magic_mirror"
+        }
+      ]
+    }
+  ]
+}

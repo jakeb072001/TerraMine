@@ -1,10 +1,10 @@
 {
   "replace": false,
   "values": [
-    "terracraft:corrupted_grass",
-    "terracraft:corrupted_sand",
-	"terracraft:corrupted_gravel",
-	"terracraft:corrupted_snow_layer",
-	"terracraft:corrupted_snow"
+    "terramine:corrupted_grass",
+    "terramine:corrupted_sand",
+	"terramine:corrupted_gravel",
+	"terramine:corrupted_snow_layer",
+	"terramine:corrupted_snow"
   ]
 }

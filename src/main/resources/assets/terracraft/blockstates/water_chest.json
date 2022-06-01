@@ -1,8 +1,0 @@
-{
-  "variants": {
-        "facing=north": { "model": "terracraft:block/water_chest" },
-        "facing=east":  { "model": "terracraft:block/water_chest", "y":  90},
-        "facing=south": { "model": "terracraft:block/water_chest", "y": 180 },
-        "facing=west":  { "model": "terracraft:block/water_chest", "y": 270 }
-    }
-}

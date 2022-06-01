@@ -1,0 +1,24 @@
+{
+  "parent": "terramine:root",
+  "display": {
+    "icon": {
+      "item": "terramine:corrupted_grass_block"
+    },
+    "title": {
+      "translate": "terramine.advancements.the_corruption.title"
+    },
+    "description": {
+      "translate": "terramine.advancements.the_corruption.description"
+    }
+  },
+  "criteria": {
+    "find_corruption": {
+      "trigger": "minecraft:location",
+      "conditions": {
+        "location": {
+          "biome": "terramine:corruption"
+        }
+      }
+    }
+  }
+}

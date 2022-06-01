@@ -1,0 +1,26 @@
+{
+  "parent": "terramine:root",
+  "display": {
+    "icon": {
+      "item": "terramine:aglet"
+    },
+    "title": {
+      "translate": "terramine.advancements.i_am_loot.title"
+    },
+    "description": {
+      "translate": "terramine.advancements.i_am_loot.description"
+    }
+  },
+  "criteria": {
+    "find_accessory": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "terramine:accessory"
+          }
+        ]
+      }
+    }
+  }
+}

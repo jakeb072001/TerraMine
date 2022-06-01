@@ -1,0 +1,15 @@
+{
+  "pools": [
+    {
+      "name": "main",
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "weight": 15,
+          "name": "terramine:ancient_chisel"
+        }
+      ]
+    }
+  ]
+}

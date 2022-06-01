@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "terramine:rocket_boots"
+    },
+    {
+      "item": "terramine:hermes_boots"
+    }
+  ],
+  "result": {
+    "item": "terramine:spectre_boots",
+    "count": 1
+  }
+}

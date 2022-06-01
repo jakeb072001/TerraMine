@@ -1,13 +1,13 @@
 {
   "replace": false,
   "values": [
-    "terracraft:sandstone_chest",
-    "terracraft:trapped_sandstone_chest",
-    "terracraft:corrupted_iron_ore",
-    "terracraft:corrupted_deepslate_iron_ore",
-    "terracraft:corrupted_lapis_ore",
-    "terracraft:corrupted_deepslate_lapis_ore",
-    "terracraft:corrupted_copper_ore",
-    "terracraft:corrupted_deepslate_copper_ore"
+    "terramine:sandstone_chest",
+    "terramine:trapped_sandstone_chest",
+    "terramine:corrupted_iron_ore",
+    "terramine:corrupted_deepslate_iron_ore",
+    "terramine:corrupted_lapis_ore",
+    "terramine:corrupted_deepslate_lapis_ore",
+    "terramine:corrupted_copper_ore",
+    "terramine:corrupted_deepslate_copper_ore"
   ]
 }

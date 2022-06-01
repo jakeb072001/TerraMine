@@ -1,0 +1,20 @@
+{
+  "pools": [
+    {
+      "name": "main",
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "weight": 15,
+          "name": "terramine:flamelash"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 28,
+          "name": "terramine:treasure_magnet"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "parent": "terramine:i_am_loot",
+  "display": {
+    "icon": {
+      "item": "terramine:mimic_spawn_egg"
+    },
+    "title": {
+      "translate": "terramine.advancements.chest_slayer.title"
+    },
+    "description": {
+      "translate": "terramine.advancements.chest_slayer.description"
+    }
+  },
+  "criteria": {
+    "kill_mimic": {
+      "trigger": "minecraft:player_killed_entity",
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "predicate": {
+              "type": "terramine:mimic"
+            },
+            "entity": "this"
+          }
+        ]
+      }
+    }
+  }
+}

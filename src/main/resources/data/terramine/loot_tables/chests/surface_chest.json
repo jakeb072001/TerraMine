@@ -1,0 +1,26 @@
+{
+  "pools": [
+    {
+      "name": "accessories",
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:loot_table",
+          "name": "terramine:chests/chest_loot/surface",
+          "weight": 100
+        }
+      ]
+    },
+    {
+      "name": "extra",
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:loot_table",
+          "name": "terramine:chests/chest_loot/surface_extra",
+          "weight": 100
+        }
+      ]
+    }
+  ]
+}

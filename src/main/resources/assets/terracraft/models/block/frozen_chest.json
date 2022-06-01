@@ -1,7 +1,0 @@
-{
-  "parent": "terracraft:block/chest_template",
-    "textures": {
-        "0": "terracraft:block/chests/frozen/frozen_chest",
-        "particle": "terracraft:block/chests/frozen/frozen_break"
-    }
-}

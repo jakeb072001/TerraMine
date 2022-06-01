@@ -1,0 +1,38 @@
+package terramine.mixin.world;
+
+import net.minecraft.client.Minecraft;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Holder;
+import net.minecraft.data.BuiltinRegistries;
+import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.biome.BiomeManager;
+import net.minecraft.world.level.block.Block;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+import terramine.common.init.ModBiomes;
+import terramine.common.utility.CorruptionHelper;
+
+@Mixin(BiomeManager.class)
+public class BiomeManagerMixin {
+
+    //todo: currently can cause a crash randomly, has to do with block tint for grass and foliage, ClientLevelMixin may temporarily fix this
+    @Inject(at = @At("RETURN"), method = "getBiome", cancellable = true)
+    public void spreadCorruptionBiome(BlockPos pos, CallbackInfoReturnable<Holder<Biome>> info) {
+        Minecraft mc = Minecraft.getInstance();
+        if (mc != null && mc.level != null && pos != null) {
+            for (int i = 45; i <= 100; i++) { // checks for blocks between y 45 and 100
+                Block block = mc.level.getBlockState(pos.atY(i)).getBlock();
+                if (block instanceof CorruptionHelper && pos.getY() > i) { // if block is a corruption block and position is above i (y range)
+                    Holder<Biome> biome = BuiltinRegistries.BIOME.getOrCreateHolder(ModBiomes.CORRUPTION); // default biome
+                    if (info.getReturnValue().is(net.minecraft.world.level.biome.Biomes.DESERT) || info.getReturnValue().is(ModBiomes.CORRUPTION_DESERT)) {
+                        biome = BuiltinRegistries.BIOME.getOrCreateHolder(ModBiomes.CORRUPTION_DESERT); // desert biome
+                    }
+                    info.setReturnValue(biome);
+                    break;
+                }
+            }
+        }
+    }
+}

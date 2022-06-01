@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "terramine:obsidian_rose"
+    },
+    {
+      "item": "terramine:obsidian_water_walking_boots"
+    },
+    {
+      "item": "terramine:lava_charm"
+    }
+  ],
+  "result": {
+    "item": "terramine:lava_waders",
+    "count": 1
+  }
+}

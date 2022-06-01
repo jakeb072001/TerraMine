@@ -1,0 +1,21 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "terramine:block/corrupted_dirt"
+      },
+      {
+        "model": "terramine:block/corrupted_dirt",
+        "y": 90
+      },
+      {
+        "model": "terramine:block/corrupted_dirt",
+        "y": 180
+      },
+      {
+        "model": "terramine:block/corrupted_dirt",
+        "y": 270
+      }
+    ]
+  }
+}

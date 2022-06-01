@@ -1,0 +1,44 @@
+package terramine.mixin.item.spectreboots;
+
+import dev.emi.stepheightentityattribute.StepHeightEntityAttributeMain;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.AttributeInstance;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import terramine.TerraMine;
+import terramine.common.init.ModItems;
+import terramine.common.item.curio.TrinketTerrariaItem;
+import terramine.common.item.curio.feet.SpectreBootsItem;
+import terramine.common.trinkets.TrinketsHelper;
+
+@Mixin(LivingEntity.class)
+public abstract class LivingEntityMixin {
+
+	@Inject(method = "setSprinting", at = @At("TAIL"))
+	private void onSetSprinting(boolean sprinting, CallbackInfo info) {
+		LivingEntity self = (LivingEntity) (Object) this;
+
+		if (!TrinketsHelper.isEquipped(ModItems.SPECTRE_BOOTS, self)) {
+			return;
+		}
+
+		AttributeInstance movementSpeed = self.getAttribute(Attributes.MOVEMENT_SPEED);
+		AttributeInstance stepHeight = self.getAttribute(StepHeightEntityAttributeMain.STEP_HEIGHT);
+
+		if (movementSpeed == null || stepHeight == null) {
+			TerraMine.LOGGER.debug("Entity {} missing entity attribute(s)", this);
+			return;
+		}
+
+		if (sprinting) {
+			TrinketTerrariaItem.addModifier(movementSpeed, SpectreBootsItem.SPEED_BOOST_MODIFIER);
+			TrinketTerrariaItem.addModifier(stepHeight, SpectreBootsItem.STEP_HEIGHT_MODIFIER);
+		} else {
+			TrinketTerrariaItem.removeModifier(movementSpeed, SpectreBootsItem.SPEED_BOOST_MODIFIER);
+			TrinketTerrariaItem.removeModifier(stepHeight, SpectreBootsItem.STEP_HEIGHT_MODIFIER);
+		}
+	}
+}

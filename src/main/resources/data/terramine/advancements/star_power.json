@@ -1,0 +1,26 @@
+{
+  "parent": "terramine:root",
+  "display": {
+    "icon": {
+      "item": "terramine:mana_crystal"
+    },
+    "title": {
+      "translate": "terramine.advancements.star_power.title"
+    },
+    "description": {
+      "translate": "terramine.advancements.star_power.description"
+    }
+  },
+  "criteria": {
+    "consume_mana_crystal": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "items": [
+            "terramine:mana_crystal"
+          ]
+        }
+      }
+    }
+  }
+}

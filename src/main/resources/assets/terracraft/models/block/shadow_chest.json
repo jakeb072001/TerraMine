@@ -1,7 +1,0 @@
-{
-  "parent": "terracraft:block/chest_template",
-    "textures": {
-        "0": "terracraft:block/chests/shadow/shadow_chest",
-        "particle": "terracraft:block/chests/shadow/shadow_break"
-    }
-}

@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "terramine:gold_watch"
+    },
+    {
+      "item": "terramine:depth_meter"
+    },
+    {
+      "item": "terramine:compass"
+    }
+  ],
+  "result": {
+    "item": "terramine:gps",
+    "count": 1
+  }
+}

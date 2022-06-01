@@ -1,0 +1,20 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "terramine:block/corrupted_stone"
+      },
+      {
+        "model": "terramine:block/corrupted_stone_mirrored"
+      },
+      {
+        "model": "terramine:block/corrupted_stone",
+        "y": 180
+      },
+      {
+        "model": "terramine:block/corrupted_stone_mirrored",
+        "y": 180
+      }
+    ]
+  }
+}

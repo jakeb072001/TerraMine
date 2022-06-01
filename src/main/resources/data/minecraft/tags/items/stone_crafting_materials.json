@@ -1,7 +1,7 @@
 {
   "replace": false,
   "values": [
-    "terracraft:corrupted_cobblestone_block",
-    "terracraft:corrupted_cobbled_deepslate_block"
+    "terramine:corrupted_cobblestone_block",
+    "terramine:corrupted_cobbled_deepslate_block"
   ]
 }

@@ -1,0 +1,25 @@
+{
+  "pools": [
+    {
+      "name": "main",
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "weight": 22,
+          "name": "terramine:feral_claws"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 22,
+          "name": "terramine:anklet"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 5,
+          "name": "terramine:flower_boots"
+        }
+      ]
+    }
+  ]
+}

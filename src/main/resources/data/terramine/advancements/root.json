@@ -1,0 +1,23 @@
+{
+    "display": {
+        "title": {
+            "translate": "terramine.advancements.root.title"
+        },
+        "description": {
+            "translate": "terramine.advancements.root.description"
+        },
+        "icon": {
+            "item": "terramine:terraspark_boots"
+        },
+        "frame": "task",
+        "show_toast": true,
+        "announce_to_chat": true,
+        "hidden": false,
+        "background": "terramine:textures/block/corrupt_stone.png"
+    },
+    "criteria": {
+        "impossible": {
+            "trigger": "minecraft:impossible"
+        }
+    }
+}

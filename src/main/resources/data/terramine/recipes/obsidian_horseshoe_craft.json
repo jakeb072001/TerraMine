@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "terramine:obsidian_skull"
+    },
+    {
+      "item": "terramine:lucky_horseshoe"
+    }
+  ],
+  "result": {
+    "item": "terramine:obsidian_horseshoe",
+    "count": 1
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "terramine:ranger_emblem"
+    },
+    {
+      "item": "terramine:warrior_emblem"
+    },
+    {
+      "item": "terramine:sorcerer_emblem"
+    }
+  ],
+  "result": {
+    "item": "terramine:avenger_emblem",
+    "count": 1
+  }
+}

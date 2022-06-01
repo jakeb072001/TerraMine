@@ -1,0 +1,7 @@
+{
+  "replace": false,
+  "values": [
+    "terramine:demonite_ore_block",
+    "terramine:deepslate_demonite_ore_block"
+  ]
+}

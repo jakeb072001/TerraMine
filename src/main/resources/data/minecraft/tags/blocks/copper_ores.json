@@ -1,7 +1,7 @@
 {
   "replace": false,
   "values": [
-    "terracraft:corrupted_copper_ore",
-    "terracraft:corrupted_deepslate_copper_ore"
+    "terramine:corrupted_copper_ore",
+    "terramine:corrupted_deepslate_copper_ore"
   ]
 }

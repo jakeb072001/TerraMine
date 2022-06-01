@@ -1,0 +1,255 @@
+{
+  "pools": [
+    {
+      "name": "main",
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "terramine:diving_helmet"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "terramine:neptune_shell"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "terramine:panic_necklace"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "terramine:magma_stone"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "terramine:lucky_horseshoe"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "terramine:shiny_red_balloon"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "terramine:flippers"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "terramine:obsidian_skull"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "terramine:obsidian_rose"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "terramine:rocket_boots"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "terramine:lava_charm"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "terramine:water_walking_boots"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "terramine:feral_claws"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "terramine:power_glove"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "terramine:depth_meter"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "terramine:compass"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "terramine:weather_radio"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "terramine:sextant"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "terramine:metal_detector"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "terramine:stopwatch"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "terramine:dps_meter"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "terramine:cross_necklace"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "terramine:treasure_magnet"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "terramine:hermes_boots"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "terramine:aglet"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "terramine:anklet"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "terramine:ice_skates"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "terramine:cloud_in_a_bottle"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "terramine:ranger_emblem"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "terramine:warrior_emblem"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "terramine:sorcerer_emblem"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "terramine:titan_glove"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "terramine:mechanical_glove"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "terramine:band_of_regeneration"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "terramine:band_of_starpower"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "terramine:flower_boots"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "terramine:toolbelt"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "terramine:toolbox"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "terramine:extendo_grip"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "terramine:ancient_chisel"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "terramine:cobalt_shield"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "terramine:shackle"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "terramine:shoe_spikes"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "terramine:climbing_claws"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "terramine:tabi"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "terramine:black_belt"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 5,
+          "name": "terramine:umbrella"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 5,
+          "name": "terramine:whoopee_cushion"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 2,
+          "name": "terramine:magic_mirror"
+        }
+      ]
+    }
+  ]
+}

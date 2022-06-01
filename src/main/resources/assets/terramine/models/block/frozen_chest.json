@@ -1,0 +1,7 @@
+{
+  "parent": "terramine:block/chest_template",
+    "textures": {
+        "0": "terramine:block/chests/frozen/frozen_chest",
+        "particle": "terramine:block/chests/frozen/frozen_break"
+    }
+}

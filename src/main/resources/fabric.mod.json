@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "id": "terracraft",
+  "id": "terramine",
   "version": "${version}",
 
   "name": "TerraMine",
@@ -14,48 +14,48 @@
     "issues": "https://github.com/jakeb072001/TerraMine/issues"
   },
   "license": "LGPL-3.0-or-later",
-  "icon": "assets/terracraft/icon.png",
+  "icon": "assets/terramine/icon.png",
 
   "environment": "*",
   "entrypoints": {
     "main": [
-      "terracraft.TerraCraft"
+      "terramine.TerraMine"
     ],
     "terrablender": [
-      "terracraft.TerraCraft"
+      "terramine.TerraMine"
     ],
     "client": [
-      "terracraft.TerraCraftClient"
+      "terramine.TerraMineClient"
     ],
     "preLaunch": [
-      "terracraft.TerraCraftMixinExtras"
+      "terramine.TerraMineMixinExtras"
     ],
-    "terracraft-compathandlers": [
-      "terracraft.common.compat.HaemaCompat",
-      "terracraft.common.compat.OriginsCompat"
+    "terramine-compathandlers": [
+      "terramine.common.compat.HaemaCompat",
+      "terramine.common.compat.OriginsCompat"
     ],
     "modmenu": [
-      "terracraft.client.integrations.ModMenuConfig"
+      "terramine.client.integrations.ModMenuConfig"
     ],
     "cardinal-components": [
-      "terracraft.common.init.ModComponents"
+      "terramine.common.init.ModComponents"
     ],
     "rei_plugins": [
-      "terracraft.client.integrations.REIPlugin"
+      "terramine.client.integrations.REIPlugin"
     ],
     "dynamiclights": [
-      "terracraft.client.integrations.DynamicLightPlugin"
+      "terramine.client.integrations.DynamicLightPlugin"
     ]
   },
   "mixins": [
-    "terracraft.mixins.json"
+    "terramine.mixins.json"
   ],
-  "accessWidener": "terracraft.accesswidener",
+  "accessWidener": "terramine.accesswidener",
 
   "depends": {
     "minecraft": ">=1.18.2",
     "fabricloader": ">=0.7.0",
-    "fabric": ">=0.48.0",
+    "fabric": ">=0.54.0",
     "trinkets": ">=3.0.0",
     "expandability": ">=6.0.0",
     "terrablender": ">=1.1.0.0",
@@ -75,13 +75,13 @@
 
   "custom": {
     "cardinal-components": [
-      "terracraft:dropped_item_entity",
-      "terracraft:demon_eye_entity",
-      "terracraft:entity_kill_tracker",
-      "terracraft:swim_abilities",
-      "terracraft:mana_handler",
-      "terracraft:dps_meter_damage",
-      "terracraft:movement_order"
+      "terramine:dropped_item_entity",
+      "terramine:demon_eye_entity",
+      "terramine:entity_kill_tracker",
+      "terramine:swim_abilities",
+      "terramine:mana_handler",
+      "terramine:dps_meter_damage",
+      "terramine:movement_order"
     ]
   }
 }

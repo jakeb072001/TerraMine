@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:smelting",
+  "group": "demonite_ingot",
+  "ingredient": {
+    "item": "terramine:demonite_ore"
+  },
+  "result": "terramine:demonite_ingot",
+  "experience": 0.8,
+  "cookingtime": 200
+}

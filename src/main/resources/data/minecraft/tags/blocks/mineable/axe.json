@@ -1,7 +1,7 @@
 {
   "replace": false,
   "values": [
-    "terracraft:ivy_chest",
-    "terracraft:trapped_ivy_chest"
+    "terramine:ivy_chest",
+    "terramine:trapped_ivy_chest"
   ]
 }

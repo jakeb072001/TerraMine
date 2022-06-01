@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "terramine:block/corrupt_deepslate_coal_ore"
+  }
+}

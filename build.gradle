@@ -54,7 +54,7 @@ version = project.mod_version + '+' + project.minecraft_version
 group = project.maven_group
 
 loom {
-    accessWidenerPath = file("src/main/resources/terracraft.accesswidener")
+    accessWidenerPath = file("src/main/resources/terramine.accesswidener")
 }
 
 sourceSets {
@@ -182,7 +182,7 @@ curseforge {
             releaseType = "release"
 
             changelogType = "markdown"
-            //changelog = System.getenv("CHANGELOG") ?: "https://github.com/florensie/terracraft-fabric/blob/master/CHANGELOG.md"
+            //changelog = System.getenv("CHANGELOG") ?: "https://github.com/florensie/terramine-fabric/blob/master/CHANGELOG.md"
 
             addGameVersion "1.18"
             addGameVersion "1.18.1"

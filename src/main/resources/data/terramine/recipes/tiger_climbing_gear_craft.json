@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "terramine:shoe_spikes"
+    },
+    {
+      "item": "terramine:climbing_claws"
+    }
+  ],
+  "result": {
+    "item": "terramine:tiger_climbing_gear",
+    "count": 1
+  }
+}
