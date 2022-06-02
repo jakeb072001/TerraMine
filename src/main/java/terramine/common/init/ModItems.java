@@ -74,8 +74,8 @@ public class ModItems {
 	public static final Item MAGMA_SKULL = register("magma_skull", new ObsidianSkullItem());
 	public static final Item OBSIDIAN_SKULL_ROSE = register("obsidian_skull_rose", new ObsidianSkullItem());
 	public static final Item MOLTEN_SKULL_ROSE = register("molten_skull_rose", new ObsidianSkullItem());
-	public static final Item LAVA_CHARM = register("lava_charm", new LavaCharmItem());
-	public static final Item MOLTEN_CHARM = register("molten_charm", new MoltenCharmItem());
+	public static final Item LAVA_CHARM = register("lava_charm", new TrinketTerrariaItem());
+	public static final Item MOLTEN_CHARM = register("molten_charm", new TrinketTerrariaItem());
 	public static final Item LUCKY_HORSESHOE = register("lucky_horseshoe", new TrinketTerrariaItem());
 	public static final Item OBSIDIAN_HORSESHOE = register("obsidian_horseshoe", new TrinketTerrariaItem());
 	public static final Item CLOUD_IN_A_BOTTLE = register("cloud_in_a_bottle", new CloudInABottleItem());

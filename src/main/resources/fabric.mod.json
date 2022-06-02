@@ -77,11 +77,11 @@
     "cardinal-components": [
       "terramine:dropped_item_entity",
       "terramine:demon_eye_entity",
-      "terramine:entity_kill_tracker",
       "terramine:swim_abilities",
       "terramine:mana_handler",
       "terramine:dps_meter_damage",
-      "terramine:movement_order"
+      "terramine:movement_order",
+      "terramine:lava_immunity"
     ]
   }
 }

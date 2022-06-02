@@ -48,7 +48,6 @@ public class TerrasparkBootsItem extends TrinketTerrariaItem {
 	public TerrasparkBootsItem() {
 		//noinspection UnstableApiUsage
 		LivingFluidCollisionCallback.EVENT.register(TerrasparkBootsItem::onFluidCollision);
-		LivingEntityHurtCallback.EVENT.register(TerrasparkBootsItem::onLivingHurt);
 		rocketHelper.setSoundSettings(ModSoundEvents.SPECTRE_BOOTS, 1f, 1f);
 		rocketHelper.setParticleSettings(TerraMine.GREEN_SPARK);
 	}
@@ -115,15 +114,6 @@ public class TerrasparkBootsItem extends TrinketTerrariaItem {
 		}
 
 		return false;
-	}
-
-	private static void onLivingHurt(LivingEntity user, DamageSource source, float amount) {
-		if (!user.level.isClientSide && amount >= 1 && user instanceof Player player && TrinketsHelper.isEquipped(ModItems.TERRASPARK_BOOTS, user)) {
-			if (user.isInLava() && !player.getCooldowns().isOnCooldown(ModItems.TERRASPARK_BOOTS)) {
-				user.addEffect(new MobEffectInstance(MobEffects.FIRE_RESISTANCE, 140, 0, false, true));
-				((Player) user).getCooldowns().addCooldown(ModItems.TERRASPARK_BOOTS, 450);
-			}
-		}
 	}
 
 	public static boolean canSprintOnWater(LivingEntity entity) {

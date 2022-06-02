@@ -41,6 +41,7 @@
     "item.neptuneshell.PlayerMixin",
     "item.obsidianwaterwalkingboots.EntityMixin",
     "item.rangeremblem.AbstractArrowMixin",
+    "item.reducelavadamage.EntityMixin",
     "item.reducelavadamage.LivingEntityMixin",
     "item.runningshoes.EntityMixin",
     "item.runningshoes.LivingEntityMixin",

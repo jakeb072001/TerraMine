@@ -22,7 +22,6 @@ public class LavaWadersItem extends TrinketTerrariaItem {
 	public LavaWadersItem() {
 		//noinspection UnstableApiUsage
         LivingFluidCollisionCallback.EVENT.register(LavaWadersItem::onFluidCollision);
-		LivingEntityHurtCallback.EVENT.register(LavaWadersItem::onLivingHurt);
 	}
 
 	@Override
@@ -47,15 +46,6 @@ public class LavaWadersItem extends TrinketTerrariaItem {
 		}
 
 		return false;
-	}
-
-	private static void onLivingHurt(LivingEntity user, DamageSource source, float amount) {
-		if (!user.level.isClientSide && amount >= 1 && user instanceof Player player && TrinketsHelper.isEquipped(ModItems.LAVA_WADERS, user)) {
-			if (user.isInLava() && !player.getCooldowns().isOnCooldown(ModItems.LAVA_WADERS)) {
-				user.addEffect(new MobEffectInstance(MobEffects.FIRE_RESISTANCE, 140, 0, false, true));
-				((Player) user).getCooldowns().addCooldown(ModItems.LAVA_WADERS, 450);
-			}
-		}
 	}
 
 	public static boolean canSprintOnWater(LivingEntity entity) {

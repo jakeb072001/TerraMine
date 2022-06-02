@@ -26,14 +26,17 @@ public class ModComponents implements EntityComponentInitializer {
 			ComponentRegistryV3.INSTANCE.getOrCreate(TerraMine.id("dps_meter_damage"), DPSDamageCounterComponent.class);
 	public static final ComponentKey<MovementOrderComponent> MOVEMENT_ORDER =
 			ComponentRegistryV3.INSTANCE.getOrCreate(TerraMine.id("movement_order"), MovementOrderComponent.class);
+	public static final ComponentKey<LavaImmunityComponent> LAVA_IMMUNITY =
+			ComponentRegistryV3.INSTANCE.getOrCreate(TerraMine.id("lava_immunity"), LavaImmunityComponent.class);
 
 	@Override
 	public void registerEntityComponentFactories(EntityComponentFactoryRegistry registry) {
 		registry.registerFor(ItemEntity.class, DROPPED_ITEM_ENTITY, entity -> new SyncedBooleanComponent("wasDropped"));
 		registry.registerFor(DemonEyeEntity.class, DEMON_EYE_ENTITY, entity -> new SyncedIntegerComponent("eyeType"));
 		registry.registerForPlayers(SWIM_ABILITIES, SwimAbilityComponent::new, RespawnCopyStrategy.LOSSLESS_ONLY);
-		registry.registerForPlayers(MANA_HANDLER, ManaHandler::new, RespawnCopyStrategy.ALWAYS_COPY);
+		registry.registerForPlayers(MANA_HANDLER, ManaHandler::new, RespawnCopyStrategy.CHARACTER);
 		registry.registerForPlayers(DPS_METER_DAMAGE, DPSDamageCounterComponent::new, RespawnCopyStrategy.LOSSLESS_ONLY);
 		registry.registerForPlayers(MOVEMENT_ORDER, MovementOrderComponent::new, RespawnCopyStrategy.LOSSLESS_ONLY);
+		registry.registerForPlayers(LAVA_IMMUNITY, LavaImmunityComponent::new, RespawnCopyStrategy.LOSSLESS_ONLY);
 	}
 }

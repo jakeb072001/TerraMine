@@ -14,7 +14,7 @@ import terramine.common.trinkets.TrinketsHelper;
 public abstract class EntityMixin {
 
     @Inject(at = @At("HEAD"), method = "isInvulnerableTo", cancellable = true)
-    private void makeOriginInvulnerable(DamageSource damageSource, CallbackInfoReturnable<Boolean> cir) {
+    private void hotFloorImmunity(DamageSource damageSource, CallbackInfoReturnable<Boolean> cir) {
         if ((Object) this instanceof LivingEntity entity) {
             if (TrinketsHelper.isEquipped(ModItems.OBSIDIAN_SKULL, entity) || TrinketsHelper.isEquipped(ModItems.OBSIDIAN_HORSESHOE, entity) || TrinketsHelper.isEquipped(ModItems.MAGMA_SKULL, entity) || TrinketsHelper.isEquipped(ModItems.OBSIDIAN_SKULL_ROSE, entity)
                     || TrinketsHelper.isEquipped(ModItems.MOLTEN_SKULL_ROSE, entity) || TrinketsHelper.isEquipped(ModItems.MOLTEN_CHARM, entity) || TrinketsHelper.isEquipped(ModItems.OBSIDIAN_WATER_WALKING_BOOTS, entity)

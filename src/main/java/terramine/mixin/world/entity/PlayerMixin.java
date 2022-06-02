@@ -20,11 +20,12 @@ public abstract class PlayerMixin extends LivingEntity {
 	public PlayerMixin(EntityType<? extends LivingEntity> entityType, Level level) {
 		super(entityType, level);
 	}
-	private Random rand = new Random();
+	private final Random rand = new Random();
 
 	@Inject(method = "tick", at = @At("TAIL"))
 	private void manaTickRegen(CallbackInfo ci) {
 		ModComponents.MANA_HANDLER.get((Player) (Object) this).update();
+		ModComponents.LAVA_IMMUNITY.get((Player) (Object) this).update();
 		if (level != null && level.dimensionType().bedWorks() && !level.isDay()) { // handles spawning stars randomly during the night, not the best way to do it most likely, but it works for now.
 			if (rand.nextInt(16800) <= 21) {
 				FallingStarEntity star = ModEntities.FALLING_STAR.create(level);
