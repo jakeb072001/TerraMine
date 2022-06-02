@@ -6,3 +6,5 @@ Not really ready for release yet, but you can still try it if you want.
 
 
 Modrinth: https://modrinth.com/mod/terrariacraft 
+
+CurseForge: https://www.curseforge.com/minecraft/mc-mods/terra-mine 
