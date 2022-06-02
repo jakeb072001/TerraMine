@@ -11,6 +11,8 @@ import terramine.common.trinkets.TrinketsHelper;
 @Mixin(LivingEntity.class)
 public abstract class LivingEntityMixin {
 
+	// todo: make work alongside artifacts instead of disabling when installed using TerraMineMixinPlugin
+
 	/**
 	 * Extends the amount of ticks of vulnerability
 	 */

@@ -14,7 +14,7 @@ import terramine.common.trinkets.TrinketsHelper;
 public abstract class PlayerMixin {
 
 	@Inject(method = "hurt", at = @At("TAIL"))
-	private void onHurt(DamageSource damageSource, float f, CallbackInfoReturnable info) {
+	private void onHurt(DamageSource damageSource, float f, CallbackInfoReturnable<Boolean> cir) {
 		Player player = (Player) (Object) this;
 		if (!TrinketsHelper.isEquipped(ModItems.MAGIC_CUFFS, player)) {
 			return;

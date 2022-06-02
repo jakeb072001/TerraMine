@@ -11,7 +11,7 @@ import java.util.Set;
 public class TerraMineMixinPlugin implements IMixinConfigPlugin {
 
 	// Base package for mixins as defined in terramine.mixins.json
-	private static final String BASE_PACKAGE = "terramine.mixin.mixins";
+	private static final String BASE_PACKAGE = "terramine.mixin";
 
 	@Override
 	public void onLoad(String mixinPackage) {
@@ -28,6 +28,9 @@ public class TerraMineMixinPlugin implements IMixinConfigPlugin {
 			String subPackageAndClassName = mixinClassName.split(BASE_PACKAGE + "\\.compat\\.")[1];
 			String modid = subPackageAndClassName.split("\\.")[0];
 			return FabricLoader.getInstance().isModLoaded(modid);
+		}
+		if (mixinClassName.equals(BASE_PACKAGE + ".item.crossnecklace.LivingEntityMixin")) {
+			return !FabricLoader.getInstance().isModLoaded("artifacts");
 		}
 
 		return true;
