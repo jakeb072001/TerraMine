@@ -5,6 +5,6 @@ TerraCraft is a WIP mod that adds everything (or at least close to) from Terrari
 Not really ready for release yet, but you can still try it if you want.
 
 
-Modrinth: https://modrinth.com/mod/terrariacraft
+Modrinth: https://modrinth.com/mod/terramine
 
 CurseForge: https://www.curseforge.com/minecraft/mc-mods/terra-mine
