@@ -9,6 +9,7 @@ public class ModPotions {
     //Timed
     public static final Potion MANA_REGENERATION_POTION = register("mana_regen", new TerrariaPotion.TerrariaPotionTimed("mana_regen", ModMobEffects.MANA_REGEN, (480 * 20), 0));
     public static final Potion MINING_SPEED_POTION = register("mining_speed", new TerrariaPotion.TerrariaPotionTimed("mining_speed", ModMobEffects.MINING_SPEED, (600 * 20), 0));
+    public static final Potion IRONSKIN_POTION = register("ironskin", new TerrariaPotion.TerrariaPotionTimed("ironskin", ModMobEffects.IRONSKIN, (480 * 20), 0));
 
     //Instant
     public static final Potion LESSER_MANA_POTION = register("lesser_mana", new TerrariaPotion.TerrariaPotionInstant("lesser_mana", ModMobEffects.INSTANT_MANA, 0));

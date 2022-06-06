@@ -7,11 +7,13 @@ import terramine.TerraMine;
 import terramine.common.potions.effects.BlankEffect;
 import terramine.common.potions.effects.mana.InstantManaEffect;
 import terramine.common.potions.effects.mana.ManaRegenEffect;
+import terramine.common.potions.effects.misc.IronSkinEffect;
 
 public class ModMobEffects {
     //Timed
     public static final MobEffect MANA_REGEN = register("mana_regen", new ManaRegenEffect(MobEffectCategory.BENEFICIAL, 0xe13b9e, false));
     public static final MobEffect MINING_SPEED = register("mining_speed", new BlankEffect(MobEffectCategory.BENEFICIAL, 0x567f85, false));
+    public static final MobEffect IRONSKIN = register("ironskin", new IronSkinEffect(MobEffectCategory.BENEFICIAL, 0xf5ff3a, false));
 
     //Instant
     public static final MobEffect INSTANT_MANA = register("instant_mana", new InstantManaEffect(MobEffectCategory.BENEFICIAL, 0x262db3, true));

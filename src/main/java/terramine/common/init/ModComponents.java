@@ -5,14 +5,15 @@ import dev.onyxstudios.cca.api.v3.component.ComponentRegistryV3;
 import dev.onyxstudios.cca.api.v3.entity.EntityComponentFactoryRegistry;
 import dev.onyxstudios.cca.api.v3.entity.EntityComponentInitializer;
 import dev.onyxstudios.cca.api.v3.entity.RespawnCopyStrategy;
+import dev.onyxstudios.cca.api.v3.level.LevelComponentFactoryRegistry;
+import dev.onyxstudios.cca.api.v3.level.LevelComponentInitializer;
 import net.minecraft.world.entity.item.ItemEntity;
-import net.minecraft.world.entity.player.Player;
 import terramine.TerraMine;
 import terramine.common.components.*;
 import terramine.common.entity.DemonEyeEntity;
 import terramine.common.mana.ManaHandler;
 
-public class ModComponents implements EntityComponentInitializer {
+public class ModComponents implements EntityComponentInitializer, LevelComponentInitializer {
 
 	public static final ComponentKey<SyncedBooleanComponent> DROPPED_ITEM_ENTITY =
 			ComponentRegistryV3.INSTANCE.getOrCreate(TerraMine.id("dropped_item_entity"), SyncedBooleanComponent.class);
@@ -29,6 +30,9 @@ public class ModComponents implements EntityComponentInitializer {
 	public static final ComponentKey<LavaImmunityComponent> LAVA_IMMUNITY =
 			ComponentRegistryV3.INSTANCE.getOrCreate(TerraMine.id("lava_immunity"), LavaImmunityComponent.class);
 
+	public static final ComponentKey<SyncedBooleanComponent> HARDMODE =
+			ComponentRegistryV3.INSTANCE.getOrCreate(TerraMine.id("hardmode"), SyncedBooleanComponent.class);
+
 	@Override
 	public void registerEntityComponentFactories(EntityComponentFactoryRegistry registry) {
 		registry.registerFor(ItemEntity.class, DROPPED_ITEM_ENTITY, entity -> new SyncedBooleanComponent("wasDropped"));
@@ -38,5 +42,10 @@ public class ModComponents implements EntityComponentInitializer {
 		registry.registerForPlayers(DPS_METER_DAMAGE, DPSDamageCounterComponent::new, RespawnCopyStrategy.LOSSLESS_ONLY);
 		registry.registerForPlayers(MOVEMENT_ORDER, MovementOrderComponent::new, RespawnCopyStrategy.LOSSLESS_ONLY);
 		registry.registerForPlayers(LAVA_IMMUNITY, LavaImmunityComponent::new, RespawnCopyStrategy.LOSSLESS_ONLY);
+	}
+
+	@Override
+	public void registerLevelComponentFactories(LevelComponentFactoryRegistry registry) {
+		registry.register(HARDMODE, level -> new SyncedBooleanComponent("hardmode"));
 	}
 }

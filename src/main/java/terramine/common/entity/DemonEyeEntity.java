@@ -20,9 +20,9 @@ import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Blocks;
 import org.jetbrains.annotations.NotNull;
-import terramine.common.init.ModComponents;
 import terramine.common.init.ModLootTables;
 import terramine.common.init.ModSoundEvents;
 
@@ -33,14 +33,75 @@ public class DemonEyeEntity extends Monster implements Enemy {
     public boolean doOnce = false;
     public double velX, velY, velZ;
     public double oldVelX, oldVelY, oldVelZ;
-    private int eyeType;
 
     public DemonEyeEntity(EntityType<? extends DemonEyeEntity> entityType, Level worldIn) {
         super(entityType, worldIn);
         moveControl = new DemonEyeMovementController(this);
-        eyeType = random.nextInt(6);
-        this.getEntityData().define(DemonEyeEntity.typed_data, 1);
-        this.getEntityData().set(DemonEyeEntity.typed_data, eyeType);
+        setEyeType(random.nextInt(6));
+    }
+
+    @Override
+    protected void defineSynchedData() {
+        super.defineSynchedData();
+        this.entityData.define(typed_data, 0);
+    }
+
+    @Override
+    public void addAdditionalSaveData(@NotNull CompoundTag tag) {
+        super.addAdditionalSaveData(tag);
+        tag.putInt("eyeType", getEyeType());
+    }
+
+    @Override
+    public void readAdditionalSaveData(@NotNull CompoundTag tag) {
+        super.readAdditionalSaveData(tag);
+        setEyeType(tag.getInt("eyeType"));
+    }
+
+    private void setEyeType(int eyeType) {
+        this.entityData.set(typed_data, eyeType);
+        switch (eyeType) {
+            case 0 -> {
+                this.getAttribute(Attributes.MAX_HEALTH).setBaseValue(15);
+                this.getAttribute(Attributes.ARMOR).setBaseValue(2);
+                this.getAttribute(Attributes.KNOCKBACK_RESISTANCE).setBaseValue(0.2);
+                this.getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue(3.5);
+            }
+            case 1 -> {
+                this.getAttribute(Attributes.MAX_HEALTH).setBaseValue(20);
+                this.getAttribute(Attributes.ARMOR).setBaseValue(4);
+                this.getAttribute(Attributes.KNOCKBACK_RESISTANCE).setBaseValue(0.3);
+                this.getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue(3.5);
+            }
+            case 2 -> {
+                this.getAttribute(Attributes.MAX_HEALTH).setBaseValue(25);
+                this.getAttribute(Attributes.ARMOR).setBaseValue(2);
+                this.getAttribute(Attributes.KNOCKBACK_RESISTANCE).setBaseValue(0.2);
+                this.getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue(3.5);
+            }
+            case 3 -> {
+                this.getAttribute(Attributes.MAX_HEALTH).setBaseValue(20);
+                this.getAttribute(Attributes.ARMOR).setBaseValue(0);
+                this.getAttribute(Attributes.KNOCKBACK_RESISTANCE).setBaseValue(0.2);
+                this.getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue(4);
+            }
+            case 4 -> {
+                this.getAttribute(Attributes.MAX_HEALTH).setBaseValue(20);
+                this.getAttribute(Attributes.ARMOR).setBaseValue(4);
+                this.getAttribute(Attributes.KNOCKBACK_RESISTANCE).setBaseValue(0.2);
+                this.getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue(3);
+            }
+            case 5 -> {
+                this.getAttribute(Attributes.MAX_HEALTH).setBaseValue(20);
+                this.getAttribute(Attributes.ARMOR).setBaseValue(2);
+                this.getAttribute(Attributes.KNOCKBACK_RESISTANCE).setBaseValue(0.15);
+                this.getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue(3);
+            }
+        }
+    }
+
+    private int getEyeType() {
+        return this.entityData.get(typed_data);
     }
 
     protected static class DemonEyeMovementController extends MoveControl {
@@ -126,9 +187,6 @@ public class DemonEyeEntity extends Monster implements Enemy {
                         demonEye.velZ = demonEye.random.nextInt(-2, 3);
                         demonEye.velY = demonEye.random.nextInt(-2, 5);
                         demonEye.doOnce = true;
-                    }
-                    if (demonEye.isSunBurnTick()) {
-                        //demonEye.setSecondsOnFire(8);
                     }
                 } else if (target != null) {
                     demonEye.doOnce = false;
@@ -239,6 +297,11 @@ public class DemonEyeEntity extends Monster implements Enemy {
                 demonEye.doOnce = true;
             }
         }
+    }
+
+    @Override
+    public boolean checkSpawnRules(@NotNull LevelAccessor world, @NotNull MobSpawnType spawnReason) {
+        return true;
     }
 
     /*

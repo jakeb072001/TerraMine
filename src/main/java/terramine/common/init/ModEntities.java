@@ -1,56 +1,74 @@
 package terramine.common.init;
 
+import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
+import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
+import net.minecraft.client.Minecraft;
 import net.minecraft.core.Registry;
-import net.minecraft.world.entity.EntityDimensions;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.MobCategory;
+import net.minecraft.world.entity.*;
+import net.minecraft.world.level.levelgen.Heightmap;
 import terramine.TerraMine;
 import terramine.common.entity.*;
 
-import static net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry.register;
-
 public class ModEntities {
 
-	public static final EntityType<MimicEntity> MIMIC = Registry.register( Registry.ENTITY_TYPE, TerraMine.id("mimic"),
-			FabricEntityTypeBuilder.create(MobCategory.MISC, MimicEntity::new)
-					.dimensions(EntityDimensions.fixed(14 / 16F, 14 / 16F))
-					.trackRangeBlocks(64)
-					.build());
+	public static final EntityType<MimicEntity> MIMIC = register("mimic", FabricEntityTypeBuilder
+			.<MimicEntity>createMob()
+			.entityFactory(MimicEntity::new)
+			.dimensions(EntityDimensions.fixed(14 / 16F, 14 / 16F))
+			.spawnGroup(MobCategory.MONSTER)
+			.defaultAttributes(MimicEntity::createMobAttributes)
+			.trackRangeBlocks(64)
+			.build());
 
-	public static final EntityType<DemonEyeEntity> DEMON_EYE = Registry.register( Registry.ENTITY_TYPE, TerraMine.id("demon_eye"),
-			FabricEntityTypeBuilder.create(MobCategory.MISC, DemonEyeEntity::new)
-					.dimensions(EntityDimensions.fixed(0.5f, 0.5f))
-					.spawnGroup(MobCategory.MONSTER)
-					.build());
+	public static final EntityType<DemonEyeEntity> DEMON_EYE = register("demon_eye", FabricEntityTypeBuilder
+			.<DemonEyeEntity>createMob()
+			.entityFactory(DemonEyeEntity::new)
+			.dimensions(EntityDimensions.fixed(0.5f, 0.5f))
+			.spawnGroup(MobCategory.MONSTER)
+			.defaultAttributes(DemonEyeEntity::createMobAttributes)
+			.spawnRestriction(SpawnPlacements.Type.NO_RESTRICTIONS, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, DemonEyeEntity::checkMobSpawnRules)
+			.build());
 
-	public static final EntityType<FallingStarEntity> FALLING_STAR = Registry.register( Registry.ENTITY_TYPE, TerraMine.id("falling_star"),
-			FabricEntityTypeBuilder.create(MobCategory.MISC, FallingStarEntity::new)
-					.dimensions(EntityDimensions.fixed(0.25f, 0.25f))
-					.build());
+	public static final EntityType<FallingStarEntity> FALLING_STAR = register("falling_star", FabricEntityTypeBuilder
+			.<FallingStarEntity>createMob()
+			.entityFactory(FallingStarEntity::new)
+			.dimensions(EntityDimensions.fixed(0.25f, 0.25f))
+			.spawnGroup(MobCategory.MISC)
+			.defaultAttributes(FallingStarEntity::createMobAttributes)
+			.build());
 
-	public static final EntityType<MagicMissileEntity> MAGIC_MISSILE = Registry.register( Registry.ENTITY_TYPE, TerraMine.id("magic_missile"),
-			FabricEntityTypeBuilder.create(MobCategory.MISC, MagicMissileEntity::new)
-					.dimensions(EntityDimensions.fixed(0.25f, 0.25f))
-					.build());
+	public static final EntityType<MagicMissileEntity> MAGIC_MISSILE = register("magic_missile", FabricEntityTypeBuilder
+			.create(MobCategory.MISC, MagicMissileEntity::new)
+			.dimensions(EntityDimensions.fixed(0.25f, 0.25f))
+			.build());
 
-	public static final EntityType<FlamelashMissileEntity> FLAMELASH_MISSILE = Registry.register( Registry.ENTITY_TYPE, TerraMine.id("flamelash_missile"),
-			FabricEntityTypeBuilder.create(MobCategory.MISC, FlamelashMissileEntity::new)
-					.dimensions(EntityDimensions.fixed(0.25f, 0.25f))
-					.build());
+	public static final EntityType<FlamelashMissileEntity> FLAMELASH_MISSILE = register("flamelash_missile", FabricEntityTypeBuilder
+			.create(MobCategory.MISC, FlamelashMissileEntity::new)
+			.dimensions(EntityDimensions.fixed(0.25f, 0.25f))
+			.build());
 
-	public static final EntityType<RainbowMissileEntity> RAINBOW_MISSILE = Registry.register( Registry.ENTITY_TYPE, TerraMine.id("rainbow_missile"),
-			FabricEntityTypeBuilder.create(MobCategory.MISC, RainbowMissileEntity::new)
-					.dimensions(EntityDimensions.fixed(0.25f, 0.25f))
-					.build());
+	public static final EntityType<RainbowMissileEntity> RAINBOW_MISSILE = register("rainbow_missile", FabricEntityTypeBuilder
+			.create(MobCategory.MISC, RainbowMissileEntity::new)
+			.dimensions(EntityDimensions.fixed(0.25f, 0.25f))
+			.build());
 
-	static {
-		// Register mob attributes
-		register(MIMIC, MimicEntity.createMobAttributes());
-		register(DEMON_EYE, DemonEyeEntity.createMobAttributes());
-		register(FALLING_STAR, FallingStarEntity.createMobAttributes());
+	private static <T extends Entity> EntityType<T> register(String name, EntityType<T> entType) {
+		return Registry.register(Registry.ENTITY_TYPE, TerraMine.id(name), entType);
 	}
 
-	private ModEntities() {
+	public static void addToSpawn() {
+		int i = 80;
+		Minecraft mc = Minecraft.getInstance();
+		if (mc != null && mc.level != null) {
+			if (mc.level.getMoonPhase() == 4) {
+				i = 100;
+			}
+		}
+		naturalSpawn(DEMON_EYE, MobCategory.MONSTER, i, 2, 6);
+	}
+
+	public static <T extends Entity> void naturalSpawn(EntityType<T> entType, MobCategory category, int weight, int minGroup, int maxGroup) {
+		BiomeModifications.addSpawn(BiomeSelectors.foundInOverworld(), category, entType, weight, minGroup, maxGroup);
 	}
 }

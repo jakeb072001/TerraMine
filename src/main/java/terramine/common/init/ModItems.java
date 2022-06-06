@@ -86,7 +86,7 @@ public class ModItems {
 	public static final Item TOOLBELT = register("toolbelt", new ToolbeltItem());
 	public static final Item TOOLBOX = register("toolbox", new ToolboxItem());
 	public static final Item EXTENDO_GRIP = register("extendo_grip", new ExtendoGripItem());
-	public static final Item ANCIENT_CHISEL = register("ancient_chisel", new AncientChiselItem());
+	public static final Item ANCIENT_CHISEL = register("ancient_chisel", new TrinketTerrariaItem());
 	public static final Item TREASURE_MAGNET = register("treasure_magnet", new UniversalAttractorItem());
 
 	// Hands
@@ -181,8 +181,5 @@ public class ModItems {
 
 	private static Item register(String name, Item item) {
 		return Registry.register(Registry.ITEM, TerraMine.id(name), item);
-	}
-
-	private ModItems() {
 	}
 }

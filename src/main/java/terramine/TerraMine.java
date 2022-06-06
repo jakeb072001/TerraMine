@@ -43,18 +43,7 @@ public class TerraMine implements ModInitializer, TerraBlenderApi {
 	public static final Logger LOGGER = LoggerFactory.getLogger(TerraMine.class);
 	public static final SimpleParticleType BLUE_POOF = FabricParticleTypes.simple();
 	public static final SimpleParticleType GREEN_SPARK = FabricParticleTypes.simple();
-	public static final AttributeModifier KNOCKBACK_RESISTANCE_COBALT_MODIFIER = new AttributeModifier(UUID.fromString("7e97cede-a243-468f-b415-14bff6da3666"),
-			"terramine:cobalt_shield_knockback_resistance", 1, AttributeModifier.Operation.ADDITION);
-	public static final AttributeModifier KNOCKBACK_RESISTANCE_OBSIDIAN_MODIFIER = new AttributeModifier(UUID.fromString("5e97cada-a242-465f-b425-13bfd6db3676"),
-			"terramine:obsidian_shield_knockback_resistance", 1, AttributeModifier.Operation.ADDITION);
-	public static final AttributeModifier ARMOR_ADD_ONE = new AttributeModifier(UUID.fromString("2e97c2de-a2d3-4a8f-b415-14bff6da3666"),
-			"terramine:cobalt_shield_armor_two", 1, AttributeModifier.Operation.ADDITION);
-	public static final AttributeModifier ARMOR_ADD_TWO = new AttributeModifier(UUID.fromString("1a93aedf-a243-4d8f-b415-14bff6da3666"),
-			"terramine:cobalt_shield_armor_one", 2, AttributeModifier.Operation.ADDITION);
-	public static final CreativeModeTab ITEM_GROUP = FabricItemGroupBuilder.build(
-			id("item_group"),
-			() -> new ItemStack(ModItems.TERRASPARK_BOOTS)
-	);
+	public static final CreativeModeTab ITEM_GROUP = FabricItemGroupBuilder.build(id("item_group"), () -> new ItemStack(ModItems.TERRASPARK_BOOTS));
 	public static final ResourceLocation WALL_JUMP_PACKET_ID = new ResourceLocation(MOD_ID, "walljump");
 	public static final ResourceLocation FALL_DISTANCE_PACKET_ID = new ResourceLocation(MOD_ID, "falldistance");
 	public static ModConfig CONFIG;
@@ -94,7 +83,8 @@ public class TerraMine implements ModInitializer, TerraBlenderApi {
 		// Force loading init classes
 		// Entities is loaded by items, loot tables can load lazily (no registration)
 		ModItems.TERRASPARK_BOOTS.toString();
-		ModSoundEvents.MIMIC_CLOSE.toString();
+		ModEntities.addToSpawn();
+		ModSoundEvents.SPECTRE_BOOTS.toString();
 		ModPotions.LESSER_MANA_POTION.toString();
 		Stats.CUSTOM.get(ModStatistics.MANA_USED, StatFormatter.DEFAULT);
 		ModScreenHandlerType.register();

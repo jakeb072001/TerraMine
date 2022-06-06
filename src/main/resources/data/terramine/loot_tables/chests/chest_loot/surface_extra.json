@@ -121,6 +121,11 @@
           ]
         },
         {
+          "type": "minecraft:loot_table",
+          "name": "terramine:chests/chest_loot/surface_special_potion",
+          "weight": 66
+        },
+        {
           "type": "minecraft:item",
           "name": "minecraft:torch",
           "weight": 50,
