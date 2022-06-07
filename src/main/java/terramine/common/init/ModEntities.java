@@ -58,14 +58,8 @@ public class ModEntities {
 	}
 
 	public static void addToSpawn() {
-		int i = 80;
-		Minecraft mc = Minecraft.getInstance();
-		if (mc != null && mc.level != null) {
-			if (mc.level.getMoonPhase() == 4) {
-				i = 100;
-			}
-		}
-		naturalSpawn(DEMON_EYE, MobCategory.MONSTER, i, 2, 6);
+		// todo: increase Demon Eye spawn weight to 100 when full moon, cant use Minecraft class otherwise server wont work
+		naturalSpawn(DEMON_EYE, MobCategory.MONSTER, 80, 2, 6);
 	}
 
 	public static <T extends Entity> void naturalSpawn(EntityType<T> entType, MobCategory category, int weight, int minGroup, int maxGroup) {

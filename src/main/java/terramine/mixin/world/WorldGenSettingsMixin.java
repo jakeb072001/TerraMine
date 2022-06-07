@@ -40,6 +40,6 @@ public class WorldGenSettingsMixin {
     @Inject(at = @At("HEAD"), method = "create")
     private static void setTerramineGlobalValues(RegistryAccess registryAccess, DedicatedServerProperties.WorldGenProperties worldGenProperties, CallbackInfoReturnable<WorldGenSettings> cir) {
         rand.setSeed(parseSeed(worldGenProperties.levelSeed()).orElse(rand.nextLong()));
-        SyncedBooleanComponent.instance(ModComponents.HARDMODE).set(rand.nextBoolean());
+        //ModComponents.HARDMODE.get("hardmode").set(rand.nextBoolean());
     }
 }

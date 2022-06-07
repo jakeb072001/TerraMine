@@ -37,10 +37,6 @@ public class SyncedBooleanComponent implements Component, AutoSyncedComponent {
 		throw new UnsupportedOperationException("Accessed server too early!");
 	}
 
-	public static <T extends SyncedBooleanComponent> SyncedBooleanComponent instance(ComponentKey<T> key) {
-		return key.get((PrimaryLevelData) getServer().getWorldData());
-	}
-
 	@Override
 	public void readFromNbt(CompoundTag tag) {
 		this.bool = tag.contains(this.name) && tag.getBoolean(this.name);

@@ -13,7 +13,7 @@ public class FlowerBootsItem extends TrinketTerrariaItem {
 	@Override
 	public void curioTick(LivingEntity player, ItemStack stack) {
 		if (player != null && player.isSprinting()) {
-			Level level = Minecraft.getInstance().level;
+			Level level = player.level;
 			BlockPos blockPos = player.getOnPos();
 			BlockPos blockCropPos = player.getOnPos().offset(0,1.3,0);
 			if (level.getBlockState(blockPos).getBlock() instanceof BonemealableBlock) {

@@ -10,6 +10,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
@@ -46,21 +47,22 @@ public class MechanicalGloveItem extends TrinketTerrariaItem {
 	}
 
 	@Override
-	public void curioTick(LivingEntity player, ItemStack stack) {
+	public void curioTick(LivingEntity livingEntity, ItemStack stack) {
 		Minecraft mc = Minecraft.getInstance();
-		if (mc.options.keyAttack.isDown())
-			if (mc.player != null && mc.player.getAttackStrengthScale(0) >= 1) {
+		if (mc.options.keyAttack.isDown()) {
+			if (livingEntity instanceof Player player && player.getAttackStrengthScale(0) >= 1) {
 				if (mc.hitResult != null && mc.hitResult.getType() == HitResult.Type.ENTITY && !(mc.hitResult instanceof BlockHitResult)) {
 					Entity entity = ((EntityHitResult) mc.hitResult).getEntity();
 					if (entity.isAlive() && entity.isAttackable()) {
 						timer += 1;
-						if (timer >= 2) {
-							mc.gameMode.attack(mc.player, entity);
+						if (timer >= 2 && mc.gameMode != null) {
+							mc.gameMode.attack(player, entity);
 							timer = 0;
 						}
 					}
 				}
 			}
+		}
 	}
 
 	@Override
