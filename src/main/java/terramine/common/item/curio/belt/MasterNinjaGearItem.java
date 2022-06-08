@@ -5,12 +5,14 @@ import net.minecraft.client.Options;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.Vec3;
 import terramine.common.init.ModItems;
 import terramine.common.item.curio.TrinketTerrariaItem;
+import terramine.common.utility.InputHandler;
 
 public class MasterNinjaGearItem extends TrinketTerrariaItem {
 
@@ -27,8 +29,6 @@ public class MasterNinjaGearItem extends TrinketTerrariaItem {
 
     @Override
 	protected void curioTick(LivingEntity livingEntity, ItemStack stack) {
-		Options options = Minecraft.getInstance().options;
-
 		if (livingEntity instanceof Player player) {
 			if (timer++ >= 6) {
 				if (upPressed) {
@@ -53,8 +53,8 @@ public class MasterNinjaGearItem extends TrinketTerrariaItem {
 				}
 			}
 			//up
-			if (options.keyUp.isDown()) {
-				if (options.keyUp.isDown() && upPressed && upKeyUnpressed && !player.getCooldowns().isOnCooldown(ModItems.MASTER_NINJA_GEAR) && !player.isInWaterOrBubble()) {
+			if (InputHandler.isHoldingForwards(player)) {
+				if (InputHandler.isHoldingForwards(player) && upPressed && upKeyUnpressed && !player.getCooldowns().isOnCooldown(ModItems.MASTER_NINJA_GEAR) && !player.isInWaterOrBubble()) {
 					playParticle(player);
 					playSound(player);
 					player.moveRelative(1, new Vec3(0, 0, 10));
@@ -67,8 +67,8 @@ public class MasterNinjaGearItem extends TrinketTerrariaItem {
 				upKeyUnpressed = true;
 			}
 			//down
-			if (options.keyDown.isDown()) {
-				if (options.keyDown.isDown() && downPressed && downKeyUnpressed && !player.getCooldowns().isOnCooldown(ModItems.MASTER_NINJA_GEAR) && !player.isInWaterOrBubble()) {
+			if (InputHandler.isHoldingBackwards(player)) {
+				if (InputHandler.isHoldingBackwards(player) && downPressed && downKeyUnpressed && !player.getCooldowns().isOnCooldown(ModItems.MASTER_NINJA_GEAR) && !player.isInWaterOrBubble()) {
 					playParticle(player);
 					playSound(player);
 					player.moveRelative(1, new Vec3(0, 0, -10));
@@ -81,8 +81,8 @@ public class MasterNinjaGearItem extends TrinketTerrariaItem {
 				downKeyUnpressed = true;
 			}
 			//left
-			if (options.keyLeft.isDown()) {
-				if (options.keyLeft.isDown() && leftPressed && leftKeyUnpressed && !player.getCooldowns().isOnCooldown(ModItems.MASTER_NINJA_GEAR) && !player.isInWaterOrBubble()) {
+			if (InputHandler.isHoldingLeft(player)) {
+				if (InputHandler.isHoldingLeft(player) && leftPressed && leftKeyUnpressed && !player.getCooldowns().isOnCooldown(ModItems.MASTER_NINJA_GEAR) && !player.isInWaterOrBubble()) {
 					playParticle(player);
 					playSound(player);
 					player.moveRelative(1, new Vec3(10, 0, 0));
@@ -95,8 +95,8 @@ public class MasterNinjaGearItem extends TrinketTerrariaItem {
 				leftKeyUnpressed = true;
 			}
 			//right
-			if (options.keyRight.isDown()) {
-				if (options.keyRight.isDown() && rightPressed && rightKeyUnpressed && !player.getCooldowns().isOnCooldown(ModItems.MASTER_NINJA_GEAR) && !player.isInWaterOrBubble()) {
+			if (InputHandler.isHoldingRight(player)) {
+				if (InputHandler.isHoldingRight(player) && rightPressed && rightKeyUnpressed && !player.getCooldowns().isOnCooldown(ModItems.MASTER_NINJA_GEAR) && !player.isInWaterOrBubble()) {
 					playParticle(player);
 					playSound(player);
 					player.moveRelative(1, new Vec3(-10, 0, 0));
@@ -125,6 +125,6 @@ public class MasterNinjaGearItem extends TrinketTerrariaItem {
 	}
 
 	private void playSound(Player player) {
-		player.playSound(SoundEvents.PHANTOM_FLAP, 1.0F, 2.0F);
+		player.level.playSound(null, player.blockPosition(), SoundEvents.PHANTOM_FLAP, SoundSource.PLAYERS, 1.0F, 2.0F);
 	}
 }

@@ -6,8 +6,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [1.3.3] - 2022-06-08
 ### Fixed
-- Dedicated Servers crashing on startup
-- Tabi and Master Ninja Gear dodge being very inconsistent
+- Dedicated Servers crashing on startup (Also fixed a bunch of other server stuff)
+- Tabi and Master Ninja Gear dodge being very inconsistent // not done yet
+- Demon Eyes spawning above surface when day (now only spawn at night above surface)
 
 ## [1.3.3] - 2022-06-07
 ### Added

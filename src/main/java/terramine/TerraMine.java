@@ -1,5 +1,6 @@
 package terramine;
 
+import dev.architectury.event.events.common.PlayerEvent;
 import me.shedaniel.autoconfig.AutoConfig;
 import me.shedaniel.autoconfig.ConfigHolder;
 import me.shedaniel.autoconfig.serializer.PartitioningSerializer;
@@ -7,6 +8,7 @@ import me.shedaniel.autoconfig.serializer.Toml4jConfigSerializer;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
 import net.fabricmc.fabric.api.command.v1.CommandRegistrationCallback;
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.fabricmc.fabric.api.loot.v2.LootTableEvents;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.fabricmc.fabric.api.particle.v1.FabricParticleTypes;
@@ -17,7 +19,6 @@ import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.stats.StatFormatter;
 import net.minecraft.stats.Stats;
-import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
 import org.slf4j.Logger;
@@ -30,12 +31,14 @@ import terrablender.worldgen.TBSurfaceRuleData;
 import terramine.common.compat.CompatHandler;
 import terramine.common.config.ModConfig;
 import terramine.common.init.*;
+import terramine.common.network.UpdateInputNetworkHandler;
 import terramine.common.network.packet.BoneMealPacket;
+import terramine.common.network.packet.UpdateInputPacket;
+import terramine.common.utility.InputHandler;
 import terramine.common.world.biome.BiomeAdder;
 import terramine.common.world.biome.BiomeSurfaceRules;
 
 import java.util.Optional;
-import java.util.UUID;
 
 public class TerraMine implements ModInitializer, TerraBlenderApi {
 
@@ -59,6 +62,9 @@ public class TerraMine implements ModInitializer, TerraBlenderApi {
 
 		// Packets
 		ServerPlayNetworking.registerGlobalReceiver(BoneMealPacket.ID, BoneMealPacket::receive);
+		ServerPlayNetworking.registerGlobalReceiver(UpdateInputNetworkHandler.PACKET_ID, (server, player, handler, buf, responseSender) -> {
+			UpdateInputPacket.onMessage(UpdateInputPacket.read(buf), server, player);
+		});
 
 		ServerPlayNetworking.registerGlobalReceiver(WALL_JUMP_PACKET_ID, (server, player, handler, buf, responseSender) -> {
 			boolean didWallJump = buf.readBoolean();
@@ -99,6 +105,10 @@ public class TerraMine implements ModInitializer, TerraBlenderApi {
 
 		Registry.register(Registry.PARTICLE_TYPE, TerraMine.id("blue_poof"), BLUE_POOF);
 		Registry.register(Registry.PARTICLE_TYPE, TerraMine.id("green_spark"), GREEN_SPARK);
+
+		ServerLifecycleEvents.SERVER_STOPPING.register(server -> InputHandler.clear());
+		PlayerEvent.CHANGE_DIMENSION.register((player, oldLevel, newLevel) -> InputHandler.onChangeDimension(player));
+		PlayerEvent.PLAYER_QUIT.register(InputHandler::onLogout);
 
 		// Compat Handlers
 		for (CompatHandler handler : FabricLoader.getInstance().getEntrypoints("terramine:compat_handlers", CompatHandler.class)) {

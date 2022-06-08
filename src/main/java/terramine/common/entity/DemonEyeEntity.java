@@ -21,10 +21,14 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.LightLayer;
+import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.Blocks;
 import org.jetbrains.annotations.NotNull;
 import terramine.common.init.ModLootTables;
 import terramine.common.init.ModSoundEvents;
+
+import java.util.Random;
 
 public class DemonEyeEntity extends Monster implements Enemy {
     public static final EntityDataAccessor<Integer> typed_data = SynchedEntityData.defineId(DemonEyeEntity.class, EntityDataSerializers.INT);
@@ -301,7 +305,11 @@ public class DemonEyeEntity extends Monster implements Enemy {
 
     @Override
     public boolean checkSpawnRules(@NotNull LevelAccessor world, @NotNull MobSpawnType spawnReason) {
-        return true;
+        if (isDarkEnoughToSpawn((ServerLevelAccessor) world, this.blockPosition(), random)) {
+            return this.blockPosition().getY() <= 60 || !this.level.isDay();
+        }
+
+        return false;
     }
 
     /*

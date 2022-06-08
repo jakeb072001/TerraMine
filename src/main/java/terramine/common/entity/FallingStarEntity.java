@@ -44,7 +44,7 @@ public class FallingStarEntity extends Mob {
     public void createStarItem() {
         if (!level.isClientSide()) { // checks if the world is not client
             level.broadcastEntityEvent(this, (byte)3); // particle?
-            playSound(ModSoundEvents.FALLING_STAR_CRASH,0.5f, 1f);
+            level.playSound(null, this.blockPosition(), ModSoundEvents.FALLING_STAR_CRASH, SoundSource.AMBIENT, 0.5f, 1f);
             ItemEntity starItem = new ItemEntity(level, this.blockPosition().getX(), this.blockPosition().getY(), this.blockPosition().getZ(), ModItems.FAKE_FALLEN_STAR.getDefaultInstance());
             starItem.setUnlimitedLifetime();
             level.addFreshEntity(starItem);
@@ -75,7 +75,6 @@ public class FallingStarEntity extends Mob {
         setDeltaMovement(new Vec3(motion.x() + this.x, y, motion.z() + this.z));
     }
 
-    @Environment(EnvType.CLIENT)
     private void spawnEffects() {
         float random = (rand.nextFloat() - 0.5F) * 0.1F;
         if (this.getServer() != null) {
@@ -84,7 +83,7 @@ public class FallingStarEntity extends Mob {
         }
         soundTimer += 1;
         if (soundTimer >= (rand.nextInt(7)) + 5) {
-            playSound(ModSoundEvents.FALLING_STAR_FALL,0.5f, 1f);
+            level.playSound(null, this.blockPosition(), ModSoundEvents.FALLING_STAR_FALL, SoundSource.AMBIENT, 0.5f, 1f);
             soundTimer = 0;
         }
     }

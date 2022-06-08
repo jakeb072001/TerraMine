@@ -3,6 +3,8 @@ package terramine.common.item.curio.hands;
 import com.google.common.collect.Multimap;
 import com.jamieswhiteshirt.reachentityattributes.ReachEntityAttributes;
 import dev.emi.trinkets.api.SlotReference;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.client.Minecraft;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.Entity;
@@ -17,6 +19,7 @@ import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
 import terramine.TerraMine;
 import terramine.common.item.curio.TrinketTerrariaItem;
+import terramine.common.utility.InputHandler;
 
 import java.util.UUID;
 
@@ -42,11 +45,12 @@ public class PowerGloveItem extends TrinketTerrariaItem {
 		return result;
 	}
 
+	@Environment(EnvType.CLIENT)
 	@Override
 	public void curioTick(LivingEntity livingEntity, ItemStack stack) {
 		Minecraft mc = Minecraft.getInstance();
-		if (mc.options.keyAttack.isDown()) {
-			if (livingEntity instanceof Player player && player.getAttackStrengthScale(0) >= 1) {
+		if (livingEntity instanceof Player player && InputHandler.isHoldingAttack(player)) {
+			if (player.getAttackStrengthScale(0) >= 1) {
 				if (mc.hitResult != null && mc.hitResult.getType() == HitResult.Type.ENTITY && !(mc.hitResult instanceof BlockHitResult)) {
 					Entity entity = ((EntityHitResult) mc.hitResult).getEntity();
 					if (entity.isAlive() && entity.isAttackable()) {

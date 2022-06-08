@@ -3,6 +3,7 @@ package terramine.mixin.item.terrasparkboots;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
@@ -48,14 +49,16 @@ public abstract class EntityMixin {
     @Inject(method = "playStepSound", at = @At("HEAD"))
     private void playSprintStepSound(BlockPos pos, BlockState blockState, CallbackInfo callbackInfo) {
         if (blockState.getMaterial().isSolid() && isRunningWithTerrasparkBoots()) {
-            ((LivingEntity) (Object) this).playSound(ModSoundEvents.SPEEDBOOTS_RUN, 0.5F, 1);
+            LivingEntity entity = (LivingEntity) (Object) this;
+            entity.level.playSound(null, entity.blockPosition(), ModSoundEvents.SPEEDBOOTS_RUN, SoundSource.PLAYERS, 0.5F, 1);
         }
     }
 
     @Inject(method = "playStepSound", at = @At("HEAD"))
     private void playWaterStepSound(BlockPos pos, BlockState blockState, CallbackInfo callbackInfo) {
         if (blockState.getMaterial().isLiquid() && isLiquidRunningWithTerrasparkBoots()) {
-            ((LivingEntity) (Object) this).playSound(ModSoundEvents.WATER_STEP, 0.15F, 1);
+            LivingEntity entity = (LivingEntity) (Object) this;
+            entity.level.playSound(null, entity.blockPosition(), ModSoundEvents.WATER_STEP, SoundSource.PLAYERS, 0.15F, 1);
         }
     }
 

@@ -4,6 +4,7 @@ import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
+import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.model.ModelLoadingRegistry;
 import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.BlockEntityRendererRegistry;
@@ -12,6 +13,7 @@ import net.fabricmc.fabric.api.event.client.ClientSpriteRegistryCallback;
 import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
 import net.fabricmc.fabric.api.resource.ResourcePackActivationType;
 import net.fabricmc.loader.api.FabricLoader;
+import net.minecraft.client.Options;
 import net.minecraft.client.particle.FlameParticle;
 import net.minecraft.client.particle.PlayerCloudParticle;
 import net.minecraft.client.renderer.RenderType;
@@ -23,10 +25,12 @@ import net.minecraft.server.packs.PackType;
 import terramine.client.render.entity.*;
 import terramine.client.render.trinket.CurioRenderers;
 import terramine.common.init.*;
+import terramine.common.utility.KeyBindingsHandler;
+
+import javax.annotation.Nullable;
 
 @Environment(EnvType.CLIENT)
 public class TerraMineClient implements ClientModInitializer {
-
 	private static final ModelResourceLocation UMBRELLA_HELD_MODEL = new ModelResourceLocation(TerraMine.id("umbrella_in_hand"), "inventory");
 
 	@Override
@@ -78,6 +82,8 @@ public class TerraMineClient implements ClientModInitializer {
 		// ModelPredicateProvider for rendering of umbrella blocking
 		ItemProperties.register(ModItems.UMBRELLA, new ResourceLocation("blocking"), (stack, level, entity, i)
 				-> entity != null && entity.isUsingItem() && entity.getUseItem() == stack ? 1 : 0);
+
+		ClientTickEvents.END_CLIENT_TICK.register(KeyBindingsHandler::onClientTick);
 	}
 
 	public static void registerTextures() {

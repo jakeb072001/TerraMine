@@ -43,7 +43,6 @@ public class RocketBootHelper {
     }
 
     private void realFly(double speed, int priority, Player player) {
-        Options settings = Minecraft.getInstance().options;
         if (player.isOnGround())
         {
             if (timer > 0)
@@ -52,8 +51,8 @@ public class RocketBootHelper {
                 soundTimer = 0;
             }
         }
-        if (settings != null && timer < rocketTime && priorityOrder(player, priority)) {
-            if (settings.keyJump.isDown()) {
+        if (timer < rocketTime && priorityOrder(player, priority)) {
+            if (InputHandler.isHoldingJump(player)) {
                 double currentAccel = speed * (player.getDeltaMovement().y() < 0.3D ? 2.5D : 1.0D);
                 double currentSpeedVertical = speed * (player.isUnderWater() ? 0.4D : 1.0D);
                 float random = (RANDOM.nextFloat() - 0.5F) * 0.1F;
@@ -61,7 +60,7 @@ public class RocketBootHelper {
                 soundTimer += 1;
 
                 double motionY = player.getDeltaMovement().y();
-                if (settings.keyJump.isDown()) {
+                if (InputHandler.isHoldingJump(player)) {
                     this.fly(player, Math.min(motionY + currentAccel, currentSpeedVertical));
                     if (soundTimer >= 3) {
                         player.level.playSound(null, player.blockPosition(), sound, SoundSource.PLAYERS, soundVolume, soundPitch);
@@ -87,16 +86,16 @@ public class RocketBootHelper {
                 float speedSideways = (float) (player.isCrouching() ? this.speedSide * 0.5F : this.speedSide);
                 float speedForward = player.isSprinting() ? (float) (speedSideways * this.sprintSpeed) : speedSideways;
 
-                if (settings.keyUp.isDown()) {
+                if (InputHandler.isHoldingForwards(player)) {
                     player.moveRelative(1, new Vec3(0, 0, speedForward));
                 }
-                if (settings.keyDown.isDown()) {
+                if (InputHandler.isHoldingBackwards(player)) {
                     player.moveRelative(1, new Vec3(0, 0, -speedSideways * 0.8F));
                 }
-                if (settings.keyLeft.isDown()) {
+                if (InputHandler.isHoldingLeft(player)) {
                     player.moveRelative(1, new Vec3(speedSideways, 0, 0));
                 }
-                if (settings.keyRight.isDown()) {
+                if (InputHandler.isHoldingRight(player)) {
                     player.moveRelative(1, new Vec3(-speedSideways, 0, 0));
                 }
                 if (!player.level.isClientSide()) {
