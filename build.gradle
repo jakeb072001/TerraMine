@@ -1,5 +1,5 @@
 plugins {
-    id 'fabric-loom' version '0.11-SNAPSHOT'
+    id 'fabric-loom' version '0.12-SNAPSHOT'
     id 'io.github.juuxel.loom-quiltflower' version '1.6.1'
     id 'com.matthewprenger.cursegradle' version '1.4.0'
     id 'maven-publish'
@@ -211,29 +211,14 @@ curseforge {
     options {
         forgeGradleIntegration = false
     }
+}
 
-    publishing {
-        publications {
-            gpr(MavenPublication) {
-                artifactId='terrariacraft'
-                from(components.java)
-            }
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
         }
-
-        repositories {
-            mavenLocal()
-            maven {
-                name = 'BuildDirLocal'
-                url = "$buildDir/repo"
-            }
-            maven {
-                name = 'GithubPackages'
-                url = uri('https://maven.pkg.github.com/jakeb072001/TerrariaCraft')
-                credentials {
-                    username = project.findProperty('gpr.user') ?: System.getenv('GPR_USER')
-                    password = project.findProperty('gpr.key') ?: System.getenv('GPR_API_KEY')
-                }
-            }
-        }
+    }
+    repositories {
     }
 }

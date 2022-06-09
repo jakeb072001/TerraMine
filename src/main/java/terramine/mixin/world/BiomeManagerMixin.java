@@ -18,6 +18,7 @@ import terramine.common.utility.CorruptionHelper;
 public class BiomeManagerMixin {
 
     //todo: currently can cause a crash randomly, has to do with block tint for grass and foliage, ClientLevelMixin may temporarily fix this
+    //todo: get working on common side of mixin, right now only works on client because of getInstance but need on server side as well
     @Inject(at = @At("RETURN"), method = "getBiome", cancellable = true)
     public void spreadCorruptionBiome(BlockPos pos, CallbackInfoReturnable<Holder<Biome>> info) {
         Minecraft mc = Minecraft.getInstance();
