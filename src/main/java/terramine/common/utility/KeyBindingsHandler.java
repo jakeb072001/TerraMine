@@ -15,6 +15,7 @@ public class KeyBindingsHandler {
     private static boolean left = false;
     private static boolean right = false;
     private static boolean attack = false;
+    private static boolean shift = false;
 
     public static void onClientTick(Minecraft client) {
         updateInputs(client);
@@ -32,21 +33,23 @@ public class KeyBindingsHandler {
 
         boolean jumpNow = settings.keyJump.isDown();
         boolean attackNow = settings.keyAttack.isDown();
+        boolean shiftNow = settings.keyShift.isDown();
         boolean forwardsNow = settings.keyUp.isDown();
         boolean backwardsNow = settings.keyDown.isDown();
         boolean leftNow = settings.keyLeft.isDown();
         boolean rightNow = settings.keyRight.isDown();
 
-        if (jumpNow != jump || attackNow != attack || forwardsNow != forwards || backwardsNow != backwards || leftNow != left || rightNow != right) {
+        if (jumpNow != jump || attackNow != attack || shiftNow != shift || forwardsNow != forwards || backwardsNow != backwards || leftNow != left || rightNow != right) {
             jump = jumpNow;
             attack = attackNow;
+            shift = shiftNow;
             forwards = forwardsNow;
             backwards = backwardsNow;
             left = leftNow;
             right = rightNow;
 
-            UpdateInputNetworkHandler.sendToServer(new UpdateInputPacket(jumpNow, attackNow, forwardsNow, backwardsNow, leftNow, rightNow));
-            InputHandler.update(client.player, jumpNow, attackNow, forwardsNow, backwardsNow, leftNow, rightNow);
+            UpdateInputNetworkHandler.sendToServer(new UpdateInputPacket(jumpNow, attackNow, shiftNow, forwardsNow, backwardsNow, leftNow, rightNow));
+            InputHandler.update(client.player, jumpNow, attackNow, shiftNow, forwardsNow, backwardsNow, leftNow, rightNow);
         }
     }
 }

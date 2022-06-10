@@ -53,6 +53,7 @@
     "item.whoopeecushion.EntityMixin",
     "statuseffect.LivingEntityMixin",
     "statuseffect.MobEffectInstanceMixin",
+    "world.BiomeManagerMixin",
     "world.WorldGenSettingsMixin",
     "world.entity.HopperBlockEntityMixin",
     "world.entity.ItemEntityMixin",
@@ -81,7 +82,6 @@
     "statuseffect.client.GameRendererMixin",
     "statuseffect.client.LivingEntityMixin",
     "statuseffect.client.MobEffectUtilMixin",
-    "world.BiomeManagerMixin",
     "world.ClientLevelMixin"
   ],
   "injectors": {

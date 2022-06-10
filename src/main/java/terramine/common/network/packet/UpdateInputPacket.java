@@ -6,16 +6,18 @@ import net.minecraft.server.level.ServerPlayer;
 import terramine.common.utility.InputHandler;
 
 public class UpdateInputPacket {
-    private final boolean up;
-    private final boolean down;
+    private final boolean jump;
+    private final boolean attack;
+    private final boolean shift;
     private final boolean forwards;
     private final boolean backwards;
     private final boolean left;
     private final boolean right;
 
-    public UpdateInputPacket(boolean up, boolean down, boolean forwards, boolean backwards, boolean left, boolean right) {
-        this.up = up;
-        this.down = down;
+    public UpdateInputPacket(boolean jump, boolean attack, boolean shift, boolean forwards, boolean backwards, boolean left, boolean right) {
+        this.jump = jump;
+        this.attack = attack;
+        this.shift = shift;
         this.forwards = forwards;
         this.backwards = backwards;
         this.left = left;
@@ -23,12 +25,13 @@ public class UpdateInputPacket {
     }
 
     public static UpdateInputPacket read(FriendlyByteBuf buffer) {
-        return new UpdateInputPacket(buffer.readBoolean(), buffer.readBoolean(), buffer.readBoolean(), buffer.readBoolean(), buffer.readBoolean(), buffer.readBoolean());
+        return new UpdateInputPacket(buffer.readBoolean(), buffer.readBoolean(), buffer.readBoolean(), buffer.readBoolean(), buffer.readBoolean(), buffer.readBoolean(), buffer.readBoolean());
     }
 
     public static void write(UpdateInputPacket message, FriendlyByteBuf buffer) {
-        buffer.writeBoolean(message.up);
-        buffer.writeBoolean(message.down);
+        buffer.writeBoolean(message.jump);
+        buffer.writeBoolean(message.attack);
+        buffer.writeBoolean(message.shift);
         buffer.writeBoolean(message.forwards);
         buffer.writeBoolean(message.backwards);
         buffer.writeBoolean(message.left);
@@ -38,7 +41,7 @@ public class UpdateInputPacket {
     public static void onMessage(UpdateInputPacket message, MinecraftServer server, ServerPlayer player) {
         server.execute(() -> {
             if (player != null) {
-                InputHandler.update(player, message.up, message.down, message.forwards, message.backwards, message.left, message.right);
+                InputHandler.update(player, message.jump, message.attack, message.shift, message.forwards, message.backwards, message.left, message.right);
             }
         });
     }

@@ -1,20 +1,20 @@
 package terramine.mixin.item.walljump;
 
+import com.mojang.authlib.GameProfile;
 import io.netty.buffer.Unpooled;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.multiplayer.ClientLevel;
+import net.minecraft.client.player.AbstractClientPlayer;
+import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Vec3i;
+import net.minecraft.core.particles.BlockParticleOption;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockState;
@@ -28,18 +28,14 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import terramine.TerraMine;
 import terramine.common.init.ModItems;
 import terramine.common.trinkets.TrinketsHelper;
+import terramine.common.utility.InputHandler;
 
 import java.util.HashSet;
 import java.util.Set;
 
-@Mixin(Player.class)
-public abstract class PlayerMixin extends LivingEntity {
-
-    @Shadow protected abstract boolean isImmobile();
-
+@Mixin(LocalPlayer.class)
+public abstract class PlayerMixin extends AbstractClientPlayer {
     @Shadow public abstract boolean isLocalPlayer();
-
-    @Shadow public abstract boolean isCreative();
 
     public int ticksWallClinged;
     private int ticksKeyDown;
@@ -48,17 +44,17 @@ public abstract class PlayerMixin extends LivingEntity {
     private double lastJumpY = Double.MAX_VALUE;
     private Set<Direction> walls = new HashSet<>();
     private Set<Direction> staleWalls = new HashSet<>();
-    Minecraft mc = Minecraft.getInstance();
+    private final Minecraft mc = Minecraft.getInstance();
 
 
-    public PlayerMixin(EntityType<? extends LivingEntity> type, Level world) {
-        super( type, world);
+    public PlayerMixin(ClientLevel level, GameProfile profile) {
+        super(level, profile);
     }
 
 
     @Inject(method = "tick", at = @At("TAIL"))
     private void wallJumpTickMovement(CallbackInfo ci) {
-        if (!this.isCreative()) {
+        if (mc.gameMode != null && !mc.gameMode.hasInfiniteItems()) {
             if (TrinketsHelper.isEquipped(ModItems.SHOE_SPIKES, this) || TrinketsHelper.isEquipped(ModItems.CLIMBING_CLAWS, this) || TrinketsHelper.isEquipped(ModItems.TIGER_CLIMBING_GEAR, this)
                     || TrinketsHelper.isEquipped(ModItems.MASTER_NINJA_GEAR, this)) {
                 this.doWallJump();
@@ -84,7 +80,7 @@ public abstract class PlayerMixin extends LivingEntity {
         }
 
         this.updateWalls();
-        this.ticksKeyDown = mc.options.keyShift.isDown() ? this.ticksKeyDown + 1 : 0;
+        this.ticksKeyDown = InputHandler.isHoldingShift(this) ? this.ticksKeyDown + 1 : 0;
         boolean trinketCheck = checkTrinkets();
 
         if(this.ticksWallClinged < 1) {
@@ -108,16 +104,11 @@ public abstract class PlayerMixin extends LivingEntity {
             return;
         }
 
-        if(!mc.options.keyShift.isDown() || this.onGround || !this.level.getFluidState(this.blockPosition()).isEmpty() || this.walls.isEmpty()) {
+        if(!InputHandler.isHoldingShift(this) || this.onGround || !this.level.getFluidState(this.blockPosition()).isEmpty() || this.walls.isEmpty()) {
             this.ticksWallClinged = 0;
 
             if((this.getSpeed() != 0) && !this.onGround && !this.walls.isEmpty()) {
                 this.fallDistance = 0.0F;
-
-                FriendlyByteBuf passedData = new FriendlyByteBuf(Unpooled.buffer());
-                passedData.writeBoolean(true);
-                ClientPlayNetworking.send(TerraMine.WALL_JUMP_PACKET_ID, passedData);
-
                 this.wallJump(0.55F);
                 this.staleWalls = new HashSet<>(this.walls);
             }
@@ -139,7 +130,7 @@ public abstract class PlayerMixin extends LivingEntity {
             } else {
                 motionY = 0.0;
             }
-        } else if (mc.options.keyDown.isDown()) {
+        } else if (InputHandler.isHoldingBackwards(this)) {
             if (motionY > 0.0) {
                 motionY = 0.0;
             } else if (motionY < -0.6) {
@@ -271,12 +262,9 @@ public abstract class PlayerMixin extends LivingEntity {
     private void spawnWallParticle(BlockPos blockPos) {
         BlockState blockState = this.level.getBlockState(blockPos);
         if(blockState.getRenderShape() != RenderShape.INVISIBLE) {
-
             Vec3 pos = this.position();
             Vec3i motion = this.getClingDirection().getNormal();
-            if (!this.isLocalPlayer()) {
-                ((ServerPlayer) (Object) this).getLevel().sendParticles(ParticleTypes.POOF, pos.x(), pos.y(), pos.z(), 1, motion.getX() * -1.0D, -1.0D, motion.getZ() * -1.0D, 0.15);
-            }
+            this.level.addParticle(new BlockParticleOption(ParticleTypes.BLOCK, blockState), pos.x(), pos.y(), pos.z(), motion.getX() * -1.0D, -1.0D, motion.getZ() * -1.0D);
         }
     }
 }

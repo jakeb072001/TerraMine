@@ -66,40 +66,40 @@ public class DemonEyeEntity extends Monster implements Enemy {
         this.entityData.set(typed_data, eyeType);
         switch (eyeType) {
             case 0 -> {
-                this.getAttribute(Attributes.MAX_HEALTH).setBaseValue(15);
+                this.getAttribute(Attributes.MAX_HEALTH).setBaseValue(10);
                 this.getAttribute(Attributes.ARMOR).setBaseValue(2);
                 this.getAttribute(Attributes.KNOCKBACK_RESISTANCE).setBaseValue(0.2);
-                this.getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue(3.5);
+                this.getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue(1.5);
             }
             case 1 -> {
-                this.getAttribute(Attributes.MAX_HEALTH).setBaseValue(20);
+                this.getAttribute(Attributes.MAX_HEALTH).setBaseValue(15);
                 this.getAttribute(Attributes.ARMOR).setBaseValue(4);
                 this.getAttribute(Attributes.KNOCKBACK_RESISTANCE).setBaseValue(0.3);
-                this.getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue(3.5);
+                this.getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue(1.5);
             }
             case 2 -> {
-                this.getAttribute(Attributes.MAX_HEALTH).setBaseValue(25);
+                this.getAttribute(Attributes.MAX_HEALTH).setBaseValue(20);
                 this.getAttribute(Attributes.ARMOR).setBaseValue(2);
                 this.getAttribute(Attributes.KNOCKBACK_RESISTANCE).setBaseValue(0.2);
-                this.getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue(3.5);
+                this.getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue(1.5);
             }
             case 3 -> {
-                this.getAttribute(Attributes.MAX_HEALTH).setBaseValue(20);
+                this.getAttribute(Attributes.MAX_HEALTH).setBaseValue(15);
                 this.getAttribute(Attributes.ARMOR).setBaseValue(0);
                 this.getAttribute(Attributes.KNOCKBACK_RESISTANCE).setBaseValue(0.2);
-                this.getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue(4);
+                this.getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue(2);
             }
             case 4 -> {
-                this.getAttribute(Attributes.MAX_HEALTH).setBaseValue(20);
+                this.getAttribute(Attributes.MAX_HEALTH).setBaseValue(15);
                 this.getAttribute(Attributes.ARMOR).setBaseValue(4);
                 this.getAttribute(Attributes.KNOCKBACK_RESISTANCE).setBaseValue(0.2);
-                this.getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue(3);
+                this.getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue(1);
             }
             case 5 -> {
-                this.getAttribute(Attributes.MAX_HEALTH).setBaseValue(20);
+                this.getAttribute(Attributes.MAX_HEALTH).setBaseValue(15);
                 this.getAttribute(Attributes.ARMOR).setBaseValue(2);
                 this.getAttribute(Attributes.KNOCKBACK_RESISTANCE).setBaseValue(0.15);
-                this.getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue(3);
+                this.getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue(1);
             }
         }
     }
@@ -364,12 +364,12 @@ public class DemonEyeEntity extends Monster implements Enemy {
 
     public static AttributeSupplier.Builder createMobAttributes() {
         return Mob.createMobAttributes()
-                .add(Attributes.MAX_HEALTH, 25)
+                .add(Attributes.MAX_HEALTH, 15)
                 .add(Attributes.ARMOR, 2)
                 .add(Attributes.FOLLOW_RANGE, 24)
                 .add(Attributes.KNOCKBACK_RESISTANCE, 0.2)
-                .add(Attributes.MOVEMENT_SPEED, 1)
-                .add(Attributes.ATTACK_DAMAGE, 3.5);
+                .add(Attributes.MOVEMENT_SPEED, 0.5)
+                .add(Attributes.ATTACK_DAMAGE, 1.5);
     }
 
     public SoundSource getSoundSource() {

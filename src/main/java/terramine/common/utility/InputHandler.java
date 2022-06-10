@@ -13,6 +13,7 @@ public class InputHandler {
     private static final Map<Player, Boolean> HOLDING_LEFT = new HashMap<>();
     private static final Map<Player, Boolean> HOLDING_RIGHT = new HashMap<>();
     private static final Map<Player, Boolean> HOLDING_ATTACK = new HashMap<>();
+    private static final Map<Player, Boolean> HOLDING_SHIFT = new HashMap<>();
 
     public static boolean isHoldingJump(Player player) {
         return HOLDING_JUMP.containsKey(player) && HOLDING_JUMP.get(player);
@@ -38,13 +39,18 @@ public class InputHandler {
         return HOLDING_ATTACK.containsKey(player) && HOLDING_ATTACK.get(player);
     }
 
-    public static void update(Player player, boolean jump, boolean attack, boolean forwards, boolean backwards, boolean left, boolean right) {
+    public static boolean isHoldingShift(Player player) {
+        return HOLDING_SHIFT.containsKey(player) && HOLDING_SHIFT.get(player);
+    }
+
+    public static void update(Player player, boolean jump, boolean attack, boolean shift, boolean forwards, boolean backwards, boolean left, boolean right) {
         HOLDING_JUMP.put(player, jump);
         HOLDING_FORWARDS.put(player, forwards);
         HOLDING_BACKWARDS.put(player, backwards);
         HOLDING_LEFT.put(player, left);
         HOLDING_RIGHT.put(player, right);
         HOLDING_ATTACK.put(player, attack);
+        HOLDING_SHIFT.put(player, shift);
     }
 
     public static void remove(Player player) {
@@ -54,6 +60,7 @@ public class InputHandler {
         HOLDING_LEFT.remove(player);
         HOLDING_RIGHT.remove(player);
         HOLDING_ATTACK.remove(player);
+        HOLDING_SHIFT.remove(player);
     }
 
     public static void clear() {
@@ -63,6 +70,7 @@ public class InputHandler {
         HOLDING_LEFT.clear();
         HOLDING_RIGHT.clear();
         HOLDING_ATTACK.clear();
+        HOLDING_SHIFT.clear();
     }
 
     public static void onLogout(ServerPlayer playerEntity) {

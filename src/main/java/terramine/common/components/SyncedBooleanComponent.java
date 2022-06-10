@@ -29,6 +29,12 @@ public class SyncedBooleanComponent implements Component, AutoSyncedComponent {
 		this.bool = bool;
 	}
 
+	public static void setServer(MinecraftServer mcServer) {
+		if (mcServer != null) {
+			server = mcServer;
+		}
+	}
+
 	@NotNull
 	public static MinecraftServer getServer() {
 		if (server != null) {

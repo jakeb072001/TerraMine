@@ -30,8 +30,12 @@ public class DemonEyeModel extends EntityModel<DemonEyeEntity> {
 
     @Override
     public void renderToBuffer(PoseStack matrixStack, VertexConsumer buffer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
+        matrixStack.pushPose();
+        matrixStack.scale(1.5f, 1.5f,1.5f);
+        matrixStack.translate(0f, 1.5f - 1.5 * 1.375f, 0f); // 1.5f - 1.5 * scale, normally but eye seems to be slightly off center in model so account for that here
         eye.render(matrixStack, buffer, packedLight, packedOverlay, red, green, blue, alpha);
         veins.render(matrixStack, buffer, packedLight, packedOverlay, red, green, blue, alpha);
+        matrixStack.popPose();
     }
 
     public static LayerDefinition createLayer() {

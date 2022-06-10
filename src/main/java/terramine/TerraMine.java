@@ -9,6 +9,7 @@ import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
 import net.fabricmc.fabric.api.command.v1.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerWorldEvents;
 import net.fabricmc.fabric.api.loot.v2.LootTableEvents;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.fabricmc.fabric.api.particle.v1.FabricParticleTypes;
@@ -29,6 +30,7 @@ import terrablender.api.SurfaceRuleManager;
 import terrablender.api.TerraBlenderApi;
 import terrablender.worldgen.TBSurfaceRuleData;
 import terramine.common.compat.CompatHandler;
+import terramine.common.components.SyncedBooleanComponent;
 import terramine.common.config.ModConfig;
 import terramine.common.init.*;
 import terramine.common.network.UpdateInputNetworkHandler;
@@ -66,15 +68,6 @@ public class TerraMine implements ModInitializer, TerraBlenderApi {
 			UpdateInputPacket.onMessage(UpdateInputPacket.read(buf), server, player);
 		});
 
-		ServerPlayNetworking.registerGlobalReceiver(WALL_JUMP_PACKET_ID, (server, player, handler, buf, responseSender) -> {
-			boolean didWallJump = buf.readBoolean();
-
-			server.execute(() -> {
-				if(didWallJump)
-					player.causeFoodExhaustion(0.8F);
-			});
-		});
-
 		ServerPlayNetworking.registerGlobalReceiver(FALL_DISTANCE_PACKET_ID, (server, player, handler, buf, responseSender) -> {
 			float fallDistance = buf.readFloat();
 			server.execute(() -> {
@@ -109,6 +102,7 @@ public class TerraMine implements ModInitializer, TerraBlenderApi {
 		ServerLifecycleEvents.SERVER_STOPPING.register(server -> InputHandler.clear());
 		PlayerEvent.CHANGE_DIMENSION.register((player, oldLevel, newLevel) -> InputHandler.onChangeDimension(player));
 		PlayerEvent.PLAYER_QUIT.register(InputHandler::onLogout);
+		ServerWorldEvents.LOAD.register((server, level) -> SyncedBooleanComponent.setServer(server));
 
 		// Compat Handlers
 		for (CompatHandler handler : FabricLoader.getInstance().getEntrypoints("terramine:compat_handlers", CompatHandler.class)) {

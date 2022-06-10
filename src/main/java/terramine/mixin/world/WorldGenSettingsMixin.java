@@ -2,6 +2,7 @@ package terramine.mixin.world;
 
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.server.dedicated.DedicatedServerProperties;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.levelgen.WorldGenSettings;
 import org.apache.commons.lang3.StringUtils;
 import org.spongepowered.asm.mixin.Mixin;
@@ -40,6 +41,9 @@ public class WorldGenSettingsMixin {
     @Inject(at = @At("HEAD"), method = "create")
     private static void setTerramineGlobalValues(RegistryAccess registryAccess, DedicatedServerProperties.WorldGenProperties worldGenProperties, CallbackInfoReturnable<WorldGenSettings> cir) {
         rand.setSeed(parseSeed(worldGenProperties.levelSeed()).orElse(rand.nextLong()));
-        //ModComponents.HARDMODE.get("hardmode").set(rand.nextBoolean());
+        //Level level = SyncedBooleanComponent.getServer().getLevel(Level.OVERWORLD);
+        //if (level != null) {
+        //    ModComponents.HARDMODE.get(level).set(rand.nextBoolean());
+        //}
     }
 }
