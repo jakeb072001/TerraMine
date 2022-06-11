@@ -119,7 +119,7 @@ public class DemonEyeEntity extends Monster implements Enemy {
         @Override
         public void tick() {
             if (demonEye.isAlive()) {
-                boolean night = demonEye.level.getDayTime() <= 23999 && demonEye.level.getDayTime() >= 13000;
+                boolean isDay = demonEye.level.isDay();
 
                 double motionY;
                 double motionX;
@@ -185,7 +185,7 @@ public class DemonEyeEntity extends Monster implements Enemy {
 
                 }
 
-                if (!night && demonEye.level.canSeeSky(demonEye.eyeBlockPosition())) {
+                if (isDay && demonEye.level.canSeeSky(demonEye.eyeBlockPosition())) {
                     if (!demonEye.doOnce) {
                         demonEye.velX = demonEye.random.nextInt(-2, 3);
                         demonEye.velZ = demonEye.random.nextInt(-2, 3);

@@ -30,7 +30,7 @@ public abstract class GuiMixin {
 	@Unique TranslatableComponent fullMoonText = new TranslatableComponent(TerraMine.MOD_ID + ".ui.fullMoon");
 	@Unique TranslatableComponent waningGibbousMoonText = new TranslatableComponent(TerraMine.MOD_ID + ".ui.waningGibbousMoon");
 	@Unique TranslatableComponent thirdQuarterMoonText = new TranslatableComponent(TerraMine.MOD_ID + ".ui.thirdQuarterMoon");
-	@Unique TranslatableComponent waningCrescentMoonText = new TranslatableComponent(TerraMine.MOD_ID + ".ui.crescentMoon");
+	@Unique TranslatableComponent waningCrescentMoonText = new TranslatableComponent(TerraMine.MOD_ID + ".ui.waningCrescentMoon");
 	@Unique TranslatableComponent newMoonText = new TranslatableComponent(TerraMine.MOD_ID + ".ui.newMoon");
 	@Unique TranslatableComponent waxingCrescentMoonText = new TranslatableComponent(TerraMine.MOD_ID + ".ui.waxingCrescentMoon");
 	@Unique TranslatableComponent firstQuarterMoonText = new TranslatableComponent(TerraMine.MOD_ID + ".ui.firstQuarterMoon");
