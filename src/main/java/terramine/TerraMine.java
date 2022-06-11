@@ -11,12 +11,8 @@ import net.fabricmc.fabric.api.command.v1.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerWorldEvents;
 import net.fabricmc.fabric.api.loot.v2.LootTableEvents;
-import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
-import net.fabricmc.fabric.api.particle.v1.FabricParticleTypes;
 import net.fabricmc.loader.api.FabricLoader;
 import net.fabricmc.loader.api.ModContainer;
-import net.minecraft.core.Registry;
-import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.stats.StatFormatter;
 import net.minecraft.stats.Stats;
@@ -33,9 +29,7 @@ import terramine.common.compat.CompatHandler;
 import terramine.common.components.SyncedBooleanComponent;
 import terramine.common.config.ModConfig;
 import terramine.common.init.*;
-import terramine.common.network.UpdateInputNetworkHandler;
-import terramine.common.network.packet.BoneMealPacket;
-import terramine.common.network.packet.UpdateInputPacket;
+import terramine.common.network.ServerPacketHandler;
 import terramine.common.utility.InputHandler;
 import terramine.common.world.biome.BiomeAdder;
 import terramine.common.world.biome.BiomeSurfaceRules;
@@ -46,11 +40,7 @@ public class TerraMine implements ModInitializer, TerraBlenderApi {
 
 	public static final String MOD_ID = "terramine";
 	public static final Logger LOGGER = LoggerFactory.getLogger(TerraMine.class);
-	public static final SimpleParticleType BLUE_POOF = FabricParticleTypes.simple();
-	public static final SimpleParticleType GREEN_SPARK = FabricParticleTypes.simple();
 	public static final CreativeModeTab ITEM_GROUP = FabricItemGroupBuilder.build(id("item_group"), () -> new ItemStack(ModItems.TERRASPARK_BOOTS));
-	public static final ResourceLocation WALL_JUMP_PACKET_ID = new ResourceLocation(MOD_ID, "walljump");
-	public static final ResourceLocation FALL_DISTANCE_PACKET_ID = new ResourceLocation(MOD_ID, "falldistance");
 	public static ModConfig CONFIG;
 	//private static final Map<String, Runnable> COMPAT_HANDLERS = Map.of(
 	//		"origins", new OriginsCompat(),
@@ -63,17 +53,7 @@ public class TerraMine implements ModInitializer, TerraBlenderApi {
 		CONFIG = getConfigAndInvalidateOldVersions();
 
 		// Packets
-		ServerPlayNetworking.registerGlobalReceiver(BoneMealPacket.ID, BoneMealPacket::receive);
-		ServerPlayNetworking.registerGlobalReceiver(UpdateInputNetworkHandler.PACKET_ID, (server, player, handler, buf, responseSender) -> {
-			UpdateInputPacket.onMessage(UpdateInputPacket.read(buf), server, player);
-		});
-
-		ServerPlayNetworking.registerGlobalReceiver(FALL_DISTANCE_PACKET_ID, (server, player, handler, buf, responseSender) -> {
-			float fallDistance = buf.readFloat();
-			server.execute(() -> {
-				player.fallDistance = fallDistance;
-			});
-		});
+		ServerPacketHandler.register();
 
 		// Loot table setup
 		ModLootConditions.register();
@@ -91,13 +71,11 @@ public class TerraMine implements ModInitializer, TerraBlenderApi {
 		ModFeatures.register();
 		ModBiomes.registerAll();
 		ModProfessions.fillTradeData();
+		ModParticles.registerServer();
 		ModCommands.registerRules();
 		CommandRegistrationCallback.EVENT.register((dispatcher, dedicated) -> {
 			ModCommands.registerCommands(dispatcher);
 		});
-
-		Registry.register(Registry.PARTICLE_TYPE, TerraMine.id("blue_poof"), BLUE_POOF);
-		Registry.register(Registry.PARTICLE_TYPE, TerraMine.id("green_spark"), GREEN_SPARK);
 
 		ServerLifecycleEvents.SERVER_STOPPING.register(server -> InputHandler.clear());
 		PlayerEvent.CHANGE_DIMENSION.register((player, oldLevel, newLevel) -> InputHandler.onChangeDimension(player));

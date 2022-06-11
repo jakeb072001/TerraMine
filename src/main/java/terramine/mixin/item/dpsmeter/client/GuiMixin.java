@@ -33,7 +33,7 @@ public abstract class GuiMixin {
 	@Shadow protected abstract Player getCameraPlayer();
 	@Shadow public abstract Font getFont();
 
-	//todo: make DPS Meter actually work, right now it doesn't really
+	//todo: make DPS Meter actually work, right now it doesn't really, probably something with packets
 	@Inject(method = "renderPlayerHealth", require = 0, at = @At(value = "TAIL"))
 	private void renderGuiDPS(PoseStack matrices, CallbackInfo ci) {
 		Player player = this.getCameraPlayer();

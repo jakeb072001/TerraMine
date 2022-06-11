@@ -1,10 +1,14 @@
 package terramine.common.utility;
 
+import io.netty.buffer.Unpooled;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.Options;
-import terramine.common.network.UpdateInputNetworkHandler;
+import net.minecraft.network.FriendlyByteBuf;
+import terramine.TerraMine;
+import terramine.common.network.ServerPacketHandler;
 import terramine.common.network.packet.UpdateInputPacket;
 
 @Environment(EnvType.CLIENT)
@@ -48,8 +52,14 @@ public class KeyBindingsHandler {
             left = leftNow;
             right = rightNow;
 
-            UpdateInputNetworkHandler.sendToServer(new UpdateInputPacket(jumpNow, attackNow, shiftNow, forwardsNow, backwardsNow, leftNow, rightNow));
+            sendToServer(new UpdateInputPacket(jumpNow, attackNow, shiftNow, forwardsNow, backwardsNow, leftNow, rightNow));
             InputHandler.update(client.player, jumpNow, attackNow, shiftNow, forwardsNow, backwardsNow, leftNow, rightNow);
         }
+    }
+
+    public static void sendToServer(UpdateInputPacket packet) {
+        FriendlyByteBuf buf = new FriendlyByteBuf(Unpooled.buffer());
+        UpdateInputPacket.write(packet, buf);
+        ClientPlayNetworking.send(ServerPacketHandler.CONTROLS_PACKET_ID, buf);
     }
 }

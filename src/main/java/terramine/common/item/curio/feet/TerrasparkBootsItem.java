@@ -3,15 +3,9 @@ package terramine.common.item.curio.feet;
 import be.florens.expandability.api.fabric.LivingFluidCollisionCallback;
 import dev.emi.stepheightentityattribute.StepHeightEntityAttributeMain;
 import dev.emi.trinkets.api.SlotReference;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.Options;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.FluidTags;
-import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
@@ -20,11 +14,10 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.material.FluidState;
-import net.minecraft.world.phys.Vec3;
 import terramine.TerraMine;
-import terramine.common.events.LivingEntityHurtCallback;
 import terramine.common.init.ModComponents;
 import terramine.common.init.ModItems;
+import terramine.common.init.ModParticles;
 import terramine.common.init.ModSoundEvents;
 import terramine.common.item.curio.TrinketTerrariaItem;
 import terramine.common.trinkets.TrinketsHelper;
@@ -49,7 +42,7 @@ public class TerrasparkBootsItem extends TrinketTerrariaItem {
 		//noinspection UnstableApiUsage
 		LivingFluidCollisionCallback.EVENT.register(TerrasparkBootsItem::onFluidCollision);
 		rocketHelper.setSoundSettings(ModSoundEvents.SPECTRE_BOOTS, 1f, 1f);
-		rocketHelper.setParticleSettings(TerraMine.GREEN_SPARK);
+		rocketHelper.setParticleSettings(ModParticles.GREEN_SPARK);
 	}
 
 	@Override

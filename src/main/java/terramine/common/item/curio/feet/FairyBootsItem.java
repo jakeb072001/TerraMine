@@ -2,12 +2,9 @@ package terramine.common.item.curio.feet;
 
 import dev.emi.stepheightentityattribute.StepHeightEntityAttributeMain;
 import dev.emi.trinkets.api.SlotReference;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.Options;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
@@ -19,6 +16,7 @@ import net.minecraft.world.level.block.BonemealableBlock;
 import net.minecraft.world.phys.Vec3;
 import terramine.TerraMine;
 import terramine.common.init.ModItems;
+import terramine.common.init.ModParticles;
 import terramine.common.init.ModSoundEvents;
 import terramine.common.item.curio.TrinketTerrariaItem;
 import terramine.common.network.packet.BoneMealPacket;
@@ -40,7 +38,7 @@ public class FairyBootsItem extends TrinketTerrariaItem {
 
 	public FairyBootsItem() {
 		rocketHelper.setSoundSettings(ModSoundEvents.SPECTRE_BOOTS, 1f, 1f);
-		rocketHelper.setParticleSettings(TerraMine.BLUE_POOF, ParticleTypes.POOF);
+		rocketHelper.setParticleSettings(ModParticles.BLUE_POOF, ParticleTypes.POOF);
 	}
 
 	@Override

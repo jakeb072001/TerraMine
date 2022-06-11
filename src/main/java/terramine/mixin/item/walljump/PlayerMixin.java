@@ -25,8 +25,8 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import terramine.TerraMine;
 import terramine.common.init.ModItems;
+import terramine.common.network.ServerPacketHandler;
 import terramine.common.trinkets.TrinketsHelper;
 import terramine.common.utility.InputHandler;
 
@@ -155,7 +155,7 @@ public abstract class PlayerMixin extends AbstractClientPlayer {
 
             FriendlyByteBuf passedData = new FriendlyByteBuf(Unpooled.buffer());
             passedData.writeFloat((float) (motionY * motionY * 8));
-            ClientPlayNetworking.send(TerraMine.FALL_DISTANCE_PACKET_ID, passedData);
+            ClientPlayNetworking.send(ServerPacketHandler.FALL_DISTANCE_PACKET_ID, passedData);
         }
 
         this.setDeltaMovement(0.0, motionY, 0.0);

@@ -28,10 +28,6 @@ public class BiomeManagerMixin {
     //todo: causes game to run like poop if ran on server, mixin to something else to more permanently change biome
     @Inject(at = @At("RETURN"), method = "getBiome", cancellable = true)
     public void spreadCorruptionBiome(BlockPos pos, CallbackInfoReturnable<Holder<Biome>> info) {
-        //if (doOnce) {
-        //    level = SyncedBooleanComponent.getServer().getLevel(Level.OVERWORLD);
-        //    doOnce = false;
-        //}
         if (level != null && pos != null) {
             for (int i = 45; i <= 100; i++) { // checks for blocks between y 45 and 100
                 Block block = level.getBlockState(pos.atY(i)).getBlock();

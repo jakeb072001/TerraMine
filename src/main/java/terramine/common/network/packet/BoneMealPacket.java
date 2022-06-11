@@ -14,14 +14,13 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.level.block.BonemealableBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import terramine.TerraMine;
+import terramine.common.network.ServerPacketHandler;
 
 public class BoneMealPacket {
-    public static final ResourceLocation ID = TerraMine.id("bone_meal");
-
     public static void send(BlockPos pos) {
         FriendlyByteBuf buf = new FriendlyByteBuf(Unpooled.buffer());
         buf.writeLong(pos.asLong());
-        ClientPlayNetworking.send(ID, buf);
+        ClientPlayNetworking.send(ServerPacketHandler.BONE_MEAL_PACKET_ID, buf);
     }
 
     public static void receive(MinecraftServer server, ServerPlayer player, ServerGamePacketListenerImpl network, FriendlyByteBuf buf, PacketSender sender) {
