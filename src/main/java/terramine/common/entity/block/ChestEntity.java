@@ -3,16 +3,13 @@ package terramine.common.entity.block;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.util.Mth;
 import net.minecraft.world.CompoundContainer;
 import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Inventory;
@@ -80,7 +77,7 @@ public class ChestEntity extends ChestBlockEntity {
 
     @Override
     protected Component getDefaultName() {
-        return new TranslatableComponent("entity." + TerraMine.MOD_ID + "." + name);
+        return Component.translatable("entity." + TerraMine.MOD_ID + "." + name);
     }
 
     private final ChestLidController chestLidController = new ChestLidController();

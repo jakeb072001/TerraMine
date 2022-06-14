@@ -28,8 +28,6 @@ import org.jetbrains.annotations.NotNull;
 import terramine.common.init.ModLootTables;
 import terramine.common.init.ModSoundEvents;
 
-import java.util.Random;
-
 public class DemonEyeEntity extends Monster implements Enemy {
     public static final EntityDataAccessor<Integer> typed_data = SynchedEntityData.defineId(DemonEyeEntity.class, EntityDataSerializers.INT);
     public boolean spawnedBlood = false;
@@ -185,7 +183,7 @@ public class DemonEyeEntity extends Monster implements Enemy {
 
                 }
 
-                if (isDay && demonEye.level.canSeeSky(demonEye.eyeBlockPosition())) {
+                if (isDay && demonEye.level.canSeeSky(new BlockPos(demonEye.getEyePosition()))) {
                     if (!demonEye.doOnce) {
                         demonEye.velX = demonEye.random.nextInt(-2, 3);
                         demonEye.velZ = demonEye.random.nextInt(-2, 3);

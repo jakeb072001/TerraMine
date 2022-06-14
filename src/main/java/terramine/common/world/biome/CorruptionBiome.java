@@ -40,7 +40,6 @@ public class CorruptionBiome {
 
         return (new Biome.BiomeBuilder())
                 .precipitation(Biome.Precipitation.RAIN)
-                .biomeCategory(Biome.BiomeCategory.PLAINS)
                 .temperature(0.5F)
                 .downfall(0.4F)
                 .specialEffects((new BiomeSpecialEffects.Builder())

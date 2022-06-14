@@ -1,5 +1,6 @@
 package terramine.mixin.world.entity;
 
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -12,15 +13,13 @@ import terramine.common.entity.FallingStarEntity;
 import terramine.common.init.ModComponents;
 import terramine.common.init.ModEntities;
 
-import java.util.Random;
-
 @Mixin(Player.class)
 public abstract class PlayerMixin extends LivingEntity {
 
 	public PlayerMixin(EntityType<? extends LivingEntity> entityType, Level level) {
 		super(entityType, level);
 	}
-	private final Random rand = new Random();
+	private final RandomSource rand = RandomSource.create();
 
 	@Inject(method = "tick", at = @At("TAIL"))
 	private void manaTickRegen(CallbackInfo ci) {

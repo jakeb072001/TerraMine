@@ -4,12 +4,12 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.Gui;
-import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
-import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
@@ -30,8 +30,8 @@ public abstract class GuiMixin {
 	@Shadow private int screenHeight;
 	@Shadow private int screenWidth;
 	@Unique private int timer = 0;
-	@Unique TranslatableComponent detectedText = new TranslatableComponent(TerraMine.MOD_ID + ".ui.oreDetected");
-	@Unique TranslatableComponent noDetectedText = new TranslatableComponent(TerraMine.MOD_ID + ".ui.oreNotDetected");
+	@Unique MutableComponent detectedText = Component.translatable(TerraMine.MOD_ID + ".ui.oreDetected");
+	@Unique MutableComponent noDetectedText = Component.translatable(TerraMine.MOD_ID + ".ui.oreNotDetected");
 	@Unique private String lastOre;
 
 	@Shadow protected abstract Player getCameraPlayer();

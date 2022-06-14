@@ -33,7 +33,7 @@ public abstract class LivingEntityRendererMixin<T extends LivingEntity, M extend
 		if (this.model instanceof HumanoidModel model) {
 			boolean heldMainHand = UmbrellaItem.getHeldStatusForHand(entity, InteractionHand.MAIN_HAND) == UmbrellaItem.HeldStatus.HELD_UP;
 			boolean heldOffHand = UmbrellaItem.getHeldStatusForHand(entity, InteractionHand.OFF_HAND) == UmbrellaItem.HeldStatus.HELD_UP;
-			boolean rightHanded = Minecraft.getInstance().options.mainHand == HumanoidArm.RIGHT;
+			boolean rightHanded = Minecraft.getInstance().options.mainHand().get() == HumanoidArm.RIGHT;
 
 			if ((heldMainHand && rightHanded) || (heldOffHand && !rightHanded)) {
 				model.rightArmPose = HumanoidModel.ArmPose.THROW_SPEAR;

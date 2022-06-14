@@ -41,7 +41,6 @@ public class CorruptionDesertBiome {
 
         return (new Biome.BiomeBuilder())
                 .precipitation(Biome.Precipitation.NONE)
-                .biomeCategory(Biome.BiomeCategory.DESERT)
                 .temperature(2F)
                 .downfall(0F)
                 .specialEffects((new BiomeSpecialEffects.Builder())

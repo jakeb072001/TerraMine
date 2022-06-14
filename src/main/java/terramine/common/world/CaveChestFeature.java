@@ -3,6 +3,7 @@ package terramine.common.world;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.tags.BiomeTags;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.ChestBlock;
 import net.minecraft.world.level.block.entity.RandomizableContainerBlockEntity;
@@ -30,7 +31,7 @@ public class CaveChestFeature extends Feature<NoneFeatureConfiguration> {
 	public boolean place(FeaturePlaceContext<NoneFeatureConfiguration> context) {
 		BlockPos origin = context.origin();
 		WorldGenLevel level = context.level();
-		Random random = context.random();
+		RandomSource random = context.random();
 
 		List<BlockPos> positions = new ArrayList<>();
 		BlockPos.betweenClosedStream(origin.offset(-1, 0, -1), origin.offset(1, 0, 1)).forEach((pos -> positions.add(pos.immutable())));
@@ -55,7 +56,7 @@ public class CaveChestFeature extends Feature<NoneFeatureConfiguration> {
 		return false;
 	}
 
-	public void generateContainer(WorldGenLevel level, BlockPos pos, Random random) {
+	public void generateContainer(WorldGenLevel level, BlockPos pos, RandomSource random) {
 		BlockPos offsetPos = pos.atY(100);
 		boolean frozen = false;
 		boolean jungle = false;

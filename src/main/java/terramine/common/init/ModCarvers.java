@@ -1,6 +1,7 @@
 package terramine.common.init;
 
 import net.minecraft.core.Holder;
+import net.minecraft.core.HolderSet;
 import net.minecraft.core.Registry;
 import net.minecraft.data.BuiltinRegistries;
 import net.minecraft.util.valueproviders.ConstantFloat;
@@ -27,6 +28,6 @@ public class ModCarvers {
 
     static {
         CORRUPTION_PIT_CARVER = register("corruption_pit", new CorruptionPitCarver(CorruptionPitCarverConfigured.CODEC));
-        CORRUPTION_PIT = register("corruption_pit", CORRUPTION_PIT_CARVER.configured(new CorruptionPitCarverConfigured(0.01F, UniformHeight.of(VerticalAnchor.absolute(10), VerticalAnchor.absolute(80)), ConstantFloat.of(3.0F), VerticalAnchor.aboveBottom(8), CarverDebugSettings.of(false, Blocks.CRIMSON_BUTTON.defaultBlockState()), UniformFloat.of(-0.125F, 0.125F), new CorruptionPitCarverConfigured.PitShapeConfiguration(UniformFloat.of(0.75F, 1.0F), TrapezoidFloat.of(0.0F, 6.0F, 2.0F), 3, UniformFloat.of(0.75F, 1.0F), 1.0F, 0.0F))));
+        CORRUPTION_PIT = register("corruption_pit", CORRUPTION_PIT_CARVER.configured(new CorruptionPitCarverConfigured(0.01F, UniformHeight.of(VerticalAnchor.absolute(10), VerticalAnchor.absolute(80)), ConstantFloat.of(3.0F), VerticalAnchor.aboveBottom(8), CarverDebugSettings.of(false, Blocks.CRIMSON_BUTTON.defaultBlockState()), HolderSet.direct(), UniformFloat.of(-0.125F, 0.125F), new CorruptionPitCarverConfigured.PitShapeConfiguration(UniformFloat.of(0.75F, 1.0F), TrapezoidFloat.of(0.0F, 6.0F, 2.0F), 3, UniformFloat.of(0.75F, 1.0F), 1.0F, 0.0F))));
     }
 }

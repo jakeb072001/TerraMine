@@ -4,7 +4,8 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.Gui;
-import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.phys.Vec3;
 import org.spongepowered.asm.mixin.Mixin;
@@ -31,7 +32,7 @@ public abstract class GuiMixin {
 	@Shadow protected abstract Player getCameraPlayer();
 	@Shadow public abstract Font getFont();
 
-	@Unique TranslatableComponent speedText = new TranslatableComponent(TerraMine.MOD_ID + ".ui.speed");
+	@Unique MutableComponent speedText = Component.translatable(TerraMine.MOD_ID + ".ui.speed");
 
 	@Inject(method = "renderPlayerHealth", require = 0, at = @At(value = "TAIL"))
 	private void renderGuiClock(PoseStack matrices, CallbackInfo ci) {

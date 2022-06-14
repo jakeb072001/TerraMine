@@ -9,6 +9,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
+import org.jetbrains.annotations.NotNull;
 import terramine.common.utility.CorruptionHelper;
 
 public class CorruptedRotatableBlock extends CorruptionHelper {
@@ -20,26 +21,8 @@ public class CorruptedRotatableBlock extends CorruptionHelper {
     }
 
     @Override
-    public BlockState rotate(BlockState blockState, Rotation rotation) {
+    public BlockState rotate(@NotNull BlockState blockState, @NotNull Rotation rotation) {
         return RotatedPillarBlock.rotatePillar(blockState, rotation);
-    }
-
-    public static BlockState rotatePillar(BlockState blockState, Rotation rotation) {
-        switch (rotation) {
-            case COUNTERCLOCKWISE_90:
-            case CLOCKWISE_90: {
-                switch (blockState.getValue(AXIS)) {
-                    case X: {
-                        return (BlockState)blockState.setValue(AXIS, Direction.Axis.Z);
-                    }
-                    case Z: {
-                        return (BlockState)blockState.setValue(AXIS, Direction.Axis.X);
-                    }
-                }
-                return blockState;
-            }
-        }
-        return blockState;
     }
 
     @Override

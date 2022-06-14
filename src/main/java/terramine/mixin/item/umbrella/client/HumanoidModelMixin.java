@@ -30,7 +30,7 @@ public abstract class HumanoidModelMixin<T extends LivingEntity> {
 	private void reduceHandSwing(T entity, float f, float g, float h, float i, float j, CallbackInfo info) {
 		boolean heldMainHand = UmbrellaItem.getHeldStatusForHand(entity, InteractionHand.MAIN_HAND) == UmbrellaItem.HeldStatus.HELD_UP;
 		boolean heldOffHand = UmbrellaItem.getHeldStatusForHand(entity, InteractionHand.OFF_HAND) == UmbrellaItem.HeldStatus.HELD_UP;
-		boolean rightHanded = Minecraft.getInstance().options.mainHand == HumanoidArm.RIGHT;
+		boolean rightHanded = Minecraft.getInstance().options.mainHand().get() == HumanoidArm.RIGHT;
 
 		if ((heldMainHand && rightHanded) || (heldOffHand && !rightHanded)) {
 			this.rightArm.xRot /= 8;

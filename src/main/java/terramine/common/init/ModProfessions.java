@@ -1,17 +1,26 @@
 package terramine.common.init;
 
 import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.ImmutableSet;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
+import net.fabricmc.fabric.api.object.builder.v1.villager.VillagerProfessionBuilder;
+import net.fabricmc.fabric.api.object.builder.v1.world.poi.PointOfInterestHelper;
+import net.minecraft.core.Holder;
+import net.minecraft.core.Registry;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.entity.ai.village.poi.PoiType;
+import net.minecraft.world.entity.ai.village.poi.PoiTypes;
 import net.minecraft.world.entity.npc.VillagerProfession;
 import net.minecraft.world.entity.npc.VillagerTrades;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
+import terramine.TerraMine;
+
+import java.util.function.Supplier;
 
 public class ModProfessions {
-    public static final PoiType GOBLIN_TINKERER_POI = register("goblin_tinkerer", 1, 1, ModBlocks.TINKERER_TABLE);
+    public static final Supplier<PoiType> GOBLIN_TINKERER_POI = register("goblin_tinkerer", 1, 1, ModBlocks.TINKERER_TABLE);
     public static final VillagerProfession GOBLIN_TINKERER = register("goblin_tinkerer", GOBLIN_TINKERER_POI, ModSoundEvents.DEMON_EYE_HURT);
 
     public static void fillTradeData() {
@@ -43,11 +52,12 @@ public class ModProfessions {
 
     }
 
-    private static PoiType register(String name, int tickCount, int searchDistance, Block block) {
-        return PoiType.register(name, PoiType.getBlockStates(block), tickCount, searchDistance);
+    private static Supplier<PoiType> register(String name, int tickCount, int searchDistance, Block block) {
+        return () -> PointOfInterestHelper.register(TerraMine.id(name), tickCount, searchDistance, block);
     }
-    private static VillagerProfession register(String name, PoiType poi, SoundEvent sound) {
-        return VillagerProfession.register(name, poi, sound);
+    private static VillagerProfession register(String name, Supplier<PoiType> poi, SoundEvent sound) {
+        var key = Registry.POINT_OF_INTEREST_TYPE.getResourceKey(poi.get()).orElseThrow();
+        return Registry.register(Registry.VILLAGER_PROFESSION, TerraMine.id(name), VillagerProfessionBuilder.create().id(TerraMine.id(name)).workstation(holder -> holder.is(key)).jobSite(holder -> holder.is(key)).workSound(sound).build());
     }
 
     private static Int2ObjectMap<VillagerTrades.ItemListing[]> toIntMap(ImmutableMap<Integer, VillagerTrades.ItemListing[]> trades) {

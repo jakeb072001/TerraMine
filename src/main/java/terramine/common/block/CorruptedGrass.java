@@ -4,6 +4,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.data.worldgen.placement.VegetationPlacements;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
@@ -12,6 +13,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.configurations.RandomPatchConfiguration;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
+import org.jetbrains.annotations.NotNull;
 import terramine.common.utility.CorruptionHelper;
 
 import java.util.List;
@@ -23,17 +25,17 @@ public class CorruptedGrass extends CorruptionHelper implements BonemealableBloc
     }
 
     @Override
-    public boolean isValidBonemealTarget(BlockGetter blockGetter, BlockPos blockPos, BlockState blockState, boolean bl) {
+    public boolean isValidBonemealTarget(BlockGetter blockGetter, BlockPos blockPos, @NotNull BlockState blockState, boolean bl) {
         return blockGetter.getBlockState(blockPos.above()).isAir();
     }
 
     @Override
-    public boolean isBonemealSuccess(Level level, Random random, BlockPos blockPos, BlockState blockState) {
+    public boolean isBonemealSuccess(@NotNull Level level, @NotNull RandomSource random, @NotNull BlockPos blockPos, @NotNull BlockState blockState) {
         return true;
     }
 
     @Override
-    public void performBonemeal(ServerLevel serverLevel, Random random, BlockPos blockPos, BlockState blockState) {
+    public void performBonemeal(@NotNull ServerLevel serverLevel, @NotNull RandomSource random, BlockPos blockPos, @NotNull BlockState blockState) {
         BlockPos blockPos2 = blockPos.above();
         BlockState blockState2 = Blocks.GRASS.defaultBlockState();
         block0: for (int i = 0; i < 128; ++i) {
@@ -59,11 +61,10 @@ public class CorruptedGrass extends CorruptionHelper implements BonemealableBloc
     }
 
     @Override
-    public void randomTick(BlockState blockState, ServerLevel serverLevel, BlockPos blockPos, Random random) {
+    public void randomTick(@NotNull BlockState blockState, @NotNull ServerLevel serverLevel, @NotNull BlockPos blockPos, @NotNull RandomSource random) {
         super.randomTick(blockState, serverLevel, blockPos, random);
         if (!canBeGrass(blockState, serverLevel, blockPos)) {
             serverLevel.setBlockAndUpdate(blockPos, Blocks.DIRT.defaultBlockState());
-            return;
         }
     }
 }

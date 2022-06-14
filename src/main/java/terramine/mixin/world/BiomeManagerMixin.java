@@ -33,9 +33,9 @@ public class BiomeManagerMixin {
                 Block block = level.getBlockState(pos.atY(i)).getBlock();
 
                 if (block instanceof CorruptionHelper && pos.getY() > i) { // if block is a corruption block and position is above i (y range)
-                    Holder<Biome> biome = BuiltinRegistries.BIOME.getOrCreateHolder(ModBiomes.CORRUPTION); // default biome
+                    Holder<Biome> biome = BuiltinRegistries.BIOME.getOrCreateHolder(ModBiomes.CORRUPTION).get().orThrow(); // default biome
                     if (info.getReturnValue().is(Biomes.DESERT) || info.getReturnValue().is(ModBiomes.CORRUPTION_DESERT)) {
-                        biome = BuiltinRegistries.BIOME.getOrCreateHolder(ModBiomes.CORRUPTION_DESERT); // desert biome
+                        biome = BuiltinRegistries.BIOME.getOrCreateHolder(ModBiomes.CORRUPTION_DESERT).get().orThrow(); // desert biome
                     }
                     info.setReturnValue(biome);
                     break;

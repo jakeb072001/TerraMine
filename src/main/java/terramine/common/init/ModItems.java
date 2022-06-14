@@ -1,6 +1,5 @@
 package terramine.common.init;
 
-import com.github.crimsondawn45.fabricshieldlib.lib.object.FabricShieldItem;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.core.Registry;
 import net.minecraft.world.item.*;
@@ -23,8 +22,10 @@ public class ModItems {
 	public static final Item UMBRELLA = register("umbrella", new UmbrellaItem());
 	public static final Item WHOOPEE_CUSHION = register("whoopee_cushion", new WhoopeeCushionItem());
 	public static final Item MAGIC_MIRROR = register("magic_mirror", new MagicMirrorItem());
-	public static final Item COBALT_SHIELD = register("cobalt_shield", new FabricShieldItem(new FabricItemSettings().maxDamage(2500).fireproof().rarity(Rarity.RARE).group(TerraMine.ITEM_GROUP), 10, 13, net.minecraft.world.item.Items.DIAMOND));
-	public static final Item OBSIDIAN_SHIELD = register("obsidian_shield", new FabricShieldItem(new FabricItemSettings().maxDamage(2500).fireproof().rarity(Rarity.RARE).group(TerraMine.ITEM_GROUP), 10, 13, net.minecraft.world.item.Items.OBSIDIAN));
+	public static final Item COBALT_SHIELD = register("cobalt_shield", new TrinketTerrariaItem());
+	public static final Item OBSIDIAN_SHIELD = register("obsidian_shield", new TrinketTerrariaItem());
+	//public static final Item COBALT_SHIELD = register("cobalt_shield", new FabricShieldItem(new FabricItemSettings().maxDamage(2500).fireproof().rarity(Rarity.RARE).group(TerraMine.ITEM_GROUP), 10, 13, Items.DIAMOND));
+	//public static final Item OBSIDIAN_SHIELD = register("obsidian_shield", new FabricShieldItem(new FabricItemSettings().maxDamage(2500).fireproof().rarity(Rarity.RARE).group(TerraMine.ITEM_GROUP), 10, 13, Items.OBSIDIAN));
 
 	// Crafting Items
 	public static final Item LENS = register("lens", new CraftingItem(new FabricItemSettings().group(CreativeModeTab.TAB_MISC)));

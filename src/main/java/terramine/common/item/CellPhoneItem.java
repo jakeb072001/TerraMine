@@ -2,7 +2,8 @@ package terramine.common.item;
 
 import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
-import net.minecraft.network.chat.TextComponent;
+import net.minecraft.network.chat.ChatType;
+import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
@@ -45,7 +46,7 @@ public class CellPhoneItem extends TrinketTerrariaItem {
 					worldSpawn(serverPlayer, serverLevel);
 				}
 			} else {
-				player.sendMessage(new TextComponent("magic_mirror.fail"), Util.NIL_UUID);
+				((ServerPlayer) player).sendSystemMessage(Component.translatable("magic_mirror.fail"), ChatType.SYSTEM);
 				level.playSound(null, player.blockPosition(), net.minecraft.sounds.SoundEvents.SHULKER_BULLET_HURT, SoundSource.BLOCKS, 1f, 1f);
 			}
 		}

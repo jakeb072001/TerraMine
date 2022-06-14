@@ -4,6 +4,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.FluidTags;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -11,6 +12,7 @@ import net.minecraft.world.level.block.SnowLayerBlock;
 import net.minecraft.world.level.block.SpreadingSnowyDirtBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.lighting.LayerLightEngine;
+import org.jetbrains.annotations.NotNull;
 import terramine.TerraMine;
 import terramine.common.block.CorruptedSnowLayer;
 import terramine.common.init.ModBlocks;
@@ -44,7 +46,7 @@ public class CorruptionHelper extends SpreadingSnowyDirtBlock  {
     }
 
     @Override
-    public void randomTick(BlockState blockState, ServerLevel serverLevel, BlockPos blockPos, Random random) {
+    public void randomTick(@NotNull BlockState blockState, @NotNull ServerLevel serverLevel, @NotNull BlockPos blockPos, @NotNull RandomSource random) {
         if (!TerraMine.CONFIG.general.disableCorruptionSpread) { // allows user to disable spreading in configs
             BlockState grass = ModBlocks.CORRUPTED_GRASS.defaultBlockState();
             BlockState snow_layer = ModBlocks.CORRUPTED_SNOW_LAYER.defaultBlockState();
@@ -99,7 +101,7 @@ public class CorruptionHelper extends SpreadingSnowyDirtBlock  {
         }
     }
 
-    private void spreadBlock(Block toSpread, Block spreadTo, ServerLevel serverLevel, BlockPos blockPos, Random random) {
+    private void spreadBlock(Block toSpread, Block spreadTo, ServerLevel serverLevel, BlockPos blockPos, RandomSource random) {
         for (int i = 0; i < 4; ++i) {
             if (random.nextInt(TerraMine.CONFIG.general.corruptionSpreadRarity + 1) == 1) {
                 BlockState block = toSpread.defaultBlockState();

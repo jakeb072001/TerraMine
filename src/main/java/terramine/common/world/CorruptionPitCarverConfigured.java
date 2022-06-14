@@ -2,8 +2,10 @@ package terramine.common.world;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.minecraft.core.HolderSet;
 import net.minecraft.util.ExtraCodecs;
 import net.minecraft.util.valueproviders.FloatProvider;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.levelgen.VerticalAnchor;
 import net.minecraft.world.level.levelgen.carver.CarverConfiguration;
 import net.minecraft.world.level.levelgen.carver.CarverDebugSettings;
@@ -22,14 +24,14 @@ public class CorruptionPitCarverConfigured extends CarverConfiguration {
     public final FloatProvider verticalRotation;
     public final PitShapeConfiguration shape;
 
-    public CorruptionPitCarverConfigured(float f, HeightProvider heightProvider, FloatProvider floatProvider, VerticalAnchor verticalAnchor, CarverDebugSettings carverDebugSettings, FloatProvider floatProvider2, PitShapeConfiguration corruptionPitCarverConfigured) {
-        super(f, heightProvider, floatProvider, verticalAnchor, carverDebugSettings);
+    public CorruptionPitCarverConfigured(float f, HeightProvider heightProvider, FloatProvider floatProvider, VerticalAnchor verticalAnchor, CarverDebugSettings carverDebugSettings, HolderSet<Block> holderSet, FloatProvider floatProvider2, PitShapeConfiguration corruptionPitCarverConfigured) {
+        super(f, heightProvider, floatProvider, verticalAnchor, carverDebugSettings, holderSet);
         this.verticalRotation = floatProvider2;
         this.shape = corruptionPitCarverConfigured;
     }
 
     public CorruptionPitCarverConfigured(CarverConfiguration carverConfiguration, FloatProvider floatProvider, PitShapeConfiguration pitShapeConfiguration) {
-        this(carverConfiguration.probability, carverConfiguration.y, carverConfiguration.yScale, carverConfiguration.lavaLevel, carverConfiguration.debugSettings, floatProvider, pitShapeConfiguration);
+        this(carverConfiguration.probability, carverConfiguration.y, carverConfiguration.yScale, carverConfiguration.lavaLevel, carverConfiguration.debugSettings, carverConfiguration.replaceable, floatProvider, pitShapeConfiguration);
     }
 
     public static class PitShapeConfiguration {

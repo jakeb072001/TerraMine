@@ -30,7 +30,7 @@ public class TabiItem extends TrinketTerrariaItem {
 	@Environment(EnvType.CLIENT)
     @Override
 	protected void curioTick(LivingEntity livingEntity, ItemStack stack) {
-		if (livingEntity instanceof LocalPlayer player && !TrinketsHelper.isEquipped(ModItems.MASTER_NINJA_GEAR, player)) {
+		if (livingEntity instanceof LocalPlayer player && !TrinketsHelper.isEquipped(ModItems.MASTER_NINJA_GEAR, player) && !player.isCreative()) {
 			if (timer++ >= 6) {
 				if (upPressed) {
 					upPressed = false;

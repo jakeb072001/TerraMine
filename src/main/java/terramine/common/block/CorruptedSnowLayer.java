@@ -3,6 +3,7 @@ package terramine.common.block;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.LevelAccessor;
@@ -19,6 +20,7 @@ import net.minecraft.world.level.pathfinder.PathComputationType;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import terramine.common.init.ModBlocks;
 import terramine.common.utility.CorruptionHelper;
@@ -98,7 +100,7 @@ public class CorruptedSnowLayer extends CorruptionHelper {
     }
 
     @Override
-    public void randomTick(BlockState blockState, ServerLevel serverLevel, BlockPos blockPos, Random random) {
+    public void randomTick(@NotNull BlockState blockState, @NotNull ServerLevel serverLevel, @NotNull BlockPos blockPos, @NotNull RandomSource random) {
         super.randomTick(blockState, serverLevel, blockPos, random);
         if (serverLevel.getBrightness(LightLayer.BLOCK, blockPos) > 11) {
             dropResources(blockState, serverLevel, blockPos);

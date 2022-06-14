@@ -4,9 +4,9 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.Gui;
-import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.entity.player.Player;
-import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
@@ -26,16 +26,16 @@ public abstract class GuiMixin {
 	@Shadow protected abstract Player getCameraPlayer();
 	@Shadow public abstract Font getFont();
 
-	@Unique TranslatableComponent moonPhaseText = new TranslatableComponent(TerraMine.MOD_ID + ".ui.moonPhase");
-	@Unique TranslatableComponent fullMoonText = new TranslatableComponent(TerraMine.MOD_ID + ".ui.fullMoon");
-	@Unique TranslatableComponent waningGibbousMoonText = new TranslatableComponent(TerraMine.MOD_ID + ".ui.waningGibbousMoon");
-	@Unique TranslatableComponent thirdQuarterMoonText = new TranslatableComponent(TerraMine.MOD_ID + ".ui.thirdQuarterMoon");
-	@Unique TranslatableComponent waningCrescentMoonText = new TranslatableComponent(TerraMine.MOD_ID + ".ui.waningCrescentMoon");
-	@Unique TranslatableComponent newMoonText = new TranslatableComponent(TerraMine.MOD_ID + ".ui.newMoon");
-	@Unique TranslatableComponent waxingCrescentMoonText = new TranslatableComponent(TerraMine.MOD_ID + ".ui.waxingCrescentMoon");
-	@Unique TranslatableComponent firstQuarterMoonText = new TranslatableComponent(TerraMine.MOD_ID + ".ui.firstQuarterMoon");
-	@Unique TranslatableComponent waxingGibbousMoonText = new TranslatableComponent(TerraMine.MOD_ID + ".ui.waxingGibbousMoon");
-	@Unique TranslatableComponent unknownMoonPhaseText = new TranslatableComponent(TerraMine.MOD_ID + ".ui.unknownMoonPhase");
+	@Unique MutableComponent moonPhaseText = Component.translatable(TerraMine.MOD_ID + ".ui.moonPhase");
+	@Unique MutableComponent fullMoonText = Component.translatable(TerraMine.MOD_ID + ".ui.fullMoon");
+	@Unique MutableComponent waningGibbousMoonText = Component.translatable(TerraMine.MOD_ID + ".ui.waningGibbousMoon");
+	@Unique MutableComponent thirdQuarterMoonText = Component.translatable(TerraMine.MOD_ID + ".ui.thirdQuarterMoon");
+	@Unique MutableComponent waningCrescentMoonText = Component.translatable(TerraMine.MOD_ID + ".ui.waningCrescentMoon");
+	@Unique MutableComponent newMoonText = Component.translatable(TerraMine.MOD_ID + ".ui.newMoon");
+	@Unique MutableComponent waxingCrescentMoonText = Component.translatable(TerraMine.MOD_ID + ".ui.waxingCrescentMoon");
+	@Unique MutableComponent firstQuarterMoonText = Component.translatable(TerraMine.MOD_ID + ".ui.firstQuarterMoon");
+	@Unique MutableComponent waxingGibbousMoonText = Component.translatable(TerraMine.MOD_ID + ".ui.waxingGibbousMoon");
+	@Unique MutableComponent unknownMoonPhaseText = Component.translatable(TerraMine.MOD_ID + ".ui.unknownMoonPhase");
 
 	@Inject(method = "renderPlayerHealth", require = 0, at = @At(value = "TAIL"))
 	private void renderGuiClock(PoseStack matrices, CallbackInfo ci) {

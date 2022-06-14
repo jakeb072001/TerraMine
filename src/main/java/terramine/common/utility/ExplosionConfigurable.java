@@ -191,7 +191,7 @@ public class ExplosionConfigurable extends Explosion {
         }
         if (bl2) {
             ObjectArrayList objectArrayList = new ObjectArrayList();
-            Collections.shuffle(this.toBlow, this.level.random);
+            Collections.shuffle(this.toBlow, (Random)this.level.random);
             for (BlockPos blockPos : this.toBlow) {
                 BlockState blockState = this.level.getBlockState(blockPos);
                 Block block = blockState.getBlock();

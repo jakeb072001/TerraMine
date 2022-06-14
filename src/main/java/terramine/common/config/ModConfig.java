@@ -99,7 +99,7 @@ public final class ModConfig extends PartitioningSerializer.GlobalData {
 			@ConfigEntry.Gui.RequiresRestart
 			@ConfigEntry.Gui.Tooltip
 			@ConfigEntry.BoundedDiscrete(max = 280, min = 80)
-			public int floatingIslandHeight = 180;
+			public int floatingIslandHeight = 180; // currently unused
 		}
 	}
 }

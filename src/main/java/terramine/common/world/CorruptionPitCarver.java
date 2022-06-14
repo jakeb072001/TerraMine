@@ -4,6 +4,7 @@ import com.mojang.serialization.Codec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.util.Mth;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.chunk.CarvingMask;
@@ -11,6 +12,7 @@ import net.minecraft.world.level.chunk.ChunkAccess;
 import net.minecraft.world.level.levelgen.Aquifer;
 import net.minecraft.world.level.levelgen.carver.CarvingContext;
 import net.minecraft.world.level.levelgen.carver.WorldCarver;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Random;
 import java.util.function.Function;
@@ -20,11 +22,7 @@ public class CorruptionPitCarver extends WorldCarver<CorruptionPitCarverConfigur
         super(codec);
     }
 
-    public boolean isStartChunk(CorruptionPitCarverConfigured corruptionPitCarverConfiguration, Random random) {
-        return random.nextFloat() <= corruptionPitCarverConfiguration.probability;
-    }
-
-    public boolean carve(CarvingContext carvingContext, CorruptionPitCarverConfigured corruptionPitCarverConfiguration, ChunkAccess chunkAccess, Function<BlockPos, Holder<Biome>> function, Random random, Aquifer aquifer, ChunkPos chunkPos, CarvingMask carvingMask) {
+    public boolean carve(@NotNull CarvingContext carvingContext, CorruptionPitCarverConfigured corruptionPitCarverConfiguration, @NotNull ChunkAccess chunkAccess, @NotNull Function<BlockPos, Holder<Biome>> function, RandomSource random, @NotNull Aquifer aquifer, ChunkPos chunkPos, @NotNull CarvingMask carvingMask) {
         int i = (this.getRange() * 2 - 1) * 16;
         double d = chunkPos.getBlockX(random.nextInt(16));
         int j = corruptionPitCarverConfiguration.y.sample(random, carvingContext);
@@ -38,9 +36,14 @@ public class CorruptionPitCarver extends WorldCarver<CorruptionPitCarverConfigur
         return true;
     }
 
+    @Override
+    public boolean isStartChunk(CorruptionPitCarverConfigured carverConfiguration, RandomSource randomSource) {
+        return randomSource.nextFloat() <= carverConfiguration.probability;
+    }
+
     private void doCarve(CarvingContext carvingContext, CorruptionPitCarverConfigured corruptionPitCarverConfiguration, ChunkAccess chunkAccess, Function<BlockPos, Holder<Biome>> function, long l, Aquifer aquifer, double d, double e, double f, float g, float h, float i, int j, int k, double m, CarvingMask carvingMask) {
-        Random random = new Random(l);
-        float[] fs = this.initWidthFactors(carvingContext, corruptionPitCarverConfiguration, random);
+        RandomSource random = RandomSource.create();
+        float[] fs = this.initWidthFactors(carvingContext, corruptionPitCarverConfiguration, (Random) random);
         float n = 0.0F;
         float o = 0.0F;
 
@@ -48,7 +51,7 @@ public class CorruptionPitCarver extends WorldCarver<CorruptionPitCarverConfigur
             double q = 1.5 + (double)(Mth.sin((float)p * 3.1415927F / (float)k) * g);
             double r = q * m;
             q *= corruptionPitCarverConfiguration.shape.horizontalRadiusFactor.sample(random);
-            r = this.updateVerticalRadius(corruptionPitCarverConfiguration, random, r, (float)k, (float)p);
+            r = this.updateVerticalRadius(corruptionPitCarverConfiguration, (Random) random, r, (float)k, (float)p);
             float s = Mth.cos(i);
             float t = Mth.sin(i);
             d += Mth.cos(h) * s;
@@ -93,7 +96,7 @@ public class CorruptionPitCarver extends WorldCarver<CorruptionPitCarverConfigur
     private double updateVerticalRadius(CorruptionPitCarverConfigured corruptionPitCarverConfiguration, Random random, double d, float f, float g) {
         float h = 1.0F - Mth.abs(0.5F - g / f) * 2.0F;
         float i = corruptionPitCarverConfiguration.shape.verticalRadiusDefaultFactor + corruptionPitCarverConfiguration.shape.verticalRadiusCenterFactor * h;
-        return (double)i * d * (double)Mth.randomBetween(random, 0.75F, 1.0F);
+        return (double)i * d * (double)Mth.randomBetween((RandomSource) random, 0.75F, 1.0F);
     }
 
     private boolean shouldSkip(CarvingContext carvingContext, float[] fs, double d, double e, double f, int i) {

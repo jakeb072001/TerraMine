@@ -13,13 +13,10 @@ import net.minecraft.world.level.levelgen.VerticalAnchor;
 import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
-import net.minecraft.world.level.levelgen.feature.StructureFeature;
 import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
-import net.minecraft.world.level.levelgen.feature.configurations.JigsawConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
 import net.minecraft.world.level.levelgen.placement.*;
 import terramine.common.world.CaveChestFeature;
-import terramine.common.world.FloatingIslandFeatureType;
 import terramine.common.world.NetherChestFeature;
 import terramine.common.world.SurfaceChestFeature;
 
@@ -48,7 +45,6 @@ public class ModFeatures {
 	public static final PlacedFeature PLACED_CAVE_CHEST;
 	public static final PlacedFeature PLACED_SURFACE_CHEST;
 	public static final PlacedFeature PLACED_NETHER_CHEST;
-	public static final StructureFeature<JigsawConfiguration> FLOATING_ISLAND = StructureFeature.register("floating_island", new FloatingIslandFeatureType(JigsawConfiguration.CODEC), GenerationStep.Decoration.SURFACE_STRUCTURES);
 
 	public static void register() {
 		if (CONFIG.worldgen.caveChest.chestRarity < 10) {
@@ -69,7 +65,6 @@ public class ModFeatures {
 					BuiltinRegistries.PLACED_FEATURE.getResourceKey(PLACED_NETHER_CHEST)
 							.orElseThrow(() -> new RuntimeException("Failed to get feature from registry")));
 		}
-		FLOATING_ISLAND.toString();
 	}
 
 	static {
@@ -89,11 +84,11 @@ public class ModFeatures {
 				new ConfiguredFeature<>(NETHER_CHEST, FeatureConfiguration.NONE)
 		);
 		ResourceKey<ConfiguredFeature<?, ?>> featureKey = BuiltinRegistries.CONFIGURED_FEATURE.getResourceKey(configuredFeature).orElseThrow();
-		Holder<ConfiguredFeature<?, ?>> featureHolder = BuiltinRegistries.CONFIGURED_FEATURE.getOrCreateHolder(featureKey);
+		Holder<ConfiguredFeature<?, ?>> featureHolder = BuiltinRegistries.CONFIGURED_FEATURE.getOrCreateHolder(featureKey).get().orThrow();
 		ResourceKey<ConfiguredFeature<?, ?>> featureKey2 = BuiltinRegistries.CONFIGURED_FEATURE.getResourceKey(configuredFeature2).orElseThrow();
-		Holder<ConfiguredFeature<?, ?>> featureHolder2 = BuiltinRegistries.CONFIGURED_FEATURE.getOrCreateHolder(featureKey2);
+		Holder<ConfiguredFeature<?, ?>> featureHolder2 = BuiltinRegistries.CONFIGURED_FEATURE.getOrCreateHolder(featureKey2).get().orThrow();
 		ResourceKey<ConfiguredFeature<?, ?>> featureKey3 = BuiltinRegistries.CONFIGURED_FEATURE.getResourceKey(configuredFeature3).orElseThrow();
-		Holder<ConfiguredFeature<?, ?>> featureHolder3 = BuiltinRegistries.CONFIGURED_FEATURE.getOrCreateHolder(featureKey3);
+		Holder<ConfiguredFeature<?, ?>> featureHolder3 = BuiltinRegistries.CONFIGURED_FEATURE.getOrCreateHolder(featureKey3).get().orThrow();
 
 		PLACED_CAVE_CHEST = Registry.register(
 				BuiltinRegistries.PLACED_FEATURE,
