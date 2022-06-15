@@ -1,0 +1,14 @@
+{
+  "snow": {
+    "layer": false
+  },
+  "corrupt_snow": {
+    "layer": true
+  },
+  "moss": {
+    "layer": true
+  },
+  "ash": {
+    "layer": true
+  }
+}

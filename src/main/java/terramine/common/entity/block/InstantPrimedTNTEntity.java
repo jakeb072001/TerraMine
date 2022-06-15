@@ -9,15 +9,13 @@ import org.jetbrains.annotations.Nullable;
 import terramine.common.utility.ExplosionConfigurable;
 
 public class InstantPrimedTNTEntity extends PrimedTnt {
-    @Nullable
-    private LivingEntity owner;
 
     public InstantPrimedTNTEntity(EntityType<? extends PrimedTnt> entityType, Level level) {
         super(entityType, level);
     }
 
     public InstantPrimedTNTEntity(Level level, double d, double e, double f, @Nullable LivingEntity livingEntity) {
-        this((EntityType<? extends PrimedTnt>)EntityType.TNT, level);
+        this(EntityType.TNT, level);
         this.setPos(d, e, f);
         double g = level.random.nextDouble() * 6.2831854820251465;
         this.setDeltaMovement(-Math.sin(g) * 0.02, 0.2f, -Math.cos(g) * 0.02);
@@ -25,7 +23,6 @@ public class InstantPrimedTNTEntity extends PrimedTnt {
         this.xo = d;
         this.yo = e;
         this.zo = f;
-        this.owner = livingEntity;
     }
 
     @Override
@@ -37,6 +34,6 @@ public class InstantPrimedTNTEntity extends PrimedTnt {
     }
 
     private void explode() {
-        new ExplosionConfigurable(level, this, null, null, this.position().x(), this.position().y(), this.position().z(), 30F, 100f, false, false, Explosion.BlockInteraction.BREAK);
+        new ExplosionConfigurable(level, this, null, null, this.position().x(), this.position().y(), this.position().z(), 20F, 100f, false, false, Explosion.BlockInteraction.BREAK);
     }
 }
