@@ -16,8 +16,8 @@ import java.util.Collections;
 import java.util.function.Supplier;
 
 public class ModProfessions {
-    public static final Supplier<PoiType> GOBLIN_TINKERER_POI = register("goblin_tinkerer", 1, 1, ModBlocks.TINKERER_TABLE);
-    public static final VillagerProfession GOBLIN_TINKERER = register("goblin_tinkerer", GOBLIN_TINKERER_POI, ModSoundEvents.DEMON_EYE_HURT);
+    public static final PoiType GOBLIN_TINKERER_POI = register("goblin_tinkerer", 1, 1, ModBlocks.TINKERER_TABLE);
+    public static final VillagerProfession GOBLIN_TINKERER = register("goblin_tinkerer", GOBLIN_TINKERER_POI, ModSoundEvents.DEMON_EYE_HURT); // change sound to something else later, using for placeholder right now
 
     public static void fillTradeData() {
         //EmeraldForItems: i = getEmerald, j = maxUses, k = villagerXp
@@ -46,11 +46,11 @@ public class ModProfessions {
         }));
     }
 
-    private static Supplier<PoiType> register(String name, int tickCount, int searchDistance, Block block) {
-        return () -> PointOfInterestHelper.register(TerraMine.id(name), tickCount, searchDistance, block);
+    private static PoiType register(String name, int tickCount, int searchDistance, Block block) {
+        return PointOfInterestHelper.register(TerraMine.id(name), tickCount, searchDistance, block);
     }
-    private static VillagerProfession register(String name, Supplier<PoiType> poi, SoundEvent sound) {
-        var key = Registry.POINT_OF_INTEREST_TYPE.getResourceKey(poi.get()).orElseThrow();
+    private static VillagerProfession register(String name, PoiType poi, SoundEvent sound) {
+        var key = Registry.POINT_OF_INTEREST_TYPE.getResourceKey(poi).orElseThrow();
         return Registry.register(Registry.VILLAGER_PROFESSION, TerraMine.id(name), VillagerProfessionBuilder.create().id(TerraMine.id(name)).workstation(holder -> holder.is(key)).jobSite(holder -> holder.is(key)).workSound(sound).build());
     }
 }
