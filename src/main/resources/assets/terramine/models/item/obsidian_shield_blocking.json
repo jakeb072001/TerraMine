@@ -1,5 +1,5 @@
 {
-  "parent": "fabricshieldlib:item/fabric_shield_blocking",
+  "parent": "terramine:item/base_shield_blocking",
   "textures":{
     "shield":"terramine:item/obsidian_shield"
   }

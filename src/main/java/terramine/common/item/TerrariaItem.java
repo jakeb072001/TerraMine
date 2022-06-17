@@ -22,6 +22,10 @@ public abstract class TerrariaItem extends Item {
 		super(properties.stacksTo(1).tab(TerraMine.ITEM_GROUP).rarity(Rarity.RARE).fireResistant());
 	}
 
+	public TerrariaItem(Properties properties, boolean nothing) {
+		super(properties);
+	}
+
 	public TerrariaItem() {
 		this(new Properties());
 	}

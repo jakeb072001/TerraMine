@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.4.0] - 2022-07-01
+### Added
+- Re-added Cobalt and Obsidian shield (no longer uses Fabric Shield API)
+
+### Changed
+- Whoopee Cushion now plays fart sound when used instead of equipping (can still be equipped in accessory slots)
+
 ## [1.3.5] - 2022-06-19
 ### Updated to Minecraft 1.19
 
@@ -126,3 +133,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [1.0.0] - 2022-04-04
 ### Added
 - Initial release
+
+[1.3.5]: https://github.com/jakeb072001/TerraMine/compare/v1.3.4...v1.3.5
+[1.3.4]: https://github.com/jakeb072001/TerraMine/compare/v1.3.3...v1.3.4
+[1.3.3]: https://github.com/jakeb072001/TerraMine/compare/v1.3.2...v1.3.3
+[1.3.2]: https://github.com/jakeb072001/TerraMine/compare/v1.3.1...v1.3.2
+[1.3.1]: https://github.com/jakeb072001/TerraMine/compare/v1.3.0...v1.3.1
+[1.3.0]: https://github.com/jakeb072001/TerraMine/compare/v1.2.0...v1.3.0
+[1.2.0]: https://github.com/jakeb072001/TerraMine/compare/v1.0.1...v1.2.0
+[1.0.1]: https://github.com/jakeb072001/TerraMine/compare/WIP...v1.0.1
+[1.0.0]: https://github.com/jakeb072001/TerraMine/releases/tag/v1.0.0

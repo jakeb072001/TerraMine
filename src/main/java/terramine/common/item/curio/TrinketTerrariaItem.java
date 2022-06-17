@@ -39,6 +39,15 @@ public class TrinketTerrariaItem extends TerrariaItem implements Trinket {
 	public boolean effectEnabled = true;
 
 	public TrinketTerrariaItem() {
+		initialise();
+	}
+
+	public TrinketTerrariaItem(Properties settings) {
+		super(settings, false);
+		initialise();
+	}
+
+	private void initialise() {
 		// DispenserBlock.registerBehavior(this, TrinketItem.TRINKET_DISPENSER_BEHAVIOR); TODO: bug, missing in trinkets rewrite
 		PlayHurtSoundCallback.EVENT.register(this::playExtraHurtSound);
 		TrinketsApi.registerTrinket(this, this);

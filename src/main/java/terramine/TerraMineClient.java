@@ -66,8 +66,12 @@ public class TerraMineClient implements ClientModInitializer {
 		// Keybinding Handler
 		ClientTickEvents.END_CLIENT_TICK.register(KeyBindingsHandler::onClientTick);
 
-		// ModelPredicateProvider for rendering of umbrella blocking
+		// ModelPredicateProvider for rendering of umbrella and shield blocking
 		ItemProperties.register(ModItems.UMBRELLA, new ResourceLocation("blocking"), (stack, level, entity, i)
+				-> entity != null && entity.isUsingItem() && entity.getUseItem() == stack ? 1 : 0);
+		ItemProperties.register(ModItems.COBALT_SHIELD, new ResourceLocation("blocking"), (stack, level, entity, i)
+				-> entity != null && entity.isUsingItem() && entity.getUseItem() == stack ? 1 : 0);
+		ItemProperties.register(ModItems.OBSIDIAN_SHIELD, new ResourceLocation("blocking"), (stack, level, entity, i)
 				-> entity != null && entity.isUsingItem() && entity.getUseItem() == stack ? 1 : 0);
 
 		// Particle Register

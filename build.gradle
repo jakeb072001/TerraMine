@@ -178,6 +178,7 @@ modrinth {
     token = System.getenv("MODRINTH_TOKEN")
     projectId = "terramine"
     versionName = "TerraMine " + project.mod_version
+    versionNumber = project.mod_version
     versionType = "beta"
     uploadFile = remapJar
     changelog = System.getenv("CHANGELOG") ?: "https://github.com/jakeb072001/TerraMine/blob/" + project.minecraft_version + "/CHANGELOG.md"
