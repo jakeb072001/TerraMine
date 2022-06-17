@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 - Corrupt snow now uses better snow from LambdaBetterGrass
+- Temporarily removed corruption biome spread (blocks still spread but biome in f3 will not change)
 
 ## [1.3.4] - 2022-06-12
 ### Changed

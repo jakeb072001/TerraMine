@@ -53,7 +53,6 @@
     "item.whoopeecushion.EntityMixin",
     "statuseffect.LivingEntityMixin",
     "statuseffect.MobEffectInstanceMixin",
-    "world.BiomeManagerMixin",
     "world.WorldGenSettingsMixin",
     "world.entity.HopperBlockEntityMixin",
     "world.entity.ItemEntityMixin",
