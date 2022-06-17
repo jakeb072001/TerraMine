@@ -12,6 +12,9 @@ jobs:
       - name: Get version from tag
         id: tag_name
         run: echo ::set-output name=version::${GITHUB_REF#refs/tags/v}
+      - name: Make Gradle wrapper executable
+        if: ${{ runner.os != 'Windows' }}
+        run: chmod +x ./gradlew
       - name: Extract Changelog
         uses: mindsers/changelog-reader-action@v2
         id: changelog_reader
