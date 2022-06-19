@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 - More server crashes and bugs
 - Black Belt crash with some mods
+- Villagers not looking for Goblin Tinkerer profession
 
 ## [1.3.5] - 2022-06-19
 ### Updated to Minecraft 1.19
