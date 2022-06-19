@@ -2,7 +2,7 @@
   "type": "minecraft:blasting",
   "group": "demonite_ingot",
   "ingredient": {
-    "item": "terramine:demonite_ore_block"
+    "item": "terramine:demonite_ore"
   },
   "result": "terramine:demonite_ingot",
   "experience": 0.8,

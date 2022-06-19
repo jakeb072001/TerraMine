@@ -24,7 +24,7 @@
                   }
                 }
               ],
-              "name": "terramine:corrupted_deepslate_block"
+              "name": "terramine:corrupted_deepslate"
             },
             {
               "type": "minecraft:item",
@@ -33,7 +33,7 @@
                   "condition": "minecraft:survives_explosion"
                 }
               ],
-              "name": "terramine:corrupted_cobbled_deepslate_block"
+              "name": "terramine:corrupted_cobbled_deepslate"
             }
           ]
         }

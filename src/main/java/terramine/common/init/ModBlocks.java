@@ -27,7 +27,7 @@ public class ModBlocks {
     public static final Block REDSTONE_STONE = register("redstone_stone", new RedStoneStoneBlock(BlockBehaviour.Properties.copy(Blocks.STONE).strength(1.5f, 1200.0f)));
     public static final Block REDSTONE_DEEPSLATE = register("redstone_deepslate", new RedStoneStoneBlock(BlockBehaviour.Properties.copy(Blocks.DEEPSLATE).strength(3.0f, 1200.0f)));
     public static final Block INSTANT_TNT = register("instant_tnt", new InstantTNTBlock(BlockBehaviour.Properties.copy(Blocks.TNT)));
-    public static final Block TINKERER_TABLE = register("tinkerer_workshop", new Block(BlockBehaviour.Properties.copy(Blocks.CRAFTING_TABLE).randomTicks()));
+    public static final Block TINKERER_TABLE = register("tinkerer_workshop", new Block(BlockBehaviour.Properties.copy(Blocks.CRAFTING_TABLE)));
     public static final Block CORRUPTED_GRASS = register("corrupted_grass", new CorruptedGrass(BlockBehaviour.Properties.copy(Blocks.GRASS_BLOCK).randomTicks()));
     public static final Block CORRUPTED_GRAVEL = register("corrupted_gravel", new CorruptedFallingBlock(BlockBehaviour.Properties.copy(Blocks.GRAVEL).randomTicks()));
     public static final Block CORRUPTED_SAND = register("corrupted_sand", new CorruptedFallingBlock(BlockBehaviour.Properties.copy(Blocks.SAND).randomTicks()));

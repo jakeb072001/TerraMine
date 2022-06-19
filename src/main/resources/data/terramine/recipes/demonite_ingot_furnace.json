@@ -2,7 +2,7 @@
   "type": "minecraft:smelting",
   "group": "demonite_ingot",
   "ingredient": {
-    "item": "terramine:demonite_ore"
+    "item": "terramine:raw_demonite"
   },
   "result": "terramine:demonite_ingot",
   "experience": 0.8,

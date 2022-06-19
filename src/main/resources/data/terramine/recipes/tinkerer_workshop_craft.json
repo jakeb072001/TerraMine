@@ -7,7 +7,7 @@
   ],
   "key": {
     "A": {
-      "tag": "terramine:terramine"
+      "tag": "terramine:accessory"
     },
 	"B": {
       "item": "minecraft:book"
@@ -17,6 +17,6 @@
     }
   },
   "result": {
-    "item": "terramine:tinkerer_workshop_block"
+    "item": "terramine:tinkerer_workshop"
   }
 }

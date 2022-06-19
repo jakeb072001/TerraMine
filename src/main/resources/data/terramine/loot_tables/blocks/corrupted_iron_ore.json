@@ -25,7 +25,7 @@
                   }
                 }
               ],
-              "name": "terramine:corrupted_iron_ore_block"
+              "name": "terramine:corrupted_iron_ore"
             },
             {
               "type": "minecraft:item",

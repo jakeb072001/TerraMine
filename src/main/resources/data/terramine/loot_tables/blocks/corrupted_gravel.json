@@ -25,7 +25,7 @@
                   }
                 }
               ],
-              "name": "terramine:corrupted_gravel_block"
+              "name": "terramine:corrupted_gravel"
             },
             {
               "type": "minecraft:alternatives",
@@ -53,7 +53,7 @@
                 },
                 {
                   "type": "minecraft:item",
-                  "name": "terramine:corrupted_gravel_block"
+                  "name": "terramine:corrupted_gravel"
                 }
               ]
             }

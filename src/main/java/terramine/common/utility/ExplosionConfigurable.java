@@ -200,7 +200,7 @@ public class ExplosionConfigurable extends Explosion {
                 net.minecraft.world.level.block.Block block = blockState.getBlock();
                 if (!blockState.isAir()) {
                     BlockPos blockPos2 = blockPos.immutable();
-                    level.getProfiler().push("explosion_blocks");
+                    level.getProfiler().push("explosions");
                     if (block.dropFromExplosion(this)) {
                         if (level instanceof ServerLevel serverLevel) {
                             BlockEntity blockEntity = blockState.hasBlockEntity() ? level.getBlockEntity(blockPos) : null;

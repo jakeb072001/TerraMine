@@ -2,7 +2,7 @@
   "type": "minecraft:blasting",
   "group": "diamond",
   "ingredient": {
-    "item": "terramine:corrupted_deepslate_diamond_ore_block"
+    "item": "terramine:corrupted_deepslate_diamond_ore"
   },
   "result": "minecraft:diamond",
   "experience": 1.0,

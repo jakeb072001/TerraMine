@@ -1,7 +1,7 @@
 {
   "replace": false,
   "values": [
-    "terramine:corrupted_lapis_ore_block",
-    "terramine:corrupted_deepslate_lapis_ore_block"
+    "terramine:corrupted_lapis_ore",
+    "terramine:corrupted_deepslate_lapis_ore"
   ]
 }

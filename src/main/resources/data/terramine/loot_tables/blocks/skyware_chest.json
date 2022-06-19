@@ -13,7 +13,7 @@
               "source": "block_entity"
             }
           ],
-          "name": "terramine:skyware_chest_block"
+          "name": "terramine:skyware_chest"
         }
       ],
       "conditions": [

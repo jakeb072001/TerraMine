@@ -2,7 +2,7 @@
   "parent": "terramine:root",
   "display": {
     "icon": {
-      "item": "terramine:corrupted_grass_block"
+      "item": "terramine:corrupted_grass"
     },
     "title": {
       "translate": "terramine.advancements.the_corruption.title"

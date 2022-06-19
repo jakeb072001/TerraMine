@@ -2,7 +2,7 @@
   "type": "minecraft:blasting",
   "group": "copper_ingot",
   "ingredient": {
-    "item": "terramine:corrupted_deepslate_copper_ore_block"
+    "item": "terramine:corrupted_deepslate_copper_ore"
   },
   "result": "minecraft:copper_ingot",
   "experience": 0.7,

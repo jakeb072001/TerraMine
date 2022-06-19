@@ -1,12 +1,12 @@
 {
     "variants": {
-        "snowy=false": [ 
+        "snowy=false": [
             { "model": "terramine:block/corrupted_grass" },
             { "model": "terramine:block/corrupted_grass", "y": 90 },
             { "model": "terramine:block/corrupted_grass", "y": 180 },
             { "model": "terramine:block/corrupted_grass", "y": 270 }
         ],
-		"snowy=true": [ 
+		"snowy=true": [
             { "model": "terramine:block/corrupted_grass_snowy" },
             { "model": "terramine:block/corrupted_grass_snowy", "y": 90 },
             { "model": "terramine:block/corrupted_grass_snowy", "y": 180 },

@@ -11,7 +11,7 @@
               "condition": "minecraft:survives_explosion"
             }
           ],
-          "name": "terramine:corrupted_sandstone_block"
+          "name": "terramine:corrupted_sandstone"
         }
       ]
     }

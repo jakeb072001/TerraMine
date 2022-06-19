@@ -1,5 +1,6 @@
 package terramine.common.init;
 
+import com.google.common.collect.ImmutableList;
 import net.fabricmc.fabric.api.object.builder.v1.trade.TradeOfferHelper;
 import net.fabricmc.fabric.api.object.builder.v1.villager.VillagerProfessionBuilder;
 import net.fabricmc.fabric.api.object.builder.v1.world.poi.PointOfInterestHelper;
@@ -16,7 +17,7 @@ import java.util.Collections;
 
 public class ModProfessions {
     public static final PoiType GOBLIN_TINKERER_POI = register("goblin_tinkerer", 1, 1, ModBlocks.TINKERER_TABLE);
-    public static final VillagerProfession GOBLIN_TINKERER = register("goblin_tinkerer", GOBLIN_TINKERER_POI, ModSoundEvents.DEMON_EYE_HURT); // change sound to something else later, using for placeholder right now
+    public static final VillagerProfession GOBLIN_TINKERER = register("goblin_tinkerer", GOBLIN_TINKERER_POI, ModSoundEvents.FART); // change sound to something else later, using for placeholder right now
 
     public static void fillTradeData() {
         //EmeraldForItems: i = getEmerald, j = maxUses, k = villagerXp

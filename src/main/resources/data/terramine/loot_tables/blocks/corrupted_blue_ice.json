@@ -7,7 +7,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "terramine:corrupted_blue_ice_block"
+          "name": "terramine:corrupted_blue_ice"
         }
       ],
       "conditions": [

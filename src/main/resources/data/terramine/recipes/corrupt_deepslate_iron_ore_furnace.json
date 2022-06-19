@@ -2,7 +2,7 @@
   "type": "minecraft:smelting",
   "group": "iron_ingot",
   "ingredient": {
-    "item": "terramine:corrupted_deepslate_iron_ore_block"
+    "item": "terramine:corrupted_deepslate_iron_ore"
   },
   "result": "minecraft:iron_ingot",
   "experience": 0.7,

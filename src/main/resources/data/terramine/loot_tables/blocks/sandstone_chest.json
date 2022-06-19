@@ -13,7 +13,7 @@
               "source": "block_entity"
             }
           ],
-          "name": "terramine:sandstone_chest_block"
+          "name": "terramine:sandstone_chest"
         }
       ],
       "conditions": [

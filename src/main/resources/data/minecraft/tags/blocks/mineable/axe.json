@@ -2,6 +2,7 @@
   "replace": false,
   "values": [
     "terramine:ivy_chest",
-    "terramine:trapped_ivy_chest"
+    "terramine:trapped_ivy_chest",
+    "terramine:tinkerer_workshop"
   ]
 }

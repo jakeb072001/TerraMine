@@ -189,7 +189,7 @@
                       }
                     }
                   ],
-                  "name": "terramine:corrupted_snow_layer_block"
+                  "name": "terramine:corrupted_snow_layer"
                 },
                 {
                   "type": "minecraft:item",
@@ -209,7 +209,7 @@
                       "add": false
                     }
                   ],
-                  "name": "terramine:corrupted_snow_layer_block"
+                  "name": "terramine:corrupted_snow_layer"
                 },
                 {
                   "type": "minecraft:item",
@@ -229,7 +229,7 @@
                       "add": false
                     }
                   ],
-                  "name": "terramine:corrupted_snow_layer_block"
+                  "name": "terramine:corrupted_snow_layer"
                 },
                 {
                   "type": "minecraft:item",
@@ -249,7 +249,7 @@
                       "add": false
                     }
                   ],
-                  "name": "terramine:corrupted_snow_layer_block"
+                  "name": "terramine:corrupted_snow_layer"
                 },
                 {
                   "type": "minecraft:item",
@@ -269,7 +269,7 @@
                       "add": false
                     }
                   ],
-                  "name": "terramine:corrupted_snow_layer_block"
+                  "name": "terramine:corrupted_snow_layer"
                 },
                 {
                   "type": "minecraft:item",
@@ -289,7 +289,7 @@
                       "add": false
                     }
                   ],
-                  "name": "terramine:corrupted_snow_layer_block"
+                  "name": "terramine:corrupted_snow_layer"
                 },
                 {
                   "type": "minecraft:item",
@@ -309,11 +309,11 @@
                       "add": false
                     }
                   ],
-                  "name": "terramine:corrupted_snow_layer_block"
+                  "name": "terramine:corrupted_snow_layer"
                 },
                 {
                   "type": "minecraft:item",
-                  "name": "terramine:corrupted_snow_block"
+                  "name": "terramine:corrupted_snow"
                 }
               ]
             }

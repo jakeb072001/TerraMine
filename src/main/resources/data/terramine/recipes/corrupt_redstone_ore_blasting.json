@@ -2,7 +2,7 @@
   "type": "minecraft:blasting",
   "group": "redstone",
   "ingredient": {
-    "item": "terramine:corrupted_redstone_ore_block"
+    "item": "terramine:corrupted_redstone_ore"
   },
   "result": "minecraft:redstone",
   "experience": 0.7,

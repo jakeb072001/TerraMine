@@ -24,7 +24,7 @@
                   }
                 }
               ],
-              "name": "terramine:corrupted_stone_block"
+              "name": "terramine:corrupted_stone"
             },
             {
               "type": "minecraft:item",
@@ -33,7 +33,7 @@
                   "condition": "minecraft:survives_explosion"
                 }
               ],
-              "name": "terramine:corrupted_cobblestone_block"
+              "name": "terramine:corrupted_cobblestone"
             }
           ]
         }

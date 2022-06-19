@@ -1,6 +1,3 @@
 {
-  "parent": "minecraft:item/generated",
-  "textures": {
-    "layer0": "terramine:item/demonite_ore"
-  }
+  "parent": "terramine:block/demonite_ore"
 }

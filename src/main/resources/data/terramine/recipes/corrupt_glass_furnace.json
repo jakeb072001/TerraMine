@@ -1,9 +1,9 @@
 {
   "type": "minecraft:smelting",
   "ingredient": {
-    "item": "terramine:corrupted_sand_block"
+    "item": "terramine:corrupted_sand"
   },
-  "result": "terramine:corrupted_glass_block",
+  "result": "terramine:corrupted_glass",
   "experience": 0.1,
   "cookingtime": 200
 }

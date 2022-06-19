@@ -2,7 +2,7 @@
   "type": "minecraft:smelting",
   "group": "lapis_lazuli",
   "ingredient": {
-    "item": "terramine:corrupted_deepslate_lapis_ore_block"
+    "item": "terramine:corrupted_deepslate_lapis_ore"
   },
   "result": "minecraft:lapis_lazuli",
   "experience": 0.2,

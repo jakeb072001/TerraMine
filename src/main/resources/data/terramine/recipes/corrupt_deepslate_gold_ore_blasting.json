@@ -2,7 +2,7 @@
   "type": "minecraft:blasting",
   "group": "gold_ingot",
   "ingredient": {
-    "item": "terramine:corrupted_deepslate_gold_ore_block"
+    "item": "terramine:corrupted_deepslate_gold_ore"
   },
   "result": "minecraft:gold_ingot",
   "experience": 1.0,

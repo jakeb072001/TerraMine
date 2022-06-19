@@ -70,6 +70,7 @@ public class TerraMine implements ModInitializer, TerraBlenderApi {
 		ModBlockEntityType.register();
 		ModFeatures.register();
 		ModBiomes.registerAll();
+		ModProfessions.GOBLIN_TINKERER_POI.toString();
 		ModProfessions.fillTradeData();
 		ModParticles.registerServer();
 		ModCommands.registerRules();
@@ -77,6 +78,7 @@ public class TerraMine implements ModInitializer, TerraBlenderApi {
 			ModCommands.registerCommands(dispatcher);
 		});
 
+		// Events
 		ServerLifecycleEvents.SERVER_STOPPING.register(server -> InputHandler.clear());
 		PlayerEvent.CHANGE_DIMENSION.register((player, oldLevel, newLevel) -> InputHandler.onChangeDimension(player));
 		PlayerEvent.PLAYER_QUIT.register(InputHandler::onLogout);
@@ -97,8 +99,7 @@ public class TerraMine implements ModInitializer, TerraBlenderApi {
 	}
 
 	@Override
-	public void onTerraBlenderInitialized()
-	{
+	public void onTerraBlenderInitialized() {
 		Regions.register(new BiomeAdder(id("terraria_biomes"), RegionType.OVERWORLD, 1));
 
 		SurfaceRuleManager.addToDefaultSurfaceRulesAtStage(SurfaceRuleManager.RuleCategory.OVERWORLD, SurfaceRuleManager.RuleStage.AFTER_BEDROCK,

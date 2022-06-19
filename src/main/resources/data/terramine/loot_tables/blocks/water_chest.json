@@ -13,7 +13,7 @@
               "source": "block_entity"
             }
           ],
-          "name": "terramine:water_chest_block"
+          "name": "terramine:water_chest"
         }
       ],
       "conditions": [

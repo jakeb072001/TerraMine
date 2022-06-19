@@ -1,7 +1,7 @@
 {
   "replace": false,
   "values": [
-    "terramine:corrupted_diamond_ore_block",
-    "terramine:corrupted_deepslate_diamond_ore_block"
+    "terramine:corrupted_diamond_ore",
+    "terramine:corrupted_deepslate_diamond_ore"
   ]
 }

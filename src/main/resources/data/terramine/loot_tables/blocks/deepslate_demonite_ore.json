@@ -25,7 +25,7 @@
                   }
                 }
               ],
-              "name": "terramine:deepslate_demonite_ore_block"
+              "name": "terramine:deepslate_demonite_ore"
             },
             {
               "type": "minecraft:item",
@@ -39,7 +39,7 @@
                   "function": "minecraft:explosion_decay"
                 }
               ],
-              "name": "terramine:demonite_ore"
+              "name": "terramine:raw_demonite"
             }
           ]
         }
