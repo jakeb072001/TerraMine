@@ -25,8 +25,6 @@ import org.jetbrains.annotations.Nullable;
 import terramine.common.init.ModBlocks;
 import terramine.common.utility.CorruptionHelper;
 
-import java.util.Random;
-
 public class CorruptedSnowLayer extends CorruptionHelper {
     public static final int MAX_HEIGHT = 8;
     public static final IntegerProperty LAYERS = BlockStateProperties.LAYERS;

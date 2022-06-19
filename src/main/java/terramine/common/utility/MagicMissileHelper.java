@@ -2,6 +2,7 @@ package terramine.common.utility;
 
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -19,11 +20,9 @@ import terramine.common.init.ModItems;
 import terramine.common.init.ModSoundEvents;
 import terramine.common.trinkets.TrinketsHelper;
 
-import java.util.Random;
-
 public class MagicMissileHelper extends AbstractArrow {
 
-    private final Random rand = new Random();
+    private final RandomSource rand = RandomSource.create();
     private Item wandItem;
     private float damageIncrease;
     private float speed;

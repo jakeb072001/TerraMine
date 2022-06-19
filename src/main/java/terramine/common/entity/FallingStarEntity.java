@@ -4,6 +4,7 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
@@ -15,10 +16,8 @@ import net.minecraft.world.phys.Vec3;
 import terramine.common.init.ModItems;
 import terramine.common.init.ModSoundEvents;
 
-import java.util.Random;
-
 public class FallingStarEntity extends Mob {
-    Random rand = new Random();
+    RandomSource rand = RandomSource.create();
     float x;
     float z;
     int soundTimer;

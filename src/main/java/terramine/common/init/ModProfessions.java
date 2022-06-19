@@ -13,7 +13,6 @@ import net.minecraft.world.level.block.Block;
 import terramine.TerraMine;
 
 import java.util.Collections;
-import java.util.function.Supplier;
 
 public class ModProfessions {
     public static final PoiType GOBLIN_TINKERER_POI = register("goblin_tinkerer", 1, 1, ModBlocks.TINKERER_TABLE);

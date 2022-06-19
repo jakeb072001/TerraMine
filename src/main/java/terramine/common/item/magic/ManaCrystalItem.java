@@ -4,6 +4,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
 import net.minecraft.advancements.CriteriaTriggers;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.LivingEntity;
@@ -15,11 +16,9 @@ import terramine.common.init.ModComponents;
 import terramine.common.init.ModSoundEvents;
 import terramine.common.item.TerrariaItemConfigurable;
 
-import java.util.Random;
-
 public class ManaCrystalItem extends TerrariaItemConfigurable {
 
-    Random rand = new Random();
+    RandomSource rand = RandomSource.create();
 
     public ManaCrystalItem(Properties properties) {
         super(properties);

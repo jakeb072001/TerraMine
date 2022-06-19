@@ -6,6 +6,7 @@ import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.phys.Vec3;
@@ -13,10 +14,8 @@ import terramine.common.init.ModComponents;
 import terramine.common.init.ModItems;
 import terramine.common.trinkets.TrinketsHelper;
 
-import java.util.Random;
-
 public class RocketBootHelper {
-    private static final Random RANDOM = new Random();
+    private static final RandomSource RANDOM = RandomSource.create();
     private SimpleParticleType particle1;
     private SimpleParticleType particle2;
     private SoundEvent sound;

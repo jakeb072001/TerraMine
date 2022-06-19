@@ -18,7 +18,6 @@ import terramine.common.init.ModLootTables;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Random;
 
 public class NetherChestFeature extends Feature<NoneFeatureConfiguration> {
 

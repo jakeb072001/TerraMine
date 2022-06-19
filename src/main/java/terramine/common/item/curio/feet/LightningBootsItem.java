@@ -4,6 +4,7 @@ import dev.emi.stepheightentityattribute.StepHeightEntityAttributeMain;
 import dev.emi.trinkets.api.SlotReference;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
@@ -19,7 +20,6 @@ import terramine.common.item.curio.TrinketTerrariaItem;
 import terramine.common.trinkets.TrinketsHelper;
 import terramine.common.utility.RocketBootHelper;
 
-import java.util.Random;
 import java.util.UUID;
 
 public class LightningBootsItem extends TrinketTerrariaItem {
@@ -30,7 +30,7 @@ public class LightningBootsItem extends TrinketTerrariaItem {
 			"terramine:lightning_boots_movement_speed_walk", 0.08, AttributeModifier.Operation.MULTIPLY_TOTAL);
 	public static final AttributeModifier STEP_HEIGHT_MODIFIER = new AttributeModifier(UUID.fromString("7e97cede-a343-411f-b465-14cdf6df3666"),
 			"terramine:lightning_boots_step_height", .5, AttributeModifier.Operation.ADDITION);
-	private static final Random RANDOM = new Random();
+	private static final RandomSource RANDOM = RandomSource.create();
 	public RocketBootHelper rocketHelper = new RocketBootHelper();
 	public double speed = 0.08D;
 

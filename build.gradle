@@ -76,14 +76,14 @@ dependencies {
     modImplementation("dev.emi:trinkets:${project.trinkets_version}") {
         transitive = false
     }
+    modImplementation "me.shedaniel.cloth:cloth-config-fabric:${project.cloth_config_version}"
+    modImplementation "com.github.glitchfiend:TerraBlender-fabric:${minecraft_version}-${terrablender_version}"
     modImplementation include("dev.onyxstudios.cardinal-components-api:cardinal-components-base:${cca_version}")
     modImplementation include("dev.onyxstudios.cardinal-components-api:cardinal-components-entity:${cca_version}")
     modImplementation include("dev.onyxstudios.cardinal-components-api:cardinal-components-level:${cca_version}")
     modImplementation include("dev.onyxstudios.cardinal-components-api:cardinal-components-world:${cca_version}")
     modImplementation include("be.florens:expandability-fabric:${project.expandability_version}")
-    modImplementation include("me.shedaniel.cloth:cloth-config-fabric:${project.cloth_config_version}")
     modImplementation include("io.github.cottonmc:LibGui:${project.libgui_version}")
-    modImplementation "com.github.glitchfiend:TerraBlender-fabric:${minecraft_version}-${terrablender_version}"
     modImplementation include("com.jamieswhiteshirt:reach-entity-attributes:${project.reach_entity_attr_version}")
     modImplementation include("com.github.emilyploszaj:step-height-entity-attribute:${project.step_height_attr_version}") {
         transitive = false
@@ -151,6 +151,7 @@ curseforge {
             addGameVersion "Fabric"
             relations {
                 requiredDependency "architectury-api"
+                requiredDependency "cloth-config"
                 requiredDependency "fabric-api"
                 requiredDependency "trinkets"
                 requiredDependency "terrablender-fabric"

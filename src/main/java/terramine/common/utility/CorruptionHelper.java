@@ -17,8 +17,6 @@ import terramine.TerraMine;
 import terramine.common.block.CorruptedSnowLayer;
 import terramine.common.init.ModBlocks;
 
-import java.util.Random;
-
 public class CorruptionHelper extends SpreadingSnowyDirtBlock  {
     protected CorruptionHelper(Properties properties) {
         super(properties);

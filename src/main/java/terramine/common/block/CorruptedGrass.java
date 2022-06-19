@@ -17,7 +17,6 @@ import org.jetbrains.annotations.NotNull;
 import terramine.common.utility.CorruptionHelper;
 
 import java.util.List;
-import java.util.Random;
 
 public class CorruptedGrass extends CorruptionHelper implements BonemealableBlock {
     public CorruptedGrass(Properties properties) {

@@ -16,8 +16,6 @@ import net.minecraft.world.level.material.Material;
 import org.jetbrains.annotations.NotNull;
 import terramine.common.utility.CorruptionHelper;
 
-import java.util.Random;
-
 public class CorruptedFallingBlock extends CorruptionHelper {
     public CorruptedFallingBlock(Properties properties) {
         super(properties);

@@ -21,7 +21,7 @@ public abstract class EntityMixin {
         if ((Object) this instanceof LivingEntity entity) {
             if (TrinketsHelper.isEquipped(ModItems.TERRASPARK_BOOTS, entity) || TrinketsHelper.isEquipped(ModItems.LAVA_WADERS, entity) ||
                     TrinketsHelper.isEquipped(ModItems.MOLTEN_CHARM, entity) || TrinketsHelper.isEquipped(ModItems.LAVA_CHARM, entity)) {
-                if (ModComponents.LAVA_IMMUNITY.get((Player)entity).getLavaImmunityTimer() > 0) {
+                if (ModComponents.LAVA_IMMUNITY.get(entity).getLavaImmunityTimer() > 0) {
                     if (damageSource.equals(DamageSource.LAVA)) {
                         cir.setReturnValue(true);
                     }

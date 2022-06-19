@@ -6,8 +6,6 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 
-import java.util.Random;
-
 /**
  * Callback for applying Trinket effects when the wearer was attacked by another entity
  */
