@@ -80,8 +80,7 @@
     "item.weatherradio.client.GuiMixin",
     "statuseffect.client.GameRendererMixin",
     "statuseffect.client.LivingEntityMixin",
-    "statuseffect.client.MobEffectUtilMixin",
-    "world.ClientLevelMixin"
+    "statuseffect.client.MobEffectUtilMixin"
   ],
   "injectors": {
     "defaultRequire": 1

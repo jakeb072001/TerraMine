@@ -3,9 +3,9 @@ package terramine.common.init;
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
 import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
-import net.minecraft.client.Minecraft;
 import net.minecraft.core.Registry;
 import net.minecraft.world.entity.*;
+import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.levelgen.Heightmap;
 import terramine.TerraMine;
 import terramine.common.entity.*;
@@ -63,6 +63,6 @@ public class ModEntities {
 	}
 
 	public static <T extends Entity> void naturalSpawn(EntityType<T> entType, MobCategory category, int weight, int minGroup, int maxGroup) {
-		BiomeModifications.addSpawn(BiomeSelectors.foundInOverworld(), category, entType, weight, minGroup, maxGroup);
+		BiomeModifications.addSpawn(BiomeSelectors.excludeByKey(Biomes.DEEP_DARK).and(BiomeSelectors.foundInOverworld()), category, entType, weight, minGroup, maxGroup);
 	}
 }

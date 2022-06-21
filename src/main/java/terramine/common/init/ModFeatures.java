@@ -124,7 +124,7 @@ public class ModFeatures {
 				BuiltinRegistries.PLACED_FEATURE,
 				id("nether_chest"),
 				new PlacedFeature(featureHolder3,
-						List.of(RarityFilter.onAverageOnceEvery(CONFIG.worldgen.caveChest.chestRarity),
+						List.of(RarityFilter.onAverageOnceEvery(CONFIG.worldgen.caveChest.chestRarity * 2),
 								InSquarePlacement.spread(),
 								HeightRangePlacement.uniform(
 										VerticalAnchor.aboveBottom(20),

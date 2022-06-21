@@ -90,6 +90,8 @@ public class TerraMineClient implements ClientModInitializer {
 			registry.register(TerraMine.id("block/chests/water/water_chest"));
 			registry.register(TerraMine.id("block/chests/skyware/skyware_chest"));
 			registry.register(TerraMine.id("block/chests/shadow/shadow_chest"));
+			registry.register(TerraMine.id("block/chests/player/piggy_bank/piggy_bank"));
+			registry.register(TerraMine.id("block/chests/player/safe/safe"));
 		});
 	}
 }

@@ -23,6 +23,7 @@ import net.minecraft.world.level.block.ChestBlock;
 import net.minecraft.world.level.block.entity.*;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.ChestType;
+import org.jetbrains.annotations.NotNull;
 import terramine.TerraMine;
 import terramine.client.render.ChestScreenHandler;
 
@@ -34,17 +35,17 @@ public class ChestEntity extends ChestBlockEntity {
     boolean trapped;
     private final ContainerOpenersCounter openersCounter = new ContainerOpenersCounter(){
         @Override
-        protected void onOpen(Level level, BlockPos blockPos, BlockState blockState) {
+        protected void onOpen(@NotNull Level level, @NotNull BlockPos blockPos, @NotNull BlockState blockState) {
             playSound(level, blockPos, blockState, SoundEvents.CHEST_OPEN);
         }
 
         @Override
-        protected void onClose(Level level, BlockPos blockPos, BlockState blockState) {
+        protected void onClose(@NotNull Level level, @NotNull BlockPos blockPos, @NotNull BlockState blockState) {
             playSound(level, blockPos, blockState, SoundEvents.CHEST_CLOSE);
         }
 
         @Override
-        protected void openerCountChanged(Level level, BlockPos blockPos, BlockState blockState, int i, int j) {
+        protected void openerCountChanged(@NotNull Level level, @NotNull BlockPos blockPos, @NotNull BlockState blockState, int i, int j) {
             signalOpenCount(level, blockPos, blockState, i, j);
         }
 
@@ -71,7 +72,7 @@ public class ChestEntity extends ChestBlockEntity {
     }
 
     @Override
-    public AbstractContainerMenu createMenu(int i, Inventory inventory, Player player) {
+    public AbstractContainerMenu createMenu(int i, @NotNull Inventory inventory, @NotNull Player player) {
         return new ChestScreenHandler(40, menu, i, inventory, ContainerLevelAccess.create(level, getBlockPos()));
     }
 
@@ -93,14 +94,14 @@ public class ChestEntity extends ChestBlockEntity {
     }
 
     @Override
-    public void startOpen(Player player) {
+    public void startOpen(@NotNull Player player) {
         if (!this.remove && !player.isSpectator()) {
             openersCounter.incrementOpeners(player, getLevel(), getBlockPos(), getBlockState());
         }
     }
 
     @Override
-    public void stopOpen(Player player) {
+    public void stopOpen(@NotNull Player player) {
         if (!this.remove && !player.isSpectator()) {
             openersCounter.decrementOpeners(player, getLevel(), getBlockPos(), getBlockState());
         }
@@ -142,7 +143,7 @@ public class ChestEntity extends ChestBlockEntity {
         }
     }
 
-    public static int getOpenCount(BlockGetter blockGetter, BlockPos blockPos) {
+    public static int getOpenCount(BlockGetter blockGetter, @NotNull BlockPos blockPos) {
         BlockEntity blockEntity;
         BlockState blockState = blockGetter.getBlockState(blockPos);
         if (blockState.hasBlockEntity() && (blockEntity = blockGetter.getBlockEntity(blockPos)) instanceof ChestEntity) {
@@ -152,7 +153,7 @@ public class ChestEntity extends ChestBlockEntity {
     }
 
     @Override
-    protected void signalOpenCount(Level level, BlockPos blockPos, BlockState blockState, int i, int j) {
+    protected void signalOpenCount(@NotNull Level level, @NotNull BlockPos blockPos, @NotNull BlockState blockState, int i, int j) {
         super.signalOpenCount(level, blockPos, blockState, i, j);
         if (i != j && trapped) {
             Block block = blockState.getBlock();

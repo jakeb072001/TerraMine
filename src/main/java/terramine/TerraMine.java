@@ -8,6 +8,7 @@ import me.shedaniel.autoconfig.serializer.Toml4jConfigSerializer;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
+import net.fabricmc.fabric.api.entity.event.v1.ServerPlayerEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerWorldEvents;
 import net.fabricmc.fabric.api.loot.v2.LootTableEvents;
@@ -33,6 +34,7 @@ import terramine.common.network.ServerPacketHandler;
 import terramine.common.utility.InputHandler;
 import terramine.common.world.biome.BiomeAdder;
 import terramine.common.world.biome.BiomeSurfaceRules;
+import terramine.extensions.PlayerStorages;
 
 import java.util.Optional;
 
@@ -83,6 +85,12 @@ public class TerraMine implements ModInitializer, TerraBlenderApi {
 		PlayerEvent.CHANGE_DIMENSION.register((player, oldLevel, newLevel) -> InputHandler.onChangeDimension(player));
 		PlayerEvent.PLAYER_QUIT.register(InputHandler::onLogout);
 		ServerWorldEvents.LOAD.register((server, level) -> SyncedBooleanComponent.setServer(server));
+		ServerPlayerEvents.COPY_FROM.register((oldPlayer, newPlayer, alive) -> {
+			if (oldPlayer instanceof PlayerStorages) {
+				((PlayerStorages) newPlayer).setPiggyBankInventory(((PlayerStorages) oldPlayer).getPiggyBankInventory());
+				((PlayerStorages) newPlayer).setSafeInventory(((PlayerStorages) oldPlayer).getSafeInventory());
+			}
+		});
 
 		// Compat Handlers
 		for (CompatHandler handler : FabricLoader.getInstance().getEntrypoints("terramine:compat_handlers", CompatHandler.class)) {

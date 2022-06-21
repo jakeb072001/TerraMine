@@ -16,6 +16,8 @@ public class ModScreenHandlerType {
     public static MenuType<ChestScreenHandler> WATER_CHEST;
     public static MenuType<ChestScreenHandler> SKYWARE_CHEST;
     public static MenuType<ChestScreenHandler> SHADOW_CHEST;
+    public static MenuType<ChestScreenHandler> PIGGY_BANK;
+    public static MenuType<ChestScreenHandler> SAFE;
 
     public static void register() {
         GOLD_CHEST = registerSimple(TerraMine.id("gold_chest"), (syncId, inventory) -> new ChestScreenHandler(40, GOLD_CHEST, syncId, inventory, ContainerLevelAccess.NULL));
@@ -25,6 +27,8 @@ public class ModScreenHandlerType {
         WATER_CHEST = registerSimple(TerraMine.id("water_chest"), (syncId, inventory) -> new ChestScreenHandler(40, WATER_CHEST, syncId, inventory, ContainerLevelAccess.NULL));
         SKYWARE_CHEST = registerSimple(TerraMine.id("skyware_chest"), (syncId, inventory) -> new ChestScreenHandler(40, SKYWARE_CHEST, syncId, inventory, ContainerLevelAccess.NULL));
         SHADOW_CHEST = registerSimple(TerraMine.id("shadow_chest"), (syncId, inventory) -> new ChestScreenHandler(40, SHADOW_CHEST, syncId, inventory, ContainerLevelAccess.NULL));
+        PIGGY_BANK = registerSimple(TerraMine.id("piggy_bank"), (syncId, inventory) -> new ChestScreenHandler(40, PIGGY_BANK, syncId, inventory, ContainerLevelAccess.NULL));
+        SAFE = registerSimple(TerraMine.id("safe"), (syncId, inventory) -> new ChestScreenHandler(40, SAFE, syncId, inventory, ContainerLevelAccess.NULL));
     }
 
     public static <T extends AbstractContainerMenu> MenuType<T> registerSimple(ResourceLocation id, MenuType.MenuSupplier<T> factory) {

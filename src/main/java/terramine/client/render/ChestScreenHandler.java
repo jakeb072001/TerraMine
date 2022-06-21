@@ -5,6 +5,7 @@ import io.github.cottonmc.cotton.gui.widget.WItemSlot;
 import io.github.cottonmc.cotton.gui.widget.WPlainPanel;
 import io.github.cottonmc.cotton.gui.widget.data.Insets;
 import net.minecraft.world.Container;
+import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.ContainerLevelAccess;
 import net.minecraft.world.inventory.MenuType;
@@ -14,6 +15,15 @@ public class ChestScreenHandler extends SyncedGuiDescription {
 
     public ChestScreenHandler(int size, MenuType<?> type, int syncId, Inventory playerInventory, ContainerLevelAccess ctx) {
         super(type, syncId, playerInventory, getBlockInventory(ctx, size), null);
+        createScreen(size, getBlockInventory(ctx, size));
+    }
+
+    public ChestScreenHandler(int size, MenuType<?> type, int syncId, Inventory playerInventory, Container blockInventory) {
+        super(type, syncId, playerInventory, blockInventory, null);
+        createScreen(size, blockInventory);
+    }
+
+    private void createScreen(int size, Container blockInventory) {
         inventory = blockInventory;
         int rows = 4;
         int length = 10;

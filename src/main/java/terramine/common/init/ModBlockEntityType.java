@@ -14,6 +14,8 @@ public class ModBlockEntityType {
     public static final BlockEntityType<WaterChestEntity> WATER_CHEST = FabricBlockEntityTypeBuilder.create(WaterChestEntity::new, ModBlocks.WATER_CHEST).build(null);
     public static final BlockEntityType<SkywareChestEntity> SKYWARE_CHEST = FabricBlockEntityTypeBuilder.create(SkywareChestEntity::new, ModBlocks.SKYWARE_CHEST).build(null);
     public static final BlockEntityType<ShadowChestEntity> SHADOW_CHEST = FabricBlockEntityTypeBuilder.create(ShadowChestEntity::new, ModBlocks.SHADOW_CHEST).build(null);
+    public static final BlockEntityType<PiggyBankEntity> PIGGY_BANK = FabricBlockEntityTypeBuilder.create(PiggyBankEntity::new, ModBlocks.PIGGY_BANK).build(null);
+    public static final BlockEntityType<SafeEntity> SAFE = FabricBlockEntityTypeBuilder.create(SafeEntity::new, ModBlocks.SAFE).build(null);
 
     public static void register() {
         Registry.register(Registry.BLOCK_ENTITY_TYPE, TerraMine.id("gold_chest"), GOLD_CHEST);
@@ -23,5 +25,7 @@ public class ModBlockEntityType {
         Registry.register(Registry.BLOCK_ENTITY_TYPE, TerraMine.id("water_chest"), WATER_CHEST);
         Registry.register(Registry.BLOCK_ENTITY_TYPE, TerraMine.id("skyware_chest"), SKYWARE_CHEST);
         Registry.register(Registry.BLOCK_ENTITY_TYPE, TerraMine.id("shadow_chest"), SHADOW_CHEST);
+        Registry.register(Registry.BLOCK_ENTITY_TYPE, TerraMine.id("piggy_bank"), PIGGY_BANK);
+        Registry.register(Registry.BLOCK_ENTITY_TYPE, TerraMine.id("safe"), SAFE);
     }
 }

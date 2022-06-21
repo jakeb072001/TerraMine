@@ -13,5 +13,7 @@ public class ModScreenHandler {
         MenuScreens.<ChestScreenHandler, ChestBlockScreenHandler>register(ModScreenHandlerType.WATER_CHEST, (description, inventory, title) -> new ChestBlockScreenHandler(description, inventory.player, title));
         MenuScreens.<ChestScreenHandler, ChestBlockScreenHandler>register(ModScreenHandlerType.SKYWARE_CHEST, (description, inventory, title) -> new ChestBlockScreenHandler(description, inventory.player, title));
         MenuScreens.<ChestScreenHandler, ChestBlockScreenHandler>register(ModScreenHandlerType.SHADOW_CHEST, (description, inventory, title) -> new ChestBlockScreenHandler(description, inventory.player, title));
+        MenuScreens.<ChestScreenHandler, ChestBlockScreenHandler>register(ModScreenHandlerType.PIGGY_BANK, (description, inventory, title) -> new ChestBlockScreenHandler(description, inventory.player, title));
+        MenuScreens.<ChestScreenHandler, ChestBlockScreenHandler>register(ModScreenHandlerType.SAFE, (description, inventory, title) -> new ChestBlockScreenHandler(description, inventory.player, title));
     }
 }

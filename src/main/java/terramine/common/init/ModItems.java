@@ -139,6 +139,8 @@ public class ModItems {
 	public static final Item WATER_CHEST = register("water_chest", new BlockItem(ModBlocks.WATER_CHEST, new FabricItemSettings().group(CreativeModeTab.TAB_DECORATIONS)));
 	public static final Item SKYWARE_CHEST = register("skyware_chest", new BlockItem(ModBlocks.SKYWARE_CHEST, new FabricItemSettings().group(CreativeModeTab.TAB_DECORATIONS)));
 	public static final Item SHADOW_CHEST = register("shadow_chest", new BlockItem(ModBlocks.SHADOW_CHEST, new FabricItemSettings().group(CreativeModeTab.TAB_DECORATIONS)));
+	public static final Item PIGGY_BANK = register("piggy_bank", new BlockItem(ModBlocks.PIGGY_BANK, new FabricItemSettings().group(CreativeModeTab.TAB_DECORATIONS)));
+	public static final Item SAFE = register("safe", new BlockItem(ModBlocks.SAFE, new FabricItemSettings().group(CreativeModeTab.TAB_DECORATIONS)));
 	public static final Item REDSTONE_STONE = register("redstone_stone", new BlockItem(ModBlocks.REDSTONE_STONE, new FabricItemSettings().group(CreativeModeTab.TAB_REDSTONE)));
 	public static final Item REDSTONE_DEEPSLATE = register("redstone_deepslate", new BlockItem(ModBlocks.REDSTONE_DEEPSLATE, new FabricItemSettings().group(CreativeModeTab.TAB_REDSTONE)));
 	public static final Item INSTANT_TNT = register("instant_tnt", new BlockItem(ModBlocks.INSTANT_TNT, new FabricItemSettings().group(CreativeModeTab.TAB_REDSTONE)));

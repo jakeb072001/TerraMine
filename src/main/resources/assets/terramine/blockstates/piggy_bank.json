@@ -1,0 +1,8 @@
+{
+  "variants": {
+        "facing=north": { "model": "terramine:block/piggy_bank" },
+        "facing=east":  { "model": "terramine:block/piggy_bank", "y":  90},
+        "facing=south": { "model": "terramine:block/piggy_bank", "y": 180 },
+        "facing=west":  { "model": "terramine:block/piggy_bank", "y": 270 }
+    }
+}

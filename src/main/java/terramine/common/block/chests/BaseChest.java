@@ -49,7 +49,7 @@ public class BaseChest extends ChestBlock {
     }
 
     @Override
-    public InteractionResult use(BlockState blockState, Level level, BlockPos blockPos, Player player, InteractionHand interactionHand, BlockHitResult blockHitResult) {
+    public InteractionResult use(@NotNull BlockState blockState, Level level, @NotNull BlockPos blockPos, @NotNull Player player, @NotNull InteractionHand interactionHand, @NotNull BlockHitResult blockHitResult) {
         if (level.isClientSide) {
             return InteractionResult.SUCCESS;
         }
@@ -69,7 +69,7 @@ public class BaseChest extends ChestBlock {
     }
 
     @Override
-    public BlockState updateShape(BlockState blockState, Direction direction, BlockState blockState2, LevelAccessor levelAccessor, BlockPos blockPos, BlockPos blockPos2) {
+    public BlockState updateShape(@NotNull BlockState blockState, @NotNull Direction direction, @NotNull BlockState blockState2, @NotNull LevelAccessor levelAccessor, @NotNull BlockPos blockPos, @NotNull BlockPos blockPos2) {
         if (direction == Direction.DOWN && !this.canSurvive(blockState, levelAccessor, blockPos)) {
             return Blocks.AIR.defaultBlockState();
         }
@@ -77,12 +77,12 @@ public class BaseChest extends ChestBlock {
     }
 
     @Override
-    public boolean canSurvive(BlockState blockState, LevelReader levelReader, BlockPos blockPos) {
+    public boolean canSurvive(@NotNull BlockState blockState, @NotNull LevelReader levelReader, BlockPos blockPos) {
         return BaseChest.canSupportCenter(levelReader, blockPos.below(), Direction.UP);
     }
 
     @Override
-    public RenderShape getRenderShape(BlockState blockState) {
+    public RenderShape getRenderShape(@NotNull BlockState blockState) {
         return RenderShape.ENTITYBLOCK_ANIMATED;
     }
 
@@ -114,12 +114,12 @@ public class BaseChest extends ChestBlock {
     }
 
     @Override
-    public boolean isSignalSource(BlockState blockState) {
+    public boolean isSignalSource(@NotNull BlockState blockState) {
         return this.trapped;
     }
 
     @Override
-    public int getSignal(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, Direction direction) {
+    public int getSignal(@NotNull BlockState blockState, @NotNull BlockGetter blockGetter, @NotNull BlockPos blockPos, @NotNull Direction direction) {
         if (this.trapped) {
             return Mth.clamp(ChestEntity.getOpenCount(blockGetter, blockPos), 0, 15);
         } else {
@@ -128,7 +128,7 @@ public class BaseChest extends ChestBlock {
     }
 
     @Override
-    public int getDirectSignal(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, Direction direction) {
+    public int getDirectSignal(@NotNull BlockState blockState, @NotNull BlockGetter blockGetter, @NotNull BlockPos blockPos, @NotNull Direction direction) {
         if (direction == Direction.UP && this.trapped) {
             return blockState.getSignal(blockGetter, blockPos, direction);
         }
@@ -141,7 +141,7 @@ public class BaseChest extends ChestBlock {
 
     @Override
     @Nullable
-    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState blockState, BlockEntityType<T> blockEntityType) {
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, @NotNull BlockState blockState, @NotNull BlockEntityType<T> blockEntityType) {
         return level.isClientSide ? BaseChest.createTickerHelper(blockEntityType, this.blockEntityType(), ChestEntity::clientTick) : null;
     }
 }

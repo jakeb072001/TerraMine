@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [1.4.0] - 2022-07-01
 ### Added
 - Re-added Cobalt and Obsidian shield (no longer uses Fabric Shield API)
+- Piggy Bank and Safe
 
 ### Changed
 - Whoopee Cushion now plays fart sound when used instead of equipping (can still be equipped in accessory slots)
@@ -15,6 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - More server crashes and bugs
 - Black Belt crash with some mods
 - Villagers not looking for Goblin Tinkerer profession
+- Demon Eyes spawning in Deep Dark
 
 ## [1.3.5] - 2022-06-19
 ### Updated to Minecraft 1.19
