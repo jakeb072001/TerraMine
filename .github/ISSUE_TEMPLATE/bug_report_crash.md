@@ -21,6 +21,6 @@ Steps to reproduce the behavior:
 Please provide details about the game environment, either by crash report/logs or by detailing it below.
  - Minecraft: [version]
  - Fabric API: [version]
- - Artifacts: [version]
+ - TerraMine: [version]
  - Trinkets: [version]
  - [other relevant mods...]
