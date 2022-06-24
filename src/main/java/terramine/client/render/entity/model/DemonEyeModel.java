@@ -2,15 +2,17 @@ package terramine.client.render.entity.model;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import net.minecraft.client.model.EntityModel;
+import net.minecraft.client.model.HierarchicalModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.CubeListBuilder;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.model.geom.builders.MeshDefinition;
+import net.minecraft.util.Mth;
+import org.jetbrains.annotations.NotNull;
 import terramine.common.entity.DemonEyeEntity;
 
-public class DemonEyeModel extends EntityModel<DemonEyeEntity> {
+public class DemonEyeModel<T extends DemonEyeEntity> extends HierarchicalModel<T> {
 
     protected final ModelPart eye;
     protected final ModelPart veins;
@@ -21,21 +23,28 @@ public class DemonEyeModel extends EntityModel<DemonEyeEntity> {
     }
 
     @Override
-    public void setupAnim(DemonEyeEntity eye, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+    public void setupAnim(@NotNull DemonEyeEntity eye, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+        float k = headPitch * 0.017453292F;
+        float f = netHeadYaw * 0.017453292F;
+        this.eye.xRot = k;
+        this.veins.xRot = k;
+        this.eye.yRot = Mth.cos(f) * 16.0F * 0.017453292F;
+        this.veins.yRot = Mth.cos(f) * 16.0F * 0.017453292F;
     }
 
     @Override
-    public void prepareMobModel(DemonEyeEntity eye, float limbSwing, float limbSwingAmount, float partialTicks) {
-    }
-
-    @Override
-    public void renderToBuffer(PoseStack matrixStack, VertexConsumer buffer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
+    public void renderToBuffer(PoseStack matrixStack, @NotNull VertexConsumer buffer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
         matrixStack.pushPose();
         matrixStack.scale(1.5f, 1.5f,1.5f);
         matrixStack.translate(0f, 1.5f - 1.5 * 1.375f, 0f); // 1.5f - 1.5 * scale, normally but eye seems to be slightly off center in model so account for that here
         eye.render(matrixStack, buffer, packedLight, packedOverlay, red, green, blue, alpha);
         veins.render(matrixStack, buffer, packedLight, packedOverlay, red, green, blue, alpha);
         matrixStack.popPose();
+    }
+
+    @Override
+    public ModelPart root() {
+        return this.eye;
     }
 
     public static LayerDefinition createLayer() {

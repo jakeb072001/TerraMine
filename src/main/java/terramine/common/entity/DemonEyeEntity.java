@@ -14,6 +14,7 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.ai.control.BodyRotationControl;
 import net.minecraft.world.entity.ai.control.MoveControl;
 import net.minecraft.world.entity.monster.Enemy;
 import net.minecraft.world.entity.monster.Monster;
@@ -21,7 +22,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
-import net.minecraft.world.level.LightLayer;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.Blocks;
 import org.jetbrains.annotations.NotNull;
@@ -42,6 +42,10 @@ public class DemonEyeEntity extends Monster implements Enemy {
         setEyeType(random.nextInt(6));
     }
 
+    protected BodyRotationControl createBodyControl() {
+        return new DemonEyeRotationControl(this);
+    }
+
     @Override
     protected void defineSynchedData() {
         super.defineSynchedData();
@@ -60,6 +64,7 @@ public class DemonEyeEntity extends Monster implements Enemy {
         setEyeType(tag.getInt("eyeType"));
     }
 
+    @SuppressWarnings("ConstantConditions")
     private void setEyeType(int eyeType) {
         this.entityData.set(typed_data, eyeType);
         switch (eyeType) {
@@ -117,6 +122,12 @@ public class DemonEyeEntity extends Monster implements Enemy {
         @Override
         public void tick() {
             if (demonEye.isAlive()) {
+                if (demonEye.horizontalCollision) {
+                    demonEye.setYRot(demonEye.getYRot() + 180.0F);
+                    demonEye.velX = -demonEye.velX;
+                    demonEye.velZ = -demonEye.velZ;
+                }
+
                 boolean isDay = demonEye.level.isDay();
 
                 double motionY;
@@ -124,9 +135,10 @@ public class DemonEyeEntity extends Monster implements Enemy {
                 double motionZ;
                 demonEye.setNoGravity(true);
                 demonEye.fallDistance = 0;
-                demonEye.setYRot(0);
-                demonEye.setXRot(0);
-                demonEye.yHeadRot = 0;
+                //demonEye.setYRot(0);
+                //demonEye.setXRot(0);
+                //demonEye.yBodyRot = demonEye.getYRot();
+                //demonEye.yHeadRot = 0;
                 Level world = demonEye.level;
                 Player target = null;
 
@@ -275,8 +287,7 @@ public class DemonEyeEntity extends Monster implements Enemy {
                 motionZ = demonEye.velZ * 0.075f * demonEye.getAttribute(Attributes.MOVEMENT_SPEED).getValue();
 
                 demonEye.setYRot(rotlerp(demonEye.getYRot(), (float)Math.toDegrees(Math.atan2(demonEye.velZ, demonEye.velX)) - 90, 360));
-                demonEye.setXRot(rotlerp(demonEye.getXRot(), (float) demonEye.velY, 360));
-                demonEye.yHeadRot = demonEye.yBodyRot = demonEye.getYRot();
+                demonEye.setXRot(rotlerp(demonEye.getXRot(), (float)Math.toDegrees(demonEye.velY), 360));
 
                 demonEye.setDeltaMovement(motionX, motionY, motionZ);
             } else {
@@ -309,56 +320,6 @@ public class DemonEyeEntity extends Monster implements Enemy {
 
         return false;
     }
-
-    /*
-    public static AttributeSupplier.Builder createMobAttributes() {
-        return switch (eyeType) {
-            case 0 -> Mob.createMobAttributes()
-                    .add(Attributes.MAX_HEALTH, 15)
-                    .add(Attributes.ARMOR, 2)
-                    .add(Attributes.FOLLOW_RANGE, 24)
-                    .add(Attributes.KNOCKBACK_RESISTANCE, 0.2)
-                    .add(Attributes.MOVEMENT_SPEED, 1)
-                    .add(Attributes.ATTACK_DAMAGE, 3.5);
-            case 1 -> Mob.createMobAttributes()
-                    .add(Attributes.MAX_HEALTH, 20)
-                    .add(Attributes.ARMOR, 4)
-                    .add(Attributes.FOLLOW_RANGE, 24)
-                    .add(Attributes.KNOCKBACK_RESISTANCE, 0.3)
-                    .add(Attributes.MOVEMENT_SPEED, 1)
-                    .add(Attributes.ATTACK_DAMAGE, 3.5);
-            case 2 -> Mob.createMobAttributes()
-                    .add(Attributes.MAX_HEALTH, 25)
-                    .add(Attributes.ARMOR, 2)
-                    .add(Attributes.FOLLOW_RANGE, 24)
-                    .add(Attributes.KNOCKBACK_RESISTANCE, 0.2)
-                    .add(Attributes.MOVEMENT_SPEED, 1)
-                    .add(Attributes.ATTACK_DAMAGE, 3.5);
-            case 3 -> Mob.createMobAttributes()
-                    .add(Attributes.MAX_HEALTH, 20)
-                    .add(Attributes.ARMOR, 0)
-                    .add(Attributes.FOLLOW_RANGE, 24)
-                    .add(Attributes.KNOCKBACK_RESISTANCE, 0.2)
-                    .add(Attributes.MOVEMENT_SPEED, 1)
-                    .add(Attributes.ATTACK_DAMAGE, 4);
-            case 4 -> Mob.createMobAttributes()
-                    .add(Attributes.MAX_HEALTH, 20)
-                    .add(Attributes.ARMOR, 4)
-                    .add(Attributes.FOLLOW_RANGE, 24)
-                    .add(Attributes.KNOCKBACK_RESISTANCE, 0.2)
-                    .add(Attributes.MOVEMENT_SPEED, 1)
-                    .add(Attributes.ATTACK_DAMAGE, 3);
-            case 5 -> Mob.createMobAttributes()
-                    .add(Attributes.MAX_HEALTH, 20)
-                    .add(Attributes.ARMOR, 2)
-                    .add(Attributes.FOLLOW_RANGE, 24)
-                    .add(Attributes.KNOCKBACK_RESISTANCE, 0.15)
-                    .add(Attributes.MOVEMENT_SPEED, 1)
-                    .add(Attributes.ATTACK_DAMAGE, 3);
-            default -> Mob.createMobAttributes();
-        };
-    }
-     */
 
     public static AttributeSupplier.Builder createMobAttributes() {
         return Mob.createMobAttributes()
@@ -421,5 +382,16 @@ public class DemonEyeEntity extends Monster implements Enemy {
     @Override
     public HumanoidArm getMainArm() {
         return HumanoidArm.LEFT;
+    }
+
+    class DemonEyeRotationControl extends BodyRotationControl {
+        public DemonEyeRotationControl(Mob mob) {
+            super(mob);
+        }
+
+        public void clientTick() {
+            DemonEyeEntity.this.yHeadRot = DemonEyeEntity.this.yBodyRot;
+            DemonEyeEntity.this.yBodyRot = DemonEyeEntity.this.getYRot();
+        }
     }
 }
