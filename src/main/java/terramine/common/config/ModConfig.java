@@ -17,20 +17,11 @@ public final class ModConfig extends PartitioningSerializer.GlobalData {
 	@ConfigEntry.Gui.TransitiveObject
 	public WorldGen worldgen = new WorldGen();
 
-	private ModConfig() {
-	}
-
 	@Config(name = "general")
 	public static final class General implements ConfigData {
-		// The current/required version of the config file format
-		// Increase this if the config format has changed in an incompatible way
-		// When the game is loaded with an older config version, it will reset all values to their defaults
-		@ConfigEntry.Gui.Excluded
-		public static final int CONFIG_VERSION = 2;
-
 		@SuppressWarnings("unused")
 		@ConfigEntry.Gui.Excluded
-		public int configVersion = CONFIG_VERSION;
+		public int configVersion = TerraMine.CONFIG_VERSION;
 		@ConfigEntry.Gui.Tooltip(count = 2)
 		public boolean showFirstPersonGloves = true;
 		@ConfigEntry.Gui.Tooltip(count = 2)
@@ -42,9 +33,6 @@ public final class ModConfig extends PartitioningSerializer.GlobalData {
 		@ConfigEntry.Gui.Tooltip(count = 2)
 		@ConfigEntry.BoundedDiscrete(max = 500, min = 0)
 		public int corruptionSpreadRarity = 4;
-
-		private General() {
-		}
 	}
 
 	@Config(name = "worldgen")
@@ -57,9 +45,6 @@ public final class ModConfig extends PartitioningSerializer.GlobalData {
 		public CaveChest caveChest = new CaveChest();
 		@ConfigEntry.Gui.CollapsibleObject(startExpanded = false)
 		public Structures structures = new Structures();
-
-		private WorldGen() {
-		}
 
 		public static final class CaveChest {
 			@ConfigEntry.Gui.RequiresRestart

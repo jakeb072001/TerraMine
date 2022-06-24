@@ -1,10 +1,6 @@
 package terramine;
 
 import dev.architectury.event.events.common.PlayerEvent;
-import me.shedaniel.autoconfig.AutoConfig;
-import me.shedaniel.autoconfig.ConfigHolder;
-import me.shedaniel.autoconfig.serializer.PartitioningSerializer;
-import me.shedaniel.autoconfig.serializer.Toml4jConfigSerializer;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
@@ -28,6 +24,7 @@ import terrablender.api.TerraBlenderApi;
 import terrablender.worldgen.TBSurfaceRuleData;
 import terramine.common.compat.CompatHandler;
 import terramine.common.components.SyncedBooleanComponent;
+import terramine.common.config.ConfigHelper;
 import terramine.common.config.ModConfig;
 import terramine.common.init.*;
 import terramine.common.network.ServerPacketHandler;
@@ -44,6 +41,7 @@ public class TerraMine implements ModInitializer, TerraBlenderApi {
 	public static final Logger LOGGER = LoggerFactory.getLogger(TerraMine.class);
 	public static final CreativeModeTab ITEM_GROUP = FabricItemGroupBuilder.build(id("item_group"), () -> new ItemStack(ModItems.TERRASPARK_BOOTS));
 	public static ModConfig CONFIG;
+	public static final int CONFIG_VERSION = 2; // Increase if config changed in an incompatible way
 	//private static final Map<String, Runnable> COMPAT_HANDLERS = Map.of(
 	//		"origins", new OriginsCompat(),
 	//		"haema", new HaemaCompat());
@@ -52,7 +50,7 @@ public class TerraMine implements ModInitializer, TerraBlenderApi {
 	@SuppressWarnings("ResultOfMethodCallIgnored")
 	public void onInitialize() {
 		// Config
-		CONFIG = getConfigAndInvalidateOldVersions();
+		CONFIG = ConfigHelper.getConfigAndInvalidateOldVersions();
 
 		// Packets
 		ServerPacketHandler.register();
@@ -114,23 +112,6 @@ public class TerraMine implements ModInitializer, TerraBlenderApi {
 				1, BiomeSurfaceRules.makeRules());
 		SurfaceRuleManager.addSurfaceRules(SurfaceRuleManager.RuleCategory.OVERWORLD, MOD_ID,
 				TBSurfaceRuleData.overworld());
-	}
-
-	/**
-	 * Gets the config and if the config version is incompatible, reset to the default config.
-	 * Note: this does not reset files for removed categories.
-	 */
-	private ModConfig getConfigAndInvalidateOldVersions() {
-		ConfigHolder<ModConfig> configHolder = AutoConfig.register(ModConfig.class,
-				PartitioningSerializer.wrap(Toml4jConfigSerializer::new));
-		int currentVersion = configHolder.getConfig().general.configVersion;
-		int requiredVersion = ModConfig.General.CONFIG_VERSION;
-		if (currentVersion != requiredVersion) {
-			LOGGER.warn("Resetting incompatible config with version {} to version {}", currentVersion, requiredVersion);
-			configHolder.resetToDefault();
-			configHolder.save();
-		}
-		return configHolder.getConfig();
 	}
 
 	public static ResourceLocation id(String path) {

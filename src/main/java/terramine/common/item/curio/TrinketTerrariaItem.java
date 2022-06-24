@@ -92,10 +92,12 @@ public class TrinketTerrariaItem extends TerrariaItem implements Trinket {
 
 	@Override
 	public final Multimap<Attribute, AttributeModifier> getModifiers(ItemStack stack, SlotReference slot, LivingEntity entity, UUID uuid) {
+		Multimap<Attribute, AttributeModifier> modifiers = Trinket.super.getModifiers(stack, slot, entity, uuid);
 		if (TrinketsHelper.areEffectsEnabled(stack) && entity instanceof Player) {
-			return this.applyModifiers(stack, slot, entity, uuid);
+			Multimap<Attribute, AttributeModifier> accessoryModifiers = this.applyModifiers(stack, slot, entity, uuid);
+			modifiers.putAll(accessoryModifiers);
 		}
-		return HashMultimap.create();
+		return modifiers;
 	}
 
 	protected Multimap<Attribute, AttributeModifier> applyModifiers(ItemStack stack, SlotReference slot, LivingEntity entity, UUID uuid) {

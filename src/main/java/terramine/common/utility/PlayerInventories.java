@@ -30,37 +30,47 @@ public class PlayerInventories extends SimpleContainer implements SidedStorageBl
 
     @Override
     public ItemStack getItem(int slot) {
-        if (activeBlockEntity instanceof PiggyBankEntity)
+        if (activeBlockEntity instanceof PiggyBankEntity) {
             return ((PlayerStorages) player).getPiggyBankInventory().getItem(slot);
-        return ((PlayerStorages) player).getSafeInventory().getItem(slot);
+        } else {
+            return ((PlayerStorages) player).getSafeInventory().getItem(slot);
+        }
     }
 
     @Override
     public ItemStack removeItem(int slot, int amount) {
-        if (activeBlockEntity instanceof PiggyBankEntity)
+        if (activeBlockEntity instanceof PiggyBankEntity) {
             return ((PlayerStorages) player).getPiggyBankInventory().removeItem(slot, amount);
-        return ((PlayerStorages) player).getSafeInventory().removeItem(slot, amount);
+        } else {
+            return ((PlayerStorages) player).getSafeInventory().removeItem(slot, amount);
+        }
     }
 
     @Override
     public ItemStack removeItemNoUpdate(int slot) {
-        if (activeBlockEntity instanceof PiggyBankEntity)
+        if (activeBlockEntity instanceof PiggyBankEntity) {
             return ((PlayerStorages) player).getPiggyBankInventory().removeItemNoUpdate(slot);
-        return ((PlayerStorages) player).getSafeInventory().removeItemNoUpdate(slot);
+        } else {
+            return ((PlayerStorages) player).getSafeInventory().removeItemNoUpdate(slot);
+        }
     }
 
     @Override
     public void setItem(int slot, @NotNull ItemStack stack) {
-        if (activeBlockEntity instanceof PiggyBankEntity)
+        if (activeBlockEntity instanceof PiggyBankEntity) {
             ((PlayerStorages) player).getPiggyBankInventory().setItem(slot, stack);
-        ((PlayerStorages) player).getSafeInventory().setItem(slot, stack);
+        } else {
+            ((PlayerStorages) player).getSafeInventory().setItem(slot, stack);
+        }
     }
 
     @Override
     public void setChanged() {
-        if (activeBlockEntity instanceof PiggyBankEntity)
+        if (activeBlockEntity instanceof PiggyBankEntity) {
             ((PlayerStorages) player).getPiggyBankInventory().setChanged();
-        ((PlayerStorages) player).getSafeInventory().setChanged();
+        } else {
+            ((PlayerStorages) player).getSafeInventory().setChanged();
+        }
     }
 
     @Override
