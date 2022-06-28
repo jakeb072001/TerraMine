@@ -1,6 +1,7 @@
 package terramine.common.entity;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.core.particles.BlockParticleOption;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
@@ -122,7 +123,7 @@ public class DemonEyeEntity extends Monster implements Enemy {
         @Override
         public void tick() {
             if (demonEye.isAlive()) {
-                if (demonEye.horizontalCollision) {
+                if (demonEye.horizontalCollision) { // todo: apply opposite force so that the demon eye actually bounces (right now it kinda bounces when hitting a wall with speed but eventually will get to 0 speed and will not bounce)
                     demonEye.setYRot(demonEye.getYRot() + 180.0F);
                     demonEye.velX = -demonEye.velX;
                     demonEye.velZ = -demonEye.velZ;
@@ -135,10 +136,6 @@ public class DemonEyeEntity extends Monster implements Enemy {
                 double motionZ;
                 demonEye.setNoGravity(true);
                 demonEye.fallDistance = 0;
-                //demonEye.setYRot(0);
-                //demonEye.setXRot(0);
-                //demonEye.yBodyRot = demonEye.getYRot();
-                //demonEye.yHeadRot = 0;
                 Level world = demonEye.level;
                 Player target = null;
 
@@ -374,24 +371,17 @@ public class DemonEyeEntity extends Monster implements Enemy {
     public void setItemSlotAndDropWhenKilled(@NotNull EquipmentSlot slot, @NotNull ItemStack stack) {
     }
 
-    @Override
-    public boolean removeWhenFarAway(double distance) {
-        return true;
-    }
+    static class DemonEyeRotationControl extends BodyRotationControl {
+        private final DemonEyeEntity demonEye;
 
-    @Override
-    public HumanoidArm getMainArm() {
-        return HumanoidArm.LEFT;
-    }
-
-    class DemonEyeRotationControl extends BodyRotationControl {
-        public DemonEyeRotationControl(Mob mob) {
-            super(mob);
+        public DemonEyeRotationControl(DemonEyeEntity demonEye) {
+            super(demonEye);
+            this.demonEye = demonEye;
         }
 
         public void clientTick() {
-            DemonEyeEntity.this.yHeadRot = DemonEyeEntity.this.yBodyRot;
-            DemonEyeEntity.this.yBodyRot = DemonEyeEntity.this.getYRot();
+            demonEye.yHeadRot = demonEye.yBodyRot;
+            demonEye.yBodyRot = demonEye.getYRot();
         }
     }
 }

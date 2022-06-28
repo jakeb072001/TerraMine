@@ -26,6 +26,7 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import terramine.common.init.ModComponents;
 import terramine.common.init.ModItems;
 import terramine.common.network.ServerPacketHandler;
 import terramine.common.trinkets.TrinketsHelper;
@@ -93,6 +94,11 @@ public abstract class PlayerMixin extends AbstractClientPlayer {
 
                     this.playHitSound(this.getWallPos());
                     this.spawnWallParticle(this.getWallPos());
+
+                    ModComponents.MOVEMENT_ORDER.get(this).setWallJumped(true);
+                    FriendlyByteBuf passedData = new FriendlyByteBuf(Unpooled.buffer());
+                    passedData.writeBoolean(true);
+                    ClientPlayNetworking.send(ServerPacketHandler.WALL_JUMP_PACKET_ID, passedData);
                 }
             } else if (this.ticksKeyDown > 0 && this.ticksKeyDown < 4 && !this.walls.isEmpty()) {
                 this.ticksWallClinged = 1;
@@ -100,6 +106,12 @@ public abstract class PlayerMixin extends AbstractClientPlayer {
                 this.clingZ = this.getZ();
 
                 this.playHitSound(this.getWallPos());
+                this.spawnWallParticle(this.getWallPos());
+
+                ModComponents.MOVEMENT_ORDER.get(this).setWallJumped(true);
+                FriendlyByteBuf passedData = new FriendlyByteBuf(Unpooled.buffer());
+                passedData.writeBoolean(true);
+                ClientPlayNetworking.send(ServerPacketHandler.WALL_JUMP_PACKET_ID, passedData);
             }
 
             return;
@@ -113,6 +125,11 @@ public abstract class PlayerMixin extends AbstractClientPlayer {
                 this.wallJump(0.55F);
                 this.staleWalls = new HashSet<>(this.walls);
             }
+
+            ModComponents.MOVEMENT_ORDER.get(this).setWallJumped(false);
+            FriendlyByteBuf passedData = new FriendlyByteBuf(Unpooled.buffer());
+            passedData.writeBoolean(false);
+            ClientPlayNetworking.send(ServerPacketHandler.WALL_JUMP_PACKET_ID, passedData);
 
             return;
         }

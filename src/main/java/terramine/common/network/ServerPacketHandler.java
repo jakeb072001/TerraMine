@@ -7,13 +7,15 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.phys.Vec3;
 import terramine.TerraMine;
+import terramine.common.init.ModComponents;
 import terramine.common.init.ModItems;
 import terramine.common.network.packet.BoneMealPacket;
 import terramine.common.network.packet.UpdateInputPacket;
 
 public class ServerPacketHandler {
     public static final ResourceLocation BONE_MEAL_PACKET_ID = TerraMine.id("bone_meal");
-    public static final ResourceLocation FALL_DISTANCE_PACKET_ID = TerraMine.id("falldistance");
+    public static final ResourceLocation FALL_DISTANCE_PACKET_ID = TerraMine.id("fall_distance");
+    public static final ResourceLocation WALL_JUMP_PACKET_ID = TerraMine.id("wall_jump");
     public static final ResourceLocation DASH_PACKET_ID = TerraMine.id("dash");
     public static final ResourceLocation CONTROLS_PACKET_ID = TerraMine.id("controls_packet");
 
@@ -50,6 +52,13 @@ public class ServerPacketHandler {
             float fallDistance = buf.readFloat();
             server.execute(() -> {
                 player.fallDistance = fallDistance;
+            });
+        });
+
+        ServerPlayNetworking.registerGlobalReceiver(WALL_JUMP_PACKET_ID, (server, player, handler, buf, responseSender) -> {
+            boolean wallJumped = buf.readBoolean();
+            server.execute(() -> {
+                ModComponents.MOVEMENT_ORDER.get(player).setWallJumped(wallJumped);
             });
         });
     }

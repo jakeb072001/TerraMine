@@ -24,19 +24,16 @@ public class DemonEyeModel<T extends DemonEyeEntity> extends HierarchicalModel<T
 
     @Override
     public void setupAnim(@NotNull DemonEyeEntity eye, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-        float k = headPitch * 0.017453292F;
-        float f = netHeadYaw * 0.017453292F;
-        this.eye.xRot = k;
-        this.veins.xRot = k;
-        this.eye.yRot = Mth.cos(f) * 16.0F * 0.017453292F;
-        this.veins.yRot = Mth.cos(f) * 16.0F * 0.017453292F;
+        //float k = eye.getXRot() * 0.017453292F;
+        //this.eye.xRot = k;
+        //this.veins.xRot = k;
     }
 
     @Override
     public void renderToBuffer(PoseStack matrixStack, @NotNull VertexConsumer buffer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
         matrixStack.pushPose();
         matrixStack.scale(1.5f, 1.5f,1.5f);
-        matrixStack.translate(0f, 1.5f - 1.5 * 1.375f, 0f); // 1.5f - 1.5 * scale, normally but eye seems to be slightly off center in model so account for that here
+        matrixStack.translate(0f, 1.5f - 1.5 * 1.375f, -0.1f); // 1.5f - 1.5 * scale, normally but eye seems to be slightly off center in model so account for that here
         eye.render(matrixStack, buffer, packedLight, packedOverlay, red, green, blue, alpha);
         veins.render(matrixStack, buffer, packedLight, packedOverlay, red, green, blue, alpha);
         matrixStack.popPose();

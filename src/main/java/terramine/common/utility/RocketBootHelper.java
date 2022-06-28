@@ -1,7 +1,5 @@
 package terramine.common.utility;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.Options;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
@@ -42,7 +40,7 @@ public class RocketBootHelper {
     }
 
     private void realFly(double speed, int priority, Player player) {
-        if (player.isOnGround())
+        if (player.isOnGround() || ModComponents.MOVEMENT_ORDER.get(player).getWallJumped())
         {
             if (timer > 0)
             {
@@ -50,7 +48,7 @@ public class RocketBootHelper {
                 soundTimer = 0;
             }
         }
-        if (timer < rocketTime && priorityOrder(player, priority)) {
+        if (timer < rocketTime && priorityOrder(player, priority) && !ModComponents.MOVEMENT_ORDER.get(player).getWallJumped()) {
             if (InputHandler.isHoldingJump(player)) {
                 double currentAccel = speed * (player.getDeltaMovement().y() < 0.3D ? 2.5D : 1.0D);
                 double currentSpeedVertical = speed * (player.isUnderWater() ? 0.4D : 1.0D);
