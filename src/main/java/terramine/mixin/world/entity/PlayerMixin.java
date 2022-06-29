@@ -14,6 +14,7 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import terramine.TerraMine;
 import terramine.common.entity.FallingStarEntity;
 import terramine.common.init.ModComponents;
 import terramine.common.init.ModEntities;
@@ -37,12 +38,14 @@ public abstract class PlayerMixin extends LivingEntity implements PlayerStorages
 	private void manaTickRegen(CallbackInfo ci) {
 		ModComponents.MANA_HANDLER.get(this).update();
 		ModComponents.LAVA_IMMUNITY.get(this).update();
-		if (level != null && level.dimensionType().bedWorks() && !level.isDay()) { // handles spawning stars randomly during the night, not the best way to do it most likely, but it works for now.
-			if (rand.nextInt(16800) <= 21) {
-				FallingStarEntity star = ModEntities.FALLING_STAR.create(level);
-				if (star != null && blockPosition().getY() >= 50) {
-					star.setPos(blockPosition().getX() + rand.nextInt(12), blockPosition().getY() + 30, blockPosition().getZ() + rand.nextInt(12));
-					level.addFreshEntity(star);
+		if (!TerraMine.CONFIG.general.disableFallingStars) {
+			if (level != null && level.dimensionType().bedWorks() && !level.isDay()) { // handles spawning stars randomly during the night, not the best way to do it most likely, but it works for now.
+				if (rand.nextInt(16800) <= TerraMine.CONFIG.general.fallingStarRarity) {
+					FallingStarEntity star = ModEntities.FALLING_STAR.create(level);
+					if (star != null && blockPosition().getY() >= 50) {
+						star.setPos(blockPosition().getX() + rand.nextInt(12), blockPosition().getY() + 30, blockPosition().getZ() + rand.nextInt(12));
+						level.addFreshEntity(star);
+					}
 				}
 			}
 		}

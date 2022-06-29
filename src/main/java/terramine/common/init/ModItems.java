@@ -145,6 +145,15 @@ public class ModItems {
 	public static final Item REDSTONE_DEEPSLATE = register("redstone_deepslate", new BlockItem(ModBlocks.REDSTONE_DEEPSLATE, new FabricItemSettings().group(CreativeModeTab.TAB_REDSTONE)));
 	public static final Item INSTANT_TNT = register("instant_tnt", new BlockItem(ModBlocks.INSTANT_TNT, new FabricItemSettings().group(CreativeModeTab.TAB_REDSTONE)));
 	public static final Item TINKERER_TABLE = register("tinkerer_workshop", new BlockItem(ModBlocks.TINKERER_TABLE, new FabricItemSettings().group(CreativeModeTab.TAB_DECORATIONS)));
+	public static final Item BLUE_BRICKS = register("blue_brick", new BlockItem(ModBlocks.BLUE_BRICKS, new FabricItemSettings().group(CreativeModeTab.TAB_BUILDING_BLOCKS)));
+	public static final Item CRACKED_BLUE_BRICKS = register("cracked_blue_brick", new BlockItem(ModBlocks.CRACKED_BLUE_BRICKS, new FabricItemSettings().group(CreativeModeTab.TAB_BUILDING_BLOCKS)));
+	public static final Item FANCY_BLUE_BRICKS = register("fancy_blue_brick", new BlockItem(ModBlocks.FANCY_BLUE_BRICKS, new FabricItemSettings().group(CreativeModeTab.TAB_BUILDING_BLOCKS)));
+	public static final Item GREEN_BRICKS = register("green_brick", new BlockItem(ModBlocks.GREEN_BRICKS, new FabricItemSettings().group(CreativeModeTab.TAB_BUILDING_BLOCKS)));
+	public static final Item CRACKED_GREEN_BRICKS = register("cracked_green_brick", new BlockItem(ModBlocks.CRACKED_GREEN_BRICKS, new FabricItemSettings().group(CreativeModeTab.TAB_BUILDING_BLOCKS)));
+	public static final Item FANCY_GREEN_BRICKS = register("fancy_green_brick", new BlockItem(ModBlocks.FANCY_GREEN_BRICKS, new FabricItemSettings().group(CreativeModeTab.TAB_BUILDING_BLOCKS)));
+	public static final Item PURPLE_BRICKS = register("purple_brick", new BlockItem(ModBlocks.PURPLE_BRICKS, new FabricItemSettings().group(CreativeModeTab.TAB_BUILDING_BLOCKS)));
+	public static final Item CRACKED_PURPLE_BRICKS = register("cracked_purple_brick", new BlockItem(ModBlocks.CRACKED_PURPLE_BRICKS, new FabricItemSettings().group(CreativeModeTab.TAB_BUILDING_BLOCKS)));
+	public static final Item FANCY_PURPLE_BRICKS = register("fancy_purple_brick", new BlockItem(ModBlocks.FANCY_PURPLE_BRICKS, new FabricItemSettings().group(CreativeModeTab.TAB_BUILDING_BLOCKS)));
 	public static final Item CORRUPTED_GRASS_BLOCK = register("corrupted_grass", new BlockItem(ModBlocks.CORRUPTED_GRASS, new FabricItemSettings().group(CreativeModeTab.TAB_BUILDING_BLOCKS)));
 	public static final Item CORRUPTED_GRAVEL = register("corrupted_gravel", new BlockItem(ModBlocks.CORRUPTED_GRAVEL, new FabricItemSettings().group(CreativeModeTab.TAB_BUILDING_BLOCKS)));
 	public static final Item CORRUPTED_SAND = register("corrupted_sand", new BlockItem(ModBlocks.CORRUPTED_SAND, new FabricItemSettings().group(CreativeModeTab.TAB_BUILDING_BLOCKS)));

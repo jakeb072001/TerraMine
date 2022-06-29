@@ -30,6 +30,15 @@ public class ModBlocks {
     public static final Block REDSTONE_DEEPSLATE = register("redstone_deepslate", new RedStoneStoneBlock(BlockBehaviour.Properties.copy(Blocks.DEEPSLATE).strength(3.0f, 1200.0f)));
     public static final Block INSTANT_TNT = register("instant_tnt", new InstantTNTBlock(BlockBehaviour.Properties.copy(Blocks.TNT)));
     public static final Block TINKERER_TABLE = register("tinkerer_workshop", new Block(BlockBehaviour.Properties.copy(Blocks.CRAFTING_TABLE)));
+    public static final Block BLUE_BRICKS = register("blue_brick", new Block(BlockBehaviour.Properties.copy(Blocks.STONE_BRICKS)));
+    public static final Block CRACKED_BLUE_BRICKS = register("cracked_blue_brick", new Block(BlockBehaviour.Properties.copy(Blocks.CRACKED_STONE_BRICKS)));
+    public static final Block FANCY_BLUE_BRICKS = register("fancy_blue_brick", new Block(BlockBehaviour.Properties.copy(Blocks.CHISELED_STONE_BRICKS)));
+    public static final Block GREEN_BRICKS = register("green_brick", new Block(BlockBehaviour.Properties.copy(Blocks.STONE_BRICKS)));
+    public static final Block CRACKED_GREEN_BRICKS = register("cracked_green_brick", new Block(BlockBehaviour.Properties.copy(Blocks.CRACKED_STONE_BRICKS)));
+    public static final Block FANCY_GREEN_BRICKS = register("fancy_green_brick", new Block(BlockBehaviour.Properties.copy(Blocks.CHISELED_STONE_BRICKS)));
+    public static final Block PURPLE_BRICKS = register("purple_brick", new Block(BlockBehaviour.Properties.copy(Blocks.STONE_BRICKS)));
+    public static final Block CRACKED_PURPLE_BRICKS = register("cracked_purple_brick", new Block(BlockBehaviour.Properties.copy(Blocks.CRACKED_STONE_BRICKS)));
+    public static final Block FANCY_PURPLE_BRICKS = register("fancy_purple_brick", new Block(BlockBehaviour.Properties.copy(Blocks.CHISELED_STONE_BRICKS)));
     public static final Block CORRUPTED_GRASS = register("corrupted_grass", new CorruptedGrass(BlockBehaviour.Properties.copy(Blocks.GRASS_BLOCK).randomTicks()));
     public static final Block CORRUPTED_GRAVEL = register("corrupted_gravel", new CorruptedFallingBlock(BlockBehaviour.Properties.copy(Blocks.GRAVEL).randomTicks()));
     public static final Block CORRUPTED_SAND = register("corrupted_sand", new CorruptedFallingBlock(BlockBehaviour.Properties.copy(Blocks.SAND).randomTicks()));

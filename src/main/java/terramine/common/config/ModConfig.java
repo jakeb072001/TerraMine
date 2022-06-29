@@ -33,6 +33,11 @@ public final class ModConfig extends PartitioningSerializer.GlobalData {
 		@ConfigEntry.Gui.Tooltip(count = 2)
 		@ConfigEntry.BoundedDiscrete(max = 500, min = 0)
 		public int corruptionSpreadRarity = 4;
+		@ConfigEntry.Gui.Tooltip
+		public boolean disableFallingStars = false;
+		@ConfigEntry.Gui.Tooltip(count = 2)
+		@ConfigEntry.BoundedDiscrete(max = 500, min = 0)
+		public int fallingStarRarity = 20;
 	}
 
 	@Config(name = "worldgen")
