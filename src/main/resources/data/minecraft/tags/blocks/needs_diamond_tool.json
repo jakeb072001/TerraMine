@@ -1,0 +1,14 @@
+{
+  "replace": false,
+  "values": [
+    "terramine:blue_brick",
+	"terramine:cracked_blue_brick",
+	"terramine:fancy_blue_brick",
+	"terramine:green_brick",
+	"terramine:cracked_green_brick",
+	"terramine:fancy_green_brick",
+	"terramine:purple_brick",
+	"terramine:cracked_purple_brick",
+	"terramine:fancy_purple_brick"
+  ]
+}
