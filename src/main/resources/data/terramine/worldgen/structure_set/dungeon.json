@@ -1,0 +1,22 @@
+{
+  "structures": [
+    {
+      "structure": "terramine:dungeon_blue",
+      "weight": 1
+    },
+    {
+      "structure": "terramine:dungeon_green",
+      "weight": 1
+    },
+    {
+      "structure": "terramine:dungeon_purple",
+      "weight": 1
+    }
+  ],
+  "placement": {
+    "type": "minecraft:random_spread",
+    "spacing": 200,
+    "separation": 40,
+    "salt": 94271832
+  }
+}

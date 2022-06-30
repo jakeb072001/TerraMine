@@ -1,0 +1,15 @@
+{
+  "name": "terramine:dungeon/purple/stairs/start_pool",
+  "fallback": "minecraft:empty",
+  "elements": [
+    {
+      "weight": 1,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "terramine:dungeon/purple/stairs/stair_1",
+        "projection": "rigid",
+        "processors": "minecraft:empty"
+      }
+    }
+  ]
+}

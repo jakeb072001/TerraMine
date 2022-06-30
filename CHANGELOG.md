@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - Rocket Boot type accessories refill after wall jumping
 - Demon Eyes now bounce when hitting blocks
+- Falling stars can now be configured to disable or change rarity
 
 ## [1.3.6] - 2022-06-25
 ### Added
