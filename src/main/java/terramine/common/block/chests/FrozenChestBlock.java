@@ -2,13 +2,11 @@ package terramine.common.block.chests;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.entity.ChestBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import org.jetbrains.annotations.Nullable;
+import org.jetbrains.annotations.NotNull;
 import terramine.TerraMine;
 import terramine.common.entity.block.ChestEntity;
 import terramine.common.entity.block.FrozenChestEntity;
@@ -29,7 +27,7 @@ public class FrozenChestBlock extends BaseChest {
     }
 
     @Override
-    public BlockEntity newBlockEntity(BlockPos blockPos, BlockState blockState) {
+    public BlockEntity newBlockEntity(@NotNull BlockPos blockPos, @NotNull BlockState blockState) {
         ChestEntity chest = new FrozenChestEntity(blockPos, blockState);
         chest.setTrapped(this.trapped);
         return chest;

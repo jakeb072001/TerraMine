@@ -6,6 +6,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.entity.ChestBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import org.jetbrains.annotations.NotNull;
 import terramine.TerraMine;
 import terramine.common.entity.block.ChestEntity;
 import terramine.common.entity.block.GoldChestEntity;
@@ -26,7 +27,7 @@ public class GoldChestBlock extends BaseChest {
     }
 
     @Override
-    public BlockEntity newBlockEntity(BlockPos blockPos, BlockState blockState) {
+    public BlockEntity newBlockEntity(@NotNull BlockPos blockPos, @NotNull BlockState blockState) {
         ChestEntity chest = new GoldChestEntity(blockPos, blockState);
         chest.setTrapped(this.trapped);
         return chest;

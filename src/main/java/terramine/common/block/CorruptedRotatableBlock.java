@@ -17,7 +17,7 @@ public class CorruptedRotatableBlock extends CorruptionHelper {
 
     public CorruptedRotatableBlock(Properties properties) {
         super(properties);
-        this.registerDefaultState((BlockState)this.defaultBlockState().setValue(AXIS, Direction.Axis.Y));
+        this.registerDefaultState(this.defaultBlockState().setValue(AXIS, Direction.Axis.Y));
     }
 
     @Override
@@ -33,6 +33,6 @@ public class CorruptedRotatableBlock extends CorruptionHelper {
 
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext blockPlaceContext) {
-        return (BlockState)this.defaultBlockState().setValue(AXIS, blockPlaceContext.getClickedFace().getAxis());
+        return this.defaultBlockState().setValue(AXIS, blockPlaceContext.getClickedFace().getAxis());
     }
 }

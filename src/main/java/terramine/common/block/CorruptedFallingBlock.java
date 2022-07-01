@@ -22,12 +22,12 @@ public class CorruptedFallingBlock extends CorruptionHelper {
     }
 
     @Override
-    public void onPlace(BlockState blockState, Level level, BlockPos blockPos, BlockState blockState2, boolean bl) {
+    public void onPlace(@NotNull BlockState blockState, Level level, @NotNull BlockPos blockPos, @NotNull BlockState blockState2, boolean bl) {
         level.scheduleTick(blockPos, this, this.getDelayAfterPlace());
     }
 
     @Override
-    public BlockState updateShape(BlockState blockState, Direction direction, BlockState blockState2, LevelAccessor levelAccessor, BlockPos blockPos, BlockPos blockPos2) {
+    public BlockState updateShape(@NotNull BlockState blockState, @NotNull Direction direction, @NotNull BlockState blockState2, LevelAccessor levelAccessor, @NotNull BlockPos blockPos, @NotNull BlockPos blockPos2) {
         levelAccessor.scheduleTick(blockPos, this, this.getDelayAfterPlace());
         return super.updateShape(blockState, direction, blockState2, levelAccessor, blockPos, blockPos2);
     }

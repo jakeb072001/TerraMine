@@ -29,7 +29,7 @@ public class CorruptedRedstoneOreBlock extends CorruptionHelper {
 
     public CorruptedRedstoneOreBlock(Properties properties) {
         super(properties);
-        this.registerDefaultState((BlockState)this.defaultBlockState().setValue(LIT, false));
+        this.registerDefaultState(this.defaultBlockState().setValue(LIT, false));
     }
 
     @Override
@@ -61,7 +61,7 @@ public class CorruptedRedstoneOreBlock extends CorruptionHelper {
     private static void interact(BlockState blockState, Level level, BlockPos blockPos) {
         spawnParticles(level, blockPos);
         if (!blockState.getValue(LIT)) {
-            level.setBlock(blockPos, (BlockState)blockState.setValue(LIT, true), 3);
+            level.setBlock(blockPos, blockState.setValue(LIT, true), 3);
         }
     }
 
@@ -73,7 +73,7 @@ public class CorruptedRedstoneOreBlock extends CorruptionHelper {
     @Override
     public void randomTick(BlockState blockState, @NotNull ServerLevel serverLevel, @NotNull BlockPos blockPos, @NotNull RandomSource random) {
         if (blockState.getValue(LIT)) {
-            serverLevel.setBlock(blockPos, (BlockState)blockState.setValue(LIT, false), 3);
+            serverLevel.setBlock(blockPos, blockState.setValue(LIT, false), 3);
         }
     }
 
@@ -94,7 +94,6 @@ public class CorruptedRedstoneOreBlock extends CorruptionHelper {
     }
 
     private static void spawnParticles(Level level, BlockPos blockPos) {
-        double d = 0.5625;
         RandomSource random = level.random;
         for (Direction direction : Direction.values()) {
             BlockPos blockPos2 = blockPos.relative(direction);

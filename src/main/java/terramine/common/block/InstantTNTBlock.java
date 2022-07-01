@@ -11,6 +11,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.TntBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import terramine.common.entity.block.InstantPrimedTNTEntity;
 
@@ -20,7 +21,7 @@ public class InstantTNTBlock extends TntBlock {
     }
 
     @Override
-    public void onPlace(BlockState blockState, Level level, BlockPos blockPos, BlockState blockState2, boolean bl) {
+    public void onPlace(BlockState blockState, @NotNull Level level, @NotNull BlockPos blockPos, BlockState blockState2, boolean bl) {
         if (blockState2.is(blockState.getBlock())) {
             return;
         }
@@ -31,20 +32,20 @@ public class InstantTNTBlock extends TntBlock {
     }
 
     @Override
-    public void neighborChanged(BlockState blockState, Level level, BlockPos blockPos, Block block, BlockPos blockPos2, boolean bl) {
+    public void neighborChanged(@NotNull BlockState blockState, Level level, @NotNull BlockPos blockPos, @NotNull Block block, @NotNull BlockPos blockPos2, boolean bl) {
         if (level.hasNeighborSignal(blockPos)) {
             InstantTNTBlock.explode(level, blockPos);
             level.removeBlock(blockPos, false);
         }
     }
 
-    public static void explode(Level level, BlockPos blockPos) {
+    public static void explode(Level level, @NotNull BlockPos blockPos) {
         InstantTNTBlock.explode(level, blockPos, null);
     }
 
     @Override
-    public void playerWillDestroy(Level level, BlockPos blockPos, BlockState blockState, Player player) {
-        if (!level.isClientSide() && !player.isCreative() && blockState.getValue(UNSTABLE).booleanValue()) {
+    public void playerWillDestroy(Level level, @NotNull BlockPos blockPos, @NotNull BlockState blockState, @NotNull Player player) {
+        if (!level.isClientSide() && !player.isCreative() && blockState.getValue(UNSTABLE)) {
             InstantTNTBlock.explode(level, blockPos);
         }
         super.playerWillDestroy(level, blockPos, blockState, player);
@@ -61,7 +62,7 @@ public class InstantTNTBlock extends TntBlock {
     }
 
     @Override
-    public void wasExploded(Level level, BlockPos blockPos, Explosion explosion) {
+    public void wasExploded(Level level, @NotNull BlockPos blockPos, @NotNull Explosion explosion) {
         if (level.isClientSide) {
             return;
         }

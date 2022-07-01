@@ -37,15 +37,12 @@ public class CorruptedSnowLayer extends CorruptionHelper {
     }
 
     @Override
-    public boolean isPathfindable(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, PathComputationType pathComputationType) {
+    public boolean isPathfindable(@NotNull BlockState blockState, @NotNull BlockGetter blockGetter, @NotNull BlockPos blockPos, PathComputationType pathComputationType) {
         switch (pathComputationType) {
-            case LAND: {
+            case LAND -> {
                 return blockState.getValue(LAYERS) < 5;
             }
-            case WATER: {
-                return false;
-            }
-            case AIR: {
+            case WATER, AIR -> {
                 return false;
             }
         }
@@ -53,32 +50,32 @@ public class CorruptedSnowLayer extends CorruptionHelper {
     }
 
     @Override
-    public VoxelShape getShape(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, CollisionContext collisionContext) {
+    public VoxelShape getShape(BlockState blockState, @NotNull BlockGetter blockGetter, @NotNull BlockPos blockPos, @NotNull CollisionContext collisionContext) {
         return SHAPE_BY_LAYER[blockState.getValue(LAYERS)];
     }
 
     @Override
-    public VoxelShape getCollisionShape(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, CollisionContext collisionContext) {
+    public VoxelShape getCollisionShape(BlockState blockState, @NotNull BlockGetter blockGetter, @NotNull BlockPos blockPos, @NotNull CollisionContext collisionContext) {
         return SHAPE_BY_LAYER[blockState.getValue(LAYERS) - 1];
     }
 
     @Override
-    public VoxelShape getBlockSupportShape(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos) {
+    public VoxelShape getBlockSupportShape(BlockState blockState, @NotNull BlockGetter blockGetter, @NotNull BlockPos blockPos) {
         return SHAPE_BY_LAYER[blockState.getValue(LAYERS)];
     }
 
     @Override
-    public VoxelShape getVisualShape(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, CollisionContext collisionContext) {
+    public VoxelShape getVisualShape(BlockState blockState, @NotNull BlockGetter blockGetter, @NotNull BlockPos blockPos, @NotNull CollisionContext collisionContext) {
         return SHAPE_BY_LAYER[blockState.getValue(LAYERS)];
     }
 
     @Override
-    public boolean useShapeForLightOcclusion(BlockState blockState) {
+    public boolean useShapeForLightOcclusion(@NotNull BlockState blockState) {
         return true;
     }
 
     @Override
-    public boolean canSurvive(BlockState blockState, LevelReader levelReader, BlockPos blockPos) {
+    public boolean canSurvive(@NotNull BlockState blockState, LevelReader levelReader, BlockPos blockPos) {
         BlockState blockState2 = levelReader.getBlockState(blockPos.below());
         if (blockState2.is(Blocks.ICE) || blockState2.is(Blocks.PACKED_ICE) || blockState2.is(Blocks.BARRIER) || blockState2.is(ModBlocks.CORRUPTED_ICE) || blockState2.is(ModBlocks.CORRUPTED_PACKED_ICE)) {
             return false;
@@ -90,7 +87,7 @@ public class CorruptedSnowLayer extends CorruptionHelper {
     }
 
     @Override
-    public BlockState updateShape(BlockState blockState, Direction direction, BlockState blockState2, LevelAccessor levelAccessor, BlockPos blockPos, BlockPos blockPos2) {
+    public BlockState updateShape(BlockState blockState, @NotNull Direction direction, @NotNull BlockState blockState2, @NotNull LevelAccessor levelAccessor, @NotNull BlockPos blockPos, @NotNull BlockPos blockPos2) {
         if (!blockState.canSurvive(levelAccessor, blockPos)) {
             return Blocks.AIR.defaultBlockState();
         }
@@ -124,7 +121,7 @@ public class CorruptedSnowLayer extends CorruptionHelper {
         BlockState blockState = blockPlaceContext.getLevel().getBlockState(blockPlaceContext.getClickedPos());
         if (blockState.is(this)) {
             int i = blockState.getValue(LAYERS);
-            return (BlockState)blockState.setValue(LAYERS, Math.min(8, i + 1));
+            return blockState.setValue(LAYERS, Math.min(8, i + 1));
         }
         return super.getStateForPlacement(blockPlaceContext);
     }
