@@ -2,15 +2,15 @@
   "structures": [
     {
       "structure": "terramine:dungeon_blue",
-      "weight": 1
+      "weight": 33
     },
     {
       "structure": "terramine:dungeon_green",
-      "weight": 1
+      "weight": 33
     },
     {
       "structure": "terramine:dungeon_purple",
-      "weight": 1
+      "weight": 33
     }
   ],
   "placement": {

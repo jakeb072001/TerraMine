@@ -1,14 +1,14 @@
 {
-  "name": "terramine:dungeon/purple/top/start_pool",
+  "name": "terramine:dungeon/blue/stairs/start_pool",
   "fallback": "minecraft:empty",
   "elements": [
     {
       "weight": 1,
       "element": {
         "element_type": "minecraft:single_pool_element",
-        "location": "terramine:dungeon/purple/top/top_1",
+        "location": "terramine:dungeon/blue/stairs/stair_1",
         "projection": "rigid",
-        "processors": "terramine:decay_purple_dungeon"
+        "processors": "terramine:decay_blue_dungeon"
       }
     }
   ]

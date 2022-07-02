@@ -8,7 +8,7 @@
         "element_type": "minecraft:single_pool_element",
         "location": "terramine:dungeon/purple/stairs/stair_1",
         "projection": "rigid",
-        "processors": "minecraft:empty"
+        "processors": "terramine:decay_purple_dungeon"
       }
     }
   ]
