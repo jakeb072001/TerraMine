@@ -16,9 +16,12 @@ import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
 import net.minecraft.world.level.levelgen.placement.*;
+import net.minecraft.world.level.levelgen.structure.StructureType;
+import terramine.TerraMine;
 import terramine.common.world.CaveChestFeature;
 import terramine.common.world.NetherChestFeature;
 import terramine.common.world.SurfaceChestFeature;
+import terramine.common.world.TerrariaJigsawStructure;
 
 import java.util.List;
 
@@ -45,6 +48,7 @@ public class ModFeatures {
 	public static final PlacedFeature PLACED_CAVE_CHEST;
 	public static final PlacedFeature PLACED_SURFACE_CHEST;
 	public static final PlacedFeature PLACED_NETHER_CHEST;
+	public static StructureType<TerrariaJigsawStructure> TERRARIA_JIGSAW_STRUCTURE = () -> TerrariaJigsawStructure.CODEC;
 
 	public static void register() {
 		if (CONFIG.worldgen.caveChest.chestRarity < 10) {
@@ -65,6 +69,7 @@ public class ModFeatures {
 					BuiltinRegistries.PLACED_FEATURE.getResourceKey(PLACED_NETHER_CHEST)
 							.orElseThrow(() -> new RuntimeException("Failed to get feature from registry")));
 		}
+		Registry.register(Registry.STRUCTURE_TYPES, TerraMine.id("terraria_jigsaw_structure"), TERRARIA_JIGSAW_STRUCTURE);
 	}
 
 	static {

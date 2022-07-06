@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Rocket Boot type accessories refill after wall jumping
 - Demon Eyes now bounce when hitting blocks
 - Falling stars can now be configured to disable or change rarity
+- Mana command has been merged (/mana set and /mana get)
 
 ## [1.3.6] - 2022-06-25
 ### Added

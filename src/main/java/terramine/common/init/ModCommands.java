@@ -17,8 +17,7 @@ import net.minecraft.world.level.GameRules;
 public class ModCommands {
     public static GameRules.Key<GameRules.IntegerValue> MANA_REGEN_SPEED;
     public static GameRules.Key<GameRules.BooleanValue> MANA_INFINITE;
-    public static LiteralCommandNode<CommandSourceStack> SETMANA;
-    public static LiteralCommandNode<CommandSourceStack> GETMANA;
+    public static LiteralCommandNode<CommandSourceStack> GETSETMANA;
 
     public static void registerRules() {
         MANA_REGEN_SPEED = GameRuleRegistry.register("manaRegenSpeed", GameRules.Category.PLAYER, GameRuleFactory.createIntRule(3, 0));
@@ -26,19 +25,20 @@ public class ModCommands {
     }
 
     public static void registerCommands(CommandDispatcher<CommandSourceStack> dispatcher) {
-        SETMANA = dispatcher.register(literal("setmaxmana")
-                .requires(cs -> cs.hasPermission(3))
-                .then(argument("player", EntityArgument.player())
-                        .then(argument("int", IntegerArgumentType.integer(0, 10))
-                            .executes(context -> setMaxMana(context, EntityArgument.getPlayer(context, "player"), IntegerArgumentType.getInteger(context, "int")))
+        GETSETMANA = dispatcher.register(literal("mana")
+                .requires(cs -> cs.hasPermission(0))
+                .then(literal("get")
+                        .then(argument("player", EntityArgument.player())
+                                .executes(context -> getMaxMana(context, EntityArgument.getPlayer(context, "player")))
                         )
                 )
-        );
-
-        GETMANA = dispatcher.register(literal("getmaxmana")
-                .requires(cs -> cs.hasPermission(2))
-                .then(argument("player", EntityArgument.player())
-                        .executes(context -> getMaxMana(context, EntityArgument.getPlayer(context, "player")))
+                .then(literal("set")
+                        .requires(cs -> cs.hasPermission(2))
+                        .then(argument("player", EntityArgument.player())
+                                .then(argument("int", IntegerArgumentType.integer(0, 10))
+                                        .executes(context -> setMaxMana(context, EntityArgument.getPlayer(context, "player"), IntegerArgumentType.getInteger(context, "int")))
+                                )
+                        )
                 )
         );
     }
