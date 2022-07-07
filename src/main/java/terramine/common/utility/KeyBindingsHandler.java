@@ -7,7 +7,6 @@ import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.Options;
 import net.minecraft.network.FriendlyByteBuf;
-import terramine.TerraMine;
 import terramine.common.network.ServerPacketHandler;
 import terramine.common.network.packet.UpdateInputPacket;
 

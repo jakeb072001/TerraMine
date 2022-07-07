@@ -1,15 +1,12 @@
 package terramine.common.components;
 
 import dev.onyxstudios.cca.api.v3.component.Component;
-import dev.onyxstudios.cca.api.v3.component.ComponentKey;
 import dev.onyxstudios.cca.api.v3.component.sync.AutoSyncedComponent;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.level.storage.PrimaryLevelData;
 import org.jetbrains.annotations.NotNull;
-import terramine.common.init.ModComponents;
 
 public class SyncedBooleanComponent implements Component, AutoSyncedComponent {
 

@@ -5,10 +5,10 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import terramine.common.utility.MagicMissileHelper;
 import terramine.common.init.ModEntities;
 import terramine.common.init.ModSoundEvents;
 import terramine.common.item.MagicTerrariaItem;
+import terramine.common.utility.MagicMissileHelper;
 
 public class RainbowRodItem extends MagicTerrariaItem {
 

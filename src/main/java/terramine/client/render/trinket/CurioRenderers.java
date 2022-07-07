@@ -10,7 +10,10 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import terramine.TerraMine;
 import terramine.client.render.trinket.model.*;
-import terramine.client.render.trinket.renderer.*;
+import terramine.client.render.trinket.renderer.BeltCurioRenderer;
+import terramine.client.render.trinket.renderer.CurioRenderer;
+import terramine.client.render.trinket.renderer.GloveCurioRenderer;
+import terramine.client.render.trinket.renderer.GlowingGloveCurioRenderer;
 import terramine.common.init.ModItems;
 import terramine.common.init.ModModelLayers;
 

@@ -11,8 +11,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import terramine.common.world.biome.CorruptionBiome;
 import terramine.common.world.biome.CorruptionDesertBiome;
 
-import java.util.function.Supplier;
-
 @Mixin(ClientLevel.class)
 public class ClientLevelMixin {
     Minecraft mc = Minecraft.getInstance();

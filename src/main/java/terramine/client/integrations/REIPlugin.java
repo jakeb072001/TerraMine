@@ -7,7 +7,6 @@ import me.shedaniel.rei.api.common.entry.type.VanillaEntryTypes;
 import me.shedaniel.rei.plugin.common.displays.DefaultInformationDisplay;
 import net.minecraft.core.Registry;
 import net.minecraft.world.item.ItemStack;
-import terramine.common.init.ModItems;
 import terramine.common.item.TerrariaItem;
 
 public class REIPlugin implements REIClientPlugin {

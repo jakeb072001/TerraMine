@@ -1,23 +1,17 @@
 package terramine.common.item.curio.necklace;
 
 import be.florens.expandability.api.fabric.PlayerSwimCallback;
-import com.google.common.collect.Multimap;
 import dev.emi.trinkets.api.SlotReference;
 import net.fabricmc.fabric.api.util.TriState;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.ai.attributes.Attribute;
-import net.minecraft.world.entity.ai.attributes.AttributeModifier;
-import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import terramine.common.init.ModComponents;
 import terramine.common.init.ModMobEffects;
 import terramine.common.item.curio.TrinketTerrariaItem;
 import terramine.common.trinkets.TrinketsHelper;
-
-import java.util.UUID;
 
 public class CelestialShell extends TrinketTerrariaItem {
 
