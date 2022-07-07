@@ -9,6 +9,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import terramine.common.init.ModComponents;
+import terramine.common.init.ModItems;
 import terramine.common.init.ModMobEffects;
 import terramine.common.item.curio.TrinketTerrariaItem;
 import terramine.common.trinkets.TrinketsHelper;
@@ -62,10 +63,14 @@ public class CelestialShell extends TrinketTerrariaItem {
     }
 
     private static TriState onPlayerSwim(Player player) {
-        return ModComponents.SWIM_ABILITIES.maybeGet(player)
-                .filter(swimAbilityComponent -> swimAbilityComponent.isSinking() && !swimAbilityComponent.isSwimming())
-                .map(swimAbilities -> TriState.FALSE)
-                .orElse(TriState.DEFAULT);
+        if (TrinketsHelper.isEquipped(ModItems.NEPTUNE_SHELL, player) || TrinketsHelper.isEquipped(ModItems.MOON_SHELL, player)
+                || TrinketsHelper.isEquipped(ModItems.CELESTIAL_SHELL, player)) {
+            return ModComponents.SWIM_ABILITIES.maybeGet(player)
+                    .filter(swimAbilityComponent -> swimAbilityComponent.isSinking() && !swimAbilityComponent.isSwimming())
+                    .map(swimAbilities -> TriState.FALSE)
+                    .orElse(TriState.DEFAULT);
+        }
+        return TriState.DEFAULT;
     }
 
     @Override
