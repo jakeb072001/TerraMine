@@ -14,6 +14,8 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.level.GameRules;
 
+import java.util.Collections;
+
 public class ModCommands {
     public static GameRules.Key<GameRules.IntegerValue> MANA_REGEN_SPEED;
     public static GameRules.Key<GameRules.BooleanValue> MANA_INFINITE;
@@ -28,12 +30,16 @@ public class ModCommands {
         GETSETMANA = dispatcher.register(literal("mana")
                 .requires(cs -> cs.hasPermission(0))
                 .then(literal("get")
+                        .executes(context -> getMaxMana(context, context.getSource().getPlayerOrException()))
                         .then(argument("player", EntityArgument.player())
                                 .executes(context -> getMaxMana(context, EntityArgument.getPlayer(context, "player")))
                         )
                 )
                 .then(literal("set")
                         .requires(cs -> cs.hasPermission(2))
+                        .then(argument("int", IntegerArgumentType.integer(0, 10))
+                                .executes(context -> setMaxMana(context, context.getSource().getPlayerOrException(), IntegerArgumentType.getInteger(context, "int")))
+                        )
                         .then(argument("player", EntityArgument.player())
                                 .then(argument("int", IntegerArgumentType.integer(0, 10))
                                         .executes(context -> setMaxMana(context, EntityArgument.getPlayer(context, "player"), IntegerArgumentType.getInteger(context, "int")))

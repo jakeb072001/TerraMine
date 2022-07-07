@@ -1,11 +1,15 @@
 package terramine.common.item.curio.necklace;
 
 import be.florens.expandability.api.fabric.PlayerSwimCallback;
+import com.google.common.collect.Multimap;
 import dev.emi.trinkets.api.SlotReference;
 import net.fabricmc.fabric.api.util.TriState;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.Attribute;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import terramine.common.init.ModComponents;
@@ -13,18 +17,35 @@ import terramine.common.init.ModMobEffects;
 import terramine.common.item.curio.TrinketTerrariaItem;
 import terramine.common.trinkets.TrinketsHelper;
 
-public class NeptuneShell extends TrinketTerrariaItem {
+import java.util.UUID;
+
+public class CelestialShell extends TrinketTerrariaItem {
 
     private boolean inWater;
+    private final boolean shell;
+    private final boolean wolf;
+    private final boolean sun;
+    private final boolean moon;
+    private boolean isNight;
+    private int timer;
 
-    public NeptuneShell() {
-        PlayerSwimCallback.EVENT.register(NeptuneShell::onPlayerSwim);
+    public CelestialShell(boolean shell, boolean wolf, boolean sun, boolean moon) {
+        if (shell) {
+            PlayerSwimCallback.EVENT.register(CelestialShell::onPlayerSwim);
+        }
+        this.shell = shell;
+        this.wolf = wolf;
+        this.sun = sun;
+        this.moon = moon;
     }
 
     @Override
     public MobEffectInstance getPermanentEffect() {
-        if (inWater) {
+        if (shell && inWater) {
             return new MobEffectInstance(ModMobEffects.MERFOLK, 20, 0, true, false);
+        }
+        if (wolf && isNight && !inWater) {
+            return new MobEffectInstance(ModMobEffects.WEREWOLF, 20, 0, true, false);
         }
         return null;
     }
@@ -32,6 +53,18 @@ public class NeptuneShell extends TrinketTerrariaItem {
     @Override
     protected void curioTick(LivingEntity livingEntity, ItemStack stack) {
         inWater = livingEntity.isInWater();
+
+        if (!livingEntity.level.isClientSide()) {
+            isNight = livingEntity.level.isNight();
+        }
+
+        if (((wolf || moon) && isNight) || (sun && !isNight)) {
+            timer += 1;
+            if (timer >= 50) {
+                livingEntity.heal(0.25f);
+                timer = 0;
+            }
+        }
     }
 
     private static TriState onPlayerSwim(Player player) {
@@ -43,7 +76,7 @@ public class NeptuneShell extends TrinketTerrariaItem {
 
     @Override
     public void onEquip(ItemStack stack, SlotReference slot, LivingEntity entity) {
-        if (entity instanceof ServerPlayer && TrinketsHelper.areEffectsEnabled(stack)) {
+        if (entity instanceof ServerPlayer && TrinketsHelper.areEffectsEnabled(stack) && shell) {
             ModComponents.SWIM_ABILITIES.maybeGet(entity).ifPresent(comp -> {
                 comp.setSinking(true);
                 ModComponents.SWIM_ABILITIES.sync(entity);
@@ -53,7 +86,7 @@ public class NeptuneShell extends TrinketTerrariaItem {
 
     @Override
     public void onUnequip(ItemStack stack, SlotReference slot, LivingEntity entity) {
-        if (entity instanceof ServerPlayer) {
+        if (entity instanceof ServerPlayer && shell) {
             ModComponents.SWIM_ABILITIES.maybeGet(entity).ifPresent(comp -> {
                 comp.setSinking(false);
                 ModComponents.SWIM_ABILITIES.sync(entity);

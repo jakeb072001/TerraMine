@@ -14,7 +14,8 @@ public abstract class EnchantmentHelperMixin {
 
     @Inject(method = "hasAquaAffinity", at = @At("HEAD"), cancellable = true)
     private static void normalWaterMining(LivingEntity livingEntity, CallbackInfoReturnable<Boolean> info) {
-        if (TrinketsHelper.isEquipped(ModItems.NEPTUNE_SHELL, livingEntity)) {
+        if (TrinketsHelper.isEquipped(ModItems.NEPTUNE_SHELL, livingEntity) || TrinketsHelper.isEquipped(ModItems.MOON_SHELL, livingEntity)
+                || TrinketsHelper.isEquipped(ModItems.CELESTIAL_SHELL, livingEntity)) {
             info.setReturnValue(true);
         }
     }

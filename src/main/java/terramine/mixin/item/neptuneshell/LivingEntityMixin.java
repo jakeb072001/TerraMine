@@ -1,6 +1,5 @@
 package terramine.mixin.item.neptuneshell;
 
-import io.github.apace100.origins.power.OriginsPowerTypes;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -14,8 +13,8 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-import terramine.common.init.ModComponents;
 import terramine.common.init.ModItems;
+import terramine.common.init.ModMobEffects;
 import terramine.common.trinkets.TrinketsHelper;
 
 @Mixin(LivingEntity.class)
@@ -36,14 +35,14 @@ public abstract class LivingEntityMixin extends Entity {
 
     @Inject(at = @At("HEAD"), method = "canBreatheUnderwater", cancellable = true)
     public void doWaterBreathing(CallbackInfoReturnable<Boolean> info) {
-        if(TrinketsHelper.isEquipped(ModItems.NEPTUNE_SHELL, (LivingEntity) (Object) this)) {
+        if(isShell()) {
             info.setReturnValue(true);
         }
     }
 
-    @ModifyVariable(method = "causeFallDamage", ordinal = 0, at = @At("HEAD"))
+    @ModifyVariable(method = "causeFallDamage", ordinal = 0, at = @At("HEAD"), argsOnly = true)
     private float reduceFallDistance(float fallDistance) {
-        if (TrinketsHelper.isEquipped(ModItems.NEPTUNE_SHELL, (LivingEntity) (Object) this) && this.isInWater()) {
+        if (isShell() && this.isInWater()) {
             fallDistance = 0;
         }
 
@@ -54,11 +53,23 @@ public abstract class LivingEntityMixin extends Entity {
     private void invokeDoubleJump(CallbackInfo info) {
         LivingEntity self = (LivingEntity) (Object) this;
         boolean flying = self instanceof Player player && player.getAbilities().flying;
-        if (this.jumping && this.isInWater() && !this.isOnGround() && !this.isPassenger() && !flying
-                && TrinketsHelper.isEquipped(ModItems.NEPTUNE_SHELL, self)) {
+        if (this.jumping && this.isInWater() && !this.isOnGround() && !this.isPassenger() && !flying && isShell()) {
             double d = (double)this.getJumpPower() + this.getJumpBoostPower();
             Vec3 vec3 = this.getDeltaMovement();
             this.setDeltaMovement(vec3.x, d, vec3.z);
         }
+    }
+
+    @Inject(at = @At("RETURN"), method = "getJumpBoostPower", cancellable = true)
+    public void addWerewolfJump(CallbackInfoReturnable<Double> info) {
+        LivingEntity self = (LivingEntity) (Object) this;
+        if (self.hasEffect(ModMobEffects.WEREWOLF)) {
+            info.setReturnValue(info.getReturnValue() + 0.1);
+        }
+    }
+
+    private boolean isShell() {
+        LivingEntity self = (LivingEntity) (Object) this;
+        return TrinketsHelper.isEquipped(ModItems.NEPTUNE_SHELL, self) || TrinketsHelper.isEquipped(ModItems.MOON_SHELL, self) || TrinketsHelper.isEquipped(ModItems.CELESTIAL_SHELL, self);
     }
 }

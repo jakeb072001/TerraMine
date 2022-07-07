@@ -17,6 +17,21 @@
         {
           "type": "minecraft:item",
           "weight": 8,
+          "name": "terramine:moon_charm"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "terramine:moon_stone"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "terramine:sun_stone"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
           "name": "terramine:panic_necklace"
         },
         {

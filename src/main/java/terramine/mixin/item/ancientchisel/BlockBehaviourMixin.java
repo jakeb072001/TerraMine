@@ -25,6 +25,14 @@ public class BlockBehaviourMixin {
         if (player.hasEffect(ModMobEffects.MINING_SPEED)) {
             speed = (float) (speed * 1.25);
         }
+        if (celestialStoneCheck(player)) {
+            speed = (float) (speed * 1.15);
+        }
         info.setReturnValue(speed);
+    }
+
+    private boolean celestialStoneCheck(Player player) {
+        return ((TrinketsHelper.isEquipped(ModItems.SUN_STONE, player) && !player.level.isNight()) || (TrinketsHelper.isEquipped(ModItems.MOON_STONE, player) && player.level.isNight())
+                || TrinketsHelper.isEquipped(ModItems.CELESTIAL_STONE, player) || TrinketsHelper.isEquipped(ModItems.CELESTIAL_SHELL, player));
     }
 }

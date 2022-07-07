@@ -34,8 +34,10 @@ public abstract class LivingEntityMixin implements LivingEntityExtensions {
 	@Unique
 	@Override
 	public double terramine$getIncreasedSwimSpeed(double speed) {
-		if (TrinketsHelper.isEquipped(ModItems.FLIPPERS, (LivingEntity) (Object) this) || TrinketsHelper.isEquipped(ModItems.DIVING_GEAR, (LivingEntity) (Object) this)
-				|| TrinketsHelper.isEquipped(ModItems.NEPTUNE_SHELL, (LivingEntity) (Object) this)) {
+		LivingEntity entity = (LivingEntity) (Object) this;
+		if (TrinketsHelper.isEquipped(ModItems.FLIPPERS, entity) || TrinketsHelper.isEquipped(ModItems.DIVING_GEAR, entity)
+				|| TrinketsHelper.isEquipped(ModItems.NEPTUNE_SHELL, entity) || TrinketsHelper.isEquipped(ModItems.MOON_SHELL, entity)
+				|| TrinketsHelper.isEquipped(ModItems.CELESTIAL_SHELL, entity)) {
 			return speed * 2;
 		} else {
 			return speed;

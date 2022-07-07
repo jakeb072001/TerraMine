@@ -20,6 +20,7 @@ public class ModMobEffects {
 
     //Visual
     public static final MobEffect MERFOLK = register("merfolk", new BlankEffect(MobEffectCategory.BENEFICIAL, 0x479c68, false));
+    public static final MobEffect WEREWOLF = register("werewolf", new BlankEffect(MobEffectCategory.BENEFICIAL, 0x7e5d3f, false));
 
     public static MobEffect register(String name, MobEffect effect) {
         return Registry.register(Registry.MOB_EFFECT, TerraMine.id(name), effect);

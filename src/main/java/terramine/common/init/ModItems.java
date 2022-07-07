@@ -64,7 +64,13 @@ public class ModItems {
 	public static final Item WARRIOR_EMBLEM = register("warrior_emblem", new WarriorEmblemItem());
 	public static final Item SORCERER_EMBLEM = register("sorcerer_emblem", new TrinketTerrariaItem());
 	public static final Item AVENGER_EMBLEM = register("avenger_emblem", new AvengerEmblemItem());
-	public static final Item NEPTUNE_SHELL = register("neptune_shell", new NeptuneShell());
+	public static final Item NEPTUNE_SHELL = register("neptune_shell", new CelestialShell(true, false, false, false));
+	public static final Item MOON_CHARM = register("moon_charm", new CelestialShell(false, true, false, false));
+	public static final Item MOON_SHELL = register("moon_shell", new CelestialShell(true, true, false, false));
+	public static final Item MOON_STONE = register("moon_stone", new CelestialShell(false, false, false, true));
+	public static final Item SUN_STONE = register("sun_stone", new CelestialShell(false, false, true, false));
+	public static final Item CELESTIAL_STONE = register("celestial_stone", new CelestialShell(false, false, true, true));
+	public static final Item CELESTIAL_SHELL = register("celestial_shell", new CelestialShell(true, true, true, true));
 
 	// Belt
 	public static final Item SHACKLE = register("shackle", new ShackleItem());

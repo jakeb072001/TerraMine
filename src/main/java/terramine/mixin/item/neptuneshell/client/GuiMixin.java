@@ -18,6 +18,6 @@ public abstract class GuiMixin {
 	@ModifyExpressionValue(method = "renderPlayerHealth", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/player/Player;isEyeInFluid(Lnet/minecraft/tags/TagKey;)Z"))
 	private boolean doNotShowAir(boolean inWater) {
 		Player player = this.getCameraPlayer();
-		return inWater && !TrinketsHelper.isEquipped(ModItems.NEPTUNE_SHELL, player);
+		return inWater && !(TrinketsHelper.isEquipped(ModItems.NEPTUNE_SHELL, player) || TrinketsHelper.isEquipped(ModItems.MOON_SHELL, player) || TrinketsHelper.isEquipped(ModItems.CELESTIAL_SHELL, player));
 	}
 }

@@ -24,7 +24,8 @@ public abstract class LocalPlayerMixin extends AbstractClientPlayer {
 
     @Inject(at = @At("HEAD"), method = "getWaterVision", cancellable = true)
     private void getUnderwaterVisibility(CallbackInfoReturnable<Float> info) {
-        if(TrinketsHelper.isEquipped(ModItems.NEPTUNE_SHELL, this)) {
+        if(TrinketsHelper.isEquipped(ModItems.NEPTUNE_SHELL, this) || TrinketsHelper.isEquipped(ModItems.MOON_SHELL, this)
+                || TrinketsHelper.isEquipped(ModItems.CELESTIAL_SHELL, this)) {
             info.setReturnValue(1.0F);
         }
     }

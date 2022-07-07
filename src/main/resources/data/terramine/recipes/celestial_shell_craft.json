@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "terramine:celestial_stone"
+    },
+    {
+      "item": "terramine:moon_shell"
+    }
+  ],
+  "result": {
+    "item": "terramine:celestial_shell",
+    "count": 1
+  }
+}
