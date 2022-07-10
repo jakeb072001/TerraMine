@@ -11,6 +11,7 @@ import net.fabricmc.fabric.api.loot.v2.LootTableEvents;
 import net.fabricmc.loader.api.FabricLoader;
 import net.fabricmc.loader.api.ModContainer;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.stats.StatFormatter;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.item.CreativeModeTab;
@@ -82,7 +83,6 @@ public class TerraMine implements ModInitializer, TerraBlenderApi {
 		ServerLifecycleEvents.SERVER_STOPPING.register(server -> InputHandler.clear());
 		PlayerEvent.CHANGE_DIMENSION.register((player, oldLevel, newLevel) -> InputHandler.onChangeDimension(player));
 		PlayerEvent.PLAYER_QUIT.register(InputHandler::onLogout);
-		ServerWorldEvents.LOAD.register((server, level) -> SyncedBooleanComponent.setServer(server));
 		ServerPlayerEvents.COPY_FROM.register((oldPlayer, newPlayer, alive) -> {
 			if (oldPlayer instanceof PlayerStorages) {
 				((PlayerStorages) newPlayer).setPiggyBankInventory(((PlayerStorages) oldPlayer).getPiggyBankInventory());

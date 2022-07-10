@@ -14,6 +14,7 @@ import net.minecraft.world.level.gameevent.GameEvent;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import terramine.common.entity.block.InstantPrimedTNTEntity;
+import terramine.common.init.ModEntities;
 
 public class InstantTNTBlock extends TntBlock {
     public InstantTNTBlock(Properties properties) {
@@ -55,10 +56,13 @@ public class InstantTNTBlock extends TntBlock {
         if (level.isClientSide) {
             return;
         }
-        InstantPrimedTNTEntity primedTnt = new InstantPrimedTNTEntity(level, (double)blockPos.getX() + 0.5, blockPos.getY(), (double)blockPos.getZ() + 0.5, livingEntity);
-        level.playSound(null, primedTnt.getX(), primedTnt.getY(), primedTnt.getZ(), SoundEvents.GENERIC_EXPLODE, SoundSource.BLOCKS, 1.0f, 1.0f);
-        level.addFreshEntity(primedTnt);
-        level.gameEvent(livingEntity, GameEvent.PRIME_FUSE, blockPos);
+        InstantPrimedTNTEntity primedTnt = ModEntities.INSTANT_TNT.create(level);
+        if (primedTnt != null) {
+            primedTnt.setValues(level, (double) blockPos.getX() + 0.5, blockPos.getY(), (double) blockPos.getZ() + 0.5, livingEntity);
+            level.playSound(null, primedTnt.getX(), primedTnt.getY(), primedTnt.getZ(), SoundEvents.GENERIC_EXPLODE, SoundSource.BLOCKS, 1.0f, 1.0f);
+            level.addFreshEntity(primedTnt);
+            level.gameEvent(livingEntity, GameEvent.PRIME_FUSE, blockPos);
+        }
     }
 
     @Override
@@ -66,8 +70,11 @@ public class InstantTNTBlock extends TntBlock {
         if (level.isClientSide) {
             return;
         }
-        InstantPrimedTNTEntity primedTnt = new InstantPrimedTNTEntity(level, (double)blockPos.getX() + 0.5, blockPos.getY(), (double)blockPos.getZ() + 0.5, explosion.getSourceMob());
-        level.playSound(null, primedTnt.getX(), primedTnt.getY(), primedTnt.getZ(), SoundEvents.GENERIC_EXPLODE, SoundSource.BLOCKS, 1.0f, 1.0f);
-        level.addFreshEntity(primedTnt);
+        InstantPrimedTNTEntity primedTnt = ModEntities.INSTANT_TNT.create(level);
+        if (primedTnt != null) {
+            primedTnt.setValues(level, (double) blockPos.getX() + 0.5, blockPos.getY(), (double) blockPos.getZ() + 0.5, explosion.getSourceMob());
+            level.playSound(null, primedTnt.getX(), primedTnt.getY(), primedTnt.getZ(), SoundEvents.GENERIC_EXPLODE, SoundSource.BLOCKS, 1.0f, 1.0f);
+            level.addFreshEntity(primedTnt);
+        }
     }
 }

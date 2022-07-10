@@ -1,6 +1,7 @@
 package terramine.common.init;
 
 import com.mojang.brigadier.CommandDispatcher;
+import com.mojang.brigadier.arguments.BoolArgumentType;
 import com.mojang.brigadier.arguments.IntegerArgumentType;
 import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.tree.LiteralCommandNode;
@@ -19,6 +20,7 @@ public class ModCommands {
     public static GameRules.Key<GameRules.IntegerValue> MANA_REGEN_SPEED;
     public static GameRules.Key<GameRules.BooleanValue> MANA_INFINITE;
     public static LiteralCommandNode<CommandSourceStack> GETSETMANA;
+    public static LiteralCommandNode<CommandSourceStack> GETSETHARDMODE;
 
     public static void registerRules() {
         MANA_REGEN_SPEED = GameRuleRegistry.register("manaRegenSpeed", GameRules.Category.PLAYER, GameRuleFactory.createIntRule(3, 0));
@@ -43,6 +45,19 @@ public class ModCommands {
                                 .then(argument("int", IntegerArgumentType.integer(0, 10))
                                         .executes(context -> setMaxMana(context, EntityArgument.getPlayer(context, "player"), IntegerArgumentType.getInteger(context, "int")))
                                 )
+                        )
+                )
+        );
+
+        GETSETHARDMODE = dispatcher.register(literal("hardmode")
+                .requires(cs -> cs.hasPermission(0))
+                .then(literal("get")
+                        .executes(context -> getHardmode(context, context.getSource().getPlayerOrException()))
+                )
+                .then(literal("set")
+                        .requires(cs -> cs.hasPermission(3))
+                        .then(argument("boolean", BoolArgumentType.bool())
+                                .executes(context -> setHardmode(context, context.getSource().getPlayerOrException(), BoolArgumentType.getBool(context, "boolean")))
                         )
                 )
         );
@@ -72,6 +87,30 @@ public class ModCommands {
         } else {
             i--;
             context.getSource().sendFailure(Component.translatable("commands.getMaxMana.fail"));
+        }
+        return i;
+    }
+
+    private static int setHardmode(CommandContext<CommandSourceStack> context, ServerPlayer player, boolean value) {
+        int i = 0;
+        if (player != null) {
+            i++;
+            ModComponents.HARDMODE.get(player.level.getLevelData()).set(value);
+            context.getSource().sendSuccess(Component.translatable("commands.setHardmode.pass", value), false);
+        } else {
+            i--;
+            context.getSource().sendFailure(Component.translatable("commands.setHardmode.fail", value));
+        }
+        return i;
+    }
+    private static int getHardmode(CommandContext<CommandSourceStack> context, ServerPlayer player) {
+        int i = 0;
+        if (player != null) {
+            i++;
+            context.getSource().sendSuccess(Component.translatable("commands.getHardmode.pass", ModComponents.HARDMODE.get(player.level.getLevelData()).get()), false);
+        } else {
+            i--;
+            context.getSource().sendFailure(Component.translatable("commands.getHardmode.fail"));
         }
         return i;
     }

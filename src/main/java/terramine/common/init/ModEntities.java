@@ -5,10 +5,12 @@ import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
 import net.minecraft.core.Registry;
 import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.item.PrimedTnt;
 import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.levelgen.Heightmap;
 import terramine.TerraMine;
 import terramine.common.entity.*;
+import terramine.common.entity.block.InstantPrimedTNTEntity;
 
 public class ModEntities {
 
@@ -41,16 +43,27 @@ public class ModEntities {
 	public static final EntityType<MagicMissileEntity> MAGIC_MISSILE = register("magic_missile", FabricEntityTypeBuilder
 			.create(MobCategory.MISC, MagicMissileEntity::new)
 			.dimensions(EntityDimensions.fixed(0.25f, 0.25f))
+			.disableSummon()
 			.build());
 
 	public static final EntityType<FlamelashMissileEntity> FLAMELASH_MISSILE = register("flamelash_missile", FabricEntityTypeBuilder
 			.create(MobCategory.MISC, FlamelashMissileEntity::new)
 			.dimensions(EntityDimensions.fixed(0.25f, 0.25f))
+			.disableSummon()
 			.build());
 
 	public static final EntityType<RainbowMissileEntity> RAINBOW_MISSILE = register("rainbow_missile", FabricEntityTypeBuilder
 			.create(MobCategory.MISC, RainbowMissileEntity::new)
 			.dimensions(EntityDimensions.fixed(0.25f, 0.25f))
+			.disableSummon()
+			.build());
+
+	public static final EntityType<InstantPrimedTNTEntity> INSTANT_TNT = register("instant_tnt", FabricEntityTypeBuilder
+			.create(MobCategory.MISC, InstantPrimedTNTEntity::new)
+			.fireImmune()
+			.dimensions(EntityDimensions.fixed(0.98f, 0.98f))
+			.trackRangeBlocks(10)
+			.trackedUpdateRate(10)
 			.build());
 
 	private static <T extends Entity> EntityType<T> register(String name, EntityType<T> entType) {

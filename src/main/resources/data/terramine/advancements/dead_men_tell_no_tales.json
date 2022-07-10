@@ -1,0 +1,31 @@
+{
+  "parent": "terramine:root",
+  "display": {
+    "icon": {
+      "item": "terramine:trapped_gold_chest"
+    },
+    "title": {
+      "translate": "terramine.advancements.dead_men_tell_no_tales.title"
+    },
+    "description": {
+      "translate": "terramine.advancements.dead_men_tell_no_tales.description"
+    }
+  },
+  "criteria": {
+    "trapped_chest": {
+      "trigger": "minecraft:item_used_on_block",
+      "conditions": {
+        "location": {
+          "block": {
+            "blocks": [
+              "terramine:trapped_gold_chest",
+              "terramine:trapped_frozen_chest",
+              "terramine:trapped_ivy_chest",
+              "terramine:trapped_sandstone_chest"
+            ]
+          }
+        }
+      }
+    }
+  }
+}

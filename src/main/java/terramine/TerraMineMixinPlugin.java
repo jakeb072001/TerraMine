@@ -29,7 +29,7 @@ public class TerraMineMixinPlugin implements IMixinConfigPlugin {
 			String modid = subPackageAndClassName.split("\\.")[0];
 			return FabricLoader.getInstance().isModLoaded(modid);
 		}
-		if (mixinClassName.equals(BASE_PACKAGE + ".item.crossnecklace.LivingEntityMixin")) {
+		if (mixinClassName.equals(BASE_PACKAGE + ".item.crossnecklace.LivingEntityMixin")) { // compatibility with Artifacts, disables Cross Necklace invulnerability as they conflict
 			return !FabricLoader.getInstance().isModLoaded("artifacts");
 		}
 

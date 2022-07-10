@@ -15,9 +15,19 @@
     "find_corruption": {
       "trigger": "minecraft:location",
       "conditions": {
-        "location": {
-          "biome": "terramine:corruption"
-        }
+        "condition": "minecraft:alternative",
+        "terms": [
+          {
+            "location": {
+              "biome": "terramine:corruption"
+            }
+          },
+          {
+            "location": {
+              "biome": "terramine:corruption_desert"
+            }
+          }
+          ]
       }
     }
   }

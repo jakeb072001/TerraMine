@@ -4,12 +4,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [1.4.0] - 2022-07-01
+## [1.4.0] - 2022-07-20
 ### Added
 - Dungeon Structure // current wip but is difficult
 - Dungeon Blocks
 - Moon Charm, Moon Shell, Sun Stone, Moon Stone, Celestial Stone, and Celestial Shell
 - Wings // needs to be started
+- More Advancements
 
 ### Changed
 - Rocket Boot type accessories refill after wall jumping
@@ -154,6 +155,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Initial release
 
+[1.4.0]: https://github.com/jakeb072001/TerraMine/compare/v1.3.6...v1.4.0
 [1.3.6]: https://github.com/jakeb072001/TerraMine/compare/v1.3.5...v1.3.6
 [1.3.5]: https://github.com/jakeb072001/TerraMine/compare/v1.3.4...v1.3.5
 [1.3.4]: https://github.com/jakeb072001/TerraMine/compare/v1.3.3...v1.3.4
