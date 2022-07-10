@@ -18,6 +18,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Falling stars can now be configured to disable or change rarity
 - Mana command has been merged and no longer requires player to be set (/mana set and /mana get)
 
+### Fixed
+- Neptune's Shell swim ability not disabling when item set to cosmetic only
+
 ## [1.3.6] - 2022-06-25
 ### Added
 - Re-added Cobalt and Obsidian shield (no longer uses Fabric Shield API)
