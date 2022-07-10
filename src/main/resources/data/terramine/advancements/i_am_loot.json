@@ -2,7 +2,7 @@
   "parent": "terramine:root",
   "display": {
     "icon": {
-      "item": "terramine:aglet"
+      "item": "terramine:gold_chest"
     },
     "title": {
       "translate": "terramine.advancements.i_am_loot.title"
@@ -12,14 +12,16 @@
     }
   },
   "criteria": {
-    "find_accessory": {
-      "trigger": "minecraft:inventory_changed",
+    "gold_chest": {
+      "trigger": "minecraft:item_used_on_block",
       "conditions": {
-        "items": [
-          {
-            "tag": "terramine:accessory"
+        "location": {
+          "block": {
+            "blocks": [
+              "terramine:gold_chest"
+            ]
           }
-        ]
+        }
       }
     }
   }

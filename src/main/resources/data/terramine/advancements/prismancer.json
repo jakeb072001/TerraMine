@@ -1,0 +1,28 @@
+{
+  "parent": "terramine:root",
+  "display": {
+    "icon": {
+      "item": "terramine:rainbow_rod"
+    },
+    "title": {
+      "translate": "terramine.advancements.prismancer.title"
+    },
+    "description": {
+      "translate": "terramine.advancements.prismancer.description"
+    }
+  },
+  "criteria": {
+    "find_accessory": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "terramine:rainbow_rod"
+            ]
+          }
+        ]
+      }
+    }
+  }
+}
