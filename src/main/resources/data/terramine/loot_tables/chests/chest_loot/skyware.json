@@ -12,12 +12,12 @@
         {
           "type": "minecraft:item",
           "weight": 33,
-          "name": "terramine:shiny_red_balloon"
+          "name": "terramine:fledgling_wings"
         },
         {
           "type": "minecraft:item",
           "weight": 33,
-          "name": "terramine:shiny_red_balloon"
+          "name": "terramine:lucky_horseshoe"
         }
       ]
     }

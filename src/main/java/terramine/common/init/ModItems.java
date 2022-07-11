@@ -2,6 +2,7 @@ package terramine.common.init;
 
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.core.Registry;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.item.*;
 import terramine.TerraMine;
 import terramine.common.item.CellPhoneItem;
@@ -11,6 +12,7 @@ import terramine.common.item.UmbrellaItem;
 import terramine.common.item.curio.ShieldTrinketItem;
 import terramine.common.item.curio.TrinketTerrariaItem;
 import terramine.common.item.curio.WhoopeeCushionItem;
+import terramine.common.item.curio.back.WingsItem;
 import terramine.common.item.curio.belt.*;
 import terramine.common.item.curio.feet.*;
 import terramine.common.item.curio.hands.*;
@@ -135,6 +137,9 @@ public class ModItems {
 	public static final Item TERRASPARK_BOOTS = register("terraspark_boots", new TerrasparkBootsItem());
 	public static final Item FLOWER_BOOTS = register("flower_boots", new FlowerBootsItem());
 	public static final Item FAIRY_BOOTS = register("fairy_boots", new FairyBootsItem());
+
+	// Back
+	public static final Item FLEDGLING_WINGS = register("fledgling_wings", new WingsItem(0.25D, 15, SoundEvents.PHANTOM_FLAP));
 
 	// Blocks
 	public static final Item GOLD_CHEST = register("gold_chest", new BlockItem(ModBlocks.GOLD_CHEST, new FabricItemSettings().group(CreativeModeTab.TAB_DECORATIONS)));

@@ -5,6 +5,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.phys.Vec3;
@@ -30,16 +31,31 @@ public class RocketBootHelper {
             if (!user.isCreative() && !user.isInWater()) {
                 if (CloudBottleEquippedCheck.isEquipped(user)) {
                     if (ModComponents.MOVEMENT_ORDER.get(user).getCloudFinished()) {
-                        realFly(speed, priority, user);
+                        realFly(speed, priority, false, user);
                     }
                 } else {
-                    realFly(speed, priority, user);
+                    realFly(speed, priority, false, user);
                 }
             }
         }
     }
 
-    private void realFly(double speed, int priority, Player player) {
+    public void wingFly(double speed, int priority, int flyTime, LivingEntity player) {
+        this.rocketTime = flyTime;
+        if (player instanceof Player user) {
+            if (!user.isCreative() && !user.isInWater()) {
+                if (CloudBottleEquippedCheck.isEquipped(user)) {
+                    if (ModComponents.MOVEMENT_ORDER.get(user).getCloudFinished()) {
+                        realFly(speed, priority, true, user);
+                    }
+                } else {
+                    realFly(speed, priority, true, user);
+                }
+            }
+        }
+    }
+
+    private void realFly(double speed, int priority, boolean wings, Player player) { // todo: move to a packet so it only runs on server
         if (player.isOnGround() || ModComponents.MOVEMENT_ORDER.get(player).getWallJumped())
         {
             if (timer > 0)
@@ -47,7 +63,21 @@ public class RocketBootHelper {
                 timer = 0;
                 soundTimer = 0;
             }
+            player.stopFallFlying();
         }
+
+        if (player.level.isClientSide()) {
+            if (wings && timer >= rocketTime && !ModComponents.MOVEMENT_ORDER.get(player).getWallJumped()) {
+                if (InputHandler.isHoldingJump(player)) {
+                    if (!player.isOnGround() && !player.isFallFlying() && !player.isInWater() && !player.hasEffect(MobEffects.LEVITATION) && !player.isFallFlying()) {
+                        player.startFallFlying(); // todo: make work more like terraria, minecraft gliding is a bit op
+                    }
+                }// else {
+                //    player.stopFallFlying();
+                //}
+            }
+        }
+
         if (timer < rocketTime && priorityOrder(player, priority) && !ModComponents.MOVEMENT_ORDER.get(player).getWallJumped()) {
             if (InputHandler.isHoldingJump(player)) {
                 double currentAccel = speed * (player.getDeltaMovement().y() < 0.3D ? 2.5D : 1.0D);
@@ -68,12 +98,16 @@ public class RocketBootHelper {
                     Vec3 playerPos = player.getPosition(0).add(0, 1.5, 0);
                     if (!player.isLocalPlayer()) {
                         Vec3 v = playerPos.add(vLeft);
+                        if (particle1 != null) {
                         ((ServerPlayer) player).getLevel().sendParticles(particle1, v.x, v.y, v.z, 1, 0, -0.2D, 0, random);
+                        }
                         if (particle2 != null) {
                             ((ServerPlayer) player).getLevel().sendParticles(particle2, v.x, v.y, v.z, 1, 0, -0.2D, 0, random);
                         }
                         v = playerPos.add(vRight);
-                        ((ServerPlayer) player).getLevel().sendParticles(particle1, v.x, v.y, v.z, 1, 0, -0.2D, 0, random);
+                        if (particle1 != null) {
+                            ((ServerPlayer) player).getLevel().sendParticles(particle1, v.x, v.y, v.z, 1, 0, -0.2D, 0, random);
+                        }
                         if (particle2 != null) {
                             ((ServerPlayer) player).getLevel().sendParticles(particle2, v.x, v.y, v.z, 1, 0, -0.2D, 0, random);
                         }
