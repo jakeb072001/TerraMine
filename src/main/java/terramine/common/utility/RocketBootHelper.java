@@ -21,7 +21,7 @@ public class RocketBootHelper {
     private float soundPitch;
     private int timer;
     private int soundTimer;
-    private double speedSide = 0.03D;
+    private double speedSide = 0.05D;
     private double sprintSpeed = 1.0D;
     private int rocketTime = 40;
 
@@ -119,13 +119,7 @@ public class RocketBootHelper {
 
     private void fly(LivingEntity player, double y) {
         Vec3 motion = player.getDeltaMovement();
-        if (motion.y() >= 0)
-        {
-            player.moveRelative(1, new Vec3(0, y, 0));
-        } else {
-            player.moveRelative(1, new Vec3(0, -y + 1, 0));
-        }
-        //player.moveRelative(1, new Vec3(motion.x(), y, motion.z()));
+        player.setDeltaMovement(motion.x(), Math.abs(y), motion.z());
     }
 
     private boolean priorityOrder(Player player, int priority) {

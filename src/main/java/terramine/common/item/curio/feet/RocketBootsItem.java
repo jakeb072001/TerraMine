@@ -10,7 +10,7 @@ import terramine.common.utility.RocketBootHelper;
 public class RocketBootsItem extends TrinketTerrariaItem {
 
 	public RocketBootHelper rocketHelper = new RocketBootHelper();
-	public double speed = 0.08D;
+	public double speed = 0.4D;
 
 	public RocketBootsItem() {
 		rocketHelper.setSoundSettings(ModSoundEvents.ROCKET_BOOTS, 1.5f, 1f);

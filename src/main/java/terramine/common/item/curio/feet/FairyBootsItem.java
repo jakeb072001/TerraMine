@@ -34,7 +34,7 @@ public class FairyBootsItem extends TrinketTerrariaItem {
 			"terramine:spectre_boots_step_height", .5, AttributeModifier.Operation.ADDITION);
 	private static final RandomSource RANDOM = RandomSource.create();
 	public RocketBootHelper rocketHelper = new RocketBootHelper();
-	public double speed = 0.08D;
+	public double speed = 0.4D;
 
 	public FairyBootsItem() {
 		rocketHelper.setSoundSettings(ModSoundEvents.SPECTRE_BOOTS, 1f, 1f);

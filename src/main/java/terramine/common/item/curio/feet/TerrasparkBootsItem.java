@@ -36,7 +36,7 @@ public class TerrasparkBootsItem extends TrinketTerrariaItem {
 			"terramine:terraspark_boots_step_height", .5, AttributeModifier.Operation.ADDITION);
 	private static final RandomSource RANDOM = RandomSource.create();
 	public RocketBootHelper rocketHelper = new RocketBootHelper();
-	public double speed = 0.08D;
+	public double speed = 0.4D;
 
 	public TerrasparkBootsItem() {
 		//noinspection UnstableApiUsage
