@@ -58,7 +58,7 @@ public abstract class LivingEntityMixin extends Entity implements LivingEntityEx
 	@Override
 	public void terramine$doubleJump() {
 		LivingEntity self = (LivingEntity) (Object) this;
-		if (self instanceof Player player && !player.isCreative()) {
+		if (self instanceof Player player && !player.isCreative() && !player.isSpectator()) {
 			if (WingsEquippedCheck.isEquipped(player) && !ModComponents.MOVEMENT_ORDER.get(player).getWingsFinished()) {
 				return;
 			}

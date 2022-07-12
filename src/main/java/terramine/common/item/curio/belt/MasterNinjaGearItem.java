@@ -29,7 +29,7 @@ public class MasterNinjaGearItem extends TrinketTerrariaItem {
 	@Environment(EnvType.CLIENT)
     @Override
 	protected void curioTick(LivingEntity livingEntity, ItemStack stack) {
-		if (livingEntity instanceof LocalPlayer player && !player.isCreative()) {
+		if (livingEntity instanceof LocalPlayer player && !player.isCreative() && !player.isSpectator()) {
 			if (timer++ >= 6) {
 				if (upPressed) {
 					upPressed = false;

@@ -26,7 +26,7 @@ public class RocketBootHelper {
 
     public void rocketFly(double speed, int priority, LivingEntity player) {
         if (player instanceof Player user) {
-            if (!user.isCreative() && !user.isInWater()) {
+            if (!user.isCreative() && !player.isSpectator() && !user.isInWater()) {
                 if (CloudBottleEquippedCheck.isEquipped(user)) {
                     if (ModComponents.MOVEMENT_ORDER.get(user).getCloudFinished()) {
                         realFly(speed, 0.05D, priority, false, user);
@@ -41,7 +41,7 @@ public class RocketBootHelper {
     public void wingFly(double speed, double glideSpeed, int priority, int flyTime, LivingEntity player) {
         this.rocketTime = flyTime;
         if (player instanceof Player user) {
-            if (!user.isCreative() && !user.isInWater()) {
+            if (!user.isCreative() && !user.isSpectator() && !user.isInWater()) {
                 realFly(speed, glideSpeed, priority, true, user);
             }
         }
