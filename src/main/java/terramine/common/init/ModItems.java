@@ -2,7 +2,6 @@ package terramine.common.init;
 
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.core.Registry;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.item.*;
 import terramine.TerraMine;
 import terramine.common.item.CellPhoneItem;
@@ -139,7 +138,7 @@ public class ModItems {
 	public static final Item FAIRY_BOOTS = register("fairy_boots", new FairyBootsItem());
 
 	// Back
-	public static final Item FLEDGLING_WINGS = register("fledgling_wings", new WingsItem(0.25D, 15, SoundEvents.PHANTOM_FLAP));
+	public static final Item FLEDGLING_WINGS = register("fledgling_wings", new WingsItem(0.5D, 0.025D, 20, 7, ModSoundEvents.WINGS_FLAP));
 
 	// Blocks
 	public static final Item GOLD_CHEST = register("gold_chest", new BlockItem(ModBlocks.GOLD_CHEST, new FabricItemSettings().group(CreativeModeTab.TAB_DECORATIONS)));

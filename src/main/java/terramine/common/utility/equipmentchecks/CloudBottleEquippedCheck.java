@@ -1,4 +1,4 @@
-package terramine.common.utility;
+package terramine.common.utility.equipmentchecks;
 
 import net.minecraft.world.entity.LivingEntity;
 import terramine.common.init.ModItems;

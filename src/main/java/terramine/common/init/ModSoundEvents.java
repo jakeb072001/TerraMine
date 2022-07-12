@@ -7,7 +7,6 @@ import terramine.TerraMine;
 
 public class ModSoundEvents {
 
-	public static final SoundEvent POP = register("generic.pop");
 	public static final SoundEvent MIMIC_HURT = register("entity.mimic.hurt");
 	public static final SoundEvent MIMIC_DEATH = register("entity.mimic.death");
 	public static final SoundEvent MIMIC_OPEN = register("entity.mimic.open");
@@ -20,6 +19,7 @@ public class ModSoundEvents {
 	public static final SoundEvent ROCKET_BOOTS = register("item.rocket_boots.flame");
 	public static final SoundEvent SPECTRE_BOOTS = register("item.spectre_boots.flame");
 	public static final SoundEvent SPEEDBOOTS_RUN = register("item.spectre_boots.run");
+	public static final SoundEvent WINGS_FLAP = register("item.wings.flap");
 	public static final SoundEvent MAGIC_MIRROR_USE = register("item.magic_mirror.use");
 	public static final SoundEvent MAGIC_MISSILE_SHOOT = register("item.magicmissile.use");
 	public static final SoundEvent FLAMELASH_SHOOT = register("item.flamelash.use");

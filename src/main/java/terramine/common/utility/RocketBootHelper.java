@@ -5,13 +5,13 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.phys.Vec3;
 import terramine.common.init.ModComponents;
 import terramine.common.init.ModItems;
 import terramine.common.trinkets.TrinketsHelper;
+import terramine.common.utility.equipmentchecks.CloudBottleEquippedCheck;
 
 public class RocketBootHelper {
     private static final RandomSource RANDOM = RandomSource.create();
@@ -22,8 +22,6 @@ public class RocketBootHelper {
     private float soundPitch;
     private int timer;
     private int soundTimer;
-    private double speedSide = 0.05D;
-    private double sprintSpeed = 1.0D;
     private int rocketTime = 40;
 
     public void rocketFly(double speed, int priority, LivingEntity player) {
@@ -31,31 +29,25 @@ public class RocketBootHelper {
             if (!user.isCreative() && !user.isInWater()) {
                 if (CloudBottleEquippedCheck.isEquipped(user)) {
                     if (ModComponents.MOVEMENT_ORDER.get(user).getCloudFinished()) {
-                        realFly(speed, priority, false, user);
+                        realFly(speed, 0.05D, priority, false, user);
                     }
                 } else {
-                    realFly(speed, priority, false, user);
+                    realFly(speed, 0.05D, priority, false, user);
                 }
             }
         }
     }
 
-    public void wingFly(double speed, int priority, int flyTime, LivingEntity player) {
+    public void wingFly(double speed, double glideSpeed, int priority, int flyTime, LivingEntity player) {
         this.rocketTime = flyTime;
         if (player instanceof Player user) {
             if (!user.isCreative() && !user.isInWater()) {
-                if (CloudBottleEquippedCheck.isEquipped(user)) {
-                    if (ModComponents.MOVEMENT_ORDER.get(user).getCloudFinished()) {
-                        realFly(speed, priority, true, user);
-                    }
-                } else {
-                    realFly(speed, priority, true, user);
-                }
+                realFly(speed, glideSpeed, priority, true, user);
             }
         }
     }
 
-    private void realFly(double speed, int priority, boolean wings, Player player) { // todo: move to a packet so it only runs on server
+    private void realFly(double speed, double glideSpeed, int priority, boolean wings, Player player) { // todo: move to a packet so it only runs on server
         if (player.isOnGround() || ModComponents.MOVEMENT_ORDER.get(player).getWallJumped())
         {
             if (timer > 0)
@@ -63,18 +55,35 @@ public class RocketBootHelper {
                 timer = 0;
                 soundTimer = 0;
             }
-            player.stopFallFlying();
+            if (wings) {
+                ModComponents.MOVEMENT_ORDER.get(player).setWingsFinished(false);
+            }
         }
 
         if (player.level.isClientSide()) {
             if (wings && timer >= rocketTime && !ModComponents.MOVEMENT_ORDER.get(player).getWallJumped()) {
-                if (InputHandler.isHoldingJump(player)) {
-                    if (!player.isOnGround() && !player.isFallFlying() && !player.isInWater() && !player.hasEffect(MobEffects.LEVITATION) && !player.isFallFlying()) {
-                        player.startFallFlying(); // todo: make work more like terraria, minecraft gliding is a bit op
+                ModComponents.MOVEMENT_ORDER.get(player).setWingsFinished(true);
+                if (InputHandler.isHoldingJump(player)) { // todo: add a small delay to help smooth movement slightly and allow double jump to work with glide
+                    double currentAccel = speed * (player.getDeltaMovement().y() < 0.3D ? 2.5D : 1.0D);
+                    double motionY = player.getDeltaMovement().y();
+                    double glideFallSpeed = InputHandler.isHoldingShift(player) ? -0.28D : -0.14D;
+                    this.fly(player, Math.min(motionY + currentAccel, glideFallSpeed));
+                    player.resetFallDistance();
+
+                    float speedSideways = (float) (player.isCrouching() ? glideSpeed * 0.5F : glideSpeed);
+                    if (InputHandler.isHoldingForwards(player)) {
+                        player.moveRelative(1, new Vec3(0, 0, speedSideways));
                     }
-                }// else {
-                //    player.stopFallFlying();
-                //}
+                    if (InputHandler.isHoldingBackwards(player)) {
+                        player.moveRelative(1, new Vec3(0, 0, -speedSideways * 0.8F));
+                    }
+                    if (InputHandler.isHoldingLeft(player)) {
+                        player.moveRelative(1, new Vec3(speedSideways, 0, 0));
+                    }
+                    if (InputHandler.isHoldingRight(player)) {
+                        player.moveRelative(1, new Vec3(-speedSideways, 0, 0));
+                    }
+                }
             }
         }
 
@@ -88,8 +97,12 @@ public class RocketBootHelper {
 
                 double motionY = player.getDeltaMovement().y();
                 if (InputHandler.isHoldingJump(player)) {
-                    this.fly(player, Math.min(motionY + currentAccel, currentSpeedVertical));
-                    if (soundTimer >= 3) {
+                    this.fly(player, Math.abs(Math.min(motionY + currentAccel, currentSpeedVertical)));
+                    //if ((wings && soundTimer >= 6) || (!wings && soundTimer >= 3)) { // todo: doesn't work right now, should do when ran from packet
+                    //    player.level.playSound(null, player.blockPosition(), sound, SoundSource.PLAYERS, soundVolume, soundPitch);
+                    //    soundTimer = 0;
+                    //}
+                    if (soundTimer >= 3) { // remove after above code is working
                         player.level.playSound(null, player.blockPosition(), sound, SoundSource.PLAYERS, soundVolume, soundPitch);
                         soundTimer = 0;
                     }
@@ -114,11 +127,9 @@ public class RocketBootHelper {
                     }
                 }
 
-                float speedSideways = (float) (player.isCrouching() ? this.speedSide * 0.5F : this.speedSide);
-                float speedForward = player.isSprinting() ? (float) (speedSideways * this.sprintSpeed) : speedSideways;
-
+                float speedSideways = (float) (player.isCrouching() ? glideSpeed * 0.5F : glideSpeed);
                 if (InputHandler.isHoldingForwards(player)) {
-                    player.moveRelative(1, new Vec3(0, 0, speedForward));
+                    player.moveRelative(1, new Vec3(0, 0, speedSideways));
                 }
                 if (InputHandler.isHoldingBackwards(player)) {
                     player.moveRelative(1, new Vec3(0, 0, -speedSideways * 0.8F));
@@ -153,7 +164,7 @@ public class RocketBootHelper {
 
     private void fly(LivingEntity player, double y) {
         Vec3 motion = player.getDeltaMovement();
-        player.setDeltaMovement(motion.x(), Math.abs(y), motion.z());
+        player.setDeltaMovement(motion.x(), y, motion.z());
     }
 
     private boolean priorityOrder(Player player, int priority) {
@@ -175,6 +186,9 @@ public class RocketBootHelper {
         }
         if (TrinketsHelper.isEquipped(ModItems.TERRASPARK_BOOTS, player)) {
             priorityOrder = 6;
+        }
+        if (TrinketsHelper.isEquipped(ModItems.FLEDGLING_WINGS, player)) {
+            priorityOrder = 7;
         }
 
         return priority >= priorityOrder;

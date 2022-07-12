@@ -23,6 +23,7 @@ import terramine.common.init.ModItems;
 import terramine.common.init.ModSoundEvents;
 import terramine.common.item.curio.belt.CloudInABottleItem;
 import terramine.common.trinkets.TrinketsHelper;
+import terramine.common.utility.equipmentchecks.WingsEquippedCheck;
 import terramine.extensions.LivingEntityExtensions;
 
 @Mixin(LivingEntity.class)
@@ -58,6 +59,9 @@ public abstract class LivingEntityMixin extends Entity implements LivingEntityEx
 	public void terramine$doubleJump() {
 		LivingEntity self = (LivingEntity) (Object) this;
 		if (self instanceof Player player && !player.isCreative()) {
+			if (WingsEquippedCheck.isEquipped(player) && !ModComponents.MOVEMENT_ORDER.get(player).getWingsFinished()) {
+				return;
+			}
 			// Call the vanilla jump method
 			// We modify the behaviour of this method in multiple places if terramine$isDoubleJumping is true
 			this.isDoubleJumping = true;

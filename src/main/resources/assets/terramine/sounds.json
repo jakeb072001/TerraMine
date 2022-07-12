@@ -1,9 +1,4 @@
 {
-  "generic.pop": {
-    "sounds": [
-      "random/pop"
-    ]
-  },
   "item.rocket_boots.flame": {
     "sounds": [
       "terramine:boots/rocketbootsflame"
@@ -17,6 +12,11 @@
   "item.spectre_boots.run": {
     "sounds": [
       "terramine:boots/spectrebootsrun"
+    ]
+  },
+  "item.wings.flap": {
+    "sounds": [
+      "terramine:wings/wing_flap"
     ]
   },
   "generic.double_jump": {

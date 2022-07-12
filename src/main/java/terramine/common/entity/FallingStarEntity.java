@@ -41,7 +41,7 @@ public class FallingStarEntity extends Mob {
     public void createStarItem() {
         if (!level.isClientSide()) { // checks if the world is not client
             level.broadcastEntityEvent(this, (byte)3); // particle?
-            level.playSound(null, this.blockPosition(), ModSoundEvents.FALLING_STAR_CRASH, SoundSource.AMBIENT, 0.5f, 1f);
+            level.playSound(null, this.blockPosition(), ModSoundEvents.FALLING_STAR_CRASH, SoundSource.AMBIENT, 2f, 1f);
             ItemEntity starItem = new ItemEntity(level, this.blockPosition().getX(), this.blockPosition().getY(), this.blockPosition().getZ(), ModItems.FAKE_FALLEN_STAR.getDefaultInstance());
             starItem.setUnlimitedLifetime();
             level.addFreshEntity(starItem);
@@ -58,6 +58,7 @@ public class FallingStarEntity extends Mob {
     public void tick() {
         super.tick();
         adjustMotion();
+        resetFallDistance();
         if (this.isOnGround() || this.isInLava() || this.isInWater()) {
             createStarItem();
         }

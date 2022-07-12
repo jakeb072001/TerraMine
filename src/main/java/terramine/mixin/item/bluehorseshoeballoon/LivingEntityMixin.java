@@ -4,7 +4,6 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
-import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -16,7 +15,6 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import terramine.common.init.ModComponents;
 import terramine.common.init.ModItems;
 import terramine.common.item.curio.belt.BlueHorseshoeBalloonItem;
@@ -44,13 +42,6 @@ public abstract class LivingEntityMixin extends Entity implements LivingEntityEx
 
 	@Shadow
 	public abstract boolean onClimbable();
-
-	@Inject(method = "causeFallDamage", cancellable = true, at = @At("HEAD"))
-	private void cancelFallDamage(float fallDistance, float damageMultiplier, DamageSource damageSource, CallbackInfoReturnable<Boolean> info) {
-		if (TrinketsHelper.isEquipped(ModItems.BLUE_HORSESHOE_BALLOON, (LivingEntity) (Object) this)) {
-			info.setReturnValue(false);
-		}
-	}
 
 	// This code is extracted because the mixin fails to apply with the usage of client-side only classes
 	@Unique
