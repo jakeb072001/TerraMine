@@ -1,10 +1,14 @@
 package terramine.common.network;
 
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
+import net.minecraft.core.Registry;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.phys.Vec3;
 import terramine.TerraMine;
 import terramine.common.init.ModComponents;
 import terramine.common.init.ModItems;
@@ -17,6 +21,8 @@ public class ServerPacketHandler {
     public static final ResourceLocation WALL_JUMP_PACKET_ID = TerraMine.id("wall_jump");
     public static final ResourceLocation DASH_PACKET_ID = TerraMine.id("dash");
     public static final ResourceLocation CONTROLS_PACKET_ID = TerraMine.id("controls_packet");
+    public static final ResourceLocation ROCKET_BOOTS_SOUND_PACKET_ID = TerraMine.id("rocket_boots_sound");
+    public static final ResourceLocation ROCKET_BOOTS_PARTICLE_PACKET_ID = TerraMine.id("rocket_boots_particles");
 
     public static void register() {
         ServerPlayNetworking.registerGlobalReceiver(BONE_MEAL_PACKET_ID, BoneMealPacket::receive);
@@ -58,6 +64,43 @@ public class ServerPacketHandler {
             boolean wallJumped = buf.readBoolean();
             server.execute(() -> {
                 ModComponents.MOVEMENT_ORDER.get(player).setWallJumped(wallJumped);
+            });
+        });
+
+        ServerPlayNetworking.registerGlobalReceiver(ROCKET_BOOTS_SOUND_PACKET_ID, (server, player, handler, buf, responseSender) -> {
+            SoundEvent sound = buf.readById(Registry.SOUND_EVENT);
+            float soundVolume = buf.readFloat();
+            float soundPitch = buf.readFloat();
+            server.execute(() -> {
+                if (sound != null) {
+                    player.level.playSound(null, player.blockPosition(), sound, SoundSource.PLAYERS, soundVolume, soundPitch);
+                }
+            });
+        });
+
+        ServerPlayNetworking.registerGlobalReceiver(ROCKET_BOOTS_PARTICLE_PACKET_ID, (server, player, handler, buf, responseSender) -> {
+            SimpleParticleType particle1 = (SimpleParticleType) buf.readById(Registry.PARTICLE_TYPE);
+            SimpleParticleType particle2 = (SimpleParticleType) buf.readById(Registry.PARTICLE_TYPE);
+            Vec3 vLeft = new Vec3(-0.15, -1.5, 0).xRot(0).yRot(player.yBodyRot * -0.017453292F);
+            Vec3 vRight = new Vec3(0.15, -1.5, 0).xRot(0).yRot(player.yBodyRot * -0.017453292F);
+            Vec3 playerPos = player.getPosition(0).add(0, 1.5, 0);
+            float random = (player.getRandom().nextFloat() - 0.5F) * 0.1F;
+
+            server.execute(() -> {
+                Vec3 v = playerPos.add(vLeft);
+                if (particle1 != null && particle1 != ParticleTypes.DRIPPING_WATER) {
+                    player.getLevel().sendParticles(particle1, v.x, v.y, v.z, 1, 0, -0.2D, 0, random);
+                }
+                if (particle2 != null && particle2 != ParticleTypes.DRIPPING_WATER) {
+                    player.getLevel().sendParticles(particle2, v.x, v.y, v.z, 1, 0, -0.2D, 0, random);
+                }
+                v = playerPos.add(vRight);
+                if (particle1 != null && particle1 != ParticleTypes.DRIPPING_WATER) {
+                    player.getLevel().sendParticles(particle1, v.x, v.y, v.z, 1, 0, -0.2D, 0, random);
+                }
+                if (particle2 != null && particle2 != ParticleTypes.DRIPPING_WATER) {
+                    player.getLevel().sendParticles(particle2, v.x, v.y, v.z, 1, 0, -0.2D, 0, random);
+                }
             });
         });
     }

@@ -70,10 +70,10 @@ public abstract class LivingEntityMixin extends Entity implements LivingEntityEx
 
 	@SuppressWarnings("ConstantConditions")
 	@Inject(method = "aiStep", at = @At("HEAD"))
-	private void invokeQuadrupleJump(CallbackInfo info) {
+	private void invokeQuadrupleJump(CallbackInfo info) { // todo: need to allow double jump when not double jumping from ground, allows double jump to work after wings without holding space till end of flight
 		LivingEntity self = (LivingEntity) (Object) this;
 		if (self instanceof Player player) {
-			jumpWasReleased |= !this.jumping;
+			jumpWasReleased |= !this.jumping; // what this do?
 
 			if ((this.isOnGround() || this.onClimbable()) && !this.isInWater()) {
 				this.hasDoubleJumped = false;

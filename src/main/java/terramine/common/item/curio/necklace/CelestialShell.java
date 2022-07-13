@@ -75,7 +75,7 @@ public class CelestialShell extends TrinketTerrariaItem {
 
     @Override
     public void onEquip(ItemStack stack, SlotReference slot, LivingEntity entity) {
-        if (entity instanceof ServerPlayer && TrinketsHelper.areEffectsEnabled(stack) && shell) {
+        if (entity instanceof ServerPlayer && TrinketsHelper.areEffectsEnabled(stack, entity) && shell) {
             ModComponents.SWIM_ABILITIES.maybeGet(entity).ifPresent(comp -> {
                 comp.setSinking(true);
                 ModComponents.SWIM_ABILITIES.sync(entity);

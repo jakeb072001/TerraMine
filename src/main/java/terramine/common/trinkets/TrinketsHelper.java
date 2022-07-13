@@ -37,7 +37,7 @@ public final class TrinketsHelper {
 
 	public static boolean isInInventory(Predicate<ItemStack> filter, ItemStack item, Player player, boolean ignoreEffectsDisabled) {
 		if (TrinketsApi.getTrinketComponent(player)
-				.map(comp -> comp.isEquipped(stack -> (areEffectsEnabled(stack) || ignoreEffectsDisabled) && filter.test(stack)))
+				.map(comp -> comp.isEquipped(stack -> (areEffectsEnabled(stack, player) || ignoreEffectsDisabled) && filter.test(stack)))
 				.orElse(false)) {
 			return true;
 		} else {
@@ -58,7 +58,7 @@ public final class TrinketsHelper {
 
 	public static boolean isEquipped(Predicate<ItemStack> filter, LivingEntity entity, boolean ignoreEffectsDisabled) {
 		return TrinketsApi.getTrinketComponent(entity)
-				.map(comp -> comp.isEquipped(stack -> (areEffectsEnabled(stack) || ignoreEffectsDisabled) && filter.test(stack)))
+				.map(comp -> comp.isEquipped(stack -> (areEffectsEnabled(stack, entity) || ignoreEffectsDisabled) && filter.test(stack)))
 				.orElse(false);
 	}
 
@@ -66,11 +66,16 @@ public final class TrinketsHelper {
 		return TrinketsApi.getTrinketComponent(entity).stream()
 				.flatMap(comp -> comp.getAllEquipped().stream())
 				.map(Tuple::getB)
-				.filter(stack -> !stack.isEmpty() && stack.getItem() instanceof TrinketTerrariaItem && (areEffectsEnabled(stack) || ignoreEffectsDisabled))
+				.filter(stack -> !stack.isEmpty() && stack.getItem() instanceof TrinketTerrariaItem && (areEffectsEnabled(stack, entity) || ignoreEffectsDisabled))
 				.collect(Collectors.toList());
 	}
 
-	public static boolean areEffectsEnabled(ItemStack stack) {
+	public static boolean areEffectsEnabled(ItemStack stack, LivingEntity entity) {
+		if (entity instanceof Player player) {
+			return TrinketTerrariaItem.getTerraMineStatus(stack)
+					.map(TrinketTerrariaItem.terramineStatus::hasEffects)
+					.orElse(false) && !player.isCreative() && !player.isSpectator();
+		}
 		return TrinketTerrariaItem.getTerraMineStatus(stack)
 				.map(TrinketTerrariaItem.terramineStatus::hasEffects)
 				.orElse(false);
@@ -93,7 +98,7 @@ public final class TrinketsHelper {
 				.flatMap(invBySlot -> Optional.ofNullable(invBySlot.get(slotId)))
 				.stream()
 				.flatMap(inv -> IntStream.range(0, inv.getContainerSize()).mapToObj(inv::getItem))
-				.filter(stack -> stack.getItem() instanceof TrinketTerrariaItem && (areEffectsEnabled(stack) || ignoreEffectsDisabled))
+				.filter(stack -> stack.getItem() instanceof TrinketTerrariaItem && (areEffectsEnabled(stack, entity) || ignoreEffectsDisabled))
 				.collect(Collectors.toList());
 	}
 }

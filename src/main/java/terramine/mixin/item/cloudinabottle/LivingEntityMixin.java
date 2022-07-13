@@ -58,7 +58,7 @@ public abstract class LivingEntityMixin extends Entity implements LivingEntityEx
 	@Override
 	public void terramine$doubleJump() {
 		LivingEntity self = (LivingEntity) (Object) this;
-		if (self instanceof Player player && !player.isCreative() && !player.isSpectator()) {
+		if (self instanceof Player player) {
 			if (WingsEquippedCheck.isEquipped(player) && !ModComponents.MOVEMENT_ORDER.get(player).getWingsFinished()) {
 				return;
 			}
@@ -73,7 +73,7 @@ public abstract class LivingEntityMixin extends Entity implements LivingEntityEx
 			this.playSound(jumpSound, 1, 0.9F + self.getRandom().nextFloat() * 0.2F);
 
 			// Reset fall distance for fall damage
-			this.fallDistance = 0;
+			this.resetFallDistance();
 
 			// Send double jump packet to server if we're on the client
 			if (this.level.isClientSide) {
