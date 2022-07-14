@@ -20,6 +20,7 @@ import terramine.common.init.ModComponents;
 import terramine.common.init.ModItems;
 import terramine.common.item.curio.belt.BundleOfBalloonsItem;
 import terramine.common.trinkets.TrinketsHelper;
+import terramine.common.utility.equipmentchecks.WingsEquippedCheck;
 import terramine.extensions.LivingEntityExtensions;
 
 @Mixin(LivingEntity.class)
@@ -73,29 +74,45 @@ public abstract class LivingEntityMixin extends Entity implements LivingEntityEx
 	private void invokeQuadrupleJump(CallbackInfo info) { // todo: need to allow double jump when not double jumping from ground, allows double jump to work after wings without holding space till end of flight
 		LivingEntity self = (LivingEntity) (Object) this;
 		if (self instanceof Player player) {
-			jumpWasReleased |= !this.jumping; // what this do?
-
-			if ((this.isOnGround() || this.onClimbable()) && !this.isInWater()) {
-				this.hasDoubleJumped = false;
-				this.hasTripleJumped = false;
-				this.hasQuadrupleJumped = false;
-				ModComponents.MOVEMENT_ORDER.get(player).setCloudFinished(false);
-			}
-
-			boolean flying = player.getAbilities().flying;
-			if (this.jumping && this.jumpWasReleased && !this.isInWater() && !this.isOnGround() && !this.isPassenger()
-					&& !flying && TrinketsHelper.isEquipped(ModItems.BUNDLE_OF_BALLOONS, player)) {
-				if (!this.hasDoubleJumped || !this.hasTripleJumped || !this.hasQuadrupleJumped) {
-					this.terramine$doubleJump();
-					if (this.hasDoubleJumped) {
-						if (this.hasTripleJumped) {
-							this.hasQuadrupleJumped = true;
-						}
-						this.hasTripleJumped = true;
-					}
-					this.hasDoubleJumped = true;
+			if (WingsEquippedCheck.isEquipped(player)) {
+				if (ModComponents.MOVEMENT_ORDER.get(player).getWingsFinished()) {
+					doDoubleJump(player);
 				}
+			} else {
+				doDoubleJump(player);
 			}
+			resetJumpStatus(player);
+		}
+	}
+
+	@Unique
+	private void doDoubleJump(Player player) {
+		jumpWasReleased |= !this.jumping;
+
+		boolean flying = player.getAbilities().flying;
+		if (this.jumping && this.jumpWasReleased && !this.isInWater() && !this.isOnGround() && !this.isPassenger()
+				&& !flying && TrinketsHelper.isEquipped(ModItems.BUNDLE_OF_BALLOONS, player)) {
+			if (!this.hasDoubleJumped || !this.hasTripleJumped || !this.hasQuadrupleJumped) {
+				this.terramine$doubleJump();
+				if (this.hasDoubleJumped) {
+					if (this.hasTripleJumped) {
+						this.hasQuadrupleJumped = true;
+					}
+					this.hasTripleJumped = true;
+				}
+				this.hasDoubleJumped = true;
+			}
+		}
+	}
+
+	@Unique
+	private void resetJumpStatus(Player player) {
+		if ((this.isOnGround() || this.onClimbable() || ModComponents.MOVEMENT_ORDER.get(player).getWallJumped()) && !this.isInWater()) {
+			this.hasDoubleJumped = false;
+			this.hasTripleJumped = false;
+			this.hasQuadrupleJumped = false;
+			this.jumpWasReleased = false;
+			ModComponents.MOVEMENT_ORDER.get(player).setCloudFinished(false);
 		}
 	}
 

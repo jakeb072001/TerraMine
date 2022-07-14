@@ -20,6 +20,7 @@ import terramine.common.init.ModComponents;
 import terramine.common.init.ModItems;
 import terramine.common.item.curio.belt.CloudInABalloonItem;
 import terramine.common.trinkets.TrinketsHelper;
+import terramine.common.utility.equipmentchecks.WingsEquippedCheck;
 import terramine.extensions.LivingEntityExtensions;
 
 @Mixin(LivingEntity.class)
@@ -66,20 +67,36 @@ public abstract class LivingEntityMixin extends Entity implements LivingEntityEx
 	private void invokeDoubleJump(CallbackInfo info) {
 		LivingEntity self = (LivingEntity) (Object) this;
 		if (self instanceof Player player) {
-			jumpWasReleased |= !this.jumping;
-
-			if ((this.isOnGround() || this.onClimbable()) && !this.isInWater()) {
-				this.hasDoubleJumped = false;
-				ModComponents.MOVEMENT_ORDER.get(player).setCloudFinished(false);
+			if (WingsEquippedCheck.isEquipped(player)) {
+				if (ModComponents.MOVEMENT_ORDER.get(player).getWingsFinished()) {
+					doDoubleJump(player);
+				}
+			} else {
+				doDoubleJump(player);
 			}
+			resetJumpStatus(player);
+		}
+	}
 
-			boolean flying = player.getAbilities().flying;
-			if (this.jumping && this.jumpWasReleased && !this.isInWater() && !this.isOnGround() && !this.isPassenger()
-					&& !this.hasDoubleJumped && !flying && TrinketsHelper.isEquipped(ModItems.CLOUD_IN_A_BALLOON, player)
-					&& !TrinketsHelper.isEquipped(ModItems.BUNDLE_OF_BALLOONS, player) && !TrinketsHelper.isEquipped(ModItems.CLOUD_IN_A_BOTTLE, player)) {
-				this.terramine$doubleJump();
-				this.hasDoubleJumped = true;
-			}
+	@Unique
+	private void doDoubleJump(Player player) {
+		jumpWasReleased |= !this.jumping;
+
+		boolean flying = player.getAbilities().flying;
+		if (this.jumping && this.jumpWasReleased && !this.isInWater() && !this.isOnGround() && !this.isPassenger()
+				&& !this.hasDoubleJumped && !flying && TrinketsHelper.isEquipped(ModItems.CLOUD_IN_A_BALLOON, player)
+				&& !TrinketsHelper.isEquipped(ModItems.BUNDLE_OF_BALLOONS, player) && !TrinketsHelper.isEquipped(ModItems.CLOUD_IN_A_BOTTLE, player)) {
+			this.terramine$doubleJump();
+			this.hasDoubleJumped = true;
+		}
+	}
+
+	@Unique
+	private void resetJumpStatus(Player player) {
+		if ((this.isOnGround() || this.onClimbable() || ModComponents.MOVEMENT_ORDER.get(player).getWallJumped()) && !this.isInWater()) {
+			this.hasDoubleJumped = false;
+			this.jumpWasReleased = false;
+			ModComponents.MOVEMENT_ORDER.get(player).setCloudFinished(false);
 		}
 	}
 

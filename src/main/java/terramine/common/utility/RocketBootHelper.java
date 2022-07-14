@@ -25,6 +25,7 @@ public class RocketBootHelper {
     private int timer;
     private int soundTimer;
     private int glideDelay;
+    private int glideCloudDelay;
     private int rocketTime = 40;
 
     public void rocketFly(double speed, int priority, LivingEntity player) {
@@ -58,6 +59,7 @@ public class RocketBootHelper {
                 timer = 0;
                 soundTimer = 0;
                 glideDelay = 0;
+                glideCloudDelay = 0;
             }
             if (wings) {
                 ModComponents.MOVEMENT_ORDER.get(player).setWingsFinished(false);
@@ -67,8 +69,16 @@ public class RocketBootHelper {
         if (wings && timer >= rocketTime / 2 && !ModComponents.MOVEMENT_ORDER.get(player).getWallJumped()) {
             ModComponents.MOVEMENT_ORDER.get(player).setWingsFinished(true);
             if (InputHandler.isHoldingJump(player)) {
-                boolean getCloudFinished = CloudBottleEquippedCheck.isEquipped(player) && ModComponents.MOVEMENT_ORDER.get(player).getCloudFinished();
-                if ((getCloudFinished && glideDelay >= 3) || (!getCloudFinished && glideDelay >= 10)) {
+                boolean getCloudEquipped = CloudBottleEquippedCheck.isEquipped(player);
+                boolean trueCloudFinished = false;
+                if (getCloudEquipped && ModComponents.MOVEMENT_ORDER.get(player).getCloudFinished()) {
+                    if (glideCloudDelay >= 10) {
+                        trueCloudFinished = true;
+                    } else {
+                        glideCloudDelay++;
+                    }
+                }
+                if (((trueCloudFinished || !getCloudEquipped) && glideDelay >= 3) || (!trueCloudFinished && glideDelay >= 10)) {
                     double currentAccel = speed * (player.getDeltaMovement().y() < 0.3D ? 2.5D : 1.0D);
                     double motionY = player.getDeltaMovement().y();
                     double glideFallSpeed = InputHandler.isHoldingShift(player) ? -0.28D : -0.14D;
