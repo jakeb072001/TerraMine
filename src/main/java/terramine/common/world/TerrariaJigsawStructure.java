@@ -18,6 +18,7 @@ import terramine.common.init.ModFeatures;
 
 import java.util.Optional;
 
+// https://github.com/TheGrimsey/Stoneholm/blob/1.19/src/main/java/net/thegrimsey/stoneholm/structures/StoneholmGenerator.java for example on probably getting this working how I want.
 public class TerrariaJigsawStructure extends Structure {
     public static final Codec<TerrariaJigsawStructure> CODEC = RecordCodecBuilder.create(instance -> instance.group(
             TerrariaJigsawStructure.settingsCodec(instance),
@@ -54,6 +55,7 @@ public class TerrariaJigsawStructure extends Structure {
         int i = this.startHeight.sample(generationContext.random(), new WorldGenerationContext(generationContext.chunkGenerator(), generationContext.heightAccessor()));
         BlockPos blockPos = new BlockPos(chunkPos.getMinBlockX(), i, chunkPos.getMinBlockZ());
         Pools.forceBootstrap();
+        //return DungeonGenerator.generate(generationContext, blockPos, maxDepth, startPool);
         return JigsawPlacement.addPieces(generationContext, this.startPool, this.startJigsawName, this.maxDepth, blockPos, this.useExpansionHack, this.projectStartToHeightmap, this.maxDistanceFromCenter);
     }
 

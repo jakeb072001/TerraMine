@@ -71,6 +71,7 @@ public class RocketBootHelper {
             if (InputHandler.isHoldingJump(player)) {
                 boolean getCloudEquipped = CloudBottleEquippedCheck.isEquipped(player);
                 boolean trueCloudFinished = false;
+
                 if (getCloudEquipped && ModComponents.MOVEMENT_ORDER.get(player).getCloudFinished()) {
                     if (glideCloudDelay >= 10) {
                         trueCloudFinished = true;
@@ -78,6 +79,7 @@ public class RocketBootHelper {
                         glideCloudDelay++;
                     }
                 }
+
                 if (((trueCloudFinished || !getCloudEquipped) && glideDelay >= 3) || (!trueCloudFinished && glideDelay >= 10)) {
                     double currentAccel = speed * (player.getDeltaMovement().y() < 0.3D ? 2.5D : 1.0D);
                     double motionY = player.getDeltaMovement().y();
@@ -178,7 +180,7 @@ public class RocketBootHelper {
         player.setDeltaMovement(motion.x(), y, motion.z());
     }
 
-    private boolean priorityOrder(Player player, int priority) {
+    private boolean priorityOrder(Player player, int priority) { // todo: change to a better system, don't know how and it's not super important but would be cleaner and easier to manage i would think
         int priorityOrder = 0;
         if (TrinketsHelper.isEquipped(ModItems.ROCKET_BOOTS, player)) {
             priorityOrder = 1;
@@ -200,6 +202,15 @@ public class RocketBootHelper {
         }
         if (TrinketsHelper.isEquipped(ModItems.FLEDGLING_WINGS, player)) {
             priorityOrder = 7;
+        }
+        if (TrinketsHelper.isEquipped(ModItems.ANGEL_WINGS, player)) {
+            priorityOrder = 8;
+        }
+        if (TrinketsHelper.isEquipped(ModItems.DEMON_WINGS, player)) {
+            priorityOrder = 9;
+        }
+        if (TrinketsHelper.isEquipped(ModItems.LEAF_WINGS, player)) {
+            priorityOrder = 10;
         }
 
         return priority >= priorityOrder;

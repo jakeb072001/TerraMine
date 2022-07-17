@@ -139,6 +139,9 @@ public class ModItems {
 
 	// Back
 	public static final Item FLEDGLING_WINGS = register("fledgling_wings", new WingsItem(0.5D, 0.025D, 20, 7, ModSoundEvents.WINGS_FLAP));
+	public static final Item ANGEL_WINGS = register("angel_wings", new WingsItem(0.5D, 0.05D, 80, 8, ModSoundEvents.WINGS_FLAP));
+	public static final Item DEMON_WINGS = register("demon_wings", new WingsItem(0.5D, 0.05D, 80, 9, ModSoundEvents.WINGS_FLAP));
+	public static final Item LEAF_WINGS = register("leaf_wings", new WingsItem(0.5D, 0.05D, 80, 10, ModSoundEvents.WINGS_FLAP));
 
 	// Blocks
 	public static final Item GOLD_CHEST = register("gold_chest", new BlockItem(ModBlocks.GOLD_CHEST, new FabricItemSettings().group(CreativeModeTab.TAB_DECORATIONS)));

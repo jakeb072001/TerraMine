@@ -61,7 +61,6 @@ public abstract class LivingEntityMixin extends Entity implements LivingEntityEx
 
 	@ModifyVariable(method = "causeFallDamage", ordinal = 0, at = @At("HEAD"), argsOnly = true)
 	private float reduceFallDistance(float fallDistance) {
-		// FIXME: this probably also works if we didn't double jump, intended?
 		if (TrinketsHelper.isEquipped(ModItems.BUNDLE_OF_BALLOONS, (LivingEntity) (Object) this)) {
 			fallDistance = Math.max(0, fallDistance - 3);
 		}
@@ -71,7 +70,7 @@ public abstract class LivingEntityMixin extends Entity implements LivingEntityEx
 
 	@SuppressWarnings("ConstantConditions")
 	@Inject(method = "aiStep", at = @At("HEAD"))
-	private void invokeQuadrupleJump(CallbackInfo info) { // todo: need to allow double jump when not double jumping from ground, allows double jump to work after wings without holding space till end of flight
+	private void invokeQuadrupleJump(CallbackInfo info) {
 		LivingEntity self = (LivingEntity) (Object) this;
 		if (self instanceof Player player) {
 			if (WingsEquippedCheck.isEquipped(player)) {

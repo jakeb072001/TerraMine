@@ -54,7 +54,6 @@ public abstract class LivingEntityMixin extends Entity implements LivingEntityEx
 
 	@ModifyVariable(method = "causeFallDamage", ordinal = 0, at = @At("HEAD"), argsOnly = true)
 	private float reduceFallDistance(float fallDistance) {
-		// FIXME: this probably also works if we didn't double jump, intended?
 		if (TrinketsHelper.isEquipped(ModItems.CLOUD_IN_A_BALLOON, (LivingEntity) (Object) this)) {
 			fallDistance = Math.max(0, fallDistance - 3);
 		}

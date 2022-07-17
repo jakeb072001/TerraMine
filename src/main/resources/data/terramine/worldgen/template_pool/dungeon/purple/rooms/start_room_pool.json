@@ -1,6 +1,6 @@
 {
   "name": "terramine:dungeon/purple/rooms/start_room_pool",
-  "fallback": "minecraft:empty",
+  "fallback": "terramine:dungeon/purple/rooms/start_hallway_pool",
   "elements": [
     {
       "weight": 1,
