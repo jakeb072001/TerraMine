@@ -6,15 +6,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [1.4.0] - 2022-07-20
 ### Added
-- Dungeon Structure // current wip but is difficult
+- Dungeon Structure (still being worked on, needs a lot of work)
 - Dungeon Blocks
 - Moon Charm, Moon Shell, Sun Stone, Moon Stone, Celestial Stone, and Celestial Shell
-- Wings // needs to be started
+- Wings (not all but a few)
 - More Advancements
 
 ### Changed
 - Rocket Boot type accessories refill after wall jumping
-- Demon Eyes now bounce when hitting blocks
+- Cloud type accessories (double/quad jump) also refill after wall jumping
+- Demon Eyes now bounce when hitting side of blocks
 - Falling stars can now be configured to disable or change rarity
 - Mana command has been merged and no longer requires player to be set (/mana set and /mana get)
 

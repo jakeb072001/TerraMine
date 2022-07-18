@@ -114,6 +114,7 @@ public class DemonEyeEntity extends Monster implements Enemy {
         return this.entityData.get(typed_data);
     }
 
+    @SuppressWarnings("ConstantConditions")
     protected static class DemonEyeMovementController extends MoveControl {
         private final DemonEyeEntity demonEye;
 
@@ -125,10 +126,8 @@ public class DemonEyeEntity extends Monster implements Enemy {
         @Override
         public void tick() {
             if (demonEye.isAlive()) {
-                if (demonEye.horizontalCollision) { // todo: apply opposite force so that the demon eye actually bounces (right now it kinda bounces when hitting a wall with speed but eventually will get to 0 speed and will not bounce)
-                    demonEye.setYRot(demonEye.getYRot() + 180.0F);
-                    demonEye.velX = -demonEye.velX;
-                    demonEye.velZ = -demonEye.velZ;
+                if (demonEye.horizontalCollision) {
+                    demonEye.bounce = true;
                 }
 
                 boolean isDay = demonEye.level.isDay();
@@ -167,31 +166,30 @@ public class DemonEyeEntity extends Monster implements Enemy {
                 if (demonEye.bounce) {
                     if (!demonEye.onGround) {
                         demonEye.velX = demonEye.oldVelX * -0.5;
-                        if (demonEye.velX > 0 && demonEye.velX < 2) {
-                            demonEye.velX = 2;
+                        if (demonEye.velX > 0 && demonEye.velX < 4) {
+                            demonEye.velX = 4;
                         }
-                        if (demonEye.velX < 0 && demonEye.velX > -2) {
-                            demonEye.velX = -2;
+                        if (demonEye.velX < 0 && demonEye.velX > -4) {
+                            demonEye.velX = -4;
                         }
                         demonEye.velZ = demonEye.oldVelZ * -0.5;
-                        if (demonEye.velZ > 0 && demonEye.velZ < 2) {
-                            demonEye.velZ = 2;
+                        if (demonEye.velZ > 0 && demonEye.velZ < 4) {
+                            demonEye.velZ = 4;
                         }
-                        if (demonEye.velZ < 0 && demonEye.velZ > -2) {
-                            demonEye.velZ = -2;
+                        if (demonEye.velZ < 0 && demonEye.velZ > -4) {
+                            demonEye.velZ = -4;
                         }
                     }
 
                     if (demonEye.onGround) {
                         demonEye.velY = demonEye.oldVelY * -0.5;
-                        if (demonEye.velY > 0 && demonEye.velY < 1) {
-                            demonEye.velY = 1;
+                        if (demonEye.velY > 0 && demonEye.velY < 2) {
+                            demonEye.velY = 2;
                         }
-                        if (demonEye.velY < 0 && demonEye.velY > -1) {
-                            demonEye.velY = -1;
+                        if (demonEye.velY < 0 && demonEye.velY > -2) {
+                            demonEye.velY = -2;
                         }
                     }
-
                 }
 
                 if (isDay && demonEye.level.canSeeSky(new BlockPos(demonEye.getEyePosition()))) {
@@ -334,6 +332,7 @@ public class DemonEyeEntity extends Monster implements Enemy {
         return SoundSource.HOSTILE;
     }
 
+    @SuppressWarnings("ConstantConditions")
     @Override
     public void playerTouch(@NotNull Player player) {
         super.playerTouch(player);

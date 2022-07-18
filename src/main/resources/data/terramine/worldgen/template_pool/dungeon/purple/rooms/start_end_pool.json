@@ -1,0 +1,24 @@
+{
+  "name": "terramine:dungeon/purple/rooms/start_end_pool",
+  "fallback": "minecraft:empty",
+  "elements": [
+    {
+      "weight": 20,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "terramine:dungeon/purple/rooms/room_1_end",
+        "projection": "rigid",
+        "processors": "terramine:decay_purple_dungeon"
+      }
+    },
+	{
+      "weight": 5,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "terramine:dungeon/purple/rooms/room_1_end_stairs",
+        "projection": "rigid",
+        "processors": "terramine:decay_purple_dungeon"
+      }
+    }
+  ]
+}

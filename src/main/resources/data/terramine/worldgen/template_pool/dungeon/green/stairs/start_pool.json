@@ -1,6 +1,6 @@
 {
   "name": "terramine:dungeon/green/stairs/start_pool",
-  "fallback": "minecraft:empty",
+  "fallback": "terramine:dungeon/green/rooms/start_first_room_pool",
   "elements": [
     {
       "weight": 1,

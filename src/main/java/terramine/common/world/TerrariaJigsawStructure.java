@@ -18,11 +18,11 @@ import terramine.common.init.ModFeatures;
 
 import java.util.Optional;
 
-// https://github.com/TheGrimsey/Stoneholm/blob/1.19/src/main/java/net/thegrimsey/stoneholm/structures/StoneholmGenerator.java for example on probably getting this working how I want.
 public class TerrariaJigsawStructure extends Structure {
     public static final Codec<TerrariaJigsawStructure> CODEC = RecordCodecBuilder.create(instance -> instance.group(
             TerrariaJigsawStructure.settingsCodec(instance),
             StructureTemplatePool.CODEC.fieldOf("start_pool").forGetter(structure -> structure.startPool),
+            StructureTemplatePool.CODEC.fieldOf("start_room_pool").forGetter(structure -> structure.startRoomPool),
             ResourceLocation.CODEC.optionalFieldOf("start_jigsaw_name").forGetter(structure -> structure.startJigsawName),
             Codec.intRange(0, 30).fieldOf("size").forGetter(structure -> structure.maxDepth),
             HeightProvider.CODEC.fieldOf("start_height").forGetter(structure -> structure.startHeight),
@@ -32,6 +32,7 @@ public class TerrariaJigsawStructure extends Structure {
     ).apply(instance, TerrariaJigsawStructure::new));
 
     private final Holder<StructureTemplatePool> startPool;
+    private final Holder<StructureTemplatePool> startRoomPool;
     private final Optional<ResourceLocation> startJigsawName;
     private final int maxDepth;
     private final HeightProvider startHeight;
@@ -39,9 +40,10 @@ public class TerrariaJigsawStructure extends Structure {
     private final Optional<Heightmap.Types> projectStartToHeightmap;
     private final int maxDistanceFromCenter;
 
-    public TerrariaJigsawStructure(StructureSettings structureSettings, Holder<StructureTemplatePool> holder, Optional<ResourceLocation> optional, int i, HeightProvider heightProvider, boolean bl, Optional<Heightmap.Types> optional2, int j) {
+    public TerrariaJigsawStructure(StructureSettings structureSettings, Holder<StructureTemplatePool> holder, Holder<StructureTemplatePool> holder2, Optional<ResourceLocation> optional, int i, HeightProvider heightProvider, boolean bl, Optional<Heightmap.Types> optional2, int j) {
         super(structureSettings);
         this.startPool = holder;
+        this.startRoomPool = holder2;
         this.startJigsawName = optional;
         this.maxDepth = i;
         this.startHeight = heightProvider;
@@ -55,8 +57,8 @@ public class TerrariaJigsawStructure extends Structure {
         int i = this.startHeight.sample(generationContext.random(), new WorldGenerationContext(generationContext.chunkGenerator(), generationContext.heightAccessor()));
         BlockPos blockPos = new BlockPos(chunkPos.getMinBlockX(), i, chunkPos.getMinBlockZ());
         Pools.forceBootstrap();
-        //return DungeonGenerator.generate(generationContext, blockPos, maxDepth, startPool);
-        return JigsawPlacement.addPieces(generationContext, this.startPool, this.startJigsawName, this.maxDepth, blockPos, this.useExpansionHack, this.projectStartToHeightmap, this.maxDistanceFromCenter);
+        return DungeonGenerator.generate(generationContext, blockPos, maxDepth, startPool, startRoomPool);
+        //return JigsawPlacement.addPieces(generationContext, this.startPool, this.startJigsawName, this.maxDepth, blockPos, this.useExpansionHack, this.projectStartToHeightmap, this.maxDistanceFromCenter);
     }
 
     public StructureType<?> type() {

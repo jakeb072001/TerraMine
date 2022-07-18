@@ -1,12 +1,84 @@
 {
   "name": "terramine:dungeon/purple/rooms/start_room_pool",
-  "fallback": "terramine:dungeon/purple/rooms/start_hallway_pool",
+  "fallback": "terramine:dungeon/purple/rooms/start_end_pool",
   "elements": [
     {
-      "weight": 1,
+      "weight": 5,
       "element": {
         "element_type": "minecraft:single_pool_element",
-        "location": "terramine:dungeon/purple/rooms/room_1",
+        "location": "terramine:dungeon/purple/rooms/room_1_end",
+        "projection": "rigid",
+        "processors": "terramine:decay_purple_dungeon"
+      }
+    },
+    {
+      "weight": 5,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "terramine:dungeon/purple/rooms/hallway_1",
+        "projection": "rigid",
+        "processors": "terramine:decay_purple_dungeon"
+      }
+    },
+	{
+      "weight": 20,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "terramine:dungeon/purple/rooms/room_1_1_door",
+        "projection": "rigid",
+        "processors": "terramine:decay_purple_dungeon"
+      }
+    },
+	{
+      "weight": 20,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "terramine:dungeon/purple/rooms/room_1_2_door",
+        "projection": "rigid",
+        "processors": "terramine:decay_purple_dungeon"
+      }
+    },
+	{
+      "weight": 20,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "terramine:dungeon/purple/rooms/room_1_3_door",
+        "projection": "rigid",
+        "processors": "terramine:decay_purple_dungeon"
+      }
+    },
+	{
+      "weight": 20,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "terramine:dungeon/purple/rooms/room_1_end_stairs",
+        "projection": "rigid",
+        "processors": "terramine:decay_purple_dungeon"
+      }
+    },
+	{
+      "weight": 20,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "terramine:dungeon/purple/rooms/room_1_1_door_stairs",
+        "projection": "rigid",
+        "processors": "terramine:decay_purple_dungeon"
+      }
+    },
+	{
+      "weight": 20,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "terramine:dungeon/purple/rooms/room_1_2_door_stairs",
+        "projection": "rigid",
+        "processors": "terramine:decay_purple_dungeon"
+      }
+    },
+	{
+      "weight": 20,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "terramine:dungeon/purple/rooms/room_1_3_door_stairs",
         "projection": "rigid",
         "processors": "terramine:decay_purple_dungeon"
       }

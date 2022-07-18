@@ -12,19 +12,44 @@
     }
   },
   "criteria": {
-    "find_corruption": {
+    "found_corruption": {
       "trigger": "minecraft:location",
       "conditions": {
-        "condition": "minecraft:alternative",
-        "terms": [
+        "player": [
           {
-            "location": {
-              "biome": "terramine:corruption"
-            }
+            "condition": "minecraft:alternative",
+            "terms": [
+              {
+                "condition": "minecraft:entity_properties",
+                "entity": "this",
+                "predicate": {
+                  "location": {
+                    "biome": "terramine:corruption"
+                  }
+                }
+              },
+              {
+                "condition": "minecraft:entity_properties",
+                "entity": "this",
+                "predicate": {
+                  "location": {
+                    "biome": "terramine:corruption_desert"
+                  }
+                }
+              }
+            ]
           },
           {
-            "location": {
-              "biome": "terramine:corruption_desert"
+            "condition": "minecraft:inverted",
+            "term": {
+              "condition": "minecraft:entity_properties",
+              "entity": "this",
+              "predicate": {
+                "type_specific": {
+                  "type": "player",
+                  "gamemode": "spectator"
+                }
+              }
             }
           }
           ]
