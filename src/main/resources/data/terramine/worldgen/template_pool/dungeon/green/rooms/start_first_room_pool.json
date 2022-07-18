@@ -1,0 +1,15 @@
+{
+  "name": "terramine:dungeon/green/rooms/start_first_room_pool",
+  "fallback": "minecraft:empty",
+  "elements": [
+    {
+      "weight": 1,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "terramine:dungeon/green/rooms/start_room_1",
+        "projection": "rigid",
+        "processors": "terramine:decay_green_dungeon"
+      }
+    }
+  ]
+}

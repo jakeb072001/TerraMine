@@ -1,0 +1,87 @@
+{
+  "name": "terramine:dungeon/blue/rooms/start_hallway_pool",
+  "fallback": "terramine:dungeon/blue/rooms/start_end_pool",
+  "elements": [
+    {
+      "weight": 10,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "terramine:dungeon/blue/rooms/hallway_1",
+        "projection": "rigid",
+        "processors": "terramine:decay_blue_dungeon"
+      }
+    },
+	{
+      "weight": 1,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "terramine:dungeon/blue/rooms/room_1_end",
+        "projection": "rigid",
+        "processors": "terramine:decay_blue_dungeon"
+      }
+    },
+	{
+      "weight": 1,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "terramine:dungeon/blue/rooms/room_1_1_door",
+        "projection": "rigid",
+        "processors": "terramine:decay_blue_dungeon"
+      }
+    },
+	{
+      "weight": 1,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "terramine:dungeon/blue/rooms/room_1_2_door",
+        "projection": "rigid",
+        "processors": "terramine:decay_blue_dungeon"
+      }
+    },
+	{
+      "weight": 1,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "terramine:dungeon/blue/rooms/room_1_3_door",
+        "projection": "rigid",
+        "processors": "terramine:decay_blue_dungeon"
+      }
+    },
+	{
+      "weight": 1,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "terramine:dungeon/blue/rooms/room_1_end_stairs",
+        "projection": "rigid",
+        "processors": "terramine:decay_blue_dungeon"
+      }
+    },
+	{
+      "weight": 1,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "terramine:dungeon/blue/rooms/room_1_1_door_stairs",
+        "projection": "rigid",
+        "processors": "terramine:decay_blue_dungeon"
+      }
+    },
+	{
+      "weight": 1,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "terramine:dungeon/blue/rooms/room_1_2_door_stairs",
+        "projection": "rigid",
+        "processors": "terramine:decay_blue_dungeon"
+      }
+    },
+	{
+      "weight": 1,
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "terramine:dungeon/blue/rooms/room_1_3_door_stairs",
+        "projection": "rigid",
+        "processors": "terramine:decay_blue_dungeon"
+      }
+    }
+  ]
+}
