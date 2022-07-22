@@ -12,7 +12,7 @@
       }
     },
 	{
-      "weight": 1,
+      "weight": 20,
       "element": {
         "element_type": "minecraft:single_pool_element",
         "location": "terramine:dungeon/green/rooms/room_1_end",
@@ -21,7 +21,7 @@
       }
     },
 	{
-      "weight": 1,
+      "weight": 20,
       "element": {
         "element_type": "minecraft:single_pool_element",
         "location": "terramine:dungeon/green/rooms/room_1_1_door",
@@ -30,7 +30,7 @@
       }
     },
 	{
-      "weight": 1,
+      "weight": 20,
       "element": {
         "element_type": "minecraft:single_pool_element",
         "location": "terramine:dungeon/green/rooms/room_1_2_door",
@@ -39,7 +39,7 @@
       }
     },
 	{
-      "weight": 1,
+      "weight": 20,
       "element": {
         "element_type": "minecraft:single_pool_element",
         "location": "terramine:dungeon/green/rooms/room_1_3_door",
@@ -48,7 +48,7 @@
       }
     },
 	{
-      "weight": 1,
+      "weight": 20,
       "element": {
         "element_type": "minecraft:single_pool_element",
         "location": "terramine:dungeon/green/rooms/room_1_end_stairs",
@@ -57,7 +57,7 @@
       }
     },
 	{
-      "weight": 1,
+      "weight": 20,
       "element": {
         "element_type": "minecraft:single_pool_element",
         "location": "terramine:dungeon/green/rooms/room_1_1_door_stairs",
@@ -66,7 +66,7 @@
       }
     },
 	{
-      "weight": 1,
+      "weight": 20,
       "element": {
         "element_type": "minecraft:single_pool_element",
         "location": "terramine:dungeon/green/rooms/room_1_2_door_stairs",
@@ -75,7 +75,7 @@
       }
     },
 	{
-      "weight": 1,
+      "weight": 20,
       "element": {
         "element_type": "minecraft:single_pool_element",
         "location": "terramine:dungeon/green/rooms/room_1_3_door_stairs",

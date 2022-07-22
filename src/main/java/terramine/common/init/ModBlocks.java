@@ -39,6 +39,7 @@ public class ModBlocks {
     public static final Block PURPLE_BRICKS = register("purple_brick", new DungeonBlock(Properties.of(Material.STONE).strength(1.5f, 1200.0F)));
     public static final Block CRACKED_PURPLE_BRICKS = register("cracked_purple_brick", new DungeonBlock(Properties.of(Material.STONE).strength(1.5f, 1200.0F)));
     public static final Block FANCY_PURPLE_BRICKS = register("fancy_purple_brick", new DungeonBlock(Properties.of(Material.STONE).strength(1.5f, 1200.0F)));
+    public static final Block DEMONITE_BLOCK = register("demonite_block", new Block(Properties.copy(Blocks.IRON_BLOCK)));
     public static final Block CORRUPTED_GRASS = register("corrupted_grass", new CorruptedGrass(Properties.copy(Blocks.GRASS_BLOCK).randomTicks()));
     public static final Block CORRUPTED_GRAVEL = register("corrupted_gravel", new CorruptedFallingBlock(Properties.copy(Blocks.GRAVEL).randomTicks()));
     public static final Block CORRUPTED_SAND = register("corrupted_sand", new CorruptedFallingBlock(Properties.copy(Blocks.SAND).randomTicks()));

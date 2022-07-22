@@ -9,6 +9,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.DispenserBlock;
+import org.jetbrains.annotations.NotNull;
 import terramine.common.init.ModItems;
 
 public class UmbrellaItem extends TerrariaItem {
@@ -47,17 +48,17 @@ public class UmbrellaItem extends TerrariaItem {
 	}
 
 	@Override
-	public UseAnim getUseAnimation(ItemStack stack) {
+	public UseAnim getUseAnimation(@NotNull ItemStack stack) {
 		return UseAnim.BLOCK;
 	}
 
 	@Override
-	public int getUseDuration(ItemStack stack) {
+	public int getUseDuration(@NotNull ItemStack stack) {
 		return 72000;
 	}
 
 	@Override
-	public InteractionResultHolder<ItemStack> use(Level world, Player player, InteractionHand hand) {
+	public InteractionResultHolder<ItemStack> use(@NotNull Level world, Player player, @NotNull InteractionHand hand) {
 		ItemStack itemstack = player.getItemInHand(hand);
 		player.startUsingItem(hand);
 		return InteractionResultHolder.consume(itemstack);

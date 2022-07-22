@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XX",
+    " #",
+    " #"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:stick"
+    },
+    "X": {
+      "item": "terramine:demonite_ingot"
+    }
+  },
+  "result": {
+    "item": "terramine:demonite_hoe"
+  }
+}

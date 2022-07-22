@@ -17,6 +17,7 @@
     "terramine:corrupted_redstone_ore",
     "terramine:corrupted_deepslate_redstone_ore",
 	"terramine:demonite_ore",
-    "terramine:deepslate_demonite_ore"
+    "terramine:deepslate_demonite_ore",
+    "terramine:demonite_block"
   ]
 }

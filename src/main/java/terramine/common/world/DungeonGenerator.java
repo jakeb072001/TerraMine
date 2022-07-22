@@ -23,12 +23,11 @@ import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.apache.commons.lang3.mutable.MutableObject;
-import terramine.TerraMine;
 
 import java.util.*;
 import java.util.function.Predicate;
 
-public class DungeonGenerator { // todo: delete if find something that works, for now keep just in case.
+public class DungeonGenerator {
 
     public static Optional<Structure.GenerationStub> generate(Structure.GenerationContext inContext, BlockPos pos, int size, Holder<StructureTemplatePool> startJigsawName, Holder<StructureTemplatePool> startRoomPool) {
         if (size <= 0)

@@ -71,7 +71,7 @@ public class DungeonBlock extends Block {
 
         if (state.getValue(PLACED) || pos.getY() >= 60) {
             return super.getDestroyProgress(state, player, getter, pos);
-        } else if (cei.getItem() instanceof DiggerItem test && test.getTier().getLevel() >= MiningLevelManager.getRequiredMiningLevel(state)) {
+        } else if (cei.getItem() instanceof DiggerItem tool && tool.getTier().getLevel() >= MiningLevelManager.getRequiredMiningLevel(state)) {
             return super.getDestroyProgress(state, player, getter, pos);
         }
 

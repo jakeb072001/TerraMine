@@ -11,15 +11,6 @@
         "processors": "terramine:decay_blue_dungeon"
       }
     },
-    {
-      "weight": 5,
-      "element": {
-        "element_type": "minecraft:single_pool_element",
-        "location": "terramine:dungeon/purple/rooms/hallway_1",
-        "projection": "rigid",
-        "processors": "terramine:decay_purple_dungeon"
-      }
-    },
 	{
       "weight": 20,
       "element": {

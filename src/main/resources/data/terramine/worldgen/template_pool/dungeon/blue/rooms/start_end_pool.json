@@ -10,15 +10,6 @@
         "projection": "rigid",
         "processors": "terramine:decay_blue_dungeon"
       }
-    },
-	{
-      "weight": 5,
-      "element": {
-        "element_type": "minecraft:single_pool_element",
-        "location": "terramine:dungeon/blue/rooms/room_1_end_stairs",
-        "projection": "rigid",
-        "processors": "terramine:decay_blue_dungeon"
-      }
     }
   ]
 }

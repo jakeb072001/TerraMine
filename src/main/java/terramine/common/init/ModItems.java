@@ -4,10 +4,7 @@ import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.core.Registry;
 import net.minecraft.world.item.*;
 import terramine.TerraMine;
-import terramine.common.item.CellPhoneItem;
-import terramine.common.item.CraftingItem;
-import terramine.common.item.MagicMirrorItem;
-import terramine.common.item.UmbrellaItem;
+import terramine.common.item.*;
 import terramine.common.item.curio.ShieldTrinketItem;
 import terramine.common.item.curio.TrinketTerrariaItem;
 import terramine.common.item.curio.WhoopeeCushionItem;
@@ -143,6 +140,15 @@ public class ModItems {
 	public static final Item DEMON_WINGS = register("demon_wings", new WingsItem(0.5D, 0.05D, 80, 9, ModSoundEvents.WINGS_FLAP));
 	public static final Item LEAF_WINGS = register("leaf_wings", new WingsItem(0.5D, 0.05D, 80, 10, ModSoundEvents.WINGS_FLAP));
 
+	// Tools
+	public static final Item DEMONITE_PICKAXE = register("demonite_pickaxe", new PickaxeItem(TerrariaToolTiers.DEMONITE, 1, -2.8f, new FabricItemSettings().group(CreativeModeTab.TAB_TOOLS)));
+	public static final Item DEMONITE_AXE = register("demonite_axe", new AxeItem(TerrariaToolTiers.DEMONITE, 6.0f, -3.1f, new FabricItemSettings().group(CreativeModeTab.TAB_TOOLS)));
+	public static final Item DEMONITE_SHOVEL = register("demonite_shovel", new ShovelItem(TerrariaToolTiers.DEMONITE, 1.5f, -3.0f, new FabricItemSettings().group(CreativeModeTab.TAB_TOOLS)));
+	public static final Item DEMONITE_HOE = register("demonite_hoe", new HoeItem(TerrariaToolTiers.DEMONITE, -2, -1.0f, new FabricItemSettings().group(CreativeModeTab.TAB_TOOLS)));
+
+	// Weapons
+	public static final Item DEMONITE_SWORD = register("demonite_sword", new SwordItem(TerrariaToolTiers.DEMONITE, 3, -2.4f, new FabricItemSettings().group(CreativeModeTab.TAB_COMBAT)));
+
 	// Blocks
 	public static final Item GOLD_CHEST = register("gold_chest", new BlockItem(ModBlocks.GOLD_CHEST, new FabricItemSettings().group(CreativeModeTab.TAB_DECORATIONS)));
 	public static final Item TRAPPED_GOLD_CHEST = register("trapped_gold_chest", new BlockItem(ModBlocks.TRAPPED_GOLD_CHEST, new FabricItemSettings().group(CreativeModeTab.TAB_DECORATIONS)));
@@ -170,6 +176,7 @@ public class ModItems {
 	public static final Item PURPLE_BRICKS = register("purple_brick", new BlockItem(ModBlocks.PURPLE_BRICKS, new FabricItemSettings().group(CreativeModeTab.TAB_BUILDING_BLOCKS)));
 	public static final Item CRACKED_PURPLE_BRICKS = register("cracked_purple_brick", new BlockItem(ModBlocks.CRACKED_PURPLE_BRICKS, new FabricItemSettings().group(CreativeModeTab.TAB_BUILDING_BLOCKS)));
 	public static final Item FANCY_PURPLE_BRICKS = register("fancy_purple_brick", new BlockItem(ModBlocks.FANCY_PURPLE_BRICKS, new FabricItemSettings().group(CreativeModeTab.TAB_BUILDING_BLOCKS)));
+	public static final Item DEMONITE_BLOCK = register("demonite_block", new BlockItem(ModBlocks.DEMONITE_BLOCK, new FabricItemSettings().group(CreativeModeTab.TAB_BUILDING_BLOCKS)));
 	public static final Item CORRUPTED_GRASS_BLOCK = register("corrupted_grass", new BlockItem(ModBlocks.CORRUPTED_GRASS, new FabricItemSettings().group(CreativeModeTab.TAB_BUILDING_BLOCKS)));
 	public static final Item CORRUPTED_GRAVEL = register("corrupted_gravel", new BlockItem(ModBlocks.CORRUPTED_GRAVEL, new FabricItemSettings().group(CreativeModeTab.TAB_BUILDING_BLOCKS)));
 	public static final Item CORRUPTED_SAND = register("corrupted_sand", new BlockItem(ModBlocks.CORRUPTED_SAND, new FabricItemSettings().group(CreativeModeTab.TAB_BUILDING_BLOCKS)));
