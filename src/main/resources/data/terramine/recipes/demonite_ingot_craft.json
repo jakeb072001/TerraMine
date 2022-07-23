@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "terramine:demonite_block"
+    }
+  ],
+  "result": {
+    "item": "terramine:demonite_ingot",
+    "count": 9
+  }
+}

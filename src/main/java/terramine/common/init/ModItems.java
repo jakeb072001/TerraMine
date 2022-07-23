@@ -176,6 +176,7 @@ public class ModItems {
 	public static final Item PURPLE_BRICKS = register("purple_brick", new BlockItem(ModBlocks.PURPLE_BRICKS, new FabricItemSettings().group(CreativeModeTab.TAB_BUILDING_BLOCKS)));
 	public static final Item CRACKED_PURPLE_BRICKS = register("cracked_purple_brick", new BlockItem(ModBlocks.CRACKED_PURPLE_BRICKS, new FabricItemSettings().group(CreativeModeTab.TAB_BUILDING_BLOCKS)));
 	public static final Item FANCY_PURPLE_BRICKS = register("fancy_purple_brick", new BlockItem(ModBlocks.FANCY_PURPLE_BRICKS, new FabricItemSettings().group(CreativeModeTab.TAB_BUILDING_BLOCKS)));
+	public static final Item RAW_DEMONITE_BLOCK = register("raw_demonite_block", new BlockItem(ModBlocks.RAW_DEMONITE_BLOCK, new FabricItemSettings().group(CreativeModeTab.TAB_BUILDING_BLOCKS)));
 	public static final Item DEMONITE_BLOCK = register("demonite_block", new BlockItem(ModBlocks.DEMONITE_BLOCK, new FabricItemSettings().group(CreativeModeTab.TAB_BUILDING_BLOCKS)));
 	public static final Item CORRUPTED_GRASS_BLOCK = register("corrupted_grass", new BlockItem(ModBlocks.CORRUPTED_GRASS, new FabricItemSettings().group(CreativeModeTab.TAB_BUILDING_BLOCKS)));
 	public static final Item CORRUPTED_GRAVEL = register("corrupted_gravel", new BlockItem(ModBlocks.CORRUPTED_GRAVEL, new FabricItemSettings().group(CreativeModeTab.TAB_BUILDING_BLOCKS)));

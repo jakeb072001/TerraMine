@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "terramine:raw_demonite_block"
+    }
+  ],
+  "result": {
+    "item": "terramine:raw_demonite",
+    "count": 9
+  }
+}

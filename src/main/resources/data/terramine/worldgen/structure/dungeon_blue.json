@@ -3,7 +3,7 @@
   "start_pool": "terramine:dungeon/blue/top/start_pool",
   "start_room_pool": "terramine:dungeon/blue/rooms/start_first_room_pool",
   "size": 20,
-  "biomes": "#minecraft:has_structure/mineshaft",
+  "biomes": "#minecraft:has_structure/pillager_outpost",
   "max_distance_from_center": 80,
   "step": "surface_structures",
   "start_height": {
