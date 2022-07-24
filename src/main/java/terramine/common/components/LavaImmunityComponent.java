@@ -68,13 +68,7 @@ public class LavaImmunityComponent implements PlayerComponent<Component>, AutoSy
     }
 
     private boolean getEquippedTrinkets(Player player) {
-        boolean equipped = false;
-
-        if (TrinketsHelper.isEquipped(ModItems.TERRASPARK_BOOTS, player) || TrinketsHelper.isEquipped(ModItems.LAVA_WADERS, player) ||
-                TrinketsHelper.isEquipped(ModItems.MOLTEN_CHARM, player) || TrinketsHelper.isEquipped(ModItems.LAVA_CHARM, player)) {
-            equipped = true;
-        }
-
-        return equipped;
+        return TrinketsHelper.isEquipped(ModItems.TERRASPARK_BOOTS, player) || TrinketsHelper.isEquipped(ModItems.LAVA_WADERS, player) ||
+                TrinketsHelper.isEquipped(ModItems.MOLTEN_CHARM, player) || TrinketsHelper.isEquipped(ModItems.LAVA_CHARM, player);
     }
 }

@@ -21,10 +21,10 @@ public abstract class GuiMixin {
 	@Shadow private int screenWidth;
 
 	@Shadow protected abstract Player getCameraPlayer();
-	@Shadow protected abstract Font getFont();
+	@Shadow public abstract Font getFont();
 
 	@Inject(method = "renderPlayerHealth", require = 0, at = @At(value = "TAIL"))
-	private void renderGuiClock(PoseStack matrices, CallbackInfo ci) {
+	private void renderGuiCompass(PoseStack matrices, CallbackInfo ci) {
 		Player player = this.getCameraPlayer();
 
 		if (player == null || !getEquippedTrinkets(player)) {
@@ -40,14 +40,8 @@ public abstract class GuiMixin {
 
 	@Unique
 	private boolean getEquippedTrinkets(Player player) {
-		boolean equipped = false;
-
-		if (TrinketsHelper.isInInventory(ModItems.COMPASS, player) || TrinketsHelper.isInInventory(ModItems.GPS, player) || TrinketsHelper.isInInventory(ModItems.PDA, player)
-				|| TrinketsHelper.isInInventory(ModItems.CELL_PHONE, player)) {
-			equipped = true;
-		}
-
-		return equipped;
+		return TrinketsHelper.isInInventory(ModItems.COMPASS, player) || TrinketsHelper.isInInventory(ModItems.GPS, player) || TrinketsHelper.isInInventory(ModItems.PDA, player)
+				|| TrinketsHelper.isInInventory(ModItems.CELL_PHONE, player);
 	}
 
 	@Unique

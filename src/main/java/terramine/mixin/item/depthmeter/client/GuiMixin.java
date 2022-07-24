@@ -29,7 +29,7 @@ public abstract class GuiMixin {
 	@Unique MutableComponent depthText = Component.translatable(TerraMine.MOD_ID + ".ui.depth");
 
 	@Inject(method = "renderPlayerHealth", require = 0, at = @At(value = "TAIL"))
-	private void renderGuiClock(PoseStack matrices, CallbackInfo ci) {
+	private void renderGuiDepth(PoseStack matrices, CallbackInfo ci) {
 		Player player = this.getCameraPlayer();
 
 		if (player == null || !getEquippedTrinkets(player)) {
@@ -45,14 +45,8 @@ public abstract class GuiMixin {
 
 	@Unique
 	private boolean getEquippedTrinkets(Player player) {
-		boolean equipped = false;
-
-		if (TrinketsHelper.isInInventory(ModItems.DEPTH_METER, player) || TrinketsHelper.isInInventory(ModItems.GPS, player) || TrinketsHelper.isInInventory(ModItems.PDA, player)
-				|| TrinketsHelper.isInInventory(ModItems.CELL_PHONE, player)) {
-			equipped = true;
-		}
-
-		return equipped;
+		return TrinketsHelper.isInInventory(ModItems.DEPTH_METER, player) || TrinketsHelper.isInInventory(ModItems.GPS, player) || TrinketsHelper.isInInventory(ModItems.PDA, player)
+				|| TrinketsHelper.isInInventory(ModItems.CELL_PHONE, player);
 	}
 
 	@Unique

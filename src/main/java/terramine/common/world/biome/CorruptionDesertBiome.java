@@ -11,11 +11,6 @@ public class CorruptionDesertBiome {
     public static final Biome CORRUPTION_DESERT = createCorruptionDesert();
 
     private static Biome createCorruptionDesert() {
-        // We specify what entities spawn and what features generate in the biome.
-        // Aside from some structures, trees, rocks, plants and
-        //   custom entities, these are mostly the same for each biome.
-        // Vanilla configured features for biomes are defined in DefaultBiomeFeatures.
-
         MobSpawnSettings.Builder spawnSettings = new MobSpawnSettings.Builder();
         BiomeDefaultFeatures.desertSpawns(spawnSettings);
         //spawnSettings.addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(EntityType.CORRUPTION_ENEMIES, 4, 2, 3));

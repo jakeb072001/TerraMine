@@ -24,10 +24,10 @@ public abstract class GuiMixin {
 	private static final DecimalFormat df = new DecimalFormat("0.00");
 
 	@Shadow protected abstract Player getCameraPlayer();
-	@Shadow protected abstract Font getFont();
+	@Shadow public abstract Font getFont();
 
 	@Inject(method = "renderPlayerHealth", require = 0, at = @At(value = "TAIL"))
-	private void renderGuiClock(PoseStack matrices, CallbackInfo ci) {
+	private void renderGuiWeather(PoseStack matrices, CallbackInfo ci) {
 		Player player = this.getCameraPlayer();
 
 		if (player == null || !getEquippedTrinkets(player)) {
@@ -43,14 +43,8 @@ public abstract class GuiMixin {
 
 	@Unique
 	private boolean getEquippedTrinkets(Player player) {
-		boolean equipped = false;
-
-		if (TrinketsHelper.isInInventory(ModItems.WEATHER_RADIO, player) || TrinketsHelper.isInInventory(ModItems.FISH_FINDER, player) || TrinketsHelper.isInInventory(ModItems.PDA, player)
-				|| TrinketsHelper.isInInventory(ModItems.CELL_PHONE, player)) {
-			equipped = true;
-		}
-
-		return equipped;
+		return TrinketsHelper.isInInventory(ModItems.WEATHER_RADIO, player) || TrinketsHelper.isInInventory(ModItems.FISH_FINDER, player) || TrinketsHelper.isInInventory(ModItems.PDA, player)
+				|| TrinketsHelper.isInInventory(ModItems.CELL_PHONE, player);
 	}
 
 	@Unique

@@ -52,14 +52,8 @@ public abstract class GuiMixin {
 
 	@Unique
 	private boolean getEquippedTrinkets(Player player) {
-		boolean equipped = false;
-
-		if (TrinketsHelper.isInInventory(ModItems.DPS_METER, player) || TrinketsHelper.isInInventory(ModItems.GOBLIN_TECH, player) || TrinketsHelper.isInInventory(ModItems.PDA, player)
-				|| TrinketsHelper.isInInventory(ModItems.CELL_PHONE, player)) {
-			equipped = true;
-		}
-
-		return equipped;
+		return TrinketsHelper.isInInventory(ModItems.DPS_METER, player) || TrinketsHelper.isInInventory(ModItems.GOBLIN_TECH, player) || TrinketsHelper.isInInventory(ModItems.PDA, player)
+				|| TrinketsHelper.isInInventory(ModItems.CELL_PHONE, player);
 	}
 
 	@Unique

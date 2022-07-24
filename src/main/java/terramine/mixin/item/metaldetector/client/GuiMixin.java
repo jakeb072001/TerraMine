@@ -7,6 +7,7 @@ import net.minecraft.client.gui.Gui;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
@@ -38,7 +39,7 @@ public abstract class GuiMixin {
 	@Shadow public abstract Font getFont();
 
 	@Inject(method = "renderPlayerHealth", require = 0, at = @At(value = "TAIL"))
-	private void renderGuiClock(PoseStack matrices, CallbackInfo ci) {
+	private void renderGuiMetalDetector(PoseStack matrices, CallbackInfo ci) {
 		Player player = this.getCameraPlayer();
 
 		if (player == null || !getEquippedTrinkets(player)) {
@@ -64,14 +65,8 @@ public abstract class GuiMixin {
 
 	@Unique
 	private boolean getEquippedTrinkets(Player player) {
-		boolean equipped = false;
-
-		if (TrinketsHelper.isInInventory(ModItems.METAL_DETECTOR, player) || TrinketsHelper.isInInventory(ModItems.GOBLIN_TECH, player) || TrinketsHelper.isInInventory(ModItems.PDA, player)
-				|| TrinketsHelper.isInInventory(ModItems.CELL_PHONE, player)) {
-			equipped = true;
-		}
-
-		return equipped;
+		return TrinketsHelper.isInInventory(ModItems.METAL_DETECTOR, player) || TrinketsHelper.isInInventory(ModItems.GOBLIN_TECH, player) || TrinketsHelper.isInInventory(ModItems.PDA, player)
+				|| TrinketsHelper.isInInventory(ModItems.CELL_PHONE, player);
 	}
 
 	@Unique
@@ -101,56 +96,76 @@ public abstract class GuiMixin {
 			Stream<BlockState> blocks = mc.level.getBlockStates(detectionBounds);
 			List<BlockState> blocksList = blocks.toList();
 			for (BlockState block : blocksList) {
-				if (block.getBlock().equals(Blocks.ANCIENT_DEBRIS)) {
+				if (checkBlocks(block, Blocks.ANCIENT_DEBRIS)) {
 					ancientDebris = true;
-				} else if (block.getBlock().equals(Blocks.EMERALD_ORE) || block.getBlock().equals(Blocks.DEEPSLATE_EMERALD_ORE)) {
+				} else if (checkBlocks(block, Blocks.EMERALD_ORE, Blocks.DEEPSLATE_EMERALD_ORE)) {
 					emeraldOre = true;
-				} else if (block.getBlock().equals(Blocks.DIAMOND_ORE) || block.getBlock().equals(Blocks.DEEPSLATE_DIAMOND_ORE)) {
+				} else if (checkBlocks(block, Blocks.DIAMOND_ORE, Blocks.DEEPSLATE_DIAMOND_ORE)) {
 					diamondOre = true;
-				} else if (block.getBlock().equals(Blocks.GOLD_ORE) || block.getBlock().equals(Blocks.DEEPSLATE_GOLD_ORE) || block.getBlock().equals(Blocks.NETHER_GOLD_ORE)) {
+				} else if (checkBlocks(block, Blocks.GOLD_ORE, Blocks.DEEPSLATE_GOLD_ORE, Blocks.NETHER_GOLD_ORE)) {
 					goldOre = true;
-				} else if (block.getBlock().equals(ModBlocks.DEMONITE_ORE) || block.getBlock().equals(ModBlocks.DEEPSLATE_DEMONITE_ORE)) {
+				} else if (checkBlocks(block, ModBlocks.DEMONITE_ORE, ModBlocks.DEEPSLATE_DEMONITE_ORE)) {
 					demoniteOre = true;
-				} else if (block.getBlock().equals(Blocks.LAPIS_ORE) || block.getBlock().equals(Blocks.DEEPSLATE_LAPIS_ORE)) {
+				} else if (checkBlocks(block, Blocks.LAPIS_ORE, Blocks.DEEPSLATE_LAPIS_ORE)) {
 					lapisOre = true;
-				} else if (block.getBlock().equals(Blocks.REDSTONE_ORE) || block.getBlock().equals(Blocks.DEEPSLATE_REDSTONE_ORE)) {
+				} else if (checkBlocks(block, Blocks.REDSTONE_ORE, Blocks.DEEPSLATE_REDSTONE_ORE)) {
 					redstoneOre = true;
-				} else if (block.getBlock().equals(Blocks.IRON_ORE) || block.getBlock().equals(Blocks.DEEPSLATE_IRON_ORE)) {
+				} else if (checkBlocks(block, Blocks.IRON_ORE, Blocks.DEEPSLATE_IRON_ORE)) {
 					ironOre = true;
-				} else if (block.getBlock().equals(Blocks.COPPER_ORE) || block.getBlock().equals(Blocks.DEEPSLATE_COPPER_ORE)) {
+				} else if (checkBlocks(block, Blocks.COPPER_ORE, Blocks.DEEPSLATE_COPPER_ORE)) {
 					copperOre = true;
-				} else if (block.getBlock().equals(Blocks.COAL_ORE) || block.getBlock().equals(Blocks.DEEPSLATE_COAL_ORE)) {
+				} else if (checkBlocks(block, Blocks.COAL_ORE, Blocks.DEEPSLATE_COAL_ORE)) {
 					coalOre = true;
-				} else if (block.getBlock().equals(Blocks.NETHER_QUARTZ_ORE)) {
+				} else if (checkBlocks(block, Blocks.NETHER_QUARTZ_ORE)) {
 					netherQuartz = true;
 				}
 			}
 		}
 		if (ancientDebris) {
-			sb.append(Blocks.ANCIENT_DEBRIS.getName().getString()).append(" ").append(detectedText.getString());
+			createText(Blocks.ANCIENT_DEBRIS, sb);
 		} else if (emeraldOre) {
-			sb.append(Blocks.EMERALD_ORE.getName().getString()).append(" ").append(detectedText.getString());
+			createText(Blocks.EMERALD_ORE, sb);
 		} else if (diamondOre) {
-			sb.append(Blocks.DIAMOND_ORE.getName().getString()).append(" ").append(detectedText.getString());
+			createText(Blocks.DIAMOND_ORE, sb);
 		} else if (goldOre) {
-			sb.append(Blocks.GOLD_ORE.getName().getString()).append(" ").append(detectedText.getString());
+			createText(Blocks.GOLD_ORE, sb);
 		} else if (demoniteOre) {
-			sb.append(ModBlocks.DEMONITE_ORE.getName().getString()).append(" ").append(detectedText.getString());
+			createText(ModBlocks.DEMONITE_ORE, sb);
 		} else if (lapisOre) {
-			sb.append(Blocks.LAPIS_ORE.getName().getString()).append(" ").append(detectedText.getString());
+			createText(Blocks.LAPIS_ORE, sb);
 		} else if (redstoneOre) {
-			sb.append(Blocks.REDSTONE_ORE.getName().getString()).append(" ").append(detectedText.getString());
+			createText(Blocks.REDSTONE_ORE, sb);
 		} else if (ironOre) {
-			sb.append(Blocks.IRON_ORE.getName().getString()).append(" ").append(detectedText.getString());
+			createText(Blocks.IRON_ORE, sb);
 		} else if (copperOre) {
-			sb.append(Blocks.COPPER_ORE.getName().getString()).append(" ").append(detectedText.getString());
+			createText(Blocks.COPPER_ORE, sb);
 		} else if (coalOre) {
-			sb.append(Blocks.COAL_ORE.getName().getString()).append(" ").append(detectedText.getString());
+			createText(Blocks.COAL_ORE, sb);
 		} else if (netherQuartz) {
-			sb.append(Blocks.NETHER_QUARTZ_ORE.getName().getString()).append(" ").append(detectedText.getString());
+			createText(Blocks.NETHER_QUARTZ_ORE, sb);
 		} else {
 			sb.append(noDetectedText.getString());
 		}
 		return sb.toString();
+	}
+
+	@Unique
+	private void createText(Block block, StringBuilder sb) {
+		sb.append(block.getName().getString()).append(" ").append(detectedText.getString());
+	}
+
+	@Unique
+	private boolean checkBlocks(BlockState state, Block block) {
+		return state.getBlock().equals(block);
+	}
+
+	@Unique
+	private boolean checkBlocks(BlockState state, Block block1, Block block2) {
+		return state.getBlock().equals(block1) || state.getBlock().equals(block2);
+	}
+
+	@Unique
+	private boolean checkBlocks(BlockState state, Block block1, Block block2, Block block3) {
+		return state.getBlock().equals(block1) || state.getBlock().equals(block2) || state.getBlock().equals(block3);
 	}
 }
