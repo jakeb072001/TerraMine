@@ -8,24 +8,28 @@ import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.CubeListBuilder;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.model.geom.builders.MeshDefinition;
+import net.minecraft.client.renderer.RenderType;
+import net.minecraft.world.entity.Entity;
 import org.jetbrains.annotations.NotNull;
 import terramine.common.entity.DemonEyeEntity;
 
 public class DemonEyeModel<T extends DemonEyeEntity> extends HierarchicalModel<T> {
 
+    protected final ModelPart root;
     protected final ModelPart eye;
     protected final ModelPart veins;
 
     public DemonEyeModel(ModelPart part) {
+        super(RenderType::entityCutout);
+        root = part;
         eye = part.getChild("eye");
         veins = part.getChild("veins");
     }
 
     @Override
-    public void setupAnim(@NotNull DemonEyeEntity eye, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-        //float k = eye.getXRot() * 0.017453292F;
-        //this.eye.xRot = k;
-        //this.veins.xRot = k;
+    public void setupAnim(T eye, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+        float k = eye.getXRot() * 0.017453292F;
+        this.root.xRot = k;
     }
 
     @Override
@@ -40,7 +44,7 @@ public class DemonEyeModel<T extends DemonEyeEntity> extends HierarchicalModel<T
 
     @Override
     public ModelPart root() {
-        return this.eye;
+        return this.root;
     }
 
     public static LayerDefinition createLayer() {

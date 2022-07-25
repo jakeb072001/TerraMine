@@ -8,9 +8,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Demonite Equipment (Sword and Tools)
 - Demonite Block and Raw Demonite Block
+- More Creative Mode Tabs
+- Eater of Souls (I wouldn't recommend living in the corruption)
 
 ### Fixed
 - Sand and Gravel disks generating on surface of Corruption biomes
+- Flickering on Demon Eyes veins
 
 ## [1.4.0] - 2022-07-19
 ### Added

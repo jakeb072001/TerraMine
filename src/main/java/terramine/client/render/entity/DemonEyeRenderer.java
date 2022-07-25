@@ -18,12 +18,12 @@ import terramine.common.init.ModModelLayers;
 public class DemonEyeRenderer extends MobRenderer<DemonEyeEntity, DemonEyeModel<DemonEyeEntity>> {
 
     private static final ResourceLocation[] TEXTURE = {
-            TerraMine.id("textures/entity/demoneyes/demon_eye.png"),
-            TerraMine.id("textures/entity/demoneyes/demon_eye_cataract.png"),
-            TerraMine.id("textures/entity/demoneyes/demon_eye_dilated.png"),
-            TerraMine.id("textures/entity/demoneyes/demon_eye_green.png"),
-            TerraMine.id("textures/entity/demoneyes/demon_eye_purple.png"),
-            TerraMine.id("textures/entity/demoneyes/demon_eye_sleepy.png")
+            TerraMine.id("textures/entity/monsters/pre-hardmode/demon_eyes/demon_eye.png"),
+            TerraMine.id("textures/entity/monsters/pre-hardmode/demon_eyes/demon_eye_cataract.png"),
+            TerraMine.id("textures/entity/monsters/pre-hardmode/demon_eyes/demon_eye_dilated.png"),
+            TerraMine.id("textures/entity/monsters/pre-hardmode/demon_eyes/demon_eye_green.png"),
+            TerraMine.id("textures/entity/monsters/pre-hardmode/demon_eyes/demon_eye_purple.png"),
+            TerraMine.id("textures/entity/monsters/pre-hardmode/demon_eyes/demon_eye_sleepy.png")
     };
 
     public DemonEyeRenderer(EntityRendererProvider.Context context) {
@@ -41,8 +41,9 @@ public class DemonEyeRenderer extends MobRenderer<DemonEyeEntity, DemonEyeModel<
         return TEXTURE[type];
     }
 
+    @Override
     protected void setupRotations(@NotNull DemonEyeEntity entity, @NotNull PoseStack poseStack, float f, float g, float h) {
-        super.setupRotations(entity, poseStack, f, g, h);
         poseStack.mulPose(Vector3f.XP.rotationDegrees(entity.getXRot()));
+        super.setupRotations(entity, poseStack, f, g, h);
     }
 }

@@ -7,6 +7,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.level.Level;
+import org.jetbrains.annotations.NotNull;
 import terramine.common.init.ModItems;
 import terramine.common.init.ModSoundEvents;
 
@@ -23,7 +24,7 @@ public class WhoopeeCushionItem extends TrinketTerrariaItem {
 	}
 
 	@Override
-	public UseAnim getUseAnimation(ItemStack stack) {
+	public UseAnim getUseAnimation(@NotNull ItemStack stack) {
 		return UseAnim.BLOCK;
 	}
 

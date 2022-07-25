@@ -1,19 +1,21 @@
 package terramine.common.world.biome;
 
 import net.minecraft.data.worldgen.BiomeDefaultFeatures;
+import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.BiomeGenerationSettings;
 import net.minecraft.world.level.biome.BiomeSpecialEffects;
 import net.minecraft.world.level.biome.MobSpawnSettings;
 import terramine.common.init.ModBiomeFeatures;
+import terramine.common.init.ModEntities;
 
 public class CorruptionBiome {
     public static final Biome CORRUPTION = createCorruption();
 
     private static Biome createCorruption() {
         MobSpawnSettings.Builder spawnSettings = new MobSpawnSettings.Builder();
-        BiomeDefaultFeatures.monsters(spawnSettings, 100, 25, 100, false);
-        //spawnSettings.addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(EntityType.CORRUPTION_ENEMIES, 4, 2, 3));
+        //BiomeDefaultFeatures.monsters(spawnSettings, 100, 25, 100, false);
+        spawnSettings.addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(ModEntities.EATER_OF_SOULS, 50, 1, 2));
 
         BiomeGenerationSettings.Builder generationSettings = new BiomeGenerationSettings.Builder();
         BiomeDefaultFeatures.addDefaultCarversAndLakes(generationSettings);

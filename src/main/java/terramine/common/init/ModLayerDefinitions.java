@@ -4,10 +4,7 @@ import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.model.geom.builders.MeshDefinition;
-import terramine.client.render.entity.model.DemonEyeModel;
-import terramine.client.render.entity.model.FallingStarModel;
-import terramine.client.render.entity.model.MimicChestLayerModel;
-import terramine.client.render.entity.model.MimicModel;
+import terramine.client.render.entity.model.*;
 import terramine.client.render.trinket.model.*;
 
 public class ModLayerDefinitions {
@@ -19,6 +16,7 @@ public class ModLayerDefinitions {
         register(ModModelLayers.FALLING_STAR, FallingStarModel::createLayer);
 
         register(ModModelLayers.DEMON_EYE, DemonEyeModel::createLayer);
+        register(ModModelLayers.EATER_OF_SOULS, EaterOfSoulsModel::createLayer);
 
         register(ModModelLayers.DIVING_HELMET, layer(HeadModel.createDivingHelmet(), 64, 32));
         register(ModModelLayers.SUPERSTITIOUS_HAT, layer(HeadModel.createSuperstitiousHat(), 64, 32));

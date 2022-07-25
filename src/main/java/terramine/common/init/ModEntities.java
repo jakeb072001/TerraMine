@@ -32,6 +32,15 @@ public class ModEntities {
 			.spawnRestriction(SpawnPlacements.Type.NO_RESTRICTIONS, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, DemonEyeEntity::checkMobSpawnRules)
 			.build());
 
+	public static final EntityType<EaterOfSoulsEntity> EATER_OF_SOULS = register("eater_of_souls", FabricEntityTypeBuilder
+			.<EaterOfSoulsEntity>createMob()
+			.entityFactory(EaterOfSoulsEntity::new)
+			.dimensions(EntityDimensions.fixed(1.6f, 0.9f))
+			.spawnGroup(MobCategory.MONSTER)
+			.defaultAttributes(EaterOfSoulsEntity::createMobAttributes)
+			.spawnRestriction(SpawnPlacements.Type.NO_RESTRICTIONS, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, EaterOfSoulsEntity::checkMobSpawnRules)
+			.build());
+
 	public static final EntityType<FallingStarEntity> FALLING_STAR = register("falling_star", FabricEntityTypeBuilder
 			.<FallingStarEntity>createMob()
 			.entityFactory(FallingStarEntity::new)

@@ -19,7 +19,7 @@ public abstract class TerrariaItem extends Item {
 	private boolean showTooltip = true;
 
 	public TerrariaItem(Properties properties) {
-		super(properties.stacksTo(1).tab(TerraMine.ITEM_GROUP).rarity(Rarity.RARE).fireResistant());
+		super(properties.stacksTo(1).tab(TerraMine.ITEM_GROUP_ACCESSORIES).rarity(Rarity.RARE).fireResistant());
 	}
 
 	public TerrariaItem(Properties properties, boolean nothing) {

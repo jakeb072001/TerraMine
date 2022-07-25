@@ -5,13 +5,19 @@ import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.level.Level;
+import terramine.TerraMine;
 import terramine.common.init.ModComponents;
 
 public class MagicTerrariaItem extends TerrariaItem {
     public int useDuration;
     public int manaCost;
+
+    public MagicTerrariaItem() {
+        super(new Properties().stacksTo(1).tab(TerraMine.ITEM_GROUP_EQUIPMENT).rarity(Rarity.RARE).fireResistant(), false);
+    }
 
     public void setVars(int useDuration, int manaCost) {
         this.useDuration = useDuration;

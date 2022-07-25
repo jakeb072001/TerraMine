@@ -6,12 +6,10 @@ import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.entity.event.v1.ServerPlayerEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
-import net.fabricmc.fabric.api.event.lifecycle.v1.ServerWorldEvents;
 import net.fabricmc.fabric.api.loot.v2.LootTableEvents;
 import net.fabricmc.loader.api.FabricLoader;
 import net.fabricmc.loader.api.ModContainer;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.MinecraftServer;
 import net.minecraft.stats.StatFormatter;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.item.CreativeModeTab;
@@ -24,7 +22,6 @@ import terrablender.api.SurfaceRuleManager;
 import terrablender.api.TerraBlenderApi;
 import terrablender.worldgen.TBSurfaceRuleData;
 import terramine.common.compat.CompatHandler;
-import terramine.common.components.SyncedBooleanComponent;
 import terramine.common.config.ConfigHelper;
 import terramine.common.config.ModConfig;
 import terramine.common.init.*;
@@ -40,7 +37,10 @@ public class TerraMine implements ModInitializer, TerraBlenderApi {
 
 	public static final String MOD_ID = "terramine";
 	public static final Logger LOGGER = LoggerFactory.getLogger(TerraMine.class);
-	public static final CreativeModeTab ITEM_GROUP = FabricItemGroupBuilder.build(id("item_group"), () -> new ItemStack(ModItems.TERRASPARK_BOOTS));
+	public static final CreativeModeTab ITEM_GROUP_EQUIPMENT = FabricItemGroupBuilder.build(id("item_group_equipment"), () -> new ItemStack(ModItems.DEMONITE_SWORD));
+	public static final CreativeModeTab ITEM_GROUP_ACCESSORIES = FabricItemGroupBuilder.build(id("item_group_accessories"), () -> new ItemStack(ModItems.TERRASPARK_BOOTS));
+	public static final CreativeModeTab ITEM_GROUP_BLOCKS = FabricItemGroupBuilder.build(id("item_group_blocks"), () -> new ItemStack(ModItems.RAW_DEMONITE_BLOCK));
+	public static final CreativeModeTab ITEM_GROUP_STUFF = FabricItemGroupBuilder.build(id("item_group_stuff"), () -> new ItemStack(ModItems.RAW_DEMONITE));
 	public static ModConfig CONFIG;
 	public static final int CONFIG_VERSION = 2; // Increase if config changed in an incompatible way
 	//private static final Map<String, Runnable> COMPAT_HANDLERS = Map.of(
