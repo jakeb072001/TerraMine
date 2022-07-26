@@ -30,11 +30,6 @@ public class EaterOfSoulsRenderer extends MobRenderer<EaterOfSoulsEntity, EaterO
     }
 
     @Override
-    protected void scale(@NotNull EaterOfSoulsEntity entity, PoseStack poseStack, float f) {
-        poseStack.scale(1.3f, 1.3f, 1.3f);
-    }
-
-    @Override
     public ResourceLocation getTextureLocation(@NotNull EaterOfSoulsEntity entity) {
         return TEXTURE;
     }

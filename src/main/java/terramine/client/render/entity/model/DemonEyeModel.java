@@ -9,15 +9,16 @@ import net.minecraft.client.model.geom.builders.CubeListBuilder;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.model.geom.builders.MeshDefinition;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.world.entity.Entity;
 import org.jetbrains.annotations.NotNull;
 import terramine.common.entity.DemonEyeEntity;
+import terramine.common.entity.MimicEntity;
 
 public class DemonEyeModel<T extends DemonEyeEntity> extends HierarchicalModel<T> {
 
     protected final ModelPart root;
     protected final ModelPart eye;
     protected final ModelPart veins;
+
 
     public DemonEyeModel(ModelPart part) {
         super(RenderType::entityCutout);
@@ -28,7 +29,8 @@ public class DemonEyeModel<T extends DemonEyeEntity> extends HierarchicalModel<T
 
     @Override
     public void setupAnim(T eye, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-        float k = eye.getXRot() * 0.017453292F;
+        // todo: need to sync the xRot from server to client, don't know how, i tried the same method as the demon eye type but that didn't work, maybe another issue but the xRot is fine on server but not client
+        float k = ((eye.getId() * 3) + eye.getXRot()); // * 0.017453292F;
         this.root.xRot = k;
     }
 

@@ -89,44 +89,39 @@ public class EaterOfSoulsModel<T extends EaterOfSoulsEntity> extends Hierarchica
         cube_r12 = right_middle_2.getChild("cube_r12");
         cube_r13 = left_back.getChild("cube_r13");
         cube_r14 = right_back.getChild("cube_r14");
-
     }
 
     @Override
     public void setupAnim(@NotNull EaterOfSoulsEntity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-        /*
-        float k = ageInTicks * 4f * ((float)Math.PI / 180);
+        float k = ((entity.getId() * 3) + ageInTicks) * 4f * ((float)Math.PI / 180);
+        float f = k * 2;
         float xMod = 8.0f;
         float yMod = 4.0f;
-        float yModFlip = -yMod;
 
-        front_tendrils.xRot = Mth.cos(k) * xMod * ((float)Math.PI / 180);
+        front.xRot = Mth.cos(k) * (xMod / 2) * ((float)Math.PI / 180);
+        left_front.xRot = Mth.cos(k) * xMod * ((float)Math.PI / 180);
+        right_front.xRot = Mth.cos(k) * xMod * ((float)Math.PI / 180);
         middle_tendrils.xRot = Mth.cos(k) * xMod * ((float)Math.PI / 180);
         back_tendrils.xRot = Mth.cos(k) * xMod * ((float)Math.PI / 180);
 
-        cube_r1.yRot = Mth.cos(k) * yMod * ((float)Math.PI / 270);
-        cube_r2.yRot = Mth.cos(k) * yModFlip * ((float)Math.PI / 270);
-        cube_r3.yRot = Mth.cos(k) * yMod * ((float)Math.PI / 270);
-        cube_r4.yRot = Mth.cos(k) * yModFlip * ((float)Math.PI / 270);
-        cube_r5.yRot = Mth.cos(k) * yMod * ((float)Math.PI / 270);
-        cube_r6.yRot = Mth.cos(k) * yModFlip * ((float)Math.PI / 270);
-        cube_r9.yRot = 0.25f + Mth.cos(k) * yModFlip * ((float)Math.PI / 270);
-        cube_r10.yRot = 0.15f + Mth.cos(k) * yModFlip * ((float)Math.PI / 270);
-        cube_r11.yRot = -0.25f + Mth.cos(k) * yMod * ((float)Math.PI / 270);
-        cube_r12.yRot = -0.15f + Mth.cos(k) * yMod * ((float)Math.PI / 270);
-        cube_r13.yRot = 0.05f + Mth.cos(k) * yMod * ((float)Math.PI / 270);
-        cube_r14.yRot = -0.05f + Mth.cos(k) * yModFlip * ((float)Math.PI / 270);
-        center_back.yRot = Mth.cos(k) * yMod * ((float)Math.PI / 270);
-        */
+        cube_r1.yRot = 0.5f + Mth.cos(f) * yMod * ((float)Math.PI / 270);
+        cube_r2.yRot = -cube_r4.yRot;
+        cube_r3.yRot = -cube_r1.yRot;
+        cube_r4.yRot = -0.3f + Mth.cos(f) * yMod * ((float)Math.PI / 270);
+        //cube_r5.yRot = Mth.cos(k) * yMod * ((float)Math.PI / 270);
+        //cube_r6.yRot = -cube_r5.yRot;
+        cube_r9.yRot = 0.30f + Mth.cos(f) * yMod * ((float)Math.PI / 270);
+        cube_r10.yRot = -cube_r12.yRot;
+        cube_r11.yRot = -cube_r9.yRot;
+        cube_r12.yRot = -0.15f + Mth.cos(f) * yMod * ((float)Math.PI / 270);
+        cube_r13.yRot = 0.15f + Mth.cos(f) * yMod * ((float)Math.PI / 270);
+        cube_r14.yRot = -cube_r13.yRot;
+        center_back.yRot = Mth.cos(f) * yMod * ((float)Math.PI / 270);
     }
 
     @Override
-    public void renderToBuffer(PoseStack matrixStack, @NotNull VertexConsumer buffer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
-        matrixStack.pushPose();
-        //matrixStack.scale(1.5f, 1.5f,1.5f);
-        //matrixStack.translate(0f, 1.5f - 1.5 * 1.375f, -0.1f); // 1.5f - 1.5 * scale, normally but eye seems to be slightly off center in model so account for that here
+    public void renderToBuffer(@NotNull PoseStack matrixStack, @NotNull VertexConsumer buffer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
         Eater_of_Souls.render(matrixStack, buffer, packedLight, packedOverlay, red, green, blue, alpha);
-        matrixStack.popPose();
     }
 
     @Override
@@ -147,35 +142,35 @@ public class EaterOfSoulsModel<T extends EaterOfSoulsEntity> extends Hierarchica
                 "front_body",
                 CubeListBuilder.create()
                         .texOffs(0, 0)
-                        .addBox(-7.0F, -8.0F, -7.0F, 14.0F, 8.0F, 8.0F, new CubeDeformation(0.0F)),
-                PartPose.offset(0.0F, 2.0F, 0.0F));
+                        .addBox(-7.0F, -4.0F, -4.0F, 14.0F, 8.0F, 8.0F, new CubeDeformation(0.0F)),
+                PartPose.offset(0.0F, -2.0F, -3.0F));
 
         front_body.addOrReplaceChild(
                 "front_eyes",
                 CubeListBuilder.create()
                         .texOffs(38, 36)
-                        .addBox(-2.0F, 0.0F, -5.0F, 4.0F, 2.0F, 4.0F, new CubeDeformation(0.0F))
+                        .addBox(-2.0F, 7.5F, -2.0F, 4.0F, 2.0F, 4.0F, new CubeDeformation(0.0F))
                         .texOffs(12, 43)
-                        .addBox(-4.5F, 0.0F, -3.5F, 2.0F, 1.0F, 2.0F, new CubeDeformation(0.0F))
+                        .addBox(-4.5F, 8.0F, -0.5F, 2.0F, 1.0F, 2.0F, new CubeDeformation(0.0F))
                         .texOffs(0, 5)
-                        .addBox(2.5F, 0.0F, -3.5F, 2.0F, 1.0F, 2.0F, new CubeDeformation(0.0F))
+                        .addBox(2.5F, 8.0F, -0.5F, 2.0F, 1.0F, 2.0F, new CubeDeformation(0.0F))
                         .texOffs(24, 45)
-                        .addBox(-4.5F, -9.0F, -3.5F, 2.0F, 1.0F, 2.0F, new CubeDeformation(0.0F))
+                        .addBox(-4.5F, -1.0F, -0.5F, 2.0F, 1.0F, 2.0F, new CubeDeformation(0.0F))
                         .texOffs(32, 45)
-                        .addBox(2.5F, -9.0F, -3.5F, 2.0F, 1.0F, 2.0F, new CubeDeformation(0.0F))
+                        .addBox(2.5F, -1.0F, -0.5F, 2.0F, 1.0F, 2.0F, new CubeDeformation(0.0F))
                         .texOffs(40, 0)
-                        .addBox(-2.0F, -10.0F, -5.0F, 4.0F, 2.0F, 4.0F, new CubeDeformation(0.0F)),
-                PartPose.offset(0.0F, 0.0F, 0.0F));
+                        .addBox(-2.0F, -1.5F, -2.0F, 4.0F, 2.0F, 4.0F, new CubeDeformation(0.0F)),
+                PartPose.offset(0.0F, -4.0F, 0.0F));
 
         PartDefinition front_tendrils = front_body.addOrReplaceChild(
                 "front_tendrils",
                 CubeListBuilder.create(),
-                PartPose.offset(0.0F, 0.0F, 0.0F));
+                PartPose.offset(0.0F, 0.0F, 3.0F));
 
         PartDefinition left_front = front_tendrils.addOrReplaceChild(
                 "left_front",
                 CubeListBuilder.create(),
-                PartPose.offset(0.0F, 0.0F, 0.0F));
+                PartPose.offset(6.0F, 0.0F, -1.0F));
 
         left_front.addOrReplaceChild(
                 "cube_r1",
@@ -184,7 +179,7 @@ public class EaterOfSoulsModel<T extends EaterOfSoulsEntity> extends Hierarchica
                         .addBox(7.0F, -2.5F, -1.0F, 1.0F, 0.0F, 5.0F, new CubeDeformation(0.0F))
                         .texOffs(19, 32)
                         .addBox(7.5F, -3.0F, -1.0F, 0.0F, 1.0F, 5.0F, new CubeDeformation(0.0F)),
-                PartPose.offsetAndRotation(0.0F, -2.0F, 0.0F, 0.0F, 0.4363F, 0.0F));
+                PartPose.offsetAndRotation(-6.0F, 2.0F, 1.0F, 0.0F, 0.4363F, 0.0F));
 
         left_front.addOrReplaceChild(
                 "cube_r2",
@@ -193,12 +188,12 @@ public class EaterOfSoulsModel<T extends EaterOfSoulsEntity> extends Hierarchica
                         .addBox(4.5F, -3.0F, 4.0F, 0.0F, 1.0F, 7.0F, new CubeDeformation(0.0F))
                         .texOffs(22, 17)
                         .addBox(4.0F, -2.5F, 4.0F, 1.0F, 0.0F, 7.0F, new CubeDeformation(0.0F)),
-                PartPose.offsetAndRotation(0.0F, -2.0F, 0.0F, 0.0F, 0.6109F, 0.0F));
+                PartPose.offsetAndRotation(-6.0F, 2.0F, 1.0F, 0.0F, 0.6109F, 0.0F));
 
         PartDefinition right_front = front_tendrils.addOrReplaceChild(
                 "right_front",
                 CubeListBuilder.create(),
-                PartPose.offset(0.0F, 0.0F, 0.0F));
+                PartPose.offset(-6.0F, 0.0F, -1.0F));
 
         right_front.addOrReplaceChild(
                 "cube_r3",
@@ -207,7 +202,7 @@ public class EaterOfSoulsModel<T extends EaterOfSoulsEntity> extends Hierarchica
                         .addBox(-8.0F, -2.5F, -1.0F, 1.0F, 0.0F, 5.0F, new CubeDeformation(0.0F))
                         .texOffs(19, 31)
                         .addBox(-7.5F, -3.0F, -1.0F, 0.0F, 1.0F, 5.0F, new CubeDeformation(0.0F)),
-                PartPose.offsetAndRotation(0.0F, -2.0F, 0.0F, 0.0F, -0.4363F, 0.0F));
+                PartPose.offsetAndRotation(6.0F, 2.0F, 1.0F, 0.0F, -0.4363F, 0.0F));
 
         right_front.addOrReplaceChild(
                 "cube_r4",
@@ -216,12 +211,12 @@ public class EaterOfSoulsModel<T extends EaterOfSoulsEntity> extends Hierarchica
                         .addBox(-4.5F, -3.0F, 3.0F, 0.0F, 1.0F, 7.0F, new CubeDeformation(0.0F))
                         .texOffs(20, 17)
                         .addBox(-5.0F, -2.5F, 3.0F, 1.0F, 0.0F, 7.0F, new CubeDeformation(0.0F)),
-                PartPose.offsetAndRotation(0.0F, -2.0F, 0.0F, 0.0F, -0.6109F, 0.0F));
+                PartPose.offsetAndRotation(6.0F, 2.0F, 1.0F, 0.0F, -0.6109F, 0.0F));
 
         PartDefinition front = front_tendrils.addOrReplaceChild(
                 "front",
                 CubeListBuilder.create(),
-                PartPose.offsetAndRotation(-7.0F, 0.0F, -13.0F, 0.0F, -2.7053F, 0.0F));
+                PartPose.offsetAndRotation(0.0F, 3.0F, -7.0F, 0.0F, -2.7053F, 0.0F));
 
         front.addOrReplaceChild(
                 "cube_r5",
@@ -230,7 +225,7 @@ public class EaterOfSoulsModel<T extends EaterOfSoulsEntity> extends Hierarchica
                         .addBox(5.5F, 0.0F, -13.0F, 0.0F, 1.0F, 5.0F, new CubeDeformation(0.0F))
                         .texOffs(0, 17)
                         .addBox(5.0F, 0.5F, -13.0F, 1.0F, 0.0F, 5.0F, new CubeDeformation(0.0F)),
-                PartPose.offsetAndRotation(-12.0F, -2.0F, 2.0F, 0.0F, -0.4363F, 0.0F));
+                PartPose.offsetAndRotation(-8.1916F, -1.0F, 10.3962F, 0.0F, -0.4363F, 0.0F));
 
         front.addOrReplaceChild(
                 "cube_r6",
@@ -239,25 +234,25 @@ public class EaterOfSoulsModel<T extends EaterOfSoulsEntity> extends Hierarchica
                         .addBox(-10.0F, 0.5F, -6.0F, 1.0F, 0.0F, 5.0F, new CubeDeformation(0.0F))
                         .texOffs(19, 31)
                         .addBox(-9.5F, 0.0F, -6.0F, 0.0F, 1.0F, 5.0F, new CubeDeformation(0.0F)),
-                PartPose.offsetAndRotation(0.0F, -2.0F, 0.0F, 0.0F, -0.4363F, 0.0F));
+                PartPose.offsetAndRotation(3.8084F, -1.0F, 8.3962F, 0.0F, -0.4363F, 0.0F));
 
         front_body.addOrReplaceChild(
                 "inner_teeth",
                 CubeListBuilder.create()
                         .texOffs(0, 36)
-                        .addBox(1.0F, -5.0F, -9.0F, 2.0F, 2.0F, 2.0F, new CubeDeformation(0.0F))
+                        .addBox(1.0F, -1.0F, -1.0F, 2.0F, 2.0F, 2.0F, new CubeDeformation(0.0F))
                         .texOffs(19, 31)
-                        .addBox(-3.0F, -5.0F, -9.0F, 2.0F, 2.0F, 2.0F, new CubeDeformation(0.0F))
+                        .addBox(-3.0F, -1.0F, -1.0F, 2.0F, 2.0F, 2.0F, new CubeDeformation(0.0F))
                         .texOffs(0, 2)
-                        .addBox(-2.0F, -4.0F, -10.0F, 1.0F, 1.0F, 1.0F, new CubeDeformation(0.0F))
+                        .addBox(-2.0F, 0.0F, -2.0F, 1.0F, 1.0F, 1.0F, new CubeDeformation(0.0F))
                         .texOffs(0, 0)
-                        .addBox(1.0F, -4.0F, -10.0F, 1.0F, 1.0F, 1.0F, new CubeDeformation(0.0F)),
-                PartPose.offset(0.0F, -2.0F, 0.0F));
+                        .addBox(1.0F, 0.0F, -2.0F, 1.0F, 1.0F, 1.0F, new CubeDeformation(0.0F)),
+                PartPose.offset(0.0F, -2.0F, -5.0F));
 
         PartDefinition left_claw = front_body.addOrReplaceChild(
                 "left_claw",
                 CubeListBuilder.create(),
-                PartPose.offset(0.0F, -2.0F, 0.0F));
+                PartPose.offset(6.0F, 1.0F, -4.0F));
 
         left_claw.addOrReplaceChild(
                 "cube_r7",
@@ -268,12 +263,12 @@ public class EaterOfSoulsModel<T extends EaterOfSoulsEntity> extends Hierarchica
                         .addBox(4.0F, -1.0F, -11.0F, 1.0F, 1.0F, 2.0F, new CubeDeformation(0.0F))
                         .texOffs(0, 31)
                         .addBox(5.0F, -3.0F, -15.0F, 3.0F, 3.0F, 9.0F, new CubeDeformation(0.0F)),
-                PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0873F, 0.0F));
+                PartPose.offsetAndRotation(-6.0F, 1.0F, 7.0F, 0.0F, 0.0873F, 0.0F));
 
         PartDefinition right_claw = front_body.addOrReplaceChild(
                 "right_claw",
                 CubeListBuilder.create(),
-                PartPose.offset(0.0F, -2.0F, 0.0F));
+                PartPose.offset(-6.0F, 1.0F, -4.0F));
 
         right_claw.addOrReplaceChild(
                 "cube_r8",
@@ -284,37 +279,37 @@ public class EaterOfSoulsModel<T extends EaterOfSoulsEntity> extends Hierarchica
                         .addBox(-5.0F, -1.0F, -11.0F, 1.0F, 1.0F, 2.0F, new CubeDeformation(0.0F))
                         .texOffs(35, 8)
                         .addBox(-8.0F, -3.0F, -15.0F, 3.0F, 3.0F, 9.0F, new CubeDeformation(0.0F)),
-                PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, -0.0873F, 0.0F));
+                PartPose.offsetAndRotation(6.0F, 1.0F, 7.0F, 0.0F, -0.0873F, 0.0F));
 
         PartDefinition middle_body = Eater_of_Souls.addOrReplaceChild(
                 "middle_body",
                 CubeListBuilder.create()
                         .texOffs(0, 17)
-                        .addBox(-5.0F, -7.0F, 1.0F, 10.0F, 6.0F, 7.0F, new CubeDeformation(0.0F)),
-                PartPose.offset(0.0F, 2.0F, 0.0F));
+                        .addBox(-5.0F, -3.0F, -3.0F, 10.0F, 6.0F, 7.0F, new CubeDeformation(0.0F)),
+                PartPose.offset(0.0F, -2.0F, 4.0F));
 
         middle_body.addOrReplaceChild(
                 "middle_eyes",
                 CubeListBuilder.create()
                         .texOffs(0, 44)
-                        .addBox(-2.5F, -1.0F, 2.5F, 2.0F, 1.0F, 2.0F, new CubeDeformation(0.0F))
+                        .addBox(-2.5F, 3.0F, -1.5F, 2.0F, 1.0F, 2.0F, new CubeDeformation(0.0F))
                         .texOffs(18, 44)
-                        .addBox(0.5F, -8.0F, 2.5F, 2.0F, 1.0F, 2.0F, new CubeDeformation(0.0F))
+                        .addBox(0.5F, -4.0F, -1.5F, 2.0F, 1.0F, 2.0F, new CubeDeformation(0.0F))
                         .texOffs(6, 45)
-                        .addBox(-2.5F, -8.0F, 2.5F, 2.0F, 1.0F, 2.0F, new CubeDeformation(0.0F))
+                        .addBox(-2.5F, -4.0F, -1.5F, 2.0F, 1.0F, 2.0F, new CubeDeformation(0.0F))
                         .texOffs(42, 43)
-                        .addBox(0.5F, -1.0F, 2.5F, 2.0F, 1.0F, 2.0F, new CubeDeformation(0.0F)),
+                        .addBox(0.5F, 3.0F, -1.5F, 2.0F, 1.0F, 2.0F, new CubeDeformation(0.0F)),
                 PartPose.offset(0.0F, 0.0F, 0.0F));
 
         PartDefinition middle_tendrils = middle_body.addOrReplaceChild(
                 "middle_tendrils",
                 CubeListBuilder.create(),
-                PartPose.offset(0.0F, 0.0F, 0.0F));
+                PartPose.offset(0.0F, 0.0F, 5.0F));
 
         PartDefinition left_middle_1 = middle_tendrils.addOrReplaceChild(
                 "left_middle_1",
                 CubeListBuilder.create(),
-                PartPose.offset(0.0F, 0.0F, 0.0F));
+                PartPose.offset(4.0F, 0.0F, -1.0F));
 
         left_middle_1.addOrReplaceChild(
                 "cube_r9",
@@ -323,12 +318,12 @@ public class EaterOfSoulsModel<T extends EaterOfSoulsEntity> extends Hierarchica
                         .addBox(2.5F, -3.0F, 8.0F, 0.0F, 1.0F, 7.0F, new CubeDeformation(0.0F))
                         .texOffs(0, 31)
                         .addBox(2.0F, -2.5F, 8.0F, 1.0F, 0.0F, 7.0F, new CubeDeformation(0.0F)),
-                PartPose.offsetAndRotation(0.0F, -2.0F, 0.0F, 0.0F, 0.1745F, 0.0F));
+                PartPose.offsetAndRotation(-4.0F, 2.0F, -8.0F, 0.0F, 0.1745F, 0.0F));
 
         PartDefinition left_middle_2 = middle_tendrils.addOrReplaceChild(
                 "left_middle_2",
                 CubeListBuilder.create(),
-                PartPose.offset(0.0F, 0.0F, 0.0F));
+                PartPose.offset(5.0F, 0.0F, -4.0F));
 
         left_middle_2.addOrReplaceChild(
                 "cube_r10",
@@ -337,12 +332,12 @@ public class EaterOfSoulsModel<T extends EaterOfSoulsEntity> extends Hierarchica
                         .addBox(2.5F, -3.0F, 6.0F, 0.0F, 1.0F, 7.0F, new CubeDeformation(0.0F))
                         .texOffs(29, 0)
                         .addBox(2.0F, -2.5F, 6.0F, 1.0F, 0.0F, 7.0F, new CubeDeformation(0.0F)),
-                PartPose.offsetAndRotation(0.0F, -2.0F, 0.0F, 0.0F, 0.3927F, 0.0F));
+                PartPose.offsetAndRotation(-5.0F, 2.0F, -5.0F, 0.0F, 0.3927F, 0.0F));
 
         PartDefinition right_middle_1 = middle_tendrils.addOrReplaceChild(
                 "right_middle_1",
                 CubeListBuilder.create(),
-                PartPose.offset(0.0F, 0.0F, 0.0F));
+                PartPose.offset(-4.0F, 0.0F, -1.0F));
 
         right_middle_1.addOrReplaceChild(
                 "cube_r11", CubeListBuilder.create()
@@ -350,12 +345,12 @@ public class EaterOfSoulsModel<T extends EaterOfSoulsEntity> extends Hierarchica
                         .addBox(-2.5F, -3.0F, 8.0F, 0.0F, 1.0F, 7.0F, new CubeDeformation(0.0F))
                         .texOffs(26, 17)
                         .addBox(-3.0F, -2.5F, 8.0F, 1.0F, 0.0F, 7.0F, new CubeDeformation(0.0F)),
-                PartPose.offsetAndRotation(0.0F, -2.0F, 0.0F, 0.0F, -0.1745F, 0.0F));
+                PartPose.offsetAndRotation(4.0F, 2.0F, -8.0F, 0.0F, -0.1745F, 0.0F));
 
         PartDefinition right_middle_2 = middle_tendrils.addOrReplaceChild(
                 "right_middle_2",
                 CubeListBuilder.create(),
-                PartPose.offset(0.0F, 0.0F, 0.0F));
+                PartPose.offset(-5.0F, 0.0F, -4.0F));
 
         right_middle_2.addOrReplaceChild(
                 "cube_r12",
@@ -364,35 +359,35 @@ public class EaterOfSoulsModel<T extends EaterOfSoulsEntity> extends Hierarchica
                         .addBox(-2.5F, -3.0F, 6.0F, 0.0F, 1.0F, 7.0F, new CubeDeformation(0.0F))
                         .texOffs(24, 17)
                         .addBox(-3.0F, -2.5F, 6.0F, 1.0F, 0.0F, 7.0F, new CubeDeformation(0.0F)),
-                PartPose.offsetAndRotation(0.0F, -2.0F, 0.0F, 0.0F, -0.3927F, 0.0F));
+                PartPose.offsetAndRotation(5.0F, 2.0F, -5.0F, 0.0F, -0.3927F, 0.0F));
 
         PartDefinition back_body = Eater_of_Souls.addOrReplaceChild(
                 "back_body",
                 CubeListBuilder.create()
                         .texOffs(28, 25)
-                        .addBox(-4.0F, -6.0F, 6.0F, 8.0F, 4.0F, 6.0F, new CubeDeformation(0.0F))
+                        .addBox(-4.0F, -2.0F, -3.0F, 8.0F, 4.0F, 6.0F, new CubeDeformation(0.0F))
                         .texOffs(24, 36)
-                        .addBox(-2.0F, -5.0F, 9.0F, 4.0F, 2.0F, 6.0F, new CubeDeformation(0.0F)),
-                PartPose.offset(0.0F, 2.0F, 0.0F));
+                        .addBox(-2.0F, -1.0F, 0.0F, 4.0F, 2.0F, 6.0F, new CubeDeformation(0.0F)),
+                PartPose.offset(0.0F, -2.0F, 9.0F));
 
         PartDefinition back_tendrils = back_body.addOrReplaceChild(
                 "back_tendrils",
                 CubeListBuilder.create(),
-                PartPose.offset(0.0F, -2.0F, 0.0F));
+                PartPose.offset(0.0F, 0.0F, 3.0F));
 
         back_tendrils.addOrReplaceChild(
                 "center_back",
                 CubeListBuilder.create()
                         .texOffs(36, 0)
-                        .addBox(0.0F, -3.0F, 15.0F, 0.0F, 1.0F, 7.0F, new CubeDeformation(0.0F))
+                        .addBox(0.0F, -1.0F, 0.0F, 0.0F, 1.0F, 7.0F, new CubeDeformation(0.0F))
                         .texOffs(10, 31)
-                        .addBox(-0.5F, -2.5F, 15.0F, 1.0F, 0.0F, 7.0F, new CubeDeformation(0.0F)),
-                PartPose.offset(0.0F, 0.0F, 0.0F));
+                        .addBox(-0.5F, -0.5F, 0.0F, 1.0F, 0.0F, 7.0F, new CubeDeformation(0.0F)),
+                PartPose.offset(0.0F, 0.0F, 3.0F));
 
         PartDefinition left_back = back_tendrils.addOrReplaceChild(
                 "left_back",
                 CubeListBuilder.create(),
-                PartPose.offset(0.0F, 0.0F, 0.0F));
+                PartPose.offset(3.0F, 0.0F, 0.0F));
 
         left_back.addOrReplaceChild(
                 "cube_r13",
@@ -401,12 +396,12 @@ public class EaterOfSoulsModel<T extends EaterOfSoulsEntity> extends Hierarchica
                         .addBox(0.5F, -3.0F, 12.0F, 0.0F, 1.0F, 7.0F, new CubeDeformation(0.0F))
                         .texOffs(8, 31)
                         .addBox(0.0F, -2.5F, 12.0F, 1.0F, 0.0F, 7.0F, new CubeDeformation(0.0F)),
-                PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.1745F, 0.0F));
+                PartPose.offsetAndRotation(-3.0F, 2.0F, -12.0F, 0.0F, 0.1745F, 0.0F));
 
         PartDefinition right_back = back_tendrils.addOrReplaceChild(
                 "right_back",
                 CubeListBuilder.create(),
-                PartPose.offset(0.0F, 2.0F, 0.0F));
+                PartPose.offset(-3.0F, 0.0F, 0.0F));
 
         right_back.addOrReplaceChild(
                 "cube_r14",
@@ -415,7 +410,7 @@ public class EaterOfSoulsModel<T extends EaterOfSoulsEntity> extends Hierarchica
                         .addBox(-0.5F, -3.0F, 12.0F, 0.0F, 1.0F, 7.0F, new CubeDeformation(0.0F))
                         .texOffs(31, 0)
                         .addBox(-1.0F, -2.5F, 12.0F, 1.0F, 0.0F, 7.0F, new CubeDeformation(0.0F)),
-                PartPose.offsetAndRotation(0.0F, -2.0F, 0.0F, 0.0F, -0.1745F, 0.0F));
+                PartPose.offsetAndRotation(3.0F, 2.0F, -12.0F, 0.0F, -0.1745F, 0.0F));
 
         return LayerDefinition.create(mesh, 64, 64);
     }
