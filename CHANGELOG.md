@@ -6,12 +6,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [1.4.1] - 2022-08-10
 ### Added
+- Crimson Biome (Very WIP, just red plains currently. Worlds can only have one type of evil)
 - Demonite Equipment (Sword and Tools)
 - Demonite Block and Raw Demonite Block
 - More Creative Mode Tabs
 - Eater of Souls (I wouldn't recommend living in the corruption)
 
 ### Fixed
+- Missing Blue and Green Brick textures
 - Sand and Gravel disks generating on surface of Corruption biomes
 - Flickering on Demon Eyes veins
 
@@ -170,6 +172,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Initial release
 
+[1.4.1]: https://github.com/jakeb072001/TerraMine/compare/v1.4.0...v1.4.1
 [1.4.0]: https://github.com/jakeb072001/TerraMine/compare/v1.3.6...v1.4.0
 [1.3.6]: https://github.com/jakeb072001/TerraMine/compare/v1.3.5...v1.3.6
 [1.3.5]: https://github.com/jakeb072001/TerraMine/compare/v1.3.4...v1.3.5

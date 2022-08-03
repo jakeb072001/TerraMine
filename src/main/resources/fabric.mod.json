@@ -81,7 +81,8 @@
       "terramine:dps_meter_damage",
       "terramine:movement_order",
       "terramine:lava_immunity",
-      "terramine:hardmode"
+      "terramine:hardmode",
+      "terramine:evil_type"
     ]
   }
 }

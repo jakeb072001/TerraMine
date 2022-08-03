@@ -4,15 +4,15 @@ import dev.onyxstudios.cca.api.v3.component.Component;
 import dev.onyxstudios.cca.api.v3.component.sync.AutoSyncedComponent;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.level.storage.LevelData;
 import org.jetbrains.annotations.NotNull;
 
 public class SyncedBooleanComponent implements Component, AutoSyncedComponent {
 
 	private final String name;
 	protected boolean bool;
-	private static MinecraftServer server;
+	private static LevelData levelData;
 
 	public SyncedBooleanComponent(String name) {
 		this.name = name;
@@ -26,12 +26,16 @@ public class SyncedBooleanComponent implements Component, AutoSyncedComponent {
 		this.bool = bool;
 	}
 
+	public static void setLevelData(LevelData mcLevelData) {
+		levelData = mcLevelData;
+	}
+
 	@NotNull
-	public static MinecraftServer getServer() {
-		if (server != null) {
-			return server;
+	public static LevelData getLevelData() {
+		if (levelData != null) {
+			return levelData;
 		}
-		throw new UnsupportedOperationException("Accessed server too early!");
+		throw new UnsupportedOperationException("Accessed server level too early!");
 	}
 
 	@Override

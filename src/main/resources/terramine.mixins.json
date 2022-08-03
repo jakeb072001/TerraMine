@@ -79,7 +79,9 @@
     "item.weatherradio.client.GuiMixin",
     "statuseffect.client.GameRendererMixin",
     "statuseffect.client.LivingEntityMixin",
-    "statuseffect.client.MobEffectUtilMixin"
+    "statuseffect.client.MobEffectUtilMixin",
+    "world.MinecraftMixin",
+    "world.WorldOpenFlowsMixin"
   ],
   "injectors": {
     "defaultRequire": 1

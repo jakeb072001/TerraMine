@@ -29,10 +29,10 @@ public final class ModConfig extends PartitioningSerializer.GlobalData {
 		@ConfigEntry.Gui.Tooltip
 		public boolean stopwatchMPH = false;
 		@ConfigEntry.Gui.Tooltip(count = 3)
-		public boolean disableCorruptionSpread = false;
+		public boolean disableEvilSpread = false;
 		@ConfigEntry.Gui.Tooltip(count = 2)
 		@ConfigEntry.BoundedDiscrete(max = 500, min = 0)
-		public int corruptionSpreadRarity = 4;
+		public int evilSpreadRarity = 4;
 		@ConfigEntry.Gui.Tooltip
 		public boolean disableFallingStars = false;
 		@ConfigEntry.Gui.Tooltip(count = 2)
@@ -45,7 +45,7 @@ public final class ModConfig extends PartitioningSerializer.GlobalData {
 		@ConfigEntry.Gui.Tooltip(count = 6)
 		public float accessoryRarity = 1;
 		@ConfigEntry.Gui.Tooltip
-		public boolean corruptionEnabled = true;
+		public boolean evilBiomeEnabled = true;
 		@ConfigEntry.Gui.CollapsibleObject(startExpanded = false)
 		public CaveChest caveChest = new CaveChest();
 		@ConfigEntry.Gui.CollapsibleObject(startExpanded = false)

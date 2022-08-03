@@ -10,6 +10,8 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import terramine.common.world.biome.CorruptionBiome;
 import terramine.common.world.biome.CorruptionDesertBiome;
+import terramine.common.world.biome.CrimsonBiome;
+import terramine.common.world.biome.CrimsonDesertBiome;
 
 @Mixin(ClientLevel.class)
 public class ClientLevelMixin {
@@ -21,6 +23,9 @@ public class ClientLevelMixin {
         if (mc.level != null) {
             if (mc.level.getBiome(blockPos).value().equals(CorruptionBiome.CORRUPTION) || mc.level.getBiome(blockPos).value().equals(CorruptionDesertBiome.CORRUPTION_DESERT)) {
                 info.setReturnValue(0x9966ff);
+            }
+            if (mc.level.getBiome(blockPos).value().equals(CrimsonBiome.CRIMSON) || mc.level.getBiome(blockPos).value().equals(CrimsonDesertBiome.CRIMSON_DESERT)) {
+                info.setReturnValue(0xdc143c);
             }
         }
     }
