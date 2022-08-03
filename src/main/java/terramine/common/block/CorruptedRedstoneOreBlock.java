@@ -71,7 +71,7 @@ public class CorruptedRedstoneOreBlock extends CorruptionHelper {
     }
 
     @Override
-    public void randomTick(BlockState blockState, @NotNull ServerLevel serverLevel, @NotNull BlockPos blockPos, @NotNull RandomSource random) {
+    public void randomTick(@NotNull BlockState blockState, @NotNull ServerLevel serverLevel, @NotNull BlockPos blockPos, @NotNull RandomSource random) {
         if (blockState.getValue(LIT)) {
             serverLevel.setBlock(blockPos, blockState.setValue(LIT, false), 3);
         }

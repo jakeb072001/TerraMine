@@ -45,7 +45,7 @@ public class CorruptionHelper extends SpreadingSnowyDirtBlock  {
 
     @Override
     public void randomTick(@NotNull BlockState blockState, @NotNull ServerLevel serverLevel, @NotNull BlockPos blockPos, @NotNull RandomSource random) {
-        if (!TerraMine.CONFIG.general.disableCorruptionSpread) { // allows user to disable spreading in configs
+        if (!TerraMine.CONFIG.general.disableEvilSpread) { // allows user to disable spreading in configs
             BlockState grass = ModBlocks.CORRUPTED_GRASS.defaultBlockState();
             BlockState snow_layer = ModBlocks.CORRUPTED_SNOW_LAYER.defaultBlockState();
 
@@ -101,7 +101,7 @@ public class CorruptionHelper extends SpreadingSnowyDirtBlock  {
 
     private void spreadBlock(Block toSpread, Block spreadTo, ServerLevel serverLevel, BlockPos blockPos, RandomSource random) {
         for (int i = 0; i < 4; ++i) {
-            if (random.nextInt(TerraMine.CONFIG.general.corruptionSpreadRarity + 1) == 1) {
+            if (random.nextInt(TerraMine.CONFIG.general.evilSpreadRarity + 1) == 1) {
                 BlockState block = toSpread.defaultBlockState();
                 BlockPos blockPos2 = blockPos.offset(random.nextInt(3) - 1, random.nextInt(5) - 3, random.nextInt(3) - 1);
                 if (!serverLevel.getBlockState(blockPos2).is(spreadTo)) continue;
