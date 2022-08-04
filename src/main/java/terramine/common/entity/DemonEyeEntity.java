@@ -31,7 +31,7 @@ import org.jetbrains.annotations.NotNull;
 import terramine.common.init.ModLootTables;
 import terramine.common.init.ModSoundEvents;
 
-public class DemonEyeEntity extends Monster implements Enemy {
+public class DemonEyeEntity extends Monster implements Enemy { // todo: move most code to another class called FlyingEntityAI and extend it, this can be used for all flying type enemies
     public static final EntityDataAccessor<Integer> typed_data = SynchedEntityData.defineId(DemonEyeEntity.class, EntityDataSerializers.INT);
     public boolean spawnedBlood = false;
     public boolean bounce;
@@ -284,7 +284,7 @@ public class DemonEyeEntity extends Monster implements Enemy {
                 motionZ = demonEye.velZ * 0.075f * demonEye.getAttribute(Attributes.MOVEMENT_SPEED).getValue();
 
                 demonEye.setYRot(rotlerp(demonEye.getYRot(), (float)Math.toDegrees(Math.atan2(demonEye.velZ, demonEye.velX)) - 90, 360));
-                demonEye.setXRot(rotlerp(demonEye.getXRot(), (float)Math.toDegrees(demonEye.velY), 360));
+                demonEye.setXRot(rotlerp(demonEye.getXRot(), (float)Math.toDegrees(Math.atan(demonEye.velY)) - 90, 360));
 
                 demonEye.setDeltaMovement(motionX, motionY, motionZ);
             } else {

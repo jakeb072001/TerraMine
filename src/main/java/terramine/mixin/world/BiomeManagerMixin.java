@@ -19,8 +19,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import terramine.common.init.ModBiomes;
 import terramine.common.utility.CorruptionHelper;
 
-@Mixin(BiomeManager.class)
-public class BiomeManagerMixin {
+@Mixin(BiomeManager.class) // https://github.com/Glitchfiend/TerraBlender/blob/TB-1.19.x-2.x.x/Common/src/main/java/terrablender/mixin/MixinMultiNoiseBiomeSource.java maybe?
+public class BiomeManagerMixin { // also for getting access to level, maybe use an interface or something, can get level using a mixin to MinecraftServer or something, similar to how SyncBooleanComponent gets LevelData
     @Unique
     private Level level;
 

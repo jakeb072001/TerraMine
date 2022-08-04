@@ -9,6 +9,7 @@
     "blocks.DeadBushBlockMixin",
     "blocks.SnowLayerBlockMixin",
     "blocks.SugarCaneBlockMixin",
+    "world.MinecraftServerMixin",
     "compat.origins.ConditionFactoryAccessor",
     "event.EnchantmentHelperMixin",
     "event.LivingEntitiesMixin",
@@ -59,6 +60,7 @@
   ],
   "client": [
     "client.GuiMixin",
+    "client.WorldOpenFlowsMixin",
     "client.render.PlayerRendererMixin",
     "event.client.LivingEntityMixin",
     "item.compass.client.GuiMixin",
@@ -79,9 +81,7 @@
     "item.weatherradio.client.GuiMixin",
     "statuseffect.client.GameRendererMixin",
     "statuseffect.client.LivingEntityMixin",
-    "statuseffect.client.MobEffectUtilMixin",
-    "world.MinecraftMixin",
-    "world.WorldOpenFlowsMixin"
+    "statuseffect.client.MobEffectUtilMixin"
   ],
   "injectors": {
     "defaultRequire": 1

@@ -6,11 +6,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [1.4.1] - 2022-08-10
 ### Added
-- Crimson Biome (Very WIP, just red plains currently. Worlds can only have one type of evil)
+- Crimson Biome (Very WIP, just red plains currently. Worlds get random evil)
 - Demonite Equipment (Sword and Tools)
 - Demonite Block and Raw Demonite Block
 - More Creative Mode Tabs
-- Eater of Souls (I wouldn't recommend living in the corruption)
+- Eater of Souls (I wouldn't recommend living in evil biomes)
 
 ### Fixed
 - Missing Blue and Green Brick textures

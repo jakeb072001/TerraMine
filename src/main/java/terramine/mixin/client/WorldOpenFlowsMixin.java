@@ -1,4 +1,4 @@
-package terramine.mixin.world;
+package terramine.mixin.client;
 
 import net.minecraft.client.gui.screens.worldselection.WorldOpenFlows;
 import net.minecraft.core.RegistryAccess;
@@ -13,10 +13,11 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import terramine.common.init.ModComponents;
 
-@Mixin(WorldOpenFlows.class)
+@Mixin(WorldOpenFlows.class) // todo: get working on server side, doesn't cause issues on server but servers will only ever have corruption (unless the world is created on client and moved to server)
 public class WorldOpenFlowsMixin {
+
     @Unique
-    RandomSource random = RandomSource.create();
+    private final RandomSource random = RandomSource.create();
 
     /**
      * Randomly sets the world evil type to true or false, false being corruption and true being crimson.
