@@ -284,7 +284,7 @@ public class DemonEyeEntity extends Monster implements Enemy { // todo: move mos
                 motionZ = demonEye.velZ * 0.075f * demonEye.getAttribute(Attributes.MOVEMENT_SPEED).getValue();
 
                 demonEye.setYRot(rotlerp(demonEye.getYRot(), (float)Math.toDegrees(Math.atan2(demonEye.velZ, demonEye.velX)) - 90, 360));
-                demonEye.setXRot(rotlerp(demonEye.getXRot(), (float)Math.toDegrees(Math.atan(demonEye.velY)) - 90, 360));
+                demonEye.setXRot(rotlerp(demonEye.getXRot(), (float)Math.toDegrees(Math.atan(demonEye.velY)), 360));
 
                 demonEye.setDeltaMovement(motionX, motionY, motionZ);
             } else {

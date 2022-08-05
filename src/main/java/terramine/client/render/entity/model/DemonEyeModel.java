@@ -30,7 +30,7 @@ public class DemonEyeModel<T extends DemonEyeEntity> extends HierarchicalModel<T
     @Override
     public void setupAnim(T eye, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
         // todo: need to sync the xRot from server to client, don't know how, i tried the same method as the demon eye type but that didn't work, maybe another issue but the xRot is fine on server but not client
-        float k = eye.getXRot();
+        float k = eye.getXRot(); // * 0.017453292F;
         this.root.xRot = k;
     }
 

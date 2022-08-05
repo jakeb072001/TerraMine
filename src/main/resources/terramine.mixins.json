@@ -9,7 +9,6 @@
     "blocks.DeadBushBlockMixin",
     "blocks.SnowLayerBlockMixin",
     "blocks.SugarCaneBlockMixin",
-    "world.MinecraftServerMixin",
     "compat.origins.ConditionFactoryAccessor",
     "event.EnchantmentHelperMixin",
     "event.LivingEntitiesMixin",
@@ -54,13 +53,14 @@
     "item.whoopeecushion.EntityMixin",
     "statuseffect.LivingEntityMixin",
     "statuseffect.MobEffectInstanceMixin",
+    "world.LevelStorageAccessMixin",
+    "world.MinecraftServerMixin",
     "world.entity.HopperBlockEntityMixin",
     "world.entity.ItemEntityMixin",
     "world.entity.PlayerMixin"
   ],
   "client": [
     "client.GuiMixin",
-    "client.WorldOpenFlowsMixin",
     "client.render.PlayerRendererMixin",
     "event.client.LivingEntityMixin",
     "item.compass.client.GuiMixin",
