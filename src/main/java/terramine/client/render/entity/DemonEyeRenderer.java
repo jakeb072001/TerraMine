@@ -43,7 +43,7 @@ public class DemonEyeRenderer extends MobRenderer<DemonEyeEntity, DemonEyeModel<
 
     @Override
     protected void setupRotations(@NotNull DemonEyeEntity entity, @NotNull PoseStack poseStack, float f, float g, float h) {
-        poseStack.mulPose(Vector3f.XP.rotationDegrees(entity.getXRot()));
         super.setupRotations(entity, poseStack, f, g, h);
+        poseStack.mulPose(Vector3f.XP.rotationDegrees(entity.getXRot()));
     }
 }

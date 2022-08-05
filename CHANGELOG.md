@@ -12,6 +12,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - More Creative Mode Tabs
 - Eater of Souls (I wouldn't recommend living in evil biomes)
 
+### Changed
+- Demon Eyes now rotate toward the player (Eater of Souls also does this)
+
 ### Fixed
 - Missing Blue and Green Brick textures
 - Sand and Gravel disks generating on surface of Corruption biomes

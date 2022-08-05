@@ -15,7 +15,7 @@ public class CrimsonDesertBiome {
     private static Biome createCrimsonDesert() {
         MobSpawnSettings.Builder spawnSettings = new MobSpawnSettings.Builder();
         //BiomeDefaultFeatures.desertSpawns(spawnSettings);
-        spawnSettings.addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(ModEntities.EATER_OF_SOULS, 50, 1, 2)); // todo: Replace with Crimera
+        spawnSettings.addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(ModEntities.EATER_OF_SOULS, 25, 0, 2)); // todo: Replace with Crimera
 
         BiomeGenerationSettings.Builder generationSettings = new BiomeGenerationSettings.Builder();
         BiomeDefaultFeatures.addFossilDecoration(generationSettings);

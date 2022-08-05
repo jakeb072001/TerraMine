@@ -15,7 +15,7 @@ public class CorruptionDesertBiome {
     private static Biome createCorruptionDesert() {
         MobSpawnSettings.Builder spawnSettings = new MobSpawnSettings.Builder();
         //BiomeDefaultFeatures.desertSpawns(spawnSettings);
-        spawnSettings.addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(ModEntities.EATER_OF_SOULS, 50, 1, 2));
+        spawnSettings.addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(ModEntities.EATER_OF_SOULS, 25, 0, 2));
 
         BiomeGenerationSettings.Builder generationSettings = new BiomeGenerationSettings.Builder();
         BiomeDefaultFeatures.addFossilDecoration(generationSettings);
