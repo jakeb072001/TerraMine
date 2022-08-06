@@ -26,7 +26,7 @@ public class ModEntities {
 	public static final EntityType<DemonEyeEntity> DEMON_EYE = register("demon_eye", FabricEntityTypeBuilder
 			.<DemonEyeEntity>createMob()
 			.entityFactory(DemonEyeEntity::new)
-			.dimensions(EntityDimensions.fixed(0.5f, 0.5f))
+			.dimensions(EntityDimensions.fixed(0.53f, 0.53f))
 			.spawnGroup(MobCategory.MONSTER)
 			.defaultAttributes(DemonEyeEntity::createMobAttributes)
 			.spawnRestriction(SpawnPlacements.Type.NO_RESTRICTIONS, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, DemonEyeEntity::checkMobSpawnRules)
@@ -35,7 +35,7 @@ public class ModEntities {
 	public static final EntityType<EaterOfSoulsEntity> EATER_OF_SOULS = register("eater_of_souls", FabricEntityTypeBuilder
 			.<EaterOfSoulsEntity>createMob()
 			.entityFactory(EaterOfSoulsEntity::new)
-			.dimensions(EntityDimensions.fixed(1.6f, 0.9f))
+			.dimensions(EntityDimensions.fixed(1f, 0.6f))
 			.spawnGroup(MobCategory.MONSTER)
 			.defaultAttributes(EaterOfSoulsEntity::createMobAttributes)
 			.spawnRestriction(SpawnPlacements.Type.NO_RESTRICTIONS, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, EaterOfSoulsEntity::checkMobSpawnRules)

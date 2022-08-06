@@ -14,7 +14,7 @@ import net.minecraft.world.phys.Vec3;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.function.Predicate;
 
-public class Utilities {
+public class Utilities { // todo: need to fix bug with magic missile where the projectile will jitter back and forth instead of just staying at its position
     private Utilities() {}
 
     public static BlockHitResult rayTraceBlocks(Entity entity, double length, boolean checkLiquids)
@@ -32,12 +32,7 @@ public class Utilities {
     {
         Vec3 vec3 = new Vec3(entity.position().x(), entity.position().y() + (double) entity.getEyeHeight(), entity.position().z());
         Vec3 vec33 = entity.getLookAngle().scale(length).add(entity.position().x(), entity.position().y() + (double) entity.getEyeHeight(), entity.position().z());
-        Predicate<Entity> predicate = new Predicate<Entity>() {
-            @Override
-            public boolean test(Entity entity) {
-                return !(entity instanceof Player || entity == self || entity instanceof ItemEntity || entity instanceof ExperienceOrb);
-            }
-        };
+        Predicate<Entity> predicate = entity1 -> !(entity1 instanceof Player || entity1 == self || entity1 instanceof ItemEntity || entity1 instanceof ExperienceOrb);
         return ProjectileUtil.getEntityHitResult(entity.level, entity, vec3, vec33, (new AABB(vec3, vec33)).inflate(1.0D), predicate);
     }
 
