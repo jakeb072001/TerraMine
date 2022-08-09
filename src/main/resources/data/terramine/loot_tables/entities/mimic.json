@@ -5,8 +5,24 @@
       "rolls": 1,
       "entries": [
         {
-          "type": "loot_table",
-          "name": "terramine:accessory"
+          "type": "minecraft:item",
+          "weight": 14,
+          "name": "terramine:titan_glove"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 14,
+          "name": "terramine:philosophers_stone"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 14,
+          "name": "terramine:cross_necklace"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 14,
+          "name": "terramine:compass"
         }
       ]
     }
