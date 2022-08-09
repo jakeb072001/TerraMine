@@ -1,5 +1,6 @@
 package terramine.mixin.event;
 
+import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -9,7 +10,12 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 import terramine.common.events.PlayHurtSoundCallback;
+import terramine.common.events.LivingEntityPotionEffectCallback;
+
+import javax.annotation.Nullable;
 
 @Mixin(LivingEntity.class)
 public abstract class LivingEntityMixin extends Entity {
@@ -22,10 +28,26 @@ public abstract class LivingEntityMixin extends Entity {
 	protected abstract float getSoundVolume();
 
 	@Shadow
-	protected abstract float getVoicePitch();
+	public abstract float getVoicePitch();
 
 	@Inject(method = "playHurtSound", at = @At("HEAD"))
 	private void onServerPlayHurtSound(CallbackInfo info) {
 		PlayHurtSoundCallback.EVENT.invoker().play((LivingEntity) (Object) this, this.getSoundVolume(), this.getVoicePitch());
+	}
+
+	// from porting-lib, didn't want to import the whole thing so just doing it this way for now
+	@Inject(
+			method = "addEffect(Lnet/minecraft/world/effect/MobEffectInstance;Lnet/minecraft/world/entity/Entity;)Z",
+			at = @At(
+					value = "INVOKE",
+					target = "Ljava/util/Map;get(Ljava/lang/Object;)Ljava/lang/Object;",
+					shift = At.Shift.BY,
+					by = 3,
+					remap = false
+			),
+			locals = LocalCapture.CAPTURE_FAILHARD
+	)
+	public void onAddEffect(MobEffectInstance newEffect, @Nullable Entity source, CallbackInfoReturnable<Boolean> cir, MobEffectInstance oldEffect) {
+		LivingEntityPotionEffectCallback.EVENT.invoker().onPotionAdded((LivingEntity) (Object) this, newEffect, oldEffect, source);
 	}
 }

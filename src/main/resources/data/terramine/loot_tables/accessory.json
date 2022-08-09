@@ -192,6 +192,11 @@
         {
           "type": "minecraft:item",
           "weight": 8,
+          "name": "terramine:philosophers_stone"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
           "name": "terramine:band_of_starpower"
         },
         {

@@ -10,7 +10,7 @@ import terramine.extensions.MobEffectInstanceExtensions;
 public abstract class MobEffectInstanceMixin implements MobEffectInstanceExtensions {
 
 	@Shadow
-	private int duration;
+	int duration;
 	@Shadow
 	private MobEffectInstance hiddenEffect;
 

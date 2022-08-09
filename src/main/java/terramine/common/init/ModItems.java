@@ -110,6 +110,8 @@ public class ModItems {
 	public static final Item MECHANICAL_GLOVE = register("mechanical_glove", new MechanicalGloveItem());
 	public static final Item FIRE_GAUNTLET = register("fire_gauntlet", new FireGauntletItem());
 	public static final Item BAND_OF_REGENERATION = register("band_of_regeneration", new BandOfRegenerationItem());
+	public static final Item PHILOSOPHERS_STONE = register("philosophers_stone", new PhilosophersStoneItem());
+	public static final Item CHARM_OF_MYTHS = register("charm_of_myths", new CharmOfMythsItem());
 	public static final Item BAND_OF_STARPOWER = register("band_of_starpower", new BandOfStarpowerItem());
 	public static final Item MANA_REGENERATION_BAND = register("mana_regeneration_band", new ManaRegenerationBandItem());
 	public static final Item MAGIC_CUFFS = register("magic_cuffs", new MagicCuffsItem());
