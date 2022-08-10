@@ -4,17 +4,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [1.4.1] - 2022-08-10
+## [1.4.1] - 2022-08-15
 ### Added
-- Crimson Biome
+- Crimson Biome (Worlds will only ever have Corruption or Crimson, not both)
 - Demonite and Crimtane Equipment (Sword and Tools)
 - Demonite and Crimtane Blocks
 - Philosopher's Stone and Charm of Myths
 - More Creative Mode Tabs
-- Eater of Souls (I wouldn't recommend living in evil biomes)
+- Eater of Souls and Crimera (I wouldn't recommend living in evil biomes)
 
 ### Changed
-- Demon Eyes now rotate toward the player (Eater of Souls also does this)
+- Demon Eyes now rotate toward the player (Eater of Souls and Crimera also do this)
 
 ### Fixed
 - Missing Blue and Green Brick textures
