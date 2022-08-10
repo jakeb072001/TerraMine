@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
-    "terramine:corrupted_grass"
+    "terramine:corrupted_grass",
+	"terramine:crimson_grass"
   ]
 }

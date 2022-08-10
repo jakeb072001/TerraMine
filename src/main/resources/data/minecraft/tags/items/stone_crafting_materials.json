@@ -2,6 +2,8 @@
   "replace": false,
   "values": [
     "terramine:corrupted_cobblestone",
-    "terramine:corrupted_cobbled_deepslate"
+    "terramine:corrupted_cobbled_deepslate",
+	"terramine:crimson_cobblestone",
+    "terramine:crimson_cobbled_deepslate"
   ]
 }

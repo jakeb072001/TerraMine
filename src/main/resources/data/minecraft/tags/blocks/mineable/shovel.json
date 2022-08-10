@@ -5,6 +5,11 @@
     "terramine:corrupted_sand",
 	"terramine:corrupted_gravel",
 	"terramine:corrupted_snow_layer",
-	"terramine:corrupted_snow"
+	"terramine:corrupted_snow",
+	"terramine:crimson_grass",
+    "terramine:crimson_sand",
+	"terramine:crimson_gravel",
+	"terramine:crimson_snow_layer",
+	"terramine:crimson_snow"
   ]
 }

@@ -1,7 +1,7 @@
 {
   "parent": "minecraft:block/cube_column_mirrored",
   "textures": {
-    "end": "terramine:block/corrupt_deepslate_top",
-    "side": "terramine:block/corrupt_deepslate"
+    "end": "terramine:block/corruption/corrupt_deepslate_top",
+    "side": "terramine:block/corruption/corrupt_deepslate"
   }
 }

@@ -1,7 +1,7 @@
 {
     "textures": {
-        "particle": "terramine:block/corrupt_snow",
-        "texture": "terramine:block/corrupt_snow"
+        "particle": "terramine:block/corruption/corrupt_snow",
+        "texture": "terramine:block/corruption/corrupt_snow"
     },
     "elements": [
         {   "from": [ 0, 0, 0 ],

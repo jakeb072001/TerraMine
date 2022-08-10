@@ -18,6 +18,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import terramine.common.init.ModBiomes;
 import terramine.common.utility.CorruptionHelper;
+import terramine.common.utility.CrimsonHelper;
 
 @Mixin(BiomeManager.class) // https://github.com/Glitchfiend/TerraBlender/blob/TB-1.19.x-2.x.x/Common/src/main/java/terrablender/mixin/MixinMultiNoiseBiomeSource.java maybe?
 public class BiomeManagerMixin { // also for getting access to level, maybe use an interface or something, can get level using a mixin to MinecraftServer or something, similar to how SyncBooleanComponent gets LevelData
@@ -36,6 +37,14 @@ public class BiomeManagerMixin { // also for getting access to level, maybe use 
                     Holder<Biome> biome = BuiltinRegistries.BIOME.getOrCreateHolder(ModBiomes.CORRUPTION).get().orThrow(); // default biome
                     if (info.getReturnValue().is(Biomes.DESERT) || info.getReturnValue().is(ModBiomes.CORRUPTION_DESERT)) {
                         biome = BuiltinRegistries.BIOME.getOrCreateHolder(ModBiomes.CORRUPTION_DESERT).get().orThrow(); // desert biome
+                    }
+                    info.setReturnValue(biome);
+                    break;
+                }
+                if (block instanceof CrimsonHelper && pos.getY() > i) { // if block is a corruption block and position is above i (y range)
+                    Holder<Biome> biome = BuiltinRegistries.BIOME.getOrCreateHolder(ModBiomes.CRIMSON).get().orThrow(); // default biome
+                    if (info.getReturnValue().is(Biomes.DESERT) || info.getReturnValue().is(ModBiomes.CRIMSON_DESERT)) {
+                        biome = BuiltinRegistries.BIOME.getOrCreateHolder(ModBiomes.CRIMSON_DESERT).get().orThrow(); // desert biome
                     }
                     info.setReturnValue(biome);
                     break;

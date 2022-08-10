@@ -6,7 +6,8 @@ import terramine.common.init.ModItems;
 
 public enum TerrariaToolTiers implements Tier {
 
-    DEMONITE(2, 500, 7.0f, 2.5f, 17, Ingredient.of(ModItems.DEMONITE_INGOT));
+    DEMONITE(2, 500, 7.5f, 2.5f, 17, Ingredient.of(ModItems.DEMONITE_INGOT)),
+    CRIMTANE(2, 500, 7.0f, 3.0f, 17, Ingredient.of(ModItems.CRIMTANE_INGOT));
 
     private final int level;
     private final int uses;

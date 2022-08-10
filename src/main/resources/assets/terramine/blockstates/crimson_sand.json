@@ -1,0 +1,10 @@
+{
+    "variants": {
+        "": [ 
+            { "model": "terramine:block/crimson_sand" },
+            { "model": "terramine:block/crimson_sand", "y": 90 },
+            { "model": "terramine:block/crimson_sand", "y": 180 },
+            { "model": "terramine:block/crimson_sand", "y": 270 }
+        ]
+    }
+}

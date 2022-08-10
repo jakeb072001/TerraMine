@@ -2,6 +2,8 @@
   "replace": false,
   "values": [
     "terramine:corrupted_coal_ore",
-    "terramine:corrupted_deepslate_coal_ore"
+    "terramine:corrupted_deepslate_coal_ore",
+	"terramine:crimson_coal_ore",
+    "terramine:crimson_deepslate_coal_ore"
   ]
 }

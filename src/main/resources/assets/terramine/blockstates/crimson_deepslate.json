@@ -1,0 +1,62 @@
+{
+  "variants": {
+    "axis=x": [
+      {
+        "model": "terramine:block/crimson_deepslate",
+        "x": 90,
+        "y": 90
+      },
+      {
+        "model": "terramine:block/crimson_deepslate_mirrored",
+        "x": 90,
+        "y": 90
+      },
+      {
+        "model": "terramine:block/crimson_deepslate",
+        "y": 90,
+        "x": 90
+      },
+      {
+        "model": "terramine:block/crimson_deepslate_mirrored",
+        "y": 90,
+        "x": 90
+      }
+    ],
+    "axis=y": [
+      {
+        "model": "terramine:block/crimson_deepslate"
+      },
+      {
+        "model": "terramine:block/crimson_deepslate_mirrored"
+      },
+      {
+        "model": "terramine:block/crimson_deepslate",
+        "y": 180
+      },
+      {
+        "model": "terramine:block/crimson_deepslate_mirrored",
+        "y": 180
+      }
+    ],
+    "axis=z": [
+      {
+        "model": "terramine:block/crimson_deepslate",
+        "x": 90
+      },
+      {
+        "model": "terramine:block/crimson_deepslate_mirrored",
+        "x": 90
+      },
+      {
+        "model": "terramine:block/crimson_deepslate",
+        "y": 180,
+        "x": 90
+      },
+      {
+        "model": "terramine:block/crimson_deepslate_mirrored",
+        "y": 180,
+        "x": 90
+      }
+    ]
+  }
+}

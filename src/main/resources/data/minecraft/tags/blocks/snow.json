@@ -2,6 +2,8 @@
   "replace": false,
   "values": [
     "terramine:corrupted_snow_layer",
-    "terramine:corrupted_snow"
+    "terramine:corrupted_snow",
+	"terramine:crimson_snow_layer",
+    "terramine:crimson_snow"
   ]
 }

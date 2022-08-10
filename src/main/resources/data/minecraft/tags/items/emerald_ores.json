@@ -2,6 +2,8 @@
   "replace": false,
   "values": [
     "terramine:corrupted_emerald_ore",
-    "terramine:corrupted_deepslate_emerald_ore"
+    "terramine:corrupted_deepslate_emerald_ore",
+	"terramine:crimson_emerald_ore",
+    "terramine:crimson_deepslate_emerald_ore"
   ]
 }

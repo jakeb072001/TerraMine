@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/cube_all",
   "textures": {
-    "all": "terramine:block/corrupt_redstone_ore"
+    "all": "terramine:block/corruption/corrupt_redstone_ore"
   }
 }

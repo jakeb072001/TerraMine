@@ -22,25 +22,25 @@ public class CorruptionHelper extends SpreadingSnowyDirtBlock  {
         super(properties);
     }
 
-    public static boolean canBeGrass(BlockState blockState, LevelReader levelReader, BlockPos blockPos) {
+    public static boolean canNotBeGrass(BlockState blockState, LevelReader levelReader, BlockPos blockPos) {
         BlockPos blockPos2 = blockPos.above();
         BlockState blockState2 = levelReader.getBlockState(blockPos2);
         if (blockState2.is(Blocks.SNOW) && blockState2.getValue(SnowLayerBlock.LAYERS) == 1) {
-            return true;
-        }
-        if (blockState2.is(ModBlocks.CORRUPTED_SNOW_LAYER) && blockState2.getValue(CorruptedSnowLayer.LAYERS) == 1) {
-            return true;
-        }
-        if (blockState2.getFluidState().getAmount() == 8) {
             return false;
         }
+        if (blockState2.is(ModBlocks.CORRUPTED_SNOW_LAYER) && blockState2.getValue(CorruptedSnowLayer.LAYERS) == 1) {
+            return false;
+        }
+        if (blockState2.getFluidState().getAmount() == 8) {
+            return true;
+        }
         int i = LayerLightEngine.getLightBlockInto(levelReader, blockState, blockPos, blockState2, blockPos2, Direction.UP, blockState2.getLightBlock(levelReader, blockPos2));
-        return i < levelReader.getMaxLightLevel();
+        return i >= levelReader.getMaxLightLevel();
     }
 
-    private static boolean canPropagate(BlockState blockState, LevelReader levelReader, BlockPos blockPos) {
+    private static boolean canNotPropagate(BlockState blockState, LevelReader levelReader, BlockPos blockPos) {
         BlockPos blockPos2 = blockPos.above();
-        return canBeGrass(blockState, levelReader, blockPos) && !levelReader.getFluidState(blockPos2).is(FluidTags.WATER);
+        return canNotBeGrass(blockState, levelReader, blockPos) || levelReader.getFluidState(blockPos2).is(FluidTags.WATER);
     }
 
     @Override
@@ -51,12 +51,12 @@ public class CorruptionHelper extends SpreadingSnowyDirtBlock  {
 
             for (int i = 0; i < 4; ++i) { // corrupted grass spread to grass
                 BlockPos blockPos2 = blockPos.offset(random.nextInt(3) - 1, random.nextInt(5) - 3, random.nextInt(3) - 1);
-                if (!serverLevel.getBlockState(blockPos2).is(Blocks.GRASS_BLOCK) || !canPropagate(grass, serverLevel, blockPos2)) continue;
+                if (!serverLevel.getBlockState(blockPos2).is(Blocks.GRASS_BLOCK) || canNotPropagate(grass, serverLevel, blockPos2)) continue;
                 serverLevel.setBlockAndUpdate(blockPos2, grass.setValue(SNOWY, (serverLevel.getBlockState(blockPos2.above()).is(Blocks.SNOW) || serverLevel.getBlockState(blockPos2.above()).is(ModBlocks.CORRUPTED_SNOW_LAYER))));
             }
             for (int i = 0; i < 4; ++i) { // normal grass spread with corrupted grass
                 BlockPos blockPos2 = blockPos.offset(random.nextInt(3) - 1, random.nextInt(5) - 3, random.nextInt(3) - 1);
-                if (!serverLevel.getBlockState(blockPos2).is(Blocks.DIRT) || !canPropagate(grass, serverLevel, blockPos2)) continue;
+                if (!serverLevel.getBlockState(blockPos2).is(Blocks.DIRT) || canNotPropagate(grass, serverLevel, blockPos2)) continue;
                 serverLevel.setBlockAndUpdate(blockPos2, grass.setValue(SNOWY, (serverLevel.getBlockState(blockPos2.above()).is(Blocks.SNOW) || serverLevel.getBlockState(blockPos2.above()).is(ModBlocks.CORRUPTED_SNOW_LAYER))));
             }
             for (int i = 0; i < 4; ++i) { // spread layered snow

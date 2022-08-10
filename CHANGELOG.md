@@ -6,9 +6,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [1.4.1] - 2022-08-10
 ### Added
-- Crimson Biome (Very WIP, just red plains currently. Worlds get random evil)
-- Demonite Equipment (Sword and Tools)
-- Demonite Block and Raw Demonite Block
+- Crimson Biome
+- Demonite and Crimtane Equipment (Sword and Tools)
+- Demonite and Crimtane Blocks
 - Philosopher's Stone and Charm of Myths
 - More Creative Mode Tabs
 - Eater of Souls (I wouldn't recommend living in evil biomes)

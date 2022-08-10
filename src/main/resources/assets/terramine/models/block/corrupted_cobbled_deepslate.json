@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/cube_all",
   "textures": {
-    "all": "terramine:block/corrupt_cobbled_deepslate"
+    "all": "terramine:block/corruption/corrupt_cobbled_deepslate"
   }
 }

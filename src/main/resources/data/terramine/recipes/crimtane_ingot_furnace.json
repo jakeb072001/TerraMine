@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:smelting",
+  "group": "crimtane_ingot",
+  "ingredient": {
+    "item": "terramine:raw_crimtane"
+  },
+  "result": "terramine:crimtane_ingot",
+  "experience": 0.8,
+  "cookingtime": 200
+}

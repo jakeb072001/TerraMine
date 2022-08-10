@@ -1,0 +1,21 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "terramine:block/crimson_dirt"
+      },
+      {
+        "model": "terramine:block/crimson_dirt",
+        "y": 90
+      },
+      {
+        "model": "terramine:block/crimson_dirt",
+        "y": 180
+      },
+      {
+        "model": "terramine:block/crimson_dirt",
+        "y": 270
+      }
+    ]
+  }
+}

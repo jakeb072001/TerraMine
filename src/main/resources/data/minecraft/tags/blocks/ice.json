@@ -3,6 +3,9 @@
   "values": [
     "terramine:corrupted_ice",
     "terramine:corrupted_packed_ice",
-    "terramine:corrupted_blue_ice"
+    "terramine:corrupted_blue_ice",
+	"terramine:crimson_ice",
+    "terramine:crimson_packed_ice",
+    "terramine:crimson_blue_ice"
   ]
 }

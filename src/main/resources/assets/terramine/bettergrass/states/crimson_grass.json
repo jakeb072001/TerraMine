@@ -1,0 +1,11 @@
+{
+  "type": "grass",
+  "variants": {
+    "snowy=false": {
+      "data": "terramine:bettergrass/data/crimson_grass"
+    },
+    "snowy=true": {
+      "data": "terramine:bettergrass/data/snowy_crimson_grass"
+    }
+  }
+}

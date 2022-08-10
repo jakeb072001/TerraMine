@@ -8,6 +8,12 @@
     "terramine:corrupted_lapis_ore",
     "terramine:corrupted_deepslate_lapis_ore",
     "terramine:corrupted_copper_ore",
-    "terramine:corrupted_deepslate_copper_ore"
+    "terramine:corrupted_deepslate_copper_ore",
+	"terramine:crimson_iron_ore",
+    "terramine:crimson_deepslate_iron_ore",
+    "terramine:crimson_lapis_ore",
+    "terramine:crimson_deepslate_lapis_ore",
+    "terramine:crimson_copper_ore",
+    "terramine:crimson_deepslate_copper_ore"
   ]
 }

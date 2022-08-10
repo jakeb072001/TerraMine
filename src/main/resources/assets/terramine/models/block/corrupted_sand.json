@@ -1,6 +1,6 @@
 {
   "parent": "block/cube_all",
   "textures": {
-    "all": "terramine:block/corrupt_sand"
+    "all": "terramine:block/corruption/corrupt_sand"
   }
 }

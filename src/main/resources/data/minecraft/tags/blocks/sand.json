@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
-    "terramine:corrupted_sand"
+    "terramine:corrupted_sand",
+	"terramine:crimson_sand"
   ]
 }

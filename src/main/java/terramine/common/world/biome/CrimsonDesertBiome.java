@@ -27,8 +27,8 @@ public class CrimsonDesertBiome {
         BiomeDefaultFeatures.addDefaultSprings(generationSettings);
         BiomeDefaultFeatures.addSurfaceFreezing(generationSettings);
         BiomeDefaultFeatures.addDefaultOres(generationSettings);
-        //ModBiomeFeatures.addDefaultCorruptOres(generationSettings); // todo: need to generate Crimson ores and disks
-        //ModBiomeFeatures.addDefaultCorruptSoftDisks(generationSettings);
+        ModBiomeFeatures.addDefaultCrimsonOres(generationSettings);
+        ModBiomeFeatures.addDefaultCrimsonSoftDisks(generationSettings);
         BiomeDefaultFeatures.addWaterTrees(generationSettings);
         BiomeDefaultFeatures.addDesertVegetation(generationSettings);
         BiomeDefaultFeatures.addDefaultMushrooms(generationSettings);
@@ -43,7 +43,7 @@ public class CrimsonDesertBiome {
                         .waterColor(0xdc143c)
                         .waterFogColor(0xdc143c)
                         .fogColor(0xdc143c)
-                        .skyColor(0xdc143c) // todo: comment out grass and foliage override to fix pallet crash when biome spread mixin is enables
+                        .skyColor(0xdc143c) // todo: comment out grass and foliage override to fix pallet crash when biome spread mixin is enabled
                         .grassColorOverride(0xdc143c)
                         .foliageColorOverride(0xdc143c)
                         .build())

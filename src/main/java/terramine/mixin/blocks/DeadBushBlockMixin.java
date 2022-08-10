@@ -14,6 +14,6 @@ import terramine.common.init.ModBlocks;
 public class DeadBushBlockMixin {
     @Inject(method = "mayPlaceOn", at = @At("RETURN"), cancellable = true)
     private void deadBushSurviveCorruptSand(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, CallbackInfoReturnable<Boolean> cir) {
-        cir.setReturnValue(cir.getReturnValue() || blockState.is(ModBlocks.CORRUPTED_SAND));
+        cir.setReturnValue(cir.getReturnValue() || blockState.is(ModBlocks.CORRUPTED_SAND) || blockState.is(ModBlocks.CRIMSON_SAND));
     }
 }

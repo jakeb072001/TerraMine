@@ -1,0 +1,20 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "terramine:block/crimson_stone"
+      },
+      {
+        "model": "terramine:block/crimson_stone_mirrored"
+      },
+      {
+        "model": "terramine:block/crimson_stone",
+        "y": 180
+      },
+      {
+        "model": "terramine:block/crimson_stone_mirrored",
+        "y": 180
+      }
+    ]
+  }
+}

@@ -19,6 +19,8 @@ public class ModEntityRenderers {
         // Block RenderLayer
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.CORRUPTED_GLASS, RenderType.translucent());
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.CORRUPTED_ICE, RenderType.translucent());
+        BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.CRIMSON_GLASS, RenderType.translucent());
+        BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.CRIMSON_ICE, RenderType.translucent());
 
         // Block Entity Renderer
         BlockEntityRendererRegistry.register(ModBlockEntityType.GOLD_CHEST, ChestEntityRenderer::new);

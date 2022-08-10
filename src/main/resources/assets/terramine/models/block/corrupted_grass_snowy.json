@@ -1,9 +1,9 @@
 {   "parent": "block/block",
     "textures": {
-        "particle": "terramine:block/dirt",
-        "top": "terramine:block/corrupt_snow",
-        "side": "terramine:block/corrupt_grass_block_snow",
-        "bottom": "terramine:block/dirt"
+        "particle": "minecraft:block/dirt",
+        "top": "terramine:block/corruption/corrupt_snow",
+        "side": "terramine:block/corruption/corrupt_grass_block_snow",
+        "bottom": "minecraft:block/dirt"
     },
     "elements": [
         {   "from": [ 0, 0, 0 ],

@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
-    "terramine:demonite_block"
+    "terramine:demonite_block",
+	"terramine:crimtane_block"
   ]
 }

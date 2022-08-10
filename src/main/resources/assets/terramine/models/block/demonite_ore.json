@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/cube_all",
   "textures": {
-    "all": "terramine:block/demonite_ore"
+    "all": "terramine:block/corruption/demonite_ore"
   }
 }

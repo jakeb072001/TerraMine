@@ -1,0 +1,59 @@
+{
+  "parent": "terramine:root",
+  "display": {
+    "icon": {
+      "item": "terramine:crimson_grass"
+    },
+    "title": {
+      "translate": "terramine.advancements.the_crimson.title"
+    },
+    "description": {
+      "translate": "terramine.advancements.the_crimson.description"
+    }
+  },
+  "criteria": {
+    "found_crimson": {
+      "trigger": "minecraft:location",
+      "conditions": {
+        "player": [
+          {
+            "condition": "minecraft:alternative",
+            "terms": [
+              {
+                "condition": "minecraft:entity_properties",
+                "entity": "this",
+                "predicate": {
+                  "location": {
+                    "biome": "terramine:crimson"
+                  }
+                }
+              },
+              {
+                "condition": "minecraft:entity_properties",
+                "entity": "this",
+                "predicate": {
+                  "location": {
+                    "biome": "terramine:crimson_desert"
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "condition": "minecraft:inverted",
+            "term": {
+              "condition": "minecraft:entity_properties",
+              "entity": "this",
+              "predicate": {
+                "type_specific": {
+                  "type": "player",
+                  "gamemode": "spectator"
+                }
+              }
+            }
+          }
+          ]
+      }
+    }
+  }
+}

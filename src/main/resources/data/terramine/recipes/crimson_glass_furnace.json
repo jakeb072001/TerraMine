@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": {
+    "item": "terramine:crimson_sand"
+  },
+  "result": "terramine:crimson_glass",
+  "experience": 0.1,
+  "cookingtime": 200
+}

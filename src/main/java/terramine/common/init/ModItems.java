@@ -35,6 +35,8 @@ public class ModItems {
 	// Ores etc
 	public static final Item RAW_DEMONITE = register("raw_demonite", new CraftingItem(new FabricItemSettings().group(TerraMine.ITEM_GROUP_STUFF)));
 	public static final Item DEMONITE_INGOT = register("demonite_ingot", new CraftingItem(new FabricItemSettings().group(TerraMine.ITEM_GROUP_STUFF)));
+	public static final Item RAW_CRIMTANE = register("raw_crimtane", new CraftingItem(new FabricItemSettings().group(TerraMine.ITEM_GROUP_STUFF)));
+	public static final Item CRIMTANE_INGOT = register("crimtane_ingot", new CraftingItem(new FabricItemSettings().group(TerraMine.ITEM_GROUP_STUFF)));
 
 	// Magic Items
 	public static final Item MAGIC_MISSILE_ITEM = register("magic_missile", new MagicMissileItem());
@@ -148,9 +150,14 @@ public class ModItems {
 	public static final Item DEMONITE_AXE = register("demonite_axe", new AxeItem(TerrariaToolTiers.DEMONITE, 6.0f, -3.1f, new FabricItemSettings().group(TerraMine.ITEM_GROUP_EQUIPMENT)));
 	public static final Item DEMONITE_SHOVEL = register("demonite_shovel", new ShovelItem(TerrariaToolTiers.DEMONITE, 1.5f, -3.0f, new FabricItemSettings().group(TerraMine.ITEM_GROUP_EQUIPMENT)));
 	public static final Item DEMONITE_HOE = register("demonite_hoe", new HoeItem(TerrariaToolTiers.DEMONITE, -2, -1.0f, new FabricItemSettings().group(TerraMine.ITEM_GROUP_EQUIPMENT)));
+	public static final Item CRIMTANE_PICKAXE = register("crimtane_pickaxe", new PickaxeItem(TerrariaToolTiers.CRIMTANE, 1, -2.8f, new FabricItemSettings().group(TerraMine.ITEM_GROUP_EQUIPMENT)));
+	public static final Item CRIMTANE_AXE = register("crimtane_axe", new AxeItem(TerrariaToolTiers.CRIMTANE, 6.5f, -3.1f, new FabricItemSettings().group(TerraMine.ITEM_GROUP_EQUIPMENT)));
+	public static final Item CRIMTANE_SHOVEL = register("crimtane_shovel", new ShovelItem(TerrariaToolTiers.CRIMTANE, 1.5f, -3.0f, new FabricItemSettings().group(TerraMine.ITEM_GROUP_EQUIPMENT)));
+	public static final Item CRIMTANE_HOE = register("crimtane_hoe", new HoeItem(TerrariaToolTiers.CRIMTANE, -2, -1.0f, new FabricItemSettings().group(TerraMine.ITEM_GROUP_EQUIPMENT)));
 
 	// Weapons
 	public static final Item DEMONITE_SWORD = register("demonite_sword", new SwordItem(TerrariaToolTiers.DEMONITE, 3, -2.4f, new FabricItemSettings().group(TerraMine.ITEM_GROUP_EQUIPMENT)));
+	public static final Item CRIMTANE_SWORD = register("crimtane_sword", new SwordItem(TerrariaToolTiers.CRIMTANE, 3, -2.4f, new FabricItemSettings().group(TerraMine.ITEM_GROUP_EQUIPMENT)));
 
 	// Blocks
 	public static final Item GOLD_CHEST = register("gold_chest", new BlockItem(ModBlocks.GOLD_CHEST, new FabricItemSettings().group(TerraMine.ITEM_GROUP_BLOCKS)));
@@ -216,6 +223,43 @@ public class ModItems {
 	public static final Item CORRUPTED_ICE = register("corrupted_ice", new BlockItem(ModBlocks.CORRUPTED_ICE, new FabricItemSettings().group(TerraMine.ITEM_GROUP_BLOCKS)));
 	public static final Item CORRUPTED_PACKED_ICE = register("corrupted_packed_ice", new BlockItem(ModBlocks.CORRUPTED_PACKED_ICE, new FabricItemSettings().group(TerraMine.ITEM_GROUP_BLOCKS)));
 	public static final Item CORRUPTED_BLUE_ICE = register("corrupted_blue_ice", new BlockItem(ModBlocks.CORRUPTED_BLUE_ICE, new FabricItemSettings().group(TerraMine.ITEM_GROUP_BLOCKS)));
+	public static final Item RAW_CRIMTANE_BLOCK = register("raw_crimtane_block", new BlockItem(ModBlocks.RAW_CRIMTANE_BLOCK, new FabricItemSettings().group(TerraMine.ITEM_GROUP_BLOCKS)));
+	public static final Item CRIMTANE_BLOCK = register("crimtane_block", new BlockItem(ModBlocks.CRIMTANE_BLOCK, new FabricItemSettings().group(TerraMine.ITEM_GROUP_BLOCKS)));
+	public static final Item CRIMSON_GRASS_BLOCK = register("crimson_grass", new BlockItem(ModBlocks.CRIMSON_GRASS, new FabricItemSettings().group(TerraMine.ITEM_GROUP_BLOCKS)));
+	public static final Item CRIMSON_GRAVEL = register("crimson_gravel", new BlockItem(ModBlocks.CRIMSON_GRAVEL, new FabricItemSettings().group(TerraMine.ITEM_GROUP_BLOCKS)));
+	public static final Item CRIMSON_SAND = register("crimson_sand", new BlockItem(ModBlocks.CRIMSON_SAND, new FabricItemSettings().group(TerraMine.ITEM_GROUP_BLOCKS)));
+	public static final Item CRIMSON_GLASS = register("crimson_glass", new BlockItem(ModBlocks.CRIMSON_GLASS, new FabricItemSettings().group(TerraMine.ITEM_GROUP_BLOCKS)));
+	public static final Item CRIMSON_SANDSTONE = register("crimson_sandstone", new BlockItem(ModBlocks.CRIMSON_SANDSTONE, new FabricItemSettings().group(TerraMine.ITEM_GROUP_BLOCKS)));
+	public static final Item CRIMSON_ANDESITE = register("crimson_andesite", new BlockItem(ModBlocks.CRIMSON_ANDESITE, new FabricItemSettings().group(TerraMine.ITEM_GROUP_BLOCKS)));
+	public static final Item CRIMSON_DIORITE = register("crimson_diorite", new BlockItem(ModBlocks.CRIMSON_DIORITE, new FabricItemSettings().group(TerraMine.ITEM_GROUP_BLOCKS)));
+	public static final Item CRIMSON_GRANITE = register("crimson_granite", new BlockItem(ModBlocks.CRIMSON_GRANITE, new FabricItemSettings().group(TerraMine.ITEM_GROUP_BLOCKS)));
+	public static final Item CRIMSON_STONE = register("crimson_stone", new BlockItem(ModBlocks.CRIMSON_STONE, new FabricItemSettings().group(TerraMine.ITEM_GROUP_BLOCKS)));
+	public static final Item CRIMSON_DEEPSLATE = register("crimson_deepslate", new BlockItem(ModBlocks.CRIMSON_DEEPSLATE, new FabricItemSettings().group(TerraMine.ITEM_GROUP_BLOCKS)));
+	public static final Item CRIMSON_COBBLESTONE = register("crimson_cobblestone", new BlockItem(ModBlocks.CRIMSON_COBBLESTONE, new FabricItemSettings().group(TerraMine.ITEM_GROUP_BLOCKS)));
+	public static final Item CRIMSON_COBBLED_DEEPSLATE = register("crimson_cobbled_deepslate", new BlockItem(ModBlocks.CRIMSON_COBBLED_DEEPSLATE, new FabricItemSettings().group(TerraMine.ITEM_GROUP_BLOCKS)));
+	public static final Item CRIMSON_COAL_ORE = register("crimson_coal_ore", new BlockItem(ModBlocks.CRIMSON_COAL_ORE, new FabricItemSettings().group(TerraMine.ITEM_GROUP_BLOCKS)));
+	public static final Item CRIMSON_IRON_ORE = register("crimson_iron_ore", new BlockItem(ModBlocks.CRIMSON_IRON_ORE, new FabricItemSettings().group(TerraMine.ITEM_GROUP_BLOCKS)));
+	public static final Item CRIMTANE_ORE = register("crimtane_ore", new BlockItem(ModBlocks.CRIMTANE_ORE, new FabricItemSettings().group(TerraMine.ITEM_GROUP_BLOCKS)));
+	public static final Item CRIMSON_COPPER_ORE = register("crimson_copper_ore", new BlockItem(ModBlocks.CRIMSON_COPPER_ORE, new FabricItemSettings().group(TerraMine.ITEM_GROUP_BLOCKS)));
+	public static final Item CRIMSON_GOLD_ORE = register("crimson_gold_ore", new BlockItem(ModBlocks.CRIMSON_GOLD_ORE, new FabricItemSettings().group(TerraMine.ITEM_GROUP_BLOCKS)));
+	public static final Item CRIMSON_LAPIS_ORE = register("crimson_lapis_ore", new BlockItem(ModBlocks.CRIMSON_LAPIS_ORE, new FabricItemSettings().group(TerraMine.ITEM_GROUP_BLOCKS)));
+	public static final Item CRIMSON_REDSTONE_ORE = register("crimson_redstone_ore", new BlockItem(ModBlocks.CRIMSON_REDSTONE_ORE, new FabricItemSettings().group(TerraMine.ITEM_GROUP_BLOCKS)));
+	public static final Item CRIMSON_DIAMOND_ORE = register("crimson_diamond_ore", new BlockItem(ModBlocks.CRIMSON_DIAMOND_ORE, new FabricItemSettings().group(TerraMine.ITEM_GROUP_BLOCKS)));
+	public static final Item CRIMSON_EMERALD_ORE = register("crimson_emerald_ore", new BlockItem(ModBlocks.CRIMSON_EMERALD_ORE, new FabricItemSettings().group(TerraMine.ITEM_GROUP_BLOCKS)));
+	public static final Item CRIMSON_DEEPSLATE_COAL_ORE = register("crimson_deepslate_coal_ore", new BlockItem(ModBlocks.CRIMSON_DEEPSLATE_COAL_ORE, new FabricItemSettings().group(TerraMine.ITEM_GROUP_BLOCKS)));
+	public static final Item CRIMSON_DEEPSLATE_IRON_ORE = register("crimson_deepslate_iron_ore", new BlockItem(ModBlocks.CRIMSON_DEEPSLATE_IRON_ORE, new FabricItemSettings().group(TerraMine.ITEM_GROUP_BLOCKS)));
+	public static final Item DEEPSLATE_CRIMTANE_ORE = register("deepslate_crimtane_ore", new BlockItem(ModBlocks.DEEPSLATE_CRIMTANE_ORE, new FabricItemSettings().group(TerraMine.ITEM_GROUP_BLOCKS)));
+	public static final Item CRIMSON_DEEPSLATE_COPPER_ORE = register("crimson_deepslate_copper_ore", new BlockItem(ModBlocks.CRIMSON_DEEPSLATE_COPPER_ORE, new FabricItemSettings().group(TerraMine.ITEM_GROUP_BLOCKS)));
+	public static final Item CRIMSON_DEEPSLATE_GOLD_ORE = register("crimson_deepslate_gold_ore", new BlockItem(ModBlocks.CRIMSON_DEEPSLATE_GOLD_ORE, new FabricItemSettings().group(TerraMine.ITEM_GROUP_BLOCKS)));
+	public static final Item CRIMSON_DEEPSLATE_LAPIS_ORE = register("crimson_deepslate_lapis_ore", new BlockItem(ModBlocks.CRIMSON_DEEPSLATE_LAPIS_ORE, new FabricItemSettings().group(TerraMine.ITEM_GROUP_BLOCKS)));
+	public static final Item CRIMSON_DEEPSLATE_REDSTONE_ORE = register("crimson_deepslate_redstone_ore", new BlockItem(ModBlocks.CRIMSON_DEEPSLATE_REDSTONE_ORE, new FabricItemSettings().group(TerraMine.ITEM_GROUP_BLOCKS)));
+	public static final Item CRIMSON_DEEPSLATE_DIAMOND_ORE = register("crimson_deepslate_diamond_ore", new BlockItem(ModBlocks.CRIMSON_DEEPSLATE_DIAMOND_ORE, new FabricItemSettings().group(TerraMine.ITEM_GROUP_BLOCKS)));
+	public static final Item CRIMSON_DEEPSLATE_EMERALD_ORE = register("crimson_deepslate_emerald_ore", new BlockItem(ModBlocks.CRIMSON_DEEPSLATE_EMERALD_ORE, new FabricItemSettings().group(TerraMine.ITEM_GROUP_BLOCKS)));
+	public static final Item CRIMSON_SNOW_LAYER = register("crimson_snow_layer", new BlockItem(ModBlocks.CRIMSON_SNOW_LAYER, new FabricItemSettings().group(TerraMine.ITEM_GROUP_BLOCKS)));
+	public static final Item CRIMSON_SNOW_BLOCK = register("crimson_snow", new BlockItem(ModBlocks.CRIMSON_SNOW, new FabricItemSettings().group(TerraMine.ITEM_GROUP_BLOCKS)));
+	public static final Item CRIMSON_ICE = register("crimson_ice", new BlockItem(ModBlocks.CRIMSON_ICE, new FabricItemSettings().group(TerraMine.ITEM_GROUP_BLOCKS)));
+	public static final Item CRIMSON_PACKED_ICE = register("crimson_packed_ice", new BlockItem(ModBlocks.CRIMSON_PACKED_ICE, new FabricItemSettings().group(TerraMine.ITEM_GROUP_BLOCKS)));
+	public static final Item CRIMSON_BLUE_ICE = register("crimson_blue_ice", new BlockItem(ModBlocks.CRIMSON_BLUE_ICE, new FabricItemSettings().group(TerraMine.ITEM_GROUP_BLOCKS)));
 
 	private static Item register(String name, Item item) {
 		return Registry.register(Registry.ITEM, TerraMine.id(name), item);

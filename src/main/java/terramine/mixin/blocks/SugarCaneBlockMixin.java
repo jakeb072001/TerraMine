@@ -19,7 +19,7 @@ public class SugarCaneBlockMixin {
     @Inject(method = "canSurvive", at = @At("RETURN"), cancellable = true)
     private void cactusSurviveCorruptSand(BlockState blockState, LevelReader levelReader, BlockPos blockPos, CallbackInfoReturnable<Boolean> cir) {
         BlockState blockState2 = levelReader.getBlockState(blockPos.below());
-        if (blockState2.is(ModBlocks.CORRUPTED_SAND)) {
+        if (blockState2.is(ModBlocks.CORRUPTED_SAND) || blockState2.is(ModBlocks.CRIMSON_SAND)) {
             BlockPos blockPos2 = blockPos.below();
             for (Direction direction : Direction.Plane.HORIZONTAL) {
                 BlockState blockState3 = levelReader.getBlockState(blockPos2.relative(direction));

@@ -45,7 +45,7 @@ public class CorruptedGrass extends CorruptionHelper implements BonemealableBloc
             }
             BlockState blockState3 = serverLevel.getBlockState(blockPos3);
             if (blockState3.is(blockState2.getBlock()) && random.nextInt(10) == 0) {
-                ((BonemealableBlock)((Object)blockState2.getBlock())).performBonemeal(serverLevel, random, blockPos3, blockState3);
+                ((BonemealableBlock) blockState2.getBlock()).performBonemeal(serverLevel, random, blockPos3, blockState3);
             }
             if (!blockState3.isAir()) continue;
             if (random.nextInt(8) == 0) {
@@ -62,7 +62,7 @@ public class CorruptedGrass extends CorruptionHelper implements BonemealableBloc
     @Override
     public void randomTick(@NotNull BlockState blockState, @NotNull ServerLevel serverLevel, @NotNull BlockPos blockPos, @NotNull RandomSource random) {
         super.randomTick(blockState, serverLevel, blockPos, random);
-        if (!canBeGrass(blockState, serverLevel, blockPos)) {
+        if (canNotBeGrass(blockState, serverLevel, blockPos)) {
             serverLevel.setBlockAndUpdate(blockPos, Blocks.DIRT.defaultBlockState());
         }
     }

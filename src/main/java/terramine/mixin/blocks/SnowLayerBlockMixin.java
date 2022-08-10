@@ -24,10 +24,11 @@ public class SnowLayerBlockMixin {
     @Inject(method = "canSurvive", at = @At("RETURN"), cancellable = true)
     private void snowLayerSurvive(BlockState blockState, LevelReader levelReader, BlockPos blockPos, CallbackInfoReturnable<Boolean> cir) {
         BlockState blockState2 = levelReader.getBlockState(blockPos.below());
-        if (blockState2.is(Blocks.ICE) || blockState2.is(Blocks.PACKED_ICE) || blockState2.is(Blocks.BARRIER) || blockState2.is(ModBlocks.CORRUPTED_ICE) || blockState2.is(ModBlocks.CORRUPTED_PACKED_ICE)) {
+        if (blockState2.is(Blocks.ICE) || blockState2.is(Blocks.PACKED_ICE) || blockState2.is(Blocks.BARRIER) || blockState2.is(ModBlocks.CORRUPTED_ICE) || blockState2.is(ModBlocks.CORRUPTED_PACKED_ICE)
+                || blockState2.is(ModBlocks.CRIMSON_ICE) || blockState2.is(ModBlocks.CRIMSON_PACKED_ICE)) {
             cir.setReturnValue(false);
         } else {
-            cir.setReturnValue(Block.isFaceFull(blockState2.getCollisionShape(levelReader, blockPos.below()), Direction.UP) || (blockState2.is((Block)(Object)this) || blockState2.is(ModBlocks.CORRUPTED_SNOW_LAYER)) && blockState2.getValue(LAYERS) == 8);
+            cir.setReturnValue(Block.isFaceFull(blockState2.getCollisionShape(levelReader, blockPos.below()), Direction.UP) || (blockState2.is((Block)(Object)this) || blockState2.is(ModBlocks.CORRUPTED_SNOW_LAYER) || blockState2.is(ModBlocks.CRIMSON_SNOW_LAYER)) && blockState2.getValue(LAYERS) == 8);
         }
     }
 }

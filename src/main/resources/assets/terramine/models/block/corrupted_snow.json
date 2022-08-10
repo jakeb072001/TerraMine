@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/cube_all",
   "textures": {
-    "all": "terramine:block/corrupt_snow"
+    "all": "terramine:block/corruption/corrupt_snow"
   }
 }

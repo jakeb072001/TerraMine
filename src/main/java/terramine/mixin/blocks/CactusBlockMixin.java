@@ -11,6 +11,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+import terramine.common.init.ModBlocks;
 
 @Mixin(CactusBlock.class)
 public class CactusBlockMixin {
@@ -25,6 +26,6 @@ public class CactusBlockMixin {
         }
 
         BlockState blockState3 = levelReader.getBlockState(blockPos.below());
-        cir.setReturnValue(((cir.getReturnValue() || blockState3.is(terramine.common.init.ModBlocks.CORRUPTED_SAND)) && !levelReader.getBlockState(blockPos.above()).getMaterial().isLiquid() && cactusSurvive));
+        cir.setReturnValue(((cir.getReturnValue() || blockState3.is(ModBlocks.CORRUPTED_SAND) || blockState3.is(ModBlocks.CRIMSON_SAND)) && !levelReader.getBlockState(blockPos.above()).getMaterial().isLiquid() && cactusSurvive));
     }
 }
