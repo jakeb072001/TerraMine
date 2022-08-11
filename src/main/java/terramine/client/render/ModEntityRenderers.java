@@ -36,6 +36,7 @@ public class ModEntityRenderers {
         EntityRendererRegistry.register(ModEntities.MIMIC, MimicRenderer::new);
         EntityRendererRegistry.register(ModEntities.DEMON_EYE, DemonEyeRenderer::new);
         EntityRendererRegistry.register(ModEntities.EATER_OF_SOULS, EaterOfSoulsRenderer::new);
+        EntityRendererRegistry.register(ModEntities.CRIMERA, CrimeraRenderer::new);
         EntityRendererRegistry.register(ModEntities.FALLING_STAR, FallingStarRenderer::new);
         EntityRendererRegistry.register(ModEntities.MAGIC_MISSILE, MagicMissileRenderer::new);
         EntityRendererRegistry.register(ModEntities.FLAMELASH_MISSILE, FlamelashMissileRenderer::new);

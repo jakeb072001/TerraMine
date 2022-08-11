@@ -38,6 +38,7 @@ public class TerraMine implements ModInitializer, TerraBlenderApi {
 	public static final String MOD_ID = "terramine";
 	public static final Logger LOGGER = LoggerFactory.getLogger(TerraMine.class);
 	public static final CreativeModeTab ITEM_GROUP_EQUIPMENT = FabricItemGroupBuilder.build(id("item_group_equipment"), () -> new ItemStack(ModItems.DEMONITE_SWORD));
+	public static final CreativeModeTab ITEM_GROUP_ARMOR = FabricItemGroupBuilder.build(id("item_group_armor"), () -> new ItemStack(ModItems.DEMONITE_SWORD));
 	public static final CreativeModeTab ITEM_GROUP_ACCESSORIES = FabricItemGroupBuilder.build(id("item_group_accessories"), () -> new ItemStack(ModItems.TERRASPARK_BOOTS));
 	public static final CreativeModeTab ITEM_GROUP_BLOCKS = FabricItemGroupBuilder.build(id("item_group_blocks"), () -> new ItemStack(ModItems.RAW_DEMONITE_BLOCK));
 	public static final CreativeModeTab ITEM_GROUP_STUFF = FabricItemGroupBuilder.build(id("item_group_stuff"), () -> new ItemStack(ModItems.RAW_DEMONITE));

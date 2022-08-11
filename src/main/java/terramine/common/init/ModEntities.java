@@ -41,6 +41,15 @@ public class ModEntities {
 			.spawnRestriction(SpawnPlacements.Type.NO_RESTRICTIONS, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, EaterOfSoulsEntity::checkMobSpawnRules)
 			.build());
 
+	public static final EntityType<CrimeraEntity> CRIMERA = register("crimera", FabricEntityTypeBuilder
+			.<CrimeraEntity>createMob()
+			.entityFactory(CrimeraEntity::new)
+			.dimensions(EntityDimensions.fixed(0.85f, 0.5f))
+			.spawnGroup(MobCategory.MONSTER)
+			.defaultAttributes(CrimeraEntity::createMobAttributes)
+			.spawnRestriction(SpawnPlacements.Type.NO_RESTRICTIONS, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, CrimeraEntity::checkMobSpawnRules)
+			.build());
+
 	public static final EntityType<FallingStarEntity> FALLING_STAR = register("falling_star", FabricEntityTypeBuilder
 			.<FallingStarEntity>createMob()
 			.entityFactory(FallingStarEntity::new)

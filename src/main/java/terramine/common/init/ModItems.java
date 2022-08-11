@@ -2,6 +2,7 @@ package terramine.common.init;
 
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.core.Registry;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.*;
 import terramine.TerraMine;
 import terramine.common.item.*;
@@ -22,6 +23,7 @@ public class ModItems {
 	public static final Item MIMIC_SPAWN_EGG = register("mimic_spawn_egg", new SpawnEggItem(ModEntities.MIMIC, 0x805113, 0x212121, new Item.Properties().tab(CreativeModeTab.TAB_MISC)));
 	public static final Item DEMON_EYE_SPAWN_EGG = register("demon_eye_spawn_egg", new SpawnEggItem(ModEntities.DEMON_EYE, 0xffffff, 0xff0000, new Item.Properties().tab(CreativeModeTab.TAB_MISC)));
 	public static final Item EATER_OF_SOULS_SPAWN_EGG = register("eater_of_souls_spawn_egg", new SpawnEggItem(ModEntities.EATER_OF_SOULS, 0x735c5f, 0x999190, new Item.Properties().tab(CreativeModeTab.TAB_MISC)));
+	public static final Item CRIMERA_SPAWN_EGG = register("crimera_spawn_egg", new SpawnEggItem(ModEntities.CRIMERA, 0x72261f, 0xac524d, new Item.Properties().tab(CreativeModeTab.TAB_MISC)));
 	public static final Item UMBRELLA = register("umbrella", new UmbrellaItem());
 	public static final Item WHOOPEE_CUSHION = register("whoopee_cushion", new WhoopeeCushionItem());
 	public static final Item MAGIC_MIRROR = register("magic_mirror", new MagicMirrorItem());
@@ -158,6 +160,17 @@ public class ModItems {
 	// Weapons
 	public static final Item DEMONITE_SWORD = register("demonite_sword", new SwordItem(TerrariaToolTiers.DEMONITE, 3, -2.4f, new FabricItemSettings().group(TerraMine.ITEM_GROUP_EQUIPMENT)));
 	public static final Item CRIMTANE_SWORD = register("crimtane_sword", new SwordItem(TerrariaToolTiers.CRIMTANE, 3, -2.4f, new FabricItemSettings().group(TerraMine.ITEM_GROUP_EQUIPMENT)));
+
+	// Armours // todo: create textures/models, create new armor item with custom abilities (https://terraria.fandom.com/wiki/Shadow_armor, https://terraria.fandom.com/wiki/Crimson_armor).
+	//  todo: would also be good to have tooltips, and have a tooltip for set bonus that only shows when all pieces of armour are equipped.
+	public static final Item DEMONITE_HELMET = register("demonite_helmet", new ArmorItem(TerrariaArmorMaterials.DEMONITE, EquipmentSlot.HEAD, new FabricItemSettings().group(TerraMine.ITEM_GROUP_ARMOR)));
+	public static final Item DEMONITE_CHESTPLATE = register("demonite_chestplate", new ArmorItem(TerrariaArmorMaterials.DEMONITE, EquipmentSlot.CHEST, new FabricItemSettings().group(TerraMine.ITEM_GROUP_ARMOR)));
+	public static final Item DEMONITE_LEGGINGS = register("demonite_leggings", new ArmorItem(TerrariaArmorMaterials.DEMONITE, EquipmentSlot.LEGS, new FabricItemSettings().group(TerraMine.ITEM_GROUP_ARMOR)));
+	public static final Item DEMONITE_BOOTS = register("demonite_boots", new ArmorItem(TerrariaArmorMaterials.DEMONITE, EquipmentSlot.FEET, new FabricItemSettings().group(TerraMine.ITEM_GROUP_ARMOR)));
+	public static final Item CRIMSON_HELMET = register("crimson_helmet", new ArmorItem(TerrariaArmorMaterials.CRIMSON, EquipmentSlot.HEAD, new FabricItemSettings().group(TerraMine.ITEM_GROUP_ARMOR)));
+	public static final Item CRIMSON_CHESTPLATE = register("crimson_chestplate", new ArmorItem(TerrariaArmorMaterials.CRIMSON, EquipmentSlot.CHEST, new FabricItemSettings().group(TerraMine.ITEM_GROUP_ARMOR)));
+	public static final Item CRIMSON_LEGGINGS = register("crimson_leggings", new ArmorItem(TerrariaArmorMaterials.CRIMSON, EquipmentSlot.LEGS, new FabricItemSettings().group(TerraMine.ITEM_GROUP_ARMOR)));
+	public static final Item CRIMSON_BOOTS = register("crimson_boots", new ArmorItem(TerrariaArmorMaterials.CRIMSON, EquipmentSlot.FEET, new FabricItemSettings().group(TerraMine.ITEM_GROUP_ARMOR)));
 
 	// Blocks
 	public static final Item GOLD_CHEST = register("gold_chest", new BlockItem(ModBlocks.GOLD_CHEST, new FabricItemSettings().group(TerraMine.ITEM_GROUP_BLOCKS)));
