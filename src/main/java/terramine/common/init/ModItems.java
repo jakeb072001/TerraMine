@@ -6,6 +6,8 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.*;
 import terramine.TerraMine;
 import terramine.common.item.*;
+import terramine.common.item.armor.ShadowArmor;
+import terramine.common.item.armor.TerrariaArmor;
 import terramine.common.item.curio.ShieldTrinketItem;
 import terramine.common.item.curio.TrinketTerrariaItem;
 import terramine.common.item.curio.WhoopeeCushionItem;
@@ -161,16 +163,15 @@ public class ModItems {
 	public static final Item DEMONITE_SWORD = register("demonite_sword", new SwordItem(TerrariaToolTiers.DEMONITE, 3, -2.4f, new FabricItemSettings().group(TerraMine.ITEM_GROUP_EQUIPMENT)));
 	public static final Item CRIMTANE_SWORD = register("crimtane_sword", new SwordItem(TerrariaToolTiers.CRIMTANE, 3, -2.4f, new FabricItemSettings().group(TerraMine.ITEM_GROUP_EQUIPMENT)));
 
-	// Armours // todo: create textures/models, create new armor item with custom abilities (https://terraria.fandom.com/wiki/Shadow_armor, https://terraria.fandom.com/wiki/Crimson_armor).
-	//  todo: would also be good to have tooltips, and have a tooltip for set bonus that only shows when all pieces of armour are equipped.
-	public static final Item DEMONITE_HELMET = register("demonite_helmet", new ArmorItem(TerrariaArmorMaterials.DEMONITE, EquipmentSlot.HEAD, new FabricItemSettings().group(TerraMine.ITEM_GROUP_ARMOR)));
-	public static final Item DEMONITE_CHESTPLATE = register("demonite_chestplate", new ArmorItem(TerrariaArmorMaterials.DEMONITE, EquipmentSlot.CHEST, new FabricItemSettings().group(TerraMine.ITEM_GROUP_ARMOR)));
-	public static final Item DEMONITE_LEGGINGS = register("demonite_leggings", new ArmorItem(TerrariaArmorMaterials.DEMONITE, EquipmentSlot.LEGS, new FabricItemSettings().group(TerraMine.ITEM_GROUP_ARMOR)));
-	public static final Item DEMONITE_BOOTS = register("demonite_boots", new ArmorItem(TerrariaArmorMaterials.DEMONITE, EquipmentSlot.FEET, new FabricItemSettings().group(TerraMine.ITEM_GROUP_ARMOR)));
-	public static final Item CRIMSON_HELMET = register("crimson_helmet", new ArmorItem(TerrariaArmorMaterials.CRIMSON, EquipmentSlot.HEAD, new FabricItemSettings().group(TerraMine.ITEM_GROUP_ARMOR)));
-	public static final Item CRIMSON_CHESTPLATE = register("crimson_chestplate", new ArmorItem(TerrariaArmorMaterials.CRIMSON, EquipmentSlot.CHEST, new FabricItemSettings().group(TerraMine.ITEM_GROUP_ARMOR)));
-	public static final Item CRIMSON_LEGGINGS = register("crimson_leggings", new ArmorItem(TerrariaArmorMaterials.CRIMSON, EquipmentSlot.LEGS, new FabricItemSettings().group(TerraMine.ITEM_GROUP_ARMOR)));
-	public static final Item CRIMSON_BOOTS = register("crimson_boots", new ArmorItem(TerrariaArmorMaterials.CRIMSON, EquipmentSlot.FEET, new FabricItemSettings().group(TerraMine.ITEM_GROUP_ARMOR)));
+	// Armours // todo: create textures/models.
+	public static final Item SHADOW_HELMET = register("shadow_helmet", new ShadowArmor("shadow_armor", TerrariaArmorMaterials.SHADOW, EquipmentSlot.HEAD, new FabricItemSettings().group(TerraMine.ITEM_GROUP_ARMOR)));
+	public static final Item SHADOW_CHESTPLATE = register("shadow_chestplate", new ShadowArmor("shadow_armor", TerrariaArmorMaterials.SHADOW, EquipmentSlot.CHEST, new FabricItemSettings().group(TerraMine.ITEM_GROUP_ARMOR)));
+	public static final Item SHADOW_LEGGINGS = register("shadow_leggings", new ShadowArmor("shadow_armor", TerrariaArmorMaterials.SHADOW, EquipmentSlot.LEGS, new FabricItemSettings().group(TerraMine.ITEM_GROUP_ARMOR)));
+	public static final Item SHADOW_BOOTS = register("shadow_boots", new ShadowArmor("shadow_armor", TerrariaArmorMaterials.SHADOW, EquipmentSlot.FEET, new FabricItemSettings().group(TerraMine.ITEM_GROUP_ARMOR)));
+	public static final Item CRIMSON_HELMET = register("crimson_helmet", new TerrariaArmor("crimson_armor", TerrariaArmorMaterials.CRIMSON, EquipmentSlot.HEAD, new FabricItemSettings().group(TerraMine.ITEM_GROUP_ARMOR)));
+	public static final Item CRIMSON_CHESTPLATE = register("crimson_chestplate", new TerrariaArmor("crimson_armor", TerrariaArmorMaterials.CRIMSON, EquipmentSlot.CHEST, new FabricItemSettings().group(TerraMine.ITEM_GROUP_ARMOR)));
+	public static final Item CRIMSON_LEGGINGS = register("crimson_leggings", new TerrariaArmor("crimson_armor", TerrariaArmorMaterials.CRIMSON, EquipmentSlot.LEGS, new FabricItemSettings().group(TerraMine.ITEM_GROUP_ARMOR)));
+	public static final Item CRIMSON_BOOTS = register("crimson_boots", new TerrariaArmor("crimson_armor", TerrariaArmorMaterials.CRIMSON, EquipmentSlot.FEET, new FabricItemSettings().group(TerraMine.ITEM_GROUP_ARMOR)));
 
 	// Blocks
 	public static final Item GOLD_CHEST = register("gold_chest", new BlockItem(ModBlocks.GOLD_CHEST, new FabricItemSettings().group(TerraMine.ITEM_GROUP_BLOCKS)));

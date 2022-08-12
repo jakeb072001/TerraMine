@@ -26,6 +26,7 @@ import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
+import org.jetbrains.annotations.NotNull;
 import terramine.TerraMine;
 import terramine.common.events.PlayHurtSoundCallback;
 import terramine.common.item.TerrariaItem;
@@ -55,7 +56,7 @@ public class TrinketTerrariaItem extends TerrariaItem implements Trinket {
 
 	@Override
 	public boolean overrideOtherStackedOnMe(ItemStack slotStack, ItemStack holdingStack, Slot slot, ClickAction clickAction, Player player, SlotAccess slotAccess) {
-		// Toggle accessory status when right clicked in inventory without a stack
+		// Toggle accessory status when right-clicked in inventory without a stack
 		if (clickAction == ClickAction.SECONDARY && holdingStack.isEmpty()) {
 			CompoundTag tag = slotStack.getOrCreateTagElement("terramine");
 			tag.putByte("Status", (byte) terramineStatus.nextIndex(tag.getByte("Status")));
@@ -105,7 +106,7 @@ public class TrinketTerrariaItem extends TerrariaItem implements Trinket {
 	}
 
 	@Override
-	public void appendHoverText(ItemStack stack, Level world, List<Component> tooltip, TooltipFlag flags) {
+	public void appendHoverText(@NotNull ItemStack stack, Level world, @NotNull List<Component> tooltip, @NotNull TooltipFlag flags) {
 		super.appendHoverText(stack, world, tooltip, flags);
 		getEffectsEnabledLanguageKey(stack).ifPresent(key -> {
 			MutableComponent enabled = Component.translatable(key).withStyle(ChatFormatting.GOLD);

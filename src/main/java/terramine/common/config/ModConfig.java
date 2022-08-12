@@ -7,7 +7,7 @@ import me.shedaniel.autoconfig.serializer.PartitioningSerializer;
 import terramine.TerraMine;
 
 @Config(name = TerraMine.MOD_ID)
-@Config.Gui.Background("terramine:textures/block/corrupt_stone.png")
+@Config.Gui.Background("terramine:textures/block/corruption/corrupt_stone.png")
 public final class ModConfig extends PartitioningSerializer.GlobalData {
 	@ConfigEntry.Category("general")
 	@ConfigEntry.Gui.TransitiveObject

@@ -6,8 +6,10 @@ import me.shedaniel.rei.api.common.entry.EntryStack;
 import me.shedaniel.rei.api.common.entry.type.VanillaEntryTypes;
 import me.shedaniel.rei.plugin.common.displays.DefaultInformationDisplay;
 import net.minecraft.core.Registry;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
 import terramine.common.item.TerrariaItem;
+import terramine.common.item.armor.TerrariaArmor;
 
 public class REIPlugin implements REIClientPlugin {
 
@@ -17,7 +19,19 @@ public class REIPlugin implements REIClientPlugin {
 				.filter(item -> item instanceof TerrariaItem)
 				.map(item -> {
 					DefaultInformationDisplay display = DefaultInformationDisplay.createFromEntry(EntryStack.of(VanillaEntryTypes.ITEM, new ItemStack(item)), item.getDescription());
-					display.line(((TerrariaItem) item).getREITooltip());
+					for (String string : ((TerrariaItem) item).getREITooltip()) {
+						display.line(Component.literal(string));
+					}
+					return display;
+				}).forEach(recipeHelper::add);
+
+		Registry.ITEM.stream()
+				.filter(item -> item instanceof TerrariaArmor)
+				.map(item -> {
+					DefaultInformationDisplay display = DefaultInformationDisplay.createFromEntry(EntryStack.of(VanillaEntryTypes.ITEM, new ItemStack(item)), item.getDescription());
+					for (String string : ((TerrariaArmor) item).getREITooltip()) {
+						display.line(Component.literal(string));
+					}
 					return display;
 				}).forEach(recipeHelper::add);
 	}
