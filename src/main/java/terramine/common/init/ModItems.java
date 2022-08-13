@@ -163,7 +163,8 @@ public class ModItems {
 	public static final Item DEMONITE_SWORD = register("demonite_sword", new SwordItem(TerrariaToolTiers.DEMONITE, 3, -2.4f, new FabricItemSettings().group(TerraMine.ITEM_GROUP_EQUIPMENT)));
 	public static final Item CRIMTANE_SWORD = register("crimtane_sword", new SwordItem(TerrariaToolTiers.CRIMTANE, 3, -2.4f, new FabricItemSettings().group(TerraMine.ITEM_GROUP_EQUIPMENT)));
 
-	// Armours // todo: add Ancient Armor, works same as Shadow but has different textures
+	// Armours
+	// todo: add Ancient Armor, works same as Shadow but has different textures
 	// todo: make another register method that registers a full set of armor instead of registering per piece
 	public static final Item SHADOW_HELMET = register("shadow_helmet", new ShadowArmor("shadow_armor", TerrariaArmorMaterials.SHADOW, EquipmentSlot.HEAD, new FabricItemSettings().group(TerraMine.ITEM_GROUP_ARMOR)));
 	public static final Item SHADOW_CHESTPLATE = register("shadow_chestplate", new ShadowArmor("shadow_armor", TerrariaArmorMaterials.SHADOW, EquipmentSlot.CHEST, new FabricItemSettings().group(TerraMine.ITEM_GROUP_ARMOR)));
