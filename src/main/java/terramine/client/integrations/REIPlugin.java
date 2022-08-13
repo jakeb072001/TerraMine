@@ -32,6 +32,11 @@ public class REIPlugin implements REIClientPlugin {
 					for (String string : ((TerrariaArmor) item).getREITooltip()) {
 						display.line(Component.literal(string));
 					}
+					if (((TerrariaArmor) item).getREISetBonusTooltip() != null) {
+						for (String string : ((TerrariaArmor) item).getREISetBonusTooltip()) {
+							display.line(Component.literal(string));
+						}
+					}
 					return display;
 				}).forEach(recipeHelper::add);
 	}

@@ -4,42 +4,42 @@ import com.google.common.collect.ImmutableMultimap;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
-import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.level.Level;
 
 import java.util.UUID;
 
-public class ShadowArmor extends TerrariaArmor {
-    private static final AttributeModifier MOVEMENT_SPEED_BONUS = new AttributeModifier(UUID.fromString("d42cc1da-db67-462a-9024-ef1ad231409b"),
-            "shadow_armor_set_bonus", 0.15, AttributeModifier.Operation.MULTIPLY_TOTAL);
+public class CrimsonArmor extends TerrariaArmor {
+    private int timer;
 
-    public ShadowArmor(String armorType, ArmorMaterial armorMaterial, EquipmentSlot equipmentSlot, Properties properties) {
+    public CrimsonArmor(String armorType, ArmorMaterial armorMaterial, EquipmentSlot equipmentSlot, Properties properties) {
         super(armorType, armorMaterial, equipmentSlot, properties);
 
         ImmutableMultimap.Builder<Attribute, AttributeModifier> builder = ImmutableMultimap.builder();
         UUID uUID = ARMOR_MODIFIER_UUID_PER_SLOT[equipmentSlot.getIndex()];
         builder.put(Attributes.ARMOR, new AttributeModifier(uUID, "Armor modifier", this.defense, AttributeModifier.Operation.ADDITION));
         builder.put(Attributes.ARMOR_TOUGHNESS, new AttributeModifier(uUID, "Armor toughness", this.toughness, AttributeModifier.Operation.ADDITION));
-        builder.put(Attributes.ATTACK_SPEED, new AttributeModifier(uUID, "Shadow Attack Speed", 0.07, AttributeModifier.Operation.MULTIPLY_TOTAL));
+        builder.put(Attributes.ATTACK_DAMAGE, new AttributeModifier(uUID, "Crimson Attack Damage", 0.02, AttributeModifier.Operation.MULTIPLY_TOTAL));
         attributeModifiers = builder.build();
     }
 
     @Override
     public void setBonusEffect(LivingEntity livingEntity, Level level) {
-        AttributeInstance movementSpeed = livingEntity.getAttribute(Attributes.MOVEMENT_SPEED);
-        if (movementSpeed != null) {
-            addModifier(movementSpeed, MOVEMENT_SPEED_BONUS);
-        }
-    }
-
-    @Override
-    public void removeBonusEffect(LivingEntity livingEntity, Level level) {
-        AttributeInstance movementSpeed = livingEntity.getAttribute(Attributes.MOVEMENT_SPEED);
-        if (movementSpeed != null) {
-            removeModifier(movementSpeed, MOVEMENT_SPEED_BONUS);
+        if (livingEntity instanceof Player player) {
+            timer += 1;
+            if (timer >= 50) {
+                player.heal(0.5f);
+                timer = 0;
+            }
+        } else { // don't know if this does anything, but maybe allows other non-player entities to heal
+            timer += 1;
+            if (timer >= 50) {
+                livingEntity.heal(0.5f);
+                timer = 0;
+            }
         }
     }
 }
