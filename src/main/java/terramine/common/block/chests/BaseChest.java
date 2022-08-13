@@ -94,7 +94,7 @@ public class BaseChest extends ChestBlock {
     }
 
     @Override
-    public DoubleBlockCombiner.NeighborCombineResult<? extends ChestEntity> combine(BlockState blockState, Level level, BlockPos blockPos2, boolean bl) {
+    public DoubleBlockCombiner.NeighborCombineResult<? extends ChestEntity> combine(@NotNull BlockState blockState, @NotNull Level level, @NotNull BlockPos blockPos2, boolean bl) {
         BiPredicate<LevelAccessor, BlockPos> biPredicate = bl ? (levelAccessor, blockPos) -> false : BaseChest::isChestBlockedAt;
         return DoubleBlockCombiner.combineWithNeigbour((BlockEntityType)this.blockEntityType.get(), BaseChest::getBlockType, BaseChest::getConnectedDirection, FACING, blockState, level, blockPos2, biPredicate);
     }
