@@ -9,6 +9,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
+import org.jetbrains.annotations.NotNull;
 import terramine.TerraMine;
 
 import java.util.Collections;
@@ -20,20 +21,12 @@ public abstract class TerrariaItemConfigurable extends Item {
 		super(properties);
 	}
 
-	public TerrariaItemConfigurable() {
-		this(new Properties());
-	}
-
 	@Override
 	@Environment(EnvType.CLIENT)
-	public void appendHoverText(ItemStack stack, Level world, List<Component> tooltip, TooltipFlag flags) {
+	public void appendHoverText(@NotNull ItemStack stack, Level world, @NotNull List<Component> tooltip, @NotNull TooltipFlag flags) {
 		if (TerraMine.CONFIG.general.showTooltips) {
 			appendTooltipDescription(tooltip, this.getDescriptionId() + ".tooltip");
 		}
-	}
-
-	public Component getREITooltip() {
-		return Component.literal(Language.getInstance().getOrDefault(this.getDescriptionId() + ".tooltip").replace("\n", " ").replace("%%", "%"));
 	}
 
 	protected void appendTooltipDescription(List<Component> tooltip, String translKey) {

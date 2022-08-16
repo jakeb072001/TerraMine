@@ -1,0 +1,35 @@
+{
+  "pools": [
+    {
+      "name": "main",
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "terramine:ancient_shadow_helmet"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "terramine:ancient_shadow_chestplate"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "terramine:ancient_shadow_leggings"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "terramine:ancient_shadow_boots"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "terramine:configurable_random_chance",
+          "default_probability": 0.019
+        },
+        {
+          "condition": "minecraft:killed_by_player"
+        }
+      ]
+    }
+  ]
+}

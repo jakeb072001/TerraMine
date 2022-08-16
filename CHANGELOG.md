@@ -4,6 +4,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.5.1] - 2022-08-20
+### Added
+- Ancient Shadow Armor (Very rare drop from Eater of Souls)
+- Rotten Chunks and Vertebra (Drops from Eater of Souls and Crimera, respectively)
+- Compatibility with Numismatic Overhaul // wip, not yet, seems there's a bug
+- Option to force a different evil for your worlds (can allow for both evils in the same world)
+- Option to disable Dungeon and Cave Chests from generating
+
+### Fixed
+- Piggy Bank and Safe not opening if block placed above
+- Mobs being able to see the player when invisible
+
 ## [1.5.0] - 2022-08-14
 ### Added
 - Crimson Biome (Worlds will only ever have Corruption or Crimson, not both)
@@ -176,6 +188,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Initial release
 
+[1.5.1]: https://github.com/jakeb072001/TerraMine/compare/v1.5.0...v1.5.1
 [1.5.0]: https://github.com/jakeb072001/TerraMine/compare/v1.4.0...v1.5.0
 [1.4.0]: https://github.com/jakeb072001/TerraMine/compare/v1.3.6...v1.4.0
 [1.3.6]: https://github.com/jakeb072001/TerraMine/compare/v1.3.5...v1.3.6

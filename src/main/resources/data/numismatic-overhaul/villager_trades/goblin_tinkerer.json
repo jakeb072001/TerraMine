@@ -1,0 +1,108 @@
+{
+  "profession": "terramine:goblin_tinkerer",
+  "trades": {
+    "novice": [
+      {
+        "type": "numismatic-overhaul:buy_stack",
+        "price": 50000,
+        "buy": {
+          "item": "terramine:rocket_boots",
+          "count": 1
+        },
+        "max_uses": 1
+      },
+      {
+        "type": "numismatic-overhaul:sell_stack",
+        "price": 2000,
+        "sell": {
+          "item": "minecraft:dispenser",
+          "count": 1
+        },
+        "max_uses": 15,
+        "villager_experience": 10
+      }
+    ],
+	"apprentice": [
+      {
+        "type": "numismatic-overhaul:buy_stack",
+        "price": 50000,
+        "buy": {
+          "item": "terramine:stopwatch",
+          "count": 1
+        },
+        "max_uses": 1
+      },
+      {
+        "type": "numismatic-overhaul:sell_stack",
+        "price": 1500,
+        "sell": {
+          "item": "minecraft:sticky_piston",
+          "count": 1
+        },
+        "max_uses": 20,
+        "villager_experience": 5
+      }
+    ],
+	"journeyman": [
+      {
+        "type": "numismatic-overhaul:buy_stack",
+        "price": 50000,
+        "buy": {
+          "item": "terramine:weather_radio",
+          "count": 1
+        },
+        "max_uses": 1
+      },
+      {
+        "type": "numismatic-overhaul:buy_stack",
+        "price": 50000,
+        "buy": {
+          "item": "terramine:sextant",
+          "count": 1
+        },
+        "max_uses": 1
+      }
+    ],
+	"expert": [
+	{
+        "type": "numismatic-overhaul:sell_stack",
+        "price": 2500,
+        "sell": {
+          "item": "minecraft:observer",
+          "count": 1
+        },
+        "max_uses": 15,
+        "villager_experience": 15
+      },
+      {
+        "type": "numismatic-overhaul:buy_stack",
+        "price": 50000,
+        "buy": {
+          "item": "terramine:extendo_grip",
+          "count": 1
+        },
+        "max_uses": 1
+      }
+    ],
+	"master": [
+      {
+        "type": "numismatic-overhaul:buy_stack",
+        "price": 50000,
+        "buy": {
+          "item": "terramine:toolbelt",
+          "count": 1
+        },
+        "max_uses": 1
+      },
+      {
+        "type": "numismatic-overhaul:buy_stack",
+        "price": 50000,
+        "buy": {
+          "item": "terramine:toolbox",
+          "count": 1
+        },
+        "max_uses": 1
+      }
+    ]
+  }
+}

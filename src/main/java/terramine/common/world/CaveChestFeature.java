@@ -43,7 +43,7 @@ public class CaveChestFeature extends Feature<NoneFeatureConfiguration> {
 
 		generateContainer(level, positions.remove(0), random);
 
-		return true;
+		return !TerraMine.CONFIG.worldgen.caveChest.disableChests;
 	}
 
 	public boolean blockWaterCheck(BlockPos pos, WorldGenLevel level) {

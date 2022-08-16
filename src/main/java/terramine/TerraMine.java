@@ -28,6 +28,7 @@ import terramine.common.init.*;
 import terramine.common.network.ServerPacketHandler;
 import terramine.common.utility.InputHandler;
 import terramine.common.world.biome.BiomeAdder;
+import terramine.common.world.biome.BiomeAdderCrimsonForced;
 import terramine.common.world.biome.BiomeSurfaceRules;
 import terramine.extensions.PlayerStorages;
 
@@ -107,7 +108,8 @@ public class TerraMine implements ModInitializer, TerraBlenderApi {
 
 	@Override
 	public void onTerraBlenderInitialized() {
-		Regions.register(new BiomeAdder(id("terraria_biomes"), RegionType.OVERWORLD, 1));
+		Regions.register(new BiomeAdder(id("terraria_biomes"), RegionType.OVERWORLD, 15));
+		Regions.register(new BiomeAdderCrimsonForced(id("terraria_biomes_crimson_forced"), RegionType.OVERWORLD, 15));
 
 		SurfaceRuleManager.addToDefaultSurfaceRulesAtStage(SurfaceRuleManager.RuleCategory.OVERWORLD, SurfaceRuleManager.RuleStage.AFTER_BEDROCK,
 				1, BiomeSurfaceRules.makeRules());

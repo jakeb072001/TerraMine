@@ -15,6 +15,7 @@ import java.util.function.Supplier;
 public enum TerrariaArmorMaterials implements ArmorMaterial {
 
     SHADOW("shadow", 20, new int[]{3, 5, 7, 2}, 9, SoundEvents.ARMOR_EQUIP_IRON, 1.0F, 0.0F, Ingredient.of(ModItems.DEMONITE_INGOT)),
+    ANCIENT_SHADOW("ancient_shadow", 20, new int[]{3, 5, 7, 2}, 9, SoundEvents.ARMOR_EQUIP_IRON, 1.0F, 0.0F, Ingredient.of(ModItems.DEMONITE_INGOT)),
     CRIMSON("crimson", 20, new int[]{3, 5, 7, 2}, 9, SoundEvents.ARMOR_EQUIP_IRON, 1.0F, 0.0F, Ingredient.of(ModItems.CRIMTANE_INGOT));
 
     private static final int[] HEALTH_PER_SLOT = new int[]{13, 15, 16, 11};

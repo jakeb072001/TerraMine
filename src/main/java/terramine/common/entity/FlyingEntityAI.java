@@ -131,7 +131,7 @@ public class FlyingEntityAI extends Monster implements Enemy {
                         flyingEntity.velY = flyingEntity.random.nextInt(-2, 5);
                         flyingEntity.doOnce = true;
                     }
-                } else if (target != null) {
+                } else if (target != null && !target.isInvisible()) {
                     flyingEntity.doOnce = false;
                     if (flyingEntity.velX > -4 && flyingEntity.position().x > target.position().x + target.getBbWidth()) {
                         flyingEntity.velX -= 0.08;

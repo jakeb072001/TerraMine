@@ -7,12 +7,11 @@
         {
           "type": "minecraft:item",
           "weight": 33,
-          "name": "terramine:rotten_chunk"
+          "name": "terramine:vertebra"
         },
         {
-          "type": "minecraft:loot_table",
-          "weight": 66,
-          "name": "terramine:entities/eater_of_souls_armor"
+          "type": "minecraft:empty",
+          "weight": 66
         }
       ]
     }

@@ -33,21 +33,23 @@ public class ModItems {
 	public static final Item OBSIDIAN_SHIELD = register("obsidian_shield", new ShieldTrinketItem(new FabricItemSettings().maxDamage(2500).fireproof().rarity(Rarity.RARE).group(TerraMine.ITEM_GROUP_ACCESSORIES), Items.OBSIDIAN));
 
 	// Crafting Items
-	public static final Item LENS = register("lens", new CraftingItem(new FabricItemSettings().group(TerraMine.ITEM_GROUP_STUFF)));
-	public static final Item BLACK_LENS = register("black_lens", new CraftingItem(new FabricItemSettings().group(TerraMine.ITEM_GROUP_STUFF)));
+	public static final Item LENS = register("lens", new CraftingItem(new FabricItemSettings().group(TerraMine.ITEM_GROUP_STUFF), false));
+	public static final Item BLACK_LENS = register("black_lens", new CraftingItem(new FabricItemSettings().group(TerraMine.ITEM_GROUP_STUFF), false));
+	public static final Item ROTTEN_CHUNK = register("rotten_chunk", new CraftingItem(new FabricItemSettings().stacksTo(64).tab(TerraMine.ITEM_GROUP_STUFF), true));
+	public static final Item VERTEBRA = register("vertebra", new CraftingItem(new FabricItemSettings().stacksTo(64).tab(TerraMine.ITEM_GROUP_STUFF), false));
 
 	// Ores etc
-	public static final Item RAW_DEMONITE = register("raw_demonite", new CraftingItem(new FabricItemSettings().group(TerraMine.ITEM_GROUP_STUFF)));
-	public static final Item DEMONITE_INGOT = register("demonite_ingot", new CraftingItem(new FabricItemSettings().group(TerraMine.ITEM_GROUP_STUFF)));
-	public static final Item RAW_CRIMTANE = register("raw_crimtane", new CraftingItem(new FabricItemSettings().group(TerraMine.ITEM_GROUP_STUFF)));
-	public static final Item CRIMTANE_INGOT = register("crimtane_ingot", new CraftingItem(new FabricItemSettings().group(TerraMine.ITEM_GROUP_STUFF)));
+	public static final Item RAW_DEMONITE = register("raw_demonite", new CraftingItem(new FabricItemSettings().group(TerraMine.ITEM_GROUP_STUFF), false));
+	public static final Item DEMONITE_INGOT = register("demonite_ingot", new CraftingItem(new FabricItemSettings().group(TerraMine.ITEM_GROUP_STUFF), false));
+	public static final Item RAW_CRIMTANE = register("raw_crimtane", new CraftingItem(new FabricItemSettings().group(TerraMine.ITEM_GROUP_STUFF), false));
+	public static final Item CRIMTANE_INGOT = register("crimtane_ingot", new CraftingItem(new FabricItemSettings().group(TerraMine.ITEM_GROUP_STUFF), false));
 
 	// Magic Items
 	public static final Item MAGIC_MISSILE_ITEM = register("magic_missile", new MagicMissileItem());
 	public static final Item FLAMELASH_ITEM = register("flamelash", new FlamelashItem());
 	public static final Item RAINBOW_ROD_ITEM = register("rainbow_rod", new RainbowRodItem());
-	public static final Item FAKE_FALLEN_STAR = register("fake_fallen_star", new FallenStarItem(new FabricItemSettings()));
-	public static final Item FALLEN_STAR = register("fallen_star", new FallenStarItem(new FabricItemSettings().stacksTo(64).rarity(Rarity.UNCOMMON).tab(TerraMine.ITEM_GROUP_STUFF)));
+	public static final Item FAKE_FALLEN_STAR = register("fake_fallen_star", new CraftingItem(new FabricItemSettings(), true));
+	public static final Item FALLEN_STAR = register("fallen_star", new CraftingItem(new FabricItemSettings().stacksTo(64).rarity(Rarity.UNCOMMON).tab(TerraMine.ITEM_GROUP_STUFF), true));
 	public static final Item MANA_CRYSTAL = register("mana_crystal", new ManaCrystalItem(new FabricItemSettings().stacksTo(64).rarity(Rarity.RARE).tab(TerraMine.ITEM_GROUP_STUFF)));
 
 	// Informational
@@ -164,12 +166,16 @@ public class ModItems {
 	public static final Item CRIMTANE_SWORD = register("crimtane_sword", new SwordItem(TerrariaToolTiers.CRIMTANE, 3, -2.4f, new FabricItemSettings().group(TerraMine.ITEM_GROUP_EQUIPMENT)));
 
 	// Armours
-	// todo: add Ancient Armor, works same as Shadow but has different textures
 	// todo: make another register method that registers a full set of armor instead of registering per piece
+	// todo: make a custom renderer so that textures are structured better and i don't have to have a different material just for the texture
 	public static final Item SHADOW_HELMET = register("shadow_helmet", new ShadowArmor("shadow_armor", TerrariaArmorMaterials.SHADOW, EquipmentSlot.HEAD, new FabricItemSettings().group(TerraMine.ITEM_GROUP_ARMOR)));
 	public static final Item SHADOW_CHESTPLATE = register("shadow_chestplate", new ShadowArmor("shadow_armor", TerrariaArmorMaterials.SHADOW, EquipmentSlot.CHEST, new FabricItemSettings().group(TerraMine.ITEM_GROUP_ARMOR)));
 	public static final Item SHADOW_LEGGINGS = register("shadow_leggings", new ShadowArmor("shadow_armor", TerrariaArmorMaterials.SHADOW, EquipmentSlot.LEGS, new FabricItemSettings().group(TerraMine.ITEM_GROUP_ARMOR)));
 	public static final Item SHADOW_BOOTS = register("shadow_boots", new ShadowArmor("shadow_armor", TerrariaArmorMaterials.SHADOW, EquipmentSlot.FEET, new FabricItemSettings().group(TerraMine.ITEM_GROUP_ARMOR)));
+	public static final Item ANCIENT_SHADOW_HELMET = register("ancient_shadow_helmet", new ShadowArmor("shadow_armor", TerrariaArmorMaterials.ANCIENT_SHADOW, EquipmentSlot.HEAD, new FabricItemSettings().group(TerraMine.ITEM_GROUP_ARMOR)));
+	public static final Item ANCIENT_SHADOW_CHESTPLATE = register("ancient_shadow_chestplate", new ShadowArmor("shadow_armor", TerrariaArmorMaterials.ANCIENT_SHADOW, EquipmentSlot.CHEST, new FabricItemSettings().group(TerraMine.ITEM_GROUP_ARMOR)));
+	public static final Item ANCIENT_SHADOW_LEGGINGS = register("ancient_shadow_leggings", new ShadowArmor("shadow_armor", TerrariaArmorMaterials.ANCIENT_SHADOW, EquipmentSlot.LEGS, new FabricItemSettings().group(TerraMine.ITEM_GROUP_ARMOR)));
+	public static final Item ANCIENT_SHADOW_BOOTS = register("ancient_shadow_boots", new ShadowArmor("shadow_armor", TerrariaArmorMaterials.ANCIENT_SHADOW, EquipmentSlot.FEET, new FabricItemSettings().group(TerraMine.ITEM_GROUP_ARMOR)));
 	public static final Item CRIMSON_HELMET = register("crimson_helmet", new CrimsonArmor("crimson_armor", TerrariaArmorMaterials.CRIMSON, EquipmentSlot.HEAD, new FabricItemSettings().group(TerraMine.ITEM_GROUP_ARMOR)));
 	public static final Item CRIMSON_CHESTPLATE = register("crimson_chestplate", new CrimsonArmor("crimson_armor", TerrariaArmorMaterials.CRIMSON, EquipmentSlot.CHEST, new FabricItemSettings().group(TerraMine.ITEM_GROUP_ARMOR)));
 	public static final Item CRIMSON_LEGGINGS = register("crimson_leggings", new CrimsonArmor("crimson_armor", TerrariaArmorMaterials.CRIMSON, EquipmentSlot.LEGS, new FabricItemSettings().group(TerraMine.ITEM_GROUP_ARMOR)));

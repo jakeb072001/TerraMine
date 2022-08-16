@@ -46,20 +46,26 @@ public final class ModConfig extends PartitioningSerializer.GlobalData {
 		public float accessoryRarity = 1;
 		@ConfigEntry.Gui.Tooltip
 		public boolean evilBiomeEnabled = true;
-		@ConfigEntry.Gui.CollapsibleObject(startExpanded = false)
+		@ConfigEntry.Gui.Tooltip
+		public boolean forceCorruption = false;
+		@ConfigEntry.Gui.Tooltip
+		public boolean forceCrimson = false;
+		@ConfigEntry.Gui.CollapsibleObject()
 		public CaveChest caveChest = new CaveChest();
-		@ConfigEntry.Gui.CollapsibleObject(startExpanded = false)
+		@ConfigEntry.Gui.CollapsibleObject()
 		public Structures structures = new Structures();
 
 		public static final class CaveChest {
-			@ConfigEntry.Gui.RequiresRestart
+			@ConfigEntry.Gui.Tooltip
+			public boolean disableChests = false;
+
 			@ConfigEntry.Gui.Tooltip(count = 2)
 			@ConfigEntry.BoundedDiscrete(max = 10, min = 1)
 			public int chestRarity = 3;
 
 			@ConfigEntry.Gui.Tooltip(count = 2)
 			@ConfigEntry.BoundedDiscrete(max = 100)
-			public int mimicChance = 15;
+			public int mimicChance = 15; // not in use right now
 
 			@ConfigEntry.Gui.Tooltip
 			@ConfigEntry.BoundedDiscrete(max = 319, min = -64)
@@ -80,16 +86,11 @@ public final class ModConfig extends PartitioningSerializer.GlobalData {
 			@ConfigEntry.Gui.Tooltip
 			@ConfigEntry.BoundedDiscrete(max = 319, min = -64)
 			public int deepCaveY = -30;
-
-			private CaveChest() {
-			}
 		}
 
 		public static final class Structures {
-			@ConfigEntry.Gui.RequiresRestart
 			@ConfigEntry.Gui.Tooltip
-			@ConfigEntry.BoundedDiscrete(max = 280, min = 80)
-			public int floatingIslandHeight = 180; // currently unused
+			public boolean disableDungeon = false;
 		}
 	}
 }

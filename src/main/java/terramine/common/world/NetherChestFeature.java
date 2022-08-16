@@ -9,6 +9,7 @@ import net.minecraft.world.level.block.entity.RandomizableContainerBlockEntity;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
+import terramine.TerraMine;
 import terramine.common.init.ModBlocks;
 import terramine.common.init.ModLootTables;
 
@@ -41,7 +42,7 @@ public class NetherChestFeature extends Feature<NoneFeatureConfiguration> {
 
 		generateContainer(level, positions.remove(0), random);
 
-		return true;
+		return !TerraMine.CONFIG.worldgen.caveChest.disableChests;
 	}
 
 	public boolean blockLavaCheck(BlockPos pos, WorldGenLevel level) {

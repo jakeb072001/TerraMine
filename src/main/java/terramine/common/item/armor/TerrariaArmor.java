@@ -24,6 +24,7 @@ import org.jetbrains.annotations.NotNull;
 import terramine.TerraMine;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 
 // todo: custom models: https://github.com/Luke100000/ImmersiveArmors/blob/1.19.2/common/src/main/java/immersive_armors/mixin/MixinArmorFeatureRenderer.java ?
@@ -70,6 +71,10 @@ public class TerrariaArmor extends ArmorItem {
         }
     }
 
+    public String getArmorType() {
+        return armorType;
+    }
+
     @Override
     public void inventoryTick(@NotNull ItemStack itemStack, @NotNull Level level, @NotNull Entity entity, int i, boolean bl) {
         super.inventoryTick(itemStack, level, entity, i, bl);
@@ -80,7 +85,7 @@ public class TerrariaArmor extends ArmorItem {
             if (equippedStack == itemStack) {
                 for (ItemStack item : livingEntity.getArmorSlots()) {
                     if (item.getItem() instanceof TerrariaArmor armorItem) {
-                        isEquipped = armorItem.getMaterial() == this.getMaterial();
+                        isEquipped = Objects.equals(armorItem.getArmorType(), this.getArmorType());
                         if (!isEquipped) {
                             break;
                         }
@@ -118,7 +123,7 @@ public class TerrariaArmor extends ArmorItem {
             if (Minecraft.getInstance().player != null) {
                 for (ItemStack item : Minecraft.getInstance().player.getArmorSlots()) {
                     if (item.getItem() instanceof TerrariaArmor armorItem) {
-                        isEquipped = armorItem.getMaterial() == this.getMaterial();
+                        isEquipped = Objects.equals(armorItem.getArmorType(), this.getArmorType());
                         if (!isEquipped) {
                             break;
                         }

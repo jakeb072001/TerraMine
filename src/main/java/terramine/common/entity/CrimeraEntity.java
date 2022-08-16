@@ -34,6 +34,6 @@ public class CrimeraEntity extends FlyingEntityAI {
 
     @Override
     protected ResourceLocation getDefaultLootTable() {
-        return ModLootTables.EATER_OF_SOULS;
+        return ModLootTables.CRIMERA;
     }
 }

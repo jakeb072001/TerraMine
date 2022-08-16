@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "terramine:item/armor/ancient_shadow/ancient_shadow_helmet"
+  }
+}
