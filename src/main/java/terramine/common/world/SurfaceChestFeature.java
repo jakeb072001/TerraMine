@@ -11,7 +11,10 @@ import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
 import terramine.TerraMine;
+import terramine.common.entity.MimicEntity;
 import terramine.common.init.ModBlocks;
+import terramine.common.init.ModComponents;
+import terramine.common.init.ModEntities;
 import terramine.common.init.ModLootTables;
 
 import java.util.ArrayList;
@@ -58,8 +61,18 @@ public class SurfaceChestFeature extends Feature<NoneFeatureConfiguration> {
 			this.setBlock(level, pos, ModBlocks.WATER_CHEST.defaultBlockState().setValue(ChestBlock.FACING, Direction.Plane.HORIZONTAL.getRandomDirection(random)).setValue(ChestBlock.WATERLOGGED, true));
 			RandomizableContainerBlockEntity.setLootTable(level, random, pos, ModLootTables.OCEAN_CHEST);
 		} else {
-			this.setBlock(level, pos, Blocks.CHEST.defaultBlockState().setValue(ChestBlock.FACING, Direction.Plane.HORIZONTAL.getRandomDirection(random)));
-			RandomizableContainerBlockEntity.setLootTable(level, random, pos, ModLootTables.SURFACE_CHEST);
+			if (ModComponents.HARDMODE.get(level.getLevelData()).get() && random.nextFloat() * 100 < TerraMine.CONFIG.worldgen.caveChest.mimicChance) {
+				MimicEntity mimic = ModEntities.MIMIC.create(level.getLevel());
+				if (mimic != null) {
+					mimic.setDormant(true);
+					mimic.setFacing(Direction.Plane.HORIZONTAL.getRandomDirection(random));
+					mimic.setPos(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5);
+					level.addFreshEntity(mimic);
+				}
+			} else {
+				this.setBlock(level, pos, Blocks.CHEST.defaultBlockState().setValue(ChestBlock.FACING, Direction.Plane.HORIZONTAL.getRandomDirection(random)));
+				RandomizableContainerBlockEntity.setLootTable(level, random, pos, ModLootTables.SURFACE_CHEST);
+			}
 		}
 	}
 }

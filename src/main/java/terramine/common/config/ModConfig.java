@@ -63,9 +63,9 @@ public final class ModConfig extends PartitioningSerializer.GlobalData {
 			@ConfigEntry.BoundedDiscrete(max = 10, min = 1)
 			public int chestRarity = 3;
 
-			@ConfigEntry.Gui.Tooltip(count = 2)
+			@ConfigEntry.Gui.Tooltip(count = 0)
 			@ConfigEntry.BoundedDiscrete(max = 100)
-			public int mimicChance = 15; // not in use right now
+			public int mimicChance = 10;
 
 			@ConfigEntry.Gui.Tooltip
 			@ConfigEntry.BoundedDiscrete(max = 319, min = -64)

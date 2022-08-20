@@ -11,7 +11,10 @@ import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
 import terramine.TerraMine;
+import terramine.common.entity.MimicEntity;
 import terramine.common.init.ModBlocks;
+import terramine.common.init.ModComponents;
+import terramine.common.init.ModEntities;
 import terramine.common.init.ModLootTables;
 
 import java.util.ArrayList;
@@ -58,6 +61,7 @@ public class CaveChestFeature extends Feature<NoneFeatureConfiguration> {
 		boolean frozen = false;
 		boolean jungle = false;
 		boolean desert = false;
+
 		if (level.getBiome(offsetPos).value().coldEnoughToSnow(offsetPos)) {
 			frozen = true;
 		} else if (level.getBiome(offsetPos).is(BiomeTags.IS_JUNGLE)) {
@@ -65,7 +69,21 @@ public class CaveChestFeature extends Feature<NoneFeatureConfiguration> {
 		} else if (level.getBiome(offsetPos).is(BiomeTags.HAS_VILLAGE_DESERT)) {
 			desert = true;
 		}
-		if (random.nextInt(5) == 0) {
+
+		if (ModComponents.HARDMODE.get(level.getLevelData()).get() && random.nextFloat() * 100 < TerraMine.CONFIG.worldgen.caveChest.mimicChance) {
+			MimicEntity mimic = ModEntities.MIMIC.create(level.getLevel());
+			if (mimic != null) {
+				if (frozen) {
+					mimic.setMimicType(3);
+				} else {
+					mimic.setMimicType(2);
+				}
+				mimic.setDormant(true);
+				mimic.setFacing(Direction.Plane.HORIZONTAL.getRandomDirection(random));
+				mimic.setPos(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5);
+				level.addFreshEntity(mimic);
+			}
+		} else if (random.nextInt(5) == 0) {
 			if (frozen) {
 				this.setBlock(level, pos, ModBlocks.TRAPPED_FROZEN_CHEST.defaultBlockState().setValue(ChestBlock.FACING, Direction.Plane.HORIZONTAL.getRandomDirection(random)));
 			} else if (jungle) {
@@ -92,6 +110,7 @@ public class CaveChestFeature extends Feature<NoneFeatureConfiguration> {
 				this.setBlock(level, pos, ModBlocks.GOLD_CHEST.defaultBlockState().setValue(ChestBlock.FACING, Direction.Plane.HORIZONTAL.getRandomDirection(random)));
 			}
 		}
+
 		if (pos.getY() <= TerraMine.CONFIG.worldgen.caveChest.deepCaveY) {
 			RandomizableContainerBlockEntity.setLootTable(level, random, pos, ModLootTables.DEEP_CAVE_CHEST);
 		} else {

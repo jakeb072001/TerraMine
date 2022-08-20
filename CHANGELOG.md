@@ -4,13 +4,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [1.5.1] - 2022-08-20
+## [1.5.1] - 2022-08-21
 ### Added
 - Ancient Shadow Armor (Very rare drop from Eater of Souls)
-- Rotten Chunks and Vertebra (Drops from Eater of Souls and Crimera, respectively)
-- Compatibility with Numismatic Overhaul // wip, not yet, seems there's a bug
+- Rotten Chunks and Vertebra (Drops from Eater of Souls and Crimera, respectively. Does nothing right now)
+- Compatibility with Numismatic Overhaul (Not yet working due to Numismatic Overhaul bug)
 - Option to force a different evil for your worlds (can allow for both evils in the same world)
 - Option to disable Dungeon and Cave Chests from generating
+
+### Changed
+- ReImplemented Mimics (Only spawn in Hardmode, can be enabled and disabled with /hardmode command for now)
+  - Mimics are going to be changed more later to make them more unique and not just the same as from Artifacts
+  - Mimics have surface, cave, ice, and shadow variants (same loot tables right now)
 
 ### Fixed
 - Piggy Bank and Safe not opening if block placed above

@@ -5,6 +5,7 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
+import org.jetbrains.annotations.NotNull;
 import terramine.TerraMine;
 import terramine.client.render.entity.model.MimicModel;
 import terramine.common.entity.MimicEntity;
@@ -20,12 +21,12 @@ public class MimicRenderer extends MobRenderer<MimicEntity, MimicModel> {
     }
 
     @Override
-    public void render(MimicEntity mimic, float entityYaw, float partialTicks, PoseStack matrixStack, MultiBufferSource buffer, int packedLight) {
+    public void render(@NotNull MimicEntity mimic, float entityYaw, float partialTicks, @NotNull PoseStack matrixStack, @NotNull MultiBufferSource buffer, int packedLight) {
         super.render(mimic, entityYaw, partialTicks, matrixStack, buffer, packedLight);
     }
 
     @Override
-    public ResourceLocation getTextureLocation(MimicEntity entity) {
+    public ResourceLocation getTextureLocation(@NotNull MimicEntity entity) {
         return TEXTURE;
     }
 }

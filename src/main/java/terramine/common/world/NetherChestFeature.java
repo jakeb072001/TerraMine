@@ -4,13 +4,17 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.WorldGenLevel;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.ChestBlock;
 import net.minecraft.world.level.block.entity.RandomizableContainerBlockEntity;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
 import terramine.TerraMine;
+import terramine.common.entity.MimicEntity;
 import terramine.common.init.ModBlocks;
+import terramine.common.init.ModComponents;
+import terramine.common.init.ModEntities;
 import terramine.common.init.ModLootTables;
 
 import java.util.ArrayList;
@@ -53,7 +57,18 @@ public class NetherChestFeature extends Feature<NoneFeatureConfiguration> {
 	}
 
 	public void generateContainer(WorldGenLevel level, BlockPos pos, RandomSource random) {
-		this.setBlock(level, pos, ModBlocks.SHADOW_CHEST.defaultBlockState().setValue(ChestBlock.FACING, Direction.Plane.HORIZONTAL.getRandomDirection(random)));
-		RandomizableContainerBlockEntity.setLootTable(level, random, pos, ModLootTables.SHADOW_CHEST);
+		if (ModComponents.HARDMODE.get(level.getLevelData()).get() && random.nextFloat() * 100 < TerraMine.CONFIG.worldgen.caveChest.mimicChance) {
+			MimicEntity mimic = ModEntities.MIMIC.create(level.getLevel());
+			if (mimic != null) {
+				mimic.setDormant(true);
+				mimic.setFacing(Direction.Plane.HORIZONTAL.getRandomDirection(random));
+				mimic.setPos(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5);
+				mimic.setMimicType(4);
+				level.addFreshEntity(mimic);
+			}
+		} else {
+			this.setBlock(level, pos, ModBlocks.SHADOW_CHEST.defaultBlockState().setValue(ChestBlock.FACING, Direction.Plane.HORIZONTAL.getRandomDirection(random)));
+			RandomizableContainerBlockEntity.setLootTable(level, random, pos, ModLootTables.SHADOW_CHEST);
+		}
 	}
 }

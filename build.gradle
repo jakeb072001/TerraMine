@@ -12,6 +12,7 @@ repositories {
     maven { url = "https://maven.shedaniel.me/" }
     maven { url = "https://ladysnake.jfrog.io/artifactory/mods" }
     maven { url = "https://maven.gegy.dev/" }
+    maven { url = "https://mvn.devos.one/snapshots/" }
     maven { url = "https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/" }
     maven {
         url = "https://maven.florens.be"
@@ -86,6 +87,7 @@ dependencies {
     modImplementation include("dev.onyxstudios.cardinal-components-api:cardinal-components-world:${project.cca_version}")
     modImplementation include("be.florens:expandability-fabric:${project.expandability_version}")
     modImplementation include("io.github.cottonmc:LibGui:${project.libgui_version}")
+    // modImplementation include("io.github.fabricators_of_create:Porting-Lib:${project.porting_lib_version}")
     modImplementation include("com.jamieswhiteshirt:reach-entity-attributes:${project.reach_entity_attr_version}")
     modImplementation include("com.github.emilyploszaj:step-height-entity-attribute:${project.step_height_attr_version}") {
         transitive = false

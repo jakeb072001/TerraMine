@@ -14,6 +14,8 @@ import net.minecraft.client.renderer.entity.layers.RenderLayer;
 import net.minecraft.client.renderer.texture.TextureAtlas;
 import net.minecraft.client.resources.model.Material;
 import net.minecraft.resources.ResourceLocation;
+import org.jetbrains.annotations.NotNull;
+import terramine.TerraMine;
 import terramine.client.render.entity.model.MimicChestLayerModel;
 import terramine.client.render.entity.model.MimicModel;
 import terramine.common.entity.MimicEntity;
@@ -26,52 +28,29 @@ import java.util.List;
 
 public class MimicChestLayer extends RenderLayer<MimicEntity, MimicModel> {
 
+    public static final ResourceLocation CHEST_ATLAS = new ResourceLocation("textures/atlas/chest.png");
     private final MimicChestLayerModel chestModel;
+    public final Material christmasChestMaterial;
     public final Material vanillaChestMaterial;
     public final List<Material> chestMaterials;
 
     public MimicChestLayer(RenderLayerParent<MimicEntity, MimicModel> entityRenderer, EntityModelSet modelSet) {
         super(entityRenderer);
 
-        Calendar calendar = Calendar.getInstance();
-        boolean isChristmas = calendar.get(Calendar.MONTH) + 1 == 12 && calendar.get(Calendar.DATE) >= 24 && calendar.get(Calendar.DATE) <= 26;
-
         chestModel = new MimicChestLayerModel(modelSet.bakeLayer(ModModelLayers.MIMIC_OVERLAY));
         chestMaterials = new ArrayList<>();
-        vanillaChestMaterial = isChristmas ? Sheets.CHEST_XMAS_LOCATION : Sheets.CHEST_LOCATION;
+        christmasChestMaterial = Sheets.CHEST_XMAS_LOCATION;
+        vanillaChestMaterial = Sheets.CHEST_LOCATION;
 
-        // Note: neither lootr and quark are available on Fabric
-        // The following Forge mod compatibility is kept just in case
-        if (FabricLoader.getInstance().isModLoaded("lootr")) {
-            ResourceLocation chestLocation = new ResourceLocation("lootr", "chest");
-            //noinspection deprecation
-            chestMaterials.add(new Material(TextureAtlas.LOCATION_BLOCKS, chestLocation));
-        } else {
-            if (!isChristmas && FabricLoader.getInstance().isModLoaded("quark")) {
-                List<String> chestTypes = Arrays.asList(
-                        "oak",
-                        "spruce",
-                        "birch",
-                        "jungle",
-                        "acacia",
-                        "dark_oak",
-                        "warped",
-                        "crimson"
-                );
-
-                ResourceLocation atlas = new ResourceLocation("textures/atlas/chest.png");
-                for (String chestType : chestTypes) {
-                    ResourceLocation chestLocation = new ResourceLocation("quark", String.format("model/chest/%s/normal", chestType));
-                    chestMaterials.add(new Material(atlas, chestLocation));
-                }
-            }
-
-            chestMaterials.add(vanillaChestMaterial);
-        }
+        chestMaterials.add(vanillaChestMaterial);
+        chestMaterials.add(christmasChestMaterial);
+        chestMaterials.add(new Material(CHEST_ATLAS, TerraMine.id("block/chests/gold/gold_chest")));
+        chestMaterials.add(new Material(CHEST_ATLAS, TerraMine.id("block/chests/frozen/frozen_chest")));
+        chestMaterials.add(new Material(CHEST_ATLAS, TerraMine.id("block/chests/shadow/shadow_chest")));
     }
 
     @Override
-    public void render(PoseStack matrixStack, MultiBufferSource buffer, int packedLight, MimicEntity mimic, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
+    public void render(@NotNull PoseStack matrixStack, @NotNull MultiBufferSource buffer, int packedLight, MimicEntity mimic, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
         if (!mimic.isInvisible()) {
             matrixStack.pushPose();
 
@@ -92,6 +71,6 @@ public class MimicChestLayer extends RenderLayer<MimicEntity, MimicModel> {
         if (chestMaterials.size() == 1) {
             return chestMaterials.get(0);
         }
-        return chestMaterials.get((int) (Math.abs(mimic.getUUID().getMostSignificantBits()) % chestMaterials.size()));
+        return chestMaterials.get(mimic.getMimicType());
     }
 }

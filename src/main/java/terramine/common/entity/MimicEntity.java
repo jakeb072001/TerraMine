@@ -1,6 +1,11 @@
 package terramine.common.entity;
 
+import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.Tag;
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.EntityDataSerializers;
+import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
@@ -25,15 +30,33 @@ import terramine.common.init.ModSoundEvents;
 import java.util.EnumSet;
 
 public class MimicEntity extends Mob implements Enemy {
-
+	public static final EntityDataAccessor<Integer> typed_data = SynchedEntityData.defineId(MimicEntity.class, EntityDataSerializers.INT);
 	public int ticksInAir;
 	public int attackCooldown;
 	public boolean isDormant;
+	public Direction facing;
 
 	public MimicEntity(EntityType<? extends MimicEntity> type, Level world) {
 		super(type, world);
 		moveControl = new MimicMovementController(this);
 		xpReward = 10;
+	}
+
+	/**
+	 * 0 = vanilla, 1 = christmas, 2 = gold, 3 = ice, 4 = shadow
+	*/
+	public void setMimicType(int mimicType) {
+		this.entityData.set(typed_data, mimicType);
+	}
+
+	public int getMimicType() {
+		return this.entityData.get(typed_data);
+	}
+
+	@Override
+	protected void defineSynchedData() {
+		super.defineSynchedData();
+		this.entityData.define(typed_data, 0);
 	}
 
 	public static AttributeSupplier.Builder createMobAttributes() {
@@ -43,6 +66,13 @@ public class MimicEntity extends Mob implements Enemy {
 				.add(Attributes.KNOCKBACK_RESISTANCE, 0.8)
 				.add(Attributes.MOVEMENT_SPEED, 0.8)
 				.add(Attributes.ATTACK_DAMAGE, 5);
+	}
+
+	public void setFacing(Direction facing) {
+		this.facing = facing;
+		if (facing != null && getMoveControl() instanceof MimicMovementController controller) {
+			controller.setDirection(facing.toYRot(), false);
+		}
 	}
 
 	@Override
@@ -78,13 +108,22 @@ public class MimicEntity extends Mob implements Enemy {
 		super.addAdditionalSaveData(compound);
 		compound.putInt("ticksInAir", ticksInAir);
 		compound.putBoolean("isDormant", isDormant);
+		if (facing != null) {
+			compound.putString("facing", facing.name());
+		}
 	}
 
 	@Override
 	public void readAdditionalSaveData(@NotNull CompoundTag compound) {
 		super.readAdditionalSaveData(compound);
 		ticksInAir = compound.getInt("ticksInAir");
-		isDormant = compound.getBoolean("isDormant");
+		if (compound.contains("facing", Tag.TAG_STRING)) {
+			facing = Direction.byName(compound.getString("facing"));
+		} else {
+			facing = null;
+		}
+		setDormant(compound.getBoolean("isDormant"));
+		setFacing(facing);
 	}
 
 	@Override
@@ -167,8 +206,11 @@ public class MimicEntity extends Mob implements Enemy {
 		return ModLootTables.MIMIC;
 	}
 
-	public void setDormant() {
-		isDormant = true;
+	public void setDormant(boolean isDormant) {
+		this.isDormant = isDormant;
+		if (!isDormant) {
+			facing = null;
+		}
 	}
 
 	protected static class AttackGoal extends Goal {
