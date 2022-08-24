@@ -17,6 +17,7 @@ public class ModLayerDefinitions {
 
         register(ModModelLayers.DEMON_EYE, DemonEyeModel::createLayer);
         register(ModModelLayers.EATER_OF_SOULS, EaterOfSoulsModel::createLayer);
+        register(ModModelLayers.DEVOURER, DevourerModel::createLayer);
         register(ModModelLayers.CRIMERA, CrimeraModel::createLayer);
 
         register(ModModelLayers.DIVING_HELMET, layer(HeadModel.createDivingHelmet(), 64, 32));

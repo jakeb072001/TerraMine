@@ -53,11 +53,13 @@ public class CrimsonHelper extends SpreadingSnowyDirtBlock  {
                 BlockPos blockPos2 = blockPos.offset(random.nextInt(3) - 1, random.nextInt(5) - 3, random.nextInt(3) - 1);
                 if (!serverLevel.getBlockState(blockPos2).is(Blocks.GRASS_BLOCK) || canNotPropagate(grass, serverLevel, blockPos2)) continue;
                 serverLevel.setBlockAndUpdate(blockPos2, grass.setValue(SNOWY, (serverLevel.getBlockState(blockPos2.above()).is(Blocks.SNOW) || serverLevel.getBlockState(blockPos2.above()).is(ModBlocks.CRIMSON_SNOW_LAYER))));
+                CorruptionHelper.spreadBiome(serverLevel, blockPos2, true);
             }
             for (int i = 0; i < 4; ++i) { // normal grass spread with crimson grass
                 BlockPos blockPos2 = blockPos.offset(random.nextInt(3) - 1, random.nextInt(5) - 3, random.nextInt(3) - 1);
                 if (!serverLevel.getBlockState(blockPos2).is(Blocks.DIRT) || canNotPropagate(grass, serverLevel, blockPos2)) continue;
                 serverLevel.setBlockAndUpdate(blockPos2, grass.setValue(SNOWY, (serverLevel.getBlockState(blockPos2.above()).is(Blocks.SNOW) || serverLevel.getBlockState(blockPos2.above()).is(ModBlocks.CRIMSON_SNOW_LAYER))));
+                CorruptionHelper.spreadBiome(serverLevel, blockPos2, true);
             }
             for (int i = 0; i < 4; ++i) { // spread layered snow
                 BlockPos blockPos2 = blockPos.offset(random.nextInt(3) - 1, random.nextInt(5) - 3, random.nextInt(3) - 1);
@@ -106,6 +108,7 @@ public class CrimsonHelper extends SpreadingSnowyDirtBlock  {
                 BlockPos blockPos2 = blockPos.offset(random.nextInt(3) - 1, random.nextInt(5) - 3, random.nextInt(3) - 1);
                 if (!serverLevel.getBlockState(blockPos2).is(spreadTo)) continue;
                 serverLevel.setBlockAndUpdate(blockPos2, block.setValue(SNOWY, (serverLevel.getBlockState(blockPos2.above()).is(Blocks.SNOW) || serverLevel.getBlockState(blockPos2.above()).is(ModBlocks.CRIMSON_SNOW_LAYER))));
+                CorruptionHelper.spreadBiome(serverLevel, blockPos2, true);
             }
         }
     }

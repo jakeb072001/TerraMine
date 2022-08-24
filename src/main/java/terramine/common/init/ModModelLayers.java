@@ -13,6 +13,7 @@ public class ModModelLayers {
 
     public static final ModelLayerLocation DEMON_EYE = createLocation("demon_eye");
     public static final ModelLayerLocation EATER_OF_SOULS = createLocation("eater_of_souls");
+    public static final ModelLayerLocation DEVOURER = createLocation("devourer");
     public static final ModelLayerLocation CRIMERA = createLocation("crimera");
 
     public static final ModelLayerLocation DIVING_HELMET = createLocation("diving_helmet");

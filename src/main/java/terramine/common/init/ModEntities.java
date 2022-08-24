@@ -11,6 +11,9 @@ import net.minecraft.world.level.levelgen.Heightmap;
 import terramine.TerraMine;
 import terramine.common.entity.*;
 import terramine.common.entity.block.InstantPrimedTNTEntity;
+import terramine.common.entity.devourer.DevourerBodyEntity;
+import terramine.common.entity.devourer.DevourerEntity;
+import terramine.common.entity.devourer.DevourerTailEntity;
 
 public class ModEntities {
 
@@ -39,6 +42,33 @@ public class ModEntities {
 			.spawnGroup(MobCategory.MONSTER)
 			.defaultAttributes(EaterOfSoulsEntity::createMobAttributes)
 			.spawnRestriction(SpawnPlacements.Type.NO_RESTRICTIONS, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, EaterOfSoulsEntity::checkMobSpawnRules)
+			.build());
+
+	public static final EntityType<DevourerEntity> DEVOURER = register("devourer", FabricEntityTypeBuilder
+			.<DevourerEntity>createMob()
+			.entityFactory(DevourerEntity::new)
+			.dimensions(EntityDimensions.fixed(0.8f, 0.4f))
+			.spawnGroup(MobCategory.MONSTER)
+			.defaultAttributes(DevourerEntity::createMobAttributes)
+			.spawnRestriction(SpawnPlacements.Type.NO_RESTRICTIONS, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, DevourerEntity::checkMobSpawnRules)
+			.build());
+
+	public static final EntityType<DevourerBodyEntity> DEVOURER_BODY = register("devourer_body", FabricEntityTypeBuilder
+			.<DevourerBodyEntity>createMob()
+			.entityFactory(DevourerBodyEntity::new)
+			.dimensions(EntityDimensions.fixed(0.8f, 0.4f))
+			.spawnGroup(MobCategory.MONSTER)
+			.defaultAttributes(DevourerBodyEntity::createMobAttributes)
+			.disableSummon()
+			.build());
+
+	public static final EntityType<DevourerTailEntity> DEVOURER_TAIL = register("devourer_tail", FabricEntityTypeBuilder
+			.<DevourerTailEntity>createMob()
+			.entityFactory(DevourerTailEntity::new)
+			.dimensions(EntityDimensions.fixed(0.8f, 0.4f))
+			.spawnGroup(MobCategory.MONSTER)
+			.defaultAttributes(DevourerTailEntity::createMobAttributes)
+			.disableSummon()
 			.build());
 
 	public static final EntityType<CrimeraEntity> CRIMERA = register("crimera", FabricEntityTypeBuilder

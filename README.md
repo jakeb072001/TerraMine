@@ -8,4 +8,4 @@ Not really ready for release yet, but you can still try it if you want.
 
 Modrinth: https://modrinth.com/mod/terramine
 
-CurseForge: https://www.curseforge.com/minecraft/mc-mods/terra-mine
+CurseForge: https://www.curseforge.com/minecraft/mc-mods/terramine

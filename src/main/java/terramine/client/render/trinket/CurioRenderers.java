@@ -8,6 +8,7 @@ import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
+import org.jetbrains.annotations.NotNull;
 import terramine.TerraMine;
 import terramine.client.render.trinket.model.*;
 import terramine.client.render.trinket.renderer.BeltCurioRenderer;
@@ -20,7 +21,7 @@ import terramine.common.init.ModModelLayers;
 public class CurioRenderers implements SimpleSynchronousResourceReloadListener {
 
     @Override
-    public void onResourceManagerReload(ResourceManager resourceManager) {
+    public void onResourceManagerReload(@NotNull ResourceManager resourceManager) {
         // head
         TrinketRendererRegistry.registerRenderer(ModItems.DIVING_HELMET, new CurioRenderer("diving_helmet", new HeadModel(bakeLayer(ModModelLayers.DIVING_HELMET), RenderType::entityTranslucent)));
 

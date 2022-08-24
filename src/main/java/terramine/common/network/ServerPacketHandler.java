@@ -1,6 +1,8 @@
 package terramine.common.network;
 
+import dev.architectury.networking.NetworkManager;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
+import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.Registry;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.particles.SimpleParticleType;
@@ -8,6 +10,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.phys.Vec3;
 import terramine.TerraMine;
 import terramine.common.init.ModComponents;
@@ -23,6 +26,7 @@ public class ServerPacketHandler {
     public static final ResourceLocation CONTROLS_PACKET_ID = TerraMine.id("controls_packet");
     public static final ResourceLocation ROCKET_BOOTS_SOUND_PACKET_ID = TerraMine.id("rocket_boots_sound");
     public static final ResourceLocation ROCKET_BOOTS_PARTICLE_PACKET_ID = TerraMine.id("rocket_boots_particles");
+    public static final ResourceLocation UPDATE_BIOME_PACKET_ID = TerraMine.id("update_biome");
 
     public static void register() {
         ServerPlayNetworking.registerGlobalReceiver(BONE_MEAL_PACKET_ID, BoneMealPacket::receive);
@@ -102,6 +106,12 @@ public class ServerPacketHandler {
                     player.getLevel().sendParticles(particle2, v.x, v.y, v.z, 1, 0, -0.2D, 0, random);
                 }
             });
+        });
+
+        NetworkManager.registerReceiver(NetworkManager.s2c(), UPDATE_BIOME_PACKET_ID, (buf, context) -> {
+            int chunkX = buf.readInt();
+            int chunkZ = buf.readInt();
+            ((ClientLevel) context.getPlayer().level).onChunkLoaded(new ChunkPos(chunkX, chunkZ));
         });
     }
 }

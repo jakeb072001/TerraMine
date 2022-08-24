@@ -14,8 +14,9 @@ public class CorruptionBiome {
 
     private static Biome createCorruption() {
         MobSpawnSettings.Builder spawnSettings = new MobSpawnSettings.Builder();
-        //BiomeDefaultFeatures.monsters(spawnSettings, 100, 25, 100, false);
-        spawnSettings.addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(ModEntities.EATER_OF_SOULS, 25, 0, 2));
+        BiomeDefaultFeatures.monsters(spawnSettings, 100, 25, 100, false);
+        spawnSettings.addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(ModEntities.EATER_OF_SOULS, 100, 0, 2));
+        spawnSettings.addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(ModEntities.DEVOURER, 25, 0, 1));
 
         BiomeGenerationSettings.Builder generationSettings = new BiomeGenerationSettings.Builder();
         BiomeDefaultFeatures.addDefaultCarversAndLakes(generationSettings);

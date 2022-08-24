@@ -250,7 +250,6 @@ public class FlyingEntityAI extends Monster implements Enemy {
 
     @Override
     public boolean hurt(@NotNull DamageSource source, float amount) {
-        playSound(ModSoundEvents.DEMON_EYE_HURT, getSoundVolume(), getVoicePitch());
         return super.hurt(source, amount);
     }
 
