@@ -55,7 +55,7 @@ public class ModBlocks {
     public static final Block CORRUPTED_COBBLED_DEEPSLATE = register("corrupted_cobbled_deepslate", new CorruptedBlock(Properties.copy(Blocks.COBBLED_DEEPSLATE).randomTicks()));
     public static final Block CORRUPTED_COAL_ORE = register("corrupted_coal_ore", new CorruptedBlock(Properties.copy(Blocks.COAL_ORE).randomTicks()));
     public static final Block CORRUPTED_IRON_ORE = register("corrupted_iron_ore", new CorruptedBlock(Properties.copy(Blocks.IRON_ORE).randomTicks()));
-    public static final Block DEMONITE_ORE = register("demonite_ore", new CorruptedBlock(Properties.copy(Blocks.IRON_ORE).randomTicks()));
+    public static final Block DEMONITE_ORE = register("demonite_ore", new Block(Properties.copy(Blocks.IRON_ORE).randomTicks()));
     public static final Block CORRUPTED_COPPER_ORE = register("corrupted_copper_ore", new CorruptedBlock(Properties.copy(Blocks.COPPER_ORE).randomTicks()));
     public static final Block CORRUPTED_GOLD_ORE = register("corrupted_gold_ore", new CorruptedBlock(Properties.copy(Blocks.GOLD_ORE).randomTicks()));
     public static final Block CORRUPTED_LAPIS_ORE = register("corrupted_lapis_ore", new CorruptedBlock(Properties.copy(Blocks.LAPIS_ORE).randomTicks()));
@@ -64,7 +64,7 @@ public class ModBlocks {
     public static final Block CORRUPTED_EMERALD_ORE = register("corrupted_emerald_ore", new CorruptedBlock(Properties.copy(Blocks.EMERALD_ORE).randomTicks()));
     public static final Block CORRUPTED_DEEPSLATE_COAL_ORE = register("corrupted_deepslate_coal_ore", new CorruptedBlock(Properties.copy(Blocks.DEEPSLATE_COAL_ORE).randomTicks()));
     public static final Block CORRUPTED_DEEPSLATE_IRON_ORE = register("corrupted_deepslate_iron_ore", new CorruptedBlock(Properties.copy(Blocks.DEEPSLATE_IRON_ORE).randomTicks()));
-    public static final Block DEEPSLATE_DEMONITE_ORE = register("deepslate_demonite_ore", new CorruptedBlock(Properties.copy(Blocks.DEEPSLATE_IRON_ORE).randomTicks()));
+    public static final Block DEEPSLATE_DEMONITE_ORE = register("deepslate_demonite_ore", new Block(Properties.copy(Blocks.DEEPSLATE_IRON_ORE).randomTicks()));
     public static final Block CORRUPTED_DEEPSLATE_COPPER_ORE = register("corrupted_deepslate_copper_ore", new CorruptedBlock(Properties.copy(Blocks.DEEPSLATE_COPPER_ORE).randomTicks()));
     public static final Block CORRUPTED_DEEPSLATE_GOLD_ORE = register("corrupted_deepslate_gold_ore", new CorruptedBlock(Properties.copy(Blocks.DEEPSLATE_GOLD_ORE).randomTicks()));
     public static final Block CORRUPTED_DEEPSLATE_LAPIS_ORE = register("corrupted_deepslate_lapis_ore", new CorruptedBlock(Properties.copy(Blocks.DEEPSLATE_LAPIS_ORE).randomTicks()));
@@ -92,7 +92,7 @@ public class ModBlocks {
     public static final Block CRIMSON_COBBLED_DEEPSLATE = register("crimson_cobbled_deepslate", new CrimsonBlock(Properties.copy(Blocks.COBBLED_DEEPSLATE).randomTicks()));
     public static final Block CRIMSON_COAL_ORE = register("crimson_coal_ore", new CrimsonBlock(Properties.copy(Blocks.COAL_ORE).randomTicks()));
     public static final Block CRIMSON_IRON_ORE = register("crimson_iron_ore", new CrimsonBlock(Properties.copy(Blocks.IRON_ORE).randomTicks()));
-    public static final Block CRIMTANE_ORE = register("crimtane_ore", new CrimsonBlock(Properties.copy(Blocks.IRON_ORE).randomTicks()));
+    public static final Block CRIMTANE_ORE = register("crimtane_ore", new Block(Properties.copy(Blocks.IRON_ORE).randomTicks()));
     public static final Block CRIMSON_COPPER_ORE = register("crimson_copper_ore", new CrimsonBlock(Properties.copy(Blocks.COPPER_ORE).randomTicks()));
     public static final Block CRIMSON_GOLD_ORE = register("crimson_gold_ore", new CrimsonBlock(Properties.copy(Blocks.GOLD_ORE).randomTicks()));
     public static final Block CRIMSON_LAPIS_ORE = register("crimson_lapis_ore", new CrimsonBlock(Properties.copy(Blocks.LAPIS_ORE).randomTicks()));
@@ -101,7 +101,7 @@ public class ModBlocks {
     public static final Block CRIMSON_EMERALD_ORE = register("crimson_emerald_ore", new CrimsonBlock(Properties.copy(Blocks.EMERALD_ORE).randomTicks()));
     public static final Block CRIMSON_DEEPSLATE_COAL_ORE = register("crimson_deepslate_coal_ore", new CrimsonBlock(Properties.copy(Blocks.DEEPSLATE_COAL_ORE).randomTicks()));
     public static final Block CRIMSON_DEEPSLATE_IRON_ORE = register("crimson_deepslate_iron_ore", new CrimsonBlock(Properties.copy(Blocks.DEEPSLATE_IRON_ORE).randomTicks()));
-    public static final Block DEEPSLATE_CRIMTANE_ORE = register("deepslate_crimtane_ore", new CrimsonBlock(Properties.copy(Blocks.DEEPSLATE_IRON_ORE).randomTicks()));
+    public static final Block DEEPSLATE_CRIMTANE_ORE = register("deepslate_crimtane_ore", new Block(Properties.copy(Blocks.DEEPSLATE_IRON_ORE).randomTicks()));
     public static final Block CRIMSON_DEEPSLATE_COPPER_ORE = register("crimson_deepslate_copper_ore", new CrimsonBlock(Properties.copy(Blocks.DEEPSLATE_COPPER_ORE).randomTicks()));
     public static final Block CRIMSON_DEEPSLATE_GOLD_ORE = register("crimson_deepslate_gold_ore", new CrimsonBlock(Properties.copy(Blocks.DEEPSLATE_GOLD_ORE).randomTicks()));
     public static final Block CRIMSON_DEEPSLATE_LAPIS_ORE = register("crimson_deepslate_lapis_ore", new CrimsonBlock(Properties.copy(Blocks.DEEPSLATE_LAPIS_ORE).randomTicks()));
