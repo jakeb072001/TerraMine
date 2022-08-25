@@ -83,6 +83,10 @@
       "terramine:lava_immunity",
       "terramine:hardmode",
       "terramine:evil_type"
-    ]
+    ],
+    "waila:plugins": {
+      "id": "terramine:waila_plugin",
+      "initializer": "terramine.common.compat.WailaCompat"
+    }
   }
 }

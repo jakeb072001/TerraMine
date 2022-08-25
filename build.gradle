@@ -14,6 +14,7 @@ repositories {
     maven { url = "https://maven.gegy.dev/" }
     maven { url = "https://mvn.devos.one/snapshots/" }
     maven { url = "https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/" }
+    maven { url "https://maven.bai.lol" }
     maven {
         url = "https://maven.florens.be"
         content {
@@ -115,6 +116,7 @@ dependencies {
     modCompileOnly("curse.maven:haema-391257:${project.haema_version}") {
         transitive = false
     }
+    modCompileOnly "mcp.mobius.waila:wthit-api:fabric-${project.wthit_version}"
 }
 
 processResources {

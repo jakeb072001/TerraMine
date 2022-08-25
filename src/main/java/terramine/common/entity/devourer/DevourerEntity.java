@@ -8,6 +8,9 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.util.Mth;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
@@ -19,8 +22,11 @@ import net.minecraft.world.entity.monster.Enemy;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
+import net.minecraft.world.phys.shapes.BooleanOp;
+import net.minecraft.world.phys.shapes.Shapes;
 import org.jetbrains.annotations.NotNull;
 import terramine.common.init.ModEntities;
 import terramine.common.init.ModLootTables;
@@ -32,6 +38,7 @@ import java.util.Map;
 
 // todo: body segments need to rotate correctly and better connect to each other
 // todo: movement needs to be like Devourer from Terraria, using flying entity AI for testing
+// todo: need to add segments to save data somehow, otherwise the devourer creates new segments each world load causing a lot of noise
 public class DevourerEntity extends Monster implements Enemy {
     public static final EntityDataAccessor<Boolean> SPAWNED = SynchedEntityData.defineId(DevourerEntity.class, EntityDataSerializers.BOOLEAN);
     public DevourerBodyEntity[] segments;
@@ -76,19 +83,7 @@ public class DevourerEntity extends Monster implements Enemy {
                 double motionY;
                 double motionX;
                 double motionZ;
-                Level world = entity.level;
-
-                if (world.getBlockState(new BlockPos(entity.position().x(), entity.position().y() - 1, entity.position().z())).getBlock().defaultBlockState() == Blocks.WATER.defaultBlockState()) {
-                    if (entity.velY < 0) {
-                        entity.velY = 3;
-                    }
-                }
-
-                if (!entity.isSpectator()) {
-                    if (world.getBlockState(new BlockPos(entity.position().x, entity.position().y - 0.5f, entity.position().z)).getMaterial().isSolid()) {
-                        entity.velY = 2.0f;
-                    }
-                }
+                Level level = entity.level;
 
                 if (entity.target != null && !entity.target.isInvisible()) {
                     if (entity.velX > -4 && entity.position().x > entity.target.position().x + entity.target.getBbWidth()) {
@@ -146,9 +141,6 @@ public class DevourerEntity extends Monster implements Enemy {
                         } else if (entity.velY > 0f) {
                             entity.velY -= 0.15;
                         }
-                        if (entity.velY < -2.5) {
-                            entity.velY = -2.5;
-                        }
                     } else if (entity.velY < 2.5 && entity.position().y + 1 < entity.target.position().y) {
                         entity.velY += 0.1f;
                         if (entity.velY < -2.5) {
@@ -156,9 +148,6 @@ public class DevourerEntity extends Monster implements Enemy {
                         }
                         else if (entity.velY < 0) {
                             entity.velY += 0.15;
-                        }
-                        if (entity.velY > 2.5) {
-                            entity.velY = 2.5;
                         }
                     }
                 }
@@ -194,10 +183,10 @@ public class DevourerEntity extends Monster implements Enemy {
         for(int i = 0; i < this.level.players().size(); ++i) {
             double dist = this.level.players().get(i).position().distanceTo(this.position());
             if (dist < this.getAttribute(Attributes.FOLLOW_RANGE).getValue()) {
-                if (!this.level.players().get(i).isCreative()) {
-                    if (!this.level.players().get(i).isSpectator()) {
-                        target = this.level.players().get(i);
-                    }
+                if (!this.level.players().get(i).isCreative() && !this.level.players().get(i).isSpectator()) {
+                    target = this.level.players().get(i);
+                } else {
+                    target = null;
                 }
             }
         }
@@ -217,6 +206,7 @@ public class DevourerEntity extends Monster implements Enemy {
 
         if (this.segments != null) {
             this.tickSegments();
+            this.shareEffects();
 
             if (!this.level.isClientSide()) {
                 this.serverTick();
@@ -253,6 +243,7 @@ public class DevourerEntity extends Monster implements Enemy {
         }
     }
 
+    // todo: segments can't go straight up or down, need to change that. Segments also don't rotate very well.
     private void tickSegments() {
         float diminishY = 1.0F;
 
@@ -282,14 +273,24 @@ public class DevourerEntity extends Monster implements Enemy {
             dif = dif.normalize();
             dif = dif.add(straightX, 0.0, straightZ);
             dif = dif.normalize();
-            double s = this.distanceForSeg(i);
+            double s = distanceForSeg(i);
             double destX = followX + s * dif.x;
             double destY = followY + s * dif.y;
             double destZ = followZ + s * dif.z;
             this.segments[i].absMoveTo(destX, destY, destZ);
 
-            this.segments[i].lookAt(leader, 360.0F, 360.0F);
-            this.segments[i].getLookControl().setLookAt(leader, 360.0F, 360.0F);
+            this.segments[i].lookAt(leader, 90f, 360f);
+            this.segments[i].getLookControl().setLookAt(leader, 90f, 360f);
+
+            MobEffectInstance highlightEffect = new MobEffectInstance(MobEffects.GLOWING, 20, 0);
+            if (this.isInWall() || this.segments[i].isInWall()) {
+                this.addEffect(highlightEffect);
+            } else {
+                if (this.hasEffect(highlightEffect.getEffect())) {
+                    this.removeEffect(highlightEffect.getEffect());
+                    this.segments[i].removeEffect(highlightEffect.getEffect());
+                }
+            }
         }
     }
 
@@ -297,16 +298,49 @@ public class DevourerEntity extends Monster implements Enemy {
         float dis = 0.8F;
 
         for(int o = 0; o < i; ++o) {
-            if (i > 1) {
-                dis -= 0.04F;
-            }
+            dis -= 0.04F;
+        }
 
-            if (i >= 6) {
-                dis -= 0.008F;
-            }
+        if (i == 0) {
+            dis = 1f;
         }
 
         return dis;
+    }
+
+    private void shareEffects() {
+        for (MobEffectInstance effect : this.getActiveEffects()) {
+            for (int i = 0; i < segmentCount; ++i) {
+                this.segments[i].addEffect(effect);
+            }
+        }
+    }
+
+    @Override
+    public void lookAt(Entity entity, float f, float g) {
+        double h;
+        double d = entity.getX() - this.getX();
+        double e = entity.getZ() - this.getZ();
+        if (entity instanceof LivingEntity livingEntity) {
+            h = livingEntity.getEyeY() - this.getEyeY();
+        } else {
+            h = (entity.getBoundingBox().minY + entity.getBoundingBox().maxY) / 2.0 - this.getEyeY();
+        }
+        double i = Math.sqrt(d * d + e * e);
+        float j = (float)(Mth.atan2(e, d) * 90) - 90.0f;
+        float k = (float)(-(Mth.atan2(h, i) * 90));
+        this.setXRot(Mth.rotlerp(this.getXRot(), k, g));
+        this.setYRot(Mth.rotlerp(this.getYRot(), j, f));
+    }
+
+    @Override
+    public boolean isInWall() {
+        float f = this.getDimensions(this.getPose()).width * 0.8f;
+        AABB aABB = AABB.ofSize(this.getEyePosition(), f, 1.0E-6, f);
+        return BlockPos.betweenClosedStream(aABB).anyMatch(blockPos -> {
+            BlockState blockState = this.level.getBlockState(blockPos);
+            return !blockState.isAir() && blockState.isSuffocating(this.level, blockPos) && Shapes.joinIsNotEmpty(blockState.getCollisionShape(this.level, blockPos).move(blockPos.getX(), blockPos.getY(), blockPos.getZ()), Shapes.create(aABB), BooleanOp.AND);
+        });
     }
 
     @SuppressWarnings("ConstantConditions")
@@ -314,7 +348,7 @@ public class DevourerEntity extends Monster implements Enemy {
     public void playerTouch(@NotNull Player player) {
         super.playerTouch(player);
 
-        if (this.isAlive() && this.getAttribute(Attributes.ATTACK_DAMAGE) != null) { // todo: for some reason the attack damage attribute returns null, need to fix
+        if (this.isAlive() && this.getAttribute(Attributes.ATTACK_DAMAGE) != null) {
             player.hurt(DamageSource.mobAttack(this), (float) this.getAttribute(Attributes.ATTACK_DAMAGE).getValue());
         }
     }
@@ -322,7 +356,6 @@ public class DevourerEntity extends Monster implements Enemy {
     @Override
     public boolean hurt(@NotNull DamageSource source, float f) {
         if (source != DamageSource.FALL && source != DamageSource.IN_WALL && source != DamageSource.CRAMMING) {
-            //playSound(ModSoundEvents.DEMON_EYE_HURT, getSoundVolume(), getVoicePitch());
             if (this.segments != null) {
                 for (DevourerBodyEntity seg : this.segments) {
                     if (seg != null) {
@@ -343,7 +376,7 @@ public class DevourerEntity extends Monster implements Enemy {
                 .add(Attributes.ARMOR, 2)
                 .add(Attributes.FOLLOW_RANGE, 24)
                 .add(Attributes.KNOCKBACK_RESISTANCE, 1)
-                .add(Attributes.MOVEMENT_SPEED, 1)
+                .add(Attributes.MOVEMENT_SPEED, 1.5d)
                 .add(Attributes.ATTACK_DAMAGE, 3);
     }
 
