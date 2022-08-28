@@ -61,6 +61,10 @@ public class ExplosionConfigurable extends Explosion {
     private final ObjectArrayList<Pair<ItemStack, BlockPos>> toBlow;
     private final Map<Player, Vec3> hitPlayers;
 
+    public ExplosionConfigurable(Level level, @Nullable Entity entity, double x, double y, double z, float radius, float damage, Explosion.BlockInteraction blockInteraction) {
+        this(level, entity, null, null, x, y, z, radius, damage, false, false, blockInteraction);
+    }
+
     public ExplosionConfigurable(Level level, @Nullable Entity entity, @Nullable DamageSource damageSource, @Nullable ExplosionDamageCalculator explosionDamageCalculator, double x, double y, double z, float radius, float damage, boolean divide, boolean fire, Explosion.BlockInteraction blockInteraction) {
         super(level, entity, damageSource, explosionDamageCalculator, x, y, z, radius, fire, blockInteraction);
         this.random = RandomSource.create();

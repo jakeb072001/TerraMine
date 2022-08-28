@@ -8,6 +8,7 @@ accessible method net/minecraft/client/renderer/RenderType create (Ljava/lang/St
 accessible method net/minecraft/client/renderer/item/ItemProperties register (Lnet/minecraft/world/item/Item;Lnet/minecraft/resources/ResourceLocation;Lnet/minecraft/client/renderer/item/ClampedItemPropertyFunction;)V
 accessible method net/minecraft/world/level/biome/BiomeManager getFiddledDistance (JIIIDDD)D
 accessible method net/minecraft/server/level/ChunkMap getLightEngine ()Lnet/minecraft/server/level/ThreadedLevelLightEngine;
+accessible method net/minecraft/world/entity/Mob rotlerp (FFF)F
 
 accessible	class	net/minecraft/world/entity/npc/VillagerTrades$DyedArmorForEmeralds
 accessible	class	net/minecraft/world/entity/npc/VillagerTrades$EmeraldForItems

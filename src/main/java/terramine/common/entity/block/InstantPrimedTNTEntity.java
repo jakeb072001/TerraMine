@@ -34,6 +34,6 @@ public class InstantPrimedTNTEntity extends PrimedTnt {
     }
 
     private void explode() {
-        new ExplosionConfigurable(level, this, null, null, this.position().x(), this.position().y(), this.position().z(), 20F, 100f, false, false, Explosion.BlockInteraction.BREAK);
+        new ExplosionConfigurable(level, this, this.position().x(), this.position().y(), this.position().z(), 20F, 100f, Explosion.BlockInteraction.BREAK);
     }
 }

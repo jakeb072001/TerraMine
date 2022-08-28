@@ -8,6 +8,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Devourer
 - Corruption and Crimson biome spread (actually spreads the biome now and not just the block, can still cause lag)
+- WTHIT support (Only used to help hide trapped chests right now)
+
+### Changed
+- Falling Stars now damage enemies if hit
 
 ## [1.5.1] - 2022-08-21
 ### Added

@@ -10,7 +10,6 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
@@ -31,18 +30,12 @@ import org.jetbrains.annotations.NotNull;
 import terramine.common.init.ModEntities;
 import terramine.common.init.ModLootTables;
 import terramine.common.init.ModSoundEvents;
-import terramine.common.utility.PosAngData;
 
-import java.util.HashMap;
-import java.util.Map;
-
-// todo: body segments need to rotate correctly and better connect to each other
 // todo: movement needs to be like Devourer from Terraria, using flying entity AI for testing
 // todo: need to add segments to save data somehow, otherwise the devourer creates new segments each world load causing a lot of noise
 public class DevourerEntity extends Monster implements Enemy {
     public static final EntityDataAccessor<Boolean> SPAWNED = SynchedEntityData.defineId(DevourerEntity.class, EntityDataSerializers.BOOLEAN);
     public DevourerBodyEntity[] segments;
-    public Map<Integer, PosAngData> bodyPositionsForRespawn;
     private LivingEntity target;
     private final int segmentCount;
     public double velX, velY, velZ;
@@ -53,8 +46,6 @@ public class DevourerEntity extends Monster implements Enemy {
         this.noPhysics = true;
         this.moveControl = new DevourerMovementController(this);
         this.lookControl = new DevourerLookControl(this);
-
-        this.bodyPositionsForRespawn = new HashMap<>();
         segmentCount = random.nextInt(10, 15);
     }
 
@@ -83,7 +74,6 @@ public class DevourerEntity extends Monster implements Enemy {
                 double motionY;
                 double motionX;
                 double motionZ;
-                Level level = entity.level;
 
                 if (entity.target != null && !entity.target.isInvisible()) {
                     if (entity.velX > -4 && entity.position().x > entity.target.position().x + entity.target.getBbWidth()) {
@@ -163,8 +153,6 @@ public class DevourerEntity extends Monster implements Enemy {
                 entity.setXRot((float)(-(Mth.atan2(-entity.velY, Math.sqrt(entity.velX * entity.velX + entity.velZ * entity.velZ)) * 180.0F / (float)Math.PI)));
 
                 entity.setDeltaMovement(motionX, motionY, motionZ);
-            } else {
-                entity.setDeltaMovement(0, -0.5f, 0);
             }
         }
     }
@@ -227,23 +215,13 @@ public class DevourerEntity extends Monster implements Enemy {
                 double z = offsetPos.getZ() - 0.5d;
                 float pitch = this.getXRot();
                 float yaw = this.getYHeadRot();
-                if (!this.bodyPositionsForRespawn.isEmpty()) {
-                    x = this.bodyPositionsForRespawn.get(i).getPos().x();
-                    y = this.bodyPositionsForRespawn.get(i).getPos().y();
-                    z = this.bodyPositionsForRespawn.get(i).getPos().z();
-                    pitch = this.bodyPositionsForRespawn.get(i).getPitch();
-                    yaw = this.bodyPositionsForRespawn.get(i).getYaw();
-                }
 
                 this.segments[i].moveTo(x, y, z, pitch, yaw);
                 this.level.addFreshEntity(this.segments[i]);
             }
-
-            this.bodyPositionsForRespawn.clear();
         }
     }
 
-    // todo: segments can't go straight up or down, need to change that. Segments also don't rotate very well.
     private void tickSegments() {
         float diminishY = 1.0F;
 
@@ -259,28 +237,27 @@ public class DevourerEntity extends Monster implements Enemy {
             float pitchThreshold = 10.0F;
             float angle;
             if (this.getXRot() > pitchThreshold || this.getXRot() < -pitchThreshold) {
-                diminishY = (float)((double)diminishY + 1.7);
+                diminishY = (float)(diminishY + 1.7);
                 angle = this.getXRot() / 50.0F;
                 angle = Mth.clamp(angle, -1.8F, 1.8F);
                 followY += angle / diminishY;
             }
 
             angle = (leader.getYRot() + 180.0F) * 3.141593F / 180.0F;
-            double align = 0.05 + 1.0 / (double)((float)(i + 1)) * 0.5;
-            double straightX = (double)(-Mth.sin(angle)) * align;
-            double straightZ = (double)Mth.cos(angle) * align;
+            double align = 0.05 + 1.0 / (i + 1) * 0.5;
+            double straightX = -Mth.sin(angle) * align;
+            double straightZ = Mth.cos(angle) * align;
+            double straightY = Mth.atan2(-this.velY, Math.sqrt(this.velX * this.velX + this.velZ * this.velZ)); // todo: improve slightly so further away segments don't snap into place as much
             Vec3 dif = new Vec3(this.segments[i].getX() - followX, this.segments[i].getY() - followY, this.segments[i].getZ() - followZ);
             dif = dif.normalize();
-            dif = dif.add(straightX, 0.0, straightZ);
+            dif = dif.add(straightX, straightY, straightZ);
             dif = dif.normalize();
             double s = distanceForSeg(i);
             double destX = followX + s * dif.x;
             double destY = followY + s * dif.y;
             double destZ = followZ + s * dif.z;
             this.segments[i].absMoveTo(destX, destY, destZ);
-
             this.segments[i].lookAt(leader, 90f, 360f);
-            this.segments[i].getLookControl().setLookAt(leader, 90f, 360f);
 
             MobEffectInstance highlightEffect = new MobEffectInstance(MobEffects.GLOWING, 20, 0);
             if (this.isInWall() || this.segments[i].isInWall()) {
@@ -314,23 +291,6 @@ public class DevourerEntity extends Monster implements Enemy {
                 this.segments[i].addEffect(effect);
             }
         }
-    }
-
-    @Override
-    public void lookAt(Entity entity, float f, float g) {
-        double h;
-        double d = entity.getX() - this.getX();
-        double e = entity.getZ() - this.getZ();
-        if (entity instanceof LivingEntity livingEntity) {
-            h = livingEntity.getEyeY() - this.getEyeY();
-        } else {
-            h = (entity.getBoundingBox().minY + entity.getBoundingBox().maxY) / 2.0 - this.getEyeY();
-        }
-        double i = Math.sqrt(d * d + e * e);
-        float j = (float)(Mth.atan2(e, d) * 90) - 90.0f;
-        float k = (float)(-(Mth.atan2(h, i) * 90));
-        this.setXRot(Mth.rotlerp(this.getXRot(), k, g));
-        this.setYRot(Mth.rotlerp(this.getYRot(), j, f));
     }
 
     @Override

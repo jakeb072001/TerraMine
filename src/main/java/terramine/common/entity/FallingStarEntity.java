@@ -9,10 +9,12 @@ import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.control.MoveControl;
 import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import terramine.common.init.ModItems;
 import terramine.common.init.ModSoundEvents;
+import terramine.common.utility.ExplosionConfigurable;
 
 public class FallingStarEntity extends Mob {
     RandomSource rand = RandomSource.create();
@@ -60,6 +62,7 @@ public class FallingStarEntity extends Mob {
         adjustMotion();
         resetFallDistance();
         if (this.isOnGround() || this.isInLava() || this.isInWater()) {
+            new ExplosionConfigurable(level, this, this.position().x(), this.position().y(), this.position().z(), 1F, 40f, Explosion.BlockInteraction.NONE);
             createStarItem();
         }
         if (!level.isClientSide()) {

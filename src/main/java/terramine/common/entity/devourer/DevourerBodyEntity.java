@@ -1,14 +1,17 @@
 package terramine.common.entity.devourer;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.sounds.SoundEvent;
+import net.minecraft.util.Mth;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.ai.control.LookControl;
 import net.minecraft.world.entity.monster.Enemy;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
@@ -26,28 +29,18 @@ public class DevourerBodyEntity extends Monster implements Enemy {
 
     public DevourerBodyEntity(EntityType<? extends Monster> entityType, Level level) {
         super(entityType, level);
+        this.lookControl = new DevourerBodyLookControl(this);
         this.noPhysics = true;
         this.xpReward = 0;
     }
 
-    @Override
-    public void addAdditionalSaveData(@NotNull CompoundTag compoundTag) {
-        super.addAdditionalSaveData(compoundTag);
-        if (this.head != null) {
-            compoundTag.putUUID("head", this.head.getUUID());
+    protected static class DevourerBodyLookControl extends LookControl {
+        public DevourerBodyLookControl(DevourerBodyEntity entity) {
+            super(entity);
         }
-    }
 
-    @Override
-    public void readAdditionalSaveData(@NotNull CompoundTag compoundTag) {
-        super.readAdditionalSaveData(compoundTag);
-        for (DevourerEntity entity : level.getEntitiesOfClass(DevourerEntity.class, new AABB(getX() - 100, getY() - 100, getZ() - 100, getX() + 100, getY() + 100, getZ() + 100))) {
-            if (compoundTag.hasUUID("head")) {
-                if (entity.getUUID() == compoundTag.getUUID("head")) {
-                    this.head = entity;
-                    break;
-                }
-            }
+        @Override
+        public void tick() { // leave empty
         }
     }
 
@@ -105,6 +98,23 @@ public class DevourerBodyEntity extends Monster implements Enemy {
             BlockState blockState = this.level.getBlockState(blockPos);
             return !blockState.isAir() && blockState.isSuffocating(this.level, blockPos) && Shapes.joinIsNotEmpty(blockState.getCollisionShape(this.level, blockPos).move(blockPos.getX(), blockPos.getY(), blockPos.getZ()), Shapes.create(aABB), BooleanOp.AND);
         });
+    }
+
+    @Override
+    public void lookAt(Entity entity, float f, float g) {
+        double h;
+        double d = entity.getX() - this.getX();
+        double e = entity.getZ() - this.getZ();
+        if (entity instanceof LivingEntity livingEntity) {
+            h = livingEntity.getEyeY() - this.getEyeY();
+        } else {
+            h = (entity.getBoundingBox().minY + entity.getBoundingBox().maxY) / 2.0 - this.getEyeY();
+        }
+        double i = Math.sqrt(d * d + e * e);
+        float j = (float)(Mth.atan2(e, d) * 57.2957763671875) - 90.0f;
+        float k = (float)((Mth.atan2(h, i) * 57.2957763671875));
+        this.setXRot(this.rotlerp(this.getXRot(), k, g));
+        this.setYRot(this.rotlerp(this.getYRot(), j, f));
     }
 
     private void shareEffects() {

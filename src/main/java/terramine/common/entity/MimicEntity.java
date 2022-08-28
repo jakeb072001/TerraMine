@@ -43,7 +43,7 @@ public class MimicEntity extends Mob implements Enemy {
 	}
 
 	/**
-	 * 0 = vanilla, 1 = christmas, 2 = gold, 3 = ice, 4 = shadow
+	 * 0 = vanilla, 1 = christmas, 2 = gold, 3 = frozen, 4 = shadow
 	*/
 	public void setMimicType(int mimicType) {
 		this.entityData.set(typed_data, mimicType);
@@ -106,6 +106,7 @@ public class MimicEntity extends Mob implements Enemy {
 	@Override
 	public void addAdditionalSaveData(@NotNull CompoundTag compound) {
 		super.addAdditionalSaveData(compound);
+		compound.putInt("mimicType", getMimicType());
 		compound.putInt("ticksInAir", ticksInAir);
 		compound.putBoolean("isDormant", isDormant);
 		if (facing != null) {
@@ -116,6 +117,7 @@ public class MimicEntity extends Mob implements Enemy {
 	@Override
 	public void readAdditionalSaveData(@NotNull CompoundTag compound) {
 		super.readAdditionalSaveData(compound);
+		setMimicType(compound.getInt("mimicType"));
 		ticksInAir = compound.getInt("ticksInAir");
 		if (compound.contains("facing", Tag.TAG_STRING)) {
 			facing = Direction.byName(compound.getString("facing"));
