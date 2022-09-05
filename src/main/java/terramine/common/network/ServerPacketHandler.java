@@ -111,7 +111,9 @@ public class ServerPacketHandler {
         NetworkManager.registerReceiver(NetworkManager.s2c(), UPDATE_BIOME_PACKET_ID, (buf, context) -> {
             int chunkX = buf.readInt();
             int chunkZ = buf.readInt();
-            ((ClientLevel) context.getPlayer().level).onChunkLoaded(new ChunkPos(chunkX, chunkZ));
+            if (context.getPlayer() != null) {
+                ((ClientLevel) context.getPlayer().level).onChunkLoaded(new ChunkPos(chunkX, chunkZ));
+            }
         });
     }
 }

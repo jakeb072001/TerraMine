@@ -13,7 +13,7 @@
         "show_toast": false,
         "announce_to_chat": false,
         "hidden": false,
-        "background": "terramine:textures/block/corrupt_stone.png"
+        "background": "terramine:textures/block/corruption/corrupt_stone.png"
     },
     "criteria": {
         "tick": {
