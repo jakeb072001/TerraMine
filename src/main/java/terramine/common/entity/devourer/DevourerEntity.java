@@ -75,6 +75,13 @@ public class DevourerEntity extends Monster implements Enemy {
                 double motionX;
                 double motionZ;
 
+                entity.setNoGravity(entity.isInWall());
+
+                // todo: for movement, when the devourer first is in a wall after having not been in a wall it will move straight down a certain amount.
+                // todo: after this, the devourer will move directly toward the player at a fast speed, once out of the ground the devourer will have gravity and will free fall instead of targeting the player.
+                // todo: during this free fall, rotate the devourer to face the ground, then repeat.
+                // todo: would also be good to decrease gravity slightly, if possible.
+
                 if (entity.target != null && !entity.target.isInvisible()) {
                     if (entity.velX > -4 && entity.position().x > entity.target.position().x + entity.target.getBbWidth()) {
                         entity.velX -= 0.08;
@@ -145,14 +152,16 @@ public class DevourerEntity extends Monster implements Enemy {
                 entity.oldVelX = entity.velX;
                 entity.oldVelY = entity.velY;
                 entity.oldVelZ = entity.velZ;
-                motionX = entity.velX * 0.075f * entity.getAttribute(Attributes.MOVEMENT_SPEED).getValue();
-                motionY = entity.velY * 0.075f * entity.getAttribute(Attributes.MOVEMENT_SPEED).getValue();
-                motionZ = entity.velZ * 0.075f * entity.getAttribute(Attributes.MOVEMENT_SPEED).getValue();
+                motionX = entity.velX * 0.0095f * entity.getAttribute(Attributes.MOVEMENT_SPEED).getValue();
+                motionY = entity.velY * 0.0095f * entity.getAttribute(Attributes.MOVEMENT_SPEED).getValue();
+                motionZ = entity.velZ * 0.0095f * entity.getAttribute(Attributes.MOVEMENT_SPEED).getValue();
 
-                entity.setYRot(rotlerp(entity.getYRot(), (float)Math.toDegrees(Math.atan2(entity.velZ, entity.velX)) - 90, 360));
-                entity.setXRot((float)(-(Mth.atan2(-entity.velY, Math.sqrt(entity.velX * entity.velX + entity.velZ * entity.velZ)) * 180.0F / (float)Math.PI)));
-
-                entity.setDeltaMovement(motionX, motionY, motionZ);
+                //entity.setDeltaMovement(motionX, motionY, motionZ);
+                if (entity.isInWall()) {
+                    entity.setYRot(rotlerp(entity.getYRot(), (float)Math.toDegrees(Math.atan2(entity.velZ, entity.velX)) - 90, 360));
+                    entity.setXRot((float)(-(Mth.atan2(-entity.velY, Math.sqrt(entity.velX * entity.velX + entity.velZ * entity.velZ)) * 180.0F / (float)Math.PI)));
+                    entity.setDeltaMovement(entity.getDeltaMovement().add(motionX, motionY, motionZ));
+                }
             }
         }
     }
@@ -334,7 +343,7 @@ public class DevourerEntity extends Monster implements Enemy {
         return Mob.createMobAttributes()
                 .add(Attributes.MAX_HEALTH, 25)
                 .add(Attributes.ARMOR, 2)
-                .add(Attributes.FOLLOW_RANGE, 24)
+                .add(Attributes.FOLLOW_RANGE, 32)
                 .add(Attributes.KNOCKBACK_RESISTANCE, 1)
                 .add(Attributes.MOVEMENT_SPEED, 1.5d)
                 .add(Attributes.ATTACK_DAMAGE, 3);

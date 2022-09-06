@@ -135,6 +135,11 @@ public class DevourerBodyEntity extends Monster implements Enemy {
     }
 
     @Override
+    public boolean is(@NotNull Entity entity) {
+        return this == entity || this.head == entity;
+    }
+
+    @Override
     protected SoundEvent getDeathSound() {
         return ModSoundEvents.DEMON_EYE_DEATH;
     }
