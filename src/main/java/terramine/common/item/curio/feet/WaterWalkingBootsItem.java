@@ -34,23 +34,9 @@ public class WaterWalkingBootsItem extends TrinketTerrariaItem {
 
 	private static boolean onFluidCollision(LivingEntity entity, FluidState fluidState) {
 		if (TrinketsHelper.isEquipped(ModItems.WATER_WALKING_BOOTS, entity) && !entity.isCrouching()) {
-			if (fluidState.is(FluidTags.LAVA)) {
-				return false;
-			}
-			return true;
+			return !fluidState.is(FluidTags.LAVA);
 		}
 
 		return false;
-	}
-
-	public static boolean canSprintOnWater(LivingEntity entity) {
-		return ModComponents.SWIM_ABILITIES.maybeGet(entity)
-				.map(swimAbilities -> entity.isSprinting()
-						&& entity.fallDistance < 6
-						&& !entity.isUsingItem()
-						&& !entity.isCrouching()
-						&& !swimAbilities.isWet()
-						&& !swimAbilities.isSwimming())
-				.orElse(false);
 	}
 }

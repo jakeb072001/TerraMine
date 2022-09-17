@@ -17,10 +17,9 @@ import terramine.common.trinkets.TrinketsHelper;
 public abstract class EntityMixin {
 
     @Inject(at = @At("HEAD"), method = "isInvulnerableTo", cancellable = true)
-    private void hotFloorImmunity(DamageSource damageSource, CallbackInfoReturnable<Boolean> cir) {
-        if ((Object) this instanceof LivingEntity entity) {
-            if (TrinketsHelper.isEquipped(ModItems.TERRASPARK_BOOTS, entity) || TrinketsHelper.isEquipped(ModItems.LAVA_WADERS, entity) ||
-                    TrinketsHelper.isEquipped(ModItems.MOLTEN_CHARM, entity) || TrinketsHelper.isEquipped(ModItems.LAVA_CHARM, entity)) {
+    private void lavaImmunity(DamageSource damageSource, CallbackInfoReturnable<Boolean> cir) {
+        if ((Entity) (Object) this instanceof LivingEntity entity) {
+            if (isLavaCharmEquipped(entity)) {
                 if (ModComponents.LAVA_IMMUNITY.get(entity).getLavaImmunityTimer() > 0) {
                     if (damageSource.equals(DamageSource.LAVA)) {
                         cir.setReturnValue(true);
@@ -33,8 +32,15 @@ public abstract class EntityMixin {
     @WrapWithCondition(method = "lavaHurt", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/Entity;setSecondsOnFire(I)V"))
     private boolean disableFire(Entity entity, int fireTime) {
         if (entity instanceof Player player) {
-            return !(ModComponents.LAVA_IMMUNITY.get(player).getLavaImmunityTimer() > 0);
+            if (isLavaCharmEquipped(player)) {
+                return !(ModComponents.LAVA_IMMUNITY.get(player).getLavaImmunityTimer() > 0);
+            }
         }
         return true;
+    }
+
+    private boolean isLavaCharmEquipped(LivingEntity player) {
+        return TrinketsHelper.isEquipped(ModItems.LAVA_CHARM, player) || TrinketsHelper.isEquipped(ModItems.MOLTEN_CHARM, player)
+                || TrinketsHelper.isEquipped(ModItems.LAVA_WADERS, player) || TrinketsHelper.isEquipped(ModItems.TERRASPARK_BOOTS, player);
     }
 }

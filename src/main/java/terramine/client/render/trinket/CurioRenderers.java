@@ -41,7 +41,7 @@ public class CurioRenderers implements SimpleSynchronousResourceReloadListener {
 
         // feet
         TrinketRendererRegistry.registerRenderer(ModItems.LAVA_WADERS, new CurioRenderer("aqua_dashers", new LegsModel(bakeLayer(ModModelLayers.AQUA_DASHERS))));
-        TrinketRendererRegistry.registerRenderer(ModItems.RUNNING_SHOES, new CurioRenderer("running_shoes", new LegsModel(bakeLayer(ModModelLayers.RUNNING_SHOES))));
+        TrinketRendererRegistry.registerRenderer(ModItems.HERMES_BOOTS, new CurioRenderer("running_shoes", new LegsModel(bakeLayer(ModModelLayers.RUNNING_SHOES))));
         TrinketRendererRegistry.registerRenderer(ModItems.FLIPPERS, new CurioRenderer("flippers", new LegsModel(bakeLayer(ModModelLayers.FLIPPERS))));
 
         // curio

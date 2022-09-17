@@ -137,7 +137,7 @@ public class ModItems {
 	public static final Item OBSIDIAN_WATER_WALKING_BOOTS = register("obsidian_water_walking_boots", new ObsidianWaterWalkingBootsItem());
 	public static final Item LAVA_WADERS = register("lava_waders", new LavaWadersItem());
 	public static final Item ICE_SKATES = register("ice_skates", new TrinketTerrariaItem());
-	public static final Item RUNNING_SHOES = register("hermes_boots", new RunningShoesItem());
+	public static final Item HERMES_BOOTS = register("hermes_boots", new TrinketTerrariaItem());
 	public static final Item ROCKET_BOOTS = register("rocket_boots", new RocketBootsItem());
 	public static final Item SPECTRE_BOOTS = register("spectre_boots", new SpectreBootsItem());
 	public static final Item LIGHTNING_BOOTS = register("lightning_boots", new LightningBootsItem());

@@ -135,8 +135,8 @@ public class CorruptionHelper extends SpreadingSnowyDirtBlock  {
     }
 
     public static void spreadBiome(ServerLevel serverLevel, BlockPos blockPos, boolean isCrimson) {
-        if (!serverLevel.getBiome(blockPos).is(ModBiomes.CORRUPTION) || !serverLevel.getBiome(blockPos).is(ModBiomes.CORRUPTION_DESERT)
-                || !serverLevel.getBiome(blockPos).is(ModBiomes.CRIMSON) || !serverLevel.getBiome(blockPos).is(ModBiomes.CRIMSON_DESERT)) {
+        if (!serverLevel.getBiome(blockPos).is(ModBiomes.CORRUPTION) && !serverLevel.getBiome(blockPos).is(ModBiomes.CORRUPTION_DESERT)
+                && !serverLevel.getBiome(blockPos).is(ModBiomes.CRIMSON) && !serverLevel.getBiome(blockPos).is(ModBiomes.CRIMSON_DESERT)) {
             if (!isCrimson) {
                 if (serverLevel.getBiome(blockPos).is(Biomes.DESERT)) {
                     setBiome(serverLevel, blockPos, CorruptionDesertBiome.CORRUPTION_DESERT);
