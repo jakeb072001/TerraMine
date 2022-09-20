@@ -93,7 +93,7 @@ public class DemonEyeEntity extends FlyingEntityAI {
     @Override
     public boolean checkSpawnRules(@NotNull LevelAccessor world, @NotNull MobSpawnType spawnReason) {
         if (isDarkEnoughToSpawn((ServerLevelAccessor) world, this.blockPosition(), random)) {
-            return this.blockPosition().getY() <= 60 || !this.level.isDay();
+            return this.blockPosition().getY() >= 50 && !this.level.isDay();
         }
 
         return false;

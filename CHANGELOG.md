@@ -9,11 +9,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Devourer
 - Corruption and Crimson biome spread (actually spreads the biome now and not just the block, can still cause lag)
 - WTHIT support (Only used to help hide trapped chests right now)
+- Biome tags (for other mods to add structures or mobs to the corruption or crimson)
 - Korean translation from [@gyular](https://github.com/gyular)
 
 ### Changed
 - Falling Stars now damage enemies if hit
 - Ice Skates and similar accessories now increase player speed while on ice
+- Demon Eyes now bounce when hit by a player
+- Mimics no longer spawn in Desert and Jungle biomes
 
 ### Fixed
 - Trinkets slots not having keep inventory

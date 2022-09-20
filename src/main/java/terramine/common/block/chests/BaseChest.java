@@ -25,6 +25,7 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.entity.ChestBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.ChestType;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
@@ -37,11 +38,11 @@ import java.util.function.BiPredicate;
 import java.util.function.Supplier;
 
 public class BaseChest extends ChestBlock {
-    boolean trapped;
+    public static final BooleanProperty TRAPPED = BooleanProperty.create("trapped");
 
     public BaseChest(Properties properties, boolean trapped, Supplier<BlockEntityType<? extends ChestBlockEntity>> supplier) {
         super(properties, supplier);
-        this.trapped = trapped;
+        registerDefaultState(defaultBlockState().setValue(TRAPPED, trapped));
     }
 
     public ResourceLocation getTexture() {
@@ -101,12 +102,12 @@ public class BaseChest extends ChestBlock {
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(FACING, TYPE, WATERLOGGED);
+        builder.add(FACING, TYPE, WATERLOGGED, TRAPPED);
     }
 
     @Override
     protected Stat<ResourceLocation> getOpenChestStat() {
-        if (this.trapped) {
+        if (this.defaultBlockState().getValue(TRAPPED)) {
             return Stats.CUSTOM.get(Stats.TRIGGER_TRAPPED_CHEST);
         } else {
             return Stats.CUSTOM.get(Stats.OPEN_CHEST);
@@ -115,12 +116,12 @@ public class BaseChest extends ChestBlock {
 
     @Override
     public boolean isSignalSource(@NotNull BlockState blockState) {
-        return this.trapped;
+        return blockState.getValue(TRAPPED);
     }
 
     @Override
     public int getSignal(@NotNull BlockState blockState, @NotNull BlockGetter blockGetter, @NotNull BlockPos blockPos, @NotNull Direction direction) {
-        if (this.trapped) {
+        if (blockState.getValue(TRAPPED)) {
             return Mth.clamp(ChestEntity.getOpenCount(blockGetter, blockPos), 0, 15);
         } else {
             return 0;
@@ -129,7 +130,7 @@ public class BaseChest extends ChestBlock {
 
     @Override
     public int getDirectSignal(@NotNull BlockState blockState, @NotNull BlockGetter blockGetter, @NotNull BlockPos blockPos, @NotNull Direction direction) {
-        if (direction == Direction.UP && this.trapped) {
+        if (direction == Direction.UP && blockState.getValue(TRAPPED)) {
             return blockState.getSignal(blockGetter, blockPos, direction);
         }
         return 0;

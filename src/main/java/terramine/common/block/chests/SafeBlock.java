@@ -23,12 +23,10 @@ import java.util.function.BiPredicate;
 import java.util.function.Supplier;
 
 public class SafeBlock extends BaseChest {
-    boolean trapped;
     protected static final VoxelShape SHAPE = Block.box(1.0, 0.0, 1.0, 15.0, 16.0, 15.0);
 
-    public SafeBlock(Properties properties, boolean trapped, Supplier<BlockEntityType<? extends ChestBlockEntity>> supplier) {
-        super(properties, trapped, supplier);
-        this.trapped = trapped;
+    public SafeBlock(Properties properties, Supplier<BlockEntityType<? extends ChestBlockEntity>> supplier) {
+        super(properties, false, supplier);
     }
 
     public VoxelShape getShape(@NotNull BlockState blockState, @NotNull BlockGetter blockGetter, @NotNull BlockPos blockPos, @NotNull CollisionContext collisionContext) {
@@ -53,9 +51,7 @@ public class SafeBlock extends BaseChest {
 
     @Override
     public BlockEntity newBlockEntity(@NotNull BlockPos blockPos, @NotNull BlockState blockState) {
-        ChestEntity chest = new SafeEntity(blockPos, blockState);
-        chest.setTrapped(this.trapped);
-        return chest;
+        return new SafeEntity(blockPos, blockState);
     }
 
     @Override

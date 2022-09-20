@@ -120,10 +120,10 @@ public class ModEntities {
 
 	public static void addToSpawn() {
 		// todo: increase Demon Eye spawn weight to 100 when full moon, cant use Minecraft class otherwise server wont work
-		naturalSpawn(DEMON_EYE, MobCategory.MONSTER, 80, 2, 6);
+		naturalSpawn(DEMON_EYE, MobCategory.MONSTER, 110, 2, 6);
 	}
 
 	public static <T extends Entity> void naturalSpawn(EntityType<T> entType, MobCategory category, int weight, int minGroup, int maxGroup) {
-		BiomeModifications.addSpawn(BiomeSelectors.excludeByKey(Biomes.DEEP_DARK).and(BiomeSelectors.foundInOverworld()), category, entType, weight, minGroup, maxGroup);
+		BiomeModifications.addSpawn(BiomeSelectors.spawnsOneOf(EntityType.ZOMBIE).and(BiomeSelectors.foundInOverworld()), category, entType, weight, minGroup, maxGroup);
 	}
 }

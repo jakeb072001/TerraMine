@@ -14,11 +14,9 @@ import terramine.common.entity.block.GoldChestEntity;
 import java.util.function.Supplier;
 
 public class GoldChestBlock extends BaseChest {
-    boolean trapped;
 
     public GoldChestBlock(Properties properties, boolean trapped, Supplier<BlockEntityType<? extends ChestBlockEntity>> supplier) {
         super(properties, trapped, supplier);
-        this.trapped = trapped;
     }
 
     @Override
@@ -29,7 +27,7 @@ public class GoldChestBlock extends BaseChest {
     @Override
     public BlockEntity newBlockEntity(@NotNull BlockPos blockPos, @NotNull BlockState blockState) {
         ChestEntity chest = new GoldChestEntity(blockPos, blockState);
-        chest.setTrapped(this.trapped);
+        chest.setTrapped(blockState.getValue(TRAPPED));
         return chest;
     }
 

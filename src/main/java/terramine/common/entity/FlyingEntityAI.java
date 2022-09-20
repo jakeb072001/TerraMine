@@ -56,7 +56,7 @@ public class FlyingEntityAI extends Monster implements Enemy {
         }
 
         @Override
-        public void tick() {
+        public void tick() { // todo: bounce entity if hit with knockback
             if (flyingEntity.isAlive()) {
                 if (flyingEntity.horizontalCollision) {
                     flyingEntity.bounce = true;
@@ -250,6 +250,9 @@ public class FlyingEntityAI extends Monster implements Enemy {
 
     @Override
     public boolean hurt(@NotNull DamageSource source, float amount) {
+        if (source.getEntity() instanceof Player) {
+            bounce = true;
+        }
         return super.hurt(source, amount);
     }
 

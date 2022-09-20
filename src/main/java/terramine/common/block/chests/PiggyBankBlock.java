@@ -24,13 +24,11 @@ import java.util.function.BiPredicate;
 import java.util.function.Supplier;
 
 public class PiggyBankBlock extends BaseChest {
-    boolean trapped;
     protected static final VoxelShape SHAPE_X = Block.box(3.0, 0.0, 5.0, 13.0, 6.0, 11.0);
     protected static final VoxelShape SHAPE_Z = Block.box(5.0, 0.0, 3.0, 11.0, 6.0, 13.0);
 
-    public PiggyBankBlock(Properties properties, boolean trapped, Supplier<BlockEntityType<? extends ChestBlockEntity>> supplier) {
-        super(properties, trapped, supplier);
-        this.trapped = trapped;
+    public PiggyBankBlock(Properties properties, Supplier<BlockEntityType<? extends ChestBlockEntity>> supplier) {
+        super(properties, false, supplier);
     }
 
     public VoxelShape getShape(@NotNull BlockState blockState, @NotNull BlockGetter blockGetter, @NotNull BlockPos blockPos, @NotNull CollisionContext collisionContext) {
@@ -56,9 +54,7 @@ public class PiggyBankBlock extends BaseChest {
 
     @Override
     public BlockEntity newBlockEntity(@NotNull BlockPos blockPos, @NotNull BlockState blockState) {
-        ChestEntity chest = new PiggyBankEntity(blockPos, blockState);
-        chest.setTrapped(this.trapped);
-        return chest;
+        return new PiggyBankEntity(blockPos, blockState);
     }
 
     @Override

@@ -49,20 +49,14 @@ public class CrimsonHelper extends SpreadingSnowyDirtBlock  {
             BlockState grass = ModBlocks.CRIMSON_GRASS.defaultBlockState();
             BlockState snow_layer = ModBlocks.CRIMSON_SNOW_LAYER.defaultBlockState();
 
-            for (int i = 0; i < 4; ++i) { // crimson grass spread to grass
-                BlockPos blockPos2 = blockPos.offset(random.nextInt(3) - 1, random.nextInt(5) - 3, random.nextInt(3) - 1);
-                if (!serverLevel.getBlockState(blockPos2).is(Blocks.GRASS_BLOCK) || canNotPropagate(grass, serverLevel, blockPos2)) continue;
-                serverLevel.setBlockAndUpdate(blockPos2, grass.setValue(SNOWY, (serverLevel.getBlockState(blockPos2.above()).is(Blocks.SNOW) || serverLevel.getBlockState(blockPos2.above()).is(ModBlocks.CRIMSON_SNOW_LAYER))));
-                CorruptionHelper.spreadBiome(serverLevel, blockPos2, true);
-            }
-            for (int i = 0; i < 4; ++i) { // normal grass spread with crimson grass
-                BlockPos blockPos2 = blockPos.offset(random.nextInt(3) - 1, random.nextInt(5) - 3, random.nextInt(3) - 1);
-                if (!serverLevel.getBlockState(blockPos2).is(Blocks.DIRT) || canNotPropagate(grass, serverLevel, blockPos2)) continue;
+            for (int i = 0; i < 4; ++i) { // crimson grass spread to grass and dirt
+                BlockPos blockPos2 = blockPos.offset(random.nextInt(3) - 1, random.nextInt(3) - 1, random.nextInt(3) - 1);
+                if ((!serverLevel.getBlockState(blockPos2).is(Blocks.GRASS_BLOCK) && !serverLevel.getBlockState(blockPos2).is(Blocks.DIRT)) || canNotPropagate(grass, serverLevel, blockPos2)) continue;
                 serverLevel.setBlockAndUpdate(blockPos2, grass.setValue(SNOWY, (serverLevel.getBlockState(blockPos2.above()).is(Blocks.SNOW) || serverLevel.getBlockState(blockPos2.above()).is(ModBlocks.CRIMSON_SNOW_LAYER))));
                 CorruptionHelper.spreadBiome(serverLevel, blockPos2, true);
             }
             for (int i = 0; i < 4; ++i) { // spread layered snow
-                BlockPos blockPos2 = blockPos.offset(random.nextInt(3) - 1, random.nextInt(5) - 3, random.nextInt(3) - 1);
+                BlockPos blockPos2 = blockPos.offset(random.nextInt(3) - 1, random.nextInt(3) - 1, random.nextInt(3) - 1);
                 if (!serverLevel.getBlockState(blockPos2).is(Blocks.SNOW)) continue;
                 serverLevel.setBlockAndUpdate(blockPos2, snow_layer.setValue(CrimsonSnowLayer.LAYERS, serverLevel.getBlockState(blockPos2).getValue(SnowLayerBlock.LAYERS)));
             }
@@ -105,7 +99,7 @@ public class CrimsonHelper extends SpreadingSnowyDirtBlock  {
         for (int i = 0; i < 4; ++i) {
             if (random.nextInt(TerraMine.CONFIG.general.evilSpreadRarity + 1) == 1) {
                 BlockState block = toSpread.defaultBlockState();
-                BlockPos blockPos2 = blockPos.offset(random.nextInt(3) - 1, random.nextInt(5) - 3, random.nextInt(3) - 1);
+                BlockPos blockPos2 = blockPos.offset(random.nextInt(3) - 1, random.nextInt(3) - 1, random.nextInt(3) - 1);
                 if (!serverLevel.getBlockState(blockPos2).is(spreadTo)) continue;
                 serverLevel.setBlockAndUpdate(blockPos2, block.setValue(SNOWY, (serverLevel.getBlockState(blockPos2.above()).is(Blocks.SNOW) || serverLevel.getBlockState(blockPos2.above()).is(ModBlocks.CRIMSON_SNOW_LAYER))));
                 CorruptionHelper.spreadBiome(serverLevel, blockPos2, true);

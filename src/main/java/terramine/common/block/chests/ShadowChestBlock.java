@@ -14,11 +14,9 @@ import terramine.common.entity.block.ShadowChestEntity;
 import java.util.function.Supplier;
 
 public class ShadowChestBlock extends BaseChest {
-    boolean trapped;
 
     public ShadowChestBlock(Properties properties, boolean trapped, Supplier<BlockEntityType<? extends ChestBlockEntity>> supplier) {
         super(properties, trapped, supplier);
-        this.trapped = trapped;
     }
 
     @Override
@@ -29,7 +27,7 @@ public class ShadowChestBlock extends BaseChest {
     @Override
     public BlockEntity newBlockEntity(@NotNull BlockPos blockPos, @NotNull BlockState blockState) {
         ChestEntity chest = new ShadowChestEntity(blockPos, blockState);
-        chest.setTrapped(this.trapped);
+        chest.setTrapped(blockState.getValue(TRAPPED));
         return chest;
     }
 

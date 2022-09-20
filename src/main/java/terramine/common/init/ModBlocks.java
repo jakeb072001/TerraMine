@@ -24,8 +24,8 @@ public class ModBlocks {
     public static final Block WATER_CHEST = register("water_chest", new WaterChestBlock(FabricBlockSettings.of(Material.METAL, MaterialColor.WATER).strength(3.0f, 6.0f).sounds(SoundType.METAL).requiresCorrectToolForDrops(), false, () -> ModBlockEntityType.WATER_CHEST));
     public static final Block SKYWARE_CHEST = register("skyware_chest", new SkywareChestBlock(FabricBlockSettings.of(Material.METAL, MaterialColor.LAPIS).strength(3.0f, 6.0f).sounds(SoundType.METAL).requiresCorrectToolForDrops(), false, () -> ModBlockEntityType.SKYWARE_CHEST));
     public static final Block SHADOW_CHEST = register("shadow_chest", new ShadowChestBlock(FabricBlockSettings.of(Material.METAL, MaterialColor.COLOR_PURPLE).strength(3.0f, 6.0f).sounds(SoundType.METAL).requiresCorrectToolForDrops(), false, () -> ModBlockEntityType.SHADOW_CHEST));
-    public static final Block PIGGY_BANK = register("piggy_bank", new PiggyBankBlock(Properties.copy(Blocks.TERRACOTTA), false, () -> ModBlockEntityType.PIGGY_BANK));
-    public static final Block SAFE = register("safe", new SafeBlock(Properties.copy(Blocks.IRON_BLOCK), false, () -> ModBlockEntityType.SAFE));
+    public static final Block PIGGY_BANK = register("piggy_bank", new PiggyBankBlock(Properties.copy(Blocks.TERRACOTTA), () -> ModBlockEntityType.PIGGY_BANK));
+    public static final Block SAFE = register("safe", new SafeBlock(Properties.copy(Blocks.IRON_BLOCK), () -> ModBlockEntityType.SAFE));
     public static final Block REDSTONE_STONE = register("redstone_stone", new RedStoneStoneBlock(Properties.copy(Blocks.STONE).strength(1.5f, 1200.0f)));
     public static final Block REDSTONE_DEEPSLATE = register("redstone_deepslate", new RedStoneDeepslateBlock(Properties.copy(Blocks.DEEPSLATE).strength(3.0f, 1200.0f)));
     public static final Block INSTANT_TNT = register("instant_tnt", new InstantTNTBlock(Properties.copy(Blocks.TNT)));

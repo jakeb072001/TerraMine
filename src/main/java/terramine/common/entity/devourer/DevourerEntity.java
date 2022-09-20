@@ -157,7 +157,7 @@ public class DevourerEntity extends Monster implements Enemy {
                 motionZ = entity.velZ * 0.0095f * entity.getAttribute(Attributes.MOVEMENT_SPEED).getValue();
 
                 //entity.setDeltaMovement(motionX, motionY, motionZ);
-                if (entity.isInWall()) {
+                if (entity.isInWall() || entity.isInWater() || entity.isInLava()) {
                     entity.setYRot(rotlerp(entity.getYRot(), (float)Math.toDegrees(Math.atan2(entity.velZ, entity.velX)) - 90, 360));
                     entity.setXRot((float)(-(Mth.atan2(-entity.velY, Math.sqrt(entity.velX * entity.velX + entity.velZ * entity.velZ)) * 180.0F / (float)Math.PI)));
                     entity.setDeltaMovement(entity.getDeltaMovement().add(motionX, motionY, motionZ));

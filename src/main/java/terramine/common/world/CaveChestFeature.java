@@ -70,7 +70,7 @@ public class CaveChestFeature extends Feature<NoneFeatureConfiguration> {
 			desert = true;
 		}
 
-		if (ModComponents.HARDMODE.get(level.getLevelData()).get() && random.nextFloat() * 100 < TerraMine.CONFIG.worldgen.caveChest.mimicChance) {
+		if (!desert && !jungle && ModComponents.HARDMODE.get(level.getLevelData()).get() && random.nextFloat() * 100 < TerraMine.CONFIG.worldgen.caveChest.mimicChance) {
 			MimicEntity mimic = ModEntities.MIMIC.create(level.getLevel());
 			if (mimic != null) {
 				if (frozen) {
