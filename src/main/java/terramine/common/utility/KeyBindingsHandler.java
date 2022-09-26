@@ -12,13 +12,8 @@ import terramine.common.network.packet.UpdateInputPacket;
 
 @Environment(EnvType.CLIENT)
 public class KeyBindingsHandler {
-    private static boolean jump = false;
-    private static boolean forwards = false;
-    private static boolean backwards = false;
-    private static boolean left = false;
-    private static boolean right = false;
-    private static boolean attack = false;
-    private static boolean shift = false;
+    private static boolean jump, attack, shift = false;
+    private static boolean forwards, backwards, left, right = false;
 
     public static void onClientTick(Minecraft client) {
         updateInputs(client);

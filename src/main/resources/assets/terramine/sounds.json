@@ -1,4 +1,19 @@
 {
+  "generic.double_jump": {
+    "sounds": [
+      "terramine:doublejump"
+    ]
+  },
+  "item.magic_mirror.use": {
+    "sounds": [
+      "terramine:magicmirroruse"
+    ]
+  },
+  "generic.bomb": {
+    "sounds": [
+      "terramine:bomb"
+    ]
+  },
   "item.rocket_boots.flame": {
     "sounds": [
       "terramine:boots/rocketbootsflame"
@@ -19,16 +34,6 @@
       "terramine:wings/wing_flap"
     ]
   },
-  "generic.double_jump": {
-    "sounds": [
-      "terramine:doublejump"
-    ]
-  },
-  "item.magic_mirror.use": {
-    "sounds": [
-      "terramine:magicmirroruse"
-    ]
-  },
   "item.magicmissile.use": {
     "sounds": [
       "terramine:mana/missile/magicshoot"
@@ -44,14 +49,22 @@
       "terramine:mana/missile/rainbowshoot"
     ]
   },
-  "mana.full": {
+  "item.whoopee_cushion.fart": {
     "sounds": [
-      "terramine:mana/full"
-    ]
+      "terramine:fart1",
+      "terramine:fart2",
+      "terramine:fart3"
+    ],
+    "subtitle": "terramine.subtitles.item.whoopee_cushion.fart"
   },
   "item.mana_crystal.use": {
     "sounds": [
       "terramine:mana/crystaluse"
+    ]
+  },
+  "mana.full": {
+    "sounds": [
+      "terramine:mana/full"
     ]
   },
   "fallingstar.fall": {
@@ -102,14 +115,6 @@
     "sounds": [
       "terramine:enemies/mobkilled"
     ]
-  },
-  "item.whoopee_cushion.fart": {
-    "sounds": [
-      "terramine:fart1",
-      "terramine:fart2",
-      "terramine:fart3"
-    ],
-    "subtitle": "terramine.subtitles.item.whoopee_cushion.fart"
   },
   "block.water.step": {
     "sounds": [

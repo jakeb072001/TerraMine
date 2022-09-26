@@ -16,6 +16,7 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
+import org.jetbrains.annotations.NotNull;
 import terramine.common.init.ModItems;
 import terramine.common.init.ModSoundEvents;
 import terramine.common.trinkets.TrinketsHelper;
@@ -24,14 +25,10 @@ public class MagicMissileHelper extends AbstractArrow {
 
     private final RandomSource rand = RandomSource.create();
     private Item wandItem;
-    private float damageIncrease;
-    private float speed;
-    private float damage;
+    private float damageIncrease, speed, damage;
     private int timer;
-    private boolean canBeInWater;
-    private boolean canBeInLava;
-    private boolean canIgnite = false;
-    private boolean limitedTime = false;
+    private boolean canBeInWater, canBeInLava;
+    private boolean canIgnite, limitedTime = false;
 
     public MagicMissileHelper(EntityType<? extends MagicMissileHelper> entityType, Level level) {
         super(entityType, level);
@@ -79,13 +76,13 @@ public class MagicMissileHelper extends AbstractArrow {
     }
 
     @Override
-    protected void onHit(HitResult hitResult) {
+    protected void onHit(@NotNull HitResult hitResult) {
         super.onHit(hitResult);
     }
 
     @Override
-    protected void onHitEntity(EntityHitResult entityHitResult) {
-        if (entityHitResult != null && entityHitResult.getEntity() != this.getOwner()) {
+    protected void onHitEntity(@NotNull EntityHitResult entityHitResult) {
+        if (entityHitResult.getEntity() != this.getOwner()) {
             entityHitResult.getEntity().hurt(DamageSource.indirectMagic(entityHitResult.getEntity(), this.getOwner()), damage * damageIncrease);
             if (canIgnite) {
                 entityHitResult.getEntity().setSecondsOnFire(rand.nextInt(4) + 4);
@@ -95,13 +92,13 @@ public class MagicMissileHelper extends AbstractArrow {
     }
 
     @Override
-    protected void onHitBlock(BlockHitResult blockHitResult) {
+    protected void onHitBlock(@NotNull BlockHitResult blockHitResult) {
         this.explode();
         this.inGround = false;
     }
 
     @Override
-    public void playerTouch(Player player) {
+    public void playerTouch(@NotNull Player player) {
     }
 
     private void explode()
@@ -109,7 +106,7 @@ public class MagicMissileHelper extends AbstractArrow {
         if(!this.level.isClientSide)
         {
             new ExplosionConfigurable(this.level, this.getOwner() != null ? this.getOwner() : this, DamageSource.playerAttack((Player) this.getOwner()).setMagic(), null, this.position().x(), this.position().y(), this.position().z(), 1F, damage / 1.5f, true, false, Explosion.BlockInteraction.NONE);
-            playSound(ModSoundEvents.FALLING_STAR_CRASH,0.25f, 1.7f);
+            level.playSound(null, blockPosition(), ModSoundEvents.BOMB, SoundSource.PLAYERS, 0.4f, 1);
             this.kill();
         }
     }
@@ -184,7 +181,7 @@ public class MagicMissileHelper extends AbstractArrow {
     }
 
     @Override
-    public void addAdditionalSaveData(CompoundTag compound) {
+    public void addAdditionalSaveData(@NotNull CompoundTag compound) {
         super.addAdditionalSaveData(compound);
         compound.putFloat("speed", speed);
         compound.putFloat("damage", damage);
@@ -195,7 +192,7 @@ public class MagicMissileHelper extends AbstractArrow {
     }
 
     @Override
-    public void readAdditionalSaveData(CompoundTag compound) {
+    public void readAdditionalSaveData(@NotNull CompoundTag compound) {
         super.readAdditionalSaveData(compound);
         speed = compound.getFloat("speed");
         damage = compound.getFloat("damage");

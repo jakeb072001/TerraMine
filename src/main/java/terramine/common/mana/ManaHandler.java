@@ -16,11 +16,9 @@ import terramine.common.init.ModStatistics;
 
 @SuppressWarnings("UnstableApiUsage")
 public class ManaHandler implements PlayerComponent<Component>, AutoSyncedComponent {
-    private int maxMana = 0;
-    private int currentMana = 0;
-    private double manaRegenDelay = 0;
-    private int manaBonus = 0;
+    private int maxMana, currentMana, manaBonus = 0;
     private int manaDelayBonus = 1;
+    private double manaRegenDelay = 0;
     private final Player provider;
 
     public ManaHandler(Player provider) {
@@ -39,20 +37,12 @@ public class ManaHandler implements PlayerComponent<Component>, AutoSyncedCompon
                 manaRegenDelay = (0.7 * ((1 - ((double) currentMana / maxMana)) * 240 + 45)) / manaDelayBonus;
                 provider.level.playSound(null, provider.blockPosition(), ModSoundEvents.MANA_FULL, SoundSource.PLAYERS, 1f, 1f);
             } else if (currentMana != maxMana) {
-                manaRegenDelay -= provider.getServer().getLevel(provider.level.dimension()).getGameRules().getInt(ModCommands.MANA_REGEN_SPEED);
+                manaRegenDelay -= provider.level.getGameRules().getInt(ModCommands.MANA_REGEN_SPEED);
             }
             if (manaRegenDelay <= 0 && currentMana != maxMana) {
                 addCurrentMana(Math.max((int) (Math.abs((((double) maxMana / 7) + 1 + ((double) maxMana / 2) + manaBonus) * (((double) currentMana / maxMana) * 0.8 + 0.2) * 1.15) / 20), 1));
             }
         }
-    }
-
-    public void updateMoving() { // not working right now, don't know if it's possible or not.
-        /*
-        if (manaRegenDelay <= 0 && currentMana != maxMana) {
-            addCurrentMana((int) ((((double)maxMana / 7) + 1 + manaBonus) * (((double)currentMana / maxMana) * 0.8 + 0.2) * 1.15) / 20);
-        }
-        */
     }
 
     public void isInUse() {
@@ -88,8 +78,8 @@ public class ManaHandler implements PlayerComponent<Component>, AutoSyncedCompon
         if (provider != null && provider.getServer() != null && !provider.isCreative()) {
             if (currentMana > 0) {
                 this.currentMana = Math.min(currentMana + this.currentMana, maxMana);
-                provider.awardStat(Stats.CUSTOM.get(ModStatistics.MANA_USED), Math.max(currentMana, 0));
-            } else if (currentMana < 0 && !provider.getServer().getLevel(provider.level.dimension()).getGameRules().getBoolean(ModCommands.MANA_INFINITE)) {
+                provider.awardStat(Stats.CUSTOM.get(ModStatistics.MANA_USED), currentMana);
+            } else if (currentMana < 0 && !provider.level.getGameRules().getBoolean(ModCommands.MANA_INFINITE)) {
                 this.currentMana = Math.max(currentMana + this.currentMana, 0);
             }
         }

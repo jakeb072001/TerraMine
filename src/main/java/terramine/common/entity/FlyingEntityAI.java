@@ -20,9 +20,7 @@ import org.jetbrains.annotations.NotNull;
 import terramine.common.init.ModSoundEvents;
 
 public class FlyingEntityAI extends Monster implements Enemy {
-    public boolean dayEscape = false;
-    public boolean bounce;
-    public boolean doOnce = false;
+    public boolean dayEscape, doOnce, bounce = false;
     public double velX, velY, velZ;
     public double oldVelX, oldVelY, oldVelZ;
 
@@ -56,7 +54,7 @@ public class FlyingEntityAI extends Monster implements Enemy {
         }
 
         @Override
-        public void tick() { // todo: bounce entity if hit with knockback
+        public void tick() {
             if (flyingEntity.isAlive()) {
                 if (flyingEntity.horizontalCollision) {
                     flyingEntity.bounce = true;

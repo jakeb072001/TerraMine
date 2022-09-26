@@ -34,7 +34,7 @@ public class IronSkinEffect extends TerrariaEffect {
     }
 
     @Override
-    public void applyEffectTick(LivingEntity livingEntity, int level) {
+    public void applyEffectTick(@NotNull LivingEntity livingEntity, int level) {
         if (livingEntity.getAttributes().hasAttribute(Attributes.ARMOR)) {
             TrinketTerrariaItem.addModifier(livingEntity.getAttribute(Attributes.ARMOR), IRONSKIN_ARMOR);
         }

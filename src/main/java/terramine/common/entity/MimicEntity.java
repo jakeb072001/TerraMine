@@ -31,8 +31,7 @@ import java.util.EnumSet;
 
 public class MimicEntity extends Mob implements Enemy {
 	public static final EntityDataAccessor<Integer> typed_data = SynchedEntityData.defineId(MimicEntity.class, EntityDataSerializers.INT);
-	public int ticksInAir;
-	public int attackCooldown;
+	public int ticksInAir, attackCooldown;
 	public boolean isDormant;
 	public Direction facing;
 

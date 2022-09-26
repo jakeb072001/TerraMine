@@ -15,7 +15,6 @@ import java.util.concurrent.ThreadLocalRandom;
 import java.util.function.Predicate;
 
 public class Utilities { // todo: need to fix bug with magic missile where the projectile will jitter back and forth instead of just staying at its position
-    private Utilities() {}
 
     public static BlockHitResult rayTraceBlocks(Entity entity, double length, boolean checkLiquids)
     {

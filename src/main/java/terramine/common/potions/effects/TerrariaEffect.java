@@ -3,10 +3,10 @@ package terramine.common.potions.effects;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.entity.LivingEntity;
+import org.jetbrains.annotations.NotNull;
 
 public class TerrariaEffect extends MobEffect {
-    private boolean instant;
-    private boolean isRegistered = false;
+    private boolean isRegistered, instant = false;
 
     public TerrariaEffect(MobEffectCategory type, int color, boolean isInstant) {
         super(type, color);
@@ -34,7 +34,7 @@ public class TerrariaEffect extends MobEffect {
     }
 
     @Override
-    public void applyEffectTick(LivingEntity entity, int amplifier) {
+    public void applyEffectTick(@NotNull LivingEntity entity, int amplifier) {
         if (isInstantenous()) {
             applyInstantenousEffect(null, null, entity, amplifier, 1.0d);
         }

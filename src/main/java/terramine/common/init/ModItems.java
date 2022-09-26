@@ -200,6 +200,9 @@ public class ModItems {
 	public static final Item REDSTONE_DEEPSLATE = register("redstone_deepslate", new BlockItem(ModBlocks.REDSTONE_DEEPSLATE, new FabricItemSettings()));
 	public static final Item INSTANT_TNT = register("instant_tnt", new BlockItem(ModBlocks.INSTANT_TNT, new FabricItemSettings()));
 	public static final Item TINKERER_TABLE = register("tinkerer_workshop", new BlockItem(ModBlocks.TINKERER_TABLE, new FabricItemSettings().group(TerraMine.ITEM_GROUP_BLOCKS)));
+	public static final Item SUNPLATE_BLOCK = register("sunplate_block", new BlockItem(ModBlocks.SUNPLATE_BLOCK, new FabricItemSettings().group(TerraMine.ITEM_GROUP_BLOCKS)));
+	public static final Item CLOUD = register("cloud", new BlockItem(ModBlocks.CLOUD, new FabricItemSettings().group(TerraMine.ITEM_GROUP_BLOCKS)));
+	public static final Item RAIN_CLOUD = register("rain_cloud", new BlockItem(ModBlocks.RAIN_CLOUD, new FabricItemSettings().group(TerraMine.ITEM_GROUP_BLOCKS)));
 	public static final Item BLUE_BRICKS = register("blue_brick", new BlockItem(ModBlocks.BLUE_BRICKS, new FabricItemSettings().group(TerraMine.ITEM_GROUP_BLOCKS)));
 	public static final Item CRACKED_BLUE_BRICKS = register("cracked_blue_brick", new BlockItem(ModBlocks.CRACKED_BLUE_BRICKS, new FabricItemSettings().group(TerraMine.ITEM_GROUP_BLOCKS)));
 	public static final Item FANCY_BLUE_BRICKS = register("fancy_blue_brick", new BlockItem(ModBlocks.FANCY_BLUE_BRICKS, new FabricItemSettings().group(TerraMine.ITEM_GROUP_BLOCKS)));

@@ -16,12 +16,8 @@ import terramine.common.trinkets.TrinketsHelper;
 
 public class CelestialShell extends TrinketTerrariaItem {
 
-    private boolean inWater;
-    private final boolean shell;
-    private final boolean wolf;
-    private final boolean sun;
-    private final boolean moon;
-    private boolean isNight;
+    private boolean inWater, isNight;
+    private final boolean shell, wolf, sun, moon;
     private int timer;
 
     public CelestialShell(boolean shell, boolean wolf, boolean sun, boolean moon) {

@@ -2,6 +2,7 @@ package terramine.common.potions.effects;
 
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.entity.LivingEntity;
+import org.jetbrains.annotations.NotNull;
 
 public class BlankEffect extends TerrariaEffect {
 
@@ -15,6 +16,6 @@ public class BlankEffect extends TerrariaEffect {
     }
 
     @Override
-    public void applyEffectTick(LivingEntity livingEntity, int level) {
+    public void applyEffectTick(@NotNull LivingEntity livingEntity, int level) {
     }
 }

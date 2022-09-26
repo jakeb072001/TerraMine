@@ -3,6 +3,7 @@ package terramine.common.potions.effects.mana;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
+import org.jetbrains.annotations.NotNull;
 import terramine.common.init.ModComponents;
 import terramine.common.potions.effects.TerrariaEffect;
 
@@ -18,7 +19,7 @@ public class InstantManaEffect extends TerrariaEffect {
     }
 
     @Override
-    public void applyEffectTick(LivingEntity livingEntity, int level) {
+    public void applyEffectTick(@NotNull LivingEntity livingEntity, int level) {
         if (livingEntity instanceof Player player) {
             ModComponents.MANA_HANDLER.get(player).addCurrentMana((level + 1) * 50);
         }

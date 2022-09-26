@@ -12,10 +12,8 @@ import terramine.common.utility.equipmentchecks.RocketBootsEquippedCheck;
 public class WingsItem extends TrinketTerrariaItem {
 
 	private final RocketBootHelper rocketHelper = new RocketBootHelper();
-	private final double speed;
-	private final double glideSpeed;
-	private final int flightTime;
-	private final int priority;
+	private final double speed, glideSpeed;
+	private final int flightTime, priority;
 
 	public WingsItem(double speed, double glideSpeed, int flightTime, int priority, SoundEvent sound) {
 		RandomSource random = RandomSource.create();

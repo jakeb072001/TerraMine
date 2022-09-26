@@ -51,11 +51,6 @@ public abstract class PlayerMixin extends LivingEntity implements PlayerStorages
 		}
 	}
 
-	@Inject(method = "aiStep", at = @At("TAIL"))
-	private void manaTickRegenMoving(CallbackInfo ci) {
-		ModComponents.MANA_HANDLER.get(this).updateMoving();
-	}
-
 	@Override
 	public SimpleContainer getPiggyBankInventory() {
 		return this.piggyBankInventory;

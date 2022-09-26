@@ -6,13 +6,7 @@ import net.minecraft.server.level.ServerPlayer;
 import terramine.common.utility.InputHandler;
 
 public class UpdateInputPacket {
-    private final boolean jump;
-    private final boolean attack;
-    private final boolean shift;
-    private final boolean forwards;
-    private final boolean backwards;
-    private final boolean left;
-    private final boolean right;
+    private final boolean jump, attack, shift, forwards, backwards, left, right;
 
     public UpdateInputPacket(boolean jump, boolean attack, boolean shift, boolean forwards, boolean backwards, boolean left, boolean right) {
         this.jump = jump;

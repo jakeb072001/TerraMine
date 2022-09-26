@@ -1,8 +1,5 @@
 package terramine.mixin.world.entity;
 
-import net.minecraft.network.syncher.EntityDataAccessor;
-import net.minecraft.network.syncher.EntityDataSerializers;
-import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.item.ItemEntity;
@@ -22,17 +19,8 @@ public abstract class ItemEntityMixin extends Entity {
         super(entityType, level);
     }
 
-    @Shadow public ItemStack getItem()  {
-        return (ItemStack)this.getEntityData().get(DATA_ITEM);
-    }
-    @Shadow public void setItem(ItemStack itemStack)  {
-        this.getEntityData().set(DATA_ITEM, itemStack);
-    }
-    @Shadow private static EntityDataAccessor<ItemStack> DATA_ITEM;
-
-    static {
-        DATA_ITEM = SynchedEntityData.defineId(ItemEntity.class, EntityDataSerializers.ITEM_STACK);
-    }
+    @Shadow public abstract ItemStack getItem();
+    @Shadow public abstract void setItem(ItemStack itemStack);
 
     @Inject(method = "tick", at = @At("TAIL"))
     public void daytimeVanish(CallbackInfo ci) {

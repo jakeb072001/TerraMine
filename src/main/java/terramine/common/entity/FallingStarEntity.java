@@ -2,7 +2,6 @@ package terramine.common.entity;
 
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
@@ -17,17 +16,16 @@ import terramine.common.init.ModSoundEvents;
 import terramine.common.utility.ExplosionConfigurable;
 
 public class FallingStarEntity extends Mob {
-    RandomSource rand = RandomSource.create();
-    float x;
-    float z;
-    int soundTimer;
+    private final float xSpeed, zSpeed;
+    private int soundTimer;
+
     public FallingStarEntity(EntityType<? extends FallingStarEntity> entityType, Level level) {
         super(entityType, level);
         moveControl = new MoveControl(this);
         xpReward = 0;
-        setXRot(rand.nextFloat());
-        x = ((rand.nextFloat()) - 0.5f) / 4;
-        z = ((rand.nextFloat()) - 0.5f) / 4;
+        setXRot(getRandom().nextFloat());
+        xSpeed = ((getRandom().nextFloat()) - 0.5f) / 4;
+        zSpeed = ((getRandom().nextFloat()) - 0.5f) / 4;
     }
 
     public static AttributeSupplier.Builder createMobAttributes() {
@@ -61,29 +59,27 @@ public class FallingStarEntity extends Mob {
         super.tick();
         adjustMotion();
         resetFallDistance();
+        spawnEffects();
         if (this.isOnGround() || this.isInLava() || this.isInWater()) {
             new ExplosionConfigurable(level, this, this.position().x(), this.position().y(), this.position().z(), 1F, 40f, Explosion.BlockInteraction.NONE);
             createStarItem();
-        }
-        if (!level.isClientSide()) {
-            spawnEffects();
         }
     }
 
     private void adjustMotion() {
         Vec3 motion = getDeltaMovement();
         double y = Math.min(-0.2F, motion.y());
-        setDeltaMovement(new Vec3(motion.x() + this.x, y, motion.z() + this.z));
+        setDeltaMovement(new Vec3(motion.x() + xSpeed, y, motion.z() + zSpeed));
     }
 
     private void spawnEffects() {
-        float random = (rand.nextFloat() - 0.5F) * 0.1F;
-        if (this.getServer() != null) {
-            this.getServer().getLevel(this.getLevel().dimension()).sendParticles(ParticleTypes.FIREWORK, position().x, position().y + 0.5f, position().z, 1, 0, -0.2D, 0, random);
-            this.getServer().getLevel(this.getLevel().dimension()).sendParticles(ParticleTypes.ENCHANTED_HIT, position().x, position().y + 0.5f, position().z, 1, 0, -0.2D, 0, random);
+        if (level != null) {
+            Vec3 motion = getDeltaMovement();
+            level.addParticle(ParticleTypes.FIREWORK, position().x, position().y + 0.5f, position().z, motion.x, motion.y, motion.z);
+            level.addParticle(ParticleTypes.ENCHANTED_HIT, position().x, position().y + 0.5f, position().z, motion.x, motion.y, motion.z);
         }
         soundTimer += 1;
-        if (soundTimer >= (rand.nextInt(7)) + 5) {
+        if (soundTimer >= (getRandom().nextInt(7)) + 5) {
             level.playSound(null, this.blockPosition(), ModSoundEvents.FALLING_STAR_FALL, SoundSource.AMBIENT, 0.5f, 1f);
             soundTimer = 0;
         }

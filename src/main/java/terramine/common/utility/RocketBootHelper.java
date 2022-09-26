@@ -20,12 +20,8 @@ public class RocketBootHelper {
     private SimpleParticleType particle1;
     private SimpleParticleType particle2;
     private SoundEvent sound;
-    private float soundVolume;
-    private float soundPitch;
-    private int timer;
-    private int soundTimer;
-    private int glideDelay;
-    private int glideCloudDelay;
+    private float soundVolume, soundPitch;
+    private int timer, soundTimer, glideDelay, glideCloudDelay;
     private int rocketTime = 40;
 
     public void rocketFly(double speed, int priority, LivingEntity player) {

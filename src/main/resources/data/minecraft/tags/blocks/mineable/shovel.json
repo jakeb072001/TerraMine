@@ -1,6 +1,8 @@
 {
   "replace": false,
   "values": [
+    "terramine:cloud",
+    "terramine:rain_cloud",
     "terramine:corrupted_grass",
     "terramine:corrupted_sand",
 	"terramine:corrupted_gravel",

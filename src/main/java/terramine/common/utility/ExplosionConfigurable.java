@@ -50,9 +50,7 @@ public class ExplosionConfigurable extends Explosion {
     private final Explosion.BlockInteraction blockInteraction;
     private final RandomSource random;
     private final Level level;
-    private final double x;
-    private final double y;
-    private final double z;
+    private final double x, y, z;
     @Nullable
     private final Entity source;
     private final float radius;

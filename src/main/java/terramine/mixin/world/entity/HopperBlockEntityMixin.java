@@ -13,7 +13,7 @@ import terramine.common.init.ModItems;
 public class HopperBlockEntityMixin {
 
     @Inject(method = "addItem*", at = @At("HEAD"))
-    private static void preventVanish(Container container, ItemEntity itemEntity, CallbackInfoReturnable ci) {
+    private static void preventVanish(Container container, ItemEntity itemEntity, CallbackInfoReturnable<?> ci) {
         if (itemEntity.getItem().is(ModItems.FAKE_FALLEN_STAR)) {
             itemEntity.setItem(ModItems.FALLEN_STAR.getDefaultInstance());
         }

@@ -16,14 +16,8 @@ import terramine.common.utility.InputHandler;
 
 public class MasterNinjaGearItem extends TrinketTerrariaItem {
 
-	public boolean upPressed;
-	public boolean downPressed;
-	public boolean leftPressed;
-	public boolean rightPressed;
-	public boolean upKeyUnpressed;
-	public boolean downKeyUnpressed;
-	public boolean leftKeyUnpressed;
-	public boolean rightKeyUnpressed;
+	public boolean upPressed, downPressed, leftPressed, rightPressed;
+	public boolean upKeyUnpressed, downKeyUnpressed, leftKeyUnpressed, rightKeyUnpressed;
 	public int timer;
 
 	@Environment(EnvType.CLIENT)

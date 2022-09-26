@@ -21,6 +21,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 - Trinkets slots not having keep inventory
 - Lava not setting player on fire if Lava Charm type accessory is not equipped
+- Trapped chests not remembering they are trapped
 - Possible crashes with boot type accessories
 
 ## [1.5.1] - 2022-08-21
