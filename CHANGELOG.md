@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Devourer
 - Corruption and Crimson biome spread (actually spreads the biome now and not just the block, can still cause lag)
+- Sunplate, Cloud, and Rain Cloud blocks
 - WTHIT support (Only used to help hide trapped chests right now)
 - Biome tags (for other mods to add structures or mobs to the corruption or crimson)
 - Korean translation from [@gyular](https://github.com/gyular)

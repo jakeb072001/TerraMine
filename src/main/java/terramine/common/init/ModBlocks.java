@@ -32,7 +32,7 @@ public class ModBlocks {
     public static final Block TINKERER_TABLE = register("tinkerer_workshop", new Block(Properties.copy(Blocks.CRAFTING_TABLE)));
     public static final Block SUNPLATE_BLOCK = register("sunplate_block", new Block(Properties.copy(Blocks.GOLD_BLOCK)));
     public static final Block CLOUD = register("cloud", new Block(Properties.of(Material.SNOW).strength(0.2f).sound(SoundType.SNOW)));
-    public static final Block RAIN_CLOUD = register("rain_cloud", new Block(Properties.of(Material.SNOW).strength(0.2f).sound(SoundType.SNOW)));
+    public static final Block RAIN_CLOUD = register("rain_cloud", new RainCloudBlock(Properties.of(Material.SNOW).strength(0.2f).sound(SoundType.SNOW)));
     public static final Block BLUE_BRICKS = register("blue_brick", new DungeonBlock(Properties.of(Material.STONE).strength(1.5f, 1200.0F)));
     public static final Block CRACKED_BLUE_BRICKS = register("cracked_blue_brick", new DungeonBlock(Properties.of(Material.STONE).strength(1.5f, 1200.0F)));
     public static final Block FANCY_BLUE_BRICKS = register("fancy_blue_brick", new DungeonBlock(Properties.of(Material.STONE).strength(1.5f, 1200.0F)));
