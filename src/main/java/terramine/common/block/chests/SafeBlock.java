@@ -29,6 +29,7 @@ public class SafeBlock extends BaseChest {
         super(properties, false, supplier);
     }
 
+    @Override
     public VoxelShape getShape(@NotNull BlockState blockState, @NotNull BlockGetter blockGetter, @NotNull BlockPos blockPos, @NotNull CollisionContext collisionContext) {
         return SHAPE;
     }

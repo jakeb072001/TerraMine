@@ -1,16 +1,22 @@
 package terramine.common.init;
 
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
+import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.FlowerPotBlock;
 import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.material.MaterialColor;
 import terramine.TerraMine;
 import terramine.common.block.*;
 import terramine.common.block.chests.*;
+import terramine.common.block.plants.EvilMushroom;
 
 public class ModBlocks {
     public static final Block GOLD_CHEST = register("gold_chest", new GoldChestBlock(FabricBlockSettings.of(Material.METAL, MaterialColor.GOLD).strength(3.0f, 6.0f).sounds(SoundType.METAL).requiresCorrectToolForDrops(), false, () -> ModBlockEntityType.GOLD_CHEST));
@@ -31,8 +37,8 @@ public class ModBlocks {
     public static final Block INSTANT_TNT = register("instant_tnt", new InstantTNTBlock(Properties.copy(Blocks.TNT)));
     public static final Block TINKERER_TABLE = register("tinkerer_workshop", new Block(Properties.copy(Blocks.CRAFTING_TABLE)));
     public static final Block SUNPLATE_BLOCK = register("sunplate_block", new Block(Properties.copy(Blocks.GOLD_BLOCK)));
-    public static final Block CLOUD = register("cloud", new Block(Properties.of(Material.SNOW).strength(0.2f).sound(SoundType.SNOW)));
-    public static final Block RAIN_CLOUD = register("rain_cloud", new RainCloudBlock(Properties.of(Material.SNOW).strength(0.2f).sound(SoundType.SNOW)));
+    public static final Block CLOUD = register("cloud", new Block(Properties.of(Material.SNOW).strength(0.2f).sound(SoundType.SNOW).noOcclusion()));
+    public static final Block RAIN_CLOUD = register("rain_cloud", new RainCloudBlock(Properties.of(Material.SNOW).strength(0.2f).sound(SoundType.SNOW).noOcclusion()));
     public static final Block BLUE_BRICKS = register("blue_brick", new DungeonBlock(Properties.of(Material.STONE).strength(1.5f, 1200.0F)));
     public static final Block CRACKED_BLUE_BRICKS = register("cracked_blue_brick", new DungeonBlock(Properties.of(Material.STONE).strength(1.5f, 1200.0F)));
     public static final Block FANCY_BLUE_BRICKS = register("fancy_blue_brick", new DungeonBlock(Properties.of(Material.STONE).strength(1.5f, 1200.0F)));
@@ -42,6 +48,10 @@ public class ModBlocks {
     public static final Block PURPLE_BRICKS = register("purple_brick", new DungeonBlock(Properties.of(Material.STONE).strength(1.5f, 1200.0F)));
     public static final Block CRACKED_PURPLE_BRICKS = register("cracked_purple_brick", new DungeonBlock(Properties.of(Material.STONE).strength(1.5f, 1200.0F)));
     public static final Block FANCY_PURPLE_BRICKS = register("fancy_purple_brick", new DungeonBlock(Properties.of(Material.STONE).strength(1.5f, 1200.0F)));
+    public static final Block VILE_MUSHROOM = register("vile_mushroom", new EvilMushroom(true, Properties.of(Material.PLANT, MaterialColor.COLOR_PURPLE).noCollission().instabreak().sound(SoundType.GRASS).lightLevel(blockState -> 1).hasPostProcess(ModBlocks::always)));
+    public static final Block POTTED_VILE_MUSHROOM = register("potted_vile_mushroom", new FlowerPotBlock(VILE_MUSHROOM, BlockBehaviour.Properties.of(Material.DECORATION).instabreak().noOcclusion()));
+    public static final Block VICIOUS_MUSHROOM = register("vicious_mushroom", new EvilMushroom(false, Properties.of(Material.PLANT, MaterialColor.COLOR_RED).noCollission().instabreak().sound(SoundType.GRASS).lightLevel(blockState -> 1).hasPostProcess(ModBlocks::always)));
+    public static final Block POTTED_VICIOUS_MUSHROOM = register("potted_vicious_mushroom", new FlowerPotBlock(VICIOUS_MUSHROOM, BlockBehaviour.Properties.of(Material.DECORATION).instabreak().noOcclusion()));
     public static final Block RAW_DEMONITE_BLOCK = register("raw_demonite_block", new Block(Properties.copy(Blocks.RAW_IRON_BLOCK)));
     public static final Block DEMONITE_BLOCK = register("demonite_block", new Block(Properties.copy(Blocks.IRON_BLOCK)));
     public static final Block CORRUPTED_GRASS = register("corrupted_grass", new CorruptedGrass(Properties.copy(Blocks.GRASS_BLOCK).randomTicks()));
@@ -119,5 +129,9 @@ public class ModBlocks {
 
     private static Block register(String name, Block block) {
         return Registry.register(Registry.BLOCK, TerraMine.id(name), block);
+    }
+
+    private static boolean always(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos) {
+        return true;
     }
 }

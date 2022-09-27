@@ -4,6 +4,7 @@ import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.core.Registry;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.*;
+import net.minecraft.world.level.block.ComposterBlock;
 import terramine.TerraMine;
 import terramine.common.item.*;
 import terramine.common.item.armor.CrimsonArmor;
@@ -212,6 +213,8 @@ public class ModItems {
 	public static final Item PURPLE_BRICKS = register("purple_brick", new BlockItem(ModBlocks.PURPLE_BRICKS, new FabricItemSettings().group(TerraMine.ITEM_GROUP_BLOCKS)));
 	public static final Item CRACKED_PURPLE_BRICKS = register("cracked_purple_brick", new BlockItem(ModBlocks.CRACKED_PURPLE_BRICKS, new FabricItemSettings().group(TerraMine.ITEM_GROUP_BLOCKS)));
 	public static final Item FANCY_PURPLE_BRICKS = register("fancy_purple_brick", new BlockItem(ModBlocks.FANCY_PURPLE_BRICKS, new FabricItemSettings().group(TerraMine.ITEM_GROUP_BLOCKS)));
+	public static final Item VILE_MUSHROOM = registerPlant("vile_mushroom", 0.65f, new BlockItem(ModBlocks.VILE_MUSHROOM, new FabricItemSettings().group(TerraMine.ITEM_GROUP_STUFF)));
+	public static final Item VICIOUS_MUSHROOM = registerPlant("vicious_mushroom", 0.65f, new BlockItem(ModBlocks.VICIOUS_MUSHROOM, new FabricItemSettings().group(TerraMine.ITEM_GROUP_STUFF)));
 	public static final Item RAW_DEMONITE_BLOCK = register("raw_demonite_block", new BlockItem(ModBlocks.RAW_DEMONITE_BLOCK, new FabricItemSettings().group(TerraMine.ITEM_GROUP_BLOCKS)));
 	public static final Item DEMONITE_BLOCK = register("demonite_block", new BlockItem(ModBlocks.DEMONITE_BLOCK, new FabricItemSettings().group(TerraMine.ITEM_GROUP_BLOCKS)));
 	public static final Item CORRUPTED_GRASS_BLOCK = register("corrupted_grass", new BlockItem(ModBlocks.CORRUPTED_GRASS, new FabricItemSettings().group(TerraMine.ITEM_GROUP_BLOCKS)));
@@ -288,6 +291,11 @@ public class ModItems {
 	public static final Item CRIMSON_BLUE_ICE = register("crimson_blue_ice", new BlockItem(ModBlocks.CRIMSON_BLUE_ICE, new FabricItemSettings().group(TerraMine.ITEM_GROUP_BLOCKS)));
 
 	private static Item register(String name, Item item) {
+		return Registry.register(Registry.ITEM, TerraMine.id(name), item);
+	}
+
+	private static Item registerPlant(String name, float chance, Item item) {
+		ComposterBlock.COMPOSTABLES.put(item, chance);
 		return Registry.register(Registry.ITEM, TerraMine.id(name), item);
 	}
 }

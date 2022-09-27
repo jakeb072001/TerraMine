@@ -12,7 +12,7 @@ import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.PackType;
-import terramine.client.render.ModEntityRenderers;
+import terramine.client.render.ModEntityBlockRenderers;
 import terramine.client.render.trinket.CurioRenderers;
 import terramine.common.init.*;
 import terramine.common.utility.KeyBindingsHandler;
@@ -43,7 +43,7 @@ public class TerraMineClient implements ClientModInitializer {
 				-> entity != null && entity.isUsingItem() && entity.getUseItem() == stack ? 1 : 0);
 
 		// All Entity renderers register
-		ModEntityRenderers.register();
+		ModEntityBlockRenderers.register();
 
 		// Entity models register
 		ModLayerDefinitions.registerAll();

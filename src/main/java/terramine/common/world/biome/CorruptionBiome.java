@@ -30,7 +30,7 @@ public class CorruptionBiome {
         ModBiomeFeatures.addDefaultCorruptOres(generationSettings);
         ModBiomeFeatures.addDefaultCorruptSoftDisks(generationSettings);
         BiomeDefaultFeatures.addWaterTrees(generationSettings);
-        BiomeDefaultFeatures.addPlainVegetation(generationSettings);
+        ModBiomeFeatures.addDefaultCorruptVegetation(generationSettings);
         BiomeDefaultFeatures.addDefaultMushrooms(generationSettings);
         BiomeDefaultFeatures.addDefaultExtraVegetation(generationSettings);
         BiomeDefaultFeatures.addDefaultSeagrass(generationSettings);

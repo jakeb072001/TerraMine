@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cross",
+  "textures": {
+    "cross": "terramine:block/plants/vile_mushroom"
+  }
+}

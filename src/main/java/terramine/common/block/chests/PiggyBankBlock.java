@@ -31,6 +31,7 @@ public class PiggyBankBlock extends BaseChest {
         super(properties, false, supplier);
     }
 
+    @Override
     public VoxelShape getShape(@NotNull BlockState blockState, @NotNull BlockGetter blockGetter, @NotNull BlockPos blockPos, @NotNull CollisionContext collisionContext) {
         Direction direction = blockState.getValue(FACING);
         return direction.getAxis() == Direction.Axis.X ? SHAPE_X : SHAPE_Z;

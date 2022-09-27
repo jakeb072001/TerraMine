@@ -29,7 +29,7 @@ public class CrimsonBiome {
         ModBiomeFeatures.addDefaultCrimsonOres(generationSettings);
         ModBiomeFeatures.addDefaultCrimsonSoftDisks(generationSettings);
         BiomeDefaultFeatures.addWaterTrees(generationSettings);
-        BiomeDefaultFeatures.addPlainVegetation(generationSettings);
+        ModBiomeFeatures.addDefaultCrimsonVegetation(generationSettings);
         BiomeDefaultFeatures.addDefaultMushrooms(generationSettings);
         BiomeDefaultFeatures.addDefaultExtraVegetation(generationSettings);
         BiomeDefaultFeatures.addDefaultSeagrass(generationSettings);
