@@ -3,18 +3,18 @@
   "trades": {
     "novice": [
       {
-        "type": "numismatic-overhaul:buy_stack",
+        "type": "numismatic-overhaul:sell_stack",
         "price": 50000,
-        "buy": {
+        "sell": {
           "item": "terramine:rocket_boots",
           "count": 1
         },
         "max_uses": 1
       },
       {
-        "type": "numismatic-overhaul:sell_stack",
+        "type": "numismatic-overhaul:buy_stack",
         "price": 2000,
-        "sell": {
+        "buy": {
           "item": "minecraft:dispenser",
           "count": 1
         },
@@ -24,18 +24,18 @@
     ],
 	"apprentice": [
       {
-        "type": "numismatic-overhaul:buy_stack",
+        "type": "numismatic-overhaul:sell_stack",
         "price": 50000,
-        "buy": {
+        "sell": {
           "item": "terramine:stopwatch",
           "count": 1
         },
         "max_uses": 1
       },
       {
-        "type": "numismatic-overhaul:sell_stack",
+        "type": "numismatic-overhaul:buy_stack",
         "price": 1500,
-        "sell": {
+        "buy": {
           "item": "minecraft:sticky_piston",
           "count": 1
         },
@@ -45,18 +45,18 @@
     ],
 	"journeyman": [
       {
-        "type": "numismatic-overhaul:buy_stack",
+        "type": "numismatic-overhaul:sell_stack",
         "price": 50000,
-        "buy": {
+        "sell": {
           "item": "terramine:weather_radio",
           "count": 1
         },
         "max_uses": 1
       },
       {
-        "type": "numismatic-overhaul:buy_stack",
+        "type": "numismatic-overhaul:sell_stack",
         "price": 50000,
-        "buy": {
+        "sell": {
           "item": "terramine:sextant",
           "count": 1
         },
@@ -65,9 +65,9 @@
     ],
 	"expert": [
 	{
-        "type": "numismatic-overhaul:sell_stack",
+        "type": "numismatic-overhaul:buy_stack",
         "price": 2500,
-        "sell": {
+        "buy": {
           "item": "minecraft:observer",
           "count": 1
         },
@@ -75,9 +75,9 @@
         "villager_experience": 15
       },
       {
-        "type": "numismatic-overhaul:buy_stack",
+        "type": "numismatic-overhaul:sell_stack",
         "price": 50000,
-        "buy": {
+        "sell": {
           "item": "terramine:extendo_grip",
           "count": 1
         },
@@ -86,18 +86,18 @@
     ],
 	"master": [
       {
-        "type": "numismatic-overhaul:buy_stack",
+        "type": "numismatic-overhaul:sell_stack",
         "price": 50000,
-        "buy": {
+        "sell": {
           "item": "terramine:toolbelt",
           "count": 1
         },
         "max_uses": 1
       },
       {
-        "type": "numismatic-overhaul:buy_stack",
+        "type": "numismatic-overhaul:sell_stack",
         "price": 50000,
-        "buy": {
+        "sell": {
           "item": "terramine:toolbox",
           "count": 1
         },
