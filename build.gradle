@@ -15,12 +15,7 @@ repositories {
     maven { url = "https://mvn.devos.one/snapshots/" }
     maven { url = "https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/" }
     maven { url "https://maven.bai.lol" }
-    maven {
-        url = "https://maven.florens.be"
-        content {
-            includeGroup "be.florens"
-        }
-    }
+    maven { url = "https://maven.florens.be" }
     maven { url = "https://maven.parchmentmc.org" }
     maven {
         url = "https://www.cursemaven.com"
