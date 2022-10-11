@@ -8,6 +8,7 @@ import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.crafting.Ingredient;
+import terramine.TerraMine;
 import terramine.common.init.ModItems;
 
 import java.util.function.Supplier;
@@ -15,7 +16,7 @@ import java.util.function.Supplier;
 public enum TerrariaArmorMaterials implements ArmorMaterial {
 
     SHADOW("shadow", 20, new int[]{3, 5, 7, 2}, 9, SoundEvents.ARMOR_EQUIP_IRON, 1.0F, 0.0F, Ingredient.of(ModItems.DEMONITE_INGOT)),
-    ANCIENT_SHADOW("ancient_shadow", 20, new int[]{3, 5, 7, 2}, 9, SoundEvents.ARMOR_EQUIP_IRON, 1.0F, 0.0F, Ingredient.of(ModItems.DEMONITE_INGOT)),
+    ANCIENT_SHADOW("ancient_shadow", SHADOW), // same stats as Shadow material but uses a different armor model/texture
     CRIMSON("crimson", 20, new int[]{3, 5, 7, 2}, 9, SoundEvents.ARMOR_EQUIP_IRON, 1.0F, 0.0F, Ingredient.of(ModItems.CRIMTANE_INGOT));
 
     private static final int[] HEALTH_PER_SLOT = new int[]{13, 15, 16, 11};
@@ -37,6 +38,17 @@ public enum TerrariaArmorMaterials implements ArmorMaterial {
         this.toughness = f;
         this.knockbackResistance = g;
         this.repairIngredient = supplier;
+    }
+
+    TerrariaArmorMaterials(String string2, TerrariaArmorMaterials material) {
+        this.name = string2;
+        this.durabilityMultiplier = material.durabilityMultiplier;
+        this.slotProtections = material.slotProtections;
+        this.enchantmentValue = material.enchantmentValue;
+        this.sound = material.sound;
+        this.toughness = material.toughness;
+        this.knockbackResistance = material.knockbackResistance;
+        this.repairIngredient = material.repairIngredient;
     }
 
     @Override
@@ -66,7 +78,7 @@ public enum TerrariaArmorMaterials implements ArmorMaterial {
 
     @Override
     public String getName() {
-        return this.name;
+        return TerraMine.MOD_ID + ":" + this.name;
     }
 
     @Override

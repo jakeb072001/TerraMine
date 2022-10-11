@@ -77,91 +77,87 @@ public class DevourerEntity extends Monster implements Enemy {
 
                 entity.setNoGravity(entity.isInWall());
 
-                // todo: for movement, when the devourer first is in a wall after having not been in a wall it will move straight down a certain amount.
-                // todo: after this, the devourer will move directly toward the player at a fast speed, once out of the ground the devourer will have gravity and will free fall instead of targeting the player.
-                // todo: during this free fall, rotate the devourer to face the ground, then repeat.
-                // todo: would also be good to decrease gravity slightly, if possible.
+                if (entity.isInWall() || entity.isInWater() || entity.isInLava()) {
+                    if (entity.target != null && !entity.target.isInvisible()) {
+                        if (entity.velX > -4 && entity.position().x > entity.target.position().x + entity.target.getBbWidth()) {
+                            entity.velX -= 0.08;
+                            if (entity.velX > 4) {
+                                entity.velX -= 0.04;
+                            } else if (entity.velX > 0) {
+                                entity.velX -= 0.2;
+                            }
+                            if (entity.velX < -4) {
+                                entity.velX = -4;
+                            }
+                        } else if (entity.velX < 4 && entity.position().x + 1 < entity.target.position().x) {
+                            entity.velX += 0.08;
+                            if (entity.velX < -4) {
+                                entity.velX += 0.04;
+                            } else if (entity.velX < 0) {
+                                entity.velX += 0.2;
+                            }
+                            if (entity.velX > 4) {
+                                entity.velX = 4;
+                            }
+                        }
 
-                if (entity.target != null && !entity.target.isInvisible()) {
-                    if (entity.velX > -4 && entity.position().x > entity.target.position().x + entity.target.getBbWidth()) {
-                        entity.velX -= 0.08;
-                        if (entity.velX > 4) {
-                            entity.velX -= 0.04;
+                        if (entity.velZ > -4 && entity.position().z > entity.target.position().z + entity.target.getBbWidth()) {
+                            entity.velZ -= 0.08;
+                            if (entity.velZ > 4) {
+                                entity.velZ -= 0.04;
+                            } else if (entity.velZ > 0f) {
+                                entity.velZ -= 0.2;
+                            }
+                            if (entity.velZ < -4) {
+                                entity.velZ = -4;
+                            }
+                        } else if (entity.velZ < 4f && entity.position().z + 1 < entity.target.position().z) {
+                            entity.velZ += 0.08f;
+                            if (entity.velZ < -4) {
+                                entity.velZ += 0.04;
+                            } else if (entity.velZ < 0f) {
+                                entity.velZ += 0.2;
+                            }
+                            if (entity.velZ > 4) {
+                                entity.velZ = 4;
+                            }
                         }
-                        else if (entity.velX > 0) {
-                            entity.velX -= 0.2;
-                        }
-                        if (entity.velX < -4) {
-                            entity.velX = -4;
-                        }
-                    } else if (entity.velX < 4 && entity.position().x + 1 < entity.target.position().x) {
-                        entity.velX += 0.08;
-                        if (entity.velX < -4) {
-                            entity.velX += 0.04;
-                        }
-                        else if (entity.velX < 0) {
-                            entity.velX += 0.2;
-                        }
-                        if (entity.velX > 4) {
-                            entity.velX = 4;
+
+                        if (entity.velY > -2.5 && entity.position().y > entity.target.position().y + entity.target.getBbHeight()) {
+                            entity.velY -= 0.1f;
+                            if (entity.velY > 2.5) {
+                                entity.velY -= 0.05;
+                            } else if (entity.velY > 0f) {
+                                entity.velY -= 0.15;
+                            }
+                        } else if (entity.velY < 2.5 && entity.position().y + 1 < entity.target.position().y) {
+                            entity.velY += 0.2f;
+                            if (entity.velY < -2.5) {
+                                entity.velY += 0.05;
+                            } else if (entity.velY < 0) {
+                                entity.velY += 0.15;
+                            }
                         }
                     }
-
-                    if (entity.velZ > -4 && entity.position().z > entity.target.position().z + entity.target.getBbWidth()) {
-                        entity.velZ -= 0.08;
-                        if (entity.velZ > 4) {
-                            entity.velZ -= 0.04;
-                        }
-                        else if (entity.velZ > 0f) {
-                            entity.velZ -= 0.2;
-                        }
-                        if (entity.velZ < -4) {
-                            entity.velZ = -4;
-                        }
-                    } else if (entity.velZ < 4f && entity.position().z + 1 < entity.target.position().z) {
-                        entity.velZ += 0.08f;
-                        if (entity.velZ < -4) {
-                            entity.velZ += 0.04;
-                        }
-                        else if (entity.velZ < 0f) {
-                            entity.velZ += 0.2;
-                        }
-                        if (entity.velZ > 4) {
-                            entity.velZ = 4;
-                        }
-                    }
-
-                    if (entity.velY > -2.5 && entity.position().y > entity.target.position().y + entity.target.getBbHeight()) {
-                        entity.velY -= 0.1f;
-                        if (entity.velY > 2.5) {
-                            entity.velY -= 0.05;
-                        } else if (entity.velY > 0f) {
-                            entity.velY -= 0.15;
-                        }
-                    } else if (entity.velY < 2.5 && entity.position().y + 1 < entity.target.position().y) {
-                        entity.velY += 0.1f;
-                        if (entity.velY < -2.5) {
-                            entity.velY += 0.05;
-                        }
-                        else if (entity.velY < 0) {
-                            entity.velY += 0.15;
-                        }
+                } else {
+                    entity.velY -= 0.1f;
+                    if (entity.velY > 2.5) {
+                        entity.velY -= 0.05;
+                    } else if (entity.velY > 0f) {
+                        entity.velY -= 0.15;
                     }
                 }
 
                 entity.oldVelX = entity.velX;
                 entity.oldVelY = entity.velY;
                 entity.oldVelZ = entity.velZ;
-                motionX = entity.velX * 0.0095f * entity.getAttribute(Attributes.MOVEMENT_SPEED).getValue();
-                motionY = entity.velY * 0.0095f * entity.getAttribute(Attributes.MOVEMENT_SPEED).getValue();
-                motionZ = entity.velZ * 0.0095f * entity.getAttribute(Attributes.MOVEMENT_SPEED).getValue();
+                motionX = entity.velX * 0.0055f * entity.getAttribute(Attributes.MOVEMENT_SPEED).getValue();
+                motionY = entity.velY * 0.0055f * entity.getAttribute(Attributes.MOVEMENT_SPEED).getValue();
+                motionZ = entity.velZ * 0.0055f * entity.getAttribute(Attributes.MOVEMENT_SPEED).getValue();
 
-                //entity.setDeltaMovement(motionX, motionY, motionZ);
-                if (entity.isInWall() || entity.isInWater() || entity.isInLava()) {
-                    entity.setYRot(rotlerp(entity.getYRot(), (float)Math.toDegrees(Math.atan2(entity.velZ, entity.velX)) - 90, 360));
-                    entity.setXRot((float)(-(Mth.atan2(-entity.velY, Math.sqrt(entity.velX * entity.velX + entity.velZ * entity.velZ)) * 180.0F / (float)Math.PI)));
-                    entity.setDeltaMovement(entity.getDeltaMovement().add(motionX, motionY, motionZ));
-                }
+                entity.setYRot(rotlerp(entity.getYRot(), (float)Math.toDegrees(Math.atan2(entity.velZ, entity.velX)) - 90, 360));
+                entity.setXRot((float)(-(Mth.atan2(-entity.velY, Math.sqrt(entity.velX * entity.velX + entity.velZ * entity.velZ)) * 180.0F / (float)Math.PI)));
+                entity.setDeltaMovement(entity.getDeltaMovement().add(motionX, motionY, motionZ));
             }
         }
     }

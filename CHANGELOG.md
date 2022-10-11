@@ -4,9 +4,9 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [1.5.2] - 2022-10-01
+## [1.6.0] - 2022-10-12
 ### Added
-- Devourer
+- Devourer (Still WIP, movement will be improved and some things may need to be changed to make easier to fight)
 - Corruption and Crimson biome spread (actually spreads the biome now and not just the block, can still cause lag)
 - Sunplate, Cloud, and Rain Cloud blocks
 - WTHIT support (Only used to help hide trapped chests right now)
@@ -20,6 +20,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Mimics no longer spawn in Desert and Jungle biomes
 
 ### Fixed
+- Wings and Rocket boots giving much greater flight time if repeatedly pressing jump instead of holding jump
 - Trinkets slots not having keep inventory
 - Lava not setting player on fire if Lava Charm type accessory is not equipped
 - Trapped chests not remembering they are trapped

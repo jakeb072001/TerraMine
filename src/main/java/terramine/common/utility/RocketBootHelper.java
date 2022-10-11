@@ -20,6 +20,7 @@ public class RocketBootHelper {
     private SimpleParticleType particle1;
     private SimpleParticleType particle2;
     private SoundEvent sound;
+    private boolean stoppedHolding = false;
     private float soundVolume, soundPitch;
     private int timer, soundTimer, glideDelay, glideCloudDelay;
     private int rocketTime = 40;
@@ -108,6 +109,7 @@ public class RocketBootHelper {
             if (InputHandler.isHoldingJump(player)) {
                 double currentAccel = speed * (player.getDeltaMovement().y() < 0.3D ? 2.5D : 1.0D);
                 double currentSpeedVertical = speed * (player.isUnderWater() ? 0.4D : 1.0D);
+                stoppedHolding = true;
                 timer++;
                 soundTimer++;
 
@@ -152,6 +154,9 @@ public class RocketBootHelper {
                 }
 
                 player.resetFallDistance();
+            } else if (stoppedHolding) {
+                timer += 3;
+                stoppedHolding = false;
             }
         }
     }
