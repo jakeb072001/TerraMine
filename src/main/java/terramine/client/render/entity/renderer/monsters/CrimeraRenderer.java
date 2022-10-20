@@ -1,4 +1,4 @@
-package terramine.client.render.entity;
+package terramine.client.render.entity.renderer.monsters;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Vector3f;
@@ -10,7 +10,7 @@ import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.NotNull;
 import terramine.TerraMine;
-import terramine.client.render.entity.model.CrimeraModel;
+import terramine.client.render.entity.model.monsters.CrimeraModel;
 import terramine.common.entity.CrimeraEntity;
 import terramine.common.init.ModModelLayers;
 

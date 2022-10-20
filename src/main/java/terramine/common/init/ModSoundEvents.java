@@ -17,6 +17,7 @@ public class ModSoundEvents {
 	public static final SoundEvent WATER_STEP = register("block.water.step");
 	public static final SoundEvent DOUBLE_JUMP = register("generic.double_jump");
 	public static final SoundEvent BOMB = register("generic.bomb");
+	public static final SoundEvent THROW = register("generic.throw");
 	public static final SoundEvent ROCKET_BOOTS = register("item.rocket_boots.flame");
 	public static final SoundEvent SPECTRE_BOOTS = register("item.spectre_boots.flame");
 	public static final SoundEvent SPEEDBOOTS_RUN = register("item.spectre_boots.run");

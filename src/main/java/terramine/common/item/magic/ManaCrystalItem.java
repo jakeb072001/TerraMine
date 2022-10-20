@@ -35,7 +35,7 @@ public class ManaCrystalItem extends TerrariaItemConfigurable {
             ModComponents.MANA_HANDLER.get(player).addMaxMana(20);
             ModComponents.MANA_HANDLER.get(player).addCurrentMana(20);
             player.awardStat(Stats.ITEM_USED.get(this));
-            if (!player.isCreative()) {
+            if (!player.getAbilities().instabuild) {
                 stack.shrink(1);
             }
         }

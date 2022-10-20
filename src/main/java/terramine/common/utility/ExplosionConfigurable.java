@@ -37,6 +37,7 @@ import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
+import terramine.common.entity.FallingStarEntity;
 
 import java.util.List;
 import java.util.Map;
@@ -61,6 +62,10 @@ public class ExplosionConfigurable extends Explosion {
 
     public ExplosionConfigurable(Level level, @Nullable Entity entity, double x, double y, double z, float radius, float damage, Explosion.BlockInteraction blockInteraction) {
         this(level, entity, null, null, x, y, z, radius, damage, false, false, blockInteraction);
+    }
+
+    public ExplosionConfigurable(Level level, @Nullable Entity entity, double x, double y, double z, float radius, float damage, boolean divide, Explosion.BlockInteraction blockInteraction) {
+        this(level, entity, null, null, x, y, z, radius, damage, divide, false, blockInteraction);
     }
 
     public ExplosionConfigurable(Level level, @Nullable Entity entity, @Nullable DamageSource damageSource, @Nullable ExplosionDamageCalculator explosionDamageCalculator, double x, double y, double z, float radius, float damage, boolean divide, boolean fire, Explosion.BlockInteraction blockInteraction) {
@@ -159,10 +164,18 @@ public class ExplosionConfigurable extends Explosion {
                         ab /= ac;
                         double ad = getSeenPercent(vec3, entity);
                         double ae = (1.0D - y) * ad;
-                        if (divide) {
-                            entity.hurt(this.damageSource, ((float) ((int) ((ae * ae + ae) / 2.0D * 7.0D * (double) q + 1.0D))) / damage);
-                        } else {
-                            entity.hurt(this.damageSource, ((float) ((int) ((ae * ae + ae) / 2.0D * 7.0D * (double) q + 1.0D))) * damage);
+                        boolean noPlayerDamage = false;
+                        if (source instanceof FallingStarEntity) {
+                            if (entity instanceof Player) {
+                                noPlayerDamage = true;
+                            }
+                        }
+                        if (!noPlayerDamage) {
+                            if (divide) {
+                                entity.hurt(this.damageSource, ((float) ((int) ((ae * ae + ae) / 2.0D * 7.0D * (double) q + 1.0D))) / damage);
+                            } else {
+                                entity.hurt(this.damageSource, ((float) ((int) ((ae * ae + ae) / 2.0D * 7.0D * (double) q + 1.0D))) * damage);
+                            }
                         }
                         double af = ae;
                         if (entity instanceof LivingEntity) {

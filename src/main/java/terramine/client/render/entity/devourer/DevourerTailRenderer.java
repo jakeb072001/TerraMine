@@ -10,7 +10,7 @@ import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.NotNull;
 import terramine.TerraMine;
-import terramine.client.render.entity.model.DevourerModel;
+import terramine.client.render.entity.model.monsters.DevourerModel;
 import terramine.common.entity.devourer.DevourerTailEntity;
 import terramine.common.init.ModModelLayers;
 

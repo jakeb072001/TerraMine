@@ -16,6 +16,8 @@ public class ModModelLayers {
     public static final ModelLayerLocation DEVOURER = createLocation("devourer");
     public static final ModelLayerLocation CRIMERA = createLocation("crimera");
 
+    public static final ModelLayerLocation DYNAMITE = createLocation("dynamite");
+
     public static final ModelLayerLocation DIVING_HELMET = createLocation("diving_helmet");
     public static final ModelLayerLocation SUPERSTITIOUS_HAT = createLocation("superstitious_hat");
     public static final ModelLayerLocation VILLAGER_HAT = createLocation("villager_hat");

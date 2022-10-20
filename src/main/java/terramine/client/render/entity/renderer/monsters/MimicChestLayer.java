@@ -1,9 +1,8 @@
-package terramine.client.render.entity;
+package terramine.client.render.entity.renderer.monsters;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Vector3f;
-import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.model.geom.EntityModelSet;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
@@ -11,19 +10,16 @@ import net.minecraft.client.renderer.Sheets;
 import net.minecraft.client.renderer.entity.LivingEntityRenderer;
 import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.layers.RenderLayer;
-import net.minecraft.client.renderer.texture.TextureAtlas;
 import net.minecraft.client.resources.model.Material;
 import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.NotNull;
 import terramine.TerraMine;
-import terramine.client.render.entity.model.MimicChestLayerModel;
-import terramine.client.render.entity.model.MimicModel;
+import terramine.client.render.entity.model.monsters.MimicChestLayerModel;
+import terramine.client.render.entity.model.monsters.MimicModel;
 import terramine.common.entity.MimicEntity;
 import terramine.common.init.ModModelLayers;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Calendar;
 import java.util.List;
 
 public class MimicChestLayer extends RenderLayer<MimicEntity, MimicModel> {

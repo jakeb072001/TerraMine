@@ -18,6 +18,7 @@ import terramine.common.item.curio.feet.*;
 import terramine.common.item.curio.hands.*;
 import terramine.common.item.curio.necklace.*;
 import terramine.common.item.magic.*;
+import terramine.common.item.throwables.DynamiteItem;
 
 @SuppressWarnings("unused")
 public class ModItems {
@@ -166,6 +167,9 @@ public class ModItems {
 	// Weapons
 	public static final Item DEMONITE_SWORD = register("demonite_sword", new SwordItem(TerrariaToolTiers.DEMONITE, 3, -2.4f, new FabricItemSettings().group(TerraMine.ITEM_GROUP_EQUIPMENT)));
 	public static final Item CRIMTANE_SWORD = register("crimtane_sword", new SwordItem(TerrariaToolTiers.CRIMTANE, 3, -2.4f, new FabricItemSettings().group(TerraMine.ITEM_GROUP_EQUIPMENT)));
+
+	// Throwables
+	public static final Item DYNAMITE = register("dynamite", new DynamiteItem(new FabricItemSettings().group(TerraMine.ITEM_GROUP_EQUIPMENT)));
 
 	// Armours
 	// todo: make another register method that registers a full set of armor instead of registering per piece, don't know the best way to do this since the item is different (ShadowArmor, CrimsonArmor)

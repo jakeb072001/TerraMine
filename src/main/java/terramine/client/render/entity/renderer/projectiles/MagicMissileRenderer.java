@@ -1,4 +1,4 @@
-package terramine.client.render.entity;
+package terramine.client.render.entity.renderer.projectiles;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.renderer.MultiBufferSource;

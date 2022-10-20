@@ -61,7 +61,7 @@ public class FallingStarEntity extends Mob {
         resetFallDistance();
         spawnEffects();
         if (this.isOnGround() || this.isInLava() || this.isInWater()) {
-            new ExplosionConfigurable(level, this, this.position().x(), this.position().y(), this.position().z(), 1F, 40f, Explosion.BlockInteraction.NONE);
+            new ExplosionConfigurable(level, this, this.position().x(), this.position().y(), this.position().z(), 1F, 4f, Explosion.BlockInteraction.NONE);
             createStarItem();
         }
     }
