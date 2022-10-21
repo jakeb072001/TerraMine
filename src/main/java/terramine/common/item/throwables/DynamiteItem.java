@@ -17,8 +17,13 @@ import terramine.common.item.TerrariaItemConfigurable;
 
 public class DynamiteItem extends TerrariaItemConfigurable {
 
-    public DynamiteItem(Properties properties) {
+    private final boolean sticky;
+    private final boolean bouncy;
+
+    public DynamiteItem(Properties properties, boolean sticky, boolean bouncy) {
         super(properties);
+        this.sticky = sticky;
+        this.bouncy = bouncy;
     }
 
     @Override
@@ -28,7 +33,9 @@ public class DynamiteItem extends TerrariaItemConfigurable {
         if (!level.isClientSide) {
             DynamiteEntity dynamite = ModEntities.DYNAMITE.create(level);
             if (dynamite != null) {
-                dynamite.setPos(player.position().x(), player.position().y(), player.position().z());
+                dynamite.setPos(player.position().x(), player.position().y() + 1, player.position().z());
+                dynamite.setSticky(sticky);
+                dynamite.setBouncy(bouncy);
                 dynamite.setOwner(player);
                 dynamite.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0f, 0.5f, 0.1f);
                 level.addFreshEntity(dynamite);

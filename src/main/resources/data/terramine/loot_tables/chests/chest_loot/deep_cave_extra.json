@@ -9,15 +9,12 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "minecraft:tnt",
+          "name": "terramine:dynamite",
           "weight": 33,
           "functions": [
             {
               "function": "set_count",
-              "count": {
-                "min": 3,
-                "max": 7
-              }
+              "count": 1
             }
           ]
         },

@@ -1,4 +1,4 @@
-package terramine.client.render.entity.renderer.throwables;
+package terramine.client.render.entity.renderer.projectiles.throwables;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
@@ -16,7 +16,9 @@ import terramine.common.init.ModModelLayers;
 
 public class DynamiteRenderer extends EntityRenderer<DynamiteEntity> {
 
-    private static final ResourceLocation TEXTURE = TerraMine.id("textures/item/weapons/throwables/dynamite.png");
+    private static final ResourceLocation TEXTURE = TerraMine.id("textures/item/weapons/throwables/dynamite_lit.png");
+    private static final ResourceLocation STICKY_TEXTURE = TerraMine.id("textures/item/weapons/throwables/sticky_dynamite_lit.png");
+    private static final ResourceLocation BOUNCY_TEXTURE = TerraMine.id("textures/item/weapons/throwables/bouncy_dynamite_lit.png");
     protected final EntityModel<DynamiteEntity> model;
 
     public DynamiteRenderer(EntityRendererProvider.Context context) {
@@ -36,6 +38,12 @@ public class DynamiteRenderer extends EntityRenderer<DynamiteEntity> {
 
     @Override
     public ResourceLocation getTextureLocation(@NotNull DynamiteEntity entity) {
+        if (entity.isSticky()) {
+            return STICKY_TEXTURE;
+        }
+        if (entity.isBouncy()) {
+            return BOUNCY_TEXTURE;
+        }
         return TEXTURE;
     }
 }

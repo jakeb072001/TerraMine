@@ -19,7 +19,7 @@ import terramine.client.render.entity.renderer.monsters.MimicRenderer;
 import terramine.client.render.entity.renderer.projectiles.FlamelashMissileRenderer;
 import terramine.client.render.entity.renderer.projectiles.MagicMissileRenderer;
 import terramine.client.render.entity.renderer.projectiles.RainbowMissileRenderer;
-import terramine.client.render.entity.renderer.throwables.DynamiteRenderer;
+import terramine.client.render.entity.renderer.projectiles.throwables.DynamiteRenderer;
 import terramine.common.init.ModBlockEntityType;
 import terramine.common.init.ModBlocks;
 import terramine.common.init.ModEntities;

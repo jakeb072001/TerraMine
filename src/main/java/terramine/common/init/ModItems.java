@@ -169,7 +169,9 @@ public class ModItems {
 	public static final Item CRIMTANE_SWORD = register("crimtane_sword", new SwordItem(TerrariaToolTiers.CRIMTANE, 3, -2.4f, new FabricItemSettings().group(TerraMine.ITEM_GROUP_EQUIPMENT)));
 
 	// Throwables
-	public static final Item DYNAMITE = register("dynamite", new DynamiteItem(new FabricItemSettings().group(TerraMine.ITEM_GROUP_EQUIPMENT)));
+	public static final Item DYNAMITE = register("dynamite", new DynamiteItem(new FabricItemSettings().group(TerraMine.ITEM_GROUP_THROWABLES), false, false));
+	public static final Item STICKY_DYNAMITE = register("sticky_dynamite", new DynamiteItem(new FabricItemSettings().group(TerraMine.ITEM_GROUP_THROWABLES), true, false));
+	public static final Item BOUNCY_DYNAMITE = register("bouncy_dynamite", new DynamiteItem(new FabricItemSettings().group(TerraMine.ITEM_GROUP_THROWABLES), false, true));
 
 	// Armours
 	// todo: make another register method that registers a full set of armor instead of registering per piece, don't know the best way to do this since the item is different (ShadowArmor, CrimsonArmor)

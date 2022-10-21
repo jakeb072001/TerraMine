@@ -1,0 +1,70 @@
+{
+	"credit": "Made with Blockbench",
+	"textures": {
+		"0": "terramine:item/weapons/throwables/bouncy_dynamite",
+		"particle": "terramine:item/weapons/throwables/bouncy_dynamite"
+	},
+	"elements": [
+		{
+			"from": [7, 0, 7],
+			"to": [9, 8, 9],
+			"rotation": {"angle": 0, "axis": "y", "origin": [-8, 0, -8]},
+			"faces": {
+				"north": {"uv": [2, 2, 4, 10], "texture": "#0"},
+				"east": {"uv": [0, 2, 2, 10], "texture": "#0"},
+				"south": {"uv": [6, 2, 8, 10], "texture": "#0"},
+				"west": {"uv": [4, 2, 6, 10], "texture": "#0"},
+				"up": {"uv": [4, 2, 2, 0], "texture": "#0"},
+				"down": {"uv": [6, 0, 4, 2], "texture": "#0"}
+			}
+		},
+		{
+			"from": [7.5, 8, 7.5],
+			"to": [8.5, 10, 8.5],
+			"rotation": {"angle": 0, "axis": "y", "origin": [-8, 0, -8]},
+			"faces": {
+				"north": {"uv": [9, 3, 10, 5], "texture": "#0"},
+				"east": {"uv": [8, 3, 9, 5], "texture": "#0"},
+				"south": {"uv": [11, 3, 12, 5], "texture": "#0"},
+				"west": {"uv": [10, 3, 11, 5], "texture": "#0"},
+				"up": {"uv": [10, 3, 9, 2], "texture": "#0"},
+				"down": {"uv": [11, 2, 10, 3], "texture": "#0"}
+			}
+		},
+		{
+			"from": [6.5, 10, 7.5],
+			"to": [7.5, 11, 8.5],
+			"rotation": {"angle": 0, "axis": "y", "origin": [-8, 0, -8]},
+			"faces": {
+				"north": {"uv": [7, 1, 8, 2], "texture": "#0"},
+				"east": {"uv": [6, 1, 7, 2], "texture": "#0"},
+				"south": {"uv": [9, 1, 10, 2], "texture": "#0"},
+				"west": {"uv": [8, 1, 9, 2], "texture": "#0"},
+				"up": {"uv": [8, 1, 7, 0], "texture": "#0"},
+				"down": {"uv": [9, 0, 8, 1], "texture": "#0"}
+			}
+		}
+	],
+	"display": {
+		"thirdperson_righthand": {
+			"translation": [0, 2, 0]
+		},
+		"firstperson_righthand": {
+			"translation": [0, 4, 0]
+		},
+		"gui": {
+			"translation": [0, 2, 0]
+		},
+		"ground": {
+			"translation": [0, 4, 0]
+		}
+	},
+	"groups": [
+		{
+			"name": "dynamite",
+			"origin": [0, 8, 0],
+			"color": 0,
+			"children": [0, 1, 2]
+		}
+	]
+}
