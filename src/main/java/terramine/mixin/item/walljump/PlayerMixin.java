@@ -15,7 +15,6 @@ import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
-import net.minecraft.world.entity.player.ProfilePublicKey;
 import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockState;
@@ -46,9 +45,8 @@ public abstract class PlayerMixin extends AbstractClientPlayer {
     private Set<Direction> staleWalls = new HashSet<>();
     private final Minecraft mc = Minecraft.getInstance();
 
-
-    public PlayerMixin(ClientLevel level, GameProfile profile, ProfilePublicKey profilePublicKey) {
-        super(level, profile, profilePublicKey);
+    public PlayerMixin(ClientLevel clientLevel, GameProfile gameProfile) {
+        super(clientLevel, gameProfile);
     }
 
 

@@ -2,7 +2,6 @@ package terramine.mixin.world.entity;
 
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -20,6 +19,8 @@ import terramine.common.init.ModComponents;
 import terramine.common.init.ModEntities;
 import terramine.extensions.PlayerStorages;
 
+import java.util.Random;
+
 @Mixin(Player.class)
 public abstract class PlayerMixin extends LivingEntity implements PlayerStorages {
 
@@ -32,7 +33,7 @@ public abstract class PlayerMixin extends LivingEntity implements PlayerStorages
 	public PlayerMixin(EntityType<? extends LivingEntity> entityType, Level level) {
 		super(entityType, level);
 	}
-	private final RandomSource rand = RandomSource.create();
+	private final Random rand = new Random();
 
 	@Inject(method = "tick", at = @At("TAIL"))
 	private void manaTickRegen(CallbackInfo ci) {

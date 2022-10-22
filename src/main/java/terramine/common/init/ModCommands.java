@@ -9,7 +9,7 @@ import net.fabricmc.fabric.api.gamerule.v1.GameRuleFactory;
 import net.fabricmc.fabric.api.gamerule.v1.GameRuleRegistry;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.arguments.EntityArgument;
-import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.level.GameRules;
 
@@ -68,10 +68,10 @@ public class ModCommands {
         if (player != null) {
             i++;
             ModComponents.MANA_HANDLER.get(player).setMaxMana(value * 20);
-            context.getSource().sendSuccess(Component.translatable("commands.setMaxMana.pass", player.getDisplayName(), value), false);
+            context.getSource().sendSuccess(new TranslatableComponent("commands.setMaxMana.pass", player.getDisplayName(), value), false);
         } else {
             i--;
-            context.getSource().sendFailure(Component.translatable("commands.setMaxMana.fail", value));
+            context.getSource().sendFailure(new TranslatableComponent("commands.setMaxMana.fail", value));
         }
         return i;
     }
@@ -80,13 +80,13 @@ public class ModCommands {
         if (player != null) {
             i++;
             if (ModComponents.MANA_HANDLER.get(player).getMaxMana() == 0) {
-                context.getSource().sendSuccess(Component.translatable("commands.getMaxMana.noMana", player.getDisplayName()), false);
+                context.getSource().sendSuccess(new TranslatableComponent("commands.getMaxMana.noMana", player.getDisplayName()), false);
             } else {
-                context.getSource().sendSuccess(Component.translatable("commands.getMaxMana.pass", player.getDisplayName(), ModComponents.MANA_HANDLER.get(player).getMaxMana() / 20), false);
+                context.getSource().sendSuccess(new TranslatableComponent("commands.getMaxMana.pass", player.getDisplayName(), ModComponents.MANA_HANDLER.get(player).getMaxMana() / 20), false);
             }
         } else {
             i--;
-            context.getSource().sendFailure(Component.translatable("commands.getMaxMana.fail"));
+            context.getSource().sendFailure(new TranslatableComponent("commands.getMaxMana.fail"));
         }
         return i;
     }
@@ -96,10 +96,10 @@ public class ModCommands {
         if (player != null) {
             i++;
             ModComponents.HARDMODE.get(player.level.getLevelData()).set(value);
-            context.getSource().sendSuccess(Component.translatable("commands.setHardmode.pass", value), false);
+            context.getSource().sendSuccess(new TranslatableComponent("commands.setHardmode.pass", value), false);
         } else {
             i--;
-            context.getSource().sendFailure(Component.translatable("commands.setHardmode.fail", value));
+            context.getSource().sendFailure(new TranslatableComponent("commands.setHardmode.fail", value));
         }
         return i;
     }
@@ -107,10 +107,10 @@ public class ModCommands {
         int i = 0;
         if (player != null) {
             i++;
-            context.getSource().sendSuccess(Component.translatable("commands.getHardmode.pass", ModComponents.HARDMODE.get(player.level.getLevelData()).get()), false);
+            context.getSource().sendSuccess(new TranslatableComponent("commands.getHardmode.pass", ModComponents.HARDMODE.get(player.level.getLevelData()).get()), false);
         } else {
             i--;
-            context.getSource().sendFailure(Component.translatable("commands.getHardmode.fail"));
+            context.getSource().sendFailure(new TranslatableComponent("commands.getHardmode.fail"));
         }
         return i;
     }

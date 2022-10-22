@@ -3,7 +3,6 @@ package terramine.common.block;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.LevelAccessor;
@@ -24,6 +23,8 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import terramine.common.init.ModBlocks;
 import terramine.common.utility.CorruptionHelper;
+
+import java.util.Random;
 
 public class CorruptedSnowLayer extends CorruptionHelper {
     public static final int MAX_HEIGHT = 8;
@@ -96,7 +97,7 @@ public class CorruptedSnowLayer extends CorruptionHelper {
     }
 
     @Override
-    public void randomTick(@NotNull BlockState blockState, @NotNull ServerLevel serverLevel, @NotNull BlockPos blockPos, @NotNull RandomSource random) {
+    public void randomTick(@NotNull BlockState blockState, @NotNull ServerLevel serverLevel, @NotNull BlockPos blockPos, @NotNull Random random) {
         super.randomTick(blockState, serverLevel, blockPos, random);
         if (serverLevel.getBrightness(LightLayer.BLOCK, blockPos) > 11) {
             dropResources(blockState, serverLevel, blockPos);

@@ -1,6 +1,5 @@
 package terramine.common.utility;
 
-import net.fabricmc.fabric.api.transfer.v1.storage.base.SidedStorageBlockEntity;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -9,7 +8,7 @@ import terramine.common.entity.block.ChestEntity;
 import terramine.common.entity.block.PiggyBankEntity;
 import terramine.extensions.PlayerStorages;
 
-public class PlayerInventories extends SimpleContainer implements SidedStorageBlockEntity {
+public class PlayerInventories extends SimpleContainer {
 
     private ChestEntity activeBlockEntity;
     private final Player player;

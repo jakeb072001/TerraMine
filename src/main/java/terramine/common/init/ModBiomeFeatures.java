@@ -3,7 +3,6 @@ package terramine.common.init;
 import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
 import net.minecraft.data.worldgen.features.FeatureUtils;
-import net.minecraft.data.worldgen.features.VegetationFeatures;
 import net.minecraft.data.worldgen.placement.MiscOverworldPlacements;
 import net.minecraft.data.worldgen.placement.PlacementUtils;
 import net.minecraft.data.worldgen.placement.VegetationPlacements;
@@ -23,7 +22,6 @@ import net.minecraft.world.level.levelgen.feature.configurations.OreConfiguratio
 import net.minecraft.world.level.levelgen.feature.configurations.RandomPatchConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.SimpleBlockConfiguration;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
-import net.minecraft.world.level.levelgen.feature.stateproviders.RuleBasedBlockStateProvider;
 import net.minecraft.world.level.levelgen.feature.stateproviders.WeightedStateProvider;
 import net.minecraft.world.level.levelgen.placement.*;
 import net.minecraft.world.level.levelgen.structure.templatesystem.RuleTest;
@@ -39,14 +37,14 @@ public class ModBiomeFeatures {
     public static final Holder<ConfiguredFeature<RandomPatchConfiguration, ?>> CRIMSON_PLANTS = FeatureUtils.register("crimson_plants", Feature.FLOWER, grassPatch(new WeightedStateProvider(SimpleWeightedRandomList.single(ModBlocks.VICIOUS_MUSHROOM.defaultBlockState())), 64));
 
     // World Gen
-    public static final Holder<ConfiguredFeature<DiskConfiguration, ?>> DISK_CORRUPT_SAND_FEATURE = FeatureUtils.register("disk_corrupt_sand", Feature.DISK, new DiskConfiguration(RuleBasedBlockStateProvider.simple(ModBlocks.CORRUPTED_SAND), BlockPredicate.matchesBlocks(List.of(Blocks.DIRT, ModBlocks.CORRUPTED_GRASS)), UniformInt.of(2, 6), 2));
-    public static final Holder<PlacedFeature> DISK_CORRUPT_SAND = PlacementUtils.register("disk_corrupt_sand", DISK_CORRUPT_SAND_FEATURE, CountPlacement.of(3), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP_TOP_SOLID, BlockPredicateFilter.forPredicate(BlockPredicate.matchesFluids(Fluids.WATER)), BiomeFilter.biome());
-    public static final Holder<ConfiguredFeature<DiskConfiguration, ?>> DISK_CORRUPT_GRAVEL_FEATURE = FeatureUtils.register("disk_corrupt_gravel", Feature.DISK, new DiskConfiguration(RuleBasedBlockStateProvider.simple(ModBlocks.CORRUPTED_GRAVEL), BlockPredicate.matchesBlocks(List.of(Blocks.DIRT, ModBlocks.CORRUPTED_GRASS)), UniformInt.of(2, 5), 2));
-    public static final Holder<PlacedFeature> DISK_CORRUPT_GRAVEL = PlacementUtils.register("disk_corrupt_gravel", DISK_CORRUPT_GRAVEL_FEATURE, InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP_TOP_SOLID, BlockPredicateFilter.forPredicate(BlockPredicate.matchesFluids(Fluids.WATER)), BiomeFilter.biome());
-    public static final Holder<ConfiguredFeature<DiskConfiguration, ?>> DISK_CRIMSON_SAND_FEATURE = FeatureUtils.register("disk_crimson_sand", Feature.DISK, new DiskConfiguration(RuleBasedBlockStateProvider.simple(ModBlocks.CRIMSON_SAND), BlockPredicate.matchesBlocks(List.of(Blocks.DIRT, ModBlocks.CRIMSON_GRASS)), UniformInt.of(2, 6), 2));
-    public static final Holder<PlacedFeature> DISK_CRIMSON_SAND = PlacementUtils.register("disk_crimson_sand", DISK_CRIMSON_SAND_FEATURE, CountPlacement.of(3), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP_TOP_SOLID, BlockPredicateFilter.forPredicate(BlockPredicate.matchesFluids(Fluids.WATER)), BiomeFilter.biome());
-    public static final Holder<ConfiguredFeature<DiskConfiguration, ?>> DISK_CRIMSON_GRAVEL_FEATURE = FeatureUtils.register("disk_crimson_gravel", Feature.DISK, new DiskConfiguration(RuleBasedBlockStateProvider.simple(ModBlocks.CRIMSON_GRAVEL), BlockPredicate.matchesBlocks(List.of(Blocks.DIRT, ModBlocks.CRIMSON_GRASS)), UniformInt.of(2, 5), 2));
-    public static final Holder<PlacedFeature> DISK_CRIMSON_GRAVEL = PlacementUtils.register("disk_crimson_gravel", DISK_CRIMSON_GRAVEL_FEATURE, InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP_TOP_SOLID, BlockPredicateFilter.forPredicate(BlockPredicate.matchesFluids(Fluids.WATER)), BiomeFilter.biome());
+    public static final Holder<ConfiguredFeature<DiskConfiguration, ?>> DISK_CORRUPT_SAND_FEATURE = FeatureUtils.register("disk_corrupt_sand", Feature.DISK, new DiskConfiguration(ModBlocks.CORRUPTED_SAND.defaultBlockState(), UniformInt.of(2, 6), 2, List.of(Blocks.DIRT.defaultBlockState(), ModBlocks.CORRUPTED_GRASS.defaultBlockState())));
+    public static final Holder<PlacedFeature> DISK_CORRUPT_SAND = PlacementUtils.register("disk_corrupt_sand", DISK_CORRUPT_SAND_FEATURE, CountPlacement.of(3), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP_TOP_SOLID, BiomeFilter.biome());
+    public static final Holder<ConfiguredFeature<DiskConfiguration, ?>> DISK_CORRUPT_GRAVEL_FEATURE = FeatureUtils.register("disk_corrupt_gravel", Feature.DISK, new DiskConfiguration(ModBlocks.CORRUPTED_GRAVEL.defaultBlockState(), UniformInt.of(2, 6), 2, List.of(Blocks.DIRT.defaultBlockState(), ModBlocks.CORRUPTED_GRASS.defaultBlockState())));
+    public static final Holder<PlacedFeature> DISK_CORRUPT_GRAVEL = PlacementUtils.register("disk_corrupt_gravel", DISK_CORRUPT_GRAVEL_FEATURE, InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP_TOP_SOLID, BiomeFilter.biome());
+    public static final Holder<ConfiguredFeature<DiskConfiguration, ?>> DISK_CRIMSON_SAND_FEATURE = FeatureUtils.register("disk_crimson_sand", Feature.DISK, new DiskConfiguration(ModBlocks.CRIMSON_SAND.defaultBlockState(), UniformInt.of(2, 6), 2, List.of(Blocks.DIRT.defaultBlockState(), ModBlocks.CRIMSON_GRASS.defaultBlockState())));
+    public static final Holder<PlacedFeature> DISK_CRIMSON_SAND = PlacementUtils.register("disk_crimson_sand", DISK_CRIMSON_SAND_FEATURE, CountPlacement.of(3), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP_TOP_SOLID, BiomeFilter.biome());
+    public static final Holder<ConfiguredFeature<DiskConfiguration, ?>> DISK_CRIMSON_GRAVEL_FEATURE = FeatureUtils.register("disk_crimson_gravel", Feature.DISK, new DiskConfiguration(ModBlocks.CRIMSON_GRAVEL.defaultBlockState(), UniformInt.of(2, 6), 2, List.of(Blocks.DIRT.defaultBlockState(), ModBlocks.CRIMSON_GRASS.defaultBlockState())));
+    public static final Holder<PlacedFeature> DISK_CRIMSON_GRAVEL = PlacementUtils.register("disk_crimson_gravel", DISK_CRIMSON_GRAVEL_FEATURE, InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP_TOP_SOLID, BiomeFilter.biome());
     public static final Holder<PlacedFeature> CORRUPTION_PLANT = PlacementUtils.register("corruption_plant", CORRUPTION_PLANTS, RarityFilter.onAverageOnceEvery(32), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome());
     public static final Holder<PlacedFeature> CRIMSON_PLANT = PlacementUtils.register("crimson_plant", CRIMSON_PLANTS, RarityFilter.onAverageOnceEvery(32), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP, BiomeFilter.biome());
 

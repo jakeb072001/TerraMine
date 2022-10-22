@@ -72,7 +72,7 @@ public class ServerPacketHandler {
         });
 
         ServerPlayNetworking.registerGlobalReceiver(ROCKET_BOOTS_SOUND_PACKET_ID, (server, player, handler, buf, responseSender) -> {
-            SoundEvent sound = buf.readById(Registry.SOUND_EVENT);
+            SoundEvent sound = Registry.SOUND_EVENT.get(buf.readResourceLocation());
             float soundVolume = buf.readFloat();
             float soundPitch = buf.readFloat();
             server.execute(() -> {
@@ -83,8 +83,8 @@ public class ServerPacketHandler {
         });
 
         ServerPlayNetworking.registerGlobalReceiver(ROCKET_BOOTS_PARTICLE_PACKET_ID, (server, player, handler, buf, responseSender) -> {
-            SimpleParticleType particle1 = (SimpleParticleType) buf.readById(Registry.PARTICLE_TYPE);
-            SimpleParticleType particle2 = (SimpleParticleType) buf.readById(Registry.PARTICLE_TYPE);
+            SimpleParticleType particle1 = (SimpleParticleType) Registry.PARTICLE_TYPE.get(buf.readResourceLocation());
+            SimpleParticleType particle2 = (SimpleParticleType) Registry.PARTICLE_TYPE.get(buf.readResourceLocation());
             Vec3 vLeft = new Vec3(-0.15, -1.5, 0).xRot(0).yRot(player.yBodyRot * -0.017453292F);
             Vec3 vRight = new Vec3(0.15, -1.5, 0).xRot(0).yRot(player.yBodyRot * -0.017453292F);
             Vec3 playerPos = player.getPosition(0).add(0, 1.5, 0);

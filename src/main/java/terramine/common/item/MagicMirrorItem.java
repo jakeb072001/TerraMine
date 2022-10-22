@@ -2,7 +2,7 @@ package terramine.common.item;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.ChatType;
-import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
@@ -21,6 +21,7 @@ import terramine.TerraMine;
 import terramine.common.init.ModSoundEvents;
 
 import java.util.Optional;
+import java.util.UUID;
 
 public class MagicMirrorItem extends TerrariaItem {
 
@@ -50,7 +51,7 @@ public class MagicMirrorItem extends TerrariaItem {
 					worldSpawn(serverPlayer, serverLevel);
 				}
 			} else {
-				((ServerPlayer) player).sendSystemMessage(Component.translatable("magic_mirror.fail"), ChatType.SYSTEM);
+				((ServerPlayer) player).sendMessage(new TranslatableComponent("magic_mirror.fail"), ChatType.SYSTEM, UUID.randomUUID());
 				level.playSound(null, player.blockPosition(), net.minecraft.sounds.SoundEvents.SHULKER_BULLET_HURT, SoundSource.BLOCKS, 1f, 1f);
 			}
 		}

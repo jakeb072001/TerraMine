@@ -5,14 +5,12 @@ import com.google.common.collect.Sets;
 import com.mojang.datafixers.util.Pair;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import it.unimi.dsi.fastutil.objects.ObjectListIterator;
-import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
@@ -39,17 +37,14 @@ import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
 import terramine.common.entity.FallingStarEntity;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 public class ExplosionConfigurable extends Explosion {
 
     private static final ExplosionDamageCalculator EXPLOSION_DAMAGE_CALCULATOR = new ExplosionDamageCalculator();
     private final boolean fire;
     private final Explosion.BlockInteraction blockInteraction;
-    private final RandomSource random;
+    private final Random random;
     private final Level level;
     private final double x, y, z;
     @Nullable
@@ -70,7 +65,7 @@ public class ExplosionConfigurable extends Explosion {
 
     public ExplosionConfigurable(Level level, @Nullable Entity entity, @Nullable DamageSource damageSource, @Nullable ExplosionDamageCalculator explosionDamageCalculator, double x, double y, double z, float radius, float damage, boolean divide, boolean fire, Explosion.BlockInteraction blockInteraction) {
         super(level, entity, damageSource, explosionDamageCalculator, x, y, z, radius, fire, blockInteraction);
-        this.random = RandomSource.create();
+        this.random = new Random();
         this.toBlow = new ObjectArrayList<>();
         this.hitPlayers = Maps.newHashMap();
         this.level = level;
@@ -208,8 +203,7 @@ public class ExplosionConfigurable extends Explosion {
         }
         if (bl2) {
             ObjectArrayList<Pair<ItemStack, BlockPos>> objectArrayList = new ObjectArrayList<>();
-            boolean bl3 = getSourceMob() instanceof Player;
-            Util.shuffle(toBlow, random);
+            Collections.shuffle(toBlow, random);
             ObjectListIterator<Pair<ItemStack, BlockPos>> var5 = toBlow.iterator();
 
             while(var5.hasNext()) {
@@ -227,7 +221,7 @@ public class ExplosionConfigurable extends Explosion {
                                 builder.withParameter(LootContextParams.EXPLOSION_RADIUS, radius);
                             }
 
-                            blockState.spawnAfterBreak(serverLevel, blockPos, ItemStack.EMPTY, bl3);
+                            blockState.spawnAfterBreak(serverLevel, blockPos, ItemStack.EMPTY);
                             blockState.getDrops(builder).forEach((itemStack) -> addBlockDrops(objectArrayList, itemStack, blockPos2));
                         }
                     }

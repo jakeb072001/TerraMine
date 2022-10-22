@@ -1,13 +1,14 @@
 package terramine.common.entity;
 
 import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.Level;
 import terramine.common.utility.MagicMissileHelper;
 
+import java.util.Random;
+
 public class FlamelashMissileEntity extends MagicMissileHelper {
-    private final RandomSource rand = RandomSource.create();
+    private final Random rand = new Random();
 
     public FlamelashMissileEntity(EntityType<? extends MagicMissileHelper> entityType, Level level) {
         super(entityType, level);

@@ -561,6 +561,8 @@
   "text.autoconfig.terramine.option.worldgen.structures": "Structures",
   "text.autoconfig.terramine.option.worldgen.structures.disableDungeon": "Disable Dungeon",
   "text.autoconfig.terramine.option.worldgen.structures.disableDungeon.@Tooltip": "Stops the Dungeon from generating in the world",
+  "text.autoconfig.terramine.option.worldgen.structures.floatingIslandHeight": "Floating Island y-level",
+  "text.autoconfig.terramine.option.worldgen.structures.floatingIslandHeight.@Tooltip": "The y-level that Floating Islands will generate at",
   "gamerule.manaRegenSpeed": "Mana Regen Speed",
   "commands.setMaxMana.pass": "Set Max Mana of %s to %s stars",
   "commands.setMaxMana.fail": "Failed to set Max Mana for that player to %s stars",

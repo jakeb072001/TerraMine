@@ -1,13 +1,14 @@
 package terramine.common.item.curio.back;
 
 import net.minecraft.sounds.SoundEvent;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import terramine.common.item.curio.TrinketTerrariaItem;
 import terramine.common.utility.RocketBootHelper;
 import terramine.common.utility.equipmentchecks.CloudBottleEquippedCheck;
 import terramine.common.utility.equipmentchecks.RocketBootsEquippedCheck;
+
+import java.util.Random;
 
 public class WingsItem extends TrinketTerrariaItem {
 
@@ -16,7 +17,7 @@ public class WingsItem extends TrinketTerrariaItem {
 	private final int flightTime, priority;
 
 	public WingsItem(double speed, double glideSpeed, int flightTime, int priority, SoundEvent sound) {
-		RandomSource random = RandomSource.create();
+		Random random = new Random();
 		rocketHelper.setSoundSettings(sound, 1.5f, random.nextInt(8, 12) / 10f);
 		this.speed = speed;
 		this.glideSpeed = glideSpeed;

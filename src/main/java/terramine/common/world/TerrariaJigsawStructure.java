@@ -10,13 +10,11 @@ import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.levelgen.WorldGenerationContext;
 import net.minecraft.world.level.levelgen.heightproviders.HeightProvider;
-import net.minecraft.world.level.levelgen.structure.Structure;
-import net.minecraft.world.level.levelgen.structure.StructureType;
 import net.minecraft.world.level.levelgen.structure.pools.StructureTemplatePool;
 import terramine.common.init.ModFeatures;
 
 import java.util.Optional;
-
+/**
 public class TerrariaJigsawStructure extends Structure {
     public static final Codec<TerrariaJigsawStructure> CODEC = RecordCodecBuilder.create(instance -> instance.group(
             TerrariaJigsawStructure.settingsCodec(instance),
@@ -64,3 +62,4 @@ public class TerrariaJigsawStructure extends Structure {
         return ModFeatures.TERRARIA_JIGSAW_STRUCTURE;
     }
 }
+ */

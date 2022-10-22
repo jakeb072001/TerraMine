@@ -38,7 +38,9 @@ public class CorruptionDesertBiome {
 
         return (new Biome.BiomeBuilder())
                 .precipitation(Biome.Precipitation.NONE)
+                .biomeCategory(Biome.BiomeCategory.DESERT)
                 .temperature(2F)
+                .temperatureAdjustment(Biome.TemperatureModifier.NONE)
                 .downfall(0F)
                 .specialEffects((new BiomeSpecialEffects.Builder())
                         .waterColor(0x9966ff)

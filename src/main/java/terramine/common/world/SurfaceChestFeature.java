@@ -2,7 +2,6 @@ package terramine.common.world;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.ChestBlock;
@@ -20,6 +19,7 @@ import terramine.common.init.ModLootTables;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Random;
 
 public class SurfaceChestFeature extends Feature<NoneFeatureConfiguration> {
 
@@ -31,7 +31,7 @@ public class SurfaceChestFeature extends Feature<NoneFeatureConfiguration> {
 	public boolean place(FeaturePlaceContext<NoneFeatureConfiguration> context) {
 		BlockPos origin = context.origin();
 		WorldGenLevel level = context.level();
-		RandomSource random = context.random();
+		Random random = context.random();
 
 		List<BlockPos> positions = new ArrayList<>();
 		BlockPos.betweenClosedStream(origin.offset(-1, 0, -1), origin.offset(1, 0, 1)).forEach((pos -> positions.add(pos.immutable())));
@@ -56,7 +56,7 @@ public class SurfaceChestFeature extends Feature<NoneFeatureConfiguration> {
 		return false;
 	}
 
-	public void generateContainer(WorldGenLevel level, BlockPos pos, RandomSource random) {
+	public void generateContainer(WorldGenLevel level, BlockPos pos, Random random) {
 		if (level.isWaterAt(pos)) {
 			this.setBlock(level, pos, ModBlocks.WATER_CHEST.defaultBlockState().setValue(ChestBlock.FACING, Direction.Plane.HORIZONTAL.getRandomDirection(random)).setValue(ChestBlock.WATERLOGGED, true));
 			RandomizableContainerBlockEntity.setLootTable(level, random, pos, ModLootTables.OCEAN_CHEST);

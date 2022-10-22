@@ -36,7 +36,9 @@ public class CrimsonBiome {
 
         return (new Biome.BiomeBuilder())
                 .precipitation(Biome.Precipitation.RAIN)
+                .biomeCategory(Biome.BiomeCategory.PLAINS)
                 .temperature(0.5F)
+                .temperatureAdjustment(Biome.TemperatureModifier.NONE)
                 .downfall(0.4F)
                 .specialEffects((new BiomeSpecialEffects.Builder())
                         .waterColor(0xdc143c)

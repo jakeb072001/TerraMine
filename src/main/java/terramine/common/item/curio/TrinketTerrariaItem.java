@@ -10,6 +10,7 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.InteractionHand;
@@ -109,8 +110,8 @@ public class TrinketTerrariaItem extends TerrariaItem implements Trinket {
 	public void appendHoverText(@NotNull ItemStack stack, Level world, @NotNull List<Component> tooltip, @NotNull TooltipFlag flags) {
 		super.appendHoverText(stack, world, tooltip, flags);
 		getEffectsEnabledLanguageKey(stack).ifPresent(key -> {
-			MutableComponent enabled = Component.translatable(key).withStyle(ChatFormatting.GOLD);
-			Component toggletooltip = Component.translatable(TerraMine.MOD_ID + ".status.toggletooltip").withStyle(ChatFormatting.GRAY);
+			MutableComponent enabled = new TranslatableComponent(key).withStyle(ChatFormatting.GOLD);
+			Component toggletooltip = new TranslatableComponent(TerraMine.MOD_ID + ".status.toggletooltip").withStyle(ChatFormatting.GRAY);
 			tooltip.add(enabled.append(" ").append(toggletooltip));
 		});
 	}

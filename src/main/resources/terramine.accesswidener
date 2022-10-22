@@ -9,6 +9,10 @@ accessible method net/minecraft/client/renderer/item/ItemProperties register (Ln
 accessible method net/minecraft/world/level/biome/BiomeManager getFiddledDistance (JIIIDDD)D
 accessible method net/minecraft/server/level/ChunkMap getLightEngine ()Lnet/minecraft/server/level/ThreadedLevelLightEngine;
 accessible method net/minecraft/world/entity/Mob rotlerp (FFF)F
+accessible method net/minecraft/world/level/levelgen/feature/StructureFeature register (Ljava/lang/String;Lnet/minecraft/world/level/levelgen/feature/StructureFeature;Lnet/minecraft/world/level/levelgen/GenerationStep$Decoration;)Lnet/minecraft/world/level/levelgen/feature/StructureFeature;
+accessible method net/minecraft/world/item/PickaxeItem <init> (Lnet/minecraft/world/item/Tier;IFLnet/minecraft/world/item/Item$Properties;)V
+accessible method net/minecraft/world/item/AxeItem <init> (Lnet/minecraft/world/item/Tier;FFLnet/minecraft/world/item/Item$Properties;)V
+accessible method net/minecraft/world/item/HoeItem <init> (Lnet/minecraft/world/item/Tier;IFLnet/minecraft/world/item/Item$Properties;)V
 
 accessible	class	net/minecraft/world/entity/npc/VillagerTrades$DyedArmorForEmeralds
 accessible	class	net/minecraft/world/entity/npc/VillagerTrades$EmeraldForItems

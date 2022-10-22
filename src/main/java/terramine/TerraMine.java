@@ -3,7 +3,7 @@ package terramine;
 import dev.architectury.event.events.common.PlayerEvent;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
-import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
+import net.fabricmc.fabric.api.command.v1.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.entity.event.v1.ServerPlayerEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.fabricmc.fabric.api.loot.v2.LootTableEvents;
@@ -78,9 +78,7 @@ public class TerraMine implements ModInitializer, TerraBlenderApi {
 		ModProfessions.fillTradeData();
 		ModParticles.registerServer();
 		ModCommands.registerRules();
-		CommandRegistrationCallback.EVENT.register((dispatcher, context, selection) -> {
-			ModCommands.registerCommands(dispatcher);
-		});
+		CommandRegistrationCallback.EVENT.register((dispatcher, context) -> ModCommands.registerCommands(dispatcher));
 
 		// Events
 		ServerLifecycleEvents.SERVER_STOPPING.register(server -> InputHandler.clear());

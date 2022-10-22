@@ -2,9 +2,7 @@ package terramine.common.world;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.WorldGenLevel;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.ChestBlock;
 import net.minecraft.world.level.block.entity.RandomizableContainerBlockEntity;
 import net.minecraft.world.level.levelgen.feature.Feature;
@@ -20,6 +18,7 @@ import terramine.common.init.ModLootTables;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Random;
 
 public class NetherChestFeature extends Feature<NoneFeatureConfiguration> {
 
@@ -31,7 +30,7 @@ public class NetherChestFeature extends Feature<NoneFeatureConfiguration> {
 	public boolean place(FeaturePlaceContext<NoneFeatureConfiguration> context) {
 		BlockPos origin = context.origin();
 		WorldGenLevel level = context.level();
-		RandomSource random = context.random();
+		Random random = context.random();
 
 		List<BlockPos> positions = new ArrayList<>();
 		BlockPos.betweenClosedStream(origin.offset(-1, 0, -1), origin.offset(1, 0, 1)).forEach((pos -> positions.add(pos.immutable())));
@@ -56,7 +55,7 @@ public class NetherChestFeature extends Feature<NoneFeatureConfiguration> {
 		return false;
 	}
 
-	public void generateContainer(WorldGenLevel level, BlockPos pos, RandomSource random) {
+	public void generateContainer(WorldGenLevel level, BlockPos pos, Random random) {
 		if (ModComponents.HARDMODE.get(level.getLevelData()).get() && random.nextFloat() * 100 < TerraMine.CONFIG.worldgen.caveChest.mimicChance) {
 			MimicEntity mimic = ModEntities.MIMIC.create(level.getLevel());
 			if (mimic != null) {

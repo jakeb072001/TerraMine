@@ -1,7 +1,6 @@
 package terramine.mixin.item.rangeremblem;
 
 import net.minecraft.util.Mth;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.projectile.AbstractArrow;
@@ -15,6 +14,8 @@ import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import terramine.common.init.ModItems;
 import terramine.common.trinkets.TrinketsHelper;
 
+import java.util.Random;
+
 @Mixin(AbstractArrow.class)
 public abstract class AbstractArrowMixin {
 
@@ -22,7 +23,7 @@ public abstract class AbstractArrowMixin {
 	private double baseDamage;
 
 	@Unique
-	private final RandomSource random = RandomSource.create();
+	private final Random random = new Random();
 
 	@ModifyVariable(method = "onHitEntity", at = @At("STORE"), ordinal = 0)
 	private int moreArrowDamage(int t, EntityHitResult entityHitResult) {

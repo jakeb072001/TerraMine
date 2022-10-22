@@ -6,7 +6,6 @@ import net.minecraft.core.particles.BlockParticleOption;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.BlockTags;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.item.FallingBlockEntity;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
@@ -15,6 +14,8 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Material;
 import org.jetbrains.annotations.NotNull;
 import terramine.common.utility.CorruptionHelper;
+
+import java.util.Random;
 
 public class CorruptedFallingBlock extends CorruptionHelper {
     public CorruptedFallingBlock(Properties properties) {
@@ -33,7 +34,7 @@ public class CorruptedFallingBlock extends CorruptionHelper {
     }
 
     @Override
-    public void tick(@NotNull BlockState blockState, @NotNull ServerLevel serverLevel, @NotNull BlockPos blockPos, @NotNull RandomSource random) {
+    public void tick(@NotNull BlockState blockState, @NotNull ServerLevel serverLevel, @NotNull BlockPos blockPos, @NotNull Random random) {
         if (!FallingBlock.isFree(serverLevel.getBlockState(blockPos.below())) || blockPos.getY() < serverLevel.getMinBuildHeight()) {
             return;
         }
@@ -54,7 +55,7 @@ public class CorruptedFallingBlock extends CorruptionHelper {
     }
 
     @Override
-    public void animateTick(@NotNull BlockState blockState, @NotNull Level level, @NotNull BlockPos blockPos, RandomSource random) {
+    public void animateTick(@NotNull BlockState blockState, @NotNull Level level, @NotNull BlockPos blockPos, Random random) {
         if (random.nextInt(16) == 0 && FallingBlock.isFree(level.getBlockState(blockPos.below()))) {
             double d = (double)blockPos.getX() + random.nextDouble();
             double e = (double)blockPos.getY() - 0.05;

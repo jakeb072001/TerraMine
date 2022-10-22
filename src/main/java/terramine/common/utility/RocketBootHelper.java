@@ -118,7 +118,9 @@ public class RocketBootHelper {
                     fly(player, Math.abs(Math.min(motionY + currentAccel, currentSpeedVertical)));
                     if ((wings && soundTimer >= 6) || (!wings && soundTimer >= 4)) {
                         FriendlyByteBuf passedData = new FriendlyByteBuf(Unpooled.buffer());
-                        passedData.writeId(Registry.SOUND_EVENT, sound);
+                        if (sound != null) {
+                            passedData.writeResourceLocation(Registry.SOUND_EVENT.getKey(sound));
+                        }
                         passedData.writeFloat(soundVolume);
                         passedData.writeFloat(soundPitch);
                         ClientPlayNetworking.send(ServerPacketHandler.ROCKET_BOOTS_SOUND_PACKET_ID, passedData);
@@ -127,14 +129,14 @@ public class RocketBootHelper {
 
                     FriendlyByteBuf passedData = new FriendlyByteBuf(Unpooled.buffer());
                     if (particle1 != null) {
-                        passedData.writeId(Registry.PARTICLE_TYPE, particle1);
+                        passedData.writeResourceLocation(Registry.PARTICLE_TYPE.getKey(particle1));
                     } else {
-                        passedData.writeId(Registry.PARTICLE_TYPE, ParticleTypes.DRIPPING_WATER);
+                        passedData.writeResourceLocation(Registry.PARTICLE_TYPE.getKey(ParticleTypes.DRIPPING_WATER));
                     }
                     if (particle2 != null) {
-                        passedData.writeId(Registry.PARTICLE_TYPE, particle2);
+                        passedData.writeResourceLocation(Registry.PARTICLE_TYPE.getKey(particle2));
                     } else {
-                        passedData.writeId(Registry.PARTICLE_TYPE, ParticleTypes.DRIPPING_WATER);
+                        passedData.writeResourceLocation(Registry.PARTICLE_TYPE.getKey(ParticleTypes.DRIPPING_WATER));
                     }
                     ClientPlayNetworking.send(ServerPacketHandler.ROCKET_BOOTS_PARTICLE_PACKET_ID, passedData);
                 }

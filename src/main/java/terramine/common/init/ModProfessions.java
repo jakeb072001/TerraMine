@@ -50,7 +50,6 @@ public class ModProfessions {
     }
 
     private static VillagerProfession register(String name, PoiType poi, SoundEvent sound) {
-        var key = Registry.POINT_OF_INTEREST_TYPE.getResourceKey(poi).orElseThrow();
-        return Registry.register(Registry.VILLAGER_PROFESSION, TerraMine.id(name), VillagerProfessionBuilder.create().id(TerraMine.id(name)).workstation(holder -> holder.is(key)).jobSite(holder -> holder.is(key)).workSound(sound).build());
+        return Registry.register(Registry.VILLAGER_PROFESSION, TerraMine.id(name), VillagerProfessionBuilder.create().id(TerraMine.id(name)).workstation(poi).workSound(sound).build());
     }
 }

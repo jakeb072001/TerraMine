@@ -4,7 +4,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.FluidTags;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -16,6 +15,8 @@ import org.jetbrains.annotations.NotNull;
 import terramine.TerraMine;
 import terramine.common.block.CrimsonSnowLayer;
 import terramine.common.init.ModBlocks;
+
+import java.util.Random;
 
 public class CrimsonHelper extends SpreadingSnowyDirtBlock  {
     protected CrimsonHelper(Properties properties) {
@@ -44,7 +45,7 @@ public class CrimsonHelper extends SpreadingSnowyDirtBlock  {
     }
 
     @Override
-    public void randomTick(@NotNull BlockState blockState, @NotNull ServerLevel serverLevel, @NotNull BlockPos blockPos, @NotNull RandomSource random) {
+    public void randomTick(@NotNull BlockState blockState, @NotNull ServerLevel serverLevel, @NotNull BlockPos blockPos, @NotNull Random random) {
         if (!TerraMine.CONFIG.general.disableEvilSpread) { // allows user to disable spreading in configs
             BlockState grass = ModBlocks.CRIMSON_GRASS.defaultBlockState();
             BlockState snow_layer = ModBlocks.CRIMSON_SNOW_LAYER.defaultBlockState();
@@ -95,7 +96,7 @@ public class CrimsonHelper extends SpreadingSnowyDirtBlock  {
         }
     }
 
-    private void spreadBlock(Block toSpread, Block spreadTo, ServerLevel serverLevel, BlockPos blockPos, RandomSource random) {
+    private void spreadBlock(Block toSpread, Block spreadTo, ServerLevel serverLevel, BlockPos blockPos, Random random) {
         for (int i = 0; i < 4; ++i) {
             if (random.nextInt(TerraMine.CONFIG.general.evilSpreadRarity + 1) == 1) {
                 BlockState block = toSpread.defaultBlockState();

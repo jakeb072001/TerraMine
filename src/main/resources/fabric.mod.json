@@ -53,18 +53,18 @@
   "accessWidener": "terramine.accesswidener",
 
   "depends": {
-    "minecraft": ">=1.19",
-    "fabricloader": ">=0.14.0",
+    "minecraft": ">=1.18",
+    "fabricloader": ">=0.13.0",
     "fabric": ">=0.56.0",
-    "trinkets": ">=3.4.0",
+    "trinkets": ">=3.3.0",
     "expandability": ">=6.0.0",
-    "terrablender": ">=2.0.0.0",
+    "terrablender": ">=1.0.0.0",
     "cardinal-components-base": ">=4.0.0",
     "cardinal-components-entity": ">=4.0.0",
-    "cloth-config2": ">=7.0",
+    "cloth-config2": ">=6.0",
     "step-height-entity-attribute": "*",
-    "reach-entity-attributes": ">=2.3.0",
-    "architectury": ">=5.6.22"
+    "reach-entity-attributes": ">=2.2.0",
+    "architectury": ">=4.0.0"
   },
   "suggests": {
     "modmenu": "*"

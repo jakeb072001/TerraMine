@@ -10,14 +10,11 @@ import net.minecraft.world.level.block.JigsawBlock;
 import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.chunk.ChunkGenerator;
 import net.minecraft.world.level.levelgen.Heightmap;
-import net.minecraft.world.level.levelgen.RandomState;
 import net.minecraft.world.level.levelgen.WorldgenRandom;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import net.minecraft.world.level.levelgen.structure.PoolElementStructurePiece;
-import net.minecraft.world.level.levelgen.structure.Structure;
 import net.minecraft.world.level.levelgen.structure.pools.*;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate;
-import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplateManager;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.Shapes;
@@ -28,6 +25,7 @@ import terramine.TerraMine;
 import java.util.*;
 import java.util.function.Predicate;
 
+/**
 public class DungeonGenerator {
 
     public static Optional<Structure.GenerationStub> generate(Structure.GenerationContext inContext, BlockPos pos, int size, Holder<StructureTemplatePool> startJigsawName, Holder<StructureTemplatePool> startRoomPool) {
@@ -253,3 +251,4 @@ public class DungeonGenerator {
 
     record DungeonShapedPoolStructurePiece(PoolElementStructurePiece piece, MutableObject<VoxelShape> pieceShape, int currentSize, BlockPos sourceBlockPos) {}
 }
+*/

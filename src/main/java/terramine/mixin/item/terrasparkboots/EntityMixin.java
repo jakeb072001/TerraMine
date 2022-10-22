@@ -6,7 +6,6 @@ import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.Mth;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityDimensions;
 import net.minecraft.world.entity.LivingEntity;
@@ -26,6 +25,8 @@ import terramine.common.init.ModSoundEvents;
 import terramine.common.item.curio.feet.TerrasparkBootsItem;
 import terramine.common.trinkets.TrinketsHelper;
 
+import java.util.Random;
+
 @Mixin(Entity.class)
 public abstract class EntityMixin {
 
@@ -33,7 +34,7 @@ public abstract class EntityMixin {
     public Level level;
 
     @Shadow @Final
-    protected RandomSource random;
+    protected Random random;
 
     @Shadow private EntityDimensions dimensions;
 

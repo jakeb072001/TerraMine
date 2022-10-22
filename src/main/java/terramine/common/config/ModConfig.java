@@ -91,6 +91,10 @@ public final class ModConfig extends PartitioningSerializer.GlobalData {
 		public static final class Structures {
 			@ConfigEntry.Gui.Tooltip
 			public boolean disableDungeon = false;
+			@ConfigEntry.Gui.RequiresRestart
+			@ConfigEntry.Gui.Tooltip
+			@ConfigEntry.BoundedDiscrete(max = 280, min = 80)
+			public int floatingIslandHeight = 180;
 		}
 	}
 }

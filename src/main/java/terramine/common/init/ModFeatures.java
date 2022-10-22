@@ -13,15 +13,15 @@ import net.minecraft.world.level.levelgen.VerticalAnchor;
 import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
+import net.minecraft.world.level.levelgen.feature.StructureFeature;
 import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
+import net.minecraft.world.level.levelgen.feature.configurations.JigsawConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
 import net.minecraft.world.level.levelgen.placement.*;
-import net.minecraft.world.level.levelgen.structure.StructureType;
-import terramine.TerraMine;
 import terramine.common.world.CaveChestFeature;
+import terramine.common.world.FloatingIslandFeatureType;
 import terramine.common.world.NetherChestFeature;
 import terramine.common.world.SurfaceChestFeature;
-import terramine.common.world.TerrariaJigsawStructure;
 
 import java.util.List;
 
@@ -48,7 +48,8 @@ public class ModFeatures {
 	public static final PlacedFeature PLACED_CAVE_CHEST;
 	public static final PlacedFeature PLACED_SURFACE_CHEST;
 	public static final PlacedFeature PLACED_NETHER_CHEST;
-	public static StructureType<TerrariaJigsawStructure> TERRARIA_JIGSAW_STRUCTURE = () -> TerrariaJigsawStructure.CODEC;
+	public static final StructureFeature<JigsawConfiguration> FLOATING_ISLAND = StructureFeature.register("floating_island", new FloatingIslandFeatureType(JigsawConfiguration.CODEC), GenerationStep.Decoration.SURFACE_STRUCTURES);
+	//public static StructureType<TerrariaJigsawStructure> TERRARIA_JIGSAW_STRUCTURE = () -> TerrariaJigsawStructure.CODEC;
 
 	public static void register() {
 		if (CONFIG.worldgen.caveChest.chestRarity < 10) {
@@ -69,7 +70,8 @@ public class ModFeatures {
 					BuiltinRegistries.PLACED_FEATURE.getResourceKey(PLACED_NETHER_CHEST)
 							.orElseThrow(() -> new RuntimeException("Failed to get feature from registry")));
 		}
-		Registry.register(Registry.STRUCTURE_TYPES, TerraMine.id("terraria_jigsaw_structure"), TERRARIA_JIGSAW_STRUCTURE);
+		FLOATING_ISLAND.toString();
+		//Registry.register(Registry.STRUCTURE_FEATURE, TerraMine.id("terraria_jigsaw_structure"), TERRARIA_JIGSAW_STRUCTURE);
 	}
 
 	static {
@@ -89,11 +91,11 @@ public class ModFeatures {
 				new ConfiguredFeature<>(NETHER_CHEST, FeatureConfiguration.NONE)
 		);
 		ResourceKey<ConfiguredFeature<?, ?>> featureKey = BuiltinRegistries.CONFIGURED_FEATURE.getResourceKey(configuredFeature).orElseThrow();
-		Holder<ConfiguredFeature<?, ?>> featureHolder = BuiltinRegistries.CONFIGURED_FEATURE.getOrCreateHolder(featureKey).get().orThrow();
+		Holder<ConfiguredFeature<?, ?>> featureHolder = BuiltinRegistries.CONFIGURED_FEATURE.getOrCreateHolder(featureKey);
 		ResourceKey<ConfiguredFeature<?, ?>> featureKey2 = BuiltinRegistries.CONFIGURED_FEATURE.getResourceKey(configuredFeature2).orElseThrow();
-		Holder<ConfiguredFeature<?, ?>> featureHolder2 = BuiltinRegistries.CONFIGURED_FEATURE.getOrCreateHolder(featureKey2).get().orThrow();
+		Holder<ConfiguredFeature<?, ?>> featureHolder2 = BuiltinRegistries.CONFIGURED_FEATURE.getOrCreateHolder(featureKey2);
 		ResourceKey<ConfiguredFeature<?, ?>> featureKey3 = BuiltinRegistries.CONFIGURED_FEATURE.getResourceKey(configuredFeature3).orElseThrow();
-		Holder<ConfiguredFeature<?, ?>> featureHolder3 = BuiltinRegistries.CONFIGURED_FEATURE.getOrCreateHolder(featureKey3).get().orThrow();
+		Holder<ConfiguredFeature<?, ?>> featureHolder3 = BuiltinRegistries.CONFIGURED_FEATURE.getOrCreateHolder(featureKey3);
 
 		PLACED_CAVE_CHEST = Registry.register(
 				BuiltinRegistries.PLACED_FEATURE,

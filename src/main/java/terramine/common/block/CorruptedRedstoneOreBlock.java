@@ -4,7 +4,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.DustParticleOptions;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
@@ -23,6 +22,8 @@ import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.NotNull;
 import terramine.common.utility.CorruptionHelper;
+
+import java.util.Random;
 
 public class CorruptedRedstoneOreBlock extends CorruptionHelper {
     public static final BooleanProperty LIT = RedstoneTorchBlock.LIT;
@@ -71,15 +72,15 @@ public class CorruptedRedstoneOreBlock extends CorruptionHelper {
     }
 
     @Override
-    public void randomTick(@NotNull BlockState blockState, @NotNull ServerLevel serverLevel, @NotNull BlockPos blockPos, @NotNull RandomSource random) {
+    public void randomTick(@NotNull BlockState blockState, @NotNull ServerLevel serverLevel, @NotNull BlockPos blockPos, @NotNull Random random) {
         if (blockState.getValue(LIT)) {
             serverLevel.setBlock(blockPos, blockState.setValue(LIT, false), 3);
         }
     }
 
     @Override
-    public void spawnAfterBreak(@NotNull BlockState blockState, @NotNull ServerLevel serverLevel, @NotNull BlockPos blockPos, @NotNull ItemStack itemStack, boolean bl) {
-        super.spawnAfterBreak(blockState, serverLevel, blockPos, itemStack, bl);
+    public void spawnAfterBreak(@NotNull BlockState blockState, @NotNull ServerLevel serverLevel, @NotNull BlockPos blockPos, @NotNull ItemStack itemStack) {
+        super.spawnAfterBreak(blockState, serverLevel, blockPos, itemStack);
         if (EnchantmentHelper.getItemEnchantmentLevel(Enchantments.SILK_TOUCH, itemStack) == 0) {
             int i = 1 + serverLevel.random.nextInt(5);
             this.popExperience(serverLevel, blockPos, i);
@@ -87,14 +88,14 @@ public class CorruptedRedstoneOreBlock extends CorruptionHelper {
     }
 
     @Override
-    public void animateTick(BlockState blockState, @NotNull Level level, @NotNull BlockPos blockPos, @NotNull RandomSource random) {
+    public void animateTick(BlockState blockState, @NotNull Level level, @NotNull BlockPos blockPos, @NotNull Random random) {
         if (blockState.getValue(LIT)) {
             spawnParticles(level, blockPos);
         }
     }
 
     private static void spawnParticles(Level level, BlockPos blockPos) {
-        RandomSource random = level.random;
+        Random random = level.random;
         for (Direction direction : Direction.values()) {
             BlockPos blockPos2 = blockPos.relative(direction);
             if (level.getBlockState(blockPos2).isSolidRender(level, blockPos2)) continue;

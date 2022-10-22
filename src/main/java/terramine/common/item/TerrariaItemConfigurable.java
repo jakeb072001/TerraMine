@@ -5,6 +5,7 @@ import net.fabricmc.api.Environment;
 import net.minecraft.ChatFormatting;
 import net.minecraft.locale.Language;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TextComponent;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
@@ -33,7 +34,7 @@ public abstract class TerrariaItemConfigurable extends Item {
 		String[] lines = String.format(Language.getInstance().getOrDefault(translKey), getTooltipDescriptionArguments().toArray()).split("\n");
 
 		for (String line : lines) {
-			tooltip.add(Component.literal(line).withStyle(ChatFormatting.GRAY));
+			tooltip.add(new TextComponent(line).withStyle(ChatFormatting.GRAY));
 		}
 	}
 

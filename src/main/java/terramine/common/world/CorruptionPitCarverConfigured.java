@@ -24,14 +24,14 @@ public class CorruptionPitCarverConfigured extends CarverConfiguration {
     public final FloatProvider verticalRotation;
     public final PitShapeConfiguration shape;
 
-    public CorruptionPitCarverConfigured(float f, HeightProvider heightProvider, FloatProvider floatProvider, VerticalAnchor verticalAnchor, CarverDebugSettings carverDebugSettings, HolderSet<Block> holderSet, FloatProvider floatProvider2, PitShapeConfiguration corruptionPitCarverConfigured) {
-        super(f, heightProvider, floatProvider, verticalAnchor, carverDebugSettings, holderSet);
+    public CorruptionPitCarverConfigured(float f, HeightProvider heightProvider, FloatProvider floatProvider, VerticalAnchor verticalAnchor, CarverDebugSettings carverDebugSettings, FloatProvider floatProvider2, PitShapeConfiguration corruptionPitCarverConfigured) {
+        super(f, heightProvider, floatProvider, verticalAnchor, carverDebugSettings);
         this.verticalRotation = floatProvider2;
         this.shape = corruptionPitCarverConfigured;
     }
 
     public CorruptionPitCarverConfigured(CarverConfiguration carverConfiguration, FloatProvider floatProvider, PitShapeConfiguration pitShapeConfiguration) {
-        this(carverConfiguration.probability, carverConfiguration.y, carverConfiguration.yScale, carverConfiguration.lavaLevel, carverConfiguration.debugSettings, carverConfiguration.replaceable, floatProvider, pitShapeConfiguration);
+        this(carverConfiguration.probability, carverConfiguration.y, carverConfiguration.yScale, carverConfiguration.lavaLevel, carverConfiguration.debugSettings, floatProvider, pitShapeConfiguration);
     }
 
     public static class PitShapeConfiguration {

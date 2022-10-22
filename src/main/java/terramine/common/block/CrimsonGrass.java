@@ -4,7 +4,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.data.worldgen.placement.VegetationPlacements;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
@@ -17,6 +16,7 @@ import org.jetbrains.annotations.NotNull;
 import terramine.common.utility.CrimsonHelper;
 
 import java.util.List;
+import java.util.Random;
 
 public class CrimsonGrass extends CrimsonHelper implements BonemealableBlock {
     public CrimsonGrass(Properties properties) {
@@ -29,12 +29,12 @@ public class CrimsonGrass extends CrimsonHelper implements BonemealableBlock {
     }
 
     @Override
-    public boolean isBonemealSuccess(@NotNull Level level, @NotNull RandomSource random, @NotNull BlockPos blockPos, @NotNull BlockState blockState) {
+    public boolean isBonemealSuccess(@NotNull Level level, @NotNull Random random, @NotNull BlockPos blockPos, @NotNull BlockState blockState) {
         return true;
     }
 
     @Override
-    public void performBonemeal(@NotNull ServerLevel serverLevel, @NotNull RandomSource random, BlockPos blockPos, @NotNull BlockState blockState) {
+    public void performBonemeal(@NotNull ServerLevel serverLevel, @NotNull Random random, BlockPos blockPos, @NotNull BlockState blockState) {
         BlockPos blockPos2 = blockPos.above();
         BlockState blockState2 = Blocks.GRASS.defaultBlockState();
         block0: for (int i = 0; i < 128; ++i) {
@@ -60,7 +60,7 @@ public class CrimsonGrass extends CrimsonHelper implements BonemealableBlock {
     }
 
     @Override
-    public void randomTick(@NotNull BlockState blockState, @NotNull ServerLevel serverLevel, @NotNull BlockPos blockPos, @NotNull RandomSource random) {
+    public void randomTick(@NotNull BlockState blockState, @NotNull ServerLevel serverLevel, @NotNull BlockPos blockPos, @NotNull Random random) {
         super.randomTick(blockState, serverLevel, blockPos, random);
         if (canNotBeGrass(blockState, serverLevel, blockPos)) {
             serverLevel.setBlockAndUpdate(blockPos, Blocks.DIRT.defaultBlockState());

@@ -2,7 +2,6 @@ package terramine.mixin.world;
 
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.storage.LevelStorageSource;
 import net.minecraft.world.level.storage.WorldData;
 import org.spongepowered.asm.mixin.Mixin;
@@ -12,11 +11,13 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import terramine.common.init.ModComponents;
 
+import java.util.Random;
+
 @Mixin(LevelStorageSource.LevelStorageAccess.class)
 public class LevelStorageAccessMixin {
 
     @Unique
-    private final RandomSource random = RandomSource.create();
+    private final Random random = new Random();
 
     /**
      * Randomly sets the world evil type to true or false, false being corruption and true being crimson.

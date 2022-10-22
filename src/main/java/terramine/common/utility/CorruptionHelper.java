@@ -11,7 +11,6 @@ import net.minecraft.server.level.ServerChunkCache;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.Mth;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
@@ -37,6 +36,7 @@ import terramine.common.world.biome.CrimsonBiome;
 import terramine.common.world.biome.CrimsonDesertBiome;
 
 import java.util.Objects;
+import java.util.Random;
 
 public class CorruptionHelper extends SpreadingSnowyDirtBlock  {
     protected CorruptionHelper(Properties properties) {
@@ -65,7 +65,7 @@ public class CorruptionHelper extends SpreadingSnowyDirtBlock  {
     }
 
     @Override
-    public void randomTick(@NotNull BlockState blockState, @NotNull ServerLevel serverLevel, @NotNull BlockPos blockPos, @NotNull RandomSource random) {
+    public void randomTick(@NotNull BlockState blockState, @NotNull ServerLevel serverLevel, @NotNull BlockPos blockPos, @NotNull Random random) {
         if (!TerraMine.CONFIG.general.disableEvilSpread) { // allows user to disable spreading in configs
             BlockState grass = ModBlocks.CORRUPTED_GRASS.defaultBlockState();
             BlockState snow_layer = ModBlocks.CORRUPTED_SNOW_LAYER.defaultBlockState();
@@ -120,7 +120,7 @@ public class CorruptionHelper extends SpreadingSnowyDirtBlock  {
         }
     }
 
-    private void spreadBlock(Block toSpread, Block spreadTo, ServerLevel serverLevel, BlockPos blockPos, RandomSource random) {
+    private void spreadBlock(Block toSpread, Block spreadTo, ServerLevel serverLevel, BlockPos blockPos, Random random) {
         for (int i = 0; i < 4; ++i) {
             if (random.nextInt(TerraMine.CONFIG.general.evilSpreadRarity + 1) == 1) {
                 BlockState block = toSpread.defaultBlockState();
@@ -203,7 +203,7 @@ public class CorruptionHelper extends SpreadingSnowyDirtBlock  {
             // This hack allows us to convert to the biome instance that is required for chunk serialization.
             // This avoids weird errors in the form of "Received invalid biome id: -1" (#818)
             Registry<Biome> biomeRegistry = level.registryAccess().registryOrThrow(Registry.BIOME_REGISTRY);
-            Holder<Biome> biomeHack = biomeRegistry.getOrCreateHolderOrThrow(ResourceKey.create(Registry.BIOME_REGISTRY, Objects.requireNonNull(BuiltinRegistries.BIOME.getKey(biome))));
+            Holder<Biome> biomeHack = biomeRegistry.getOrCreateHolder(ResourceKey.create(Registry.BIOME_REGISTRY, Objects.requireNonNull(BuiltinRegistries.BIOME.getKey(biome))));
             if (biomeHack == null)
                 return;
 
