@@ -16,9 +16,9 @@ import terramine.common.init.ModModelLayers;
 
 public class GrenadeRenderer extends EntityRenderer<GrenadeEntity> {
 
-    private static final ResourceLocation TEXTURE = TerraMine.id("textures/item/weapons/throwables/grenade.png");
-    private static final ResourceLocation STICKY_TEXTURE = TerraMine.id("textures/item/weapons/throwables/sticky_grenade.png");
-    private static final ResourceLocation BOUNCY_TEXTURE = TerraMine.id("textures/item/weapons/throwables/bouncy_grenade.png");
+    private static final ResourceLocation TEXTURE = TerraMine.id("textures/item/weapons/throwables/grenade/grenade.png");
+    private static final ResourceLocation STICKY_TEXTURE = TerraMine.id("textures/item/weapons/throwables/grenade/sticky_grenade.png");
+    private static final ResourceLocation BOUNCY_TEXTURE = TerraMine.id("textures/item/weapons/throwables/grenade/bouncy_grenade.png");
     protected final EntityModel<GrenadeEntity> model;
 
     public GrenadeRenderer(EntityRendererProvider.Context context) {

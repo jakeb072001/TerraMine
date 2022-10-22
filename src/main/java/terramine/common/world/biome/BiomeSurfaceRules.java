@@ -34,7 +34,6 @@ public class BiomeSurfaceRules extends SurfaceRules {
         RuleSource crimsonGrassSurface = sequence(ifTrue(ON_FLOOR, sequence(ifTrue(isAtOrAboveWaterLevel, CRIMSON_GRASS))), sequence(ifTrue(UNDER_FLOOR, sequence(ifTrue(isOceanFloorWaterLevel, DIRT), CRIMSON_GRAVEL))), CRIMSON_STONE);
         RuleSource crimsonSandSurface = sequence(ifTrue(ON_FLOOR, sequence(ifTrue(isAtOrAboveWaterLevel, CRIMSON_SAND))), sequence(ifTrue(UNDER_FLOOR, CRIMSON_SAND)), CRIMSON_SANDSTONE);
 
-
         return sequence(
                 ifTrue(isBiome(ModBiomes.CORRUPTION), corruptGrassSurface),
                 ifTrue(isBiome(ModBiomes.CORRUPTION_DESERT), corruptSandSurface),

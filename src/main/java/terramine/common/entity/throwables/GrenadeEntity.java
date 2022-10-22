@@ -10,7 +10,7 @@ import org.jetbrains.annotations.NotNull;
 public class GrenadeEntity extends ExplosiveThrowableEntity {
     public GrenadeEntity(EntityType<? extends ThrowableProjectile> entityType, Level level) {
         super(entityType, level);
-        setStats(3, 3f, 0.6f);
+        setStats(3, 2f, 0.6f);
         explosionType = BlockInteraction.NONE;
     }
 

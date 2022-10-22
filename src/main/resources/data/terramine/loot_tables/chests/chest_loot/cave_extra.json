@@ -9,14 +9,14 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "minecraft:tnt",
+          "name": "terramine:bomb",
           "weight": 33,
           "functions": [
             {
               "function": "set_count",
               "count": {
-                "min": 5,
-                "max": 10
+                "min": 7,
+                "max": 15
               }
             }
           ]

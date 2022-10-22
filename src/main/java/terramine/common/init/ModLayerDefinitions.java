@@ -6,6 +6,7 @@ import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.model.geom.builders.MeshDefinition;
 import terramine.client.render.entity.model.*;
 import terramine.client.render.entity.model.monsters.*;
+import terramine.client.render.entity.model.throwables.BombModel;
 import terramine.client.render.entity.model.throwables.DynamiteModel;
 import terramine.client.render.entity.model.throwables.GrenadeModel;
 import terramine.client.render.trinket.model.*;
@@ -25,6 +26,7 @@ public class ModLayerDefinitions {
 
         register(ModModelLayers.DYNAMITE, DynamiteModel::createLayer);
         register(ModModelLayers.GRENADE, GrenadeModel::createLayer);
+        register(ModModelLayers.BOMB, BombModel::createLayer);
 
         register(ModModelLayers.DIVING_HELMET, layer(HeadModel.createDivingHelmet(), 64, 32));
         register(ModModelLayers.SUPERSTITIOUS_HAT, layer(HeadModel.createSuperstitiousHat(), 64, 32));

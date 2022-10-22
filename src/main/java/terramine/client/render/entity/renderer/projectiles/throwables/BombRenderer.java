@@ -10,24 +10,24 @@ import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.NotNull;
 import terramine.TerraMine;
-import terramine.client.render.entity.model.throwables.DynamiteModel;
-import terramine.common.entity.throwables.DynamiteEntity;
+import terramine.client.render.entity.model.throwables.BombModel;
+import terramine.common.entity.throwables.BombEntity;
 import terramine.common.init.ModModelLayers;
 
-public class DynamiteRenderer extends EntityRenderer<DynamiteEntity> {
+public class BombRenderer extends EntityRenderer<BombEntity> {
 
-    private static final ResourceLocation TEXTURE = TerraMine.id("textures/item/weapons/throwables/dynamite/dynamite_lit.png");
-    private static final ResourceLocation STICKY_TEXTURE = TerraMine.id("textures/item/weapons/throwables/dynamite/sticky_dynamite_lit.png");
-    private static final ResourceLocation BOUNCY_TEXTURE = TerraMine.id("textures/item/weapons/throwables/dynamite/bouncy_dynamite_lit.png");
-    protected final EntityModel<DynamiteEntity> model;
+    private static final ResourceLocation TEXTURE = TerraMine.id("textures/item/weapons/throwables/bomb/bomb_lit.png");
+    private static final ResourceLocation STICKY_TEXTURE = TerraMine.id("textures/item/weapons/throwables/bomb/sticky_bomb_lit.png");
+    private static final ResourceLocation BOUNCY_TEXTURE = TerraMine.id("textures/item/weapons/throwables/bomb/bouncy_bomb_lit.png");
+    protected final EntityModel<BombEntity> model;
 
-    public DynamiteRenderer(EntityRendererProvider.Context context) {
+    public BombRenderer(EntityRendererProvider.Context context) {
         super(context);
-        this.model = new DynamiteModel(context.bakeLayer(ModModelLayers.DYNAMITE));
+        this.model = new BombModel(context.bakeLayer(ModModelLayers.BOMB));
     }
 
     @Override
-    public void render(@NotNull DynamiteEntity entity, float entityYaw, float partialTicks, @NotNull PoseStack poseStack, @NotNull MultiBufferSource buffer, int packedLight) {
+    public void render(@NotNull BombEntity entity, float entityYaw, float partialTicks, @NotNull PoseStack poseStack, @NotNull MultiBufferSource buffer, int packedLight) {
         super.render(entity, entityYaw, partialTicks, poseStack, buffer, packedLight);
         poseStack.pushPose();
         this.model.setupAnim(entity, 0.0f, 0.0f, 0.0f, entity.getYRot(), entity.getXRot());
@@ -37,7 +37,7 @@ public class DynamiteRenderer extends EntityRenderer<DynamiteEntity> {
     }
 
     @Override
-    public ResourceLocation getTextureLocation(@NotNull DynamiteEntity entity) {
+    public ResourceLocation getTextureLocation(@NotNull BombEntity entity) {
         if (entity.isSticky()) {
             return STICKY_TEXTURE;
         }

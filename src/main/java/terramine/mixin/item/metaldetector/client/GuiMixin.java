@@ -78,6 +78,7 @@ public abstract class GuiMixin {
 		boolean diamondOre = false;
 		boolean goldOre = false;
 		boolean demoniteOre = false;
+		boolean crimtaneOre = false;
 		boolean lapisOre = false;
 		boolean redstoneOre = false;
 		boolean ironOre = false;
@@ -106,6 +107,8 @@ public abstract class GuiMixin {
 					goldOre = true;
 				} else if (checkBlocks(block, ModBlocks.DEMONITE_ORE, ModBlocks.DEEPSLATE_DEMONITE_ORE)) {
 					demoniteOre = true;
+				} else if (checkBlocks(block, ModBlocks.CRIMTANE_ORE, ModBlocks.DEEPSLATE_CRIMTANE_ORE)) {
+					crimtaneOre = true;
 				} else if (checkBlocks(block, Blocks.LAPIS_ORE, Blocks.DEEPSLATE_LAPIS_ORE)) {
 					lapisOre = true;
 				} else if (checkBlocks(block, Blocks.REDSTONE_ORE, Blocks.DEEPSLATE_REDSTONE_ORE)) {
@@ -131,6 +134,8 @@ public abstract class GuiMixin {
 			createText(Blocks.GOLD_ORE, sb);
 		} else if (demoniteOre) {
 			createText(ModBlocks.DEMONITE_ORE, sb);
+		} else if (crimtaneOre) {
+			createText(ModBlocks.CRIMTANE_ORE, sb);
 		} else if (lapisOre) {
 			createText(Blocks.LAPIS_ORE, sb);
 		} else if (redstoneOre) {
