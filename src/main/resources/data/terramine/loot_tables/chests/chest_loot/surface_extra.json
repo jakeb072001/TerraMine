@@ -23,7 +23,7 @@
         },
         {
           "type": "minecraft:item",
-          "name": "minecraft:tnt",
+          "name": "terramine:grenade",
           "weight": 33,
           "functions": [
             {
