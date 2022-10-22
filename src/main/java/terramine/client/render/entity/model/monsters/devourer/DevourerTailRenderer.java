@@ -1,4 +1,4 @@
-package terramine.client.render.entity.devourer;
+package terramine.client.render.entity.model.monsters.devourer;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Vector3f;

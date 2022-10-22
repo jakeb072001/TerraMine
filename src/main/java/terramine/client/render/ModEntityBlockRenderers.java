@@ -8,9 +8,9 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.Sheets;
 import net.minecraft.client.renderer.entity.TntRenderer;
 import terramine.TerraMine;
-import terramine.client.render.entity.devourer.DevourerBodyRenderer;
-import terramine.client.render.entity.devourer.DevourerHeadRenderer;
-import terramine.client.render.entity.devourer.DevourerTailRenderer;
+import terramine.client.render.entity.model.monsters.devourer.DevourerBodyRenderer;
+import terramine.client.render.entity.model.monsters.devourer.DevourerHeadRenderer;
+import terramine.client.render.entity.model.monsters.devourer.DevourerTailRenderer;
 import terramine.client.render.entity.renderer.*;
 import terramine.client.render.entity.renderer.monsters.CrimeraRenderer;
 import terramine.client.render.entity.renderer.monsters.DemonEyeRenderer;
@@ -20,6 +20,7 @@ import terramine.client.render.entity.renderer.projectiles.FlamelashMissileRende
 import terramine.client.render.entity.renderer.projectiles.MagicMissileRenderer;
 import terramine.client.render.entity.renderer.projectiles.RainbowMissileRenderer;
 import terramine.client.render.entity.renderer.projectiles.throwables.DynamiteRenderer;
+import terramine.client.render.entity.renderer.projectiles.throwables.GrenadeRenderer;
 import terramine.common.init.ModBlockEntityType;
 import terramine.common.init.ModBlocks;
 import terramine.common.init.ModEntities;
@@ -62,6 +63,7 @@ public class ModEntityBlockRenderers {
         EntityRendererRegistry.register(ModEntities.FLAMELASH_MISSILE, FlamelashMissileRenderer::new);
         EntityRendererRegistry.register(ModEntities.RAINBOW_MISSILE, RainbowMissileRenderer::new);
         EntityRendererRegistry.register(ModEntities.DYNAMITE, DynamiteRenderer::new);
+        EntityRendererRegistry.register(ModEntities.GRENADE, GrenadeRenderer::new);
         EntityRendererRegistry.register(ModEntities.INSTANT_TNT, TntRenderer::new);
     }
 

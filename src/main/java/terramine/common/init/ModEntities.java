@@ -15,6 +15,7 @@ import terramine.common.entity.devourer.DevourerBodyEntity;
 import terramine.common.entity.devourer.DevourerEntity;
 import terramine.common.entity.devourer.DevourerTailEntity;
 import terramine.common.entity.throwables.DynamiteEntity;
+import terramine.common.entity.throwables.GrenadeEntity;
 
 public class ModEntities {
 
@@ -109,6 +110,12 @@ public class ModEntities {
 
 	public static final EntityType<DynamiteEntity> DYNAMITE = register("dynamite", FabricEntityTypeBuilder
 			.create(MobCategory.MISC, DynamiteEntity::new)
+			.dimensions(EntityDimensions.fixed(0.25f, 0.25f))
+			.disableSummon()
+			.build());
+
+	public static final EntityType<GrenadeEntity> GRENADE = register("grenade", FabricEntityTypeBuilder
+			.create(MobCategory.MISC, GrenadeEntity::new)
 			.dimensions(EntityDimensions.fixed(0.25f, 0.25f))
 			.disableSummon()
 			.build());
