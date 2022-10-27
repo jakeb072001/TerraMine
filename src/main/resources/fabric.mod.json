@@ -58,7 +58,7 @@
     "fabric": ">=0.56.0",
     "trinkets": ">=3.3.0",
     "expandability": ">=6.0.0",
-    "terrablender": ">=1.0.0.0",
+    "terrablender": ">=1.2.0.0",
     "cardinal-components-base": ">=4.0.0",
     "cardinal-components-entity": ">=4.0.0",
     "cloth-config2": ">=6.0",
