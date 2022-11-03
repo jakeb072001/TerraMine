@@ -9,7 +9,9 @@ public class DynamicLightPlugin implements DynamicLightsInitializer {
 
     @Override
     public void onInitializeDynamicLights() {
-        DynamicLightHandlers.registerDynamicLightHandler(ModEntities.FALLING_STAR, DynamicLightHandler.makeHandler(star -> 10, star -> false));
+        //DynamicLightHandlers.registerDynamicLightHandler(ModEntities.ENTITY, DynamicLightHandler.makeHandler(entity -> 10, entity -> false));
+        DynamicLightHandlers.registerDynamicLightHandler(ModEntities.FALLING_STAR, star -> 10);
+        DynamicLightHandlers.registerDynamicLightHandler(ModEntities.METEORITE, meteorite -> 10);
         DynamicLightHandlers.registerDynamicLightHandler(ModEntities.MAGIC_MISSILE, missile -> 8);
         DynamicLightHandlers.registerDynamicLightHandler(ModEntities.FLAMELASH_MISSILE, missile -> 10);
         DynamicLightHandlers.registerDynamicLightHandler(ModEntities.RAINBOW_MISSILE, missile -> 12);

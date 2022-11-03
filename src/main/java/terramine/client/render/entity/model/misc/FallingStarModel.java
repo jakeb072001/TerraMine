@@ -1,4 +1,4 @@
-package terramine.client.render.entity.model;
+package terramine.client.render.entity.model.misc;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
@@ -8,9 +8,11 @@ import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.CubeListBuilder;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.model.geom.builders.MeshDefinition;
+import net.minecraft.world.entity.Entity;
+import org.jetbrains.annotations.NotNull;
 import terramine.common.entity.FallingStarEntity;
 
-public class FallingStarModel extends EntityModel<FallingStarEntity> {
+public class FallingStarModel<T extends Entity> extends EntityModel<T> {
 
     protected final ModelPart star;
 
@@ -19,15 +21,13 @@ public class FallingStarModel extends EntityModel<FallingStarEntity> {
     }
 
     @Override
-    public void setupAnim(FallingStarEntity star, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+    public void setupAnim(@NotNull T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float yRot, float xRot) {
+        star.xRot = xRot;
+        star.yRot = yRot;
     }
 
     @Override
-    public void prepareMobModel(FallingStarEntity star, float limbSwing, float limbSwingAmount, float partialTicks) {
-    }
-
-    @Override
-    public void renderToBuffer(PoseStack matrixStack, VertexConsumer buffer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
+    public void renderToBuffer(@NotNull PoseStack matrixStack, @NotNull VertexConsumer buffer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
         star.render(matrixStack, buffer, packedLight, packedOverlay, red, green, blue, alpha);
     }
 

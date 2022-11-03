@@ -38,6 +38,7 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
 import terramine.common.entity.FallingStarEntity;
+import terramine.common.init.ModTags;
 
 import java.util.List;
 import java.util.Map;
@@ -47,7 +48,7 @@ import java.util.Set;
 public class ExplosionConfigurable extends Explosion {
 
     private static final ExplosionDamageCalculator EXPLOSION_DAMAGE_CALCULATOR = new ExplosionDamageCalculator();
-    private final boolean fire;
+    private final boolean fire, isMeteorite;
     private final Explosion.BlockInteraction blockInteraction;
     private final RandomSource random;
     private final Level level;
@@ -60,15 +61,19 @@ public class ExplosionConfigurable extends Explosion {
     private final ObjectArrayList<Pair<ItemStack, BlockPos>> toBlow;
     private final Map<Player, Vec3> hitPlayers;
 
+    public ExplosionConfigurable(Level level, Entity entity, boolean isMeteorite) { // todo: add a meteorite damage source
+        this(level, entity, null, null, entity.getX(), entity.getY(), entity.getZ(), 10, 1000, false, true, isMeteorite, BlockInteraction.DESTROY);
+    }
+
     public ExplosionConfigurable(Level level, @Nullable Entity entity, double x, double y, double z, float radius, float damage, Explosion.BlockInteraction blockInteraction) {
-        this(level, entity, null, null, x, y, z, radius, damage, false, false, blockInteraction);
+        this(level, entity, null, null, x, y, z, radius, damage, false, false, false, blockInteraction);
     }
 
-    public ExplosionConfigurable(Level level, @Nullable Entity entity, double x, double y, double z, float radius, float damage, boolean divide, Explosion.BlockInteraction blockInteraction) {
-        this(level, entity, null, null, x, y, z, radius, damage, divide, false, blockInteraction);
+    public ExplosionConfigurable(Level level, @Nullable Entity entity, @Nullable DamageSource damageSource, double x, double y, double z, float radius, float damage, boolean divide, Explosion.BlockInteraction blockInteraction) {
+        this(level, entity, null, null, x, y, z, radius, damage, divide, false, false, blockInteraction);
     }
 
-    public ExplosionConfigurable(Level level, @Nullable Entity entity, @Nullable DamageSource damageSource, @Nullable ExplosionDamageCalculator explosionDamageCalculator, double x, double y, double z, float radius, float damage, boolean divide, boolean fire, Explosion.BlockInteraction blockInteraction) {
+    public ExplosionConfigurable(Level level, @Nullable Entity entity, @Nullable DamageSource damageSource, @Nullable ExplosionDamageCalculator explosionDamageCalculator, double x, double y, double z, float radius, float damage, boolean divide, boolean fire, boolean isMeteorite, Explosion.BlockInteraction blockInteraction) {
         super(level, entity, damageSource, explosionDamageCalculator, x, y, z, radius, fire, blockInteraction);
         this.random = RandomSource.create();
         this.toBlow = new ObjectArrayList<>();
@@ -80,6 +85,7 @@ public class ExplosionConfigurable extends Explosion {
         this.y = y;
         this.z = z;
         this.fire = fire;
+        this.isMeteorite = isMeteorite;
         this.blockInteraction = blockInteraction;
         this.damageSource = damageSource == null ? DamageSource.explosion(this) : damageSource;
         this.damageCalculator = explosionDamageCalculator == null ? this.makeDamageCalculator(entity) : explosionDamageCalculator;
@@ -196,8 +202,11 @@ public class ExplosionConfigurable extends Explosion {
 
     public void finalizeExplosion(boolean bl) {
         boolean bl2 = this.blockInteraction != BlockInteraction.NONE;
-        if (this.level.isClientSide) {
-            this.level.playLocalSound(this.x, this.y, this.z, SoundEvents.GENERIC_EXPLODE, SoundSource.BLOCKS, 4.0f, (1.0f + (random.nextFloat() - random.nextFloat()) * 0.2f) * 0.7f, false);
+        boolean noSound = source instanceof FallingStarEntity;
+        if (!noSound) {
+            if (this.level.isClientSide) {
+                this.level.playLocalSound(this.x, this.y, this.z, SoundEvents.GENERIC_EXPLODE, SoundSource.BLOCKS, 4.0f, (1.0f + (random.nextFloat() - random.nextFloat()) * 0.2f) * 0.7f, false);
+            }
         }
         if (bl) {
             if (this.radius < 2.0f || !bl2) {
@@ -215,7 +224,7 @@ public class ExplosionConfigurable extends Explosion {
             while(var5.hasNext()) {
                 BlockPos blockPos = var5.next().getSecond();
                 BlockState blockState = level.getBlockState(blockPos);
-                net.minecraft.world.level.block.Block block = blockState.getBlock();
+                Block block = blockState.getBlock();
                 if (!blockState.isAir()) {
                     BlockPos blockPos2 = blockPos.immutable();
                     level.getProfiler().push("explosions");
@@ -232,6 +241,14 @@ public class ExplosionConfigurable extends Explosion {
                         }
                     }
 
+                    if (isMeteorite) {
+                        for (int i = 0; i < 2; i++) {
+                            BlockPos replaceBlock = blockPos.below(3).offset(random.nextInt(3) - 1, random.nextInt(3) - 1, random.nextInt(3) - 1);
+                            if (blockState.is(ModTags.METEORITE_REPLACE_BLOCKS)) {
+                                this.level.setBlock(replaceBlock, Blocks.MAGMA_BLOCK.defaultBlockState(), 3);
+                            }
+                        }
+                    }
                     this.level.setBlock(blockPos, Blocks.AIR.defaultBlockState(), 3);
                     block.wasExploded(level, blockPos, this);
                     this.level.getProfiler().pop();

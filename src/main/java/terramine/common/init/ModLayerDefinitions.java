@@ -4,7 +4,7 @@ import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.model.geom.builders.MeshDefinition;
-import terramine.client.render.entity.model.*;
+import terramine.client.render.entity.model.misc.FallingStarModel;
 import terramine.client.render.entity.model.monsters.*;
 import terramine.client.render.entity.model.throwables.BombModel;
 import terramine.client.render.entity.model.throwables.DynamiteModel;

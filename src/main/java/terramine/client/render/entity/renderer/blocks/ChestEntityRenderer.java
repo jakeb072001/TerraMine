@@ -1,4 +1,4 @@
-package terramine.client.render.entity.renderer;
+package terramine.client.render.entity.renderer.blocks;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;

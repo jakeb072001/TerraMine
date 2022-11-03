@@ -84,11 +84,13 @@ public class ModEntities {
 			.build());
 
 	public static final EntityType<FallingStarEntity> FALLING_STAR = register("falling_star", FabricEntityTypeBuilder
-			.<FallingStarEntity>createMob()
-			.entityFactory(FallingStarEntity::new)
+			.create(MobCategory.MISC, FallingStarEntity::new)
 			.dimensions(EntityDimensions.fixed(0.25f, 0.25f))
-			.spawnGroup(MobCategory.MISC)
-			.defaultAttributes(FallingStarEntity::createMobAttributes)
+			.build());
+
+	public static final EntityType<FallingMeteoriteEntity> METEORITE = register("meteorite", FabricEntityTypeBuilder
+			.create(MobCategory.MISC, FallingMeteoriteEntity::new)
+			.dimensions(EntityDimensions.fixed(1f, 1f))
 			.build());
 
 	public static final EntityType<MagicMissileEntity> MAGIC_MISSILE = register("magic_missile", FabricEntityTypeBuilder

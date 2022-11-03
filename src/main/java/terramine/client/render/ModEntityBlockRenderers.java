@@ -11,7 +11,9 @@ import terramine.TerraMine;
 import terramine.client.render.entity.model.monsters.devourer.DevourerBodyRenderer;
 import terramine.client.render.entity.model.monsters.devourer.DevourerHeadRenderer;
 import terramine.client.render.entity.model.monsters.devourer.DevourerTailRenderer;
-import terramine.client.render.entity.renderer.*;
+import terramine.client.render.entity.renderer.blocks.ChestEntityRenderer;
+import terramine.client.render.entity.renderer.misc.FallingStarRenderer;
+import terramine.client.render.entity.renderer.misc.MeteoriteRenderer;
 import terramine.client.render.entity.renderer.monsters.CrimeraRenderer;
 import terramine.client.render.entity.renderer.monsters.DemonEyeRenderer;
 import terramine.client.render.entity.renderer.monsters.EaterOfSoulsRenderer;
@@ -60,6 +62,7 @@ public class ModEntityBlockRenderers {
         EntityRendererRegistry.register(ModEntities.DEVOURER_TAIL, DevourerTailRenderer::new);
         EntityRendererRegistry.register(ModEntities.CRIMERA, CrimeraRenderer::new);
         EntityRendererRegistry.register(ModEntities.FALLING_STAR, FallingStarRenderer::new);
+        EntityRendererRegistry.register(ModEntities.METEORITE, MeteoriteRenderer::new);
         EntityRendererRegistry.register(ModEntities.MAGIC_MISSILE, MagicMissileRenderer::new);
         EntityRendererRegistry.register(ModEntities.FLAMELASH_MISSILE, FlamelashMissileRenderer::new);
         EntityRendererRegistry.register(ModEntities.RAINBOW_MISSILE, RainbowMissileRenderer::new);
