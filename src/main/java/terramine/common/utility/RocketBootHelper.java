@@ -85,17 +85,19 @@ public class RocketBootHelper {
                     player.resetFallDistance();
 
                     float speedSideways = (float) (player.isCrouching() ? glideSpeed * 0.5F : glideSpeed);
-                    if (InputHandler.isHoldingForwards(player)) {
-                        player.moveRelative(1, new Vec3(0, 0, speedSideways));
-                    }
-                    if (InputHandler.isHoldingBackwards(player)) {
-                        player.moveRelative(1, new Vec3(0, 0, -speedSideways * 0.8F));
-                    }
-                    if (InputHandler.isHoldingLeft(player)) {
-                        player.moveRelative(1, new Vec3(speedSideways, 0, 0));
-                    }
-                    if (InputHandler.isHoldingRight(player)) {
-                        player.moveRelative(1, new Vec3(-speedSideways, 0, 0));
+                    if (!player.isFallFlying()) {
+                        if (InputHandler.isHoldingForwards(player)) {
+                            player.moveRelative(1, new Vec3(0, 0, speedSideways));
+                        }
+                        if (InputHandler.isHoldingBackwards(player)) {
+                            player.moveRelative(1, new Vec3(0, 0, -speedSideways * 0.8F));
+                        }
+                        if (InputHandler.isHoldingLeft(player)) {
+                            player.moveRelative(1, new Vec3(speedSideways, 0, 0));
+                        }
+                        if (InputHandler.isHoldingRight(player)) {
+                            player.moveRelative(1, new Vec3(-speedSideways, 0, 0));
+                        }
                     }
                 } else {
                     glideDelay++;
