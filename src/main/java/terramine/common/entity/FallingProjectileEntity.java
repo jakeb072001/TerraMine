@@ -2,14 +2,11 @@ package terramine.common.entity;
 
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientboundAddEntityPacket;
-import net.minecraft.util.Mth;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.projectile.ThrowableProjectile;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.NotNull;
-
-import static net.minecraft.util.Mth.rotlerp;
 
 public abstract class FallingProjectileEntity extends ThrowableProjectile {
     public FallingProjectileEntity(EntityType<? extends ThrowableProjectile> entityType, Level level) {

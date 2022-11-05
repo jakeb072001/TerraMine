@@ -31,7 +31,7 @@ public class FallingStarEntity extends FallingProjectileEntity {
         if (!level.isClientSide()) { // checks if the world is not client
             level.broadcastEntityEvent(this, (byte)3); // particle?
             level.playSound(null, this.blockPosition(), ModSoundEvents.FALLING_STAR_CRASH, SoundSource.AMBIENT, 2f, 1f);
-            ItemEntity starItem = new ItemEntity(level, this.blockPosition().getX(), this.blockPosition().getY() + 3, this.blockPosition().getZ(), ModItems.FAKE_FALLEN_STAR.getDefaultInstance());
+            ItemEntity starItem = new ItemEntity(level, this.blockPosition().getX(), this.blockPosition().getY() + 1, this.blockPosition().getZ(), ModItems.FAKE_FALLEN_STAR.getDefaultInstance());
             starItem.setUnlimitedLifetime();
             level.addFreshEntity(starItem);
             this.discard();

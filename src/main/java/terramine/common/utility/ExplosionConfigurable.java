@@ -38,6 +38,7 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
 import terramine.common.entity.FallingStarEntity;
+import terramine.common.init.ModBlocks;
 import terramine.common.init.ModTags;
 
 import java.util.List;
@@ -242,11 +243,9 @@ public class ExplosionConfigurable extends Explosion {
                     }
 
                     if (isMeteorite) {
-                        for (int i = 0; i < 2; i++) {
-                            BlockPos replaceBlock = blockPos.below(3).offset(random.nextInt(3) - 1, random.nextInt(3) - 1, random.nextInt(3) - 1);
-                            if (blockState.is(ModTags.METEORITE_REPLACE_BLOCKS)) {
-                                this.level.setBlock(replaceBlock, Blocks.MAGMA_BLOCK.defaultBlockState(), 3);
-                            }
+                        BlockPos replaceBlock = blockPos.below(3).offset(random.nextInt(3) - 1, random.nextInt(3) - 1, random.nextInt(3) - 1);
+                        if (blockState.is(ModTags.METEORITE_REPLACE_BLOCKS)) {
+                            this.level.setBlock(replaceBlock, ModBlocks.METEORITE_ORE.defaultBlockState(), 3);
                         }
                     }
                     this.level.setBlock(blockPos, Blocks.AIR.defaultBlockState(), 3);

@@ -199,7 +199,11 @@ public class ModItems {
 	public static final Item CRIMSON_LEGGINGS = register("crimson_leggings", new CrimsonArmor("crimson_armor", TerrariaArmorMaterials.CRIMSON, EquipmentSlot.LEGS, new FabricItemSettings().group(TerraMine.ITEM_GROUP_ARMOR)));
 	public static final Item CRIMSON_BOOTS = register("crimson_boots", new CrimsonArmor("crimson_armor", TerrariaArmorMaterials.CRIMSON, EquipmentSlot.FEET, new FabricItemSettings().group(TerraMine.ITEM_GROUP_ARMOR)));
 
-	// Blocks
+
+
+	///////////////// Blocks /////////////////
+
+	// Chests
 	public static final Item GOLD_CHEST = register("gold_chest", new BlockItem(ModBlocks.GOLD_CHEST, new FabricItemSettings().group(TerraMine.ITEM_GROUP_BLOCKS)));
 	public static final Item TRAPPED_GOLD_CHEST = register("trapped_gold_chest", new BlockItem(ModBlocks.TRAPPED_GOLD_CHEST, new FabricItemSettings().group(TerraMine.ITEM_GROUP_BLOCKS)));
 	public static final Item FROZEN_CHEST = register("frozen_chest", new BlockItem(ModBlocks.FROZEN_CHEST, new FabricItemSettings().group(TerraMine.ITEM_GROUP_BLOCKS)));
@@ -213,10 +217,21 @@ public class ModItems {
 	public static final Item SHADOW_CHEST = register("shadow_chest", new BlockItem(ModBlocks.SHADOW_CHEST, new FabricItemSettings().group(TerraMine.ITEM_GROUP_BLOCKS)));
 	public static final Item PIGGY_BANK = register("piggy_bank", new BlockItem(ModBlocks.PIGGY_BANK, new FabricItemSettings().group(TerraMine.ITEM_GROUP_BLOCKS)));
 	public static final Item SAFE = register("safe", new BlockItem(ModBlocks.SAFE, new FabricItemSettings().group(TerraMine.ITEM_GROUP_BLOCKS)));
+
+	// Metals
+	public static final Item METEORITE_ORE = register("meteorite_ore", new BlockItem(ModBlocks.METEORITE_ORE, new FabricItemSettings().group(TerraMine.ITEM_GROUP_BLOCKS)));
+	public static final Item RAW_DEMONITE_BLOCK = register("raw_demonite_block", new BlockItem(ModBlocks.RAW_DEMONITE_BLOCK, new FabricItemSettings().group(TerraMine.ITEM_GROUP_BLOCKS)));
+	public static final Item DEMONITE_BLOCK = register("demonite_block", new BlockItem(ModBlocks.DEMONITE_BLOCK, new FabricItemSettings().group(TerraMine.ITEM_GROUP_BLOCKS)));
+	public static final Item RAW_CRIMTANE_BLOCK = register("raw_crimtane_block", new BlockItem(ModBlocks.RAW_CRIMTANE_BLOCK, new FabricItemSettings().group(TerraMine.ITEM_GROUP_BLOCKS)));
+	public static final Item CRIMTANE_BLOCK = register("crimtane_block", new BlockItem(ModBlocks.CRIMTANE_BLOCK, new FabricItemSettings().group(TerraMine.ITEM_GROUP_BLOCKS)));
+
+	// Misc
 	public static final Item REDSTONE_STONE = register("redstone_stone", new BlockItem(ModBlocks.REDSTONE_STONE, new FabricItemSettings()));
 	public static final Item REDSTONE_DEEPSLATE = register("redstone_deepslate", new BlockItem(ModBlocks.REDSTONE_DEEPSLATE, new FabricItemSettings()));
 	public static final Item INSTANT_TNT = register("instant_tnt", new BlockItem(ModBlocks.INSTANT_TNT, new FabricItemSettings()));
 	public static final Item TINKERER_TABLE = register("tinkerer_workshop", new BlockItem(ModBlocks.TINKERER_TABLE, new FabricItemSettings().group(TerraMine.ITEM_GROUP_BLOCKS)));
+
+	// Building
 	public static final Item SUNPLATE_BLOCK = register("sunplate_block", new BlockItem(ModBlocks.SUNPLATE_BLOCK, new FabricItemSettings().group(TerraMine.ITEM_GROUP_BLOCKS)));
 	public static final Item CLOUD = register("cloud", new BlockItem(ModBlocks.CLOUD, new FabricItemSettings().group(TerraMine.ITEM_GROUP_BLOCKS)));
 	public static final Item RAIN_CLOUD = register("rain_cloud", new BlockItem(ModBlocks.RAIN_CLOUD, new FabricItemSettings().group(TerraMine.ITEM_GROUP_BLOCKS)));
@@ -229,10 +244,12 @@ public class ModItems {
 	public static final Item PURPLE_BRICKS = register("purple_brick", new BlockItem(ModBlocks.PURPLE_BRICKS, new FabricItemSettings().group(TerraMine.ITEM_GROUP_BLOCKS)));
 	public static final Item CRACKED_PURPLE_BRICKS = register("cracked_purple_brick", new BlockItem(ModBlocks.CRACKED_PURPLE_BRICKS, new FabricItemSettings().group(TerraMine.ITEM_GROUP_BLOCKS)));
 	public static final Item FANCY_PURPLE_BRICKS = register("fancy_purple_brick", new BlockItem(ModBlocks.FANCY_PURPLE_BRICKS, new FabricItemSettings().group(TerraMine.ITEM_GROUP_BLOCKS)));
+
+	// Vegetation
 	public static final Item VILE_MUSHROOM = registerPlant("vile_mushroom", 0.65f, new BlockItem(ModBlocks.VILE_MUSHROOM, new FabricItemSettings().group(TerraMine.ITEM_GROUP_STUFF)));
 	public static final Item VICIOUS_MUSHROOM = registerPlant("vicious_mushroom", 0.65f, new BlockItem(ModBlocks.VICIOUS_MUSHROOM, new FabricItemSettings().group(TerraMine.ITEM_GROUP_STUFF)));
-	public static final Item RAW_DEMONITE_BLOCK = register("raw_demonite_block", new BlockItem(ModBlocks.RAW_DEMONITE_BLOCK, new FabricItemSettings().group(TerraMine.ITEM_GROUP_BLOCKS)));
-	public static final Item DEMONITE_BLOCK = register("demonite_block", new BlockItem(ModBlocks.DEMONITE_BLOCK, new FabricItemSettings().group(TerraMine.ITEM_GROUP_BLOCKS)));
+
+	// Corruption
 	public static final Item CORRUPTED_GRASS_BLOCK = register("corrupted_grass", new BlockItem(ModBlocks.CORRUPTED_GRASS, new FabricItemSettings().group(TerraMine.ITEM_GROUP_BLOCKS)));
 	public static final Item CORRUPTED_GRAVEL = register("corrupted_gravel", new BlockItem(ModBlocks.CORRUPTED_GRAVEL, new FabricItemSettings().group(TerraMine.ITEM_GROUP_BLOCKS)));
 	public static final Item CORRUPTED_SAND = register("corrupted_sand", new BlockItem(ModBlocks.CORRUPTED_SAND, new FabricItemSettings().group(TerraMine.ITEM_GROUP_BLOCKS)));
@@ -268,8 +285,8 @@ public class ModItems {
 	public static final Item CORRUPTED_ICE = register("corrupted_ice", new BlockItem(ModBlocks.CORRUPTED_ICE, new FabricItemSettings().group(TerraMine.ITEM_GROUP_BLOCKS)));
 	public static final Item CORRUPTED_PACKED_ICE = register("corrupted_packed_ice", new BlockItem(ModBlocks.CORRUPTED_PACKED_ICE, new FabricItemSettings().group(TerraMine.ITEM_GROUP_BLOCKS)));
 	public static final Item CORRUPTED_BLUE_ICE = register("corrupted_blue_ice", new BlockItem(ModBlocks.CORRUPTED_BLUE_ICE, new FabricItemSettings().group(TerraMine.ITEM_GROUP_BLOCKS)));
-	public static final Item RAW_CRIMTANE_BLOCK = register("raw_crimtane_block", new BlockItem(ModBlocks.RAW_CRIMTANE_BLOCK, new FabricItemSettings().group(TerraMine.ITEM_GROUP_BLOCKS)));
-	public static final Item CRIMTANE_BLOCK = register("crimtane_block", new BlockItem(ModBlocks.CRIMTANE_BLOCK, new FabricItemSettings().group(TerraMine.ITEM_GROUP_BLOCKS)));
+
+	// Crimson
 	public static final Item CRIMSON_GRASS_BLOCK = register("crimson_grass", new BlockItem(ModBlocks.CRIMSON_GRASS, new FabricItemSettings().group(TerraMine.ITEM_GROUP_BLOCKS)));
 	public static final Item CRIMSON_GRAVEL = register("crimson_gravel", new BlockItem(ModBlocks.CRIMSON_GRAVEL, new FabricItemSettings().group(TerraMine.ITEM_GROUP_BLOCKS)));
 	public static final Item CRIMSON_SAND = register("crimson_sand", new BlockItem(ModBlocks.CRIMSON_SAND, new FabricItemSettings().group(TerraMine.ITEM_GROUP_BLOCKS)));

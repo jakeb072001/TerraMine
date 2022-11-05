@@ -10,7 +10,6 @@ import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.model.geom.builders.MeshDefinition;
 import net.minecraft.world.entity.Entity;
 import org.jetbrains.annotations.NotNull;
-import terramine.common.entity.FallingStarEntity;
 
 public class FallingStarModel<T extends Entity> extends EntityModel<T> {
 
@@ -21,8 +20,9 @@ public class FallingStarModel<T extends Entity> extends EntityModel<T> {
     }
 
     @Override
-    public void setupAnim(@NotNull T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float yRot, float xRot) {
-        star.xRot = xRot;
+    public void setupAnim(@NotNull T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float xRot, float yRot) {
+        star.zRot = 135f;
+        //star.xRot = xRot;
         star.yRot = yRot;
     }
 
