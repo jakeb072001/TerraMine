@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/cube_all",
   "textures": {
-    "all": "terramine:block/demonite_block"
+    "all": "terramine:block/metals/blocks/refined/demonite_block"
   }
 }

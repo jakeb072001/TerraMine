@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "terramine:raw_meteorite_block"
+    }
+  ],
+  "result": {
+    "item": "terramine:raw_meteorite",
+    "count": 9
+  }
+}

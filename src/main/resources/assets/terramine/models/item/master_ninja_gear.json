@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "terramine:item/master_ninja_gear"
+    "layer0": "terramine:item/accessories/master_ninja_gear"
   }
 }

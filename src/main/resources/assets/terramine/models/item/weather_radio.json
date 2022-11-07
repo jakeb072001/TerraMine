@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "terramine:item/weather_radio"
+    "layer0": "terramine:item/accessories/weather_radio"
   }
 }

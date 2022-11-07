@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "terramine:item/ranger_emblem"
+    "layer0": "terramine:item/accessories/ranger_emblem"
   }
 }

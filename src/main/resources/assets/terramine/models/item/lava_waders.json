@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "terramine:item/lava_waders"
+    "layer0": "terramine:item/accessories/lava_waders"
   }
 }

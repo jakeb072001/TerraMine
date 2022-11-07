@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "terramine:item/charm_of_myths"
+    "layer0": "terramine:item/accessories/charm_of_myths"
   }
 }

@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "terramine:item/cloud_in_a_bottle"
+    "layer0": "terramine:item/accessories/cloud_in_a_bottle"
   }
 }

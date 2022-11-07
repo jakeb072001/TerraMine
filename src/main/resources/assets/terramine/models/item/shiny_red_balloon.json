@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "terramine:item/shiny_red_balloon"
+    "layer0": "terramine:item/accessories/shiny_red_balloon"
   }
 }

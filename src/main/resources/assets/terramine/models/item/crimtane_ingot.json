@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "terramine:item/crimtane_ingot"
+    "layer0": "terramine:item/metals/refined/crimtane_ingot"
   }
 }

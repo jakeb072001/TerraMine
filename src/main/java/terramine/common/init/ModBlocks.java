@@ -34,8 +34,10 @@ public class ModBlocks {
     public static final Block PIGGY_BANK = register("piggy_bank", new PiggyBankBlock(Properties.copy(Blocks.TERRACOTTA), () -> ModBlockEntityType.PIGGY_BANK));
     public static final Block SAFE = register("safe", new SafeBlock(Properties.copy(Blocks.IRON_BLOCK), () -> ModBlockEntityType.SAFE));
 
-    // Metals // todo: meteorite should only be explosion proof in pre-hardmode
-    public static final Block METEORITE_ORE = register("meteorite_ore", new HotFloorBlock(Properties.copy(Blocks.MAGMA_BLOCK).strength(5f), true)); // todo: add tags for pickaxe and mining level, also all the texture stuff
+    // Metals
+    public static final Block METEORITE_ORE = register("meteorite_ore", new HotFloorBlock(Properties.copy(Blocks.MAGMA_BLOCK).strength(5f), true));
+    public static final Block RAW_METEORITE_BLOCK = register("raw_meteorite_block", new Block(Properties.copy(Blocks.MAGMA_BLOCK).strength(8f)));
+    public static final Block METEORITE_BLOCK = register("meteorite_block", new Block(Properties.copy(Blocks.RAW_IRON_BLOCK)));
     public static final Block RAW_DEMONITE_BLOCK = register("raw_demonite_block", new Block(Properties.copy(Blocks.RAW_IRON_BLOCK)));
     public static final Block DEMONITE_BLOCK = register("demonite_block", new Block(Properties.copy(Blocks.IRON_BLOCK)));
     public static final Block RAW_CRIMTANE_BLOCK = register("raw_crimtane_block", new Block(Properties.copy(Blocks.RAW_IRON_BLOCK)));

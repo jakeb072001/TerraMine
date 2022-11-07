@@ -85,6 +85,9 @@
 	"terramine:crimson_packed_ice",
 	"terramine:crimson_blue_ice",
 	"terramine:raw_crimtane_block",
-	"terramine:crimtane_block"
+	"terramine:crimtane_block",
+	"terramine:meteorite_ore",
+    "terramine:raw_meteorite_block",
+	"terramine:meteorite_block"
   ]
 }

@@ -1,7 +1,7 @@
 {
   "parent":"terramine:item/base_shield",
   "textures":{
-    "shield":"terramine:item/obsidian_shield"
+    "shield":"terramine:item/accessories/obsidian_shield"
   },
   "overrides": [
     {

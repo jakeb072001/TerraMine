@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "terramine:item/ice_skates"
+    "layer0": "terramine:item/accessories/ice_skates"
   }
 }

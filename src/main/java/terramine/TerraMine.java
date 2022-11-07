@@ -38,12 +38,12 @@ public class TerraMine implements ModInitializer, TerraBlenderApi {
 
 	public static final String MOD_ID = "terramine";
 	public static final Logger LOGGER = LoggerFactory.getLogger(TerraMine.class);
-	public static final CreativeModeTab ITEM_GROUP_EQUIPMENT = FabricItemGroupBuilder.build(id("item_group_equipment"), () -> new ItemStack(ModItems.DEMONITE_SWORD));
-	public static final CreativeModeTab ITEM_GROUP_ARMOR = FabricItemGroupBuilder.build(id("item_group_armor"), () -> new ItemStack(ModItems.SHADOW_HELMET));
-	public static final CreativeModeTab ITEM_GROUP_ACCESSORIES = FabricItemGroupBuilder.build(id("item_group_accessories"), () -> new ItemStack(ModItems.TERRASPARK_BOOTS));
-	public static final CreativeModeTab ITEM_GROUP_BLOCKS = FabricItemGroupBuilder.build(id("item_group_blocks"), () -> new ItemStack(ModItems.RAW_DEMONITE_BLOCK));
-	public static final CreativeModeTab ITEM_GROUP_THROWABLES = FabricItemGroupBuilder.build(id("item_group_throwables"), () -> new ItemStack(ModItems.DYNAMITE));
-	public static final CreativeModeTab ITEM_GROUP_STUFF = FabricItemGroupBuilder.build(id("item_group_stuff"), () -> new ItemStack(ModItems.RAW_DEMONITE));
+	public static final CreativeModeTab ITEM_GROUP_EQUIPMENT = FabricItemGroupBuilder.build(id("terramine_equipment"), () -> new ItemStack(ModItems.DEMONITE_SWORD));
+	public static final CreativeModeTab ITEM_GROUP_ARMOR = FabricItemGroupBuilder.build(id("terramine_armor"), () -> new ItemStack(ModItems.SHADOW_HELMET));
+	public static final CreativeModeTab ITEM_GROUP_ACCESSORIES = FabricItemGroupBuilder.build(id("terramine_accessories"), () -> new ItemStack(ModItems.TERRASPARK_BOOTS));
+	public static final CreativeModeTab ITEM_GROUP_BLOCKS = FabricItemGroupBuilder.build(id("terramine_blocks"), () -> new ItemStack(ModItems.RAW_DEMONITE_BLOCK));
+	public static final CreativeModeTab ITEM_GROUP_THROWABLES = FabricItemGroupBuilder.build(id("terramine_throwables"), () -> new ItemStack(ModItems.DYNAMITE));
+	public static final CreativeModeTab ITEM_GROUP_STUFF = FabricItemGroupBuilder.build(id("terramine_stuff"), () -> new ItemStack(ModItems.RAW_DEMONITE));
 	public static ModConfig CONFIG;
 	public static final int CONFIG_VERSION = 2; // Increase if config changed in an incompatible way
 	//private static final Map<String, Runnable> COMPAT_HANDLERS = Map.of(

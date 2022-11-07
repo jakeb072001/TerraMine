@@ -2,6 +2,7 @@
   "replace": false,
   "values": [
     "terramine:demonite_ingot",
-	"terramine:crimtane_ingot"
+	"terramine:crimtane_ingot",
+	"terramine:meteorite_ingot"
   ]
 }

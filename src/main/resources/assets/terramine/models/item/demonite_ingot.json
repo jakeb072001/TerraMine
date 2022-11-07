@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "terramine:item/demonite_ingot"
+    "layer0": "terramine:item/metals/refined/demonite_ingot"
   }
 }

@@ -17,6 +17,7 @@ import terramine.common.init.ModItems;
 
 // Priority is higher so we can inject into canvas' renderItem overwrite
 // TODO: rewrite this using FabricBakedModel if/when RenderContext gets the transform mode
+// todo: make work for throwables and magic weapons, maybe somehow use json like forge does?
 @Mixin(value = ItemRenderer.class, priority = 1500)
 public abstract class ItemRendererMixin {
 

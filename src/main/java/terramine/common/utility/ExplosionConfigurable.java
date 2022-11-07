@@ -243,7 +243,7 @@ public class ExplosionConfigurable extends Explosion {
                     }
 
                     if (isMeteorite) {
-                        BlockPos replaceBlock = blockPos.below(3).offset(random.nextInt(3) - 1, random.nextInt(3) - 1, random.nextInt(3) - 1);
+                        BlockPos replaceBlock = blockPos.below(random.nextInt(2) + 3).offset(random.nextInt(3) - 1, random.nextInt(3) - 1, random.nextInt(3) - 1);
                         if (blockState.is(ModTags.METEORITE_REPLACE_BLOCKS)) {
                             this.level.setBlock(replaceBlock, ModBlocks.METEORITE_ORE.defaultBlockState(), 3);
                         }
@@ -262,7 +262,6 @@ public class ExplosionConfigurable extends Explosion {
             }
         }
         if (this.fire) {
-
             for (Pair<ItemStack, BlockPos> itemStackBlockPosPair : toBlow) {
                 BlockPos blockPos3 = itemStackBlockPosPair.getSecond();
                 if (this.random.nextInt(3) == 0 && this.level.getBlockState(blockPos3).isAir() && this.level.getBlockState(blockPos3.below()).isSolidRender(this.level, blockPos3.below())) {

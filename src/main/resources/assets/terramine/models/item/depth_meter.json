@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "terramine:item/depth_meter"
+    "layer0": "terramine:item/accessories/depth_meter"
   }
 }

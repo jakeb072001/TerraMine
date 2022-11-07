@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "terramine:item/gold_watch"
+    "layer0": "terramine:item/accessories/gold_watch"
   }
 }

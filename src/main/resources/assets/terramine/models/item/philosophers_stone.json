@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "terramine:item/philosophers_stone"
+    "layer0": "terramine:item/accessories/philosophers_stone"
   }
 }
