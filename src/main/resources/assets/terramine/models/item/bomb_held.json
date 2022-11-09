@@ -1,0 +1,7 @@
+{
+	"parent": "terramine:item/bomb_template",
+	"credit": "Made with Blockbench",
+	"textures": {
+		"0": "terramine:item/weapons/throwables/bomb/bomb"
+	}
+}

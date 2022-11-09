@@ -1,8 +1,6 @@
 {
-	"parent": "terramine:item/grenade_template",
-	"credit": "Made with Blockbench",
-	"textures": {
-		"0": "terramine:item/weapons/throwables/grenade/grenade",
-		"particle": "terramine:item/weapons/throwables/grenade/grenade"
-	}
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "terramine:item/weapons/throwables/grenade/gui/grenade"
+  }
 }
