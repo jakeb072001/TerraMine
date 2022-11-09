@@ -4,6 +4,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.6.1-1.19] - 2022-11-20
+### Added
+- Meteorites
+
+### Changed
+- Throwable explosives now render in 2D in Inventory
+- Magic Missile, Flamelash, and Rainbow Rod now have 3D models when held in hand
+
+### Fixed
+- Elytra and Wings together allowing the player to fly at incredible speed (still pretty powerful together but more balanced)
+
 ## [1.6.0-1.19] - 2022-10-23
 ### Added
 - Devourer (Still WIP, movement will be improved and some things may need to be changed to make easier to fight)
@@ -217,6 +228,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Initial release
 
+[1.6.1-1.19]: https://github.com/jakeb072001/TerraMine/compare/v1.6.0-1.19...v1.6.1-1.19
 [1.6.0-1.19]: https://github.com/jakeb072001/TerraMine/compare/v1.5.1...v1.6.0-1.19
 [1.5.1]: https://github.com/jakeb072001/TerraMine/compare/v1.5.0...v1.5.1
 [1.5.0]: https://github.com/jakeb072001/TerraMine/compare/v1.4.0...v1.5.0
