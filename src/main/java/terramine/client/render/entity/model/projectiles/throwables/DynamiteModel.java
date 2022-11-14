@@ -1,4 +1,4 @@
-package terramine.client.render.entity.model.throwables;
+package terramine.client.render.entity.model.projectiles.throwables;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;

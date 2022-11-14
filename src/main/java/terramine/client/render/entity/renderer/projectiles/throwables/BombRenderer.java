@@ -10,7 +10,7 @@ import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.NotNull;
 import terramine.TerraMine;
-import terramine.client.render.entity.model.throwables.BombModel;
+import terramine.client.render.entity.model.projectiles.throwables.BombModel;
 import terramine.common.entity.throwables.BombEntity;
 import terramine.common.init.ModModelLayers;
 

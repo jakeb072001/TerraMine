@@ -68,8 +68,8 @@ public class FallingStarEntity extends FallingProjectileEntity {
     private void spawnEffects() {
         if (level != null) {
             Vec3 motion = getDeltaMovement();
-            level.addParticle(ParticleTypes.FIREWORK, position().x, position().y + 0.5f, position().z, motion.x, motion.y, motion.z);
-            level.addParticle(ParticleTypes.ENCHANTED_HIT, position().x, position().y + 0.5f, position().z, motion.x, motion.y, motion.z);
+            level.addParticle(ParticleTypes.FIREWORK, position().x, position().y - 0.5f, position().z, motion.x, motion.y, motion.z);
+            level.addParticle(ParticleTypes.ENCHANTED_HIT, position().x, position().y - 0.5f, position().z, motion.x, motion.y, motion.z);
         }
         soundTimer += 1;
         if (soundTimer >= (random.nextInt(7)) + 5) {

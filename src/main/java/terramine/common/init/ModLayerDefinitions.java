@@ -5,10 +5,12 @@ import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.model.geom.builders.MeshDefinition;
 import terramine.client.render.entity.model.misc.FallingStarModel;
+import terramine.client.render.entity.model.misc.MeteoriteModel;
 import terramine.client.render.entity.model.monsters.*;
-import terramine.client.render.entity.model.throwables.BombModel;
-import terramine.client.render.entity.model.throwables.DynamiteModel;
-import terramine.client.render.entity.model.throwables.GrenadeModel;
+import terramine.client.render.entity.model.projectiles.magic.MagicMissileModel;
+import terramine.client.render.entity.model.projectiles.throwables.BombModel;
+import terramine.client.render.entity.model.projectiles.throwables.DynamiteModel;
+import terramine.client.render.entity.model.projectiles.throwables.GrenadeModel;
 import terramine.client.render.trinket.model.*;
 
 public class ModLayerDefinitions {
@@ -18,11 +20,14 @@ public class ModLayerDefinitions {
         register(ModModelLayers.MIMIC_OVERLAY, MimicChestLayerModel::createLayer);
 
         register(ModModelLayers.FALLING_STAR, FallingStarModel::createLayer);
+        register(ModModelLayers.METEORITE, MeteoriteModel::createLayer);
 
         register(ModModelLayers.DEMON_EYE, DemonEyeModel::createLayer);
         register(ModModelLayers.EATER_OF_SOULS, EaterOfSoulsModel::createLayer);
         register(ModModelLayers.DEVOURER, DevourerModel::createLayer);
         register(ModModelLayers.CRIMERA, CrimeraModel::createLayer);
+
+        register(ModModelLayers.MAGIC_MISSILE, MagicMissileModel::createLayer);
 
         register(ModModelLayers.DYNAMITE, DynamiteModel::createLayer);
         register(ModModelLayers.GRENADE, GrenadeModel::createLayer);

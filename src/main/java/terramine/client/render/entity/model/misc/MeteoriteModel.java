@@ -11,11 +11,11 @@ import net.minecraft.client.model.geom.builders.MeshDefinition;
 import net.minecraft.world.entity.Entity;
 import org.jetbrains.annotations.NotNull;
 
-public class FallingStarModel<T extends Entity> extends EntityModel<T> {
+public class MeteoriteModel<T extends Entity> extends EntityModel<T> {
 
     protected final ModelPart star;
 
-    public FallingStarModel(ModelPart part) {
+    public MeteoriteModel(ModelPart part) {
         star = part.getChild("star");
     }
 
@@ -75,7 +75,7 @@ public class FallingStarModel<T extends Entity> extends EntityModel<T> {
                 .addBox(-1.0F, 1.0F, 0.0F, 1.0F, 2.0F, 1.0F)
                 .texOffs(13, 13)
                 .addBox(0.0F, 3.0F, 0.0F, 2.0F, 1.0F, 1.0F),
-                PartPose.offset(0.0F, 0.0F, 0.0F)
+                PartPose.offset(0.0F, 19.0F, 0.0F)
         );
 
         return LayerDefinition.create(mesh, 32, 32);

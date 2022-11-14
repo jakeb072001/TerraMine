@@ -10,7 +10,7 @@ import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.NotNull;
 import terramine.TerraMine;
-import terramine.client.render.entity.model.misc.FallingStarModel;
+import terramine.client.render.entity.model.misc.MeteoriteModel;
 import terramine.common.entity.FallingMeteoriteEntity;
 import terramine.common.init.ModModelLayers;
 
@@ -21,7 +21,7 @@ public class MeteoriteRenderer extends EntityRenderer<FallingMeteoriteEntity> { 
 
     public MeteoriteRenderer(EntityRendererProvider.Context context) {
         super(context);
-        this.model = new FallingStarModel<>(context.bakeLayer(ModModelLayers.FALLING_STAR));
+        this.model = new MeteoriteModel<>(context.bakeLayer(ModModelLayers.METEORITE));
     }
 
     @Override

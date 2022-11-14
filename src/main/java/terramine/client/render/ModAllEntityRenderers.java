@@ -18,9 +18,9 @@ import terramine.client.render.entity.renderer.monsters.CrimeraRenderer;
 import terramine.client.render.entity.renderer.monsters.DemonEyeRenderer;
 import terramine.client.render.entity.renderer.monsters.EaterOfSoulsRenderer;
 import terramine.client.render.entity.renderer.monsters.MimicRenderer;
-import terramine.client.render.entity.renderer.projectiles.FlamelashMissileRenderer;
-import terramine.client.render.entity.renderer.projectiles.MagicMissileRenderer;
-import terramine.client.render.entity.renderer.projectiles.RainbowMissileRenderer;
+import terramine.client.render.entity.renderer.projectiles.magic.FlamelashMissileRenderer;
+import terramine.client.render.entity.renderer.projectiles.magic.MagicMissileRenderer;
+import terramine.client.render.entity.renderer.projectiles.magic.RainbowMissileRenderer;
 import terramine.client.render.entity.renderer.projectiles.throwables.BombRenderer;
 import terramine.client.render.entity.renderer.projectiles.throwables.DynamiteRenderer;
 import terramine.client.render.entity.renderer.projectiles.throwables.GrenadeRenderer;
@@ -28,7 +28,7 @@ import terramine.common.init.ModBlockEntityType;
 import terramine.common.init.ModBlocks;
 import terramine.common.init.ModEntities;
 
-public class ModEntityBlockRenderers {
+public class ModAllEntityRenderers {
 
     public static void register() {
         // Block RenderLayer

@@ -10,11 +10,14 @@ public class ModModelLayers {
     public static final ModelLayerLocation MIMIC_OVERLAY = createLocation("mimic", "overlay");
 
     public static final ModelLayerLocation FALLING_STAR = createLocation("falling_star");
+    public static final ModelLayerLocation METEORITE = createLocation("meteorite");
 
     public static final ModelLayerLocation DEMON_EYE = createLocation("demon_eye");
     public static final ModelLayerLocation EATER_OF_SOULS = createLocation("eater_of_souls");
     public static final ModelLayerLocation DEVOURER = createLocation("devourer");
     public static final ModelLayerLocation CRIMERA = createLocation("crimera");
+
+    public static final ModelLayerLocation MAGIC_MISSILE = createLocation("magic_missile");
 
     public static final ModelLayerLocation DYNAMITE = createLocation("dynamite");
     public static final ModelLayerLocation GRENADE = createLocation("grenade");
