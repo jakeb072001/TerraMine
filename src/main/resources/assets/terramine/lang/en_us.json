@@ -575,5 +575,8 @@
   "commands.setHardmode.pass": "Set Hardmode to %s",
   "commands.setHardmode.fail": "Failed to set Hardmode to %s",
   "commands.getHardmode.pass": "Hardmode is %s",
-  "commands.getHardmode.fail": "Failed to get Hardmode state"
+  "commands.getHardmode.fail": "Failed to get Hardmode state",
+  "death.attack.falling_star": "%1$s got disintegrated by a falling star",
+  "death.attack.indirect_magic_projectile": "%1$s was blasted with magic by %2$s",
+  "death.attack.indirect_magic_projectile.item": "%1$s was blasted with magic by %2$s using %3$s"
 }

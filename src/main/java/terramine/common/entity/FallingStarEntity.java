@@ -5,12 +5,14 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.item.ItemEntity;
-import net.minecraft.world.level.Explosion;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.Vec3;
+import org.jetbrains.annotations.NotNull;
+import terramine.common.init.ModDamageSource;
 import terramine.common.init.ModItems;
 import terramine.common.init.ModSoundEvents;
-import terramine.common.utility.ExplosionConfigurable;
 
 public class FallingStarEntity extends FallingProjectileEntity {
     private final float xSpeed, zSpeed;
@@ -45,9 +47,16 @@ public class FallingStarEntity extends FallingProjectileEntity {
         resetFallDistance();
         spawnEffects();
         if (this.isOnGround() || this.isInLava() || this.isInWater()) {
-            new ExplosionConfigurable(level, this, this.position().x(), this.position().y(), this.position().z(), 1F, 4f, Explosion.BlockInteraction.NONE);
             createStarItem();
         }
+    }
+
+    @Override
+    protected void onHitEntity(@NotNull EntityHitResult entityHitResult) {
+        if (entityHitResult.getEntity() instanceof Player) {
+            return;
+        }
+        entityHitResult.getEntity().hurt(ModDamageSource.FALLING_STAR, 50f);
     }
 
     private void adjustMotion() {

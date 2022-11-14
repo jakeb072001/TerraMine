@@ -3,7 +3,6 @@ package terramine.common.utility;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -17,6 +16,7 @@ import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
+import terramine.common.init.ModDamageSource;
 import terramine.common.init.ModItems;
 import terramine.common.init.ModSoundEvents;
 import terramine.common.trinkets.TrinketsHelper;
@@ -83,7 +83,7 @@ public class MagicMissileHelper extends AbstractArrow {
     @Override
     protected void onHitEntity(@NotNull EntityHitResult entityHitResult) {
         if (entityHitResult.getEntity() != this.getOwner()) {
-            entityHitResult.getEntity().hurt(DamageSource.indirectMagic(entityHitResult.getEntity(), this.getOwner()), damage * damageIncrease);
+            entityHitResult.getEntity().hurt(ModDamageSource.indirectMagicProjectile(entityHitResult.getEntity(), this.getOwner(), wandItem), damage * damageIncrease);
             if (canIgnite) {
                 entityHitResult.getEntity().setSecondsOnFire(rand.nextInt(4) + 4);
             }
@@ -105,7 +105,7 @@ public class MagicMissileHelper extends AbstractArrow {
     {
         if(!this.level.isClientSide)
         {
-            new ExplosionConfigurable(this.level, this.getOwner() != null ? this.getOwner() : this, DamageSource.playerAttack((Player) this.getOwner()).setMagic(), this.position().x(), this.position().y(), this.position().z(), 1F, damage / 1.5f, true, Explosion.BlockInteraction.NONE);
+            new ExplosionConfigurable(this.level, this.getOwner() != null ? this.getOwner() : this, ModDamageSource.indirectMagicProjectile(this.getOwner(), wandItem), this.position().x(), this.position().y(), this.position().z(), 1F, damage / 4, Explosion.BlockInteraction.NONE);
             level.playSound(null, blockPosition(), ModSoundEvents.BOMB, SoundSource.PLAYERS, 0.4f, 1);
             this.kill();
         }
