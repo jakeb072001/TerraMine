@@ -38,6 +38,7 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
 import terramine.common.init.ModBlocks;
+import terramine.common.init.ModDamageSource;
 import terramine.common.init.ModTags;
 
 import java.util.List;
@@ -53,7 +54,6 @@ public class ExplosionConfigurable extends Explosion {
     private final RandomSource random;
     private final Level level;
     private final double x, y, z;
-    @Nullable
     private final Entity source;
     private final float radius;
     private final DamageSource damageSource;
@@ -61,8 +61,8 @@ public class ExplosionConfigurable extends Explosion {
     private final ObjectArrayList<Pair<ItemStack, BlockPos>> toBlow;
     private final Map<Player, Vec3> hitPlayers;
 
-    public ExplosionConfigurable(Level level, Entity entity, boolean isMeteorite) { // todo: add a meteorite damage source
-        this(level, entity, null, null, entity.getX(), entity.getY(), entity.getZ(), 10, 1000, true, isMeteorite, BlockInteraction.DESTROY);
+    public ExplosionConfigurable(Level level, Entity entity, boolean isMeteorite) {
+        this(level, entity, ModDamageSource.METEORITE, null, entity.getX(), entity.getY(), entity.getZ(), 10, 1000, true, isMeteorite, BlockInteraction.DESTROY);
     }
 
     public ExplosionConfigurable(Level level, @Nullable Entity entity, double x, double y, double z, float radius, float damage, Explosion.BlockInteraction blockInteraction) {
@@ -128,11 +128,11 @@ public class ExplosionConfigurable extends Explosion {
                             }
 
                             Optional<Float> optional = this.damageCalculator.getBlockExplosionResistance(this, this.level, blockPos, blockState, fluidState);
-                            if (optional.isPresent()) {
+                            if (optional.isPresent() && !(isMeteorite && !fluidState.isEmpty())) {
                                 h -= (optional.get() + 0.3F) * 0.3F;
                             }
 
-                            if (h > 0.0F && this.damageCalculator.shouldBlockExplode(this, this.level, blockPos, blockState, h)) {
+                            if (h > 0.0F && this.damageCalculator.shouldBlockExplode(this, this.level, blockPos, blockState, h) && fluidState.isEmpty()) {
                                 set.add(Pair.of(null, blockPos));
                             }
 
@@ -248,7 +248,7 @@ public class ExplosionConfigurable extends Explosion {
         if (this.fire) {
             for (Pair<ItemStack, BlockPos> itemStackBlockPosPair : toBlow) {
                 BlockPos blockPos3 = itemStackBlockPosPair.getSecond();
-                if (this.random.nextInt(3) == 0 && this.level.getBlockState(blockPos3).isAir() && this.level.getBlockState(blockPos3.below()).isSolidRender(this.level, blockPos3.below())) {
+                if (this.random.nextInt(3) == 0 && this.level.getBlockState(blockPos3).isAir() && this.level.getFluidState(blockPos3).isEmpty() && this.level.getBlockState(blockPos3.below()).isSolidRender(this.level, blockPos3.below())) {
                     this.level.setBlockAndUpdate(blockPos3, BaseFireBlock.getState(this.level, blockPos3));
                 }
             }

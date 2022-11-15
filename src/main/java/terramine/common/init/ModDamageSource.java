@@ -9,6 +9,7 @@ import terramine.common.utility.damagesources.DamageSourceItem;
 
 public class ModDamageSource extends DamageSource {
     public static final DamageSource FALLING_STAR = (new ModDamageSource("falling_star"));
+    public static final DamageSource METEORITE = (new ModDamageSource("meteorite"));
 
     public static DamageSource indirectMagicProjectile(@NotNull Entity entity, @Nullable Entity entity2, Item item) {
         return (new DamageSourceItem("indirect_magic_projectile", entity, entity2, item));

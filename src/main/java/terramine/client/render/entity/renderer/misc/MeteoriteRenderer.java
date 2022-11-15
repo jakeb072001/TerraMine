@@ -16,7 +16,7 @@ import terramine.common.init.ModModelLayers;
 
 public class MeteoriteRenderer extends EntityRenderer<FallingMeteoriteEntity> { // todo: make Meteorite model and texture
 
-    private static final ResourceLocation TEXTURE = TerraMine.id("textures/entity/falling_star.png");
+    private static final ResourceLocation TEXTURE = TerraMine.id("textures/entity/meteorite.png");
     protected final EntityModel<FallingMeteoriteEntity> model;
 
     public MeteoriteRenderer(EntityRendererProvider.Context context) {

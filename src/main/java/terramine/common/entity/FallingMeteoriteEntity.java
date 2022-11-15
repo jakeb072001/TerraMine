@@ -1,7 +1,9 @@
 package terramine.common.entity;
 
+import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.Level;
@@ -30,7 +32,7 @@ public class FallingMeteoriteEntity extends FallingProjectileEntity {
         adjustMotion();
         resetFallDistance();
         spawnEffects();
-        if (this.isOnGround() || this.isInLava() || this.isInWater()) {
+        if (level.getBlockState(blockPosition().below()).isFaceSturdy(level, blockPosition().below(), Direction.getRandom(random)) && !level.getBlockState(blockPosition().below()).is(BlockTags.LOGS)) {
             new ExplosionConfigurable(level, this, true);
             if (!level.isClientSide()) { // checks if the world is not client
                 level.broadcastEntityEvent(this, (byte)3); // particle?

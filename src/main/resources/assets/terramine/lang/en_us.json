@@ -61,6 +61,10 @@
   "entity.terramine.devourer_tail": "Devourer Tail",
   "entity.terramine.crimera": "Crimera",
   "entity.terramine.falling_star": "Falling Star",
+  "entity.terramine.meteorite": "Meteorite",
+  "entity.terramine.magic_missile": "Magic Missile",
+  "entity.terramine.flamelash_missile": "Flamelash Missile",
+  "entity.terramine.rainbow_missile": "Rainbow Missile",
   "entity.terramine.dynamite": "Dynamite",
   "entity.terramine.grenade": "Grenade",
   "entity.terramine.bomb": "Bomb",
@@ -577,6 +581,7 @@
   "commands.getHardmode.pass": "Hardmode is %s",
   "commands.getHardmode.fail": "Failed to get Hardmode state",
   "death.attack.falling_star": "%1$s got disintegrated by a falling star",
+  "death.attack.meteorite": "%1$s was crushed by a meteorite",
   "death.attack.indirect_magic_projectile": "%1$s was blasted with magic by %2$s",
   "death.attack.indirect_magic_projectile.item": "%1$s was blasted with magic by %2$s using %3$s"
 }
