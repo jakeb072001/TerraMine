@@ -6,11 +6,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [1.6.1-1.19] - 2022-11-20
 ### Added
-- Meteorites
+- Meteorites // just needs world spawning
+- Hellstone // still todo
+- New Armors and Weapons // still todo
 
 ### Changed
 - Throwable explosives now render in 2D in Inventory
-- Magic Missile, Flamelash, and Rainbow Rod now have 3D models when held in hand
+- Magic Missile, Flamelash, and Rainbow Rod now have 3D models when held in hand // still todo
 
 ### Fixed
 - Elytra and Wings together allowing the player to fly at incredible speed (still pretty powerful together but more balanced)
