@@ -17,9 +17,9 @@ public class HotFloorBlock extends Block {
     private Level level;
     private final boolean hardmodeExplosionResist;
 
-    public HotFloorBlock(Properties properties, boolean hardmodeExplosionResist) {
+    public HotFloorBlock(Properties properties) {
         super(properties);
-        this.hardmodeExplosionResist = hardmodeExplosionResist;
+        this.hardmodeExplosionResist = true;
     }
 
     @Override

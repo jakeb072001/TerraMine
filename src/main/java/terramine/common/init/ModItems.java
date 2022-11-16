@@ -45,11 +45,14 @@ public class ModItems {
 
 	// Ores etc
 	public static final Item RAW_METEORITE = register("raw_meteorite", new CraftingItem(new FabricItemSettings().group(TerraMine.ITEM_GROUP_STUFF), false));
-	public static final Item METEORITE_INGOT = register("meteorite_ingot", new CraftingItem(new FabricItemSettings().group(TerraMine.ITEM_GROUP_STUFF), false));
+	public static final Item METEORITE_INGOT = register("meteorite_ingot", new CraftingItem(new FabricItemSettings().group(TerraMine.ITEM_GROUP_STUFF), true));
 	public static final Item RAW_DEMONITE = register("raw_demonite", new CraftingItem(new FabricItemSettings().group(TerraMine.ITEM_GROUP_STUFF), false));
-	public static final Item DEMONITE_INGOT = register("demonite_ingot", new CraftingItem(new FabricItemSettings().group(TerraMine.ITEM_GROUP_STUFF), false));
+	public static final Item DEMONITE_INGOT = register("demonite_ingot", new CraftingItem(new FabricItemSettings().group(TerraMine.ITEM_GROUP_STUFF), true));
 	public static final Item RAW_CRIMTANE = register("raw_crimtane", new CraftingItem(new FabricItemSettings().group(TerraMine.ITEM_GROUP_STUFF), false));
 	public static final Item CRIMTANE_INGOT = register("crimtane_ingot", new CraftingItem(new FabricItemSettings().group(TerraMine.ITEM_GROUP_STUFF), false));
+	public static final Item RAW_HELLSTONE = register("raw_hellstone", new CraftingItem(new FabricItemSettings().fireproof().group(TerraMine.ITEM_GROUP_STUFF), true));
+	public static final Item RAW_HELLSTONE_HARDENED = register("raw_hellstone_hardened", new CraftingItem(new FabricItemSettings().fireproof().group(TerraMine.ITEM_GROUP_STUFF), true));
+	public static final Item HELLSTONE_INGOT = register("hellstone_ingot", new CraftingItem(new FabricItemSettings().fireproof().group(TerraMine.ITEM_GROUP_STUFF), true));
 
 	// Magic Items
 	public static final Item MAGIC_MISSILE_ITEM = register("magic_missile", new MagicMissileItem());
@@ -232,6 +235,9 @@ public class ModItems {
 	public static final Item DEEPSLATE_CRIMTANE_ORE = register("deepslate_crimtane_ore", new BlockItem(ModBlocks.DEEPSLATE_CRIMTANE_ORE, new FabricItemSettings().group(TerraMine.ITEM_GROUP_BLOCKS)));
 	public static final Item RAW_CRIMTANE_BLOCK = register("raw_crimtane_block", new BlockItem(ModBlocks.RAW_CRIMTANE_BLOCK, new FabricItemSettings().group(TerraMine.ITEM_GROUP_BLOCKS)));
 	public static final Item CRIMTANE_BLOCK = register("crimtane_block", new BlockItem(ModBlocks.CRIMTANE_BLOCK, new FabricItemSettings().group(TerraMine.ITEM_GROUP_BLOCKS)));
+	public static final Item HELLSTONE_ORE = register("hellstone_ore", new BlockItem(ModBlocks.HELLSTONE_ORE, new FabricItemSettings().fireproof().group(TerraMine.ITEM_GROUP_BLOCKS)));
+	public static final Item RAW_HELLSTONE_BLOCK = register("raw_hellstone_block", new BlockItem(ModBlocks.RAW_HELLSTONE_BLOCK, new FabricItemSettings().fireproof().group(TerraMine.ITEM_GROUP_BLOCKS)));
+	public static final Item HELLSTONE_BLOCK = register("hellstone_block", new BlockItem(ModBlocks.HELLSTONE_BLOCK, new FabricItemSettings().fireproof().group(TerraMine.ITEM_GROUP_BLOCKS)));
 
 	// Misc
 	public static final Item REDSTONE_STONE = register("redstone_stone", new BlockItem(ModBlocks.REDSTONE_STONE, new FabricItemSettings()));

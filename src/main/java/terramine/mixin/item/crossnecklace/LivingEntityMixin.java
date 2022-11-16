@@ -12,6 +12,7 @@ import terramine.common.trinkets.TrinketsHelper;
 public abstract class LivingEntityMixin {
 
 	// todo: make work alongside artifacts instead of disabling when installed using TerraMineMixinPlugin
+	// todo: use @WrapOperation to get working with Artifacts (hopefully)
 
 	/**
 	 * Extends the amount of ticks of vulnerability
@@ -19,7 +20,7 @@ public abstract class LivingEntityMixin {
 	@ModifyConstant(method = "hurt", constant = @Constant(intValue = 20, ordinal = 0))
 	private int longerInvulnerability(int original) {
 		if (TrinketsHelper.isEquipped(ModItems.CROSS_NECKLACE, (LivingEntity) (Object) this)) {
-			// Invulnerability is determined by timeUntilRegen > 10 so we subtract this amount before applying our multiplier
+			// Invulnerability is determined by timeUntilRegen > 10, so we subtract this amount before applying our multiplier
 			return (int) ((original - 10) * CrossNecklaceItem.HURT_RESISTANCE_MULTIPLIER + 10);
 		}
 
