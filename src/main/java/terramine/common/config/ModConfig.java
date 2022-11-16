@@ -45,6 +45,9 @@ public final class ModConfig extends PartitioningSerializer.GlobalData {
 		@ConfigEntry.Gui.Tooltip(count = 6)
 		public float accessoryRarity = 1;
 		@ConfigEntry.Gui.Tooltip
+		@ConfigEntry.BoundedDiscrete(max = 10, min = 1)
+		public int hellstoneRarity = 3;
+		@ConfigEntry.Gui.Tooltip
 		public boolean evilBiomeEnabled = true;
 		@ConfigEntry.Gui.Tooltip
 		public boolean forceCorruption = false;
