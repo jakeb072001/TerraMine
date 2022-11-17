@@ -6,7 +6,7 @@ import net.minecraft.world.entity.ai.attributes.AttributeMap;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import org.jetbrains.annotations.NotNull;
-import terramine.common.item.curio.TrinketTerrariaItem;
+import terramine.common.item.accessories.TrinketTerrariaItem;
 import terramine.common.potions.effects.TerrariaEffect;
 
 import java.util.UUID;

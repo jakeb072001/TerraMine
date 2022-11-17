@@ -22,9 +22,9 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
 import terramine.TerraMine;
+import terramine.common.utility.equipmentchecks.ArmorSetCheck;
 
 import java.util.List;
-import java.util.Objects;
 import java.util.UUID;
 
 // todo: custom models: https://github.com/Luke100000/ImmersiveArmors/blob/1.19.2/common/src/main/java/immersive_armors/mixin/MixinArmorFeatureRenderer.java ?
@@ -79,21 +79,11 @@ public class TerrariaArmor extends ArmorItem {
     public void inventoryTick(@NotNull ItemStack itemStack, @NotNull Level level, @NotNull Entity entity, int i, boolean bl) {
         super.inventoryTick(itemStack, level, entity, i, bl);
 
-        boolean isEquipped = false;
+        boolean isEquipped;
         if (entity instanceof LivingEntity livingEntity) {
             ItemStack equippedStack = livingEntity.getItemBySlot(getSlot());
             if (equippedStack == itemStack) {
-                for (ItemStack item : livingEntity.getArmorSlots()) {
-                    if (item.getItem() instanceof TerrariaArmor armorItem) {
-                        isEquipped = Objects.equals(armorItem.getArmorType(), this.getArmorType());
-                        if (!isEquipped) {
-                            break;
-                        }
-                    } else {
-                        isEquipped = false;
-                        break;
-                    }
-                }
+                isEquipped = ArmorSetCheck.isSetEquipped(livingEntity, this.getArmorType());
 
                 if (isEquipped) {
                     if (itemStack.getItem() instanceof TerrariaArmor armor && armor.getSlot() == EquipmentSlot.HEAD) { // do this so the set bonus only happens once and not per armor (4 times the buff)
@@ -121,17 +111,7 @@ public class TerrariaArmor extends ArmorItem {
             // Checks if the player is wearing a full set of one type of armor, then display the set bonus
             boolean isEquipped = false;
             if (Minecraft.getInstance().player != null) {
-                for (ItemStack item : Minecraft.getInstance().player.getArmorSlots()) {
-                    if (item.getItem() instanceof TerrariaArmor armorItem) {
-                        isEquipped = Objects.equals(armorItem.getArmorType(), this.getArmorType());
-                        if (!isEquipped) {
-                            break;
-                        }
-                    } else {
-                        isEquipped = false;
-                        break;
-                    }
-                }
+                isEquipped = ArmorSetCheck.isSetEquipped(Minecraft.getInstance().player, this.getArmorType());
             }
             if (isEquipped) {
                 appendTooltipDescription(tooltip, "item." + TerraMine.MOD_ID + "." + armorType + ".setbonus");

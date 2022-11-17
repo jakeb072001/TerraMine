@@ -15,8 +15,9 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
+import org.jetbrains.annotations.NotNull;
 import terramine.common.init.ModSoundEvents;
-import terramine.common.item.curio.TrinketTerrariaItem;
+import terramine.common.item.accessories.TrinketTerrariaItem;
 
 import java.util.Optional;
 
@@ -62,7 +63,7 @@ public class CellPhoneItem extends TrinketTerrariaItem {
 	}
 
 	@Override
-	public InteractionResultHolder<ItemStack> use(Level world, Player user, InteractionHand hand) {
+	public InteractionResultHolder<ItemStack> use(@NotNull Level world, Player user, @NotNull InteractionHand hand) {
 		ItemStack itemstack = user.getItemInHand(hand);
 		user.startUsingItem(hand);
 		return InteractionResultHolder.consume(itemstack);

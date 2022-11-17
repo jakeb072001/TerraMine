@@ -15,10 +15,13 @@ import terramine.common.mana.ManaHandler;
 
 public class ModComponents implements EntityComponentInitializer, LevelComponentInitializer {
 
+	// Entity Data
 	public static final ComponentKey<SyncedBooleanComponent> DROPPED_ITEM_ENTITY =
 			ComponentRegistryV3.INSTANCE.getOrCreate(TerraMine.id("dropped_item_entity"), SyncedBooleanComponent.class);
 	public static final ComponentKey<SyncedIntegerComponent> DEMON_EYE_ENTITY =
 			ComponentRegistryV3.INSTANCE.getOrCreate(TerraMine.id("demon_eye_entity"), SyncedIntegerComponent.class);
+
+	// Player Data
 	public static final ComponentKey<SwimAbilityComponent> SWIM_ABILITIES =
 			ComponentRegistryV3.INSTANCE.getOrCreate(TerraMine.id("swim_abilities"), SwimAbilityComponent.class);
 	public static final ComponentKey<ManaHandler> MANA_HANDLER =
@@ -29,7 +32,10 @@ public class ModComponents implements EntityComponentInitializer, LevelComponent
 			ComponentRegistryV3.INSTANCE.getOrCreate(TerraMine.id("movement_order"), MovementOrderComponent.class);
 	public static final ComponentKey<LavaImmunityComponent> LAVA_IMMUNITY =
 			ComponentRegistryV3.INSTANCE.getOrCreate(TerraMine.id("lava_immunity"), LavaImmunityComponent.class);
+	public static final ComponentKey<SyncedBooleanComponent> SPACE_GUN_FREE =
+			ComponentRegistryV3.INSTANCE.getOrCreate(TerraMine.id("space_gun_free"), SyncedBooleanComponent.class);
 
+	// Level Data
 	public static final ComponentKey<SyncedBooleanComponent> HARDMODE =
 			ComponentRegistryV3.INSTANCE.getOrCreate(TerraMine.id("hardmode"), SyncedBooleanComponent.class);
 	public static final ComponentKey<SyncedBooleanComponent> EVIL_TYPE =
@@ -37,13 +43,17 @@ public class ModComponents implements EntityComponentInitializer, LevelComponent
 
 	@Override
 	public void registerEntityComponentFactories(EntityComponentFactoryRegistry registry) {
+		// Entity
 		registry.registerFor(ItemEntity.class, DROPPED_ITEM_ENTITY, entity -> new SyncedBooleanComponent("wasDropped"));
 		registry.registerFor(DemonEyeEntity.class, DEMON_EYE_ENTITY, entity -> new SyncedIntegerComponent("eyeType"));
+
+		// Player
 		registry.registerForPlayers(SWIM_ABILITIES, SwimAbilityComponent::new, RespawnCopyStrategy.LOSSLESS_ONLY);
 		registry.registerForPlayers(MANA_HANDLER, ManaHandler::new, RespawnCopyStrategy.CHARACTER);
 		registry.registerForPlayers(DPS_METER_DAMAGE, DPSDamageCounterComponent::new, RespawnCopyStrategy.LOSSLESS_ONLY);
 		registry.registerForPlayers(MOVEMENT_ORDER, MovementOrderComponent::new, RespawnCopyStrategy.LOSSLESS_ONLY);
 		registry.registerForPlayers(LAVA_IMMUNITY, LavaImmunityComponent::new, RespawnCopyStrategy.LOSSLESS_ONLY);
+		registry.registerForPlayers(SPACE_GUN_FREE, level -> new SyncedBooleanComponent("space_gun_free"), RespawnCopyStrategy.LOSSLESS_ONLY);
 	}
 
 	@Override

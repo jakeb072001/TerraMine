@@ -7,7 +7,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-import terramine.common.item.curio.TrinketTerrariaItem;
+import terramine.common.item.accessories.TrinketTerrariaItem;
 import terramine.common.trinkets.TrinketsHelper;
 
 import java.util.Optional;

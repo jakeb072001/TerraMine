@@ -8,15 +8,17 @@ import net.minecraft.world.level.block.ComposterBlock;
 import terramine.TerraMine;
 import terramine.common.item.*;
 import terramine.common.item.armor.CrimsonArmor;
+import terramine.common.item.armor.MeteorArmor;
+import terramine.common.item.armor.MoltenArmor;
 import terramine.common.item.armor.ShadowArmor;
-import terramine.common.item.curio.ShieldTrinketItem;
-import terramine.common.item.curio.TrinketTerrariaItem;
-import terramine.common.item.curio.WhoopeeCushionItem;
-import terramine.common.item.curio.back.WingsItem;
-import terramine.common.item.curio.belt.*;
-import terramine.common.item.curio.feet.*;
-import terramine.common.item.curio.hands.*;
-import terramine.common.item.curio.necklace.*;
+import terramine.common.item.accessories.ShieldTrinketItem;
+import terramine.common.item.accessories.TrinketTerrariaItem;
+import terramine.common.item.accessories.WhoopeeCushionItem;
+import terramine.common.item.accessories.back.WingsItem;
+import terramine.common.item.accessories.belt.*;
+import terramine.common.item.accessories.feet.*;
+import terramine.common.item.accessories.hands.*;
+import terramine.common.item.accessories.necklace.*;
 import terramine.common.item.magic.*;
 import terramine.common.item.throwables.BombItem;
 import terramine.common.item.throwables.DynamiteItem;
@@ -80,9 +82,9 @@ public class ModItems {
 	// Necklace
 	public static final Item CROSS_NECKLACE = register("cross_necklace", new CrossNecklaceItem());
 	public static final Item PANIC_NECKLACE = register("panic_necklace", new PanicNecklaceItem());
-	public static final Item RANGER_EMBLEM = register("ranger_emblem", new TrinketTerrariaItem());
+	public static final Item RANGER_EMBLEM = register("ranger_emblem", new TrinketTerrariaItem()); // todo: need to make actually work
 	public static final Item WARRIOR_EMBLEM = register("warrior_emblem", new WarriorEmblemItem());
-	public static final Item SORCERER_EMBLEM = register("sorcerer_emblem", new TrinketTerrariaItem());
+	public static final Item SORCERER_EMBLEM = register("sorcerer_emblem", new SorcererEmblemItem());
 	public static final Item AVENGER_EMBLEM = register("avenger_emblem", new AvengerEmblemItem());
 	public static final Item NEPTUNE_SHELL = register("neptune_shell", new CelestialShell(true, false, false, false));
 	public static final Item MOON_CHARM = register("moon_charm", new CelestialShell(false, true, false, false));
@@ -203,6 +205,14 @@ public class ModItems {
 	public static final Item CRIMSON_CHESTPLATE = register("crimson_chestplate", new CrimsonArmor("crimson_armor", TerrariaArmorMaterials.CRIMSON, EquipmentSlot.CHEST, new FabricItemSettings().group(TerraMine.ITEM_GROUP_ARMOR)));
 	public static final Item CRIMSON_LEGGINGS = register("crimson_leggings", new CrimsonArmor("crimson_armor", TerrariaArmorMaterials.CRIMSON, EquipmentSlot.LEGS, new FabricItemSettings().group(TerraMine.ITEM_GROUP_ARMOR)));
 	public static final Item CRIMSON_BOOTS = register("crimson_boots", new CrimsonArmor("crimson_armor", TerrariaArmorMaterials.CRIMSON, EquipmentSlot.FEET, new FabricItemSettings().group(TerraMine.ITEM_GROUP_ARMOR)));
+	public static final Item METEOR_HELMET = register("meteor_helmet", new MeteorArmor("meteor_armor", TerrariaArmorMaterials.METEOR, EquipmentSlot.HEAD, new FabricItemSettings().group(TerraMine.ITEM_GROUP_ARMOR)));
+	public static final Item METEOR_CHESTPLATE = register("meteor_chestplate", new MeteorArmor("meteor_armor", TerrariaArmorMaterials.METEOR, EquipmentSlot.CHEST, new FabricItemSettings().group(TerraMine.ITEM_GROUP_ARMOR)));
+	public static final Item METEOR_LEGGINGS = register("meteor_leggings", new MeteorArmor("meteor_armor", TerrariaArmorMaterials.METEOR, EquipmentSlot.LEGS, new FabricItemSettings().group(TerraMine.ITEM_GROUP_ARMOR)));
+	public static final Item METEOR_BOOTS = register("meteor_boots", new MeteorArmor("meteor_armor", TerrariaArmorMaterials.METEOR, EquipmentSlot.FEET, new FabricItemSettings().group(TerraMine.ITEM_GROUP_ARMOR)));
+	public static final Item MOLTEN_HELMET = register("molten_helmet", new MoltenArmor("molten_armor", TerrariaArmorMaterials.MOLTEN, EquipmentSlot.HEAD, new FabricItemSettings().group(TerraMine.ITEM_GROUP_ARMOR)));
+	public static final Item MOLTEN_CHESTPLATE = register("molten_chestplate", new MoltenArmor("molten_armor", TerrariaArmorMaterials.MOLTEN, EquipmentSlot.CHEST, new FabricItemSettings().group(TerraMine.ITEM_GROUP_ARMOR)));
+	public static final Item MOLTEN_LEGGINGS = register("molten_leggings", new MoltenArmor("molten_armor", TerrariaArmorMaterials.MOLTEN, EquipmentSlot.LEGS, new FabricItemSettings().group(TerraMine.ITEM_GROUP_ARMOR)));
+	public static final Item MOLTEN_BOOTS = register("molten_boots", new MoltenArmor("molten_armor", TerrariaArmorMaterials.MOLTEN, EquipmentSlot.FEET, new FabricItemSettings().group(TerraMine.ITEM_GROUP_ARMOR)));
 
 
 

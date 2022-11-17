@@ -7,7 +7,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import terramine.common.item.curio.TrinketTerrariaItem;
+import terramine.common.item.accessories.TrinketTerrariaItem;
 
 import java.util.List;
 import java.util.Optional;

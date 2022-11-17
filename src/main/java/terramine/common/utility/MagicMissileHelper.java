@@ -5,6 +5,9 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.AttributeInstance;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.item.Item;
@@ -16,6 +19,8 @@ import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
+import terramine.TerraMine;
+import terramine.common.init.ModAttributes;
 import terramine.common.init.ModDamageSource;
 import terramine.common.init.ModItems;
 import terramine.common.init.ModSoundEvents;
@@ -25,7 +30,7 @@ public class MagicMissileHelper extends AbstractArrow {
 
     private final RandomSource rand = RandomSource.create();
     private Item wandItem;
-    private float damageIncrease, speed, damage;
+    private float speed, damage;
     private int timer;
     private boolean canBeInWater, canBeInLava;
     private boolean canIgnite, limitedTime = false;
@@ -35,18 +40,6 @@ public class MagicMissileHelper extends AbstractArrow {
         this.setNoGravity(true);
         setKnockback(7);
         this.pickup = AbstractArrow.Pickup.DISALLOWED;
-    }
-
-    private void trinketCheck() { // replace with AttributeModifier later
-        if (TrinketsHelper.isEquipped(ModItems.SORCERER_EMBLEM, (LivingEntity) this.getOwner()) && TrinketsHelper.isEquipped(ModItems.AVENGER_EMBLEM, (LivingEntity) this.getOwner())) {
-            damageIncrease = 1.27f;
-        } else if (TrinketsHelper.isEquipped(ModItems.SORCERER_EMBLEM, (LivingEntity) this.getOwner())) {
-            damageIncrease = 1.15f;
-        } else if (TrinketsHelper.isEquipped(ModItems.AVENGER_EMBLEM, (LivingEntity) this.getOwner())) {
-            damageIncrease = 1.12f;
-        } else {
-            damageIncrease = 1f;
-        }
     }
 
     public void setCooldownItem(Item wandItem) {
@@ -75,6 +68,16 @@ public class MagicMissileHelper extends AbstractArrow {
         return SoundSource.PLAYERS;
     }
 
+    private float damageMultiplier() {
+        if (this.getOwner() instanceof Player player) {
+            if (player.getAttributes().hasAttribute(ModAttributes.MAGIC_ATTACK_DAMAGE)) {
+                return (float) player.getAttribute(ModAttributes.MAGIC_ATTACK_DAMAGE).getValue();
+            }
+        }
+
+        return 1f;
+    }
+
     @Override
     protected void onHit(@NotNull HitResult hitResult) {
         super.onHit(hitResult);
@@ -83,7 +86,7 @@ public class MagicMissileHelper extends AbstractArrow {
     @Override
     protected void onHitEntity(@NotNull EntityHitResult entityHitResult) {
         if (entityHitResult.getEntity() != this.getOwner()) {
-            entityHitResult.getEntity().hurt(ModDamageSource.indirectMagicProjectile(entityHitResult.getEntity(), this.getOwner(), wandItem), damage * damageIncrease);
+            entityHitResult.getEntity().hurt(ModDamageSource.indirectMagicProjectile(entityHitResult.getEntity(), this.getOwner(), wandItem), damage * damageMultiplier());
             if (canIgnite) {
                 entityHitResult.getEntity().setSecondsOnFire(rand.nextInt(4) + 4);
             }
@@ -105,7 +108,7 @@ public class MagicMissileHelper extends AbstractArrow {
     {
         if(!this.level.isClientSide)
         {
-            new ExplosionConfigurable(this.level, this.getOwner() != null ? this.getOwner() : this, ModDamageSource.indirectMagicProjectile(this.getOwner(), wandItem), this.position().x(), this.position().y(), this.position().z(), 1F, damage / 4, Explosion.BlockInteraction.NONE);
+            new ExplosionConfigurable(this.level, this.getOwner() != null ? this.getOwner() : this, ModDamageSource.indirectMagicProjectile(this.getOwner(), wandItem), this.position().x(), this.position().y(), this.position().z(), 1F, (damage * damageMultiplier()) / 5, Explosion.BlockInteraction.NONE);
             level.playSound(null, blockPosition(), ModSoundEvents.BOMB, SoundSource.PLAYERS, 0.4f, 1);
             this.kill();
         }
@@ -116,7 +119,6 @@ public class MagicMissileHelper extends AbstractArrow {
     {
         super.tick();
         adjustMotion();
-        trinketCheck();
         createParticles();
         if (this.isAlive() && this.getOwner() != null) {
             ((Player) this.getOwner()).getCooldowns().addCooldown(wandItem, 10);

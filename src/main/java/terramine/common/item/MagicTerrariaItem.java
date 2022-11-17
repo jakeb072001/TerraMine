@@ -8,6 +8,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.level.Level;
+import org.jetbrains.annotations.NotNull;
 import terramine.TerraMine;
 import terramine.common.init.ModComponents;
 
@@ -33,17 +34,17 @@ public class MagicTerrariaItem extends TerrariaItem {
     }
 
     @Override
-    public ItemStack finishUsingItem(ItemStack stack, Level world, LivingEntity entity) {
+    public ItemStack finishUsingItem(@NotNull ItemStack stack, @NotNull Level world, @NotNull LivingEntity entity) {
         return super.finishUsingItem(stack, world, entity);
     }
 
     @Override
-    public UseAnim getUseAnimation(ItemStack stack) {
+    public UseAnim getUseAnimation(@NotNull ItemStack stack) {
         return UseAnim.BOW;
     }
 
     @Override
-    public InteractionResultHolder<ItemStack> use(Level world, Player user, InteractionHand hand) {
+    public InteractionResultHolder<ItemStack> use(@NotNull Level world, Player user, @NotNull InteractionHand hand) {
         ItemStack itemstack = user.getItemInHand(hand);
         if (!(ModComponents.MANA_HANDLER.get(user).getCurrentMana() < manaCost) || user.isCreative()) {
             user.startUsingItem(hand);
@@ -53,7 +54,7 @@ public class MagicTerrariaItem extends TerrariaItem {
     }
 
     @Override
-    public int getUseDuration(ItemStack stack) {
+    public int getUseDuration(@NotNull ItemStack stack) {
         return useDuration;
     }
 }

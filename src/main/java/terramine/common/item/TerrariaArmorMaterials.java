@@ -15,9 +15,11 @@ import java.util.function.Supplier;
 
 public enum TerrariaArmorMaterials implements ArmorMaterial {
 
-    SHADOW("shadow", 20, new int[]{3, 5, 7, 2}, 9, SoundEvents.ARMOR_EQUIP_IRON, 1.0F, 0.0F, Ingredient.of(ModItems.DEMONITE_INGOT)),
+    SHADOW("shadow", 20, new int[]{3, 5, 7, 2}, 10, SoundEvents.ARMOR_EQUIP_IRON, 1.0F, 0.0F, Ingredient.of(ModItems.DEMONITE_INGOT)),
     ANCIENT_SHADOW("ancient_shadow", SHADOW), // same stats as Shadow material but uses a different armor model/texture
-    CRIMSON("crimson", 20, new int[]{3, 5, 7, 2}, 9, SoundEvents.ARMOR_EQUIP_IRON, 1.0F, 0.0F, Ingredient.of(ModItems.CRIMTANE_INGOT));
+    CRIMSON("crimson", 20, new int[]{3, 5, 7, 2}, 10, SoundEvents.ARMOR_EQUIP_IRON, 1.0F, 0.0F, Ingredient.of(ModItems.CRIMTANE_INGOT)),
+    METEOR("meteor", 35, new int[]{3, 6, 8, 3}, 15, SoundEvents.ARMOR_EQUIP_NETHERITE, 2.0F, 0.1F, Ingredient.of(ModItems.METEORITE_INGOT)),
+    MOLTEN("molten", 40, new int[]{4, 8, 8, 4}, 20, SoundEvents.ARMOR_EQUIP_NETHERITE, 3.0F, 0.1F, Ingredient.of(ModItems.HELLSTONE_INGOT));
 
     private static final int[] HEALTH_PER_SLOT = new int[]{13, 15, 16, 11};
     private final String name;
