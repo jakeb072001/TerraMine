@@ -30,22 +30,19 @@ public class MechanicalGloveItem extends TrinketTerrariaItem {
 	@Override
 	protected Multimap<Attribute, AttributeModifier> applyModifiers(ItemStack stack, SlotReference slot, LivingEntity entity, UUID uuid) {
 		Multimap<Attribute, AttributeModifier> result = super.applyModifiers(stack, slot, entity, uuid);
-		AttributeModifier modifier = new AttributeModifier(uuid,
-				TerraMine.id("mechanical_glove_attack_speed").toString(),
+		AttributeModifier attackModifier = new AttributeModifier(uuid,
+				TerraMine.id("mechanical_glove_attack").toString(),
 				0.12, AttributeModifier.Operation.MULTIPLY_TOTAL);
-		AttributeModifier modifier2 = new AttributeModifier(uuid,
-				TerraMine.id("mechanical_glove_attack_damage").toString(),
-				0.12f, AttributeModifier.Operation.MULTIPLY_TOTAL);
-		AttributeModifier modifier3 = new AttributeModifier(uuid,
+		AttributeModifier reachModifier = new AttributeModifier(uuid,
 				TerraMine.id("mechanical_glove_range").toString(),
 				0.5, AttributeModifier.Operation.ADDITION);
-		AttributeModifier modifier4 = new AttributeModifier(uuid,
+		AttributeModifier attackRangeModifier = new AttributeModifier(uuid,
 				TerraMine.id("mechanical_glove_attack_range").toString(),
 				3, AttributeModifier.Operation.ADDITION);
-		result.put(Attributes.ATTACK_SPEED, modifier);
-		result.put(Attributes.ATTACK_DAMAGE, modifier2);
-		result.put(ReachEntityAttributes.REACH, modifier3);
-		result.put(ReachEntityAttributes.ATTACK_RANGE, modifier4);
+		result.put(Attributes.ATTACK_SPEED, attackModifier);
+		result.put(Attributes.ATTACK_DAMAGE, attackModifier);
+		result.put(ReachEntityAttributes.REACH, reachModifier);
+		result.put(ReachEntityAttributes.ATTACK_RANGE, attackRangeModifier);
 		return result;
 	}
 

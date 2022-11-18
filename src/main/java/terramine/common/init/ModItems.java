@@ -82,7 +82,7 @@ public class ModItems {
 	// Necklace
 	public static final Item CROSS_NECKLACE = register("cross_necklace", new CrossNecklaceItem());
 	public static final Item PANIC_NECKLACE = register("panic_necklace", new PanicNecklaceItem());
-	public static final Item RANGER_EMBLEM = register("ranger_emblem", new TrinketTerrariaItem()); // todo: need to make actually work
+	public static final Item RANGER_EMBLEM = register("ranger_emblem", new RangerEmblemItem());
 	public static final Item WARRIOR_EMBLEM = register("warrior_emblem", new WarriorEmblemItem());
 	public static final Item SORCERER_EMBLEM = register("sorcerer_emblem", new SorcererEmblemItem());
 	public static final Item AVENGER_EMBLEM = register("avenger_emblem", new AvengerEmblemItem());

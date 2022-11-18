@@ -20,6 +20,7 @@ public abstract class LivingEntityMixin extends Entity {
     @Inject(method = "createLivingAttributes", at = @At("RETURN"))
     private static void addAttributes(final CallbackInfoReturnable<AttributeSupplier.Builder> cir) {
         cir.getReturnValue()
+                .add(ModAttributes.RANGER_ATTACK_DAMAGE)
                 .add(ModAttributes.MAGIC_ATTACK_DAMAGE)
                 .add(ModAttributes.MAGIC_ATTACK_SPEED);
     }

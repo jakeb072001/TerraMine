@@ -611,6 +611,7 @@
   "commands.setHardmode.fail": "Failed to set Hardmode to %s",
   "commands.getHardmode.pass": "Hardmode is %s",
   "commands.getHardmode.fail": "Failed to get Hardmode state",
+  "attribute.name.ranger_attack_damage": "Ranger Attack Damage",
   "attribute.name.magic_attack_damage": "Magic Attack Damage",
   "attribute.name.magic_attack_speed": "Magic Attack Speed",
   "death.attack.falling_star": "%1$s got disintegrated by a falling star",
