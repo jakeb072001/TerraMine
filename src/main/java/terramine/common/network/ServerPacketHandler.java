@@ -24,6 +24,7 @@ public class ServerPacketHandler {
     public static final ResourceLocation WALL_JUMP_PACKET_ID = TerraMine.id("wall_jump");
     public static final ResourceLocation DASH_PACKET_ID = TerraMine.id("dash");
     public static final ResourceLocation CONTROLS_PACKET_ID = TerraMine.id("controls_packet");
+    public static final ResourceLocation PLAYER_MOVEMENT_PACKET_ID = TerraMine.id("player_movement");
     public static final ResourceLocation ROCKET_BOOTS_SOUND_PACKET_ID = TerraMine.id("rocket_boots_sound");
     public static final ResourceLocation ROCKET_BOOTS_PARTICLE_PACKET_ID = TerraMine.id("rocket_boots_particles");
     public static final ResourceLocation UPDATE_BIOME_PACKET_ID = TerraMine.id("update_biome");
@@ -68,6 +69,15 @@ public class ServerPacketHandler {
             boolean wallJumped = buf.readBoolean();
             server.execute(() -> {
                 ModComponents.MOVEMENT_ORDER.get(player).setWallJumped(wallJumped);
+            });
+        });
+
+        ServerPlayNetworking.registerGlobalReceiver(PLAYER_MOVEMENT_PACKET_ID, (server, player, handler, buf, responseSender) -> {
+            double x = buf.readDouble();
+            double y = buf.readDouble();
+            double z = buf.readDouble();
+            server.execute(() -> {
+                player.setDeltaMovement(x, y, z);
             });
         });
 

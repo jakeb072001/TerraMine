@@ -180,6 +180,11 @@ public class RocketBootHelper {
 
     private void fly(Player player, double y) {
         Vec3 motion = player.getDeltaMovement();
+        FriendlyByteBuf passedData = new FriendlyByteBuf(Unpooled.buffer());
+        passedData.writeDouble(motion.x());
+        passedData.writeDouble(y);
+        passedData.writeDouble(motion.z());
+        ClientPlayNetworking.send(ServerPacketHandler.PLAYER_MOVEMENT_PACKET_ID, passedData);
         player.setDeltaMovement(motion.x(), y, motion.z());
     }
 
