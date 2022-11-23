@@ -11,7 +11,7 @@ import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.NotNull;
 import terramine.TerraMine;
 import terramine.client.render.entity.model.misc.FallingStarModel;
-import terramine.common.entity.FallingStarEntity;
+import terramine.common.entity.projectiles.FallingStarEntity;
 import terramine.common.init.ModModelLayers;
 
 public class FallingStarRenderer extends EntityRenderer<FallingStarEntity> {

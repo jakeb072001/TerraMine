@@ -11,7 +11,7 @@ import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.NotNull;
 import terramine.TerraMine;
 import terramine.client.render.entity.model.projectiles.magic.MagicMissileModel;
-import terramine.common.entity.FlamelashMissileEntity;
+import terramine.common.entity.projectiles.FlamelashMissileEntity;
 import terramine.common.init.ModModelLayers;
 
 public class FlamelashMissileRenderer extends EntityRenderer<FlamelashMissileEntity> {

@@ -10,22 +10,22 @@ import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.NotNull;
 import terramine.TerraMine;
-import terramine.client.render.entity.model.projectiles.magic.MagicMissileModel;
-import terramine.common.entity.projectiles.RainbowMissileEntity;
+import terramine.client.render.entity.model.projectiles.magic.LaserModel;
+import terramine.common.entity.projectiles.LaserEntity;
 import terramine.common.init.ModModelLayers;
 
-public class RainbowMissileRenderer extends EntityRenderer<RainbowMissileEntity> {
+public class LaserRenderer extends EntityRenderer<LaserEntity> {
 
-    private static final ResourceLocation TEXTURE = TerraMine.id("textures/entity/projectiles/magic/magic_missile.png");
-    protected final EntityModel<RainbowMissileEntity> model;
+    private static final ResourceLocation TEXTURE = TerraMine.id("textures/entity/projectiles/magic/laser.png");
+    protected final EntityModel<LaserEntity> model;
 
-    public RainbowMissileRenderer(EntityRendererProvider.Context context) {
+    public LaserRenderer(EntityRendererProvider.Context context) {
         super(context);
-        this.model = new MagicMissileModel<>(context.bakeLayer(ModModelLayers.MAGIC_MISSILE));
+        this.model = new LaserModel<>(context.bakeLayer(ModModelLayers.LASER));
     }
 
     @Override
-    public void render(@NotNull RainbowMissileEntity entity, float entityYaw, float partialTicks, @NotNull PoseStack poseStack, @NotNull MultiBufferSource buffer, int packedLight) {
+    public void render(@NotNull LaserEntity entity, float entityYaw, float partialTicks, @NotNull PoseStack poseStack, @NotNull MultiBufferSource buffer, int packedLight) {
         super.render(entity, entityYaw, partialTicks, poseStack, buffer, packedLight);
         poseStack.pushPose();
         this.model.setupAnim(entity, 0.0f, 0.0f, partialTicks, entity.getYRot(), entity.getXRot());
@@ -35,7 +35,7 @@ public class RainbowMissileRenderer extends EntityRenderer<RainbowMissileEntity>
     }
 
     @Override
-    public ResourceLocation getTextureLocation(@NotNull RainbowMissileEntity entity) {
+    public ResourceLocation getTextureLocation(@NotNull LaserEntity entity) {
         return TEXTURE;
     }
 }

@@ -1,4 +1,4 @@
-package terramine.common.entity;
+package terramine.common.entity.mobs;
 
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;

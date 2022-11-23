@@ -1,4 +1,4 @@
-package terramine.common.entity;
+package terramine.common.entity.projectiles;
 
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.util.RandomSource;

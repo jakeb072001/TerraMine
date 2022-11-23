@@ -11,7 +11,7 @@ import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.NotNull;
 import terramine.TerraMine;
 import terramine.client.render.entity.model.monsters.DevourerModel;
-import terramine.common.entity.devourer.DevourerTailEntity;
+import terramine.common.entity.mobs.devourer.DevourerTailEntity;
 import terramine.common.init.ModModelLayers;
 
 @Environment(value=EnvType.CLIENT)

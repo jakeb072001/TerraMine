@@ -9,7 +9,7 @@ import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.util.Mth;
 import org.jetbrains.annotations.NotNull;
-import terramine.common.entity.CrimeraEntity;
+import terramine.common.entity.mobs.CrimeraEntity;
 
 public class CrimeraModel<T extends CrimeraEntity> extends HierarchicalModel<T> {
 

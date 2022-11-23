@@ -27,9 +27,15 @@ public class MagicTerrariaItem extends TerrariaItem {
     public boolean canUse(Player player) {
         if (!player.getCooldowns().isOnCooldown(this)) {
             ModComponents.MANA_HANDLER.get(player).isInUse();
-            ModComponents.MANA_HANDLER.get(player).addCurrentMana(-manaCost);
+            if (!isFree(player)) {
+                ModComponents.MANA_HANDLER.get(player).addCurrentMana(-manaCost);
+            }
             return true;
         }
+        return false;
+    }
+
+    public boolean isFree(Player player) {
         return false;
     }
 

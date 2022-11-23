@@ -9,7 +9,7 @@ import net.minecraft.client.model.geom.builders.CubeDeformation;
 import net.minecraft.client.model.geom.builders.CubeListBuilder;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.model.geom.builders.MeshDefinition;
-import terramine.common.entity.MimicEntity;
+import terramine.common.entity.mobs.MimicEntity;
 
 public class MimicModel extends EntityModel<MimicEntity> {
 

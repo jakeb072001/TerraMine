@@ -10,8 +10,7 @@ import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.model.geom.builders.MeshDefinition;
 import net.minecraft.client.renderer.RenderType;
 import org.jetbrains.annotations.NotNull;
-import terramine.common.entity.DemonEyeEntity;
-import terramine.common.entity.MimicEntity;
+import terramine.common.entity.mobs.DemonEyeEntity;
 
 public class DemonEyeModel<T extends DemonEyeEntity> extends HierarchicalModel<T> {
 

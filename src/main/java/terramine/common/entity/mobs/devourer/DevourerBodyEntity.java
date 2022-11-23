@@ -1,4 +1,4 @@
-package terramine.common.entity.devourer;
+package terramine.common.entity.mobs.devourer;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvent;

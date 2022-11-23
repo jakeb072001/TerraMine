@@ -19,6 +19,7 @@ import terramine.client.render.entity.renderer.monsters.DemonEyeRenderer;
 import terramine.client.render.entity.renderer.monsters.EaterOfSoulsRenderer;
 import terramine.client.render.entity.renderer.monsters.MimicRenderer;
 import terramine.client.render.entity.renderer.projectiles.magic.FlamelashMissileRenderer;
+import terramine.client.render.entity.renderer.projectiles.magic.LaserRenderer;
 import terramine.client.render.entity.renderer.projectiles.magic.MagicMissileRenderer;
 import terramine.client.render.entity.renderer.projectiles.magic.RainbowMissileRenderer;
 import terramine.client.render.entity.renderer.projectiles.throwables.BombRenderer;
@@ -66,6 +67,7 @@ public class ModAllEntityRenderers {
         EntityRendererRegistry.register(ModEntities.MAGIC_MISSILE, MagicMissileRenderer::new);
         EntityRendererRegistry.register(ModEntities.FLAMELASH_MISSILE, FlamelashMissileRenderer::new);
         EntityRendererRegistry.register(ModEntities.RAINBOW_MISSILE, RainbowMissileRenderer::new);
+        EntityRendererRegistry.register(ModEntities.LASER, LaserRenderer::new);
         EntityRendererRegistry.register(ModEntities.DYNAMITE, DynamiteRenderer::new);
         EntityRendererRegistry.register(ModEntities.GRENADE, GrenadeRenderer::new);
         EntityRendererRegistry.register(ModEntities.BOMB, BombRenderer::new);

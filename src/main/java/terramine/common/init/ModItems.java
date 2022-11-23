@@ -183,6 +183,9 @@ public class ModItems {
 	public static final Item PHASEBLADE_GREEN = register("phaseblade_green", new CustomSoundSwordItem(TerrariaToolTiers.METEOR, 3, -2.4f, ModSoundEvents.PHASEBLADE_SWING, new FabricItemSettings().group(TerraMine.ITEM_GROUP_EQUIPMENT)));
 	public static final Item VOLCANO_SWORD = register("volcano_sword", new VolcanoSwordItem(TerrariaToolTiers.MOLTEN, 4, -2.4f, new FabricItemSettings().group(TerraMine.ITEM_GROUP_EQUIPMENT)));
 
+	// Ranged
+	public static final Item SPACE_GUN = register("space_gun", new SpaceGunItem());
+
 	// Throwables
 	// Grenades
 	public static final Item GRENADE = register("grenade", new GrenadeItem(new FabricItemSettings().group(TerraMine.ITEM_GROUP_THROWABLES), false, false));

@@ -19,6 +19,7 @@ public class ModSoundEvents {
 	public static final SoundEvent MAGIC_MISSILE_SHOOT = register("item.magicmissile.use");
 	public static final SoundEvent FLAMELASH_SHOOT = register("item.flamelash.use");
 	public static final SoundEvent RAINBOW_ROD_SHOOT = register("item.rainbowrod.use");
+	public static final SoundEvent SPACE_GUN_SHOOT = register("item.spacegun.use");
 
 	// Accessories
 	public static final SoundEvent FART = register("item.whoopee_cushion.fart");

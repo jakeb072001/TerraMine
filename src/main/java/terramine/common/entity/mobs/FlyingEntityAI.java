@@ -1,4 +1,4 @@
-package terramine.common.entity;
+package terramine.common.entity.mobs;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvent;

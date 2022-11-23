@@ -9,8 +9,8 @@ import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.world.entity.monster.Monster;
 import org.jetbrains.annotations.NotNull;
-import terramine.common.entity.devourer.DevourerEntity;
-import terramine.common.entity.devourer.DevourerTailEntity;
+import terramine.common.entity.mobs.devourer.DevourerEntity;
+import terramine.common.entity.mobs.devourer.DevourerTailEntity;
 
 public class DevourerModel<T extends Monster> extends HierarchicalModel<T> {
     protected final ModelPart root;

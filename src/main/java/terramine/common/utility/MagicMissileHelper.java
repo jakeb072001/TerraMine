@@ -4,10 +4,6 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.ai.attributes.AttributeInstance;
-import net.minecraft.world.entity.ai.attributes.AttributeModifier;
-import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.item.Item;
@@ -19,12 +15,10 @@ import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
-import terramine.TerraMine;
-import terramine.common.init.ModAttributes;
 import terramine.common.init.ModDamageSource;
-import terramine.common.init.ModItems;
 import terramine.common.init.ModSoundEvents;
-import terramine.common.trinkets.TrinketsHelper;
+
+import static terramine.common.init.ModAttributes.damageMultiplier;
 
 public class MagicMissileHelper extends AbstractArrow {
 
@@ -68,16 +62,6 @@ public class MagicMissileHelper extends AbstractArrow {
         return SoundSource.PLAYERS;
     }
 
-    private float damageMultiplier() {
-        if (this.getOwner() instanceof Player player) {
-            if (player.getAttributes().hasAttribute(ModAttributes.MAGIC_ATTACK_DAMAGE)) {
-                return (float) player.getAttribute(ModAttributes.MAGIC_ATTACK_DAMAGE).getValue();
-            }
-        }
-
-        return 1f;
-    }
-
     @Override
     protected void onHit(@NotNull HitResult hitResult) {
         super.onHit(hitResult);
@@ -86,7 +70,7 @@ public class MagicMissileHelper extends AbstractArrow {
     @Override
     protected void onHitEntity(@NotNull EntityHitResult entityHitResult) {
         if (entityHitResult.getEntity() != this.getOwner()) {
-            entityHitResult.getEntity().hurt(ModDamageSource.indirectMagicProjectile(entityHitResult.getEntity(), this.getOwner(), wandItem), damage * damageMultiplier());
+            entityHitResult.getEntity().hurt(ModDamageSource.indirectMagicProjectile(entityHitResult.getEntity(), this.getOwner(), wandItem), damage * damageMultiplier(this.getOwner()));
             if (canIgnite) {
                 entityHitResult.getEntity().setSecondsOnFire(rand.nextInt(4) + 4);
             }
@@ -108,7 +92,7 @@ public class MagicMissileHelper extends AbstractArrow {
     {
         if(!this.level.isClientSide)
         {
-            new ExplosionConfigurable(this.level, this.getOwner() != null ? this.getOwner() : this, ModDamageSource.indirectMagicProjectile(this.getOwner(), wandItem), this.position().x(), this.position().y(), this.position().z(), 1F, (damage * damageMultiplier()) / 5, Explosion.BlockInteraction.NONE);
+            new ExplosionConfigurable(this.level, this.getOwner() != null ? this.getOwner() : this, ModDamageSource.indirectMagicProjectile(this.getOwner(), wandItem), this.position().x(), this.position().y(), this.position().z(), 1F, (damage * damageMultiplier(this.getOwner())) / 5, Explosion.BlockInteraction.NONE);
             level.playSound(null, blockPosition(), ModSoundEvents.BOMB, SoundSource.PLAYERS, 0.4f, 1);
             this.kill();
         }

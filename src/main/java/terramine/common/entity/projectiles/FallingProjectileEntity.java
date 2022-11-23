@@ -1,4 +1,4 @@
-package terramine.common.entity;
+package terramine.common.entity.projectiles;
 
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientboundAddEntityPacket;

@@ -7,6 +7,7 @@ import net.minecraft.client.model.geom.builders.MeshDefinition;
 import terramine.client.render.entity.model.misc.FallingStarModel;
 import terramine.client.render.entity.model.misc.MeteoriteModel;
 import terramine.client.render.entity.model.monsters.*;
+import terramine.client.render.entity.model.projectiles.magic.LaserModel;
 import terramine.client.render.entity.model.projectiles.magic.MagicMissileModel;
 import terramine.client.render.entity.model.projectiles.throwables.BombModel;
 import terramine.client.render.entity.model.projectiles.throwables.DynamiteModel;
@@ -28,6 +29,7 @@ public class ModLayerDefinitions {
         register(ModModelLayers.CRIMERA, CrimeraModel::createLayer);
 
         register(ModModelLayers.MAGIC_MISSILE, MagicMissileModel::createLayer);
+        register(ModModelLayers.LASER, LaserModel::createLayer);
 
         register(ModModelLayers.DYNAMITE, DynamiteModel::createLayer);
         register(ModModelLayers.GRENADE, GrenadeModel::createLayer);

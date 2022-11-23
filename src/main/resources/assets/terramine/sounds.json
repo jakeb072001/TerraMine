@@ -54,6 +54,11 @@
       "terramine:mana/missile/rainbowshoot"
     ]
   },
+  "item.spacegun.use": {
+    "sounds": [
+      "terramine:mana/laser"
+    ]
+  },
   "item.whoopee_cushion.fart": {
     "sounds": [
       "terramine:fart1",

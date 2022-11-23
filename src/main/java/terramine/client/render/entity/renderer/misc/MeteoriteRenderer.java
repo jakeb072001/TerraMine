@@ -11,7 +11,7 @@ import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.NotNull;
 import terramine.TerraMine;
 import terramine.client.render.entity.model.misc.MeteoriteModel;
-import terramine.common.entity.FallingMeteoriteEntity;
+import terramine.common.entity.projectiles.FallingMeteoriteEntity;
 import terramine.common.init.ModModelLayers;
 
 public class MeteoriteRenderer extends EntityRenderer<FallingMeteoriteEntity> { // todo: make Meteorite model and texture

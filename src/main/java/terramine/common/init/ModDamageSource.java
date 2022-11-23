@@ -19,6 +19,14 @@ public class ModDamageSource extends DamageSource {
         return indirectMagicProjectile(entity, null, item);
     }
 
+    public static DamageSource indirectLaserProjectile(@NotNull Entity entity, @Nullable Entity entity2, Item item) {
+        return (new DamageSourceItem("indirect_laser_projectile", entity, entity2, item));
+    }
+
+    public static DamageSource indirectLaserProjectile(@NotNull Entity entity, Item item) {
+        return indirectLaserProjectile(entity, null, item);
+    }
+
     protected ModDamageSource(String string) {
         super(string);
     }

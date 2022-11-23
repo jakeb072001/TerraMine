@@ -65,6 +65,7 @@
   "entity.terramine.magic_missile": "Magic Missile",
   "entity.terramine.flamelash_missile": "Flamelash Missile",
   "entity.terramine.rainbow_missile": "Rainbow Missile",
+  "entity.terramine.laser": "Laser",
   "entity.terramine.dynamite": "Dynamite",
   "entity.terramine.grenade": "Grenade",
   "entity.terramine.bomb": "Bomb",
@@ -128,6 +129,7 @@
   "item.terramine.magic_missile": "Magic Missile",
   "item.terramine.flamelash": "Flamelash",
   "item.terramine.rainbow_rod": "Rainbow Rod",
+  "item.terramine.space_gun": "Space Gun",
   "item.terramine.fire_gauntlet": "Fire Gauntlet",
   "item.terramine.feral_claws": "Feral Claws",
   "item.terramine.titan_glove": "Titan Glove",
@@ -301,6 +303,7 @@
   "item.terramine.magic_missile.tooltip": "Casts a controllable missile",
   "item.terramine.flamelash.tooltip": "Summons a controllable ball of fire",
   "item.terramine.rainbow_rod.tooltip": "Casts a controllable rainbow",
+  "item.terramine.space_gun.tooltip": "A gun, from SPACE!",
   "item.terramine.fire_gauntlet.tooltip": "Increases melee knockback and melee attacks inflict fire damage\n12%% increased melee damage and speed\nEnables auto swing for melee weapons",
   "item.terramine.feral_claws.tooltip": "12%% increased melee speed\nEnables auto swing for melee weapons",
   "item.terramine.titan_glove.tooltip": "Increases melee knockback\nIncreases the size of melee weapons",
@@ -624,5 +627,7 @@
   "death.attack.falling_star": "%1$s got disintegrated by a falling star",
   "death.attack.meteorite": "%1$s was crushed by a meteorite",
   "death.attack.indirect_magic_projectile": "%1$s was blasted with magic by %2$s",
-  "death.attack.indirect_magic_projectile.item": "%1$s was blasted with magic by %2$s using %3$s"
+  "death.attack.indirect_magic_projectile.item": "%1$s was blasted with magic by %2$s using %3$s",
+  "death.attack.indirect_laser_projectile": "%1$s got a laser to the face by %2$s",
+  "death.attack.indirect_laser_projectile.item": "%1$s got a laser to the face by %2$s using %3$s"
 }
