@@ -3,29 +3,20 @@ package terramine.common.item.accessories.hands;
 import com.google.common.collect.Multimap;
 import com.jamieswhiteshirt.reachentityattributes.ReachEntityAttributes;
 import dev.emi.trinkets.api.SlotReference;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
-import net.minecraft.client.Minecraft;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.phys.BlockHitResult;
-import net.minecraft.world.phys.EntityHitResult;
-import net.minecraft.world.phys.HitResult;
 import terramine.TerraMine;
 import terramine.common.item.accessories.TrinketTerrariaItem;
-import terramine.common.utility.InputHandler;
 
 import java.util.UUID;
 
-public class MechanicalGloveItem extends TrinketTerrariaItem {
+import static terramine.common.utility.Utilities.autoSwing;
 
-	int timer = 0;
+public class MechanicalGloveItem extends TrinketTerrariaItem {
 
 	@Override
 	protected Multimap<Attribute, AttributeModifier> applyModifiers(ItemStack stack, SlotReference slot, LivingEntity entity, UUID uuid) {
@@ -46,24 +37,9 @@ public class MechanicalGloveItem extends TrinketTerrariaItem {
 		return result;
 	}
 
-	@Environment(EnvType.CLIENT)
 	@Override
 	public void curioTick(LivingEntity livingEntity, ItemStack stack) {
-		Minecraft mc = Minecraft.getInstance();
-		if (livingEntity instanceof Player player && InputHandler.isHoldingAttack(player)) {
-			if (player.getAttackStrengthScale(0) >= 1) {
-				if (mc.hitResult != null && mc.hitResult.getType() == HitResult.Type.ENTITY && !(mc.hitResult instanceof BlockHitResult)) {
-					Entity entity = ((EntityHitResult) mc.hitResult).getEntity();
-					if (entity.isAlive() && entity.isAttackable()) {
-						timer += 1;
-						if (timer >= 2 && mc.gameMode != null) {
-							mc.gameMode.attack(player, entity);
-							timer = 0;
-						}
-					}
-				}
-			}
-		}
+		autoSwing();
 	}
 
 	@Override

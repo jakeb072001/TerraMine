@@ -179,8 +179,8 @@ public class ModItems {
 	// Weapons
 	public static final Item DEMONITE_SWORD = register("demonite_sword", new SwordItem(TerrariaToolTiers.DEMONITE, 3, -2.4f, new FabricItemSettings().group(TerraMine.ITEM_GROUP_EQUIPMENT)));
 	public static final Item CRIMTANE_SWORD = register("crimtane_sword", new SwordItem(TerrariaToolTiers.CRIMTANE, 3, -2.4f, new FabricItemSettings().group(TerraMine.ITEM_GROUP_EQUIPMENT)));
-	public static final Item PHASEBLADE_WHITE = register("phaseblade_white", new CustomSoundSwordItem(TerrariaToolTiers.METEOR, 3, -0.4f, ModSoundEvents.PHASEBLADE_SWING, new FabricItemSettings().group(TerraMine.ITEM_GROUP_EQUIPMENT)));
-	public static final Item PHASEBLADE_GREEN = register("phaseblade_green", new CustomSoundSwordItem(TerrariaToolTiers.METEOR, 3, -0.4f, ModSoundEvents.PHASEBLADE_SWING, new FabricItemSettings().group(TerraMine.ITEM_GROUP_EQUIPMENT)));
+	public static final Item PHASEBLADE_WHITE = register("phaseblade_white", new CustomSoundSwordItem(TerrariaToolTiers.METEOR, 3, -2.4f, ModSoundEvents.PHASEBLADE_SWING, new FabricItemSettings().group(TerraMine.ITEM_GROUP_EQUIPMENT)));
+	public static final Item PHASEBLADE_GREEN = register("phaseblade_green", new CustomSoundSwordItem(TerrariaToolTiers.METEOR, 3, -2.4f, ModSoundEvents.PHASEBLADE_SWING, new FabricItemSettings().group(TerraMine.ITEM_GROUP_EQUIPMENT)));
 	public static final Item VOLCANO_SWORD = register("volcano_sword", new VolcanoSwordItem(TerrariaToolTiers.MOLTEN, 4, -2.4f, new FabricItemSettings().group(TerraMine.ITEM_GROUP_EQUIPMENT)));
 
 	// Throwables
