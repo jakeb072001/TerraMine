@@ -67,6 +67,11 @@
       "terramine:mana/crystaluse"
     ]
   },
+  "item.phaseblade.swing": {
+    "sounds": [
+      "terramine:items/phasebladeswing"
+    ]
+  },
   "mana.full": {
     "sounds": [
       "terramine:mana/full"

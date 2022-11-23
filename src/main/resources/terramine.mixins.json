@@ -46,7 +46,9 @@
     "world.MinecraftServerMixin",
     "world.entity.HopperBlockEntityMixin",
     "world.entity.ItemEntityMixin",
+    "world.entity.ItemMixin",
     "world.entity.LivingEntityMixin",
+    "world.entity.MobMixin",
     "world.entity.PlayerMixin"
   ],
   "client": [

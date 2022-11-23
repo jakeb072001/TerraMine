@@ -45,8 +45,8 @@ public class FeralClawsItem extends TrinketTerrariaItem {
 				if (mc.hitResult != null && mc.hitResult.getType() == HitResult.Type.ENTITY && !(mc.hitResult instanceof BlockHitResult)) {
 					Entity entity = ((EntityHitResult) mc.hitResult).getEntity();
 					if (entity.isAlive() && entity.isAttackable()) {
-						timer += 1;
-						if (timer >= 2 && mc.gameMode != null) {
+						timer++;
+						if (timer >= 50 && mc.gameMode != null) {
 							mc.gameMode.attack(player, entity);
 							timer = 0;
 						}

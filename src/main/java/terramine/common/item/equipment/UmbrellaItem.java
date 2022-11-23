@@ -1,4 +1,4 @@
-package terramine.common.item;
+package terramine.common.item.equipment;
 
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
@@ -13,6 +13,7 @@ import net.minecraft.world.level.block.DispenserBlock;
 import org.jetbrains.annotations.NotNull;
 import terramine.TerraMine;
 import terramine.common.init.ModItems;
+import terramine.common.item.TerrariaItem;
 
 public class UmbrellaItem extends TerrariaItem {
 

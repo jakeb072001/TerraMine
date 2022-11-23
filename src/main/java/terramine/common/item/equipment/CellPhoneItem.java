@@ -1,4 +1,4 @@
-package terramine.common.item;
+package terramine.common.item.equipment;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.ChatType;
@@ -12,24 +12,19 @@ import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
-import terramine.TerraMine;
 import terramine.common.init.ModSoundEvents;
+import terramine.common.item.accessories.TrinketTerrariaItem;
 
 import java.util.Optional;
 
-public class MagicMirrorItem extends TerrariaItem {
-
-	public MagicMirrorItem() {
-		super(new Properties().stacksTo(1).tab(TerraMine.ITEM_GROUP_EQUIPMENT).rarity(Rarity.RARE).fireResistant(), false);
-	}
+public class CellPhoneItem extends TrinketTerrariaItem {
 
 	@Override
-	public ItemStack finishUsingItem(@NotNull ItemStack stack, Level level, @NotNull LivingEntity entity) {
+	public ItemStack finishUsingItem(ItemStack stack, Level level, LivingEntity entity) {
 		Player player = (Player)entity;
 		if (!level.isClientSide) {
 			ServerPlayer serverPlayer = (ServerPlayer)player;
@@ -40,9 +35,10 @@ public class MagicMirrorItem extends TerrariaItem {
 					Optional<Vec3> optionalSpawnVec = Player.findRespawnPositionAndUseSpawnBlock(serverLevel, spawnpoint, serverPlayer.getRespawnAngle(), false, false);
 
 					//Player Spawn
+					BlockPos finalSpawnpoint = spawnpoint;
 					optionalSpawnVec.ifPresentOrElse(spawnVec -> {
 						serverPlayer.teleportTo(serverLevel, spawnVec.x(), spawnVec.y(), spawnVec.z(), serverPlayer.getRespawnAngle(), 0.5F);
-						serverLevel.playSound(null, spawnpoint, ModSoundEvents.MAGIC_MIRROR_USE, SoundSource.PLAYERS, 0.4f, 1f);
+						serverLevel.playSound(null, finalSpawnpoint, ModSoundEvents.MAGIC_MIRROR_USE, SoundSource.PLAYERS, 0.4f, 1f);
 					}, () -> {
 						worldSpawn(serverPlayer, serverLevel);
 					});
@@ -54,13 +50,15 @@ public class MagicMirrorItem extends TerrariaItem {
 				level.playSound(null, player.blockPosition(), net.minecraft.sounds.SoundEvents.SHULKER_BULLET_HURT, SoundSource.BLOCKS, 1f, 1f);
 			}
 		}
-		player.getCooldowns().addCooldown(this, 20);
-		player.awardStat(Stats.ITEM_USED.get(this));
+		if (player != null) {
+			player.getCooldowns().addCooldown(this, 20);
+			player.awardStat(Stats.ITEM_USED.get(this));
+		}
 		return super.finishUsingItem(stack, level, entity);
 	}
 
 	@Override
-	public UseAnim getUseAnimation(@NotNull ItemStack stack) {
+	public UseAnim getUseAnimation(ItemStack stack) {
 		return UseAnim.BOW;
 	}
 
@@ -72,7 +70,7 @@ public class MagicMirrorItem extends TerrariaItem {
 	}
 
 	@Override
-	public int getUseDuration(@NotNull ItemStack stack) {
+	public int getUseDuration(ItemStack stack) {
 		return 28;
 	}
 

@@ -6,9 +6,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [1.6.1-1.19] - 2022-11-20
 ### Added
-- Meteorites // just needs world spawning
-- Hellstone // still todo
-- New Armors and Weapons // still todo
+- Meteorites
+- Hellstone
+- New Armors and Weapons
 
 ### Changed
 - Throwable explosives now render in 2D in Inventory
@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 - Elytra and Wings together allowing the player to fly at incredible speed (still pretty powerful together but more balanced)
+- Various bugs with flying (such as arrows firing straight down and the player being rocketed to the ground when hit in the air)
 
 ## [1.6.0-1.19] - 2022-10-23
 ### Added

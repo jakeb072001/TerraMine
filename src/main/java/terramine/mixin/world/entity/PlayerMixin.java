@@ -18,6 +18,7 @@ import terramine.TerraMine;
 import terramine.common.entity.FallingStarEntity;
 import terramine.common.init.ModComponents;
 import terramine.common.init.ModEntities;
+import terramine.extensions.ItemExtensions;
 import terramine.extensions.PlayerStorages;
 
 @Mixin(Player.class)
@@ -48,6 +49,14 @@ public abstract class PlayerMixin extends LivingEntity implements PlayerStorages
 					}
 				}
 			}
+		}
+	}
+
+	@Inject(at = @At("HEAD"), method = "blockUsingShield")
+	public void blockUsingShield(LivingEntity attacker, CallbackInfo info) {
+		super.blockUsingShield(attacker);
+		if (((ItemExtensions) attacker.getMainHandItem().getItem()).canDisableShield(attacker.getMainHandItem(), this.getUseItem(), this, attacker)) {
+			(((Player) (Object)this)).disableShield(true);
 		}
 	}
 

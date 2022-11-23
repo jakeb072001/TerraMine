@@ -7,10 +7,7 @@ import net.minecraft.world.item.*;
 import net.minecraft.world.level.block.ComposterBlock;
 import terramine.TerraMine;
 import terramine.common.item.*;
-import terramine.common.item.armor.CrimsonArmor;
-import terramine.common.item.armor.MeteorArmor;
-import terramine.common.item.armor.MoltenArmor;
-import terramine.common.item.armor.ShadowArmor;
+import terramine.common.item.armor.*;
 import terramine.common.item.accessories.ShieldTrinketItem;
 import terramine.common.item.accessories.TrinketTerrariaItem;
 import terramine.common.item.accessories.WhoopeeCushionItem;
@@ -19,6 +16,9 @@ import terramine.common.item.accessories.belt.*;
 import terramine.common.item.accessories.feet.*;
 import terramine.common.item.accessories.hands.*;
 import terramine.common.item.accessories.necklace.*;
+import terramine.common.item.equipment.*;
+import terramine.common.item.equipment.swords.CustomSoundSwordItem;
+import terramine.common.item.equipment.swords.VolcanoSwordItem;
 import terramine.common.item.magic.*;
 import terramine.common.item.throwables.BombItem;
 import terramine.common.item.throwables.DynamiteItem;
@@ -172,10 +172,16 @@ public class ModItems {
 	public static final Item CRIMTANE_AXE = register("crimtane_axe", new AxeItem(TerrariaToolTiers.CRIMTANE, 6.5f, -3.1f, new FabricItemSettings().group(TerraMine.ITEM_GROUP_EQUIPMENT)));
 	public static final Item CRIMTANE_SHOVEL = register("crimtane_shovel", new ShovelItem(TerrariaToolTiers.CRIMTANE, 1.5f, -3.0f, new FabricItemSettings().group(TerraMine.ITEM_GROUP_EQUIPMENT)));
 	public static final Item CRIMTANE_HOE = register("crimtane_hoe", new HoeItem(TerrariaToolTiers.CRIMTANE, -2, -1.0f, new FabricItemSettings().group(TerraMine.ITEM_GROUP_EQUIPMENT)));
+	public static final Item METEOR_SHAXE = register("meteor_shaxe", new TerrariaShaxeItem(TerrariaToolTiers.METEOR, 7, -3.1f, new FabricItemSettings().group(TerraMine.ITEM_GROUP_EQUIPMENT)));
+	public static final Item MOLTEN_PICKAXE = register("molten_pickaxe", new MoltenPickaxeItem(TerrariaToolTiers.MOLTEN, 1, -2.8f, new FabricItemSettings().group(TerraMine.ITEM_GROUP_EQUIPMENT)));
+	public static final Item MOLTEN_SHAXE = register("molten_shaxe", new TerrariaShaxeItem(TerrariaToolTiers.MOLTEN, 7.5f, -3.1f, true, new FabricItemSettings().group(TerraMine.ITEM_GROUP_EQUIPMENT)));
 
 	// Weapons
 	public static final Item DEMONITE_SWORD = register("demonite_sword", new SwordItem(TerrariaToolTiers.DEMONITE, 3, -2.4f, new FabricItemSettings().group(TerraMine.ITEM_GROUP_EQUIPMENT)));
 	public static final Item CRIMTANE_SWORD = register("crimtane_sword", new SwordItem(TerrariaToolTiers.CRIMTANE, 3, -2.4f, new FabricItemSettings().group(TerraMine.ITEM_GROUP_EQUIPMENT)));
+	public static final Item PHASEBLADE_WHITE = register("phaseblade_white", new CustomSoundSwordItem(TerrariaToolTiers.METEOR, 3, -0.4f, ModSoundEvents.PHASEBLADE_SWING, new FabricItemSettings().group(TerraMine.ITEM_GROUP_EQUIPMENT)));
+	public static final Item PHASEBLADE_GREEN = register("phaseblade_green", new CustomSoundSwordItem(TerrariaToolTiers.METEOR, 3, -0.4f, ModSoundEvents.PHASEBLADE_SWING, new FabricItemSettings().group(TerraMine.ITEM_GROUP_EQUIPMENT)));
+	public static final Item VOLCANO_SWORD = register("volcano_sword", new VolcanoSwordItem(TerrariaToolTiers.MOLTEN, 4, -2.4f, new FabricItemSettings().group(TerraMine.ITEM_GROUP_EQUIPMENT)));
 
 	// Throwables
 	// Grenades

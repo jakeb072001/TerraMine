@@ -21,8 +21,8 @@ public class GlowingGloveCurioRenderer extends GloveCurioRenderer {
 
     public GlowingGloveCurioRenderer(String name, ArmsModel defaultModel, ArmsModel slimModel) {
         super(name, defaultModel, slimModel);
-        defaultGlowTexture = TerraMine.id(String.format("textures/entity/curio/glove/%s/%s_default_glow.png", name, name));
-        slimGlowTexture = TerraMine.id(String.format("textures/entity/curio/glove/%s/%s_slim_glow.png", name, name));
+        defaultGlowTexture = TerraMine.id(String.format("textures/entity/trinket/glove/%s/%s_default_glow.png", name, name));
+        slimGlowTexture = TerraMine.id(String.format("textures/entity/trinket/glove/%s/%s_slim_glow.png", name, name));
     }
 
     private ResourceLocation getGlowTexture(boolean hasSlimArms) {

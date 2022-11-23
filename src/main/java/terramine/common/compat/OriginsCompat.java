@@ -5,7 +5,7 @@ import io.github.apace100.origins.Origins;
 import net.fabricmc.fabric.api.event.registry.RegistryEntryAddedCallback;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.LivingEntity;
-import terramine.common.item.UmbrellaItem;
+import terramine.common.item.equipment.UmbrellaItem;
 import terramine.mixin.compat.origins.ConditionFactoryAccessor;
 
 public class OriginsCompat implements CompatHandler {

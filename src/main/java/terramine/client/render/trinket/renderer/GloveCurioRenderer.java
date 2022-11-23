@@ -33,8 +33,8 @@ public class GloveCurioRenderer implements TrinketRenderer {
     }
 
     public GloveCurioRenderer(String defaultTexturePath, String slimTexturePath, ArmsModel defaultModel, ArmsModel slimModel) {
-        this.defaultTexture = TerraMine.id(String.format("textures/entity/curio/%s.png", defaultTexturePath));
-        this.slimTexture = TerraMine.id(String.format("textures/entity/curio/%s.png", slimTexturePath));
+        this.defaultTexture = TerraMine.id(String.format("textures/entity/trinket/%s.png", defaultTexturePath));
+        this.slimTexture = TerraMine.id(String.format("textures/entity/trinket/%s.png", slimTexturePath));
         this.defaultModel = defaultModel;
         this.slimModel = slimModel;
     }

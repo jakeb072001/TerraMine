@@ -3,7 +3,6 @@ package terramine.client.render.trinket.renderer;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import dev.emi.trinkets.api.SlotReference;
-import dev.emi.trinkets.api.client.TrinketRenderer;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -16,16 +15,16 @@ import net.minecraft.world.item.ItemStack;
 import terramine.TerraMine;
 import terramine.common.trinkets.TrinketsHelper;
 
-public class CurioRenderer implements TrinketRenderer {
+public class TrinketRenderer implements dev.emi.trinkets.api.client.TrinketRenderer {
 
     private final ResourceLocation texture;
     private final HumanoidModel<LivingEntity> model;
 
-    public CurioRenderer(String texturePath, HumanoidModel<LivingEntity> model) {
-        this(TerraMine.id(String.format("textures/entity/curio/%s.png", texturePath)), model);
+    public TrinketRenderer(String texturePath, HumanoidModel<LivingEntity> model) {
+        this(TerraMine.id(String.format("textures/entity/trinket/%s.png", texturePath)), model);
     }
 
-    public CurioRenderer(ResourceLocation texture, HumanoidModel<LivingEntity> model) {
+    public TrinketRenderer(ResourceLocation texture, HumanoidModel<LivingEntity> model) {
         this.texture = texture;
         this.model = model;
     }
@@ -47,7 +46,7 @@ public class CurioRenderer implements TrinketRenderer {
 
         model.setupAnim(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
         model.prepareMobModel(entity, limbSwing, limbSwingAmount, partialTicks);
-        TrinketRenderer.followBodyRotations(entity, model);
+        dev.emi.trinkets.api.client.TrinketRenderer.followBodyRotations(entity, model);
         render(poseStack, multiBufferSource, light, stack.hasFoil());
     }
 

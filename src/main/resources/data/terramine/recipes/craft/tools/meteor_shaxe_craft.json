@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XX ",
+    "X#X",
+    " # "
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:stick"
+    },
+    "X": {
+      "item": "terramine:meteorite_ingot"
+    }
+  },
+  "result": {
+    "item": "terramine:meteor_shaxe"
+  }
+}

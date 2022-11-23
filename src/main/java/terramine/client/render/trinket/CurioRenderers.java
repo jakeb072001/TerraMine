@@ -12,7 +12,7 @@ import org.jetbrains.annotations.NotNull;
 import terramine.TerraMine;
 import terramine.client.render.trinket.model.*;
 import terramine.client.render.trinket.renderer.BeltCurioRenderer;
-import terramine.client.render.trinket.renderer.CurioRenderer;
+import terramine.client.render.trinket.renderer.TrinketRenderer;
 import terramine.client.render.trinket.renderer.GloveCurioRenderer;
 import terramine.client.render.trinket.renderer.GlowingGloveCurioRenderer;
 import terramine.common.init.ModItems;
@@ -23,11 +23,11 @@ public class CurioRenderers implements SimpleSynchronousResourceReloadListener {
     @Override
     public void onResourceManagerReload(@NotNull ResourceManager resourceManager) {
         // head
-        TrinketRendererRegistry.registerRenderer(ModItems.DIVING_HELMET, new CurioRenderer("diving_helmet", new HeadModel(bakeLayer(ModModelLayers.DIVING_HELMET), RenderType::entityTranslucent)));
+        TrinketRendererRegistry.registerRenderer(ModItems.DIVING_HELMET, new TrinketRenderer("diving_helmet", new HeadModel(bakeLayer(ModModelLayers.DIVING_HELMET), RenderType::entityTranslucent)));
 
         // necklace
-        TrinketRendererRegistry.registerRenderer(ModItems.CROSS_NECKLACE, new CurioRenderer("cross_necklace", new NecklaceModel(bakeLayer(ModModelLayers.CROSS_NECKLACE))));
-        TrinketRendererRegistry.registerRenderer(ModItems.PANIC_NECKLACE, new CurioRenderer("panic_necklace", new NecklaceModel(bakeLayer(ModModelLayers.PANIC_NECKLACE))));
+        TrinketRendererRegistry.registerRenderer(ModItems.CROSS_NECKLACE, new TrinketRenderer("cross_necklace", new NecklaceModel(bakeLayer(ModModelLayers.CROSS_NECKLACE))));
+        TrinketRendererRegistry.registerRenderer(ModItems.PANIC_NECKLACE, new TrinketRenderer("panic_necklace", new NecklaceModel(bakeLayer(ModModelLayers.PANIC_NECKLACE))));
 
         // belt
         TrinketRendererRegistry.registerRenderer(ModItems.CLOUD_IN_A_BOTTLE, new BeltCurioRenderer("cloud_in_a_bottle", BeltModel.createCloudInABottleModel()));
@@ -40,12 +40,12 @@ public class CurioRenderers implements SimpleSynchronousResourceReloadListener {
         TrinketRendererRegistry.registerRenderer(ModItems.FIRE_GAUNTLET, new GlowingGloveCurioRenderer("fire_gauntlet", ArmsModel.createGloveModel(false), ArmsModel.createGloveModel(true)));
 
         // feet
-        TrinketRendererRegistry.registerRenderer(ModItems.LAVA_WADERS, new CurioRenderer("aqua_dashers", new LegsModel(bakeLayer(ModModelLayers.AQUA_DASHERS))));
-        TrinketRendererRegistry.registerRenderer(ModItems.HERMES_BOOTS, new CurioRenderer("running_shoes", new LegsModel(bakeLayer(ModModelLayers.RUNNING_SHOES))));
-        TrinketRendererRegistry.registerRenderer(ModItems.FLIPPERS, new CurioRenderer("flippers", new LegsModel(bakeLayer(ModModelLayers.FLIPPERS))));
+        TrinketRendererRegistry.registerRenderer(ModItems.LAVA_WADERS, new TrinketRenderer("aqua_dashers", new LegsModel(bakeLayer(ModModelLayers.AQUA_DASHERS))));
+        TrinketRendererRegistry.registerRenderer(ModItems.HERMES_BOOTS, new TrinketRenderer("running_shoes", new LegsModel(bakeLayer(ModModelLayers.RUNNING_SHOES))));
+        TrinketRendererRegistry.registerRenderer(ModItems.FLIPPERS, new TrinketRenderer("flippers", new LegsModel(bakeLayer(ModModelLayers.FLIPPERS))));
 
         // curio
-        TrinketRendererRegistry.registerRenderer(ModItems.WHOOPEE_CUSHION, new CurioRenderer("whoopee_cushion", new HeadModel(bakeLayer(ModModelLayers.WHOOPEE_CUSHION))));
+        TrinketRendererRegistry.registerRenderer(ModItems.WHOOPEE_CUSHION, new TrinketRenderer("whoopee_cushion", new HeadModel(bakeLayer(ModModelLayers.WHOOPEE_CUSHION))));
     }
 
     public static ModelPart bakeLayer(ModelLayerLocation layerLocation) {

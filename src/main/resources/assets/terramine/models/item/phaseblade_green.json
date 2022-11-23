@@ -1,0 +1,6 @@
+{
+  "parent": "terramine:item/big_sword_base",
+  "textures": {
+    "layer0": "terramine:item/tools/meteor/phaseblade/green_phaseblade"
+  }
+}

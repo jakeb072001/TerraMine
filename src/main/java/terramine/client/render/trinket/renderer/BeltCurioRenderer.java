@@ -22,7 +22,7 @@ public class BeltCurioRenderer implements TrinketRenderer {
     private final BeltModel model;
 
     public BeltCurioRenderer(String texturePath, BeltModel model) {
-        this(TerraMine.id(String.format("textures/entity/curio/%s.png", texturePath)), model);
+        this(TerraMine.id(String.format("textures/entity/trinket/%s.png", texturePath)), model);
     }
 
     public BeltCurioRenderer(ResourceLocation texture, BeltModel model) {

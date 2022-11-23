@@ -13,13 +13,13 @@ import net.minecraft.world.entity.LivingEntity;
 import terramine.TerraMine;
 import terramine.client.render.RenderTypes;
 
-public class GlowingCurioRenderer extends CurioRenderer {
+public class GlowingCurioRenderer extends TrinketRenderer {
 
     private final ResourceLocation glowTexture;
 
     public GlowingCurioRenderer(String name, HumanoidModel<LivingEntity> model) {
         super(String.format("%s/%s", name, name), model);
-        this.glowTexture = TerraMine.id(String.format("textures/entity/curio/%s/%s_glow.png", name, name));
+        this.glowTexture = TerraMine.id(String.format("textures/entity/trinket/%s/%s_glow.png", name, name));
     }
 
     private ResourceLocation getGlowTexture() {

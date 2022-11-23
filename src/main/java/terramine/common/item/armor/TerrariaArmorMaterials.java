@@ -1,17 +1,12 @@
-package terramine.common.item;
+package terramine.common.item.armor;
 
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.util.LazyLoadedValue;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.ArmorMaterial;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.crafting.Ingredient;
 import terramine.TerraMine;
 import terramine.common.init.ModItems;
-
-import java.util.function.Supplier;
 
 public enum TerrariaArmorMaterials implements ArmorMaterial {
 

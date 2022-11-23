@@ -13,7 +13,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import terramine.common.components.SwimAbilityComponent;
 import terramine.common.init.ModComponents;
-import terramine.common.item.UmbrellaItem;
+import terramine.common.item.equipment.UmbrellaItem;
 
 @Mixin(LivingEntity.class)
 public abstract class LivingEntityMixin extends Entity {
