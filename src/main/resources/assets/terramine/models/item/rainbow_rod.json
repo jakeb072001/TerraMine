@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "terramine:item/weapons/magic/rainbow_rod"
+    "layer0": "terramine:item/weapons/magic/gui/rainbow_rod"
   }
 }

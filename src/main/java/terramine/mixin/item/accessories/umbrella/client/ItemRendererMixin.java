@@ -26,6 +26,8 @@ public abstract class ItemRendererMixin {
 	@Unique
 	private static final ModelResourceLocation UMBRELLA_ICON_MODEL = new ModelResourceLocation(TerraMine.id("umbrella"), "inventory");
 	@Unique
+	private static final ModelResourceLocation SPACE_GUN_ICON_MODEL = new ModelResourceLocation(TerraMine.id("space_gun"), "inventory");
+	@Unique
 	private static final ModelResourceLocation GRENADE_ICON_MODEL = new ModelResourceLocation(TerraMine.id("grenade"), "inventory");
 	@Unique
 	private static final ModelResourceLocation STICKY_GRENADE_ICON_MODEL = new ModelResourceLocation(TerraMine.id("sticky_grenade"), "inventory");
@@ -48,6 +50,9 @@ public abstract class ItemRendererMixin {
 	private BakedModel setUmbrellaHeldModel(BakedModel model, ItemStack stack) {
 		if (stack.getItem() == ModItems.UMBRELLA) {
 			return this.itemModelShaper.getModelManager().getModel(HeldItemModels.UMBRELLA_HELD_MODEL);
+		}
+		if (stack.getItem() == ModItems.SPACE_GUN) {
+			return this.itemModelShaper.getModelManager().getModel(HeldItemModels.SPACE_GUN_HELD_MODEL);
 		}
 		if (stack.getItem() == ModItems.GRENADE) {
 			return this.itemModelShaper.getModelManager().getModel(HeldItemModels.GRENADE_HELD_MODEL);
@@ -89,6 +94,8 @@ public abstract class ItemRendererMixin {
 		if (shouldUseIcon) {
 			if (stack.getItem() == ModItems.UMBRELLA) {
 				return this.itemModelShaper.getModelManager().getModel(UMBRELLA_ICON_MODEL);
+			} else if (stack.getItem() == ModItems.SPACE_GUN) {
+				return this.itemModelShaper.getModelManager().getModel(SPACE_GUN_ICON_MODEL);
 			} else if (stack.getItem() == ModItems.GRENADE) {
 				return this.itemModelShaper.getModelManager().getModel(GRENADE_ICON_MODEL);
 			} else if (stack.getItem() == ModItems.STICKY_GRENADE) {

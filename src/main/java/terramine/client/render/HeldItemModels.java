@@ -6,6 +6,7 @@ import terramine.TerraMine;
 
 public class HeldItemModels {
     public static final ModelResourceLocation UMBRELLA_HELD_MODEL = new ModelResourceLocation(TerraMine.id("umbrella_in_hand"), "inventory");
+    public static final ModelResourceLocation SPACE_GUN_HELD_MODEL = new ModelResourceLocation(TerraMine.id("space_gun_held"), "inventory");
     public static final ModelResourceLocation GRENADE_HELD_MODEL = new ModelResourceLocation(TerraMine.id("grenade_held"), "inventory");
     public static final ModelResourceLocation STICKY_GRENADE_HELD_MODEL = new ModelResourceLocation(TerraMine.id("sticky_grenade_held"), "inventory");
     public static final ModelResourceLocation BOUNCY_GRENADE_HELD_MODEL = new ModelResourceLocation(TerraMine.id("bouncy_grenade_held"), "inventory");
@@ -18,6 +19,7 @@ public class HeldItemModels {
 
     public static void register() {
         ModelLoadingRegistry.INSTANCE.registerModelProvider((manager, out) -> out.accept(UMBRELLA_HELD_MODEL));
+        ModelLoadingRegistry.INSTANCE.registerModelProvider((manager, out) -> out.accept(SPACE_GUN_HELD_MODEL));
         ModelLoadingRegistry.INSTANCE.registerModelProvider((manager, out) -> out.accept(GRENADE_HELD_MODEL));
         ModelLoadingRegistry.INSTANCE.registerModelProvider((manager, out) -> out.accept(STICKY_GRENADE_HELD_MODEL));
         ModelLoadingRegistry.INSTANCE.registerModelProvider((manager, out) -> out.accept(BOUNCY_GRENADE_HELD_MODEL));
