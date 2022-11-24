@@ -6,6 +6,7 @@ import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.Mth;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.projectile.ThrowableProjectile;
 import net.minecraft.world.level.Explosion.BlockInteraction;
@@ -70,8 +71,9 @@ public abstract class ExplosiveThrowableEntity extends ThrowableProjectile {
         super.tick();
         timer ++;
 
-        this.setXRot((float) (getXRot() + Math.abs(getDeltaMovement().x)));
-        this.setYRot((float) (getYRot() + Math.abs(getDeltaMovement().z)));
+        double i = getDeltaMovement().horizontalDistance();
+        this.setYRot((float)(Mth.atan2(getDeltaMovement().x, getDeltaMovement().z) * 57.2957763671875));
+        this.setXRot((float)(Mth.atan2(getDeltaMovement().y, i) * 57.2957763671875));
 
         if (timer >= (fuseTime * 20)) {
             explode();
@@ -100,14 +102,14 @@ public abstract class ExplosiveThrowableEntity extends ThrowableProjectile {
             setDeltaMovement(0, 0, 0);
             setNoGravity(true);
         } else if (isBouncy()) {
-            setDeltaMovement(getDeltaMovement().x, 0.1, getDeltaMovement().z);
+            setDeltaMovement(getDeltaMovement().x, 0.2, getDeltaMovement().z);
             if (isInWall()) {
                 setDeltaMovement(-(getDeltaMovement().x), 0, -(getDeltaMovement().z));
             }
         } else {
-            setDeltaMovement(getDeltaMovement().x / 1.5f, 0, getDeltaMovement().z / 1.5f);
+            setDeltaMovement(getDeltaMovement().x / 1.25f, 0, getDeltaMovement().z / 1.25f);
             if (isInWall()) {
-                setDeltaMovement(-(getDeltaMovement().x / 1.5), 0, -(getDeltaMovement().z / 1.5));
+                setDeltaMovement(-(getDeltaMovement().x / 1.25f), 0, -(getDeltaMovement().z / 1.25f));
             }
         }
     }

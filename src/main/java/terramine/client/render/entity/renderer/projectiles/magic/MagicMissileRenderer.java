@@ -2,6 +2,7 @@ package terramine.client.render.entity.renderer.projectiles.magic;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
+import com.mojang.math.Vector3f;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRenderer;
@@ -29,6 +30,8 @@ public class MagicMissileRenderer extends EntityRenderer<MagicMissileEntity> {
         super.render(entity, entityYaw, partialTicks, poseStack, buffer, packedLight);
         poseStack.pushPose();
         this.model.setupAnim(entity, 0.0f, 0.0f, partialTicks, entity.getYRot(), entity.getXRot());
+        poseStack.mulPose(Vector3f.YP.rotationDegrees(entity.getYRot()));
+        poseStack.mulPose(Vector3f.XN.rotationDegrees(entity.getXRot() - 180));
         VertexConsumer vertexConsumer = buffer.getBuffer(this.model.renderType(this.getTextureLocation(entity)));
         this.model.renderToBuffer(poseStack, vertexConsumer, packedLight, OverlayTexture.NO_OVERLAY, 0.48f, 0.96f, 0.92f, 1.0f);
         poseStack.popPose();

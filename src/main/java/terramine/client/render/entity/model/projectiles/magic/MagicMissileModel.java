@@ -21,9 +21,6 @@ public class MagicMissileModel<T extends Entity> extends EntityModel<T> {
 
     @Override
     public void setupAnim(@NotNull T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float xRot, float yRot) {
-        missile.zRot = 135f;
-        //star.xRot = xRot;
-        missile.yRot = yRot;
     }
 
     @Override

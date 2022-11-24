@@ -22,9 +22,6 @@ public class LaserModel<T extends Entity> extends EntityModel<T> {
 
     @Override
     public void setupAnim(@NotNull T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float xRot, float yRot) {
-        laser.zRot = 135f;
-        //star.xRot = xRot;
-        laser.yRot = yRot;
     }
 
     @Override

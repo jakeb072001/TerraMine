@@ -38,6 +38,7 @@ public class Utilities { // todo: need to fix bug with magic missile where the p
     }
 
 
+    // todo: make work better, seems to not work well right now
     /**
      * Rotates the given entity towards its motion vector at the given speed.
      */
@@ -89,6 +90,7 @@ public class Utilities { // todo: need to fix bug with magic missile where the p
         return  coneAxis.scale(Math.cos(theta)).add(u.scale(Math.cos(phi) * Math.sin(theta))).add(v.scale(Math.sin(phi) * Math.sin(theta)));
     }
 
+    // todo: get working with faster swing speeds (for phaseblade)
     @Environment(EnvType.CLIENT)
     public static void autoSwing() {
         Minecraft mc = Minecraft.getInstance();

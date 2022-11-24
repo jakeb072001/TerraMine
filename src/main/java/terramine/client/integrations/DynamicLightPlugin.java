@@ -15,5 +15,6 @@ public class DynamicLightPlugin implements DynamicLightsInitializer {
         DynamicLightHandlers.registerDynamicLightHandler(ModEntities.MAGIC_MISSILE, missile -> 8);
         DynamicLightHandlers.registerDynamicLightHandler(ModEntities.FLAMELASH_MISSILE, missile -> 10);
         DynamicLightHandlers.registerDynamicLightHandler(ModEntities.RAINBOW_MISSILE, missile -> 12);
+        DynamicLightHandlers.registerDynamicLightHandler(ModEntities.LASER, laser -> 5);
     }
 }

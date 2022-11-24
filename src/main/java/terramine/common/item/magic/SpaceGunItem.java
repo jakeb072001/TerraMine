@@ -10,7 +10,6 @@ import terramine.common.entity.projectiles.LaserEntity;
 import terramine.common.init.ModComponents;
 import terramine.common.init.ModEntities;
 import terramine.common.init.ModSoundEvents;
-import terramine.common.item.MagicTerrariaItem;
 
 public class SpaceGunItem extends MagicTerrariaItem {
 
@@ -27,7 +26,7 @@ public class SpaceGunItem extends MagicTerrariaItem {
                 laser.setOwner(player);
                 laser.setGun(this);
                 laser.setPos(player.position().x(), player.position().y() + 1.5f, player.position().z());
-                laser.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0f, 1f, 4f);
+                laser.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0f, 2f, 4f);
                 world.addFreshEntity(laser);
                 world.playSound(null, player.blockPosition(), ModSoundEvents.SPACE_GUN_SHOOT, SoundSource.PLAYERS, 0.50f, 1f);
             }

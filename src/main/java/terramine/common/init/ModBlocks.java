@@ -46,7 +46,7 @@ public class ModBlocks {
     public static final Block DEEPSLATE_CRIMTANE_ORE = register("deepslate_crimtane_ore", new Block(Properties.copy(Blocks.DEEPSLATE_IRON_ORE)));
     public static final Block RAW_CRIMTANE_BLOCK = register("raw_crimtane_block", new Block(Properties.copy(Blocks.RAW_IRON_BLOCK)));
     public static final Block CRIMTANE_BLOCK = register("crimtane_block", new Block(Properties.copy(Blocks.IRON_BLOCK)));
-    public static final Block HELLSTONE_ORE = register("hellstone_ore", new HellstoneBlock(Properties.copy(Blocks.MAGMA_BLOCK).strength(7f)));
+    public static final Block HELLSTONE_ORE = register("hellstone_ore", new HellstoneBlock(Properties.copy(Blocks.MAGMA_BLOCK).sound(SoundType.NETHER_GOLD_ORE).strength(7f)));
     public static final Block RAW_HELLSTONE_BLOCK = register("raw_hellstone_block", new HotFloorBlock(Properties.copy(Blocks.MAGMA_BLOCK).strength(10f)));
     public static final Block HELLSTONE_BLOCK = register("hellstone_block", new Block(Properties.copy(Blocks.NETHERITE_BLOCK)));
 

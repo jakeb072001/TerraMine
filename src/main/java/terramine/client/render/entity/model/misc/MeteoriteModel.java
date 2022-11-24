@@ -21,9 +21,6 @@ public class MeteoriteModel<T extends Entity> extends EntityModel<T> {
 
     @Override
     public void setupAnim(@NotNull T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float xRot, float yRot) {
-        meteorite.zRot = 135f;
-        //star.xRot = xRot;
-        meteorite.yRot = yRot;
     }
 
     @Override

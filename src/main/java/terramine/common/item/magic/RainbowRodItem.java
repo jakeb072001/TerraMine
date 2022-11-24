@@ -8,7 +8,6 @@ import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
 import terramine.common.init.ModEntities;
 import terramine.common.init.ModSoundEvents;
-import terramine.common.item.MagicTerrariaItem;
 import terramine.common.utility.MagicMissileHelper;
 
 public class RainbowRodItem extends MagicTerrariaItem {

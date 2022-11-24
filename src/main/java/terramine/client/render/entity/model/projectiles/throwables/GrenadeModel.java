@@ -22,15 +22,14 @@ public class GrenadeModel extends HierarchicalModel<GrenadeEntity> {
 
         partDefinition.addOrReplaceChild("grenade", CubeListBuilder.create().texOffs(0, 0).addBox(-2.0F, -2.0F, -2.0F, 4.0F, 5.0F, 4.0F, new CubeDeformation(0.0F))
                 .texOffs(0, 9).mirror().addBox(-1.0F, -4.0F, -1.0F, 2.0F, 2.0F, 2.0F, new CubeDeformation(0.0F)).mirror(false)
-                .texOffs(8, 11).mirror().addBox(-1.5F, -3.5F, -0.5F, 1.0F, 1.0F, 1.0F, new CubeDeformation(0.0F)).mirror(false), PartPose.offset(0.0F, 2.0F, 0.0F));
+                .texOffs(8, 11).mirror().addBox(-1.5F, -3.5F, -0.5F, 1.0F, 1.0F, 1.0F, new CubeDeformation(0.0F)).mirror(false),
+                PartPose.offset(0.0F, -2.0F, 0.0F));
 
         return LayerDefinition.create(meshDefinition, 16, 16);
     }
 
     @Override
     public void setupAnim(@NotNull GrenadeEntity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float zRot, float xRot) {
-        grenade.xRot = xRot;
-        grenade.zRot = zRot;
     }
 
     @Override

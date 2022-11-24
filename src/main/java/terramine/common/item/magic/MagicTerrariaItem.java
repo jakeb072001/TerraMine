@@ -1,4 +1,4 @@
-package terramine.common.item;
+package terramine.common.item.magic;
 
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
@@ -11,6 +11,7 @@ import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
 import terramine.TerraMine;
 import terramine.common.init.ModComponents;
+import terramine.common.item.TerrariaItem;
 
 public class MagicTerrariaItem extends TerrariaItem {
     public int useDuration, manaCost;
