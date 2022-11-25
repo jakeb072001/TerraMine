@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "IDI",
+    "DGD",
+    "IDI"
+  ],
+  "key": {
+    "D": {
+      "item": "minecraft:diamond"
+    },
+	"I": {
+      "item": "minecraft:gold_ingot"
+    },
+	"G": {
+      "item": "minecraft:glass"
+    }
+  },
+  "result": {
+    "item": "terramine:magic_mirror"
+  }
+}

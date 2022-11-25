@@ -26,6 +26,12 @@ public abstract class ItemRendererMixin {
 	@Unique
 	private static final ModelResourceLocation UMBRELLA_ICON_MODEL = new ModelResourceLocation(TerraMine.id("umbrella"), "inventory");
 	@Unique
+	private static final ModelResourceLocation MAGIC_MISSILE_ICON_MODEL = new ModelResourceLocation(TerraMine.id("magic_missile"), "inventory");
+	@Unique
+	private static final ModelResourceLocation FLAMELASH_ICON_MODEL = new ModelResourceLocation(TerraMine.id("flamelash"), "inventory");
+	@Unique
+	private static final ModelResourceLocation RAINBOW_ROD_ICON_MODEL = new ModelResourceLocation(TerraMine.id("rainbow_rod"), "inventory");
+	@Unique
 	private static final ModelResourceLocation SPACE_GUN_ICON_MODEL = new ModelResourceLocation(TerraMine.id("space_gun"), "inventory");
 	@Unique
 	private static final ModelResourceLocation GRENADE_ICON_MODEL = new ModelResourceLocation(TerraMine.id("grenade"), "inventory");
@@ -50,6 +56,15 @@ public abstract class ItemRendererMixin {
 	private BakedModel setUmbrellaHeldModel(BakedModel model, ItemStack stack) {
 		if (stack.getItem() == ModItems.UMBRELLA) {
 			return this.itemModelShaper.getModelManager().getModel(HeldItemModels.UMBRELLA_HELD_MODEL);
+		}
+		if (stack.getItem() == ModItems.MAGIC_MISSILE_ITEM) {
+			return this.itemModelShaper.getModelManager().getModel(HeldItemModels.MAGIC_MISSILE_HELD_MODEL);
+		}
+		if (stack.getItem() == ModItems.FLAMELASH_ITEM) {
+			return this.itemModelShaper.getModelManager().getModel(HeldItemModels.FLAMELASH_HELD_MODEL);
+		}
+		if (stack.getItem() == ModItems.RAINBOW_ROD_ITEM) {
+			return this.itemModelShaper.getModelManager().getModel(HeldItemModels.RAINBOW_ROD_HELD_MODEL);
 		}
 		if (stack.getItem() == ModItems.SPACE_GUN) {
 			return this.itemModelShaper.getModelManager().getModel(HeldItemModels.SPACE_GUN_HELD_MODEL);
@@ -94,6 +109,12 @@ public abstract class ItemRendererMixin {
 		if (shouldUseIcon) {
 			if (stack.getItem() == ModItems.UMBRELLA) {
 				return this.itemModelShaper.getModelManager().getModel(UMBRELLA_ICON_MODEL);
+			} else if (stack.getItem() == ModItems.MAGIC_MISSILE_ITEM) {
+				return this.itemModelShaper.getModelManager().getModel(MAGIC_MISSILE_ICON_MODEL);
+			} else if (stack.getItem() == ModItems.FLAMELASH_ITEM) {
+				return this.itemModelShaper.getModelManager().getModel(FLAMELASH_ICON_MODEL);
+			} else if (stack.getItem() == ModItems.RAINBOW_ROD_ITEM) {
+				return this.itemModelShaper.getModelManager().getModel(RAINBOW_ROD_ICON_MODEL);
 			} else if (stack.getItem() == ModItems.SPACE_GUN) {
 				return this.itemModelShaper.getModelManager().getModel(SPACE_GUN_ICON_MODEL);
 			} else if (stack.getItem() == ModItems.GRENADE) {

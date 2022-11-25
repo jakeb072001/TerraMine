@@ -1,5 +1,6 @@
 package terramine.common.entity.projectiles;
 
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -14,7 +15,7 @@ import terramine.common.init.ModDamageSource;
 import static terramine.common.init.ModAttributes.damageMultiplier;
 
 public class LaserEntity extends FallingProjectileEntity {
-    private int timer = 0;
+    private int timer, hitCount = 0;
     private Item weapon;
 
     public LaserEntity(EntityType<? extends FallingProjectileEntity> entityType, Level level) {
@@ -62,6 +63,10 @@ public class LaserEntity extends FallingProjectileEntity {
         super.onHitEntity(entityHitResult);
         if (this.getOwner() != null && weapon != null) {
             entityHitResult.getEntity().hurt(ModDamageSource.indirectLaserProjectile(this.getOwner(), weapon), 1.5f * damageMultiplier(this.getOwner()));
+            hitCount++;
+            if (hitCount == 3) {
+                this.discard();
+            }
         }
     }
 
@@ -69,5 +74,17 @@ public class LaserEntity extends FallingProjectileEntity {
     protected void onHitBlock(@NotNull BlockHitResult blockHitResult) {
         super.onHitBlock(blockHitResult);
         this.discard();
+    }
+
+    @Override
+    protected void readAdditionalSaveData(@NotNull CompoundTag compoundTag) {
+        timer = compoundTag.getInt("fadeTime");
+        hitCount = compoundTag.getInt("hitCount");
+    }
+
+    @Override
+    protected void addAdditionalSaveData(@NotNull CompoundTag compoundTag) {
+        compoundTag.putInt("fadeTime", timer);
+        compoundTag.putInt("hitCount", hitCount);
     }
 }
