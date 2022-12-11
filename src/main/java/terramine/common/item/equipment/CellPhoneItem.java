@@ -1,7 +1,6 @@
 package terramine.common.item.equipment;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.network.chat.ChatType;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -24,7 +23,7 @@ import java.util.Optional;
 public class CellPhoneItem extends TrinketTerrariaItem {
 
 	@Override
-	public ItemStack finishUsingItem(ItemStack stack, Level level, LivingEntity entity) {
+	public ItemStack finishUsingItem(@NotNull ItemStack stack, Level level, @NotNull LivingEntity entity) {
 		Player player = (Player)entity;
 		if (!level.isClientSide) {
 			ServerPlayer serverPlayer = (ServerPlayer)player;
@@ -35,10 +34,9 @@ public class CellPhoneItem extends TrinketTerrariaItem {
 					Optional<Vec3> optionalSpawnVec = Player.findRespawnPositionAndUseSpawnBlock(serverLevel, spawnpoint, serverPlayer.getRespawnAngle(), false, false);
 
 					//Player Spawn
-					BlockPos finalSpawnpoint = spawnpoint;
 					optionalSpawnVec.ifPresentOrElse(spawnVec -> {
 						serverPlayer.teleportTo(serverLevel, spawnVec.x(), spawnVec.y(), spawnVec.z(), serverPlayer.getRespawnAngle(), 0.5F);
-						serverLevel.playSound(null, finalSpawnpoint, ModSoundEvents.MAGIC_MIRROR_USE, SoundSource.PLAYERS, 0.4f, 1f);
+						serverLevel.playSound(null, spawnpoint, ModSoundEvents.MAGIC_MIRROR_USE, SoundSource.PLAYERS, 0.4f, 1f);
 					}, () -> {
 						worldSpawn(serverPlayer, serverLevel);
 					});
@@ -46,19 +44,17 @@ public class CellPhoneItem extends TrinketTerrariaItem {
 					worldSpawn(serverPlayer, serverLevel);
 				}
 			} else {
-				((ServerPlayer) player).sendSystemMessage(Component.translatable("magic_mirror.fail"), ChatType.SYSTEM);
+				((ServerPlayer) player).sendSystemMessage(Component.translatable("magic_mirror.fail"));
 				level.playSound(null, player.blockPosition(), net.minecraft.sounds.SoundEvents.SHULKER_BULLET_HURT, SoundSource.BLOCKS, 1f, 1f);
 			}
 		}
-		if (player != null) {
-			player.getCooldowns().addCooldown(this, 20);
-			player.awardStat(Stats.ITEM_USED.get(this));
-		}
+		player.getCooldowns().addCooldown(this, 20);
+		player.awardStat(Stats.ITEM_USED.get(this));
 		return super.finishUsingItem(stack, level, entity);
 	}
 
 	@Override
-	public UseAnim getUseAnimation(ItemStack stack) {
+	public UseAnim getUseAnimation(@NotNull ItemStack stack) {
 		return UseAnim.BOW;
 	}
 
@@ -70,7 +66,7 @@ public class CellPhoneItem extends TrinketTerrariaItem {
 	}
 
 	@Override
-	public int getUseDuration(ItemStack stack) {
+	public int getUseDuration(@NotNull ItemStack stack) {
 		return 28;
 	}
 

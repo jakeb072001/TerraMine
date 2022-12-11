@@ -4,15 +4,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [1.6.1-1.19] - 2022-11-20
+## [1.6.1-1.19] - 2022-12-01
 ### Added
-- Meteorites
-- Hellstone
-- New Armors and Weapons
+- Meteorites // just need to make spawn in world then update can release
+- Meteorite armor, tools, and Space Gun
+- Hellstone ore
+- Hellstone armor and tools
 
 ### Changed
 - Throwable explosives now render in 2D in Inventory
-- Magic Missile, Flamelash, and Rainbow Rod now have 3D models when held in hand // still todo
+- Magic Missile, Flamelash, and Rainbow Rod now have 3D models when held in hand
 
 ### Fixed
 - Elytra and Wings together allowing the player to fly at incredible speed (still pretty powerful together but more balanced)

@@ -70,7 +70,7 @@ dependencies {
     modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 
     // Dependencies
-    modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}+${minecraft_version}"
+    modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}+${project.minecraft_version}"
     modImplementation("dev.emi:trinkets:${project.trinkets_version}") {
         transitive = false
     }
