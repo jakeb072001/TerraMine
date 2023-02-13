@@ -30,7 +30,7 @@
     "preLaunch": [
       "terramine.TerraMineMixinExtras"
     ],
-    "terramine-compathandlers": [
+    "terramine:compat_handlers": [
       "terramine.common.compat.HaemaCompat",
       "terramine.common.compat.OriginsCompat"
     ],

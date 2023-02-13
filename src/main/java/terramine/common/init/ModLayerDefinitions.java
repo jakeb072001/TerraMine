@@ -8,7 +8,6 @@ import terramine.client.render.entity.model.misc.FallingStarModel;
 import terramine.client.render.entity.model.misc.MeteoriteModel;
 import terramine.client.render.entity.model.monsters.*;
 import terramine.client.render.entity.model.projectiles.magic.LaserModel;
-import terramine.client.render.entity.model.projectiles.magic.MagicMissileModel;
 import terramine.client.render.entity.model.projectiles.throwables.BombModel;
 import terramine.client.render.entity.model.projectiles.throwables.DynamiteModel;
 import terramine.client.render.entity.model.projectiles.throwables.GrenadeModel;
@@ -17,24 +16,26 @@ import terramine.client.render.trinket.model.*;
 public class ModLayerDefinitions {
 
     public static void registerAll() {
+        // Mobs
         register(ModModelLayers.MIMIC, MimicModel::createLayer);
         register(ModModelLayers.MIMIC_OVERLAY, MimicChestLayerModel::createLayer);
-
-        register(ModModelLayers.FALLING_STAR, FallingStarModel::createLayer);
-        register(ModModelLayers.METEORITE, MeteoriteModel::createLayer);
 
         register(ModModelLayers.DEMON_EYE, DemonEyeModel::createLayer);
         register(ModModelLayers.EATER_OF_SOULS, EaterOfSoulsModel::createLayer);
         register(ModModelLayers.DEVOURER, DevourerModel::createLayer);
         register(ModModelLayers.CRIMERA, CrimeraModel::createLayer);
 
-        register(ModModelLayers.MAGIC_MISSILE, MagicMissileModel::createLayer);
+        // Projectiles
+        register(ModModelLayers.FALLING_STAR, FallingStarModel::createLayer);
+        register(ModModelLayers.METEORITE, MeteoriteModel::createLayer);
+
         register(ModModelLayers.LASER, LaserModel::createLayer);
 
         register(ModModelLayers.DYNAMITE, DynamiteModel::createLayer);
         register(ModModelLayers.GRENADE, GrenadeModel::createLayer);
         register(ModModelLayers.BOMB, BombModel::createLayer);
 
+        // Accessories
         register(ModModelLayers.DIVING_HELMET, layer(HeadModel.createDivingHelmet(), 64, 32));
         register(ModModelLayers.SUPERSTITIOUS_HAT, layer(HeadModel.createSuperstitiousHat(), 64, 32));
         register(ModModelLayers.VILLAGER_HAT, layer(HeadModel.createVillagerHat(), 32, 32));

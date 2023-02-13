@@ -92,8 +92,10 @@ public class MagicMissileHelper extends AbstractArrow {
     {
         if(!this.level.isClientSide)
         {
-            new ExplosionConfigurable(this.level, this.getOwner() != null ? this.getOwner() : this, ModDamageSource.indirectMagicProjectile(this.getOwner(), wandItem), this.position().x(), this.position().y(), this.position().z(), 1F, (damage * damageMultiplier(this.getOwner())) / 5, Explosion.BlockInteraction.NONE);
-            level.playSound(null, blockPosition(), ModSoundEvents.BOMB, SoundSource.PLAYERS, 0.4f, 1);
+            if (wandItem != null && this.getOwner() != null) {
+                new ExplosionConfigurable(this.level, this.getOwner() != null ? this.getOwner() : this, ModDamageSource.indirectMagicProjectile(this.getOwner(), wandItem), this.position().x(), this.position().y(), this.position().z(), 1F, (damage * damageMultiplier(this.getOwner())) / 5, Explosion.BlockInteraction.NONE);
+                level.playSound(null, blockPosition(), ModSoundEvents.BOMB, SoundSource.PLAYERS, 0.4f, 1);
+            }
             this.kill();
         }
     }
