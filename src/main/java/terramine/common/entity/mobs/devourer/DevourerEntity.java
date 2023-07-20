@@ -32,14 +32,16 @@ import terramine.common.init.ModLootTables;
 import terramine.common.init.ModSoundEvents;
 
 // todo: movement needs to be like Devourer from Terraria, using flying entity AI for testing
+// probably don't use gravity and just curve downwards through code when having left the ground
 // todo: need to add segments to save data somehow, otherwise the devourer creates new segments each world load causing a lot of noise
 public class DevourerEntity extends Monster implements Enemy {
     public static final EntityDataAccessor<Boolean> SPAWNED = SynchedEntityData.defineId(DevourerEntity.class, EntityDataSerializers.BOOLEAN);
     public DevourerBodyEntity[] segments;
     private LivingEntity target;
     private final int segmentCount;
+    private double sinValue = 0;
+    private final double sinIncrement = 0.05; // adjust to control how fast the worm moves up and down
     public double velX, velY, velZ;
-    public double oldVelX, oldVelY, oldVelZ;
 
     public DevourerEntity(EntityType<? extends Monster> entityType, Level level) {
         super(entityType, level);
@@ -71,93 +73,39 @@ public class DevourerEntity extends Monster implements Enemy {
         @Override
         public void tick() {
             if (entity.isAlive()) {
-                double motionY;
-                double motionX;
-                double motionZ;
+                entity.target = entity.level.getNearestPlayer(entity.getX(), entity.getY(), entity.getZ(), entity.getAttribute(Attributes.FOLLOW_RANGE).getValue(), true);
+                entity.setNoGravity(true);
 
-                entity.setNoGravity(entity.isInWall());
+                if (entity.target != null && !entity.target.isInvisible()) {
+                    double speed = entity.getAttribute(Attributes.MOVEMENT_SPEED).getValue() * 0.50;
+                    double playerX = entity.target.getX();
+                    double playerY = entity.target.getY();
+                    double playerZ = entity.target.getZ();
+                    double dx = playerX - entity.getX();
+                    double dy = playerY - entity.getY();
+                    double dz = playerZ - entity.getZ();
+                    double distance = Math.sqrt(dx * dx + dy * dy + dz * dz);
 
-                if (entity.isInWall() || entity.isInWater() || entity.isInLava()) {
-                    if (entity.target != null && !entity.target.isInvisible()) {
-                        if (entity.velX > -4 && entity.position().x > entity.target.position().x + entity.target.getBbWidth()) {
-                            entity.velX -= 0.08;
-                            if (entity.velX > 4) {
-                                entity.velX -= 0.04;
-                            } else if (entity.velX > 0) {
-                                entity.velX -= 0.2;
-                            }
-                            if (entity.velX < -4) {
-                                entity.velX = -4;
-                            }
-                        } else if (entity.velX < 4 && entity.position().x + 1 < entity.target.position().x) {
-                            entity.velX += 0.08;
-                            if (entity.velX < -4) {
-                                entity.velX += 0.04;
-                            } else if (entity.velX < 0) {
-                                entity.velX += 0.2;
-                            }
-                            if (entity.velX > 4) {
-                                entity.velX = 4;
-                            }
-                        }
-
-                        if (entity.velZ > -4 && entity.position().z > entity.target.position().z + entity.target.getBbWidth()) {
-                            entity.velZ -= 0.08;
-                            if (entity.velZ > 4) {
-                                entity.velZ -= 0.04;
-                            } else if (entity.velZ > 0f) {
-                                entity.velZ -= 0.2;
-                            }
-                            if (entity.velZ < -4) {
-                                entity.velZ = -4;
-                            }
-                        } else if (entity.velZ < 4f && entity.position().z + 1 < entity.target.position().z) {
-                            entity.velZ += 0.08f;
-                            if (entity.velZ < -4) {
-                                entity.velZ += 0.04;
-                            } else if (entity.velZ < 0f) {
-                                entity.velZ += 0.2;
-                            }
-                            if (entity.velZ > 4) {
-                                entity.velZ = 4;
-                            }
-                        }
-
-                        if (entity.velY > -2.5 && entity.position().y > entity.target.position().y + entity.target.getBbHeight()) {
-                            entity.velY -= 0.1f;
-                            if (entity.velY > 2.5) {
-                                entity.velY -= 0.05;
-                            } else if (entity.velY > 0f) {
-                                entity.velY -= 0.15;
-                            }
-                        } else if (entity.velY < 2.5 && entity.position().y + 1 < entity.target.position().y) {
-                            entity.velY += 0.2f;
-                            if (entity.velY < -2.5) {
-                                entity.velY += 0.05;
-                            } else if (entity.velY < 0) {
-                                entity.velY += 0.15;
-                            }
-                        }
+                    // move towards the player in a sine wave pattern
+                    entity.sinValue += entity.sinIncrement;
+                    double newY;
+                    if (playerY >= entity.getY()) {
+                        newY = entity.getY() + (0.3);
+                    } else {
+                        newY = entity.getY() - (0.3);
                     }
+                    newY = newY + (Math.sin(entity.sinValue));
+                    double newSpeedX = dx / distance * speed;
+                    double newSpeedZ = dz / distance * speed;
+
+                    entity.setYRot(rotlerp(entity.getYRot(), (float)Math.toDegrees(Math.atan2(newSpeedZ, newSpeedX)) - 90, 360));
+                    entity.setXRot((float)(-(Mth.atan2(-(newY - entity.getY()), Math.sqrt(newSpeedX * newSpeedX + newSpeedZ * newSpeedZ)) * 180.0F / (float)Math.PI)));
+
+                    entity.setDeltaMovement(newSpeedX, newY - entity.getY(), newSpeedZ);
                 } else {
-                    entity.velY -= 0.1f;
-                    if (entity.velY > 2.5) {
-                        entity.velY -= 0.05;
-                    } else if (entity.velY > 0f) {
-                        entity.velY -= 0.15;
-                    }
+                    entity.sinValue = 0;
+                    entity.setDeltaMovement(0, -0.15, 0);
                 }
-
-                entity.oldVelX = entity.velX;
-                entity.oldVelY = entity.velY;
-                entity.oldVelZ = entity.velZ;
-                motionX = entity.velX * 0.0055f * entity.getAttribute(Attributes.MOVEMENT_SPEED).getValue();
-                motionY = entity.velY * 0.0055f * entity.getAttribute(Attributes.MOVEMENT_SPEED).getValue();
-                motionZ = entity.velZ * 0.0055f * entity.getAttribute(Attributes.MOVEMENT_SPEED).getValue();
-
-                entity.setYRot(rotlerp(entity.getYRot(), (float)Math.toDegrees(Math.atan2(entity.velZ, entity.velX)) - 90, 360));
-                entity.setXRot((float)(-(Mth.atan2(-entity.velY, Math.sqrt(entity.velX * entity.velX + entity.velZ * entity.velZ)) * 180.0F / (float)Math.PI)));
-                entity.setDeltaMovement(entity.getDeltaMovement().add(motionX, motionY, motionZ));
             }
         }
     }

@@ -68,8 +68,9 @@ public class FlyingEntityAI extends Monster implements Enemy {
                 flyingEntity.setNoGravity(true);
                 flyingEntity.fallDistance = 0;
                 Level world = flyingEntity.level;
-                Player target = null;
+                Player target;
 
+                /*
                 for(int i = 0; i < flyingEntity.level.players().size(); ++i) {
                     double dist = flyingEntity.level.players().get(i).position().distanceTo(flyingEntity.position());
                     if (dist < flyingEntity.getAttribute(Attributes.FOLLOW_RANGE).getValue()) {
@@ -80,6 +81,9 @@ public class FlyingEntityAI extends Monster implements Enemy {
                         }
                     }
                 }
+                 */
+
+                target = flyingEntity.level.getNearestPlayer(flyingEntity.getX(), flyingEntity.getY(), flyingEntity.getZ(), flyingEntity.getAttribute(Attributes.FOLLOW_RANGE).getValue(), true);
 
                 if (world.getBlockState(new BlockPos(flyingEntity.position().x(), flyingEntity.position().y() - 1, flyingEntity.position().z())).getBlock().defaultBlockState() == Blocks.WATER.defaultBlockState()) {
                     if (flyingEntity.velY < 0) {

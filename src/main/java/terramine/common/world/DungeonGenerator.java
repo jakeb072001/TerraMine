@@ -70,14 +70,12 @@ public class DungeonGenerator {
 
         int yOffset = pieceBoundingBox.minY() + poolStructurePiece.getGroundLevelDelta();
         poolStructurePiece.move(0, y - yOffset, 0);
-        if (poolStructurePiece.getRotation().equals(Rotation.CLOCKWISE_90)) {
-            poolRoomStructurePiece.move(-14, yRoom, 0);
-        } else if (poolStructurePiece.getRotation().equals(Rotation.CLOCKWISE_180)) {
-            poolRoomStructurePiece.move(0, yRoom, -14);
-        } else if (poolStructurePiece.getRotation().equals(Rotation.COUNTERCLOCKWISE_90)) {
-            poolRoomStructurePiece.move(14, yRoom, 0);
-        } else {
-            poolRoomStructurePiece.move(0, yRoom, 14);
+
+        switch (poolStructurePiece.getRotation()) {
+            case CLOCKWISE_90 -> poolRoomStructurePiece.move(-14, yRoom, 0);
+            case CLOCKWISE_180 -> poolRoomStructurePiece.move(0, yRoom, -14);
+            case COUNTERCLOCKWISE_90 -> poolRoomStructurePiece.move(14, yRoom, 0);
+            default -> poolRoomStructurePiece.move(0, yRoom, 14);
         }
 
         return Optional.of(new Structure.GenerationStub(new BlockPos(centerX, y, centerZ), (collector) -> {
