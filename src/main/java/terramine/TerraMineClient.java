@@ -14,6 +14,7 @@ import terramine.client.render.HeldItemModels;
 import terramine.client.render.ModAllEntityRenderers;
 import terramine.client.render.trinket.CurioRenderers;
 import terramine.common.init.*;
+import terramine.common.network.ServerPacketHandler;
 import terramine.common.utility.KeyBindingsHandler;
 
 @Environment(EnvType.CLIENT)
@@ -52,5 +53,8 @@ public class TerraMineClient implements ClientModInitializer {
 
 		// Screen Handler
 		ModScreenHandler.register();
+
+		// Client Packet Handler
+		ServerPacketHandler.registerClient();
 	}
 }

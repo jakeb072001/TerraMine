@@ -6,7 +6,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
-import terramine.client.render.ChestScreenHandler;
+import terramine.client.render.gui.ChestScreenCreator;
 import terramine.common.init.ModBlockEntityType;
 import terramine.common.init.ModScreenHandlerType;
 import terramine.common.utility.PlayerInventories;
@@ -28,6 +28,6 @@ public class SafeEntity extends ChestEntity {
     public AbstractContainerMenu createMenu(int i, @NotNull Inventory inventory, @NotNull Player player) {
         PlayerInventories inv = new PlayerInventories(player);
         inv.setActiveBlockEntity(this);
-        return new ChestScreenHandler(40, menu, i, inventory, inv);
+        return new ChestScreenCreator(40, menu, i, inventory, inv);
     }
 }

@@ -40,6 +40,8 @@
     "item.accessories.umbrella.LivingEntityMixin",
     "item.accessories.whoopeecushion.EntityMixin",
     "item.armors.molten.EntityMixin",
+    "player.InventoryMixin",
+    "player.ServerEntityMixin",
     "statuseffect.LivingEntityMixin",
     "statuseffect.MobEffectInstanceMixin",
     "world.LevelStorageAccessMixin",
@@ -72,6 +74,7 @@
     "item.accessories.umbrella.client.LivingEntityRendererMixin",
     "item.accessories.walljump.PlayerMixin",
     "item.accessories.weatherradio.client.GuiMixin",
+    "player.InventoryScreenMixin",
     "statuseffect.client.GameRendererMixin",
     "statuseffect.client.LivingEntityMixin",
     "statuseffect.client.MobEffectUtilMixin"

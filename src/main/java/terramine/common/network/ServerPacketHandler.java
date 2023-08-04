@@ -1,6 +1,9 @@
 package terramine.common.network;
 
 import dev.architectury.networking.NetworkManager;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.Registry;
@@ -10,6 +13,8 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.phys.Vec3;
 import terramine.TerraMine;
@@ -28,6 +33,7 @@ public class ServerPacketHandler {
     public static final ResourceLocation ROCKET_BOOTS_SOUND_PACKET_ID = TerraMine.id("rocket_boots_sound");
     public static final ResourceLocation ROCKET_BOOTS_PARTICLE_PACKET_ID = TerraMine.id("rocket_boots_particles");
     public static final ResourceLocation UPDATE_BIOME_PACKET_ID = TerraMine.id("update_biome");
+    public static final ResourceLocation UPDATE_ACCESSORY_VISIBILITY_PACKET_ID = TerraMine.id("update_accessory_visibility");
 
     public static void register() {
         ServerPlayNetworking.registerGlobalReceiver(BONE_MEAL_PACKET_ID, BoneMealPacket::receive);
@@ -124,6 +130,22 @@ public class ServerPacketHandler {
             if (context.getPlayer() != null) {
                 ((ClientLevel) context.getPlayer().level).onChunkLoaded(new ChunkPos(chunkX, chunkZ));
             }
+        });
+    }
+
+    @Environment(EnvType.CLIENT)
+    public static void registerClient() {
+        ClientPlayNetworking.registerGlobalReceiver(UPDATE_ACCESSORY_VISIBILITY_PACKET_ID, (client, handler, buffer, responseSender) -> {
+            int[] bufferArray = buffer.readVarIntArray();
+            int entityId = bufferArray[0];
+            int slot = bufferArray[1];
+            ItemStack itemStack = buffer.readItem();
+            client.execute(() -> {
+                if (client.player.getLevel().getEntity(entityId) != null) {
+                    Player player = (Player) client.player.getLevel().getEntity(entityId);
+                    player.getInventory().setItem(slot, itemStack.copy());
+                }
+            });
         });
     }
 }

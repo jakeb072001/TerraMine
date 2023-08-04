@@ -58,7 +58,7 @@ public abstract class GuiMixin {
 
 	/**
 	 * Calculate offset for our status bar height, taking rendering of other status bars into account
-	 * This might take
+	 * This might take (What did he mean by this?)
 	 */
 	@Unique
 	private int getStatusBarHeightOffset(Player player) {

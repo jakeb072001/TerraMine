@@ -14,7 +14,6 @@ repositories {
     maven { url = "https://maven.gegy.dev/" }
     maven { url = "https://mvn.devos.one/snapshots/" }
     maven { url = "https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/" }
-    maven { url "https://maven.bai.lol" }
     maven { url = "https://maven.florens.be/releases" }
     maven { url = "https://maven.parchmentmc.org" }
     maven {
@@ -29,6 +28,7 @@ repositories {
             includeGroupByRegex "com.github.*"
         }
     }
+    maven { url "https://maven.bai.lol" }
     maven {
         url "https://maven.jamieswhiteshirt.com/libs-release"
         content {
@@ -88,8 +88,7 @@ dependencies {
     modImplementation include("com.github.emilyploszaj:step-height-entity-attribute:${project.step_height_attr_version}") {
         transitive = false
     }
-    implementation include("com.github.LlamaLad7:MixinExtras:${project.mixinextras_version}")
-    annotationProcessor("com.github.LlamaLad7:MixinExtras:${project.mixinextras_version}")
+    include(implementation(annotationProcessor("com.github.LlamaLad7:MixinExtras:${project.mixinextras_version}")))
 
     // Optional
     modImplementation("com.terraformersmc:modmenu:${project.mod_menu_version}") {
