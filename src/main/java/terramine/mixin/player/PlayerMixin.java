@@ -1,4 +1,4 @@
-package terramine.mixin.world.entity;
+package terramine.mixin.player;
 
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;

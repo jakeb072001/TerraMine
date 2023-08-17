@@ -51,7 +51,7 @@
     "world.entity.ItemMixin",
     "world.entity.LivingEntityMixin",
     "world.entity.MobMixin",
-    "world.entity.PlayerMixin"
+    "player.PlayerMixin"
   ],
   "client": [
     "client.GuiMixin",

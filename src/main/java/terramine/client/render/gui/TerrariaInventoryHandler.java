@@ -29,7 +29,6 @@ import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import terramine.TerraMine;
 
-import java.util.Iterator;
 import java.util.List;
 
 public class TerrariaInventoryHandler extends EffectRenderingInventoryScreen<TerrariaInventoryCreator> {
