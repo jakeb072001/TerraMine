@@ -30,7 +30,7 @@ public class ServerEntityMixin {
     @Inject(method = "addPairing", at = @At(value = "TAIL"))
     public void startTrackingMixin(ServerPlayer serverPlayer, CallbackInfo info) {
         if (entity instanceof Player player) {
-            for (int i = 43; i < 73; i++) {
+            for (int i = 56; i < 61; i++) {
                 if (!serverPlayer.getInventory().getItem(i).isEmpty()) {
                     FriendlyByteBuf data = new FriendlyByteBuf(Unpooled.buffer());
                     data.writeVarIntArray(new int[] { serverPlayer.getId(), i });

@@ -99,6 +99,7 @@ public class TerrariaInventoryCreator extends AbstractContainerMenu {
         }
 
         // todo: slots don't display items, maybe something to do with int i?
+        // todo: items don't actually go in slot, i thought they did but guess not... most likely cause of above
         // todo: add another two slots with isActive() so i can add slots during game
         // todo: add all the vanity and dye slots
         // Accessories
@@ -128,18 +129,6 @@ public class TerrariaInventoryCreator extends AbstractContainerMenu {
                     return Pair.of(InventoryMenu.BLOCK_ATLAS, EMPTY_ACCESSORY_SLOT);
                 }
             });
-        }
-    }
-
-    public void slotsChanged(@NotNull Container container) {
-        //CraftingMenu.slotChangedCraftingGrid(this, this.owner.level, this.owner, this.craftSlots, this.resultSlots);
-    }
-
-    public void removed(@NotNull Player player) {
-        super.removed(player);
-        this.resultSlots.clearContent();
-        if (!player.level.isClientSide) {
-            this.clearContainer(player, this.craftSlots);
         }
     }
 
@@ -209,12 +198,8 @@ public class TerrariaInventoryCreator extends AbstractContainerMenu {
         return itemStack;
     }
 
-    public boolean canTakeItemForPickAll(@NotNull ItemStack itemStack, Slot slot) {
-        return slot.container != this.resultSlots && super.canTakeItemForPickAll(itemStack, slot);
-    }
-
     public int getSize() {
-        return 5;
+        return 15; // what do this do?
     }
 
     static {

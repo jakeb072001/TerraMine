@@ -44,7 +44,6 @@ public class TerrariaInventoryHandler extends EffectRenderingInventoryScreen<Ter
     public TerrariaInventoryHandler(Player player) {
         super(new TerrariaInventoryCreator(player.getInventory(), !player.level.isClientSide, player), player.getInventory(), Component.empty());
         this.passEvents = true;
-        this.titleLabelX = 97;
     }
 
     public void containerTick() {
@@ -157,7 +156,7 @@ public class TerrariaInventoryHandler extends EffectRenderingInventoryScreen<Ter
     }
 
     protected boolean hasClickedOutside(double d, double e, int i, int j, int k) {
-        return d < (double)i || e < (double)j || d >= (double)(i + this.imageWidth) || e >= (double)(j + this.imageHeight);
+        return d < (double)i || e < (double)j - 26 || d >= (double)(i + this.imageWidth) || e >= (double)(j + this.imageHeight - 26);
     }
 
     protected void slotClicked(Slot slot, int i, int j, @NotNull ClickType clickType) {
@@ -171,11 +170,11 @@ public class TerrariaInventoryHandler extends EffectRenderingInventoryScreen<Ter
                 if (k != abstractContainerMenu.containerId) {
                     TerraMine.LOGGER.warn("Ignoring click in mismatching container. Click in {}, player has {}.", k, abstractContainerMenu.containerId);
                 } else {
-                    NonNullList<Slot> nonNullList = abstractContainerMenu.slots;
-                    int l = nonNullList.size();
+                    NonNullList<Slot> slots = abstractContainerMenu.slots;
+                    int l = slots.size();
                     List<ItemStack> list = Lists.newArrayListWithCapacity(l);
 
-                    for (Slot slot2 : nonNullList) {
+                    for (Slot slot2 : slots) {
                         list.add(slot2.getItem().copy());
                     }
 
@@ -184,7 +183,7 @@ public class TerrariaInventoryHandler extends EffectRenderingInventoryScreen<Ter
 
                     for (int m = 0; m < l; ++m) {
                         ItemStack itemStack = list.get(m);
-                        ItemStack itemStack2 = nonNullList.get(m).getItem();
+                        ItemStack itemStack2 = slots.get(m).getItem();
                         if (!ItemStack.matches(itemStack, itemStack2)) {
                             int2ObjectMap.put(m, itemStack2.copy());
                         }
