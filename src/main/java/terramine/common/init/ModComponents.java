@@ -34,6 +34,8 @@ public class ModComponents implements EntityComponentInitializer, LevelComponent
 			ComponentRegistryV3.INSTANCE.getOrCreate(TerraMine.id("lava_immunity"), LavaImmunityComponent.class);
 	public static final ComponentKey<SyncedBooleanComponent> SPACE_GUN_FREE =
 			ComponentRegistryV3.INSTANCE.getOrCreate(TerraMine.id("space_gun_free"), SyncedBooleanComponent.class);
+	public static final ComponentKey<SyncedIntegerComponent> ACCESSORY_SLOTS_ADDER =
+			ComponentRegistryV3.INSTANCE.getOrCreate(TerraMine.id("accessory_slots_adder"), SyncedIntegerComponent.class);
 
 	// Level Data
 	public static final ComponentKey<SyncedBooleanComponent> HARDMODE =
@@ -54,6 +56,7 @@ public class ModComponents implements EntityComponentInitializer, LevelComponent
 		registry.registerForPlayers(MOVEMENT_ORDER, MovementOrderComponent::new, RespawnCopyStrategy.LOSSLESS_ONLY);
 		registry.registerForPlayers(LAVA_IMMUNITY, LavaImmunityComponent::new, RespawnCopyStrategy.LOSSLESS_ONLY);
 		registry.registerForPlayers(SPACE_GUN_FREE, level -> new SyncedBooleanComponent("space_gun_free"), RespawnCopyStrategy.LOSSLESS_ONLY);
+		registry.registerForPlayers(ACCESSORY_SLOTS_ADDER, level -> new SyncedIntegerComponent("extraSlots"), RespawnCopyStrategy.CHARACTER);
 	}
 
 	@Override

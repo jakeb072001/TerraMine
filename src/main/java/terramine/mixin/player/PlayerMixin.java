@@ -25,6 +25,9 @@ import terramine.extensions.PlayerStorages;
 public abstract class PlayerMixin extends LivingEntity implements PlayerStorages {
 
 	@Unique
+	SimpleContainer terrariaInventory = new SimpleContainer(30);
+
+	@Unique
 	SimpleContainer piggyBankInventory = new SimpleContainer(40);
 
 	@Unique
@@ -61,6 +64,11 @@ public abstract class PlayerMixin extends LivingEntity implements PlayerStorages
 	}
 
 	@Override
+	public SimpleContainer getTerrariaInventory() {
+		return this.terrariaInventory;
+	}
+
+	@Override
 	public SimpleContainer getPiggyBankInventory() {
 		return this.piggyBankInventory;
 	}
@@ -68,6 +76,11 @@ public abstract class PlayerMixin extends LivingEntity implements PlayerStorages
 	@Override
 	public SimpleContainer getSafeInventory() {
 		return this.safeInventory;
+	}
+
+	@Override
+	public void setTerrariaInventory(SimpleContainer terrariaInventory) {
+		this.terrariaInventory = terrariaInventory;
 	}
 
 	@Override
@@ -82,12 +95,16 @@ public abstract class PlayerMixin extends LivingEntity implements PlayerStorages
 
 	@Inject(method = "addAdditionalSaveData", at = @At("TAIL"))
 	public void writePlayerChests(CompoundTag tag, CallbackInfo ci) {
+		tag.put("terrariaItems", getTags(terrariaInventory));
 		tag.put("piggyBankItems", getTags(piggyBankInventory));
 		tag.put("safeItems", getTags(safeInventory));
 	}
 
 	@Inject(method = "readAdditionalSaveData", at = @At("TAIL"))
 	public void readPlayerChests(CompoundTag tag, CallbackInfo ci) {
+		if (tag.contains("terrariaItems", 9)) {
+			readTags(tag.getList("terrariaItems", 10), terrariaInventory);
+		}
 		if (tag.contains("piggyBankItems", 9)) {
 			readTags(tag.getList("piggyBankItems", 10), piggyBankInventory);
 		}

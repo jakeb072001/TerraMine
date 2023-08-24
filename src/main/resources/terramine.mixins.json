@@ -40,8 +40,7 @@
     "item.accessories.umbrella.LivingEntityMixin",
     "item.accessories.whoopeecushion.EntityMixin",
     "item.armors.molten.EntityMixin",
-    "player.InventoryMixin",
-    "player.ServerEntityMixin",
+    "player.PlayerMixin",
     "statuseffect.LivingEntityMixin",
     "statuseffect.MobEffectInstanceMixin",
     "world.LevelStorageAccessMixin",
@@ -50,8 +49,7 @@
     "world.entity.ItemEntityMixin",
     "world.entity.ItemMixin",
     "world.entity.LivingEntityMixin",
-    "world.entity.MobMixin",
-    "player.PlayerMixin"
+    "world.entity.MobMixin"
   ],
   "client": [
     "client.GuiMixin",
@@ -74,6 +72,7 @@
     "item.accessories.umbrella.client.LivingEntityRendererMixin",
     "item.accessories.walljump.PlayerMixin",
     "item.accessories.weatherradio.client.GuiMixin",
+    "player.CreativeModeInventoryScreenMixin",
     "player.InventoryScreenMixin",
     "statuseffect.client.GameRendererMixin",
     "statuseffect.client.LivingEntityMixin",

@@ -3,6 +3,7 @@ package terramine.client.render.gui;
 import com.mojang.datafixers.util.Pair;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.Container;
+import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.player.Inventory;
@@ -12,7 +13,10 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import org.jetbrains.annotations.NotNull;
 import terramine.TerraMine;
+import terramine.common.init.ModComponents;
+import terramine.common.init.ModScreenHandlerType;
 import terramine.common.item.accessories.TrinketTerrariaItem;
+import terramine.extensions.PlayerStorages;
 
 public class TerrariaInventoryCreator extends AbstractContainerMenu {
     public static final ResourceLocation EMPTY_ARMOR_SLOT_HELMET = new ResourceLocation("item/empty_armor_slot_helmet");
@@ -26,23 +30,16 @@ public class TerrariaInventoryCreator extends AbstractContainerMenu {
     private static final EquipmentSlot[] SLOT_IDS;
     private final CraftingContainer craftSlots = new CraftingContainer(this, 2, 2);
     private final ResultContainer resultSlots = new ResultContainer();
-    public final boolean active;
 
-    public TerrariaInventoryCreator(Inventory inventory, boolean bl, final Player player) {
-        super(null, 0);
-        this.active = bl;
-
-        // Crafting Result
-        this.addSlot(new ResultSlot(inventory.player, this.craftSlots, this.resultSlots, 0, -1000, -1000));
+    public TerrariaInventoryCreator(final Player player) {
+        super(ModScreenHandlerType.TERRARIA_CONTAINER, 10);
+        Inventory inventory = player.getInventory();
+        SimpleContainer terrariaInventory = ((PlayerStorages)player).getTerrariaInventory();
 
         int i;
         int j;
-
-        // Crafting Items
-        for(i = 0; i < 2; ++i) {
-            for(j = 0; j < 2; ++j) {
-                this.addSlot(new Slot(this.craftSlots, j + i * 2, -1000, -1000));
-            }
+        for (i = 0; i < 5; ++i) {
+            this.addSlot(new Slot(inventory, i, -1000, -1000));
         }
 
         // Armor
@@ -93,23 +90,21 @@ public class TerrariaInventoryCreator extends AbstractContainerMenu {
             }
         });
 
-        // dud slots for Trinkets compat
-        for(i = 0; i < 15; ++i) {
-                this.addSlot(new Slot(inventory, 100 + i, -1000, -1000));
-        }
-
-        // todo: slots don't display items, maybe something to do with int i?
-        // todo: items don't actually go in slot, i thought they did but guess not... most likely cause of above
-        // todo: add another two slots with isActive() so i can add slots during game
         // todo: add all the vanity and dye slots
         // Accessories
         // assets\minecraft\atlases\blocks.json
-        for(i = 0; i < 5; ++i) {
-            this.addSlot(new Slot(inventory, 115 + i, 116, -18 + i * 18) {
+        for(i = 0; i < 7; ++i) {
+            int k = i;
+            this.addSlot(new Slot(terrariaInventory, i, 116, -18 + i * 18) {
                 public void set(@NotNull ItemStack itemStack) {
                     //ItemStack itemStack2 = this.getItem();
                     super.set(itemStack);
                     //player.onEquipItem(equipmentSlot, itemStack2, itemStack);
+                }
+
+                public boolean isActive() {
+                    // allows for adding slots during gameplay, for the 2 extra accessory slots players can get
+                    return k < (5 + ModComponents.ACCESSORY_SLOTS_ADDER.get(player).get()); // todo: not updated live, only after reloading world
                 }
 
                 public int getMaxStackSize() {
@@ -122,7 +117,7 @@ public class TerrariaInventoryCreator extends AbstractContainerMenu {
 
                 public boolean mayPickup(@NotNull Player player) {
                     ItemStack itemStack = this.getItem();
-                    return (itemStack.isEmpty() || player.isCreative()) && super.mayPickup(player);
+                    return !itemStack.isEmpty() && super.mayPickup(player);
                 }
 
                 public Pair<ResourceLocation, ResourceLocation> getNoItemIcon() {

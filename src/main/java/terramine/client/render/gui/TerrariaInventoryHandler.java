@@ -8,6 +8,8 @@ import com.mojang.math.Quaternion;
 import com.mojang.math.Vector3f;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.ImageButton;
 import net.minecraft.client.gui.screens.inventory.CreativeModeInventoryScreen;
@@ -28,12 +30,16 @@ import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import terramine.TerraMine;
+import terramine.common.init.ModComponents;
 
 import java.util.List;
 
+@Environment(EnvType.CLIENT)
 public class TerrariaInventoryHandler extends EffectRenderingInventoryScreen<TerrariaInventoryCreator> {
     private static final ResourceLocation BUTTON_TEX = TerraMine.id("textures/gui/terraria_slots_button.png");
     private static final ResourceLocation TERRARIA_CONTAINER_5 = TerraMine.id("textures/gui/container/terraria_slots_5.png");
+    private static final ResourceLocation TERRARIA_CONTAINER_6 = TerraMine.id("textures/gui/container/terraria_slots_6.png");
+    private static final ResourceLocation TERRARIA_CONTAINER_7 = TerraMine.id("textures/gui/container/terraria_slots_7.png");
     private float xMouse;
     private float yMouse;
     private final int imageWidth = 176;
@@ -42,22 +48,19 @@ public class TerrariaInventoryHandler extends EffectRenderingInventoryScreen<Ter
     private boolean buttonClicked;
 
     public TerrariaInventoryHandler(Player player) {
-        super(new TerrariaInventoryCreator(player.getInventory(), !player.level.isClientSide, player), player.getInventory(), Component.empty());
+        super(new TerrariaInventoryCreator(player), player.getInventory(), Component.empty());
         this.passEvents = true;
     }
 
-    public void containerTick() {
-        if (this.minecraft.gameMode.hasInfiniteItems()) {
-            this.minecraft.setScreen(new CreativeModeInventoryScreen(this.minecraft.player));
-        }
-    }
-
     protected void init() {
+        super.init();
+        this.widthTooNarrow = this.width < 379;
         if (this.minecraft.gameMode.hasInfiniteItems()) {
-            this.minecraft.setScreen(new CreativeModeInventoryScreen(this.minecraft.player));
+            this.addRenderableWidget(new ImageButton(this.leftPos + 105, this.height / 2 - 40, 8, 8, 0, 0, 8, BUTTON_TEX, 8, 16, (buttonWidget) -> {
+                this.minecraft.setScreen(new CreativeModeInventoryScreen(this.minecraft.player));
+                this.buttonClicked = true;
+            }));
         } else {
-            super.init();
-            this.widthTooNarrow = this.width < 379;
             this.addRenderableWidget(new ImageButton(this.leftPos + 105, this.height / 2 - 40, 8, 8, 0, 0, 8, BUTTON_TEX, 8, 16, (buttonWidget) -> {
                 this.minecraft.setScreen(new InventoryScreen(minecraft.player));
                 this.buttonClicked = true;
@@ -85,7 +88,13 @@ public class TerrariaInventoryHandler extends EffectRenderingInventoryScreen<Ter
     protected void renderBg(@NotNull PoseStack poseStack, float f, int i, int j) {
         RenderSystem.setShader(GameRenderer::getPositionTexShader);
         RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
-        RenderSystem.setShaderTexture(0, TERRARIA_CONTAINER_5);
+        if (ModComponents.ACCESSORY_SLOTS_ADDER.get(this.minecraft.player).get() == 1) {  // todo: not updated live, only after reloading world
+            RenderSystem.setShaderTexture(0, TERRARIA_CONTAINER_6);
+        } else if (ModComponents.ACCESSORY_SLOTS_ADDER.get(this.minecraft.player).get() == 2) {
+            RenderSystem.setShaderTexture(0, TERRARIA_CONTAINER_7);
+        } else {
+            RenderSystem.setShaderTexture(0, TERRARIA_CONTAINER_5);
+        }
         int k = this.leftPos;
         int l = this.topPos - 26;
         blit(poseStack, k, l, this.getBlitOffset(), (float)0, (float)0, this.imageWidth, this.imageHeight, this.imageWidth, this.imageHeight);

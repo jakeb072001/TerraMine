@@ -9,15 +9,19 @@ import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.Registry;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.particles.SimpleParticleType;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.SimpleMenuProvider;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.phys.Vec3;
 import terramine.TerraMine;
+import terramine.client.render.gui.TerrariaInventoryCreator;
+import terramine.client.render.gui.TerrariaInventoryHandler;
 import terramine.common.init.ModComponents;
 import terramine.common.init.ModItems;
 import terramine.common.network.packet.BoneMealPacket;
@@ -33,6 +37,7 @@ public class ServerPacketHandler {
     public static final ResourceLocation ROCKET_BOOTS_SOUND_PACKET_ID = TerraMine.id("rocket_boots_sound");
     public static final ResourceLocation ROCKET_BOOTS_PARTICLE_PACKET_ID = TerraMine.id("rocket_boots_particles");
     public static final ResourceLocation UPDATE_BIOME_PACKET_ID = TerraMine.id("update_biome");
+    public static final ResourceLocation SETUP_INVENTORY_PACKET_ID = TerraMine.id("setup_inventory");
     public static final ResourceLocation UPDATE_ACCESSORY_VISIBILITY_PACKET_ID = TerraMine.id("update_accessory_visibility");
 
     public static void register() {
@@ -121,6 +126,12 @@ public class ServerPacketHandler {
                 if (particle2 != null && particle2 != ParticleTypes.DRIPPING_WATER) {
                     player.getLevel().sendParticles(particle2, v.x, v.y, v.z, 1, 0, -0.2D, 0, random);
                 }
+            });
+        });
+
+        ServerPlayNetworking.registerGlobalReceiver(SETUP_INVENTORY_PACKET_ID, (server, player, handler, buf, responseSender) -> {
+            server.execute(() -> {
+                player.openMenu(new SimpleMenuProvider((id, inventory, player2) -> new TerrariaInventoryCreator(player), Component.empty()));
             });
         });
 
