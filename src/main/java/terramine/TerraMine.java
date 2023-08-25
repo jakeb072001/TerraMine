@@ -12,6 +12,7 @@ import net.fabricmc.loader.api.ModContainer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.stats.StatFormatter;
 import net.minecraft.stats.Stats;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
 import org.slf4j.Logger;
@@ -88,10 +89,12 @@ public class TerraMine implements ModInitializer, TerraBlenderApi {
 		PlayerEvent.PLAYER_QUIT.register(InputHandler::onLogout);
 		ServerPlayerEvents.COPY_FROM.register((oldPlayer, newPlayer, alive) -> {
 			if (oldPlayer instanceof PlayerStorages) {
+				((PlayerStorages) newPlayer).setTerrariaInventory(((PlayerStorages) oldPlayer).getTerrariaInventory());
 				((PlayerStorages) newPlayer).setPiggyBankInventory(((PlayerStorages) oldPlayer).getPiggyBankInventory());
 				((PlayerStorages) newPlayer).setSafeInventory(((PlayerStorages) oldPlayer).getSafeInventory());
 			}
 		});
+		PlayerEvent.PLAYER_JOIN.register(this::checkHardcore);
 
 		// Compat Handlers
 		for (CompatHandler handler : FabricLoader.getInstance().getEntrypoints("terramine:compat_handlers", CompatHandler.class)) {
@@ -105,6 +108,15 @@ public class TerraMine implements ModInitializer, TerraBlenderApi {
 		}
 
 		LOGGER.info("Finished initialization");
+	}
+
+	private void checkHardcore(Player player) {
+		if (player.level.getLevelData().isHardcore() && !ModComponents.ACCESSORY_HARDCORE_CHECK.get(player).get()) {
+			ModComponents.ACCESSORY_HARDCORE_CHECK.get(player).set(true);
+			ModComponents.ACCESSORY_HARDCORE_CHECK.sync(player);
+			ModComponents.ACCESSORY_SLOTS_ADDER.get(player).add(1);
+			ModComponents.ACCESSORY_SLOTS_ADDER.sync(player);
+		}
 	}
 
 	@Override

@@ -1,5 +1,7 @@
 package terramine.mixin.player;
 
+import com.mojang.authlib.GameProfile;
+import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.util.RandomSource;
@@ -7,6 +9,7 @@ import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.player.ProfilePublicKey;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import org.spongepowered.asm.mixin.Mixin;
@@ -15,6 +18,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import terramine.TerraMine;
+import terramine.client.render.gui.TerrariaInventoryCreator;
 import terramine.common.entity.projectiles.FallingStarEntity;
 import terramine.common.init.ModComponents;
 import terramine.common.init.ModEntities;
@@ -25,7 +29,7 @@ import terramine.extensions.PlayerStorages;
 public abstract class PlayerMixin extends LivingEntity implements PlayerStorages {
 
 	@Unique
-	SimpleContainer terrariaInventory = new SimpleContainer(30);
+	SimpleContainer terrariaInventory = new SimpleContainer(35);
 
 	@Unique
 	SimpleContainer piggyBankInventory = new SimpleContainer(40);
@@ -33,13 +37,23 @@ public abstract class PlayerMixin extends LivingEntity implements PlayerStorages
 	@Unique
 	SimpleContainer safeInventory = new SimpleContainer(40);
 
+	@Unique
+	TerrariaInventoryCreator terrariaMenu;
+
+	@Unique
+	private final RandomSource rand = RandomSource.create();
+
 	public PlayerMixin(EntityType<? extends LivingEntity> entityType, Level level) {
 		super(entityType, level);
 	}
-	private final RandomSource rand = RandomSource.create();
+
+	@Inject(method = "<init>", at = @At("TAIL"))
+	private void onInit(Level level, BlockPos blockPos, float f, GameProfile gameProfile, ProfilePublicKey profilePublicKey, CallbackInfo ci) {
+		terrariaMenu = new TerrariaInventoryCreator((Player)(Object)this);
+	}
 
 	@Inject(method = "tick", at = @At("TAIL"))
-	private void manaTickRegen(CallbackInfo ci) {
+	private void onTick(CallbackInfo ci) {
 		ModComponents.MANA_HANDLER.get(this).update();
 		ModComponents.LAVA_IMMUNITY.get(this).update();
 		if (!TerraMine.CONFIG.general.disableFallingStars) {
@@ -79,6 +93,11 @@ public abstract class PlayerMixin extends LivingEntity implements PlayerStorages
 	}
 
 	@Override
+	public TerrariaInventoryCreator getTerrariaMenu() {
+		return this.terrariaMenu;
+	}
+
+	@Override
 	public void setTerrariaInventory(SimpleContainer terrariaInventory) {
 		this.terrariaInventory = terrariaInventory;
 	}
@@ -94,14 +113,14 @@ public abstract class PlayerMixin extends LivingEntity implements PlayerStorages
 	}
 
 	@Inject(method = "addAdditionalSaveData", at = @At("TAIL"))
-	public void writePlayerChests(CompoundTag tag, CallbackInfo ci) {
+	public void writePlayerInventories(CompoundTag tag, CallbackInfo ci) {
 		tag.put("terrariaItems", getTags(terrariaInventory));
 		tag.put("piggyBankItems", getTags(piggyBankInventory));
 		tag.put("safeItems", getTags(safeInventory));
 	}
 
 	@Inject(method = "readAdditionalSaveData", at = @At("TAIL"))
-	public void readPlayerChests(CompoundTag tag, CallbackInfo ci) {
+	public void readPlayerInventories(CompoundTag tag, CallbackInfo ci) {
 		if (tag.contains("terrariaItems", 9)) {
 			readTags(tag.getList("terrariaItems", 10), terrariaInventory);
 		}

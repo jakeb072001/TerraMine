@@ -26,6 +26,7 @@ import terramine.common.init.ModComponents;
 import terramine.common.init.ModItems;
 import terramine.common.network.packet.BoneMealPacket;
 import terramine.common.network.packet.UpdateInputPacket;
+import terramine.extensions.PlayerStorages;
 
 public class ServerPacketHandler {
     public static final ResourceLocation BONE_MEAL_PACKET_ID = TerraMine.id("bone_meal");
@@ -131,7 +132,7 @@ public class ServerPacketHandler {
 
         ServerPlayNetworking.registerGlobalReceiver(SETUP_INVENTORY_PACKET_ID, (server, player, handler, buf, responseSender) -> {
             server.execute(() -> {
-                player.openMenu(new SimpleMenuProvider((id, inventory, player2) -> new TerrariaInventoryCreator(player), Component.empty()));
+                player.openMenu(new SimpleMenuProvider((id, inventory, player2) -> ((PlayerStorages)player).getTerrariaMenu(), Component.empty()));
             });
         });
 

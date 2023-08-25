@@ -30,7 +30,7 @@ public class MeteorArmor extends TerrariaArmor {
     @Override
     public void setBonusEffect(LivingEntity livingEntity, Level level) {
         if (livingEntity instanceof Player player) {
-            ModComponents.SPACE_GUN_FREE.get(player).set(true); // todo: need to make Space Gun and use this to make it free
+            ModComponents.SPACE_GUN_FREE.get(player).set(true);
         }
     }
 

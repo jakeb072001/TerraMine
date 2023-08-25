@@ -31,6 +31,7 @@ import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import terramine.TerraMine;
 import terramine.common.init.ModComponents;
+import terramine.extensions.PlayerStorages;
 
 import java.util.List;
 
@@ -48,7 +49,7 @@ public class TerrariaInventoryHandler extends EffectRenderingInventoryScreen<Ter
     private boolean buttonClicked;
 
     public TerrariaInventoryHandler(Player player) {
-        super(new TerrariaInventoryCreator(player), player.getInventory(), Component.empty());
+        super(((PlayerStorages)player).getTerrariaMenu(), player.getInventory(), Component.empty());
         this.passEvents = true;
     }
 
@@ -88,7 +89,7 @@ public class TerrariaInventoryHandler extends EffectRenderingInventoryScreen<Ter
     protected void renderBg(@NotNull PoseStack poseStack, float f, int i, int j) {
         RenderSystem.setShader(GameRenderer::getPositionTexShader);
         RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
-        if (ModComponents.ACCESSORY_SLOTS_ADDER.get(this.minecraft.player).get() == 1) {  // todo: not updated live, only after reloading world
+        if (ModComponents.ACCESSORY_SLOTS_ADDER.get(this.minecraft.player).get() == 1) {
             RenderSystem.setShaderTexture(0, TERRARIA_CONTAINER_6);
         } else if (ModComponents.ACCESSORY_SLOTS_ADDER.get(this.minecraft.player).get() == 2) {
             RenderSystem.setShaderTexture(0, TERRARIA_CONTAINER_7);

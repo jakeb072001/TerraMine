@@ -28,6 +28,13 @@ public class SyncedIntegerComponent implements Component, AutoSyncedComponent {
 		TerraMine.LOGGER.info("boolean: " + this.set);
 	}
 
+	public void add(int integer) {
+		this.integer += integer;
+		this.set = true;
+		TerraMine.LOGGER.info("integer: " + this.integer);
+		TerraMine.LOGGER.info("boolean: " + this.set);
+	}
+
 	public boolean isSet() {
 		return set;
 	}

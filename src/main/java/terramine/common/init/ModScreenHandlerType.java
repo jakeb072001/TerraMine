@@ -8,6 +8,7 @@ import net.minecraft.world.inventory.MenuType;
 import terramine.TerraMine;
 import terramine.client.render.gui.ChestScreenCreator;
 import terramine.client.render.gui.TerrariaInventoryCreator;
+import terramine.extensions.PlayerStorages;
 
 public class ModScreenHandlerType {
     public static MenuType<TerrariaInventoryCreator> TERRARIA_CONTAINER;
@@ -22,7 +23,7 @@ public class ModScreenHandlerType {
     public static MenuType<ChestScreenCreator> SAFE;
 
     public static void register() {
-        TERRARIA_CONTAINER = registerSimple(TerraMine.id("terraria_container"), (syncId, inventory) -> new TerrariaInventoryCreator(inventory.player));
+        TERRARIA_CONTAINER = registerSimple(TerraMine.id("terraria_container"), (syncId, inventory) -> ((PlayerStorages)inventory.player).getTerrariaMenu());
         GOLD_CHEST = registerSimple(TerraMine.id("gold_chest"), (syncId, inventory) -> new ChestScreenCreator(40, GOLD_CHEST, syncId, inventory, ContainerLevelAccess.NULL));
         FROZEN_CHEST = registerSimple(TerraMine.id("frozen_chest"), (syncId, inventory) -> new ChestScreenCreator(40, FROZEN_CHEST, syncId, inventory, ContainerLevelAccess.NULL));
         IVY_CHEST = registerSimple(TerraMine.id("ivy_chest"), (syncId, inventory) -> new ChestScreenCreator(40, IVY_CHEST, syncId, inventory, ContainerLevelAccess.NULL));

@@ -2,7 +2,6 @@ package terramine.client.render.gui;
 
 import com.mojang.datafixers.util.Pair;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.Container;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.Mob;
@@ -28,11 +27,13 @@ public class TerrariaInventoryCreator extends AbstractContainerMenu {
     public static final ResourceLocation EMPTY_ACCESSORY_DYE_SLOT = TerraMine.id("gui/slots/accessory_dye");
     static final ResourceLocation[] TEXTURE_EMPTY_SLOTS;
     private static final EquipmentSlot[] SLOT_IDS;
-    private final CraftingContainer craftSlots = new CraftingContainer(this, 2, 2);
-    private final ResultContainer resultSlots = new ResultContainer();
 
     public TerrariaInventoryCreator(final Player player) {
         super(ModScreenHandlerType.TERRARIA_CONTAINER, 10);
+        addSlots(player);
+    }
+
+    private void addSlots(Player player) {
         Inventory inventory = player.getInventory();
         SimpleContainer terrariaInventory = ((PlayerStorages)player).getTerrariaInventory();
 
@@ -90,12 +91,33 @@ public class TerrariaInventoryCreator extends AbstractContainerMenu {
             }
         });
 
-        // todo: add all the vanity and dye slots
         // Accessories
-        // assets\minecraft\atlases\blocks.json
-        for(i = 0; i < 7; ++i) {
+        createAccessorySlots(player, terrariaInventory, EMPTY_ACCESSORY_SLOT, 0);
+        createAccessorySlots(player, terrariaInventory, EMPTY_ACCESSORY_VANITY_SLOT, 1);
+        createAccessorySlots(player, terrariaInventory, EMPTY_ACCESSORY_DYE_SLOT, 2);
+
+        // Shield Vanity
+        this.addSlot(new Slot(terrariaInventory, 21, 80, 54) {
+            public Pair<ResourceLocation, ResourceLocation> getNoItemIcon() {
+                return Pair.of(InventoryMenu.BLOCK_ATLAS, InventoryMenu.EMPTY_ARMOR_SLOT_SHIELD);
+            }
+        });
+        this.addSlot(new Slot(terrariaInventory, 22, 98, 54) {
+            public Pair<ResourceLocation, ResourceLocation> getNoItemIcon() {
+                return Pair.of(InventoryMenu.BLOCK_ATLAS, EMPTY_ACCESSORY_DYE_SLOT);
+            }
+        });
+
+        // Armor Vanity
+        createExtraArmorSlots(player, terrariaInventory, 26, false);
+        createExtraArmorSlots(player, terrariaInventory, 30, true);
+    }
+
+    private void createAccessorySlots(Player player, SimpleContainer terrariaInventory, ResourceLocation texture, int accessoryType) {
+        // todo: on death, items are removed from inventory on client side, after reloading world items appear again
+        for(int i = 0; i < 7; ++i) {
             int k = i;
-            this.addSlot(new Slot(terrariaInventory, i, 116, -18 + i * 18) {
+            this.addSlot(new Slot(terrariaInventory, i + (accessoryType * 7), 116 + (accessoryType * 18), -18 + i * 18) {
                 public void set(@NotNull ItemStack itemStack) {
                     //ItemStack itemStack2 = this.getItem();
                     super.set(itemStack);
@@ -104,7 +126,7 @@ public class TerrariaInventoryCreator extends AbstractContainerMenu {
 
                 public boolean isActive() {
                     // allows for adding slots during gameplay, for the 2 extra accessory slots players can get
-                    return k < (5 + ModComponents.ACCESSORY_SLOTS_ADDER.get(player).get()); // todo: not updated live, only after reloading world
+                    return k < (5 + ModComponents.ACCESSORY_SLOTS_ADDER.get(player).get());
                 }
 
                 public int getMaxStackSize() {
@@ -112,6 +134,9 @@ public class TerrariaInventoryCreator extends AbstractContainerMenu {
                 }
 
                 public boolean mayPlace(@NotNull ItemStack itemStack) {
+                    if (accessoryType == 2) {
+                        return true; // todo: replace with dye item once made
+                    }
                     return itemStack.getItem() instanceof TrinketTerrariaItem;
                 }
 
@@ -121,7 +146,45 @@ public class TerrariaInventoryCreator extends AbstractContainerMenu {
                 }
 
                 public Pair<ResourceLocation, ResourceLocation> getNoItemIcon() {
-                    return Pair.of(InventoryMenu.BLOCK_ATLAS, EMPTY_ACCESSORY_SLOT);
+                    // assets\minecraft\atlases\blocks.json
+                    return Pair.of(InventoryMenu.BLOCK_ATLAS, texture);
+                }
+            });
+        }
+    }
+
+    private void createExtraArmorSlots(Player player, SimpleContainer inventory, int slotValue, boolean isDye) {
+        for(int i = 0; i < 4; ++i) {
+            final EquipmentSlot equipmentSlot = SLOT_IDS[i];
+            this.addSlot(new Slot(inventory, slotValue - i, 8 + ((isDye ? 2 : 1) * 18), -18 + i * 18) {
+                public void set(@NotNull ItemStack itemStack) {
+                    ItemStack itemStack2 = this.getItem();
+                    super.set(itemStack);
+                    player.onEquipItem(equipmentSlot, itemStack2, itemStack);
+                }
+
+                public int getMaxStackSize() {
+                    return 1;
+                }
+
+                public boolean mayPlace(@NotNull ItemStack itemStack) {
+                    if (isDye) {
+                        return true; // todo: replace with dye item once made
+                    }
+                    return equipmentSlot == Mob.getEquipmentSlotForItem(itemStack);
+                }
+
+                public boolean mayPickup(@NotNull Player player) {
+                    ItemStack itemStack = this.getItem();
+                    return !itemStack.isEmpty() && super.mayPickup(player);
+                }
+
+                public Pair<ResourceLocation, ResourceLocation> getNoItemIcon() {
+                    // assets\minecraft\atlases\blocks.json
+                    if (isDye) {
+                        return Pair.of(InventoryMenu.BLOCK_ATLAS, EMPTY_ACCESSORY_DYE_SLOT);
+                    }
+                    return Pair.of(InventoryMenu.BLOCK_ATLAS, TEXTURE_EMPTY_SLOTS[equipmentSlot.getIndex()]);
                 }
             });
         }
