@@ -1,4 +1,4 @@
-package terramine.client.render.gui;
+package terramine.client.render.gui.menu;
 
 import io.github.cottonmc.cotton.gui.SyncedGuiDescription;
 import io.github.cottonmc.cotton.gui.widget.WItemSlot;
@@ -9,15 +9,15 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.ContainerLevelAccess;
 import net.minecraft.world.inventory.MenuType;
 
-public class ChestScreenCreator extends SyncedGuiDescription {
+public class ChestBlockContainerMenu extends SyncedGuiDescription {
     Container inventory;
 
-    public ChestScreenCreator(int size, MenuType<?> type, int syncId, Inventory playerInventory, ContainerLevelAccess ctx) {
+    public ChestBlockContainerMenu(int size, MenuType<?> type, int syncId, Inventory playerInventory, ContainerLevelAccess ctx) {
         super(type, syncId, playerInventory, getBlockInventory(ctx, size), null);
         createScreen(size, getBlockInventory(ctx, size));
     }
 
-    public ChestScreenCreator(int size, MenuType<?> type, int syncId, Inventory playerInventory, Container blockInventory) {
+    public ChestBlockContainerMenu(int size, MenuType<?> type, int syncId, Inventory playerInventory, Container blockInventory) {
         super(type, syncId, playerInventory, blockInventory, null);
         createScreen(size, blockInventory);
     }

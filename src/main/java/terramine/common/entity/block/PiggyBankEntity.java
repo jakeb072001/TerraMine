@@ -6,10 +6,11 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
-import terramine.client.render.gui.ChestScreenCreator;
+import terramine.client.render.gui.menu.ChestBlockContainerMenu;
 import terramine.common.init.ModBlockEntityType;
 import terramine.common.init.ModScreenHandlerType;
 import terramine.common.utility.PlayerInventories;
+import terramine.extensions.PlayerStorages;
 
 public class PiggyBankEntity extends ChestEntity {
     public PiggyBankEntity(BlockPos pos, BlockState state) {
@@ -17,7 +18,7 @@ public class PiggyBankEntity extends ChestEntity {
     }
 
     @Override
-    public void startOpen(@NotNull Player player) {
+    public void startOpen(@NotNull Player player) { // todo: play sound
     }
 
     @Override
@@ -26,8 +27,7 @@ public class PiggyBankEntity extends ChestEntity {
 
     @Override
     public AbstractContainerMenu createMenu(int i, @NotNull Inventory inventory, @NotNull Player player) {
-        PlayerInventories inv = new PlayerInventories(player);
-        inv.setActiveBlockEntity(this);
-        return new ChestScreenCreator(40, menu, i, inventory, inv);
+        PlayerInventories inv = new PlayerInventories(((PlayerStorages)player).getPiggyBankInventory(), this);
+        return new ChestBlockContainerMenu(40, menu, i, inventory, inv);
     }
 }

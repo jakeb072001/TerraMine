@@ -89,9 +89,13 @@ public class TerraMine implements ModInitializer, TerraBlenderApi {
 		PlayerEvent.PLAYER_QUIT.register(InputHandler::onLogout);
 		ServerPlayerEvents.COPY_FROM.register((oldPlayer, newPlayer, alive) -> {
 			if (oldPlayer instanceof PlayerStorages) {
+				// Copy inventories from the player entity that died to the one that respawned
 				((PlayerStorages) newPlayer).setTerrariaInventory(((PlayerStorages) oldPlayer).getTerrariaInventory());
 				((PlayerStorages) newPlayer).setPiggyBankInventory(((PlayerStorages) oldPlayer).getPiggyBankInventory());
 				((PlayerStorages) newPlayer).setSafeInventory(((PlayerStorages) oldPlayer).getSafeInventory());
+
+				// Do the same thing but for the menu
+				((PlayerStorages) newPlayer).setTerrariaMenu(((PlayerStorages) oldPlayer).getTerrariaMenu());
 			}
 		});
 		PlayerEvent.PLAYER_JOIN.register(this::checkHardcore);

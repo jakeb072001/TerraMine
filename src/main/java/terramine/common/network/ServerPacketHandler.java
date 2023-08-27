@@ -20,8 +20,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.phys.Vec3;
 import terramine.TerraMine;
-import terramine.client.render.gui.TerrariaInventoryCreator;
-import terramine.client.render.gui.TerrariaInventoryHandler;
 import terramine.common.init.ModComponents;
 import terramine.common.init.ModItems;
 import terramine.common.network.packet.BoneMealPacket;
@@ -44,9 +42,8 @@ public class ServerPacketHandler {
     public static void register() {
         ServerPlayNetworking.registerGlobalReceiver(BONE_MEAL_PACKET_ID, BoneMealPacket::receive);
 
-        ServerPlayNetworking.registerGlobalReceiver(CONTROLS_PACKET_ID, (server, player, handler, buf, responseSender) -> {
-            UpdateInputPacket.onMessage(UpdateInputPacket.read(buf), server, player);
-        });
+        ServerPlayNetworking.registerGlobalReceiver(CONTROLS_PACKET_ID, (server, player, handler, buf, responseSender) ->
+                UpdateInputPacket.onMessage(UpdateInputPacket.read(buf), server, player));
 
         ServerPlayNetworking.registerGlobalReceiver(DASH_PACKET_ID, (server, player, handler, buf, responseSender) -> {
             boolean isGear = buf.readBoolean();
@@ -130,11 +127,8 @@ public class ServerPacketHandler {
             });
         });
 
-        ServerPlayNetworking.registerGlobalReceiver(SETUP_INVENTORY_PACKET_ID, (server, player, handler, buf, responseSender) -> {
-            server.execute(() -> {
-                player.openMenu(new SimpleMenuProvider((id, inventory, player2) -> ((PlayerStorages)player).getTerrariaMenu(), Component.empty()));
-            });
-        });
+        ServerPlayNetworking.registerGlobalReceiver(SETUP_INVENTORY_PACKET_ID, (server, player, handler, buf, responseSender) ->
+                server.execute(() -> player.openMenu(new SimpleMenuProvider((id, inventory, player2) -> ((PlayerStorages)player).getTerrariaMenu(), Component.empty()))));
 
         NetworkManager.registerReceiver(NetworkManager.s2c(), UPDATE_BIOME_PACKET_ID, (buf, context) -> {
             int chunkX = buf.readInt();

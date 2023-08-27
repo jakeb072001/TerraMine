@@ -26,7 +26,7 @@ import terramine.client.render.entity.renderer.projectiles.magic.RainbowMissileR
 import terramine.client.render.entity.renderer.projectiles.throwables.BombRenderer;
 import terramine.client.render.entity.renderer.projectiles.throwables.DynamiteRenderer;
 import terramine.client.render.entity.renderer.projectiles.throwables.GrenadeRenderer;
-import terramine.client.render.gui.TerrariaInventoryCreator;
+import terramine.client.render.gui.menu.TerrariaInventoryContainerMenu;
 import terramine.common.init.ModBlockEntityType;
 import terramine.common.init.ModBlocks;
 import terramine.common.init.ModEntities;
@@ -91,9 +91,9 @@ public class ModAllEntityRenderers {
         });
 
         ClientSpriteRegistryCallback.event(InventoryMenu.BLOCK_ATLAS).register((atlas, registry) -> {
-            registry.register(TerrariaInventoryCreator.EMPTY_ACCESSORY_SLOT);
-            registry.register(TerrariaInventoryCreator.EMPTY_ACCESSORY_VANITY_SLOT);
-            registry.register(TerrariaInventoryCreator.EMPTY_ACCESSORY_DYE_SLOT);
+            registry.register(TerrariaInventoryContainerMenu.EMPTY_ACCESSORY_SLOT);
+            registry.register(TerrariaInventoryContainerMenu.EMPTY_ACCESSORY_VANITY_SLOT);
+            registry.register(TerrariaInventoryContainerMenu.EMPTY_ACCESSORY_DYE_SLOT);
         });
     }
 }

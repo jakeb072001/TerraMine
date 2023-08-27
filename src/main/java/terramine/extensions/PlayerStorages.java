@@ -1,7 +1,7 @@
 package terramine.extensions;
 
 import net.minecraft.world.SimpleContainer;
-import terramine.client.render.gui.TerrariaInventoryCreator;
+import terramine.client.render.gui.menu.TerrariaInventoryContainerMenu;
 
 public interface PlayerStorages {
 
@@ -11,11 +11,13 @@ public interface PlayerStorages {
 
 	SimpleContainer getSafeInventory();
 
-	TerrariaInventoryCreator getTerrariaMenu();
+	TerrariaInventoryContainerMenu getTerrariaMenu();
 
 	void setTerrariaInventory(SimpleContainer terrariaInventory);
 
 	void setPiggyBankInventory(SimpleContainer piggyBankInventory);
 
 	void setSafeInventory(SimpleContainer safeInventory);
+
+	void setTerrariaMenu(TerrariaInventoryContainerMenu terrariaMenu);
 }

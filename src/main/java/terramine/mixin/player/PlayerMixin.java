@@ -18,7 +18,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import terramine.TerraMine;
-import terramine.client.render.gui.TerrariaInventoryCreator;
+import terramine.client.render.gui.menu.TerrariaInventoryContainerMenu;
 import terramine.common.entity.projectiles.FallingStarEntity;
 import terramine.common.init.ModComponents;
 import terramine.common.init.ModEntities;
@@ -38,7 +38,7 @@ public abstract class PlayerMixin extends LivingEntity implements PlayerStorages
 	SimpleContainer safeInventory = new SimpleContainer(40);
 
 	@Unique
-	TerrariaInventoryCreator terrariaMenu;
+	TerrariaInventoryContainerMenu terrariaMenu;
 
 	@Unique
 	private final RandomSource rand = RandomSource.create();
@@ -49,7 +49,7 @@ public abstract class PlayerMixin extends LivingEntity implements PlayerStorages
 
 	@Inject(method = "<init>", at = @At("TAIL"))
 	private void onInit(Level level, BlockPos blockPos, float f, GameProfile gameProfile, ProfilePublicKey profilePublicKey, CallbackInfo ci) {
-		terrariaMenu = new TerrariaInventoryCreator((Player)(Object)this);
+		setTerrariaMenu(new TerrariaInventoryContainerMenu((Player)(Object)this));
 	}
 
 	@Inject(method = "tick", at = @At("TAIL"))
@@ -93,7 +93,7 @@ public abstract class PlayerMixin extends LivingEntity implements PlayerStorages
 	}
 
 	@Override
-	public TerrariaInventoryCreator getTerrariaMenu() {
+	public TerrariaInventoryContainerMenu getTerrariaMenu() {
 		return this.terrariaMenu;
 	}
 
@@ -110,6 +110,11 @@ public abstract class PlayerMixin extends LivingEntity implements PlayerStorages
 	@Override
 	public void setSafeInventory(SimpleContainer safeInventory) {
 		this.safeInventory = safeInventory;
+	}
+
+	@Override
+	public void setTerrariaMenu(TerrariaInventoryContainerMenu terrariaMenu) {
+		this.terrariaMenu = terrariaMenu;
 	}
 
 	@Inject(method = "addAdditionalSaveData", at = @At("TAIL"))
@@ -146,7 +151,6 @@ public abstract class PlayerMixin extends LivingEntity implements PlayerStorages
 				simpleInventory.setItem(k, ItemStack.of(compoundTag));
 			}
 		}
-
 	}
 
 	@Unique

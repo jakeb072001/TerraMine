@@ -28,13 +28,13 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.ChestType;
 import org.jetbrains.annotations.NotNull;
 import terramine.TerraMine;
-import terramine.client.render.gui.ChestScreenCreator;
+import terramine.client.render.gui.menu.ChestBlockContainerMenu;
 
 import javax.annotation.Nullable;
 
 public class ChestEntity extends ChestBlockEntity {
     String name;
-    MenuType<ChestScreenCreator> menu;
+    MenuType<ChestBlockContainerMenu> menu;
     boolean trapped;
     private final ContainerOpenersCounter openersCounter = new ContainerOpenersCounter(){
         @Override
@@ -54,8 +54,8 @@ public class ChestEntity extends ChestBlockEntity {
 
         @Override
         protected boolean isOwnContainer(Player player) {
-            if (player.containerMenu instanceof ChestScreenCreator) {
-                Container container = ((ChestScreenCreator)player.containerMenu).getContainer();
+            if (player.containerMenu instanceof ChestBlockContainerMenu) {
+                Container container = ((ChestBlockContainerMenu)player.containerMenu).getContainer();
                 return container == ChestEntity.this || container instanceof CompoundContainer && ((CompoundContainer)container).contains(ChestEntity.this);
             }
             return false;
@@ -63,7 +63,7 @@ public class ChestEntity extends ChestBlockEntity {
     };
 
 
-    public ChestEntity(String name, MenuType<ChestScreenCreator> menu, BlockEntityType type, BlockPos pos, BlockState state) {
+    public ChestEntity(String name, MenuType<ChestBlockContainerMenu> menu, BlockEntityType type, BlockPos pos, BlockState state) {
         super(type, pos, state);
         this.name = name;
         this.menu = menu;
@@ -76,7 +76,7 @@ public class ChestEntity extends ChestBlockEntity {
 
     @Override
     public AbstractContainerMenu createMenu(int i, @NotNull Inventory inventory, @NotNull Player player) {
-        return new ChestScreenCreator(40, menu, i, inventory, ContainerLevelAccess.create(level, getBlockPos()));
+        return new ChestBlockContainerMenu(40, menu, i, inventory, ContainerLevelAccess.create(level, getBlockPos()));
     }
 
     @Override

@@ -1,4 +1,4 @@
-package terramine.client.render.gui;
+package terramine.client.render.gui.screen;
 
 import com.google.common.collect.Lists;
 import com.mojang.blaze3d.platform.Lighting;
@@ -30,13 +30,16 @@ import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import terramine.TerraMine;
+import terramine.client.render.gui.menu.TerrariaInventoryContainerMenu;
 import terramine.common.init.ModComponents;
 import terramine.extensions.PlayerStorages;
 
 import java.util.List;
 
+// todo: sometimes when clicking a slot the item isn't picked up or placed down
+// todo: also items aren't thrown when clicking outside screen, hasClickedOutside is working correctly so not sure why this is happening
 @Environment(EnvType.CLIENT)
-public class TerrariaInventoryHandler extends EffectRenderingInventoryScreen<TerrariaInventoryCreator> {
+public class TerrariaInventoryScreen extends EffectRenderingInventoryScreen<TerrariaInventoryContainerMenu> {
     private static final ResourceLocation BUTTON_TEX = TerraMine.id("textures/gui/terraria_slots_button.png");
     private static final ResourceLocation TERRARIA_CONTAINER_5 = TerraMine.id("textures/gui/container/terraria_slots_5.png");
     private static final ResourceLocation TERRARIA_CONTAINER_6 = TerraMine.id("textures/gui/container/terraria_slots_6.png");
@@ -45,17 +48,16 @@ public class TerrariaInventoryHandler extends EffectRenderingInventoryScreen<Ter
     private float yMouse;
     private final int imageWidth = 176;
     private final int imageHeight = 218;
-    private boolean widthTooNarrow;
     private boolean buttonClicked;
 
-    public TerrariaInventoryHandler(Player player) {
+    public TerrariaInventoryScreen(Player player) {
         super(((PlayerStorages)player).getTerrariaMenu(), player.getInventory(), Component.empty());
         this.passEvents = true;
     }
 
     protected void init() {
         super.init();
-        this.widthTooNarrow = this.width < 379;
+        this.minecraft.keyboardHandler.setSendRepeatsToGui(true);
         if (this.minecraft.gameMode.hasInfiniteItems()) {
             this.addRenderableWidget(new ImageButton(this.leftPos + 105, this.height / 2 - 40, 8, 8, 0, 0, 8, BUTTON_TEX, 8, 16, (buttonWidget) -> {
                 this.minecraft.setScreen(new CreativeModeInventoryScreen(this.minecraft.player));
@@ -75,12 +77,7 @@ public class TerrariaInventoryHandler extends EffectRenderingInventoryScreen<Ter
 
     public void render(@NotNull PoseStack poseStack, int i, int j, float f) {
         this.renderBackground(poseStack);
-        if (this.widthTooNarrow) {
-            this.renderBg(poseStack, f, i, j);
-        } else {
-            super.render(poseStack, i, j, f);
-        }
-
+        super.render(poseStack, i, j, f);
         this.renderTooltip(poseStack, i, j);
         this.xMouse = (float)i;
         this.yMouse = (float)j;
@@ -96,10 +93,10 @@ public class TerrariaInventoryHandler extends EffectRenderingInventoryScreen<Ter
         } else {
             RenderSystem.setShaderTexture(0, TERRARIA_CONTAINER_5);
         }
-        int k = this.leftPos;
-        int l = this.topPos - 26;
-        blit(poseStack, k, l, this.getBlitOffset(), (float)0, (float)0, this.imageWidth, this.imageHeight, this.imageWidth, this.imageHeight);
-        renderEntityInInventory(k + 88, l + 71, 30, (float)(k + 51) - this.xMouse, (float)(l + 75 - 50) - this.yMouse, this.minecraft.player);
+        int k = (this.width - this.imageWidth) / 2;
+        int l = (this.height - this.imageHeight) / 2;
+        blit(poseStack, k, l, this.getBlitOffset(), 0f, 0f, this.imageWidth, this.imageHeight, this.imageWidth, this.imageHeight);
+        renderEntityInInventory(k + 88, l + 71, 30, (k + 51f) - this.xMouse, l + 75f - 50f - this.yMouse, this.minecraft.player);
     }
 
     public static void renderEntityInInventory(int i, int j, int k, float f, float g, LivingEntity livingEntity) {
@@ -149,11 +146,11 @@ public class TerrariaInventoryHandler extends EffectRenderingInventoryScreen<Ter
     }
 
     protected boolean isHovering(int i, int j, int k, int l, double d, double e) {
-        return (!this.widthTooNarrow) && super.isHovering(i, j, k, l, d, e);
+        return super.isHovering(i, j, k, l, d, e);
     }
 
     public boolean mouseClicked(double d, double e, int i) {
-        return !this.widthTooNarrow && super.mouseClicked(d, e, i);
+        return super.mouseClicked(d, e, i);
     }
 
     public boolean mouseReleased(double d, double e, int i) {
@@ -207,5 +204,6 @@ public class TerrariaInventoryHandler extends EffectRenderingInventoryScreen<Ter
 
     public void removed() {
         super.removed();
+        this.minecraft.keyboardHandler.setSendRepeatsToGui(false);
     }
 }

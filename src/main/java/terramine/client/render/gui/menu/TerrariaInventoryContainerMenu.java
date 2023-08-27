@@ -1,4 +1,4 @@
-package terramine.client.render.gui;
+package terramine.client.render.gui.menu;
 
 import com.mojang.datafixers.util.Pair;
 import net.minecraft.resources.ResourceLocation;
@@ -17,7 +17,7 @@ import terramine.common.init.ModScreenHandlerType;
 import terramine.common.item.accessories.TrinketTerrariaItem;
 import terramine.extensions.PlayerStorages;
 
-public class TerrariaInventoryCreator extends AbstractContainerMenu {
+public class TerrariaInventoryContainerMenu extends AbstractContainerMenu {
     public static final ResourceLocation EMPTY_ARMOR_SLOT_HELMET = new ResourceLocation("item/empty_armor_slot_helmet");
     public static final ResourceLocation EMPTY_ARMOR_SLOT_CHESTPLATE = new ResourceLocation("item/empty_armor_slot_chestplate");
     public static final ResourceLocation EMPTY_ARMOR_SLOT_LEGGINGS = new ResourceLocation("item/empty_armor_slot_leggings");
@@ -28,7 +28,7 @@ public class TerrariaInventoryCreator extends AbstractContainerMenu {
     static final ResourceLocation[] TEXTURE_EMPTY_SLOTS;
     private static final EquipmentSlot[] SLOT_IDS;
 
-    public TerrariaInventoryCreator(final Player player) {
+    public TerrariaInventoryContainerMenu(final Player player) {
         super(ModScreenHandlerType.TERRARIA_CONTAINER, 10);
         addSlots(player);
     }
@@ -114,7 +114,6 @@ public class TerrariaInventoryCreator extends AbstractContainerMenu {
     }
 
     private void createAccessorySlots(Player player, SimpleContainer terrariaInventory, ResourceLocation texture, int accessoryType) {
-        // todo: on death, items are removed from inventory on client side, after reloading world items appear again
         for(int i = 0; i < 7; ++i) {
             int k = i;
             this.addSlot(new Slot(terrariaInventory, i + (accessoryType * 7), 116 + (accessoryType * 18), -18 + i * 18) {
