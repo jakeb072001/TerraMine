@@ -4,26 +4,25 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
-import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.Vec3;
 import terramine.common.init.ModItems;
-import terramine.common.item.accessories.TrinketTerrariaItem;
+import terramine.common.item.accessories.AccessoryTerrariaItem;
 import terramine.common.network.ServerPacketHandler;
 import terramine.common.utility.InputHandler;
 
-public class MasterNinjaGearItem extends TrinketTerrariaItem {
+// todo: make work without a packet, curioTick runs on both client and server so it should work fine, do same for Tabi
+public class MasterNinjaGearItem extends AccessoryTerrariaItem {
 
 	public boolean upPressed, downPressed, leftPressed, rightPressed;
 	public boolean upKeyUnpressed, downKeyUnpressed, leftKeyUnpressed, rightKeyUnpressed;
 	public int timer;
 
-	@Environment(EnvType.CLIENT)
     @Override
-	protected void curioTick(LivingEntity livingEntity, ItemStack stack) {
-		if (livingEntity instanceof LocalPlayer player) {
+	protected void curioTick(Player player, ItemStack stack) {
+		if (player.level.isClientSide) {
 			if (timer++ >= 6) {
 				if (upPressed) {
 					upPressed = false;

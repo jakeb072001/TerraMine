@@ -1,6 +1,5 @@
 package terramine.client.integrations;
 
-import dev.lambdaurora.lambdynlights.api.DynamicLightHandler;
 import dev.lambdaurora.lambdynlights.api.DynamicLightHandlers;
 import dev.lambdaurora.lambdynlights.api.DynamicLightsInitializer;
 import terramine.common.init.ModEntities;

@@ -1,9 +1,9 @@
 package terramine.common.init;
 
 import net.minecraft.client.gui.screens.MenuScreens;
-import terramine.client.render.gui.screen.ChestBlockScreen;
 import terramine.client.render.gui.menu.ChestBlockContainerMenu;
 import terramine.client.render.gui.menu.TerrariaInventoryContainerMenu;
+import terramine.client.render.gui.screen.ChestBlockScreen;
 import terramine.client.render.gui.screen.TerrariaInventoryScreen;
 
 public class ModScreenHandler {

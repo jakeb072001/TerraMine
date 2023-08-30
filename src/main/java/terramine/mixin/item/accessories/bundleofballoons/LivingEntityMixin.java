@@ -18,8 +18,8 @@ import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import terramine.common.init.ModComponents;
 import terramine.common.init.ModItems;
-import terramine.common.item.accessories.belt.BundleOfBalloonsItem;
-import terramine.common.trinkets.TrinketsHelper;
+import terramine.common.item.accessories.hands.BundleOfBalloonsItem;
+import terramine.common.misc.AccessoriesHelper;
 import terramine.common.utility.equipmentchecks.WingsEquippedCheck;
 import terramine.extensions.LivingEntityExtensions;
 
@@ -61,7 +61,7 @@ public abstract class LivingEntityMixin extends Entity implements LivingEntityEx
 
 	@ModifyVariable(method = "causeFallDamage", ordinal = 0, at = @At("HEAD"), argsOnly = true)
 	private float reduceFallDistance(float fallDistance) {
-		if (TrinketsHelper.isEquipped(ModItems.BUNDLE_OF_BALLOONS, (LivingEntity) (Object) this)) {
+		if (AccessoriesHelper.isEquipped(ModItems.BUNDLE_OF_BALLOONS, (LivingEntity) (Object) this)) {
 			fallDistance = Math.max(0, fallDistance - 3);
 		}
 
@@ -90,7 +90,7 @@ public abstract class LivingEntityMixin extends Entity implements LivingEntityEx
 
 		boolean flying = player.getAbilities().flying;
 		if (this.jumping && this.jumpWasReleased && !this.isInWater() && !this.isOnGround() && !this.isPassenger()
-				&& !flying && TrinketsHelper.isEquipped(ModItems.BUNDLE_OF_BALLOONS, player)) {
+				&& !flying && AccessoriesHelper.isEquipped(ModItems.BUNDLE_OF_BALLOONS, player)) {
 			if (!this.hasDoubleJumped || !this.hasTripleJumped || !this.hasQuadrupleJumped) {
 				this.terramine$doubleJump();
 				if (this.hasDoubleJumped) {

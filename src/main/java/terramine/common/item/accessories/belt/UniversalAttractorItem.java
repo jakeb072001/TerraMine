@@ -1,23 +1,23 @@
 package terramine.common.item.accessories.belt;
 
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import terramine.common.init.ModComponents;
-import terramine.common.item.accessories.TrinketTerrariaItem;
+import terramine.common.item.accessories.AccessoryTerrariaItem;
 
 import java.util.List;
 
-public class UniversalAttractorItem extends TrinketTerrariaItem {
+public class UniversalAttractorItem extends AccessoryTerrariaItem {
 
     @Override
 	// Magnet logic from Botania, see https://github.com/Vazkii/Botania
-	protected void curioTick(LivingEntity livingEntity, ItemStack stack) {
-		Vec3 playerPos = livingEntity.position().add(0, 0.75, 0);
+	protected void curioTick(Player player, ItemStack stack) {
+		Vec3 playerPos = player.position().add(0, 0.75, 0);
 		AABB itemRange = new AABB(playerPos, playerPos).inflate(5);
-		List<ItemEntity> items = livingEntity.level.getEntitiesOfClass(ItemEntity.class, itemRange);
+		List<ItemEntity> items = player.level.getEntitiesOfClass(ItemEntity.class, itemRange);
 
 		int pulled = 0;
 		for (ItemEntity item : items) {

@@ -7,7 +7,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import terramine.common.init.ModItems;
-import terramine.common.trinkets.TrinketsHelper;
+import terramine.common.misc.AccessoriesHelper;
 
 @Mixin(Gui.class)
 public abstract class GuiMixin {
@@ -18,6 +18,6 @@ public abstract class GuiMixin {
 	@ModifyExpressionValue(method = "renderPlayerHealth", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/player/Player;isEyeInFluid(Lnet/minecraft/tags/TagKey;)Z"))
 	private boolean doNotShowAir(boolean inWater) {
 		Player player = this.getCameraPlayer();
-		return inWater && !(TrinketsHelper.isEquipped(ModItems.NEPTUNE_SHELL, player) || TrinketsHelper.isEquipped(ModItems.MOON_SHELL, player) || TrinketsHelper.isEquipped(ModItems.CELESTIAL_SHELL, player));
+		return inWater && !(AccessoriesHelper.isEquipped(ModItems.NEPTUNE_SHELL, player) || AccessoriesHelper.isEquipped(ModItems.MOON_SHELL, player) || AccessoriesHelper.isEquipped(ModItems.CELESTIAL_SHELL, player));
 	}
 }

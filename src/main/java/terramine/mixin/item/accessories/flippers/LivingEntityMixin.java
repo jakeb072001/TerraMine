@@ -7,7 +7,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
 import org.spongepowered.asm.mixin.injection.Slice;
 import terramine.common.init.ModItems;
-import terramine.common.trinkets.TrinketsHelper;
+import terramine.common.misc.AccessoriesHelper;
 import terramine.extensions.LivingEntityExtensions;
 
 @Mixin(LivingEntity.class)
@@ -35,9 +35,9 @@ public abstract class LivingEntityMixin implements LivingEntityExtensions {
 	@Override
 	public double terramine$getIncreasedSwimSpeed(double speed) {
 		LivingEntity entity = (LivingEntity) (Object) this;
-		if (TrinketsHelper.isEquipped(ModItems.FLIPPERS, entity) || TrinketsHelper.isEquipped(ModItems.DIVING_GEAR, entity)
-				|| TrinketsHelper.isEquipped(ModItems.NEPTUNE_SHELL, entity) || TrinketsHelper.isEquipped(ModItems.MOON_SHELL, entity)
-				|| TrinketsHelper.isEquipped(ModItems.CELESTIAL_SHELL, entity)) {
+		if (AccessoriesHelper.isEquipped(ModItems.FLIPPERS, entity) || AccessoriesHelper.isEquipped(ModItems.DIVING_GEAR, entity)
+				|| AccessoriesHelper.isEquipped(ModItems.NEPTUNE_SHELL, entity) || AccessoriesHelper.isEquipped(ModItems.MOON_SHELL, entity)
+				|| AccessoriesHelper.isEquipped(ModItems.CELESTIAL_SHELL, entity)) {
 			return speed * 2;
 		} else {
 			return speed;

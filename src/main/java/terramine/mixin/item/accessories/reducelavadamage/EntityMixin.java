@@ -11,7 +11,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import terramine.common.init.ModComponents;
 import terramine.common.init.ModItems;
-import terramine.common.trinkets.TrinketsHelper;
+import terramine.common.misc.AccessoriesHelper;
 
 @Mixin(Entity.class)
 public abstract class EntityMixin {
@@ -40,7 +40,7 @@ public abstract class EntityMixin {
     }
 
     private boolean isLavaCharmEquipped(LivingEntity player) {
-        return TrinketsHelper.isEquipped(ModItems.LAVA_CHARM, player) || TrinketsHelper.isEquipped(ModItems.MOLTEN_CHARM, player)
-                || TrinketsHelper.isEquipped(ModItems.LAVA_WADERS, player) || TrinketsHelper.isEquipped(ModItems.TERRASPARK_BOOTS, player);
+        return AccessoriesHelper.isEquipped(ModItems.LAVA_CHARM, player) || AccessoriesHelper.isEquipped(ModItems.MOLTEN_CHARM, player)
+                || AccessoriesHelper.isEquipped(ModItems.LAVA_WADERS, player) || AccessoriesHelper.isEquipped(ModItems.TERRASPARK_BOOTS, player);
     }
 }

@@ -27,8 +27,8 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import terramine.common.init.ModComponents;
 import terramine.common.init.ModItems;
+import terramine.common.misc.AccessoriesHelper;
 import terramine.common.network.ServerPacketHandler;
-import terramine.common.trinkets.TrinketsHelper;
 import terramine.common.utility.InputHandler;
 
 import java.util.HashSet;
@@ -55,16 +55,16 @@ public abstract class PlayerMixin extends AbstractClientPlayer {
     @Inject(method = "tick", at = @At("TAIL"))
     private void wallJumpTickMovement(CallbackInfo ci) {
         if (mc.gameMode != null && !mc.gameMode.hasInfiniteItems()) {
-            if (TrinketsHelper.isEquipped(ModItems.SHOE_SPIKES, this) || TrinketsHelper.isEquipped(ModItems.CLIMBING_CLAWS, this) || TrinketsHelper.isEquipped(ModItems.TIGER_CLIMBING_GEAR, this)
-                    || TrinketsHelper.isEquipped(ModItems.MASTER_NINJA_GEAR, this)) {
+            if (AccessoriesHelper.isEquipped(ModItems.SHOE_SPIKES, this) || AccessoriesHelper.isEquipped(ModItems.CLIMBING_CLAWS, this) || AccessoriesHelper.isEquipped(ModItems.TIGER_CLIMBING_GEAR, this)
+                    || AccessoriesHelper.isEquipped(ModItems.MASTER_NINJA_GEAR, this)) {
                 this.doWallJump();
             }
         }
     }
 
-    private boolean checkTrinkets() {
-        return (TrinketsHelper.isEquipped(ModItems.SHOE_SPIKES, this) && TrinketsHelper.isEquipped(ModItems.CLIMBING_CLAWS, this)) || TrinketsHelper.isEquipped(ModItems.TIGER_CLIMBING_GEAR, this)
-                || TrinketsHelper.isEquipped(ModItems.MASTER_NINJA_GEAR, this);
+    private boolean checkAccessories() {
+        return (AccessoriesHelper.isEquipped(ModItems.SHOE_SPIKES, this) && AccessoriesHelper.isEquipped(ModItems.CLIMBING_CLAWS, this)) || AccessoriesHelper.isEquipped(ModItems.TIGER_CLIMBING_GEAR, this)
+                || AccessoriesHelper.isEquipped(ModItems.MASTER_NINJA_GEAR, this);
     }
 
 
@@ -81,10 +81,10 @@ public abstract class PlayerMixin extends AbstractClientPlayer {
 
         this.updateWalls();
         this.ticksKeyDown = InputHandler.isHoldingShift(this) ? this.ticksKeyDown + 1 : 0;
-        boolean trinketCheck = checkTrinkets();
+        boolean accessoryCheck = checkAccessories();
 
         if(this.ticksWallClinged < 1) {
-            if (!trinketCheck) {
+            if (!accessoryCheck) {
                 if (this.ticksKeyDown > 0 && this.ticksKeyDown < 4 && !this.walls.isEmpty() && this.canWallCling()) {
                     this.ticksWallClinged = 1;
                     this.clingX = this.getX();
@@ -134,7 +134,7 @@ public abstract class PlayerMixin extends AbstractClientPlayer {
 
         this.setPos(this.clingX, this.getY(), this.clingZ);
         double motionY = this.getDeltaMovement().y();
-        if (!trinketCheck) {
+        if (!accessoryCheck) {
             if (motionY > 0.0) {
                 motionY = 0.0;
             } else if (motionY < -0.6) {

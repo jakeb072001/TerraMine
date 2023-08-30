@@ -10,8 +10,8 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import terramine.common.init.ModItems;
-import terramine.common.item.accessories.TrinketTerrariaItem;
-import terramine.common.trinkets.TrinketsHelper;
+import terramine.common.item.accessories.AccessoryTerrariaItem;
+import terramine.common.misc.AccessoriesHelper;
 
 import java.util.UUID;
 
@@ -37,19 +37,19 @@ public abstract class PlayerMixin {
 		AttributeInstance armorAdd = self.getAttribute(Attributes.ARMOR);
 
 		if (knockbackResist != null && armorAdd != null) {
-			if (self.getMainHandItem().is(ModItems.COBALT_SHIELD) || self.getOffhandItem().is(ModItems.COBALT_SHIELD) || TrinketsHelper.isEquipped(ModItems.COBALT_SHIELD, self)) {
-				TrinketTerrariaItem.addModifier(knockbackResist, KNOCKBACK_RESISTANCE);
-				TrinketTerrariaItem.addModifier(armorAdd, ARMOR_ADD_ONE);
+			if (self.getMainHandItem().is(ModItems.COBALT_SHIELD) || self.getOffhandItem().is(ModItems.COBALT_SHIELD) || AccessoriesHelper.isEquipped(ModItems.COBALT_SHIELD, self)) {
+				AccessoryTerrariaItem.addModifier(knockbackResist, KNOCKBACK_RESISTANCE);
+				AccessoryTerrariaItem.addModifier(armorAdd, ARMOR_ADD_ONE);
 			} else {
-				TrinketTerrariaItem.removeModifier(knockbackResist, KNOCKBACK_RESISTANCE);
-				TrinketTerrariaItem.removeModifier(armorAdd, ARMOR_ADD_ONE);
+				AccessoryTerrariaItem.removeModifier(knockbackResist, KNOCKBACK_RESISTANCE);
+				AccessoryTerrariaItem.removeModifier(armorAdd, ARMOR_ADD_ONE);
 			}
-			if (self.getMainHandItem().is(ModItems.OBSIDIAN_SHIELD) || self.getOffhandItem().is(ModItems.OBSIDIAN_SHIELD) || TrinketsHelper.isEquipped(ModItems.OBSIDIAN_SHIELD, self)) {
-				TrinketTerrariaItem.addModifier(knockbackResist, KNOCKBACK_RESISTANCE);
-				TrinketTerrariaItem.addModifier(armorAdd, ARMOR_ADD_TWO);
+			if (self.getMainHandItem().is(ModItems.OBSIDIAN_SHIELD) || self.getOffhandItem().is(ModItems.OBSIDIAN_SHIELD) || AccessoriesHelper.isEquipped(ModItems.OBSIDIAN_SHIELD, self)) {
+				AccessoryTerrariaItem.addModifier(knockbackResist, KNOCKBACK_RESISTANCE);
+				AccessoryTerrariaItem.addModifier(armorAdd, ARMOR_ADD_TWO);
 			} else {
-				TrinketTerrariaItem.removeModifier(knockbackResist, KNOCKBACK_RESISTANCE);
-				TrinketTerrariaItem.removeModifier(armorAdd, ARMOR_ADD_TWO);
+				AccessoryTerrariaItem.removeModifier(knockbackResist, KNOCKBACK_RESISTANCE);
+				AccessoryTerrariaItem.removeModifier(armorAdd, ARMOR_ADD_TWO);
 			}
 		}
 	}

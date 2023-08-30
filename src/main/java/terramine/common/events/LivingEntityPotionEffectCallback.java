@@ -9,7 +9,7 @@ import net.minecraft.world.entity.LivingEntity;
 import javax.annotation.Nullable;
 
 /**
- * Callback for increasing potion duration with trinkets
+ * Callback for increasing potion duration with accessories
  */
 public interface LivingEntityPotionEffectCallback {
 

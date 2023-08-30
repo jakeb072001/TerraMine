@@ -10,7 +10,7 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.player.Player;
 import terramine.common.init.ModComponents;
 import terramine.common.init.ModItems;
-import terramine.common.trinkets.TrinketsHelper;
+import terramine.common.misc.AccessoriesHelper;
 
 @SuppressWarnings("UnstableApiUsage")
 public class LavaImmunityComponent implements PlayerComponent<Component>, AutoSyncedComponent {
@@ -34,7 +34,7 @@ public class LavaImmunityComponent implements PlayerComponent<Component>, AutoSy
         int maxImmunityTimer = 140;
 
         if (provider.isInLava() && !provider.hasEffect(MobEffects.FIRE_RESISTANCE)) {
-            if (immunityTimer > 0 && getEquippedTrinkets(provider)) {
+            if (immunityTimer > 0 && getEquippedAccessories(provider)) {
                 --immunityTimer;
             }
         } else {
@@ -67,8 +67,8 @@ public class LavaImmunityComponent implements PlayerComponent<Component>, AutoSy
         this.setLavaImmunityTimer(buf.readInt());
     }
 
-    private boolean getEquippedTrinkets(Player player) {
-        return TrinketsHelper.isEquipped(ModItems.TERRASPARK_BOOTS, player) || TrinketsHelper.isEquipped(ModItems.LAVA_WADERS, player) ||
-                TrinketsHelper.isEquipped(ModItems.MOLTEN_CHARM, player) || TrinketsHelper.isEquipped(ModItems.LAVA_CHARM, player);
+    private boolean getEquippedAccessories(Player player) {
+        return AccessoriesHelper.isEquipped(ModItems.TERRASPARK_BOOTS, player) || AccessoriesHelper.isEquipped(ModItems.LAVA_WADERS, player) ||
+                AccessoriesHelper.isEquipped(ModItems.MOLTEN_CHARM, player) || AccessoriesHelper.isEquipped(ModItems.LAVA_CHARM, player);
     }
 }

@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import terramine.common.item.accessories.ShieldTrinketItem;
+import terramine.common.item.accessories.ShieldAccessoryItem;
 import terramine.extensions.ItemExtensions;
 
 @Mixin(Mob.class)
@@ -23,7 +23,7 @@ public abstract class MobMixin extends LivingEntity {
 
     @Inject(at = @At("HEAD"), method = "maybeDisableShield")
     public void maybeDisableShield(Player player, ItemStack itemStack, ItemStack itemStack2, CallbackInfo info) {
-        if (!itemStack.isEmpty() && !itemStack2.isEmpty() && ((ItemExtensions) itemStack.getItem()).canDisableShield(itemStack, itemStack2, player, this) && (itemStack2.getItem() instanceof ShieldItem || itemStack2.getItem() instanceof ShieldTrinketItem)) {
+        if (!itemStack.isEmpty() && !itemStack2.isEmpty() && ((ItemExtensions) itemStack.getItem()).canDisableShield(itemStack, itemStack2, player, this) && (itemStack2.getItem() instanceof ShieldItem || itemStack2.getItem() instanceof ShieldAccessoryItem)) {
             float f = 0.25F + (float) EnchantmentHelper.getBlockEfficiency(this) * 0.05F;
             if (this.random.nextFloat() < f) {
                 player.getCooldowns().addCooldown(itemStack2.getItem(), 100);

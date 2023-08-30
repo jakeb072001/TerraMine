@@ -54,6 +54,7 @@
   "client": [
     "client.GuiMixin",
     "client.render.ArmorFeatureRendererMixin",
+    "client.render.LivingEntityRendererMixin",
     "client.render.PlayerRendererMixin",
     "event.client.LivingEntityMixin",
     "item.accessories.compass.client.GuiMixin",

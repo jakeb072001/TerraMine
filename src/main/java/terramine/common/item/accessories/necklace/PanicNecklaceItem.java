@@ -7,17 +7,17 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
 import terramine.common.events.LivingEntityHurtCallback;
 import terramine.common.init.ModItems;
-import terramine.common.item.accessories.TrinketTerrariaItem;
-import terramine.common.trinkets.TrinketsHelper;
+import terramine.common.item.accessories.AccessoryTerrariaItem;
+import terramine.common.misc.AccessoriesHelper;
 
-public class PanicNecklaceItem extends TrinketTerrariaItem {
+public class PanicNecklaceItem extends AccessoryTerrariaItem {
 
 	public PanicNecklaceItem() {
         LivingEntityHurtCallback.EVENT.register(PanicNecklaceItem::applyEffects);
 	}
 
 	private static void applyEffects(LivingEntity user, DamageSource source, float amount) {
-		if (!user.level.isClientSide && amount >= 1 && TrinketsHelper.isEquipped(ModItems.PANIC_NECKLACE, user)) {
+		if (!user.level.isClientSide && amount >= 1 && AccessoriesHelper.isEquipped(ModItems.PANIC_NECKLACE, user)) {
 			user.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 160, 0, false, false));
 		}
 	}

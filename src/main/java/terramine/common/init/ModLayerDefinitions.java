@@ -4,6 +4,7 @@ import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.model.geom.builders.MeshDefinition;
+import terramine.client.render.accessory.model.*;
 import terramine.client.render.entity.model.misc.FallingStarModel;
 import terramine.client.render.entity.model.misc.MeteoriteModel;
 import terramine.client.render.entity.model.monsters.*;
@@ -11,7 +12,6 @@ import terramine.client.render.entity.model.projectiles.magic.LaserModel;
 import terramine.client.render.entity.model.projectiles.throwables.BombModel;
 import terramine.client.render.entity.model.projectiles.throwables.DynamiteModel;
 import terramine.client.render.entity.model.projectiles.throwables.GrenadeModel;
-import terramine.client.render.trinket.model.*;
 
 public class ModLayerDefinitions {
 

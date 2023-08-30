@@ -37,7 +37,7 @@ public abstract class InventoryScreenMixin extends EffectRenderingInventoryScree
         if (!this.minecraft.gameMode.hasInfiniteItems()) {
             this.addRenderableWidget(new ImageButton(this.leftPos + 66, this.height / 2 - 14, 8, 8, 0, 0, 8, BUTTON_TEX, 8, 16, (buttonWidget) -> {
                 //this.minecraft.setScreen(new TerrariaInventoryHandler(this.minecraft.player));
-                ClientPlayNetworking.send(ServerPacketHandler.SETUP_INVENTORY_PACKET_ID, new FriendlyByteBuf(Unpooled.buffer()));
+                ClientPlayNetworking.send(ServerPacketHandler.OPEN_INVENTORY_PACKET_ID, new FriendlyByteBuf(Unpooled.buffer()));
                 this.buttonClicked = true;
             }));
         }

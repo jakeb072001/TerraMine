@@ -27,6 +27,7 @@ import terramine.common.network.packet.UpdateInputPacket;
 import terramine.extensions.PlayerStorages;
 
 public class ServerPacketHandler {
+    // Server
     public static final ResourceLocation BONE_MEAL_PACKET_ID = TerraMine.id("bone_meal");
     public static final ResourceLocation FALL_DISTANCE_PACKET_ID = TerraMine.id("fall_distance");
     public static final ResourceLocation WALL_JUMP_PACKET_ID = TerraMine.id("wall_jump");
@@ -36,6 +37,9 @@ public class ServerPacketHandler {
     public static final ResourceLocation ROCKET_BOOTS_SOUND_PACKET_ID = TerraMine.id("rocket_boots_sound");
     public static final ResourceLocation ROCKET_BOOTS_PARTICLE_PACKET_ID = TerraMine.id("rocket_boots_particles");
     public static final ResourceLocation UPDATE_BIOME_PACKET_ID = TerraMine.id("update_biome");
+    public static final ResourceLocation OPEN_INVENTORY_PACKET_ID = TerraMine.id("open_inventory");
+
+    // Client
     public static final ResourceLocation SETUP_INVENTORY_PACKET_ID = TerraMine.id("setup_inventory");
     public static final ResourceLocation UPDATE_ACCESSORY_VISIBILITY_PACKET_ID = TerraMine.id("update_accessory_visibility");
 
@@ -127,7 +131,7 @@ public class ServerPacketHandler {
             });
         });
 
-        ServerPlayNetworking.registerGlobalReceiver(SETUP_INVENTORY_PACKET_ID, (server, player, handler, buf, responseSender) ->
+        ServerPlayNetworking.registerGlobalReceiver(OPEN_INVENTORY_PACKET_ID, (server, player, handler, buf, responseSender) ->
                 server.execute(() -> player.openMenu(new SimpleMenuProvider((id, inventory, player2) -> ((PlayerStorages)player).getTerrariaMenu(), Component.empty()))));
 
         NetworkManager.registerReceiver(NetworkManager.s2c(), UPDATE_BIOME_PACKET_ID, (buf, context) -> {
@@ -141,6 +145,12 @@ public class ServerPacketHandler {
 
     @Environment(EnvType.CLIENT)
     public static void registerClient() {
+        ClientPlayNetworking.registerGlobalReceiver(SETUP_INVENTORY_PACKET_ID, (client, handler, buffer, responseSender) -> {
+            int slot = buffer.readInt();
+            ItemStack itemStack = buffer.readItem();
+            client.execute(() -> ((PlayerStorages)client.player).getTerrariaInventory().setItem(slot, itemStack));
+        });
+
         ClientPlayNetworking.registerGlobalReceiver(UPDATE_ACCESSORY_VISIBILITY_PACKET_ID, (client, handler, buffer, responseSender) -> {
             int[] bufferArray = buffer.readVarIntArray();
             int entityId = bufferArray[0];

@@ -1,11 +1,6 @@
 {
   "magic_mirror.fail": "스폰 포인트를 찾을 수 없음",
   "stat.terramine.mana_used": "사용된 마나",
-  "trinkets.slot.terraria.accessory1": "장신구 슬롯 1",
-  "trinkets.slot.terraria.accessory2": "장신구 슬롯 2",
-  "trinkets.slot.terraria.accessory3": "장신구 슬롯 3",
-  "trinkets.slot.terraria.accessory4": "장신구 슬롯 4",
-  "trinkets.slot.terraria.accessory5": "장신구 슬롯 5",
   "terramine.status.allenabled": "효과 & 치장",
   "terramine.status.cosmeticonly": "치장만 적용",
   "terramine.status.effectsonly": "효과만 적용",

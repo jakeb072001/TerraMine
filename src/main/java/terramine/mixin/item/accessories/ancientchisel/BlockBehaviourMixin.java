@@ -11,7 +11,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import terramine.common.init.ModItems;
 import terramine.common.init.ModMobEffects;
-import terramine.common.trinkets.TrinketsHelper;
+import terramine.common.misc.AccessoriesHelper;
 
 @Mixin(BlockBehaviour.class)
 public class BlockBehaviourMixin {
@@ -19,7 +19,7 @@ public class BlockBehaviourMixin {
     @Inject(at = @At("RETURN"), method = "getDestroyProgress", cancellable = true)
     private void modifyBlockBreakSpeed(BlockState state, Player player, BlockGetter world, BlockPos pos, CallbackInfoReturnable<Float> info) {
         float speed = info.getReturnValue();
-        if (TrinketsHelper.isEquipped(ModItems.ANCIENT_CHISEL, player)) {
+        if (AccessoriesHelper.isEquipped(ModItems.ANCIENT_CHISEL, player)) {
             speed = (float) (speed * 1.25);
         }
         if (player.hasEffect(ModMobEffects.MINING_SPEED)) {
@@ -32,7 +32,7 @@ public class BlockBehaviourMixin {
     }
 
     private boolean celestialStoneCheck(Player player) {
-        return ((TrinketsHelper.isEquipped(ModItems.SUN_STONE, player) && !player.level.isNight()) || (TrinketsHelper.isEquipped(ModItems.MOON_STONE, player) && player.level.isNight())
-                || TrinketsHelper.isEquipped(ModItems.CELESTIAL_STONE, player) || TrinketsHelper.isEquipped(ModItems.CELESTIAL_SHELL, player));
+        return ((AccessoriesHelper.isEquipped(ModItems.SUN_STONE, player) && !player.level.isNight()) || (AccessoriesHelper.isEquipped(ModItems.MOON_STONE, player) && player.level.isNight())
+                || AccessoriesHelper.isEquipped(ModItems.CELESTIAL_STONE, player) || AccessoriesHelper.isEquipped(ModItems.CELESTIAL_SHELL, player));
     }
 }

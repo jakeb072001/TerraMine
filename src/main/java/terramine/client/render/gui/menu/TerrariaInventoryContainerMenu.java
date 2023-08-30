@@ -2,19 +2,21 @@ package terramine.client.render.gui.menu;
 
 import com.mojang.datafixers.util.Pair;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.inventory.*;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.InventoryMenu;
+import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import org.jetbrains.annotations.NotNull;
 import terramine.TerraMine;
 import terramine.common.init.ModComponents;
 import terramine.common.init.ModScreenHandlerType;
-import terramine.common.item.accessories.TrinketTerrariaItem;
+import terramine.common.item.accessories.AccessoryTerrariaItem;
+import terramine.common.misc.TerrariaInventory;
 import terramine.extensions.PlayerStorages;
 
 public class TerrariaInventoryContainerMenu extends AbstractContainerMenu {
@@ -35,7 +37,7 @@ public class TerrariaInventoryContainerMenu extends AbstractContainerMenu {
 
     private void addSlots(Player player) {
         Inventory inventory = player.getInventory();
-        SimpleContainer terrariaInventory = ((PlayerStorages)player).getTerrariaInventory();
+        TerrariaInventory terrariaInventory = ((PlayerStorages)player).getTerrariaInventory();
 
         int i;
         int j;
@@ -113,9 +115,9 @@ public class TerrariaInventoryContainerMenu extends AbstractContainerMenu {
         createExtraArmorSlots(player, terrariaInventory, 30, true);
     }
 
-    private void createAccessorySlots(Player player, SimpleContainer terrariaInventory, ResourceLocation texture, int accessoryType) {
+    private void createAccessorySlots(Player player, TerrariaInventory terrariaInventory, ResourceLocation texture, int accessoryType) {
         for(int i = 0; i < 7; ++i) {
-            int k = i;
+            int j = i;
             this.addSlot(new Slot(terrariaInventory, i + (accessoryType * 7), 116 + (accessoryType * 18), -18 + i * 18) {
                 public void set(@NotNull ItemStack itemStack) {
                     //ItemStack itemStack2 = this.getItem();
@@ -125,7 +127,7 @@ public class TerrariaInventoryContainerMenu extends AbstractContainerMenu {
 
                 public boolean isActive() {
                     // allows for adding slots during gameplay, for the 2 extra accessory slots players can get
-                    return k < (5 + ModComponents.ACCESSORY_SLOTS_ADDER.get(player).get());
+                    return j < (5 + ModComponents.ACCESSORY_SLOTS_ADDER.get(player).get());
                 }
 
                 public int getMaxStackSize() {
@@ -136,7 +138,7 @@ public class TerrariaInventoryContainerMenu extends AbstractContainerMenu {
                     if (accessoryType == 2) {
                         return true; // todo: replace with dye item once made
                     }
-                    return itemStack.getItem() instanceof TrinketTerrariaItem;
+                    return itemStack.getItem() instanceof AccessoryTerrariaItem;
                 }
 
                 public boolean mayPickup(@NotNull Player player) {
@@ -152,7 +154,7 @@ public class TerrariaInventoryContainerMenu extends AbstractContainerMenu {
         }
     }
 
-    private void createExtraArmorSlots(Player player, SimpleContainer inventory, int slotValue, boolean isDye) {
+    private void createExtraArmorSlots(Player player, TerrariaInventory inventory, int slotValue, boolean isDye) {
         for(int i = 0; i < 4; ++i) {
             final EquipmentSlot equipmentSlot = SLOT_IDS[i];
             this.addSlot(new Slot(inventory, slotValue - i, 8 + ((isDye ? 2 : 1) * 18), -18 + i * 18) {

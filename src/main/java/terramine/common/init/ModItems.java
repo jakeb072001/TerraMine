@@ -6,16 +6,16 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.block.ComposterBlock;
 import terramine.TerraMine;
-import terramine.common.item.*;
-import terramine.common.item.armor.*;
-import terramine.common.item.accessories.ShieldTrinketItem;
-import terramine.common.item.accessories.TrinketTerrariaItem;
+import terramine.common.item.CraftingItem;
+import terramine.common.item.accessories.AccessoryTerrariaItem;
+import terramine.common.item.accessories.ShieldAccessoryItem;
 import terramine.common.item.accessories.WhoopeeCushionItem;
 import terramine.common.item.accessories.back.WingsItem;
 import terramine.common.item.accessories.belt.*;
 import terramine.common.item.accessories.feet.*;
 import terramine.common.item.accessories.hands.*;
 import terramine.common.item.accessories.necklace.*;
+import terramine.common.item.armor.*;
 import terramine.common.item.equipment.*;
 import terramine.common.item.equipment.swords.CustomSoundSwordItem;
 import terramine.common.item.equipment.swords.VolcanoSwordItem;
@@ -36,8 +36,8 @@ public class ModItems {
 	public static final Item UMBRELLA = register("umbrella", new UmbrellaItem());
 	public static final Item WHOOPEE_CUSHION = register("whoopee_cushion", new WhoopeeCushionItem());
 	public static final Item MAGIC_MIRROR = register("magic_mirror", new MagicMirrorItem());
-	public static final Item COBALT_SHIELD = register("cobalt_shield", new ShieldTrinketItem(new FabricItemSettings().maxDamage(2500).fireproof().rarity(Rarity.RARE).group(TerraMine.ITEM_GROUP_ACCESSORIES), Items.DIAMOND));
-	public static final Item OBSIDIAN_SHIELD = register("obsidian_shield", new ShieldTrinketItem(new FabricItemSettings().maxDamage(2500).fireproof().rarity(Rarity.RARE).group(TerraMine.ITEM_GROUP_ACCESSORIES), Items.OBSIDIAN));
+	public static final Item COBALT_SHIELD = register("cobalt_shield", new ShieldAccessoryItem(new FabricItemSettings().maxDamage(2500).fireproof().rarity(Rarity.RARE).group(TerraMine.ITEM_GROUP_ACCESSORIES), Items.DIAMOND));
+	public static final Item OBSIDIAN_SHIELD = register("obsidian_shield", new ShieldAccessoryItem(new FabricItemSettings().maxDamage(2500).fireproof().rarity(Rarity.RARE).group(TerraMine.ITEM_GROUP_ACCESSORIES), Items.OBSIDIAN));
 
 	// Crafting Items
 	public static final Item LENS = register("lens", new CraftingItem(new FabricItemSettings().group(TerraMine.ITEM_GROUP_STUFF), false));
@@ -65,18 +65,18 @@ public class ModItems {
 	public static final Item MANA_CRYSTAL = register("mana_crystal", new ManaCrystalItem(new FabricItemSettings().stacksTo(64).rarity(Rarity.RARE).tab(TerraMine.ITEM_GROUP_STUFF)));
 
 	// Informational
-	public static final Item GOLD_WATCH = register("gold_watch", new TrinketTerrariaItem());
-	public static final Item DEPTH_METER = register("depth_meter", new TrinketTerrariaItem());
-	public static final Item COMPASS = register("compass", new TrinketTerrariaItem());
-	public static final Item GPS = register("gps", new TrinketTerrariaItem());
-	public static final Item WEATHER_RADIO = register("weather_radio", new TrinketTerrariaItem());
-	public static final Item SEXTANT = register("sextant", new TrinketTerrariaItem());
-	public static final Item FISH_FINDER = register("fish_finder", new TrinketTerrariaItem());
-	public static final Item METAL_DETECTOR = register("metal_detector", new TrinketTerrariaItem());
-	public static final Item STOPWATCH = register("stopwatch", new TrinketTerrariaItem());
-	public static final Item DPS_METER = register("dps_meter", new TrinketTerrariaItem());
-	public static final Item GOBLIN_TECH = register("goblin_tech", new TrinketTerrariaItem());
-	public static final Item PDA = register("pda", new TrinketTerrariaItem());
+	public static final Item GOLD_WATCH = register("gold_watch", new AccessoryTerrariaItem());
+	public static final Item DEPTH_METER = register("depth_meter", new AccessoryTerrariaItem());
+	public static final Item COMPASS = register("compass", new AccessoryTerrariaItem());
+	public static final Item GPS = register("gps", new AccessoryTerrariaItem());
+	public static final Item WEATHER_RADIO = register("weather_radio", new AccessoryTerrariaItem());
+	public static final Item SEXTANT = register("sextant", new AccessoryTerrariaItem());
+	public static final Item FISH_FINDER = register("fish_finder", new AccessoryTerrariaItem());
+	public static final Item METAL_DETECTOR = register("metal_detector", new AccessoryTerrariaItem());
+	public static final Item STOPWATCH = register("stopwatch", new AccessoryTerrariaItem());
+	public static final Item DPS_METER = register("dps_meter", new AccessoryTerrariaItem());
+	public static final Item GOBLIN_TECH = register("goblin_tech", new AccessoryTerrariaItem());
+	public static final Item PDA = register("pda", new AccessoryTerrariaItem());
 	public static final Item CELL_PHONE = register("cell_phone", new CellPhoneItem());
 
 	// Necklace
@@ -96,16 +96,16 @@ public class ModItems {
 
 	// Belt
 	public static final Item SHACKLE = register("shackle", new ShackleItem());
-	public static final Item OBSIDIAN_ROSE = register("obsidian_rose", new TrinketTerrariaItem());
-	public static final Item MAGMA_STONE = register("magma_stone", new TrinketTerrariaItem());
+	public static final Item OBSIDIAN_ROSE = register("obsidian_rose", new AccessoryTerrariaItem());
+	public static final Item MAGMA_STONE = register("magma_stone", new AccessoryTerrariaItem());
 	public static final Item OBSIDIAN_SKULL = register("obsidian_skull", new ObsidianSkullItem());
 	public static final Item MAGMA_SKULL = register("magma_skull", new ObsidianSkullItem());
 	public static final Item OBSIDIAN_SKULL_ROSE = register("obsidian_skull_rose", new ObsidianSkullItem());
 	public static final Item MOLTEN_SKULL_ROSE = register("molten_skull_rose", new ObsidianSkullItem());
-	public static final Item LAVA_CHARM = register("lava_charm", new TrinketTerrariaItem());
-	public static final Item MOLTEN_CHARM = register("molten_charm", new TrinketTerrariaItem());
-	public static final Item LUCKY_HORSESHOE = register("lucky_horseshoe", new TrinketTerrariaItem());
-	public static final Item OBSIDIAN_HORSESHOE = register("obsidian_horseshoe", new TrinketTerrariaItem());
+	public static final Item LAVA_CHARM = register("lava_charm", new AccessoryTerrariaItem());
+	public static final Item MOLTEN_CHARM = register("molten_charm", new AccessoryTerrariaItem());
+	public static final Item LUCKY_HORSESHOE = register("lucky_horseshoe", new AccessoryTerrariaItem());
+	public static final Item OBSIDIAN_HORSESHOE = register("obsidian_horseshoe", new AccessoryTerrariaItem());
 	public static final Item CLOUD_IN_A_BOTTLE = register("cloud_in_a_bottle", new CloudInABottleItem());
 	public static final Item SHINY_RED_BALLOON = register("shiny_red_balloon", new ShinyRedBalloonItem());
 	public static final Item CLOUD_IN_A_BALLOON = register("cloud_in_a_balloon", new CloudInABalloonItem());
@@ -114,15 +114,15 @@ public class ModItems {
 	public static final Item TOOLBELT = register("toolbelt", new ToolbeltItem());
 	public static final Item TOOLBOX = register("toolbox", new ToolboxItem());
 	public static final Item EXTENDO_GRIP = register("extendo_grip", new ExtendoGripItem());
-	public static final Item ANCIENT_CHISEL = register("ancient_chisel", new TrinketTerrariaItem());
+	public static final Item ANCIENT_CHISEL = register("ancient_chisel", new AccessoryTerrariaItem());
 	public static final Item TREASURE_MAGNET = register("treasure_magnet", new UniversalAttractorItem());
 
 	// Hands
-	public static final Item SHOE_SPIKES = register("shoe_spikes", new TrinketTerrariaItem());
-	public static final Item CLIMBING_CLAWS = register("climbing_claws", new TrinketTerrariaItem());
-	public static final Item TIGER_CLIMBING_GEAR = register("tiger_climbing_gear", new TrinketTerrariaItem());
+	public static final Item SHOE_SPIKES = register("shoe_spikes", new AccessoryTerrariaItem());
+	public static final Item CLIMBING_CLAWS = register("climbing_claws", new AccessoryTerrariaItem());
+	public static final Item TIGER_CLIMBING_GEAR = register("tiger_climbing_gear", new AccessoryTerrariaItem());
 	public static final Item TABI = register("tabi", new TabiItem());
-	public static final Item BLACK_BELT = register("black_belt", new TrinketTerrariaItem());
+	public static final Item BLACK_BELT = register("black_belt", new AccessoryTerrariaItem());
 	public static final Item MASTER_NINJA_GEAR = register("master_ninja_gear", new MasterNinjaGearItem());
 	public static final Item FERAL_CLAWS = register("feral_claws", new FeralClawsItem());
 	public static final Item TITAN_GLOVE = register("titan_glove", new TitanGloveItem());
@@ -137,18 +137,18 @@ public class ModItems {
 	public static final Item MAGIC_CUFFS = register("magic_cuffs", new MagicCuffsItem());
 
 	// Head
-	public static final Item DIVING_HELMET = register("diving_helmet", new TrinketTerrariaItem());
-	public static final Item DIVING_GEAR = register("diving_gear", new TrinketTerrariaItem());
+	public static final Item DIVING_HELMET = register("diving_helmet", new AccessoryTerrariaItem());
+	public static final Item DIVING_GEAR = register("diving_gear", new AccessoryTerrariaItem());
 
 	// Feet
-	public static final Item FLIPPERS = register("flippers", new TrinketTerrariaItem());
+	public static final Item FLIPPERS = register("flippers", new AccessoryTerrariaItem());
 	public static final Item AGLET = register("aglet", new AgletItem());
 	public static final Item ANKLET = register("anklet", new AnkletItem());
 	public static final Item WATER_WALKING_BOOTS = register("water_walking_boots", new WaterWalkingBootsItem());
 	public static final Item OBSIDIAN_WATER_WALKING_BOOTS = register("obsidian_water_walking_boots", new ObsidianWaterWalkingBootsItem());
 	public static final Item LAVA_WADERS = register("lava_waders", new LavaWadersItem());
-	public static final Item ICE_SKATES = register("ice_skates", new TrinketTerrariaItem());
-	public static final Item HERMES_BOOTS = register("hermes_boots", new TrinketTerrariaItem());
+	public static final Item ICE_SKATES = register("ice_skates", new AccessoryTerrariaItem());
+	public static final Item HERMES_BOOTS = register("hermes_boots", new AccessoryTerrariaItem());
 	public static final Item ROCKET_BOOTS = register("rocket_boots", new RocketBootsItem());
 	public static final Item SPECTRE_BOOTS = register("spectre_boots", new SpectreBootsItem());
 	public static final Item LIGHTNING_BOOTS = register("lightning_boots", new LightningBootsItem());

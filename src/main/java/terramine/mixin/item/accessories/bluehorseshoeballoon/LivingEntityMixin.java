@@ -17,8 +17,8 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import terramine.common.init.ModComponents;
 import terramine.common.init.ModItems;
-import terramine.common.item.accessories.belt.BlueHorseshoeBalloonItem;
-import terramine.common.trinkets.TrinketsHelper;
+import terramine.common.item.accessories.hands.BlueHorseshoeBalloonItem;
+import terramine.common.misc.AccessoriesHelper;
 import terramine.common.utility.equipmentchecks.WingsEquippedCheck;
 import terramine.extensions.LivingEntityExtensions;
 
@@ -73,9 +73,9 @@ public abstract class LivingEntityMixin extends Entity implements LivingEntityEx
 
 		boolean flying = player.getAbilities().flying;
 		if (this.jumping && this.jumpWasReleased && !this.isInWater() && !this.isOnGround() && !this.isPassenger()
-				&& !this.hasDoubleJumped && !flying && TrinketsHelper.isEquipped(ModItems.BLUE_HORSESHOE_BALLOON, player)
-				&& !TrinketsHelper.isEquipped(ModItems.BUNDLE_OF_BALLOONS, player) && !TrinketsHelper.isEquipped(ModItems.CLOUD_IN_A_BOTTLE, player)
-				&& !TrinketsHelper.isEquipped(ModItems.CLOUD_IN_A_BALLOON, player)) {
+				&& !this.hasDoubleJumped && !flying && AccessoriesHelper.isEquipped(ModItems.BLUE_HORSESHOE_BALLOON, player)
+				&& !AccessoriesHelper.isEquipped(ModItems.BUNDLE_OF_BALLOONS, player) && !AccessoriesHelper.isEquipped(ModItems.CLOUD_IN_A_BOTTLE, player)
+				&& !AccessoriesHelper.isEquipped(ModItems.CLOUD_IN_A_BALLOON, player)) {
 			this.terramine$doubleJump();
 			this.hasDoubleJumped = true;
 		}

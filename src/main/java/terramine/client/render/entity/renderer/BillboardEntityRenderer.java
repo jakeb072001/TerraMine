@@ -13,8 +13,6 @@ import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 import org.jetbrains.annotations.NotNull;
-import terramine.TerraMine;
-import terramine.common.entity.projectiles.MagicMissileEntity;
 
 public abstract class BillboardEntityRenderer<T extends Entity> extends EntityRenderer<T> {
     private final ResourceLocation TEXTURE;

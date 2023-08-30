@@ -8,7 +8,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import terramine.common.init.ModComponents;
 import terramine.common.init.ModItems;
-import terramine.common.trinkets.TrinketsHelper;
+import terramine.common.misc.AccessoriesHelper;
 
 @Mixin(Player.class)
 public abstract class PlayerMixin {
@@ -16,7 +16,7 @@ public abstract class PlayerMixin {
 	@Inject(method = "hurt", at = @At("TAIL"))
 	private void onHurt(DamageSource damageSource, float f, CallbackInfoReturnable<Boolean> cir) {
 		Player player = (Player) (Object) this;
-		if (!TrinketsHelper.isEquipped(ModItems.MAGIC_CUFFS, player)) {
+		if (!AccessoriesHelper.isEquipped(ModItems.MAGIC_CUFFS, player)) {
 			return;
 		}
 		if (!damageSource.equals(DamageSource.DROWN)) {

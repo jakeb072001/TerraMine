@@ -1,24 +1,30 @@
 package terramine.common.item.accessories.hands;
 
-import dev.emi.trinkets.api.SlotReference;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import terramine.common.init.ModComponents;
-import terramine.common.item.accessories.TrinketTerrariaItem;
+import terramine.common.item.accessories.AccessoryTerrariaItem;
 
-public class MagicCuffsItem extends TrinketTerrariaItem {
+public class MagicCuffsItem extends AccessoryTerrariaItem {
 
 	@Override
-	public void onEquip(ItemStack stack, SlotReference slot, LivingEntity entity) {
-		Player player = (Player)entity;
+	public void onEquip(ItemStack stack, Player player) {
 		ModComponents.MANA_HANDLER.get(player).addMaxMana(20);
 	}
 
     @Override
-	public void onUnequip(ItemStack stack, SlotReference slot, LivingEntity entity) {
-		Player player = (Player)entity;
+	public void onUnequip(ItemStack stack, Player player) {
 		ModComponents.MANA_HANDLER.get(player).addMaxMana(-20);
 		ModComponents.MANA_HANDLER.get(player).addCurrentMana(-20);
+	}
+
+	@Override
+	public boolean isBothHands() {
+		return true;
+	}
+
+	@Override
+	public boolean isGlove() {
+		return true;
 	}
 }

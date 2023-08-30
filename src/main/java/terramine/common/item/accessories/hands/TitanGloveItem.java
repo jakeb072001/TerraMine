@@ -2,21 +2,20 @@ package terramine.common.item.accessories.hands;
 
 import com.google.common.collect.Multimap;
 import com.jamieswhiteshirt.reachentityattributes.ReachEntityAttributes;
-import dev.emi.trinkets.api.SlotReference;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.item.ItemStack;
 import terramine.TerraMine;
-import terramine.common.item.accessories.TrinketTerrariaItem;
+import terramine.common.item.accessories.AccessoryTerrariaItem;
 
 import java.util.UUID;
 
-public class TitanGloveItem extends TrinketTerrariaItem {
+public class TitanGloveItem extends AccessoryTerrariaItem {
     @Override
-	protected Multimap<Attribute, AttributeModifier> applyModifiers(ItemStack stack, SlotReference slot, LivingEntity entity, UUID uuid) {
-		Multimap<Attribute, AttributeModifier> result = super.applyModifiers(stack, slot, entity, uuid);
+	protected Multimap<Attribute, AttributeModifier> applyModifiers(ItemStack stack, LivingEntity entity, UUID uuid) {
+		Multimap<Attribute, AttributeModifier> result = super.applyModifiers(stack, entity, uuid);
 		AttributeModifier modifier = new AttributeModifier(uuid,
 				TerraMine.id("titan_glove_attack_range").toString(),
 				3, AttributeModifier.Operation.ADDITION);
@@ -26,6 +25,16 @@ public class TitanGloveItem extends TrinketTerrariaItem {
 		result.put(ReachEntityAttributes.ATTACK_RANGE, modifier);
 		result.put(ReachEntityAttributes.REACH, modifier2);
 		return result;
+	}
+
+	@Override
+	public boolean isBothHands() {
+		return true;
+	}
+
+	@Override
+	public boolean isGlove() {
+		return true;
 	}
 
 	@Override

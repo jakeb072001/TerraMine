@@ -1,21 +1,20 @@
 package terramine.common.item.accessories.feet;
 
-import dev.emi.trinkets.api.SlotReference;
 import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import terramine.TerraMine;
 import terramine.common.init.ModParticles;
 import terramine.common.init.ModSoundEvents;
-import terramine.common.item.accessories.TrinketTerrariaItem;
+import terramine.common.item.accessories.AccessoryTerrariaItem;
 import terramine.common.utility.RocketBootHelper;
 
 import java.util.UUID;
 
-public class LightningBootsItem extends TrinketTerrariaItem {
+public class LightningBootsItem extends AccessoryTerrariaItem {
 
 	public static final AttributeModifier SPEED_BOOST_MODIFIER_WALK = new AttributeModifier(UUID.fromString("0bb62526-1cf9-4d7d-be51-ada9c7648422"),
 			"lightning_boots_movement_speed_walk", 0.08, AttributeModifier.Operation.MULTIPLY_TOTAL);
@@ -28,13 +27,13 @@ public class LightningBootsItem extends TrinketTerrariaItem {
 	}
 
 	@Override
-	public void curioTick(LivingEntity player, ItemStack stack) {
+	public void curioTick(Player player, ItemStack stack) {
 		rocketHelper.rocketFly(speed, 4, player);
 	}
 
 	@Override
-	public void onEquip(ItemStack stack, SlotReference slot, LivingEntity entity) {
-		AttributeInstance movementSpeed = entity.getAttribute(Attributes.MOVEMENT_SPEED);
+	public void onEquip(ItemStack stack, Player player) {
+		AttributeInstance movementSpeed = player.getAttribute(Attributes.MOVEMENT_SPEED);
 
 		if (movementSpeed == null) {
 			TerraMine.LOGGER.debug("Entity {} missing entity attribute(s)", this);
@@ -45,8 +44,8 @@ public class LightningBootsItem extends TrinketTerrariaItem {
 	}
 
 	@Override
-	public void onUnequip(ItemStack stack, SlotReference slot, LivingEntity entity) {
-		AttributeInstance movementSpeed = entity.getAttribute(Attributes.MOVEMENT_SPEED);
+	public void onUnequip(ItemStack stack, Player player) {
+		AttributeInstance movementSpeed = player.getAttribute(Attributes.MOVEMENT_SPEED);
 
 		if (movementSpeed == null) {
 			TerraMine.LOGGER.debug("Entity {} missing entity attribute(s)", this);

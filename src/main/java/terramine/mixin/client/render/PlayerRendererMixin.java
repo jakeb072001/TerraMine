@@ -1,7 +1,6 @@
 package terramine.mixin.client.render;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import dev.emi.trinkets.api.client.TrinketRendererRegistry;
 import net.minecraft.client.player.AbstractClientPlayer;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.player.PlayerRenderer;
@@ -13,9 +12,12 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import terramine.TerraMine;
-import terramine.client.render.trinket.renderer.GloveCurioRenderer;
-import terramine.common.trinkets.TrinketsHelper;
+import terramine.client.render.AccessoryRenderRegistry;
+import terramine.client.render.accessory.renderer.GloveCurioRenderer;
+import terramine.common.item.accessories.AccessoryTerrariaItem;
+import terramine.extensions.PlayerStorages;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Mixin(PlayerRenderer.class)
@@ -37,15 +39,19 @@ public abstract class PlayerRendererMixin {
 			return;
 		}
 
-		String groupId = handSide == player.getMainArm() ? "hand" : "offhand";
-		List<ItemStack> allEquippedGloves = TrinketsHelper.getAllEquippedForSlot(player, groupId, "glove", true);
+		List<ItemStack> allEquippedGloves = new ArrayList<>();
+		for (int i = 0; i < 7; i++) {
+			allEquippedGloves.add(i, ((PlayerStorages)player).getTerrariaInventory().getItem(i));
+		}
 
 		for (ItemStack stack : allEquippedGloves) {
-			TrinketRendererRegistry.getRenderer(stack.getItem()).ifPresent(renderer -> {
-				if (renderer instanceof GloveCurioRenderer gloveRenderer) {
-					gloveRenderer.renderFirstPersonArm(matrixStack, buffer, light, player, handSide, stack.hasFoil());
-				}
-			});
+			if (stack.getItem() instanceof AccessoryTerrariaItem accessory && accessory.isGlove()) {
+				AccessoryRenderRegistry.getRenderer(stack.getItem()).ifPresent(renderer -> {
+					if (renderer instanceof GloveCurioRenderer gloveRenderer) {
+						gloveRenderer.renderFirstPersonArm(matrixStack, buffer, light, player, handSide, stack.hasFoil());
+					}
+				});
+			}
 		}
 	}
 }

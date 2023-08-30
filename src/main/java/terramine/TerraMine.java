@@ -7,9 +7,13 @@ import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.entity.event.v1.ServerPlayerEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.fabricmc.fabric.api.loot.v2.LootTableEvents;
+import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
+import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.fabricmc.loader.api.FabricLoader;
 import net.fabricmc.loader.api.ModContainer;
+import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.stats.StatFormatter;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.entity.player.Player;
@@ -26,6 +30,7 @@ import terramine.common.compat.CompatHandler;
 import terramine.common.config.ConfigHelper;
 import terramine.common.config.ModConfig;
 import terramine.common.init.*;
+import terramine.common.misc.TerrariaInventory;
 import terramine.common.network.ServerPacketHandler;
 import terramine.common.utility.InputHandler;
 import terramine.common.world.biome.BiomeAdder;
@@ -87,6 +92,7 @@ public class TerraMine implements ModInitializer, TerraBlenderApi {
 		ServerLifecycleEvents.SERVER_STOPPING.register(server -> InputHandler.clear());
 		PlayerEvent.CHANGE_DIMENSION.register((player, oldLevel, newLevel) -> InputHandler.onChangeDimension(player));
 		PlayerEvent.PLAYER_QUIT.register(InputHandler::onLogout);
+		// todo: after player death, client side items don't sync correctly between terraria menu and inventory menu, no clue why
 		ServerPlayerEvents.COPY_FROM.register((oldPlayer, newPlayer, alive) -> {
 			if (oldPlayer instanceof PlayerStorages) {
 				// Copy inventories from the player entity that died to the one that respawned
@@ -94,10 +100,12 @@ public class TerraMine implements ModInitializer, TerraBlenderApi {
 				((PlayerStorages) newPlayer).setPiggyBankInventory(((PlayerStorages) oldPlayer).getPiggyBankInventory());
 				((PlayerStorages) newPlayer).setSafeInventory(((PlayerStorages) oldPlayer).getSafeInventory());
 
-				// Do the same thing but for the menu
+				// Copy menu over so after death items show in inventory
 				((PlayerStorages) newPlayer).setTerrariaMenu(((PlayerStorages) oldPlayer).getTerrariaMenu());
 			}
 		});
+		PlayerEvent.PLAYER_RESPAWN.register((player, bl) -> syncInventory(player));
+		PlayerEvent.PLAYER_JOIN.register(this::syncInventory);
 		PlayerEvent.PLAYER_JOIN.register(this::checkHardcore);
 
 		// Compat Handlers
@@ -112,6 +120,16 @@ public class TerraMine implements ModInitializer, TerraBlenderApi {
 		}
 
 		LOGGER.info("Finished initialization");
+	}
+
+	private void syncInventory(ServerPlayer player) {
+		TerrariaInventory terrariaInventory = ((PlayerStorages)player).getTerrariaInventory();
+		for (int i = 0; i < terrariaInventory.getContainerSize(); i++) {
+			FriendlyByteBuf buf = PacketByteBufs.create();
+			buf.writeInt(i);
+			buf.writeItem(terrariaInventory.getItem(i));
+			ServerPlayNetworking.send(player, ServerPacketHandler.SETUP_INVENTORY_PACKET_ID, buf);
+		}
 	}
 
 	private void checkHardcore(Player player) {

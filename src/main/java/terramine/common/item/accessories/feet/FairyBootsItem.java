@@ -2,17 +2,17 @@ package terramine.common.item.accessories.feet;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BonemealableBlock;
 import terramine.common.init.ModParticles;
 import terramine.common.init.ModSoundEvents;
-import terramine.common.item.accessories.TrinketTerrariaItem;
+import terramine.common.item.accessories.AccessoryTerrariaItem;
 import terramine.common.network.packet.BoneMealPacket;
 import terramine.common.utility.RocketBootHelper;
 
-public class FairyBootsItem extends TrinketTerrariaItem {
+public class FairyBootsItem extends AccessoryTerrariaItem {
 
 	public RocketBootHelper rocketHelper = new RocketBootHelper();
 	public double speed = 0.4D;
@@ -23,7 +23,7 @@ public class FairyBootsItem extends TrinketTerrariaItem {
 	}
 
 	@Override
-	public void curioTick(LivingEntity player, ItemStack stack) {
+	public void curioTick(Player player, ItemStack stack) {
 		if (player != null && player.isSprinting() && !player.isCrouching()) {
 			Level level = player.level;
 			BlockPos blockPos = player.getOnPos();

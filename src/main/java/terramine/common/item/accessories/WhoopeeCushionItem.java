@@ -11,7 +11,7 @@ import org.jetbrains.annotations.NotNull;
 import terramine.common.init.ModItems;
 import terramine.common.init.ModSoundEvents;
 
-public class WhoopeeCushionItem extends TrinketTerrariaItem {
+public class WhoopeeCushionItem extends AccessoryTerrariaItem {
 
 	@Override
 	public InteractionResultHolder<ItemStack> use(@NotNull Level level, Player player, @NotNull InteractionHand interactionHand) {

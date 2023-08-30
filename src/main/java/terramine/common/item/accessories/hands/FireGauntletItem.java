@@ -2,25 +2,25 @@ package terramine.common.item.accessories.hands;
 
 import com.google.common.collect.Multimap;
 import com.jamieswhiteshirt.reachentityattributes.ReachEntityAttributes;
-import dev.emi.trinkets.api.SlotReference;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import terramine.TerraMine;
-import terramine.common.item.accessories.TrinketTerrariaItem;
+import terramine.common.item.accessories.AccessoryTerrariaItem;
 
 import java.util.UUID;
 
 import static terramine.common.utility.Utilities.autoSwing;
 
-public class FireGauntletItem extends TrinketTerrariaItem {
+public class FireGauntletItem extends AccessoryTerrariaItem {
 
 	@Override
-	protected Multimap<Attribute, AttributeModifier> applyModifiers(ItemStack stack, SlotReference slot, LivingEntity entity, UUID uuid) {
-		Multimap<Attribute, AttributeModifier> result = super.applyModifiers(stack, slot, entity, uuid);
+	protected Multimap<Attribute, AttributeModifier> applyModifiers(ItemStack stack, LivingEntity entity, UUID uuid) {
+		Multimap<Attribute, AttributeModifier> result = super.applyModifiers(stack, entity, uuid);
 		AttributeModifier attackModifier = new AttributeModifier(uuid,
 				TerraMine.id("fire_gauntlet_attack").toString(),
 				0.12, AttributeModifier.Operation.MULTIPLY_TOTAL);
@@ -38,8 +38,18 @@ public class FireGauntletItem extends TrinketTerrariaItem {
 	}
 
 	@Override
-	public void curioTick(LivingEntity livingEntity, ItemStack stack) {
+	public void curioTick(Player player, ItemStack stack) {
 		autoSwing();
+	}
+
+	@Override
+	public boolean isBothHands() {
+		return true;
+	}
+
+	@Override
+	public boolean isGlove() {
+		return true;
 	}
 
 	@Override

@@ -1,9 +1,9 @@
 package terramine.common.item.accessories.necklace;
 
 import net.minecraft.sounds.SoundEvents;
-import terramine.common.item.accessories.TrinketTerrariaItem;
+import terramine.common.item.accessories.AccessoryTerrariaItem;
 
-public class CrossNecklaceItem extends TrinketTerrariaItem {
+public class CrossNecklaceItem extends AccessoryTerrariaItem {
 
 	public static final double HURT_RESISTANCE_MULTIPLIER = 3; // Hurt invuln is multiplied by this factor
 

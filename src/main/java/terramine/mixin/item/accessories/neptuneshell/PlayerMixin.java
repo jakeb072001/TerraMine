@@ -13,8 +13,8 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import terramine.common.init.ModItems;
-import terramine.common.item.accessories.TrinketTerrariaItem;
-import terramine.common.trinkets.TrinketsHelper;
+import terramine.common.item.accessories.AccessoryTerrariaItem;
+import terramine.common.misc.AccessoriesHelper;
 
 import java.util.UUID;
 
@@ -43,8 +43,8 @@ public abstract class PlayerMixin  extends LivingEntity {
 
     @Inject(at = @At("TAIL"), method = "tick")
     private void tick(CallbackInfo info) {
-        if(TrinketsHelper.isEquipped(ModItems.NEPTUNE_SHELL, this) || TrinketsHelper.isEquipped(ModItems.MOON_SHELL, this)
-                || TrinketsHelper.isEquipped(ModItems.CELESTIAL_SHELL, this)) {
+        if(AccessoriesHelper.isEquipped(ModItems.NEPTUNE_SHELL, this) || AccessoriesHelper.isEquipped(ModItems.MOON_SHELL, this)
+                || AccessoriesHelper.isEquipped(ModItems.CELESTIAL_SHELL, this)) {
             if(this.getAirSupply() < this.getMaxAirSupply()){
                 this.setAirSupply(this.increaseAirSupply(this.getAirSupply()));
             }
@@ -59,27 +59,27 @@ public abstract class PlayerMixin  extends LivingEntity {
             boolean isNight = this.level.isNight();
 
             if (attackDamage != null && attackSpeed != null && movementSpeed != null && armorAdd != null) {
-                if ((TrinketsHelper.isEquipped(ModItems.MOON_STONE, this) && isNight) || (TrinketsHelper.isEquipped(ModItems.SUN_STONE, this) && !isNight)
-                        || TrinketsHelper.isEquipped(ModItems.CELESTIAL_STONE, this) || TrinketsHelper.isEquipped(ModItems.CELESTIAL_SHELL, this)) {
-                    TrinketTerrariaItem.addModifier(attackDamage, celestialMeleeModifier);
-                    TrinketTerrariaItem.addModifier(attackSpeed, celestialMeleeModifier);
-                    TrinketTerrariaItem.addModifier(armorAdd, celestialDefenseModifier);
+                if ((AccessoriesHelper.isEquipped(ModItems.MOON_STONE, this) && isNight) || (AccessoriesHelper.isEquipped(ModItems.SUN_STONE, this) && !isNight)
+                        || AccessoriesHelper.isEquipped(ModItems.CELESTIAL_STONE, this) || AccessoriesHelper.isEquipped(ModItems.CELESTIAL_SHELL, this)) {
+                    AccessoryTerrariaItem.addModifier(attackDamage, celestialMeleeModifier);
+                    AccessoryTerrariaItem.addModifier(attackSpeed, celestialMeleeModifier);
+                    AccessoryTerrariaItem.addModifier(armorAdd, celestialDefenseModifier);
                 } else {
-                    TrinketTerrariaItem.removeModifier(attackDamage, celestialMeleeModifier);
-                    TrinketTerrariaItem.removeModifier(attackSpeed, celestialMeleeModifier);
-                    TrinketTerrariaItem.removeModifier(armorAdd, celestialDefenseModifier);
+                    AccessoryTerrariaItem.removeModifier(attackDamage, celestialMeleeModifier);
+                    AccessoryTerrariaItem.removeModifier(attackSpeed, celestialMeleeModifier);
+                    AccessoryTerrariaItem.removeModifier(armorAdd, celestialDefenseModifier);
                 }
-                if ((TrinketsHelper.isEquipped(ModItems.MOON_CHARM, this) || TrinketsHelper.isEquipped(ModItems.MOON_SHELL, this)
-                        || TrinketsHelper.isEquipped(ModItems.CELESTIAL_SHELL, this)) && isNight) {
-                    TrinketTerrariaItem.addModifier(attackDamage, charmMeleeModifier);
-                    TrinketTerrariaItem.addModifier(attackSpeed, charmMeleeModifier);
-                    TrinketTerrariaItem.addModifier(movementSpeed, charmMovementSpeedModifier);
-                    TrinketTerrariaItem.addModifier(armorAdd, charmDefenseModifier);
+                if ((AccessoriesHelper.isEquipped(ModItems.MOON_CHARM, this) || AccessoriesHelper.isEquipped(ModItems.MOON_SHELL, this)
+                        || AccessoriesHelper.isEquipped(ModItems.CELESTIAL_SHELL, this)) && isNight) {
+                    AccessoryTerrariaItem.addModifier(attackDamage, charmMeleeModifier);
+                    AccessoryTerrariaItem.addModifier(attackSpeed, charmMeleeModifier);
+                    AccessoryTerrariaItem.addModifier(movementSpeed, charmMovementSpeedModifier);
+                    AccessoryTerrariaItem.addModifier(armorAdd, charmDefenseModifier);
                 } else {
-                    TrinketTerrariaItem.removeModifier(attackDamage, charmMeleeModifier);
-                    TrinketTerrariaItem.removeModifier(attackSpeed, charmMeleeModifier);
-                    TrinketTerrariaItem.removeModifier(movementSpeed, charmMovementSpeedModifier);
-                    TrinketTerrariaItem.removeModifier(armorAdd, charmDefenseModifier);
+                    AccessoryTerrariaItem.removeModifier(attackDamage, charmMeleeModifier);
+                    AccessoryTerrariaItem.removeModifier(attackSpeed, charmMeleeModifier);
+                    AccessoryTerrariaItem.removeModifier(movementSpeed, charmMovementSpeedModifier);
+                    AccessoryTerrariaItem.removeModifier(armorAdd, charmDefenseModifier);
                 }
             }
         }

@@ -11,7 +11,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import terramine.common.init.ModItems;
 import terramine.common.init.ModSoundEvents;
-import terramine.common.trinkets.TrinketsHelper;
+import terramine.common.misc.AccessoriesHelper;
 
 @Mixin(Entity.class)
 public abstract class EntityMixin {
@@ -22,7 +22,7 @@ public abstract class EntityMixin {
 	private void playFartSound(boolean sneaking, CallbackInfo info) {
 		//noinspection ConstantConditions
 		if (sneaking && !this.level.isClientSide() && (Object) this instanceof LivingEntity entity
-				&& TrinketsHelper.isEquipped(ModItems.WHOOPEE_CUSHION, entity)
+				&& AccessoriesHelper.isEquipped(ModItems.WHOOPEE_CUSHION, entity)
 				&& entity.getRandom().nextInt(8) == 0) {
 
 			entity.level.playSound(null, entity.getX(), entity.getY(), entity.getZ(),

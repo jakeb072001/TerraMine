@@ -24,7 +24,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import terramine.common.init.ModItems;
 import terramine.common.init.ModSoundEvents;
 import terramine.common.item.accessories.feet.TerrasparkBootsItem;
-import terramine.common.trinkets.TrinketsHelper;
+import terramine.common.misc.AccessoriesHelper;
 
 @Mixin(Entity.class)
 public abstract class EntityMixin {
@@ -105,14 +105,14 @@ public abstract class EntityMixin {
 
     @Unique
     private boolean isRunningWithBoots(LivingEntity self) {
-        return TrinketsHelper.isEquipped(ModItems.HERMES_BOOTS, self) || TrinketsHelper.isEquipped(ModItems.SPECTRE_BOOTS, self)
-                || TrinketsHelper.isEquipped(ModItems.FAIRY_BOOTS, self) || TrinketsHelper.isEquipped(ModItems.LIGHTNING_BOOTS, self)
-                || TrinketsHelper.isEquipped(ModItems.FROSTSPARK_BOOTS, self) || TrinketsHelper.isEquipped(ModItems.TERRASPARK_BOOTS, self);
+        return AccessoriesHelper.isEquipped(ModItems.HERMES_BOOTS, self) || AccessoriesHelper.isEquipped(ModItems.SPECTRE_BOOTS, self)
+                || AccessoriesHelper.isEquipped(ModItems.FAIRY_BOOTS, self) || AccessoriesHelper.isEquipped(ModItems.LIGHTNING_BOOTS, self)
+                || AccessoriesHelper.isEquipped(ModItems.FROSTSPARK_BOOTS, self) || AccessoriesHelper.isEquipped(ModItems.TERRASPARK_BOOTS, self);
     }
 
     @Unique
     private boolean isLiquidRunningWithBoots(LivingEntity self) {
-        return (TrinketsHelper.isEquipped(ModItems.WATER_WALKING_BOOTS, self) || TrinketsHelper.isEquipped(ModItems.OBSIDIAN_WATER_WALKING_BOOTS, self)
-        || TrinketsHelper.isEquipped(ModItems.LAVA_WADERS, self) || TrinketsHelper.isEquipped(ModItems.TERRASPARK_BOOTS, self)) && TerrasparkBootsItem.canSprintOnWater(self);
+        return (AccessoriesHelper.isEquipped(ModItems.WATER_WALKING_BOOTS, self) || AccessoriesHelper.isEquipped(ModItems.OBSIDIAN_WATER_WALKING_BOOTS, self)
+        || AccessoriesHelper.isEquipped(ModItems.LAVA_WADERS, self) || AccessoriesHelper.isEquipped(ModItems.TERRASPARK_BOOTS, self)) && TerrasparkBootsItem.canSprintOnWater(self);
     }
 }

@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import terramine.common.init.ModItems;
-import terramine.common.trinkets.TrinketsHelper;
+import terramine.common.misc.AccessoriesHelper;
 
 @Environment(EnvType.CLIENT)
 @Mixin(LocalPlayer.class)
@@ -24,8 +24,8 @@ public abstract class LocalPlayerMixin extends AbstractClientPlayer {
 
     @Inject(at = @At("HEAD"), method = "getWaterVision", cancellable = true)
     private void getUnderwaterVisibility(CallbackInfoReturnable<Float> info) {
-        if(TrinketsHelper.isEquipped(ModItems.NEPTUNE_SHELL, this) || TrinketsHelper.isEquipped(ModItems.MOON_SHELL, this)
-                || TrinketsHelper.isEquipped(ModItems.CELESTIAL_SHELL, this)) {
+        if(AccessoriesHelper.isEquipped(ModItems.NEPTUNE_SHELL, this) || AccessoriesHelper.isEquipped(ModItems.MOON_SHELL, this)
+                || AccessoriesHelper.isEquipped(ModItems.CELESTIAL_SHELL, this)) {
             info.setReturnValue(1.0F);
         }
     }

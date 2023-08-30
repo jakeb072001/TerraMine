@@ -21,8 +21,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import terramine.TerraMine;
 import terramine.common.init.ModBlocks;
 import terramine.common.init.ModItems;
-import terramine.common.item.accessories.TrinketTerrariaItem;
-import terramine.common.trinkets.TrinketsHelper;
+import terramine.common.item.accessories.AccessoryTerrariaItem;
+import terramine.common.misc.AccessoriesHelper;
 
 import java.util.UUID;
 
@@ -60,11 +60,11 @@ public abstract class LivingEntityMixin extends Entity {
 		}
 
 		if (sprinting) {
-			TrinketTerrariaItem.addModifier(movementSpeed, SPEED_BOOST_MODIFIER);
-			TrinketTerrariaItem.addModifier(stepHeight, STEP_HEIGHT_MODIFIER);
+			AccessoryTerrariaItem.addModifier(movementSpeed, SPEED_BOOST_MODIFIER);
+			AccessoryTerrariaItem.addModifier(stepHeight, STEP_HEIGHT_MODIFIER);
 		} else {
-			TrinketTerrariaItem.removeModifier(movementSpeed, SPEED_BOOST_MODIFIER);
-			TrinketTerrariaItem.removeModifier(stepHeight, STEP_HEIGHT_MODIFIER);
+			AccessoryTerrariaItem.removeModifier(movementSpeed, SPEED_BOOST_MODIFIER);
+			AccessoryTerrariaItem.removeModifier(stepHeight, STEP_HEIGHT_MODIFIER);
 		}
 	}
 
@@ -80,26 +80,26 @@ public abstract class LivingEntityMixin extends Entity {
 
 		if (iceSkatesEquipped(self)) {
 			if (isIceBlock()) {
-				TrinketTerrariaItem.addModifier(movementSpeed, ICE_SPEED_BOOST_MODIFIER);
+				AccessoryTerrariaItem.addModifier(movementSpeed, ICE_SPEED_BOOST_MODIFIER);
 				t = 0.6F; // default friction on regular blocks
 			} else {
-				TrinketTerrariaItem.removeModifier(movementSpeed, ICE_SPEED_BOOST_MODIFIER);
+				AccessoryTerrariaItem.removeModifier(movementSpeed, ICE_SPEED_BOOST_MODIFIER);
 			}
 		} else {
-			TrinketTerrariaItem.removeModifier(movementSpeed, ICE_SPEED_BOOST_MODIFIER);
+			AccessoryTerrariaItem.removeModifier(movementSpeed, ICE_SPEED_BOOST_MODIFIER);
 		}
 		return t;
 	}
 
 	private boolean runningShoesEquipped(LivingEntity self) {
-		return TrinketsHelper.isEquipped(ModItems.HERMES_BOOTS, self) || TrinketsHelper.isEquipped(ModItems.SPECTRE_BOOTS, self)
-				|| TrinketsHelper.isEquipped(ModItems.FAIRY_BOOTS, self) || TrinketsHelper.isEquipped(ModItems.LIGHTNING_BOOTS, self)
-				|| TrinketsHelper.isEquipped(ModItems.FROSTSPARK_BOOTS, self) || TrinketsHelper.isEquipped(ModItems.TERRASPARK_BOOTS, self);
+		return AccessoriesHelper.isEquipped(ModItems.HERMES_BOOTS, self) || AccessoriesHelper.isEquipped(ModItems.SPECTRE_BOOTS, self)
+				|| AccessoriesHelper.isEquipped(ModItems.FAIRY_BOOTS, self) || AccessoriesHelper.isEquipped(ModItems.LIGHTNING_BOOTS, self)
+				|| AccessoriesHelper.isEquipped(ModItems.FROSTSPARK_BOOTS, self) || AccessoriesHelper.isEquipped(ModItems.TERRASPARK_BOOTS, self);
 	}
 
 	private boolean iceSkatesEquipped(LivingEntity self) {
-		return TrinketsHelper.isEquipped(ModItems.ICE_SKATES, self) || TrinketsHelper.isEquipped(ModItems.FROSTSPARK_BOOTS, self)
-				|| TrinketsHelper.isEquipped(ModItems.TERRASPARK_BOOTS, self);
+		return AccessoriesHelper.isEquipped(ModItems.ICE_SKATES, self) || AccessoriesHelper.isEquipped(ModItems.FROSTSPARK_BOOTS, self)
+				|| AccessoriesHelper.isEquipped(ModItems.TERRASPARK_BOOTS, self);
 	}
 
 	private boolean isIceBlock() {

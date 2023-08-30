@@ -6,7 +6,6 @@ import net.minecraft.world.entity.item.PrimedTnt;
 import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.Nullable;
-import terramine.common.init.ModEntities;
 import terramine.common.utility.ExplosionConfigurable;
 
 public class InstantPrimedTNTEntity extends PrimedTnt {

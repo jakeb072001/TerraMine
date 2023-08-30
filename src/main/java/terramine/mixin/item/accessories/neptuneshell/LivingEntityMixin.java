@@ -15,7 +15,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import terramine.common.init.ModItems;
 import terramine.common.init.ModMobEffects;
-import terramine.common.trinkets.TrinketsHelper;
+import terramine.common.misc.AccessoriesHelper;
 
 @Mixin(LivingEntity.class)
 public abstract class LivingEntityMixin extends Entity {
@@ -70,6 +70,6 @@ public abstract class LivingEntityMixin extends Entity {
 
     private boolean isShell() {
         LivingEntity self = (LivingEntity) (Object) this;
-        return TrinketsHelper.isEquipped(ModItems.NEPTUNE_SHELL, self) || TrinketsHelper.isEquipped(ModItems.MOON_SHELL, self) || TrinketsHelper.isEquipped(ModItems.CELESTIAL_SHELL, self);
+        return AccessoriesHelper.isEquipped(ModItems.NEPTUNE_SHELL, self) || AccessoriesHelper.isEquipped(ModItems.MOON_SHELL, self) || AccessoriesHelper.isEquipped(ModItems.CELESTIAL_SHELL, self);
     }
 }

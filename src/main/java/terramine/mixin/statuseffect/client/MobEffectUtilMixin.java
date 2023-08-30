@@ -8,8 +8,8 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-import terramine.common.item.accessories.TrinketTerrariaItem;
-import terramine.common.trinkets.TrinketsHelper;
+import terramine.common.item.accessories.AccessoryTerrariaItem;
+import terramine.common.misc.AccessoriesHelper;
 
 @Mixin(MobEffectUtil.class)
 public abstract class MobEffectUtilMixin {
@@ -19,10 +19,10 @@ public abstract class MobEffectUtilMixin {
 		LocalPlayer player = Minecraft.getInstance().player;
 
 		if (player != null && effect.isNoCounter()) {
-			TrinketsHelper.getAllEquipped(player).forEach(stack -> {
-				MobEffectInstance trinketEffect = ((TrinketTerrariaItem) stack.getItem()).getPermanentEffect();
+			AccessoriesHelper.getAllEquipped(player).forEach(stack -> {
+				MobEffectInstance accessoryEffect = ((AccessoryTerrariaItem) stack.getItem()).getPermanentEffect();
 
-				if (trinketEffect != null && trinketEffect.getEffect() == effect.getEffect()) {
+				if (accessoryEffect != null && accessoryEffect.getEffect() == effect.getEffect()) {
 					info.setReturnValue(stack.getHoverName().getString());
 				}
 			});

@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import terramine.common.init.ModItems;
-import terramine.common.trinkets.TrinketsHelper;
+import terramine.common.misc.AccessoriesHelper;
 
 import java.text.DecimalFormat;
 
@@ -30,7 +30,7 @@ public abstract class GuiMixin {
 	private void renderGuiWeather(PoseStack matrices, CallbackInfo ci) {
 		Player player = this.getCameraPlayer();
 
-		if (player == null || !getEquippedTrinkets(player)) {
+		if (player == null || !getEquippedAccessories(player)) {
 			return;
 		}
 
@@ -42,9 +42,9 @@ public abstract class GuiMixin {
 	}
 
 	@Unique
-	private boolean getEquippedTrinkets(Player player) {
-		return TrinketsHelper.isInInventory(ModItems.WEATHER_RADIO, player) || TrinketsHelper.isInInventory(ModItems.FISH_FINDER, player) || TrinketsHelper.isInInventory(ModItems.PDA, player)
-				|| TrinketsHelper.isInInventory(ModItems.CELL_PHONE, player);
+	private boolean getEquippedAccessories(Player player) {
+		return AccessoriesHelper.isInInventory(ModItems.WEATHER_RADIO, player) || AccessoriesHelper.isInInventory(ModItems.FISH_FINDER, player) || AccessoriesHelper.isInInventory(ModItems.PDA, player)
+				|| AccessoriesHelper.isInInventory(ModItems.CELL_PHONE, player);
 	}
 
 	@Unique

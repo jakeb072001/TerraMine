@@ -17,7 +17,7 @@ import terramine.TerraMine;
 import terramine.common.components.DPSDamageCounterComponent;
 import terramine.common.init.ModComponents;
 import terramine.common.init.ModItems;
-import terramine.common.trinkets.TrinketsHelper;
+import terramine.common.misc.AccessoriesHelper;
 
 import java.text.DecimalFormat;
 
@@ -39,7 +39,7 @@ public abstract class GuiMixin {
 	private void renderGuiDPS(PoseStack matrices, CallbackInfo ci) {
 		Player player = this.getCameraPlayer();
 
-		if (player == null || !getEquippedTrinkets(player)) {
+		if (player == null || !getEquippedAccessories(player)) {
 			return;
 		}
 
@@ -51,9 +51,9 @@ public abstract class GuiMixin {
 	}
 
 	@Unique
-	private boolean getEquippedTrinkets(Player player) {
-		return TrinketsHelper.isInInventory(ModItems.DPS_METER, player) || TrinketsHelper.isInInventory(ModItems.GOBLIN_TECH, player) || TrinketsHelper.isInInventory(ModItems.PDA, player)
-				|| TrinketsHelper.isInInventory(ModItems.CELL_PHONE, player);
+	private boolean getEquippedAccessories(Player player) {
+		return AccessoriesHelper.isInInventory(ModItems.DPS_METER, player) || AccessoriesHelper.isInInventory(ModItems.GOBLIN_TECH, player) || AccessoriesHelper.isInInventory(ModItems.PDA, player)
+				|| AccessoriesHelper.isInInventory(ModItems.CELL_PHONE, player);
 	}
 
 	@Unique

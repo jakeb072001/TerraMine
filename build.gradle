@@ -71,9 +71,6 @@ dependencies {
 
     // Dependencies
     modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}+${project.minecraft_version}"
-    modImplementation("dev.emi:trinkets:${project.trinkets_version}") {
-        transitive = false
-    }
     modImplementation "me.shedaniel.cloth:cloth-config-fabric:${project.cloth_config_version}"
     modImplementation "com.github.glitchfiend:TerraBlender-fabric:${project.minecraft_version}-${project.terrablender_version}"
     // modImplementation "software.bernie.geckolib:geckolib-fabric-1.19:${project.geckolib_version}"
@@ -153,7 +150,6 @@ curseforge {
                 requiredDependency "architectury-api"
                 requiredDependency "cloth-config"
                 requiredDependency "fabric-api"
-                requiredDependency "trinkets"
                 requiredDependency "terrablender-fabric"
                 optionalDependency "continuity"
                 optionalDependency "lambdabettergrass"
@@ -186,7 +182,6 @@ modrinth {
 
     dependencies {
         required.project "fabric-api"
-        required.project "trinkets"
         required.project "architectury-api"
     }
 }

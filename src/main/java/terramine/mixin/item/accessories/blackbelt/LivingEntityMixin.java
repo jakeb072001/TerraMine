@@ -13,7 +13,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import terramine.common.init.ModItems;
-import terramine.common.trinkets.TrinketsHelper;
+import terramine.common.misc.AccessoriesHelper;
 
 @Mixin(LivingEntity.class)
 public abstract class LivingEntityMixin {
@@ -32,7 +32,7 @@ public abstract class LivingEntityMixin {
 	@ModifyVariable(method = "hurt", at = @At("HEAD"), ordinal = 0, argsOnly = true)
 	private float dodgeAttack(float f) {
 		LivingEntity self = (LivingEntity) (Object) this;
-		if (TrinketsHelper.isEquipped(ModItems.BLACK_BELT, self) || TrinketsHelper.isEquipped(ModItems.MASTER_NINJA_GEAR, self)) {
+		if (AccessoriesHelper.isEquipped(ModItems.BLACK_BELT, self) || AccessoriesHelper.isEquipped(ModItems.MASTER_NINJA_GEAR, self)) {
 			if (damageSource != DamageSource.FALL && self.getRandom().nextInt(100) <= 10) {
 				f = 0f;
 				dodged = true;
@@ -49,7 +49,7 @@ public abstract class LivingEntityMixin {
 	@ModifyVariable(method = "knockback", at = @At("HEAD"), ordinal = 0, argsOnly = true)
 	private double removeKnockback(double d) {
 		LivingEntity self = (LivingEntity) (Object) this;
-		if (TrinketsHelper.isEquipped(ModItems.BLACK_BELT, self) || TrinketsHelper.isEquipped(ModItems.MASTER_NINJA_GEAR, self)) {
+		if (AccessoriesHelper.isEquipped(ModItems.BLACK_BELT, self) || AccessoriesHelper.isEquipped(ModItems.MASTER_NINJA_GEAR, self)) {
 			if (dodged) {
 				d = 0f;
 				dodged = false;

@@ -1,12 +1,12 @@
 package terramine.common.item.accessories.hands;
 
-import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import terramine.common.init.ModItems;
-import terramine.common.item.accessories.TrinketTerrariaItem;
-import terramine.common.trinkets.TrinketsHelper;
+import terramine.common.item.accessories.AccessoryTerrariaItem;
+import terramine.common.misc.AccessoriesHelper;
 
-public class BandOfRegenerationItem extends TrinketTerrariaItem {
+public class BandOfRegenerationItem extends AccessoryTerrariaItem {
 
 	/**
     @Override
@@ -18,13 +18,18 @@ public class BandOfRegenerationItem extends TrinketTerrariaItem {
 	private int timer;
 
 	@Override
-	public void curioTick(LivingEntity player, ItemStack stack) {
-		if (player != null && !TrinketsHelper.isEquipped(ModItems.CHARM_OF_MYTHS, player)) {
+	public void curioTick(Player player, ItemStack stack) {
+		if (player != null && !AccessoriesHelper.isEquipped(ModItems.CHARM_OF_MYTHS, player)) {
 			timer += 1;
 			if (timer >= 50) {
 				player.heal(0.5f);
 				timer = 0;
 			}
 		}
+	}
+
+	@Override
+	public boolean isGlove() {
+		return true;
 	}
 }

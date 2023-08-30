@@ -7,7 +7,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 
 /**
- * Callback for applying Trinket effects when the wearer was attacked by another entity
+ * Callback for applying Accessory effects when the wearer was attacked by another entity
  */
 public interface LivingEntityAttackedCallback {
 

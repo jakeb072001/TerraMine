@@ -11,7 +11,7 @@ import net.minecraft.world.entity.item.ItemEntity;
 import terramine.TerraMine;
 import terramine.common.components.*;
 import terramine.common.entity.mobs.DemonEyeEntity;
-import terramine.common.mana.ManaHandler;
+import terramine.common.misc.ManaHandler;
 
 public class ModComponents implements EntityComponentInitializer, LevelComponentInitializer {
 
@@ -34,6 +34,8 @@ public class ModComponents implements EntityComponentInitializer, LevelComponent
 			ComponentRegistryV3.INSTANCE.getOrCreate(TerraMine.id("lava_immunity"), LavaImmunityComponent.class);
 	public static final ComponentKey<SyncedBooleanComponent> SPACE_GUN_FREE =
 			ComponentRegistryV3.INSTANCE.getOrCreate(TerraMine.id("space_gun_free"), SyncedBooleanComponent.class);
+	public static final ComponentKey<PlayerAccessoriesComponent> ACCESSORIES_DATA =
+			ComponentRegistryV3.INSTANCE.getOrCreate(TerraMine.id("accessories"), PlayerAccessoriesComponent.class);
 	public static final ComponentKey<SyncedIntegerComponent> ACCESSORY_SLOTS_ADDER =
 			ComponentRegistryV3.INSTANCE.getOrCreate(TerraMine.id("accessory_slots_adder"), SyncedIntegerComponent.class);
 	public static final ComponentKey<SyncedBooleanComponent> ACCESSORY_HARDCORE_CHECK =
@@ -58,6 +60,7 @@ public class ModComponents implements EntityComponentInitializer, LevelComponent
 		registry.registerForPlayers(MOVEMENT_ORDER, MovementOrderComponent::new, RespawnCopyStrategy.LOSSLESS_ONLY);
 		registry.registerForPlayers(LAVA_IMMUNITY, LavaImmunityComponent::new, RespawnCopyStrategy.LOSSLESS_ONLY);
 		registry.registerForPlayers(SPACE_GUN_FREE, player -> new SyncedBooleanComponent("space_gun_free"), RespawnCopyStrategy.LOSSLESS_ONLY);
+		registry.registerForPlayers(ACCESSORIES_DATA, PlayerAccessoriesComponent::new, RespawnCopyStrategy.ALWAYS_COPY);
 		registry.registerForPlayers(ACCESSORY_SLOTS_ADDER, player -> new SyncedIntegerComponent("extraSlots"), RespawnCopyStrategy.CHARACTER);
 		registry.registerForPlayers(ACCESSORY_HARDCORE_CHECK, player -> new SyncedBooleanComponent("addedHardcoreSlot"), RespawnCopyStrategy.CHARACTER);
 	}

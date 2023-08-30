@@ -10,10 +10,10 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.server.network.ServerGamePacketListenerImpl;
 import net.minecraft.sounds.SoundEvents;
 import terramine.TerraMine;
-import terramine.common.item.accessories.TrinketTerrariaItem;
+import terramine.common.item.accessories.AccessoryTerrariaItem;
 import terramine.extensions.LivingEntityExtensions;
 
-public class CloudInABottleItem extends TrinketTerrariaItem {
+public class CloudInABottleItem extends AccessoryTerrariaItem {
 
 	public static final ResourceLocation C2S_DOUBLE_JUMPED_ID = TerraMine.id("c2s_double_jumped");
 

@@ -1,7 +1,6 @@
 package terramine.common.item.accessories.feet;
 
 import be.florens.expandability.api.fabric.LivingFluidCollisionCallback;
-import dev.emi.trinkets.api.SlotReference;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -9,10 +8,10 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.material.FluidState;
 import terramine.common.init.ModComponents;
 import terramine.common.init.ModItems;
-import terramine.common.item.accessories.TrinketTerrariaItem;
-import terramine.common.trinkets.TrinketsHelper;
+import terramine.common.item.accessories.AccessoryTerrariaItem;
+import terramine.common.misc.AccessoriesHelper;
 
-public class ObsidianWaterWalkingBootsItem extends TrinketTerrariaItem {
+public class ObsidianWaterWalkingBootsItem extends AccessoryTerrariaItem {
 
 	public ObsidianWaterWalkingBootsItem() {
 		//noinspection UnstableApiUsage
@@ -20,20 +19,20 @@ public class ObsidianWaterWalkingBootsItem extends TrinketTerrariaItem {
 	}
 
 	@Override
-	public void tick(ItemStack stack, SlotReference slot, LivingEntity entity) {
-		ModComponents.SWIM_ABILITIES.maybeGet(entity).ifPresent(swimAbilities -> {
-			if (entity.isInWater()) {
+	public void tick(ItemStack stack, Player player) {
+		ModComponents.SWIM_ABILITIES.maybeGet(player).ifPresent(swimAbilities -> {
+			if (player.isInWater()) {
 				swimAbilities.setWet(true);
-			} else if (entity.isOnGround() || (entity instanceof Player player && player.getAbilities().flying)) {
+			} else if (player.isOnGround() || player.getAbilities().flying) {
 				swimAbilities.setWet(false);
 			}
 		});
 
-		super.tick(stack, slot, entity);
+		super.tick(stack, player);
 	}
 
 	private static boolean onFluidCollision(LivingEntity entity, FluidState fluidState) {
-		if (TrinketsHelper.isEquipped(ModItems.OBSIDIAN_WATER_WALKING_BOOTS, entity) && !entity.isCrouching()) {
+		if (AccessoriesHelper.isEquipped(ModItems.OBSIDIAN_WATER_WALKING_BOOTS, entity) && !entity.isCrouching()) {
 			return !fluidState.is(FluidTags.LAVA);
 		}
 

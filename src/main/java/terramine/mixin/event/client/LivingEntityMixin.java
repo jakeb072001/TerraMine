@@ -1,6 +1,7 @@
 package terramine.mixin.event.client;
 
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -19,6 +20,8 @@ public abstract class LivingEntityMixin {
 
 	@Inject(method = "handleEntityEvent", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/LivingEntity;getHurtSound(Lnet/minecraft/world/damagesource/DamageSource;)Lnet/minecraft/sounds/SoundEvent;"))
 	private void onClientPlayHurtSound(byte status, CallbackInfo info) {
-		PlayHurtSoundCallback.EVENT.invoker().play((LivingEntity) (Object) this, this.getSoundVolume(), this.getVoicePitch());
+		if (((LivingEntity) (Object) this) instanceof Player player) {
+			PlayHurtSoundCallback.EVENT.invoker().play(player, this.getSoundVolume(), this.getVoicePitch());
+		}
 	}
 }

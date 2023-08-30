@@ -1,11 +1,6 @@
 {
   "magic_mirror.fail": "No spawnpoint found",
   "stat.terramine.mana_used": "Mana Used",
-  "trinkets.slot.terraria.accessory1": "Accessory Slot 1",
-  "trinkets.slot.terraria.accessory2": "Accessory Slot 2",
-  "trinkets.slot.terraria.accessory3": "Accessory Slot 3",
-  "trinkets.slot.terraria.accessory4": "Accessory Slot 4",
-  "trinkets.slot.terraria.accessory5": "Accessory Slot 5",
   "terramine.status.allenabled": "Effects & cosmetic",
   "terramine.status.cosmeticonly": "Cosmetic only",
   "terramine.status.effectsonly": "Effects only",

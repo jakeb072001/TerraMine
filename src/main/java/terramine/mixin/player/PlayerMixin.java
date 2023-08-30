@@ -6,6 +6,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.SimpleContainer;
+import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -22,6 +23,9 @@ import terramine.client.render.gui.menu.TerrariaInventoryContainerMenu;
 import terramine.common.entity.projectiles.FallingStarEntity;
 import terramine.common.init.ModComponents;
 import terramine.common.init.ModEntities;
+import terramine.common.item.accessories.AccessoryTerrariaItem;
+import terramine.common.misc.AccessoriesHelper;
+import terramine.common.misc.TerrariaInventory;
 import terramine.extensions.ItemExtensions;
 import terramine.extensions.PlayerStorages;
 
@@ -29,7 +33,7 @@ import terramine.extensions.PlayerStorages;
 public abstract class PlayerMixin extends LivingEntity implements PlayerStorages {
 
 	@Unique
-	SimpleContainer terrariaInventory = new SimpleContainer(35);
+	TerrariaInventory terrariaInventory = new TerrariaInventory(35);
 
 	@Unique
 	SimpleContainer piggyBankInventory = new SimpleContainer(40);
@@ -56,6 +60,11 @@ public abstract class PlayerMixin extends LivingEntity implements PlayerStorages
 	private void onTick(CallbackInfo ci) {
 		ModComponents.MANA_HANDLER.get(this).update();
 		ModComponents.LAVA_IMMUNITY.get(this).update();
+		for (int i = 0; i < 7; i++) {
+			if (terrariaInventory.getItem(i).getItem() instanceof AccessoryTerrariaItem accessoryItem) {
+				accessoryItem.tick(terrariaInventory.getItem(i), (Player) (Object) this);
+			}
+		}
 		if (!TerraMine.CONFIG.general.disableFallingStars) {
 			if (level != null && level.dimensionType().bedWorks() && !level.isDay()) { // handles spawning stars randomly during the night, not the best way to do it most likely, but it works for now.
 				if (rand.nextInt(16800) <= TerraMine.CONFIG.general.fallingStarRarity) {
@@ -66,6 +75,18 @@ public abstract class PlayerMixin extends LivingEntity implements PlayerStorages
 					}
 				}
 			}
+		}
+
+		if (!this.level.isClientSide && this.tickCount % 15 == 0) {
+			AccessoriesHelper.getAllEquipped((Player) (Object) this).forEach(stack -> {
+				if (stack.getItem() instanceof AccessoryTerrariaItem accessoryItem) {
+					MobEffectInstance effect = accessoryItem.getPermanentEffect();
+
+					if (effect != null) {
+						this.addEffect(effect);
+					}
+				}
+			});
 		}
 	}
 
@@ -78,7 +99,7 @@ public abstract class PlayerMixin extends LivingEntity implements PlayerStorages
 	}
 
 	@Override
-	public SimpleContainer getTerrariaInventory() {
+	public TerrariaInventory getTerrariaInventory() {
 		return this.terrariaInventory;
 	}
 
@@ -98,7 +119,7 @@ public abstract class PlayerMixin extends LivingEntity implements PlayerStorages
 	}
 
 	@Override
-	public void setTerrariaInventory(SimpleContainer terrariaInventory) {
+	public void setTerrariaInventory(TerrariaInventory terrariaInventory) {
 		this.terrariaInventory = terrariaInventory;
 	}
 

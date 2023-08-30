@@ -16,11 +16,11 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
 import terramine.common.init.ModSoundEvents;
-import terramine.common.item.accessories.TrinketTerrariaItem;
+import terramine.common.item.accessories.AccessoryTerrariaItem;
 
 import java.util.Optional;
 
-public class CellPhoneItem extends TrinketTerrariaItem {
+public class CellPhoneItem extends AccessoryTerrariaItem {
 
 	@Override
 	public ItemStack finishUsingItem(@NotNull ItemStack stack, Level level, @NotNull LivingEntity entity) {

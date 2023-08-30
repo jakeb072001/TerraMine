@@ -22,7 +22,7 @@ import terramine.common.init.ModComponents;
 import terramine.common.init.ModItems;
 import terramine.common.init.ModSoundEvents;
 import terramine.common.item.accessories.belt.CloudInABottleItem;
-import terramine.common.trinkets.TrinketsHelper;
+import terramine.common.misc.AccessoriesHelper;
 import terramine.common.utility.equipmentchecks.WingsEquippedCheck;
 import terramine.extensions.LivingEntityExtensions;
 
@@ -68,7 +68,7 @@ public abstract class LivingEntityMixin extends Entity implements LivingEntityEx
 			this.jumpFromGround();
 
 			// Play jump sound
-			SoundEvent jumpSound = TrinketsHelper.isEquipped(ModItems.WHOOPEE_CUSHION, self) ?
+			SoundEvent jumpSound = AccessoriesHelper.isEquipped(ModItems.WHOOPEE_CUSHION, self) ?
 					ModSoundEvents.FART : ModSoundEvents.DOUBLE_JUMP;
 			this.playSound(jumpSound, 1, 0.9F + self.getRandom().nextFloat() * 0.2F);
 
@@ -83,7 +83,7 @@ public abstract class LivingEntityMixin extends Entity implements LivingEntityEx
 			this.isDoubleJumping = false;
 
 			// Controls order of movement accessories, allows rocket boots after double jump
-			if (TrinketsHelper.isEquipped(ModItems.BUNDLE_OF_BALLOONS, player)) {
+			if (AccessoriesHelper.isEquipped(ModItems.BUNDLE_OF_BALLOONS, player)) {
 				quadJumped++;
 				if (quadJumped == 3) {
 					ModComponents.MOVEMENT_ORDER.get(player).setCloudFinished(true);
@@ -104,7 +104,7 @@ public abstract class LivingEntityMixin extends Entity implements LivingEntityEx
 
 	@ModifyVariable(method = "causeFallDamage", ordinal = 0, at = @At("HEAD"), argsOnly = true)
 	private float reduceFallDistance(float fallDistance) {
-		if (TrinketsHelper.isEquipped(ModItems.CLOUD_IN_A_BOTTLE, (LivingEntity) (Object) this)) {
+		if (AccessoriesHelper.isEquipped(ModItems.CLOUD_IN_A_BOTTLE, (LivingEntity) (Object) this)) {
 			fallDistance = Math.max(0, fallDistance - 3);
 		}
 
@@ -133,8 +133,8 @@ public abstract class LivingEntityMixin extends Entity implements LivingEntityEx
 
 		boolean flying = player.getAbilities().flying;
 		if (this.jumping && this.jumpWasReleased && !this.isInWater() && !this.isOnGround() && !this.isPassenger()
-				&& !this.hasDoubleJumped && !flying && TrinketsHelper.isEquipped(ModItems.CLOUD_IN_A_BOTTLE, player)
-				&& !TrinketsHelper.isEquipped(ModItems.BUNDLE_OF_BALLOONS, player)) {
+				&& !this.hasDoubleJumped && !flying && AccessoriesHelper.isEquipped(ModItems.CLOUD_IN_A_BOTTLE, player)
+				&& !AccessoriesHelper.isEquipped(ModItems.BUNDLE_OF_BALLOONS, player)) {
 			this.terramine$doubleJump();
 			this.hasDoubleJumped = true;
 		}

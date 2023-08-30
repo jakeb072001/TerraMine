@@ -15,7 +15,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import terramine.TerraMine;
 import terramine.common.init.ModItems;
-import terramine.common.trinkets.TrinketsHelper;
+import terramine.common.misc.AccessoriesHelper;
 
 @Mixin(Gui.class)
 public abstract class GuiMixin {
@@ -32,7 +32,7 @@ public abstract class GuiMixin {
 	private void renderGuiDepth(PoseStack matrices, CallbackInfo ci) {
 		Player player = this.getCameraPlayer();
 
-		if (player == null || !getEquippedTrinkets(player)) {
+		if (player == null || !getEquippedAccessories(player)) {
 			return;
 		}
 
@@ -44,9 +44,9 @@ public abstract class GuiMixin {
 	}
 
 	@Unique
-	private boolean getEquippedTrinkets(Player player) {
-		return TrinketsHelper.isInInventory(ModItems.DEPTH_METER, player) || TrinketsHelper.isInInventory(ModItems.GPS, player) || TrinketsHelper.isInInventory(ModItems.PDA, player)
-				|| TrinketsHelper.isInInventory(ModItems.CELL_PHONE, player);
+	private boolean getEquippedAccessories(Player player) {
+		return AccessoriesHelper.isInInventory(ModItems.DEPTH_METER, player) || AccessoriesHelper.isInInventory(ModItems.GPS, player) || AccessoriesHelper.isInInventory(ModItems.PDA, player)
+				|| AccessoriesHelper.isInInventory(ModItems.CELL_PHONE, player);
 	}
 
 	@Unique
