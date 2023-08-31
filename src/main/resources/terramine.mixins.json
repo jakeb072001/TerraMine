@@ -53,8 +53,10 @@
   ],
   "client": [
     "client.GuiMixin",
-    "client.render.ArmorFeatureRendererMixin",
+    "client.render.HumanoidArmorLayerMixin",
+    "client.render.ItemInHandRendererMixin",
     "client.render.LivingEntityRendererMixin",
+    "client.render.PlayerItemInHandLayerMixin",
     "client.render.PlayerRendererMixin",
     "event.client.LivingEntityMixin",
     "item.accessories.compass.client.GuiMixin",
