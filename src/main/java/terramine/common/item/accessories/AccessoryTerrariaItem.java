@@ -143,7 +143,7 @@ public class AccessoryTerrariaItem extends TerrariaItem implements Accessories {
 	/**
 	 * @return The {@link SoundInfo} to play when the accessory is right-click equipped
 	 */
-	protected SoundInfo getEquipSoundInfo() {
+	public SoundInfo getEquipSoundInfo() {
 		return new SoundInfo(SoundEvents.ARMOR_EQUIP_GENERIC);
 	}
 
@@ -231,7 +231,7 @@ public class AccessoryTerrariaItem extends TerrariaItem implements Accessories {
 		}
 	}
 
-	protected record SoundInfo(SoundEvent soundEvent, float volume, float pitch) {
+	public record SoundInfo(SoundEvent soundEvent, float volume, float pitch) {
 
 		// Changes access modifier to public
 		@SuppressWarnings({"RedundantRecordConstructor", "RedundantSuppression"})

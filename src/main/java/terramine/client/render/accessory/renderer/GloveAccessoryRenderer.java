@@ -22,18 +22,18 @@ import terramine.common.item.accessories.AccessoryTerrariaItem;
 import terramine.common.misc.AccessoriesHelper;
 
 
-public class GloveCurioRenderer implements AccessoryRenderer {
+public class GloveAccessoryRenderer implements AccessoryRenderer {
 
     private final ResourceLocation defaultTexture;
     private final ResourceLocation slimTexture;
     private final ArmsModel defaultModel;
     private final ArmsModel slimModel;
 
-    public GloveCurioRenderer(String name, ArmsModel defaultModel, ArmsModel slimModel) {
+    public GloveAccessoryRenderer(String name, ArmsModel defaultModel, ArmsModel slimModel) {
         this(String.format("glove/%s/%s_default", name, name), String.format("glove/%s/%s_slim", name, name), defaultModel, slimModel);
     }
 
-    public GloveCurioRenderer(String defaultTexturePath, String slimTexturePath, ArmsModel defaultModel, ArmsModel slimModel) {
+    public GloveAccessoryRenderer(String defaultTexturePath, String slimTexturePath, ArmsModel defaultModel, ArmsModel slimModel) {
         this.defaultTexture = TerraMine.id(String.format("textures/entity/accessory/%s.png", defaultTexturePath));
         this.slimTexture = TerraMine.id(String.format("textures/entity/accessory/%s.png", slimTexturePath));
         this.defaultModel = defaultModel;

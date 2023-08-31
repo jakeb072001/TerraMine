@@ -12,13 +12,9 @@ public interface PlayerStorages {
 
 	SimpleContainer getSafeInventory();
 
-	TerrariaInventoryContainerMenu getTerrariaMenu();
-
 	void setTerrariaInventory(TerrariaInventory terrariaInventory);
 
 	void setPiggyBankInventory(SimpleContainer piggyBankInventory);
 
 	void setSafeInventory(SimpleContainer safeInventory);
-
-	void setTerrariaMenu(TerrariaInventoryContainerMenu terrariaMenu);
 }

@@ -13,7 +13,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import terramine.TerraMine;
 import terramine.client.render.AccessoryRenderRegistry;
-import terramine.client.render.accessory.renderer.GloveCurioRenderer;
+import terramine.client.render.accessory.renderer.GloveAccessoryRenderer;
 import terramine.common.item.accessories.AccessoryTerrariaItem;
 import terramine.extensions.PlayerStorages;
 
@@ -47,7 +47,7 @@ public abstract class PlayerRendererMixin {
 		for (ItemStack stack : allEquippedGloves) {
 			if (stack.getItem() instanceof AccessoryTerrariaItem accessory && accessory.isGlove()) {
 				AccessoryRenderRegistry.getRenderer(stack.getItem()).ifPresent(renderer -> {
-					if (renderer instanceof GloveCurioRenderer gloveRenderer) {
+					if (renderer instanceof GloveAccessoryRenderer gloveRenderer) {
 						gloveRenderer.renderFirstPersonArm(matrixStack, buffer, light, player, handSide, stack.hasFoil());
 					}
 				});

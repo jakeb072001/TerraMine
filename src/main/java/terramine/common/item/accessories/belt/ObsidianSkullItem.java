@@ -25,7 +25,7 @@ public class ObsidianSkullItem extends AccessoryTerrariaItem {
 	}
 
 	@Override
-	protected SoundInfo getEquipSoundInfo() {
+	public SoundInfo getEquipSoundInfo() {
 		return new SoundInfo(SoundEvents.ARMOR_EQUIP_IRON);
 	}
 }

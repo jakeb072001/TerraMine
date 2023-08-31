@@ -20,6 +20,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.phys.Vec3;
 import terramine.TerraMine;
+import terramine.client.render.gui.menu.TerrariaInventoryContainerMenu;
 import terramine.common.init.ModComponents;
 import terramine.common.init.ModItems;
 import terramine.common.network.packet.BoneMealPacket;
@@ -132,7 +133,7 @@ public class ServerPacketHandler {
         });
 
         ServerPlayNetworking.registerGlobalReceiver(OPEN_INVENTORY_PACKET_ID, (server, player, handler, buf, responseSender) ->
-                server.execute(() -> player.openMenu(new SimpleMenuProvider((id, inventory, player2) -> ((PlayerStorages)player).getTerrariaMenu(), Component.empty()))));
+                server.execute(() -> player.openMenu(new SimpleMenuProvider((id, inventory, player2) -> new TerrariaInventoryContainerMenu(player), Component.empty()))));
 
         NetworkManager.registerReceiver(NetworkManager.s2c(), UPDATE_BIOME_PACKET_ID, (buf, context) -> {
             int chunkX = buf.readInt();

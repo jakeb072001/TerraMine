@@ -10,12 +10,14 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.InventoryMenu;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ShieldItem;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import org.jetbrains.annotations.NotNull;
 import terramine.TerraMine;
 import terramine.common.init.ModComponents;
 import terramine.common.init.ModScreenHandlerType;
 import terramine.common.item.accessories.AccessoryTerrariaItem;
+import terramine.common.item.accessories.ShieldAccessoryItem;
 import terramine.common.misc.TerrariaInventory;
 import terramine.extensions.PlayerStorages;
 
@@ -100,11 +102,19 @@ public class TerrariaInventoryContainerMenu extends AbstractContainerMenu {
 
         // Shield Vanity
         this.addSlot(new Slot(terrariaInventory, 21, 80, 54) {
+            public boolean mayPlace(@NotNull ItemStack itemStack) {
+                return itemStack.getItem() instanceof ShieldItem || itemStack.getItem() instanceof ShieldAccessoryItem;
+            }
+
             public Pair<ResourceLocation, ResourceLocation> getNoItemIcon() {
                 return Pair.of(InventoryMenu.BLOCK_ATLAS, InventoryMenu.EMPTY_ARMOR_SLOT_SHIELD);
             }
         });
         this.addSlot(new Slot(terrariaInventory, 22, 98, 54) {
+            public boolean mayPlace(@NotNull ItemStack itemStack) {
+                return true; // todo: replace with dye item once made
+            }
+
             public Pair<ResourceLocation, ResourceLocation> getNoItemIcon() {
                 return Pair.of(InventoryMenu.BLOCK_ATLAS, EMPTY_ACCESSORY_DYE_SLOT);
             }
@@ -120,9 +130,9 @@ public class TerrariaInventoryContainerMenu extends AbstractContainerMenu {
             int j = i;
             this.addSlot(new Slot(terrariaInventory, i + (accessoryType * 7), 116 + (accessoryType * 18), -18 + i * 18) {
                 public void set(@NotNull ItemStack itemStack) {
-                    //ItemStack itemStack2 = this.getItem();
+                    ItemStack itemStack2 = this.getItem();
                     super.set(itemStack);
-                    //player.onEquipItem(equipmentSlot, itemStack2, itemStack);
+                    onEquipAccessory(player, itemStack2, itemStack);
                 }
 
                 public boolean isActive() {
@@ -188,6 +198,16 @@ public class TerrariaInventoryContainerMenu extends AbstractContainerMenu {
                     return Pair.of(InventoryMenu.BLOCK_ATLAS, TEXTURE_EMPTY_SLOTS[equipmentSlot.getIndex()]);
                 }
             });
+        }
+    }
+
+    private void onEquipAccessory(Player player, ItemStack itemStack, ItemStack itemStack2) {
+        boolean bl = itemStack2.isEmpty() && itemStack.isEmpty();
+        if (!bl && !ItemStack.isSameIgnoreDurability(itemStack, itemStack2)) {
+            if (itemStack2.getItem() instanceof AccessoryTerrariaItem accessory) {
+                AccessoryTerrariaItem.SoundInfo sound = accessory.getEquipSoundInfo();
+                player.playSound(sound.soundEvent(), sound.volume(), sound.pitch());
+            }
         }
     }
 

@@ -11,7 +11,7 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.LivingEntity;
-import terramine.client.render.accessory.CurioRenderers;
+import terramine.client.render.accessory.AccessoryRenderers;
 import terramine.common.init.ModModelLayers;
 
 import java.util.function.Function;
@@ -56,7 +56,7 @@ public class BeltModel extends HumanoidModel<LivingEntity> {
     }
 
     public static BeltModel createCloudInABottleModel() {
-        return new BeltModel(CurioRenderers.bakeLayer(ModModelLayers.CLOUD_IN_A_BOTTLE), RenderType::entityTranslucent, 3, -3, -0.5F) {
+        return new BeltModel(AccessoryRenderers.bakeLayer(ModModelLayers.CLOUD_IN_A_BOTTLE), RenderType::entityTranslucent, 3, -3, -0.5F) {
             private final ModelPart cloud = charm.getChild("cloud");
 
             @Override
@@ -69,11 +69,11 @@ public class BeltModel extends HumanoidModel<LivingEntity> {
     }
 
     public static BeltModel createObsidianSkullModel() {
-        return new BeltModel(CurioRenderers.bakeLayer(ModModelLayers.OBSIDIAN_SKULL), 4.5F, -4F, -0.5F);
+        return new BeltModel(AccessoryRenderers.bakeLayer(ModModelLayers.OBSIDIAN_SKULL), 4.5F, -4F, -0.5F);
     }
 
     public static BeltModel createUniversalAttractorModel() {
-        return new BeltModel(CurioRenderers.bakeLayer(ModModelLayers.UNIVERSAL_ATTRACTOR), 2.5F, -3, 0);
+        return new BeltModel(AccessoryRenderers.bakeLayer(ModModelLayers.UNIVERSAL_ATTRACTOR), 2.5F, -3, 0);
     }
 
     private static MeshDefinition createBelt(CubeListBuilder charm) {

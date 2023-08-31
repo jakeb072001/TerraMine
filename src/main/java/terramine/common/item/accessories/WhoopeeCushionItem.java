@@ -29,7 +29,7 @@ public class WhoopeeCushionItem extends AccessoryTerrariaItem {
 	}
 
 	@Override
-	protected SoundInfo getEquipSoundInfo() {
+	public SoundInfo getEquipSoundInfo() {
 		return new SoundInfo(ModSoundEvents.FART);
 	}
 }

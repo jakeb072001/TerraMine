@@ -12,7 +12,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.PackType;
 import terramine.client.render.HeldItemModels;
 import terramine.client.render.ModAllEntityRenderers;
-import terramine.client.render.accessory.CurioRenderers;
+import terramine.client.render.accessory.AccessoryRenderers;
 import terramine.common.init.ModItems;
 import terramine.common.init.ModLayerDefinitions;
 import terramine.common.init.ModParticles;
@@ -49,7 +49,7 @@ public class TerraMineClient implements ClientModInitializer {
 
 		// Entity models register
 		ModLayerDefinitions.registerAll();
-		ResourceManagerHelper.get(PackType.CLIENT_RESOURCES).registerReloadListener(new CurioRenderers());
+		ResourceManagerHelper.get(PackType.CLIENT_RESOURCES).registerReloadListener(new AccessoryRenderers());
 
 		// Particle register
 		ModParticles.registerClient();

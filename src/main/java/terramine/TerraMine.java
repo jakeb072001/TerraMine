@@ -92,16 +92,12 @@ public class TerraMine implements ModInitializer, TerraBlenderApi {
 		ServerLifecycleEvents.SERVER_STOPPING.register(server -> InputHandler.clear());
 		PlayerEvent.CHANGE_DIMENSION.register((player, oldLevel, newLevel) -> InputHandler.onChangeDimension(player));
 		PlayerEvent.PLAYER_QUIT.register(InputHandler::onLogout);
-		// todo: after player death, client side items don't sync correctly between terraria menu and inventory menu, no clue why
 		ServerPlayerEvents.COPY_FROM.register((oldPlayer, newPlayer, alive) -> {
 			if (oldPlayer instanceof PlayerStorages) {
 				// Copy inventories from the player entity that died to the one that respawned
 				((PlayerStorages) newPlayer).setTerrariaInventory(((PlayerStorages) oldPlayer).getTerrariaInventory());
 				((PlayerStorages) newPlayer).setPiggyBankInventory(((PlayerStorages) oldPlayer).getPiggyBankInventory());
 				((PlayerStorages) newPlayer).setSafeInventory(((PlayerStorages) oldPlayer).getSafeInventory());
-
-				// Copy menu over so after death items show in inventory
-				((PlayerStorages) newPlayer).setTerrariaMenu(((PlayerStorages) oldPlayer).getTerrariaMenu());
 			}
 		});
 		PlayerEvent.PLAYER_RESPAWN.register((player, bl) -> syncInventory(player));
@@ -122,6 +118,7 @@ public class TerraMine implements ModInitializer, TerraBlenderApi {
 		LOGGER.info("Finished initialization");
 	}
 
+	// maybe move into inventory itself or something? works perfectly like this though so I'll just leave it for now
 	private void syncInventory(ServerPlayer player) {
 		TerrariaInventory terrariaInventory = ((PlayerStorages)player).getTerrariaInventory();
 		for (int i = 0; i < terrariaInventory.getContainerSize(); i++) {

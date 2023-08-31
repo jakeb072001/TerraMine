@@ -11,6 +11,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.item.CreativeModeTab;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -20,6 +21,8 @@ import terramine.common.network.ServerPacketHandler;
 
 @Mixin(CreativeModeInventoryScreen.class)
 public abstract class CreativeModeInventoryScreenMixin extends EffectRenderingInventoryScreen<CreativeModeInventoryScreen.ItemPickerMenu> {
+    @Shadow public abstract int getSelectedTab();
+
     @Unique
     private static final ResourceLocation BUTTON_TEX = TerraMine.id("textures/gui/terraria_slots_button.png");
 
@@ -37,14 +40,22 @@ public abstract class CreativeModeInventoryScreenMixin extends EffectRenderingIn
                 ClientPlayNetworking.send(ServerPacketHandler.OPEN_INVENTORY_PACKET_ID, new FriendlyByteBuf(Unpooled.buffer()));
             }));
         }
+
+        terrariaButton.visible = false;
     }
 
-    // todo: if opening another screen like the rei settings and then returning this isn't called and terrariaButton.visible is set to true, fix plz
-    // todo: maybe use containerTick again, I don't remember what issue that had
+    // todo: both methods together looks best but probably not the cleanest way, maybe improve later, not too important
     @Inject(method = "selectTab", at = @At("HEAD"))
     private void onSelectTab(CreativeModeTab creativeModeTab, CallbackInfo ci) {
         if (terrariaButton != null) {
             terrariaButton.visible = creativeModeTab == CreativeModeTab.TAB_INVENTORY;
+        }
+    }
+
+    @Inject(method = "containerTick", at = @At("HEAD"))
+    private void onTick(CallbackInfo ci) {
+        if (terrariaButton != null) {
+            terrariaButton.visible = getSelectedTab() == CreativeModeTab.TAB_INVENTORY.getId();
         }
     }
 }

@@ -32,7 +32,6 @@ import org.jetbrains.annotations.NotNull;
 import terramine.TerraMine;
 import terramine.client.render.gui.menu.TerrariaInventoryContainerMenu;
 import terramine.common.init.ModComponents;
-import terramine.extensions.PlayerStorages;
 
 import java.util.List;
 
@@ -51,7 +50,7 @@ public class TerrariaInventoryScreen extends EffectRenderingInventoryScreen<Terr
     private boolean buttonClicked;
 
     public TerrariaInventoryScreen(Player player) {
-        super(((PlayerStorages)player).getTerrariaMenu(), player.getInventory(), Component.empty());
+        super(new TerrariaInventoryContainerMenu(player), player.getInventory(), Component.empty());
         this.passEvents = true;
     }
 

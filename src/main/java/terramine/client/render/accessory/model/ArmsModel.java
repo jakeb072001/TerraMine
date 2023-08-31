@@ -13,7 +13,7 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.HumanoidArm;
 import net.minecraft.world.entity.LivingEntity;
-import terramine.client.render.accessory.CurioRenderers;
+import terramine.client.render.accessory.AccessoryRenderers;
 import terramine.common.init.ModModelLayers;
 
 import java.util.function.Function;
@@ -45,15 +45,15 @@ public class ArmsModel extends HumanoidModel<LivingEntity> {
     }
 
     public static ArmsModel createClawsModel(boolean smallArms) {
-        return new ArmsModel(CurioRenderers.bakeLayer(ModModelLayers.claws(smallArms)));
+        return new ArmsModel(AccessoryRenderers.bakeLayer(ModModelLayers.claws(smallArms)));
     }
 
     public static ArmsModel createGloveModel(boolean smallArms) {
-        return new ArmsModel(CurioRenderers.bakeLayer(ModModelLayers.glove(smallArms)));
+        return new ArmsModel(AccessoryRenderers.bakeLayer(ModModelLayers.glove(smallArms)));
     }
 
     public static ArmsModel createGoldenHookModel(boolean smallArms) {
-        return new ArmsModel(CurioRenderers.bakeLayer(ModModelLayers.goldenHook(smallArms)));
+        return new ArmsModel(AccessoryRenderers.bakeLayer(ModModelLayers.goldenHook(smallArms)));
     }
 
     public static MeshDefinition createEmptyArms(CubeListBuilder leftArm, CubeListBuilder rightArm, boolean smallArms) {

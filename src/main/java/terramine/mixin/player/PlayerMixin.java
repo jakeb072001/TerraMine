@@ -1,7 +1,5 @@
 package terramine.mixin.player;
 
-import com.mojang.authlib.GameProfile;
-import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.util.RandomSource;
@@ -10,7 +8,6 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.entity.player.ProfilePublicKey;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import org.spongepowered.asm.mixin.Mixin;
@@ -19,7 +16,6 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import terramine.TerraMine;
-import terramine.client.render.gui.menu.TerrariaInventoryContainerMenu;
 import terramine.common.entity.projectiles.FallingStarEntity;
 import terramine.common.init.ModComponents;
 import terramine.common.init.ModEntities;
@@ -42,18 +38,10 @@ public abstract class PlayerMixin extends LivingEntity implements PlayerStorages
 	SimpleContainer safeInventory = new SimpleContainer(40);
 
 	@Unique
-	TerrariaInventoryContainerMenu terrariaMenu;
-
-	@Unique
 	private final RandomSource rand = RandomSource.create();
 
 	public PlayerMixin(EntityType<? extends LivingEntity> entityType, Level level) {
 		super(entityType, level);
-	}
-
-	@Inject(method = "<init>", at = @At("TAIL"))
-	private void onInit(Level level, BlockPos blockPos, float f, GameProfile gameProfile, ProfilePublicKey profilePublicKey, CallbackInfo ci) {
-		setTerrariaMenu(new TerrariaInventoryContainerMenu((Player)(Object)this));
 	}
 
 	@Inject(method = "tick", at = @At("TAIL"))
@@ -114,11 +102,6 @@ public abstract class PlayerMixin extends LivingEntity implements PlayerStorages
 	}
 
 	@Override
-	public TerrariaInventoryContainerMenu getTerrariaMenu() {
-		return this.terrariaMenu;
-	}
-
-	@Override
 	public void setTerrariaInventory(TerrariaInventory terrariaInventory) {
 		this.terrariaInventory = terrariaInventory;
 	}
@@ -131,11 +114,6 @@ public abstract class PlayerMixin extends LivingEntity implements PlayerStorages
 	@Override
 	public void setSafeInventory(SimpleContainer safeInventory) {
 		this.safeInventory = safeInventory;
-	}
-
-	@Override
-	public void setTerrariaMenu(TerrariaInventoryContainerMenu terrariaMenu) {
-		this.terrariaMenu = terrariaMenu;
 	}
 
 	@Inject(method = "addAdditionalSaveData", at = @At("TAIL"))

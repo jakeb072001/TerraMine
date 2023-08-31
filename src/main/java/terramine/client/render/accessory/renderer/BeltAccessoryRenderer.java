@@ -16,16 +16,16 @@ import terramine.client.render.AccessoryRenderer;
 import terramine.client.render.accessory.model.BeltModel;
 import terramine.common.misc.AccessoriesHelper;
 
-public class BeltCurioRenderer implements AccessoryRenderer {
+public class BeltAccessoryRenderer implements AccessoryRenderer {
 
     private final ResourceLocation texture;
     private final BeltModel model;
 
-    public BeltCurioRenderer(String texturePath, BeltModel model) {
+    public BeltAccessoryRenderer(String texturePath, BeltModel model) {
         this(TerraMine.id(String.format("textures/entity/accessory/%s.png", texturePath)), model);
     }
 
-    public BeltCurioRenderer(ResourceLocation texture, BeltModel model) {
+    public BeltAccessoryRenderer(ResourceLocation texture, BeltModel model) {
         this.texture = texture;
         this.model = model;
     }

@@ -38,7 +38,7 @@ public class CloudInABalloonItem extends AccessoryTerrariaItem {
 	}
 
 	@Override
-	protected SoundInfo getEquipSoundInfo() {
+	public SoundInfo getEquipSoundInfo() {
 		return new SoundInfo(SoundEvents.BOTTLE_FILL_DRAGONBREATH);
 	}
 

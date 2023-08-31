@@ -14,12 +14,12 @@ import terramine.TerraMine;
 import terramine.client.render.RenderTypes;
 import terramine.client.render.accessory.model.ArmsModel;
 
-public class GlowingGloveCurioRenderer extends GloveCurioRenderer {
+public class GlowingGloveAccessoryRenderer extends GloveAccessoryRenderer {
 
     private final ResourceLocation defaultGlowTexture;
     private final ResourceLocation slimGlowTexture;
 
-    public GlowingGloveCurioRenderer(String name, ArmsModel defaultModel, ArmsModel slimModel) {
+    public GlowingGloveAccessoryRenderer(String name, ArmsModel defaultModel, ArmsModel slimModel) {
         super(name, defaultModel, slimModel);
         defaultGlowTexture = TerraMine.id(String.format("textures/entity/accessory/glove/%s/%s_default_glow.png", name, name));
         slimGlowTexture = TerraMine.id(String.format("textures/entity/accessory/glove/%s/%s_slim_glow.png", name, name));
