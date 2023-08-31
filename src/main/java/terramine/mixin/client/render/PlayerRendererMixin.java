@@ -41,6 +41,10 @@ public abstract class PlayerRendererMixin {
 
 		List<ItemStack> allEquippedGloves = new ArrayList<>();
 		for (int i = 0; i < 7; i++) {
+			if (((PlayerStorages)player).getTerrariaInventory().getItem(i + 7).getItem() instanceof AccessoryTerrariaItem) {
+				allEquippedGloves.add(i, ((PlayerStorages)player).getTerrariaInventory().getItem(i + 7));
+				continue;
+			}
 			allEquippedGloves.add(i, ((PlayerStorages)player).getTerrariaInventory().getItem(i));
 		}
 

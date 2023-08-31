@@ -8,6 +8,7 @@ import net.minecraft.client.renderer.entity.layers.RenderLayer;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import terramine.common.item.accessories.AccessoryTerrariaItem;
 import terramine.extensions.PlayerStorages;
 
 public class AccessoryFeatureRenderer<T extends LivingEntity, M extends EntityModel<T>> extends RenderLayer<T, M> {
@@ -20,9 +21,13 @@ public class AccessoryFeatureRenderer<T extends LivingEntity, M extends EntityMo
         for (int i = 0; i < 7; i++) {
             if (entity instanceof Player player) {
                 ItemStack itemStack = ((PlayerStorages) player).getTerrariaInventory().getItem(i);
-                AccessoryRenderRegistry.getRenderer(itemStack.getItem()).ifPresent(renderer -> {
+                if ((((PlayerStorages) player).getTerrariaInventory().getItem(i + 7).getItem() instanceof AccessoryTerrariaItem)) {
+                    itemStack = ((PlayerStorages) player).getTerrariaInventory().getItem(i + 7);
+                }
+                ItemStack finalItemStack = itemStack;
+                AccessoryRenderRegistry.getRenderer(finalItemStack.getItem()).ifPresent(renderer -> {
                     poseStack.pushPose();
-                    renderer.render(itemStack, this.getParentModel(), poseStack, multiBufferSource,
+                    renderer.render(finalItemStack, this.getParentModel(), poseStack, multiBufferSource,
                             light, player, limbAngle, limbDistance, tickDelta, animationProgress, headYaw, headPitch);
                     poseStack.popPose();
                 });
