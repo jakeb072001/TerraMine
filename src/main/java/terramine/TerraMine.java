@@ -44,12 +44,19 @@ public class TerraMine implements ModInitializer, TerraBlenderApi {
 
 	public static final String MOD_ID = "terramine";
 	public static final Logger LOGGER = LoggerFactory.getLogger(TerraMine.class);
+	// todo: make tabs have a random item as the icon, pretty easy to do but i want it to work nicely so create an array somewhere with all the items i want as icons for each tab and then use a RandomSource to select a random one
+	/** Example, haven't tested but should work (maybe with some small changes, I don't remember array stuff off the top of my head)
+	 * public static final CreativeModeTab ITEM_GROUP_EQUIPMENT = FabricItemGroupBuilder.build(id("terramine_equipment"), () -> {
+	 * return new ItemStack(Utilities.arrayOfEquipment[randomSource.getInt(Utilities.arrayOfEquipment.length())])
+	 * });
+	 */
 	public static final CreativeModeTab ITEM_GROUP_EQUIPMENT = FabricItemGroupBuilder.build(id("terramine_equipment"), () -> new ItemStack(ModItems.DEMONITE_SWORD));
 	public static final CreativeModeTab ITEM_GROUP_ARMOR = FabricItemGroupBuilder.build(id("terramine_armor"), () -> new ItemStack(ModItems.SHADOW_HELMET));
 	public static final CreativeModeTab ITEM_GROUP_ACCESSORIES = FabricItemGroupBuilder.build(id("terramine_accessories"), () -> new ItemStack(ModItems.TERRASPARK_BOOTS));
 	public static final CreativeModeTab ITEM_GROUP_BLOCKS = FabricItemGroupBuilder.build(id("terramine_blocks"), () -> new ItemStack(ModItems.RAW_DEMONITE_BLOCK));
 	public static final CreativeModeTab ITEM_GROUP_THROWABLES = FabricItemGroupBuilder.build(id("terramine_throwables"), () -> new ItemStack(ModItems.DYNAMITE));
 	public static final CreativeModeTab ITEM_GROUP_STUFF = FabricItemGroupBuilder.build(id("terramine_stuff"), () -> new ItemStack(ModItems.RAW_DEMONITE));
+	public static final CreativeModeTab ITEM_GROUP_DYES = FabricItemGroupBuilder.build(id("terramine_dyes"), () -> new ItemStack(ModItems.BLUE_DYE));
 	public static ModConfig CONFIG;
 	public static final int CONFIG_VERSION = 2; // Increase if config changed in an incompatible way
 	//private static final Map<String, Runnable> COMPAT_HANDLERS = Map.of(
@@ -102,7 +109,7 @@ public class TerraMine implements ModInitializer, TerraBlenderApi {
 		});
 		PlayerEvent.PLAYER_RESPAWN.register((player, bl) -> syncInventory(player));
 		PlayerEvent.PLAYER_JOIN.register(this::syncInventory);
-		PlayerEvent.PLAYER_JOIN.register(this::checkHardcore);
+		PlayerEvent.PLAYER_JOIN.register(this::onPlayerJoin);
 
 		// Compat Handlers
 		for (CompatHandler handler : FabricLoader.getInstance().getEntrypoints("terramine:compat_handlers", CompatHandler.class)) {
@@ -118,7 +125,7 @@ public class TerraMine implements ModInitializer, TerraBlenderApi {
 		LOGGER.info("Finished initialization");
 	}
 
-	// maybe move into inventory itself or something? works perfectly like this though so I'll just leave it for now
+	// maybe move into inventory itself or something? works perfectly like this though, so I'll just leave it for now
 	private void syncInventory(ServerPlayer player) {
 		TerrariaInventory terrariaInventory = ((PlayerStorages)player).getTerrariaInventory();
 		for (int i = 0; i < terrariaInventory.getContainerSize(); i++) {
@@ -129,12 +136,27 @@ public class TerraMine implements ModInitializer, TerraBlenderApi {
 		}
 	}
 
-	private void checkHardcore(Player player) {
-		if (player.level.getLevelData().isHardcore() && !ModComponents.ACCESSORY_HARDCORE_CHECK.get(player).get()) {
-			ModComponents.ACCESSORY_HARDCORE_CHECK.get(player).set(true);
-			ModComponents.ACCESSORY_HARDCORE_CHECK.sync(player);
-			ModComponents.ACCESSORY_SLOTS_ADDER.get(player).add(1);
+	private void onPlayerJoin(Player player) {
+		// set extra slots manually
+		if (CONFIG.general.setExtraAccessorySlots > 0) {
+			ModComponents.ACCESSORY_SLOTS_ADDER.get(player).set(CONFIG.general.setExtraAccessorySlots);
+			if (ModComponents.ACCESSORY_DEMON_HEART_CHECK.get(player).get() && CONFIG.general.setExtraAccessorySlots < 2) {
+				ModComponents.ACCESSORY_SLOTS_ADDER.get(player).add(1);
+			}
 			ModComponents.ACCESSORY_SLOTS_ADDER.sync(player);
+		} else {
+			// check if hardcore and add an extra accessory slot if true, also checks the config to see if the slot should be removed or not
+			if (player.level.getLevelData().isHardcore() && ModComponents.ACCESSORY_SLOTS_ADDER.get(player).get() < 2 && !ModComponents.ACCESSORY_HARDCORE_CHECK.get(player).get() && !CONFIG.general.disableHardcoreExtraAccessory) {
+				ModComponents.ACCESSORY_HARDCORE_CHECK.get(player).set(true);
+				ModComponents.ACCESSORY_HARDCORE_CHECK.sync(player);
+				ModComponents.ACCESSORY_SLOTS_ADDER.get(player).add(1);
+				ModComponents.ACCESSORY_SLOTS_ADDER.sync(player);
+			} else if ((player.level.getLevelData().isHardcore() && ModComponents.ACCESSORY_HARDCORE_CHECK.get(player).get() && CONFIG.general.disableHardcoreExtraAccessory)) {
+				ModComponents.ACCESSORY_HARDCORE_CHECK.get(player).set(false);
+				ModComponents.ACCESSORY_HARDCORE_CHECK.sync(player);
+				ModComponents.ACCESSORY_SLOTS_ADDER.get(player).remove(1);
+				ModComponents.ACCESSORY_SLOTS_ADDER.sync(player);
+			}
 		}
 	}
 

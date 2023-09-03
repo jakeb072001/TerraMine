@@ -4,7 +4,6 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import terramine.common.item.accessories.AccessoryTerrariaItem;
 import terramine.extensions.PlayerStorages;
 
 import java.util.ArrayList;
@@ -66,31 +65,4 @@ public final class AccessoriesHelper {
 		}
 		return list;
 	}
-
-	public static boolean areEffectsEnabled(ItemStack stack, Player player) {
-		return AccessoryTerrariaItem.getTerraMineStatus(stack)
-				.map(AccessoryTerrariaItem.terramineStatus::hasEffects)
-				.orElse(false) && !player.isCreative() && !player.isSpectator();
-	}
-
-	public static boolean areCosmeticsEnabled(ItemStack stack) {
-		return AccessoryTerrariaItem.getTerraMineStatus(stack)
-				.map(AccessoryTerrariaItem.terramineStatus::hasCosmetics)
-				.orElse(false);
-	}
-
-	//public static List<ItemStack> getAllEquippedForSlot(Player player, String groupId, String slotId) {
-	//	return getAllEquippedForSlot(player, groupId, slotId, false);
-	//}
-
-	//public static List<ItemStack> getAllEquippedForSlot(Player player, String groupId, String slotId, boolean ignoreEffectsDisabled) {
-	//	return TrinketsApi.getTrinketComponent(player)
-	//			.map(TrinketComponent::getInventory)
-	//			.flatMap(invByGroup -> Optional.ofNullable(invByGroup.get(groupId)))
-	//			.flatMap(invBySlot -> Optional.ofNullable(invBySlot.get(slotId)))
-	//			.stream()
-	//			.flatMap(inv -> IntStream.range(0, inv.getContainerSize()).mapToObj(inv::getItem))
-	//			.filter(stack -> stack.getItem() instanceof TrinketTerrariaItem && (areEffectsEnabled(stack, player) || ignoreEffectsDisabled))
-	//			.collect(Collectors.toList());
-	//}
 }

@@ -82,9 +82,10 @@
       "terramine:movement_order",
       "terramine:lava_immunity",
       "terramine:space_gun_free",
-      "terramine:accessories",
+      "terramine:accessory_visibility",
       "terramine:accessory_slots_adder",
       "terramine:accessory_hardcore_check",
+      "terramine:accessory_demon_heart_check",
       "terramine:hardmode",
       "terramine:evil_type"
     ],

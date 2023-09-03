@@ -34,12 +34,14 @@ public class ModComponents implements EntityComponentInitializer, LevelComponent
 			ComponentRegistryV3.INSTANCE.getOrCreate(TerraMine.id("lava_immunity"), LavaImmunityComponent.class);
 	public static final ComponentKey<SyncedBooleanComponent> SPACE_GUN_FREE =
 			ComponentRegistryV3.INSTANCE.getOrCreate(TerraMine.id("space_gun_free"), SyncedBooleanComponent.class);
-	public static final ComponentKey<PlayerAccessoriesComponent> ACCESSORIES_DATA =
-			ComponentRegistryV3.INSTANCE.getOrCreate(TerraMine.id("accessories"), PlayerAccessoriesComponent.class);
+	public static final ComponentKey<AccessoryVisibilityComponent> ACCESSORY_VISIBILITY =
+			ComponentRegistryV3.INSTANCE.getOrCreate(TerraMine.id("accessory_visibility"), AccessoryVisibilityComponent.class);
 	public static final ComponentKey<SyncedIntegerComponent> ACCESSORY_SLOTS_ADDER =
 			ComponentRegistryV3.INSTANCE.getOrCreate(TerraMine.id("accessory_slots_adder"), SyncedIntegerComponent.class);
 	public static final ComponentKey<SyncedBooleanComponent> ACCESSORY_HARDCORE_CHECK =
 			ComponentRegistryV3.INSTANCE.getOrCreate(TerraMine.id("accessory_hardcore_check"), SyncedBooleanComponent.class);
+	public static final ComponentKey<SyncedBooleanComponent> ACCESSORY_DEMON_HEART_CHECK =
+			ComponentRegistryV3.INSTANCE.getOrCreate(TerraMine.id("accessory_demon_heart_check"), SyncedBooleanComponent.class);
 
 	// Level Data
 	public static final ComponentKey<SyncedBooleanComponent> HARDMODE =
@@ -60,9 +62,10 @@ public class ModComponents implements EntityComponentInitializer, LevelComponent
 		registry.registerForPlayers(MOVEMENT_ORDER, MovementOrderComponent::new, RespawnCopyStrategy.LOSSLESS_ONLY);
 		registry.registerForPlayers(LAVA_IMMUNITY, LavaImmunityComponent::new, RespawnCopyStrategy.LOSSLESS_ONLY);
 		registry.registerForPlayers(SPACE_GUN_FREE, player -> new SyncedBooleanComponent("space_gun_free"), RespawnCopyStrategy.LOSSLESS_ONLY);
-		registry.registerForPlayers(ACCESSORIES_DATA, PlayerAccessoriesComponent::new, RespawnCopyStrategy.ALWAYS_COPY);
+		registry.registerForPlayers(ACCESSORY_VISIBILITY, AccessoryVisibilityComponent::new, RespawnCopyStrategy.CHARACTER);
 		registry.registerForPlayers(ACCESSORY_SLOTS_ADDER, player -> new SyncedIntegerComponent("extraSlots"), RespawnCopyStrategy.CHARACTER);
 		registry.registerForPlayers(ACCESSORY_HARDCORE_CHECK, player -> new SyncedBooleanComponent("addedHardcoreSlot"), RespawnCopyStrategy.CHARACTER);
+		registry.registerForPlayers(ACCESSORY_DEMON_HEART_CHECK, player -> new SyncedBooleanComponent("addedDemonHeartSlot"), RespawnCopyStrategy.CHARACTER);
 	}
 
 	@Override

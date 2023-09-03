@@ -69,7 +69,7 @@ public class CelestialShell extends AccessoryTerrariaItem {
 
     @Override
     public void onEquip(ItemStack stack, Player player) {
-        if (player instanceof ServerPlayer && AccessoriesHelper.areEffectsEnabled(stack, player) && shell) {
+        if (player instanceof ServerPlayer && shell) {
             ModComponents.SWIM_ABILITIES.maybeGet(player).ifPresent(comp -> {
                 comp.setSinking(true);
                 ModComponents.SWIM_ABILITIES.sync(player);

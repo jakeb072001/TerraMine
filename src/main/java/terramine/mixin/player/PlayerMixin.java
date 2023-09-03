@@ -2,7 +2,6 @@ package terramine.mixin.player;
 
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.EntityType;
@@ -15,10 +14,7 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import terramine.TerraMine;
-import terramine.common.entity.projectiles.FallingStarEntity;
 import terramine.common.init.ModComponents;
-import terramine.common.init.ModEntities;
 import terramine.common.item.accessories.AccessoryTerrariaItem;
 import terramine.common.misc.AccessoriesHelper;
 import terramine.common.misc.TerrariaInventory;
@@ -37,9 +33,6 @@ public abstract class PlayerMixin extends LivingEntity implements PlayerStorages
 	@Unique
 	SimpleContainer safeInventory = new SimpleContainer(40);
 
-	@Unique
-	private final RandomSource rand = RandomSource.create();
-
 	public PlayerMixin(EntityType<? extends LivingEntity> entityType, Level level) {
 		super(entityType, level);
 	}
@@ -48,20 +41,10 @@ public abstract class PlayerMixin extends LivingEntity implements PlayerStorages
 	private void onTick(CallbackInfo ci) {
 		ModComponents.MANA_HANDLER.get(this).update();
 		ModComponents.LAVA_IMMUNITY.get(this).update();
+
 		for (int i = 0; i < 7; i++) {
 			if (terrariaInventory.getItem(i).getItem() instanceof AccessoryTerrariaItem accessoryItem) {
 				accessoryItem.tick(terrariaInventory.getItem(i), (Player) (Object) this);
-			}
-		}
-		if (!TerraMine.CONFIG.general.disableFallingStars) {
-			if (level != null && level.dimensionType().bedWorks() && !level.isDay()) { // handles spawning stars randomly during the night, not the best way to do it most likely, but it works for now.
-				if (rand.nextInt(16800) <= TerraMine.CONFIG.general.fallingStarRarity) {
-					FallingStarEntity star = ModEntities.FALLING_STAR.create(level);
-					if (star != null && blockPosition().getY() >= 50) {
-						star.setPos(blockPosition().getX() + rand.nextInt(12), blockPosition().getY() + 30, blockPosition().getZ() + rand.nextInt(12));
-						level.addFreshEntity(star);
-					}
-				}
 			}
 		}
 

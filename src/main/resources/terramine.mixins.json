@@ -45,6 +45,7 @@
     "statuseffect.MobEffectInstanceMixin",
     "world.LevelStorageAccessMixin",
     "world.MinecraftServerMixin",
+    "world.ServerLevelMixin",
     "world.entity.HopperBlockEntityMixin",
     "world.entity.ItemEntityMixin",
     "world.entity.ItemMixin",

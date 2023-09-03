@@ -18,8 +18,8 @@ public class FallingMeteoriteEntity extends FallingProjectileEntity {
 
     public FallingMeteoriteEntity(EntityType<? extends FallingMeteoriteEntity> entityType, Level level) {
         super(entityType, level);
-        xSpeed = ((random.nextFloat()) - 0.5f) / 4;
-        zSpeed = ((random.nextFloat()) - 0.5f) / 4;
+        xSpeed = ((random.nextFloat()) - 0.75f) / 4;
+        zSpeed = ((random.nextFloat()) - 0.75f) / 4;
     }
 
     public SoundSource getSoundSource() {

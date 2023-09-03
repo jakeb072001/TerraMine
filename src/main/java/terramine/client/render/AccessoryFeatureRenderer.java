@@ -21,13 +21,19 @@ public class AccessoryFeatureRenderer<T extends LivingEntity, M extends EntityMo
         for (int i = 0; i < 7; i++) {
             if (entity instanceof Player player) {
                 ItemStack itemStack = ((PlayerStorages) player).getTerrariaInventory().getItem(i);
-                if ((((PlayerStorages) player).getTerrariaInventory().getItem(i + 7).getItem() instanceof AccessoryTerrariaItem)) {
-                    itemStack = ((PlayerStorages) player).getTerrariaInventory().getItem(i + 7);
-                }
-                ItemStack finalItemStack = itemStack;
-                AccessoryRenderRegistry.getRenderer(finalItemStack.getItem()).ifPresent(renderer -> {
+                ItemStack itemStack2 = ((PlayerStorages) player).getTerrariaInventory().getItem(i + 7);
+                int dyeSlot = i;
+                int realSlot = i + 7;
+                AccessoryRenderRegistry.getRenderer(itemStack.getItem()).ifPresent(renderer -> {
                     poseStack.pushPose();
-                    renderer.render(finalItemStack, this.getParentModel(), poseStack, multiBufferSource,
+                    renderer.render(itemStack, dyeSlot, dyeSlot, this.getParentModel(), poseStack, multiBufferSource,
+                            light, player, limbAngle, limbDistance, tickDelta, animationProgress, headYaw, headPitch);
+                    poseStack.popPose();
+                });
+
+                AccessoryRenderRegistry.getRenderer(itemStack2.getItem()).ifPresent(renderer -> {
+                    poseStack.pushPose();
+                    renderer.render(itemStack2, dyeSlot, realSlot, this.getParentModel(), poseStack, multiBufferSource,
                             light, player, limbAngle, limbDistance, tickDelta, animationProgress, headYaw, headPitch);
                     poseStack.popPose();
                 });

@@ -1,4 +1,4 @@
-package terramine.extensions.accessories;
+package terramine.extensions;
 
 import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;

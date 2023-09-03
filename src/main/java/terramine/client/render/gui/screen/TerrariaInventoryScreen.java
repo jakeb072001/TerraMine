@@ -6,10 +6,12 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Quaternion;
 import com.mojang.math.Vector3f;
+import io.netty.buffer.Unpooled;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.ImageButton;
 import net.minecraft.client.gui.screens.inventory.CreativeModeInventoryScreen;
@@ -19,6 +21,7 @@ import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
 import net.minecraft.core.NonNullList;
+import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.game.ServerboundContainerClickPacket;
 import net.minecraft.resources.ResourceLocation;
@@ -30,8 +33,10 @@ import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import terramine.TerraMine;
+import terramine.client.render.gui.ToggleImageButton;
 import terramine.client.render.gui.menu.TerrariaInventoryContainerMenu;
 import terramine.common.init.ModComponents;
+import terramine.common.network.ServerPacketHandler;
 
 import java.util.List;
 
@@ -41,6 +46,9 @@ import java.util.List;
 @Environment(EnvType.CLIENT)
 public class TerrariaInventoryScreen extends EffectRenderingInventoryScreen<TerrariaInventoryContainerMenu> {
     private static final ResourceLocation BUTTON_TEX = TerraMine.id("textures/gui/terraria_slots_button.png");
+    private static final ResourceLocation ROTATE_LEFT_TEX = TerraMine.id("textures/gui/terraria_rotate_left_button.png");
+    private static final ResourceLocation ROTATE_RIGHT_TEX = TerraMine.id("textures/gui/terraria_rotate_right_button.png");
+    private static final ResourceLocation EYE_TEX = TerraMine.id("textures/gui/visibility.png");
     private static final ResourceLocation TERRARIA_CONTAINER_5 = TerraMine.id("textures/gui/container/terraria_slots_5.png");
     private static final ResourceLocation TERRARIA_CONTAINER_6 = TerraMine.id("textures/gui/container/terraria_slots_6.png");
     private static final ResourceLocation TERRARIA_CONTAINER_7 = TerraMine.id("textures/gui/container/terraria_slots_7.png");
@@ -48,6 +56,7 @@ public class TerrariaInventoryScreen extends EffectRenderingInventoryScreen<Terr
     private float yMouse;
     private final int imageWidth = 176;
     private final int imageHeight = 218;
+    private int rotation;
     private boolean buttonClicked;
 
     public TerrariaInventoryScreen(Player player) {
@@ -57,7 +66,14 @@ public class TerrariaInventoryScreen extends EffectRenderingInventoryScreen<Terr
 
     protected void init() {
         super.init();
+        rotation = 0;
         this.minecraft.keyboardHandler.setSendRepeatsToGui(true);
+        this.addRenderableWidget(new ImageButton(this.leftPos + 63, this.height / 2 - 100, 8, 8, 0, 0, 8, ROTATE_RIGHT_TEX, 8, 16, (buttonWidget) -> {
+            rotation -= 40;
+        }));
+        this.addRenderableWidget(new ImageButton(this.leftPos + 104, this.height / 2 - 100, 8, 8, 0, 0, 8, ROTATE_LEFT_TEX, 8, 16, (buttonWidget) -> {
+            rotation += 40;
+        }));
         if (this.minecraft.gameMode.hasInfiniteItems()) {
             this.addRenderableWidget(new ImageButton(this.leftPos + 105, this.height / 2 - 40, 8, 8, 0, 0, 8, BUTTON_TEX, 8, 16, (buttonWidget) -> {
                 this.minecraft.setScreen(new CreativeModeInventoryScreen(this.minecraft.player));
@@ -67,6 +83,17 @@ public class TerrariaInventoryScreen extends EffectRenderingInventoryScreen<Terr
             this.addRenderableWidget(new ImageButton(this.leftPos + 105, this.height / 2 - 40, 8, 8, 0, 0, 8, BUTTON_TEX, 8, 16, (buttonWidget) -> {
                 this.minecraft.setScreen(new InventoryScreen(minecraft.player));
                 this.buttonClicked = true;
+            }));
+        }
+
+        // todo: after rejoining a world or respawning, all slots are set to visible, don't know why this information is not being saved
+        for (int i = 0; i < 5 + ModComponents.ACCESSORY_SLOTS_ADDER.get(this.minecraft.player).get(); i++) {
+            int finalI = i;
+            this.addRenderableWidget(new ToggleImageButton(this.leftPos + 130, this.height / 2 - 105 + (18 * i), 8, 8, 0, 0, 8, 8, i, EYE_TEX, 16, 16, (buttonWidget) -> {
+                FriendlyByteBuf buf = new FriendlyByteBuf(Unpooled.buffer());
+                buf.writeInt(finalI);
+                buf.writeBoolean(!ModComponents.ACCESSORY_VISIBILITY.get(this.minecraft.player).getSlotVisibility(finalI));
+                ClientPlayNetworking.send(ServerPacketHandler.UPDATE_ACCESSORY_VISIBILITY_PACKET_ID, buf);
             }));
         }
     }
@@ -99,7 +126,7 @@ public class TerrariaInventoryScreen extends EffectRenderingInventoryScreen<Terr
         renderEntityInInventory(k + 88, l + 71, 30, (k + 51f) - this.xMouse, l + 75f - 50f - this.yMouse, this.minecraft.player);
     }
 
-    public static void renderEntityInInventory(int i, int j, int k, float f, float g, LivingEntity livingEntity) {
+    public void renderEntityInInventory(int i, int j, int k, float f, float g, LivingEntity livingEntity) {
         float h = (float)Math.atan(f / 40.0F);
         float l = (float)Math.atan(g / 40.0F);
         PoseStack poseStack = RenderSystem.getModelViewStack();
@@ -112,7 +139,9 @@ public class TerrariaInventoryScreen extends EffectRenderingInventoryScreen<Terr
         poseStack2.scale((float)k, (float)k, (float)k);
         Quaternion quaternion = Vector3f.ZP.rotationDegrees(180.0F);
         Quaternion quaternion2 = Vector3f.XP.rotationDegrees(l * 20.0F);
+        Quaternion quaternion3 = Vector3f.YP.rotationDegrees(rotation);
         quaternion.mul(quaternion2);
+        quaternion.mul(quaternion3);
         poseStack2.mulPose(quaternion);
         float m = livingEntity.yBodyRot;
         float n = livingEntity.getYRot();

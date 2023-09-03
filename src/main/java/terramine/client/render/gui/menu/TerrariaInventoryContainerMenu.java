@@ -18,6 +18,7 @@ import terramine.common.init.ModComponents;
 import terramine.common.init.ModScreenHandlerType;
 import terramine.common.item.accessories.AccessoryTerrariaItem;
 import terramine.common.item.accessories.ShieldAccessoryItem;
+import terramine.common.item.dye.BasicDye;
 import terramine.common.misc.TerrariaInventory;
 import terramine.extensions.PlayerStorages;
 
@@ -112,7 +113,11 @@ public class TerrariaInventoryContainerMenu extends AbstractContainerMenu {
         });
         this.addSlot(new Slot(terrariaInventory, 22, 98, 54) {
             public boolean mayPlace(@NotNull ItemStack itemStack) {
-                return true; // todo: replace with dye item once made
+                return itemStack.getItem() instanceof BasicDye;
+            }
+
+            public int getMaxStackSize() {
+                return 1;
             }
 
             public Pair<ResourceLocation, ResourceLocation> getNoItemIcon() {
@@ -146,7 +151,7 @@ public class TerrariaInventoryContainerMenu extends AbstractContainerMenu {
 
                 public boolean mayPlace(@NotNull ItemStack itemStack) {
                     if (accessoryType == 2) {
-                        return true; // todo: replace with dye item once made
+                        return itemStack.getItem() instanceof BasicDye;
                     }
                     return itemStack.getItem() instanceof AccessoryTerrariaItem;
                 }
@@ -180,7 +185,7 @@ public class TerrariaInventoryContainerMenu extends AbstractContainerMenu {
 
                 public boolean mayPlace(@NotNull ItemStack itemStack) {
                     if (isDye) {
-                        return true; // todo: replace with dye item once made
+                        return itemStack.getItem() instanceof BasicDye;
                     }
                     return equipmentSlot == Mob.getEquipmentSlotForItem(itemStack);
                 }
@@ -215,7 +220,6 @@ public class TerrariaInventoryContainerMenu extends AbstractContainerMenu {
         return true;
     }
 
-    // todo: add accessory slots to quickMoveStack
     public @NotNull ItemStack quickMoveStack(@NotNull Player player, int i) {
         ItemStack itemStack = ItemStack.EMPTY;
         Slot slot = this.slots.get(i);
@@ -223,12 +227,41 @@ public class TerrariaInventoryContainerMenu extends AbstractContainerMenu {
             ItemStack itemStack2 = slot.getItem();
             itemStack = itemStack2.copy();
             EquipmentSlot equipmentSlot = Mob.getEquipmentSlotForItem(itemStack);
+            int extraSlots = ModComponents.ACCESSORY_SLOTS_ADDER.get(player).get();
             if (i == 0) {
                 if (!this.moveItemStackTo(itemStack2, 9, 45, true)) {
                     return ItemStack.EMPTY;
                 }
 
                 slot.onQuickCraft(itemStack2, itemStack);
+            } else if (i >= 45 && i < 76) {
+                if (!this.moveItemStackTo(itemStack2, 9, 45, false)) {
+                    return ItemStack.EMPTY;
+                }
+            } else if (itemStack2.getItem() instanceof AccessoryTerrariaItem) {
+                if (!this.moveItemStackTo(itemStack2, 45, 51 + extraSlots, false)) {
+                    if (!this.moveItemStackTo(itemStack2, 53, 58 + extraSlots, false)) {
+                        if (!this.moveItemStackTo(itemStack2, 67, 68, false)) {
+                            if (!this.moveItemStackTo(itemStack2, 9, 45, false)) {
+                                return ItemStack.EMPTY;
+                            }
+                        }
+                    }
+                }
+            //} else if (itemStack2.getItem() instanceof BasicDye) {
+            //    if (!this.moveItemStackTo(itemStack2, 59, 63 + extraSlots, false)) {
+            //        if (!this.moveItemStackTo(itemStack2, 64, 65, false)) {
+            //            if (!this.moveItemStackTo(itemStack2, 72, 76, false)) {
+            //                return ItemStack.EMPTY;
+            //            }
+            //        }
+            //    }
+            } else if (itemStack2.getItem() instanceof ShieldItem) {
+                if (!this.moveItemStackTo(itemStack2, 67, 68, false)) {
+                    if (!this.moveItemStackTo(itemStack2, 9, 45, false)) {
+                        return ItemStack.EMPTY;
+                    }
+                }
             } else if (i >= 1 && i < 5) {
                 if (!this.moveItemStackTo(itemStack2, 9, 45, false)) {
                     return ItemStack.EMPTY;
@@ -239,6 +272,11 @@ public class TerrariaInventoryContainerMenu extends AbstractContainerMenu {
                 }
             } else if (equipmentSlot.getType() == EquipmentSlot.Type.ARMOR && !this.slots.get(8 - equipmentSlot.getIndex()).hasItem()) {
                 int j = 8 - equipmentSlot.getIndex();
+                if (!this.moveItemStackTo(itemStack2, j, j + 1, false)) {
+                    return ItemStack.EMPTY;
+                }
+            } else if (equipmentSlot.getType() == EquipmentSlot.Type.ARMOR && !this.slots.get(72 - equipmentSlot.getIndex()).hasItem()) {
+                int j = 72 - equipmentSlot.getIndex();
                 if (!this.moveItemStackTo(itemStack2, j, j + 1, false)) {
                     return ItemStack.EMPTY;
                 }

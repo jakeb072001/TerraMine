@@ -18,8 +18,6 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import terramine.TerraMine;
-import terramine.common.components.PlayerAccessoriesComponent;
-import terramine.common.init.ModComponents;
 import terramine.common.item.accessories.AccessoryTerrariaItem;
 import terramine.common.misc.TerrariaInventory;
 import terramine.extensions.PlayerStorages;
@@ -46,7 +44,6 @@ public abstract class LivingEntityMixin extends Entity {
 		LivingEntity entity = (LivingEntity) (Object) this;
 		if (entity instanceof Player player) {
 			TerrariaInventory inventory = ((PlayerStorages)player).getTerrariaInventory();
-			PlayerAccessoriesComponent component = ModComponents.ACCESSORIES_DATA.get(player);
 			for (int i = 0; i < 7; i++) {
 				ItemStack oldStack = getOldStack(i);
 				ItemStack newStack = inventory.getItem(i);
@@ -64,7 +61,6 @@ public abstract class LivingEntityMixin extends Entity {
 							}
 
 							this.getAttributes().removeAttributeModifiers(map);
-							component.removeModifiers(slotMap);
 						}
 
 						if (!newStack.isEmpty()) {
@@ -78,7 +74,6 @@ public abstract class LivingEntityMixin extends Entity {
 								}
 
 								this.getAttributes().addTransientAttributeModifiers(map);
-								component.addTemporaryModifiers(slotMap);
 							}
 						}
 					}

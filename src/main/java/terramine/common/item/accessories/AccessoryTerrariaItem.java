@@ -2,44 +2,32 @@ package terramine.common.item.accessories;
 
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
-import net.minecraft.ChatFormatting;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.SlotAccess;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.inventory.ClickAction;
-import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.Wearable;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.gameevent.GameEvent;
 import org.jetbrains.annotations.NotNull;
-import terramine.TerraMine;
 import terramine.common.events.PlayHurtSoundCallback;
+import terramine.common.init.ModComponents;
 import terramine.common.item.TerrariaItem;
 import terramine.common.misc.AccessoriesHelper;
 import terramine.common.misc.TerrariaInventory;
 import terramine.extensions.PlayerStorages;
-import terramine.extensions.accessories.Accessories;
+import terramine.extensions.Accessories;
 
-import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 public class AccessoryTerrariaItem extends TerrariaItem implements Accessories {
-	public boolean effectEnabled = true;
-
 	public AccessoryTerrariaItem() {
 		initialise();
 	}
@@ -53,22 +41,9 @@ public class AccessoryTerrariaItem extends TerrariaItem implements Accessories {
 		PlayHurtSoundCallback.EVENT.register(this::playExtraHurtSound);
 	}
 
-	@Override
-	public boolean overrideOtherStackedOnMe(@NotNull ItemStack slotStack, @NotNull ItemStack holdingStack, @NotNull Slot slot, @NotNull ClickAction clickAction, @NotNull Player player, @NotNull SlotAccess slotAccess) {
-		// Toggle accessory status when right-clicked in inventory without a stack
-		if (clickAction == ClickAction.SECONDARY && holdingStack.isEmpty()) {
-			CompoundTag tag = slotStack.getOrCreateTagElement("terramine");
-			tag.putByte("Status", (byte) terramineStatus.nextIndex(tag.getByte("Status")));
-			slotStack.addTagElement("terramine", tag);
-			effectEnabled = terramineStatus.values()[tag.getByte("Status")].hasEffects();
-			return true;
-		}
-		return false;
-	}
-
 	public static boolean equipItem(Player player, ItemStack stack) {
 		TerrariaInventory inventory = ((PlayerStorages)player).getTerrariaInventory();
-			for (int i = 0; i < 7; i++) {
+			for (int i = 0; i < 5 + ModComponents.ACCESSORY_SLOTS_ADDER.get(player).get(); i++) {
 				if (inventory.getItem(i).isEmpty()) {
 					ItemStack newStack = stack.copy();
 					inventory.setItem(i, newStack);
@@ -100,9 +75,7 @@ public class AccessoryTerrariaItem extends TerrariaItem implements Accessories {
 
 	@Override
 	public void tick(ItemStack stack, Player player) {
-		if (AccessoriesHelper.areEffectsEnabled(stack, player)) {
-			curioTick(player, stack);
-		}
+		curioTick(player, stack);
 	}
 
 	protected void curioTick(Player player, ItemStack stack) {
@@ -119,25 +92,13 @@ public class AccessoryTerrariaItem extends TerrariaItem implements Accessories {
 	@Override
 	public final Multimap<Attribute, AttributeModifier> getModifiers(ItemStack stack, Player player, UUID uuid) {
 		Multimap<Attribute, AttributeModifier> modifiers = Accessories.super.getModifiers(stack, player, uuid);
-		if (AccessoriesHelper.areEffectsEnabled(stack, player)) {
-			Multimap<Attribute, AttributeModifier> accessoryModifiers = this.applyModifiers(stack, player, uuid);
-			modifiers.putAll(accessoryModifiers);
-		}
+		Multimap<Attribute, AttributeModifier> accessoryModifiers = this.applyModifiers(stack, player, uuid);
+		modifiers.putAll(accessoryModifiers);
 		return modifiers;
 	}
 
 	protected Multimap<Attribute, AttributeModifier> applyModifiers(ItemStack stack, LivingEntity entity, UUID uuid) {
 		return HashMultimap.create();
-	}
-
-	@Override
-	public void appendHoverText(@NotNull ItemStack stack, Level world, @NotNull List<Component> tooltip, @NotNull TooltipFlag flags) {
-		super.appendHoverText(stack, world, tooltip, flags);
-		getEffectsEnabledLanguageKey(stack).ifPresent(key -> {
-			MutableComponent enabled = Component.translatable(key).withStyle(ChatFormatting.GOLD);
-			Component toggletooltip = Component.translatable(TerraMine.MOD_ID + ".status.toggletooltip").withStyle(ChatFormatting.GRAY);
-			tooltip.add(enabled.append(" ").append(toggletooltip));
-		});
 	}
 
 	/**
@@ -181,53 +142,6 @@ public class AccessoryTerrariaItem extends TerrariaItem implements Accessories {
 	public static void removeModifier(AttributeInstance instance, AttributeModifier modifier) {
 		if (instance.hasModifier(modifier)) {
 			instance.removeModifier(modifier);
-		}
-	}
-
-	private static Optional<String> getEffectsEnabledLanguageKey(ItemStack stack) {
-		return getTerraMineStatus(stack).map(status -> switch (status) {
-			case ALL_ENABLED -> "terramine.status.allenabled";
-			case COSMETIC_ONLY -> "terramine.status.cosmeticonly";
-			case EFFECTS_ONLY -> "terramine.status.effectsonly";
-		});
-	}
-
-	public static Optional<terramineStatus> getTerraMineStatus(ItemStack stack) {
-		if (!(stack.getItem() instanceof AccessoryTerrariaItem)) {
-			return Optional.empty();
-		}
-
-		CompoundTag tag = stack.getTagElement("terramine");
-		if (tag == null || !tag.contains("Status", 1)) {
-			return Optional.of(terramineStatus.ALL_ENABLED);
-		}
-
-		return Optional.ofNullable(terramineStatus.values()[tag.getByte("Status")]);
-	}
-
-	public enum terramineStatus {
-		ALL_ENABLED(true, true),
-		COSMETIC_ONLY(false, true),
-		EFFECTS_ONLY(true, false);
-
-		private final boolean hasEffects;
-		private final boolean hasCosmetics;
-
-		terramineStatus(boolean hasEffects, boolean hasCosmetics) {
-			this.hasEffects = hasEffects;
-			this.hasCosmetics = hasCosmetics;
-		}
-
-		public boolean hasEffects() {
-			return hasEffects;
-		}
-
-		public boolean hasCosmetics() {
-			return hasCosmetics;
-		}
-
-		public static int nextIndex(int index) {
-			return index >= values().length - 1 ? 0 : index + 1;
 		}
 	}
 

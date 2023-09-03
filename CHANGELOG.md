@@ -7,12 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [1.7.0-1.19] - 2023-09-15
 // todo: update to 1.19.4 and then create a fork for 1.20
 ### Added
-- Meteorites // just need to make spawn in world then update can release
+- Meteorites (only spawn at exactly midnight, default 2% chance)
 - Meteorite armor, tools, and Space Gun
 - Hellstone ore
 - Hellstone armor and tools
-- New GUI
-- Some Dyes and Vanity accessories/armor // not started
+- New GUI (can be accessed by the small button on the bottom right of the player preview in your inventory)
+- Vanity system
+- Dye system (more dyes to be added later, some with custom shading)
+- Various vanity armors // not started
 - Teams (will be used in the future) // not started
 
 ### Changed

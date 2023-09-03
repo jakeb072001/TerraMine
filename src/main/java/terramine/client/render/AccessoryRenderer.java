@@ -21,7 +21,7 @@ public interface AccessoryRenderer {
      * @param stack The {@link ItemStack} for the Accessory being rendered
      * @param contextModel The model this Accessory is being rendered on
      */
-    void render(ItemStack stack, EntityModel<? extends LivingEntity> contextModel,
+    void render(ItemStack stack, int dyeSlot, int realSlot, EntityModel<? extends LivingEntity> contextModel,
                 PoseStack poseStack, MultiBufferSource vertexConsumers, int light, Player player,
                 float limbAngle, float limbDistance, float tickDelta, float animationProgress, float headYaw,
                 float headPitch);

@@ -1,5 +1,6 @@
 package terramine.common.init;
 
+import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.core.Registry;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -16,6 +17,7 @@ import terramine.common.item.accessories.feet.*;
 import terramine.common.item.accessories.hands.*;
 import terramine.common.item.accessories.necklace.*;
 import terramine.common.item.armor.*;
+import terramine.common.item.dye.BasicDye;
 import terramine.common.item.equipment.*;
 import terramine.common.item.equipment.swords.CustomSoundSwordItem;
 import terramine.common.item.equipment.swords.VolcanoSwordItem;
@@ -23,6 +25,7 @@ import terramine.common.item.magic.*;
 import terramine.common.item.throwables.BombItem;
 import terramine.common.item.throwables.DynamiteItem;
 import terramine.common.item.throwables.GrenadeItem;
+import terramine.common.utility.Utilities;
 
 @SuppressWarnings("unused")
 public class ModItems {
@@ -38,6 +41,22 @@ public class ModItems {
 	public static final Item MAGIC_MIRROR = register("magic_mirror", new MagicMirrorItem());
 	public static final Item COBALT_SHIELD = register("cobalt_shield", new ShieldAccessoryItem(new FabricItemSettings().maxDamage(2500).fireproof().rarity(Rarity.RARE).group(TerraMine.ITEM_GROUP_ACCESSORIES), Items.DIAMOND));
 	public static final Item OBSIDIAN_SHIELD = register("obsidian_shield", new ShieldAccessoryItem(new FabricItemSettings().maxDamage(2500).fireproof().rarity(Rarity.RARE).group(TerraMine.ITEM_GROUP_ACCESSORIES), Items.OBSIDIAN));
+
+	// todo: add many more dyes, need to create a model/item for each one but its just copy paste
+	// todo: also add some custom shader dyes, need to add a system to render the dyes first though
+	// todo: make dye craft-able, some will also be obtainable from enemies and other things
+	// todo: maybe also make work like potions, so only one item is registered and doesn't need a model per item, maybe
+	// Dye Items (uses hex)
+	public static final Item RED_DYE = registerDye("red_dye", new BasicDye(0xFF0000));
+	public static final Item GREEN_DYE = registerDye("green_dye", new BasicDye(0x008000));
+	public static final Item BLUE_DYE = registerDye("blue_dye", new BasicDye(0x0000FF));
+	public static final Item YELLOW_DYE = registerDye("yellow_dye", new BasicDye(0xFFFF00));
+	public static final Item ORANGE_DYE = registerDye("orange_dye", new BasicDye(0xFFA500));
+	public static final Item PURPLE_DYE = registerDye("purple_dye", new BasicDye(0x800080));
+	public static final Item PINK_DYE = registerDye("pink_dye", new BasicDye(0xFFC0CB));
+	public static final Item BROWN_DYE = registerDye("brown_dye", new BasicDye(0x964B00));
+	public static final Item GRAY_DYE = registerDye("gray_dye", new BasicDye(0x808080));
+	public static final Item BLACK_DYE = registerDye("black_dye", new BasicDye(0x000000));
 
 	// Crafting Items
 	public static final Item LENS = register("lens", new CraftingItem(new FabricItemSettings().group(TerraMine.ITEM_GROUP_STUFF), false));
@@ -63,6 +82,7 @@ public class ModItems {
 	public static final Item FAKE_FALLEN_STAR = register("fake_fallen_star", new CraftingItem(new FabricItemSettings(), true));
 	public static final Item FALLEN_STAR = register("fallen_star", new CraftingItem(new FabricItemSettings().stacksTo(64).rarity(Rarity.UNCOMMON).tab(TerraMine.ITEM_GROUP_STUFF), true));
 	public static final Item MANA_CRYSTAL = register("mana_crystal", new ManaCrystalItem(new FabricItemSettings().stacksTo(64).rarity(Rarity.RARE).tab(TerraMine.ITEM_GROUP_STUFF)));
+	public static final Item DEMON_HEART = register("demon_heart", new DemonHeartItem(new FabricItemSettings().stacksTo(16).rarity(Rarity.EPIC).tab(TerraMine.ITEM_GROUP_STUFF)));
 
 	// Informational
 	public static final Item GOLD_WATCH = register("gold_watch", new AccessoryTerrariaItem());
@@ -353,6 +373,11 @@ public class ModItems {
 	public static final Item CRIMSON_BLUE_ICE = register("crimson_blue_ice", new BlockItem(ModBlocks.CRIMSON_BLUE_ICE, new FabricItemSettings().group(TerraMine.ITEM_GROUP_BLOCKS)));
 
 	private static Item register(String name, Item item) {
+		return Registry.register(Registry.ITEM, TerraMine.id(name), item);
+	}
+
+	private static Item registerDye(String name, Item item) {
+		ColorProviderRegistry.ITEM.register((stack, tintIndex) -> tintIndex == 0 ? Utilities.getDyeColour(stack) : -1, item);
 		return Registry.register(Registry.ITEM, TerraMine.id(name), item);
 	}
 
