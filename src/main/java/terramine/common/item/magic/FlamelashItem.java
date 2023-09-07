@@ -5,9 +5,9 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import org.jetbrains.annotations.NotNull;
 import terramine.common.init.ModEntities;
 import terramine.common.init.ModSoundEvents;
-import terramine.common.item.MagicTerrariaItem;
 import terramine.common.utility.MagicMissileHelper;
 
 public class FlamelashItem extends MagicTerrariaItem {
@@ -17,7 +17,7 @@ public class FlamelashItem extends MagicTerrariaItem {
     }
 
     @Override
-    public ItemStack finishUsingItem(ItemStack stack, Level world, LivingEntity entity) {
+    public ItemStack finishUsingItem(@NotNull ItemStack stack, @NotNull Level world, @NotNull LivingEntity entity) {
         Player player = (Player)entity;
         if (canUse(player)) {
             MagicMissileHelper flameMissile = ModEntities.FLAMELASH_MISSILE.create(world);

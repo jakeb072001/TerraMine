@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "terramine:item/tabi"
+    "layer0": "terramine:item/accessories/tabi"
   }
 }

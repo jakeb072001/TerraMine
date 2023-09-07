@@ -10,6 +10,7 @@ import net.minecraft.network.chat.TextComponent;
 import net.minecraft.world.item.ItemStack;
 import terramine.common.item.TerrariaItem;
 import terramine.common.item.armor.TerrariaArmor;
+import terramine.common.item.armor.vanity.VanityArmor;
 
 public class REIPlugin implements REIClientPlugin {
 
@@ -26,7 +27,7 @@ public class REIPlugin implements REIClientPlugin {
 				}).forEach(recipeHelper::add);
 
 		Registry.ITEM.stream()
-				.filter(item -> item instanceof TerrariaArmor)
+				.filter(item -> item instanceof TerrariaArmor && !(item instanceof VanityArmor))
 				.map(item -> {
 					DefaultInformationDisplay display = DefaultInformationDisplay.createFromEntry(EntryStack.of(VanillaEntryTypes.ITEM, new ItemStack(item)), item.getDescription());
 					for (String string : ((TerrariaArmor) item).getREITooltip()) {

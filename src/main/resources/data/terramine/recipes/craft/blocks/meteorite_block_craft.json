@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XXX",
+    "XXX",
+    "XXX"
+  ],
+  "key": {
+    "X": {
+      "item": "terramine:meteorite_ingot"
+    }
+  },
+  "result": {
+    "item": "terramine:meteorite_block"
+  }
+}

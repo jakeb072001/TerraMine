@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:smelting",
+  "group": "hellstone_ingot",
+  "ingredient": {
+    "item": "terramine:hellstone_ore"
+  },
+  "result": "terramine:raw_hellstone",
+  "experience": 0.8,
+  "cookingtime": 200
+}

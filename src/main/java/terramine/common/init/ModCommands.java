@@ -21,6 +21,7 @@ public class ModCommands {
     public static GameRules.Key<GameRules.BooleanValue> MANA_INFINITE;
     public static LiteralCommandNode<CommandSourceStack> GETSETMANA;
     public static LiteralCommandNode<CommandSourceStack> GETSETHARDMODE;
+    public static LiteralCommandNode<CommandSourceStack> GETSETACCESSORYSLOTS;
 
     public static void registerRules() {
         MANA_REGEN_SPEED = GameRuleRegistry.register("manaRegenSpeed", GameRules.Category.PLAYER, GameRuleFactory.createIntRule(3, 0));
@@ -58,6 +59,19 @@ public class ModCommands {
                         .requires(cs -> cs.hasPermission(3))
                         .then(argument("boolean", BoolArgumentType.bool())
                                 .executes(context -> setHardmode(context, context.getSource().getPlayerOrException(), BoolArgumentType.getBool(context, "boolean")))
+                        )
+                )
+        );
+
+        GETSETACCESSORYSLOTS = dispatcher.register(literal("accessoryslots")
+                .requires(cs -> cs.hasPermission(0))
+                .then(literal("get")
+                        .executes(context -> getAccessorySlots(context, context.getSource().getPlayerOrException()))
+                )
+                .then(literal("set")
+                        .requires(cs -> cs.hasPermission(3))
+                        .then(argument("int", IntegerArgumentType.integer(0, 2))
+                                .executes(context -> setAccessorySlots(context, context.getSource().getPlayerOrException(), IntegerArgumentType.getInteger(context, "int")))
                         )
                 )
         );
@@ -111,6 +125,31 @@ public class ModCommands {
         } else {
             i--;
             context.getSource().sendFailure(new TranslatableComponent("commands.getHardmode.fail"));
+        }
+        return i;
+    }
+
+    private static int setAccessorySlots(CommandContext<CommandSourceStack> context, ServerPlayer player, int value) {
+        int i = 0;
+        if (player != null) {
+            i++;
+            ModComponents.ACCESSORY_SLOTS_ADDER.get(player).set(value);
+            ModComponents.ACCESSORY_SLOTS_ADDER.sync(player);
+            context.getSource().sendSuccess(Component.translatable("commands.setAccessorySlots.pass", value), false);
+        } else {
+            i--;
+            context.getSource().sendFailure(Component.translatable("commands.setAccessorySlots.fail", value));
+        }
+        return i;
+    }
+    private static int getAccessorySlots(CommandContext<CommandSourceStack> context, ServerPlayer player) {
+        int i = 0;
+        if (player != null) {
+            i++;
+            context.getSource().sendSuccess(Component.translatable("commands.getAccessorySlots.pass", ModComponents.ACCESSORY_SLOTS_ADDER.get(player).get()), false);
+        } else {
+            i--;
+            context.getSource().sendFailure(Component.translatable("commands.getAccessorySlots.fail"));
         }
         return i;
     }

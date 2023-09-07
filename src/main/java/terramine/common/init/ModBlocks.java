@@ -19,6 +19,7 @@ import terramine.common.block.chests.*;
 import terramine.common.block.plants.EvilMushroom;
 
 public class ModBlocks {
+    // Chests
     public static final Block GOLD_CHEST = register("gold_chest", new GoldChestBlock(FabricBlockSettings.of(Material.METAL, MaterialColor.GOLD).strength(3.0f, 6.0f).sounds(SoundType.METAL).requiresCorrectToolForDrops(), false, () -> ModBlockEntityType.GOLD_CHEST));
     public static final Block TRAPPED_GOLD_CHEST = register("trapped_gold_chest", new GoldChestBlock(FabricBlockSettings.of(Material.METAL, MaterialColor.GOLD).strength(3.0f, 6.0f).sounds(SoundType.METAL).requiresCorrectToolForDrops(), true, () -> ModBlockEntityType.GOLD_CHEST));
     public static final Block FROZEN_CHEST = register("frozen_chest", new FrozenChestBlock(FabricBlockSettings.of(Material.ICE_SOLID, MaterialColor.ICE).strength(2.0f, 5.0f).sounds(SoundType.METAL).friction(0.98f).requiresCorrectToolForDrops(), false, () -> ModBlockEntityType.FROZEN_CHEST));
@@ -32,28 +33,50 @@ public class ModBlocks {
     public static final Block SHADOW_CHEST = register("shadow_chest", new ShadowChestBlock(FabricBlockSettings.of(Material.METAL, MaterialColor.COLOR_PURPLE).strength(3.0f, 6.0f).sounds(SoundType.METAL).requiresCorrectToolForDrops(), false, () -> ModBlockEntityType.SHADOW_CHEST));
     public static final Block PIGGY_BANK = register("piggy_bank", new PiggyBankBlock(Properties.copy(Blocks.TERRACOTTA), () -> ModBlockEntityType.PIGGY_BANK));
     public static final Block SAFE = register("safe", new SafeBlock(Properties.copy(Blocks.IRON_BLOCK), () -> ModBlockEntityType.SAFE));
+
+    // Metals
+    public static final Block METEORITE_ORE = register("meteorite_ore", new HotFloorBlock(Properties.copy(Blocks.MAGMA_BLOCK).strength(5f)));
+    public static final Block RAW_METEORITE_BLOCK = register("raw_meteorite_block", new Block(Properties.copy(Blocks.MAGMA_BLOCK).strength(8f)));
+    public static final Block METEORITE_BLOCK = register("meteorite_block", new Block(Properties.copy(Blocks.RAW_IRON_BLOCK)));
+    public static final Block DEMONITE_ORE = register("demonite_ore", new Block(Properties.copy(Blocks.IRON_ORE)));
+    public static final Block DEEPSLATE_DEMONITE_ORE = register("deepslate_demonite_ore", new Block(Properties.copy(Blocks.DEEPSLATE_IRON_ORE)));
+    public static final Block RAW_DEMONITE_BLOCK = register("raw_demonite_block", new Block(Properties.copy(Blocks.RAW_IRON_BLOCK)));
+    public static final Block DEMONITE_BLOCK = register("demonite_block", new Block(Properties.copy(Blocks.IRON_BLOCK)));
+    public static final Block CRIMTANE_ORE = register("crimtane_ore", new Block(Properties.copy(Blocks.IRON_ORE)));
+    public static final Block DEEPSLATE_CRIMTANE_ORE = register("deepslate_crimtane_ore", new Block(Properties.copy(Blocks.DEEPSLATE_IRON_ORE)));
+    public static final Block RAW_CRIMTANE_BLOCK = register("raw_crimtane_block", new Block(Properties.copy(Blocks.RAW_IRON_BLOCK)));
+    public static final Block CRIMTANE_BLOCK = register("crimtane_block", new Block(Properties.copy(Blocks.IRON_BLOCK)));
+    public static final Block HELLSTONE_ORE = register("hellstone_ore", new HellstoneBlock(Properties.copy(Blocks.MAGMA_BLOCK).sound(SoundType.NETHER_GOLD_ORE).strength(7f)));
+    public static final Block RAW_HELLSTONE_BLOCK = register("raw_hellstone_block", new HotFloorBlock(Properties.copy(Blocks.MAGMA_BLOCK).strength(10f)));
+    public static final Block HELLSTONE_BLOCK = register("hellstone_block", new Block(Properties.copy(Blocks.NETHERITE_BLOCK)));
+
+    // Misc
     public static final Block REDSTONE_STONE = register("redstone_stone", new RedStoneStoneBlock(Properties.copy(Blocks.STONE).strength(1.5f, 1200.0f)));
     public static final Block REDSTONE_DEEPSLATE = register("redstone_deepslate", new RedStoneDeepslateBlock(Properties.copy(Blocks.DEEPSLATE).strength(3.0f, 1200.0f)));
     public static final Block INSTANT_TNT = register("instant_tnt", new InstantTNTBlock(Properties.copy(Blocks.TNT)));
     public static final Block TINKERER_TABLE = register("tinkerer_workshop", new Block(Properties.copy(Blocks.CRAFTING_TABLE)));
+
+    // Building
     public static final Block SUNPLATE_BLOCK = register("sunplate_block", new Block(Properties.copy(Blocks.GOLD_BLOCK)));
     public static final Block CLOUD = register("cloud", new Block(Properties.of(Material.SNOW).strength(0.2f).sound(SoundType.SNOW).noOcclusion()));
     public static final Block RAIN_CLOUD = register("rain_cloud", new RainCloudBlock(Properties.of(Material.SNOW).strength(0.2f).sound(SoundType.SNOW).noOcclusion()));
-    public static final Block BLUE_BRICKS = register("blue_brick", new DungeonBlock(Properties.of(Material.STONE).strength(1.5f, 1200.0F)));
-    public static final Block CRACKED_BLUE_BRICKS = register("cracked_blue_brick", new DungeonBlock(Properties.of(Material.STONE).strength(1.5f, 1200.0F)));
-    public static final Block FANCY_BLUE_BRICKS = register("fancy_blue_brick", new DungeonBlock(Properties.of(Material.STONE).strength(1.5f, 1200.0F)));
-    public static final Block GREEN_BRICKS = register("green_brick", new DungeonBlock(Properties.of(Material.STONE).strength(1.5f, 1200.0F)));
-    public static final Block CRACKED_GREEN_BRICKS = register("cracked_green_brick", new DungeonBlock(Properties.of(Material.STONE).strength(1.5f, 1200.0F)));
-    public static final Block FANCY_GREEN_BRICKS = register("fancy_green_brick", new DungeonBlock(Properties.of(Material.STONE).strength(1.5f, 1200.0F)));
-    public static final Block PURPLE_BRICKS = register("purple_brick", new DungeonBlock(Properties.of(Material.STONE).strength(1.5f, 1200.0F)));
-    public static final Block CRACKED_PURPLE_BRICKS = register("cracked_purple_brick", new DungeonBlock(Properties.of(Material.STONE).strength(1.5f, 1200.0F)));
-    public static final Block FANCY_PURPLE_BRICKS = register("fancy_purple_brick", new DungeonBlock(Properties.of(Material.STONE).strength(1.5f, 1200.0F)));
+    public static final Block BLUE_BRICKS = register("blue_brick", new DungeonBlock(Properties.of(Material.STONE).requiresCorrectToolForDrops().strength(1.5f, 1200.0F)));
+    public static final Block CRACKED_BLUE_BRICKS = register("cracked_blue_brick", new DungeonBlock(Properties.of(Material.STONE).requiresCorrectToolForDrops().strength(1.5f, 1200.0F)));
+    public static final Block FANCY_BLUE_BRICKS = register("fancy_blue_brick", new DungeonBlock(Properties.of(Material.STONE).requiresCorrectToolForDrops().strength(1.5f, 1200.0F)));
+    public static final Block GREEN_BRICKS = register("green_brick", new DungeonBlock(Properties.of(Material.STONE).requiresCorrectToolForDrops().strength(1.5f, 1200.0F)));
+    public static final Block CRACKED_GREEN_BRICKS = register("cracked_green_brick", new DungeonBlock(Properties.of(Material.STONE).requiresCorrectToolForDrops().strength(1.5f, 1200.0F)));
+    public static final Block FANCY_GREEN_BRICKS = register("fancy_green_brick", new DungeonBlock(Properties.of(Material.STONE).requiresCorrectToolForDrops().strength(1.5f, 1200.0F)));
+    public static final Block PURPLE_BRICKS = register("purple_brick", new DungeonBlock(Properties.of(Material.STONE).requiresCorrectToolForDrops().strength(1.5f, 1200.0F)));
+    public static final Block CRACKED_PURPLE_BRICKS = register("cracked_purple_brick", new DungeonBlock(Properties.of(Material.STONE).requiresCorrectToolForDrops().strength(1.5f, 1200.0F)));
+    public static final Block FANCY_PURPLE_BRICKS = register("fancy_purple_brick", new DungeonBlock(Properties.of(Material.STONE).requiresCorrectToolForDrops().strength(1.5f, 1200.0F)));
+
+    // Vegetation
     public static final Block VILE_MUSHROOM = register("vile_mushroom", new EvilMushroom(true, Properties.of(Material.PLANT, MaterialColor.COLOR_PURPLE).noCollission().instabreak().sound(SoundType.GRASS).lightLevel(blockState -> 1).hasPostProcess(ModBlocks::always)));
     public static final Block POTTED_VILE_MUSHROOM = register("potted_vile_mushroom", new FlowerPotBlock(VILE_MUSHROOM, BlockBehaviour.Properties.of(Material.DECORATION).instabreak().noOcclusion()));
     public static final Block VICIOUS_MUSHROOM = register("vicious_mushroom", new EvilMushroom(false, Properties.of(Material.PLANT, MaterialColor.COLOR_RED).noCollission().instabreak().sound(SoundType.GRASS).lightLevel(blockState -> 1).hasPostProcess(ModBlocks::always)));
     public static final Block POTTED_VICIOUS_MUSHROOM = register("potted_vicious_mushroom", new FlowerPotBlock(VICIOUS_MUSHROOM, BlockBehaviour.Properties.of(Material.DECORATION).instabreak().noOcclusion()));
-    public static final Block RAW_DEMONITE_BLOCK = register("raw_demonite_block", new Block(Properties.copy(Blocks.RAW_IRON_BLOCK)));
-    public static final Block DEMONITE_BLOCK = register("demonite_block", new Block(Properties.copy(Blocks.IRON_BLOCK)));
+
+    // Corruption
     public static final Block CORRUPTED_GRASS = register("corrupted_grass", new CorruptedGrass(Properties.copy(Blocks.GRASS_BLOCK).randomTicks()));
     public static final Block CORRUPTED_GRAVEL = register("corrupted_gravel", new CorruptedFallingBlock(Properties.copy(Blocks.GRAVEL).randomTicks()));
     public static final Block CORRUPTED_SAND = register("corrupted_sand", new CorruptedFallingBlock(Properties.copy(Blocks.SAND).randomTicks()));
@@ -68,7 +91,6 @@ public class ModBlocks {
     public static final Block CORRUPTED_COBBLED_DEEPSLATE = register("corrupted_cobbled_deepslate", new CorruptedBlock(Properties.copy(Blocks.COBBLED_DEEPSLATE).randomTicks()));
     public static final Block CORRUPTED_COAL_ORE = register("corrupted_coal_ore", new CorruptedBlock(Properties.copy(Blocks.COAL_ORE).randomTicks()));
     public static final Block CORRUPTED_IRON_ORE = register("corrupted_iron_ore", new CorruptedBlock(Properties.copy(Blocks.IRON_ORE).randomTicks()));
-    public static final Block DEMONITE_ORE = register("demonite_ore", new Block(Properties.copy(Blocks.IRON_ORE)));
     public static final Block CORRUPTED_COPPER_ORE = register("corrupted_copper_ore", new CorruptedBlock(Properties.copy(Blocks.COPPER_ORE).randomTicks()));
     public static final Block CORRUPTED_GOLD_ORE = register("corrupted_gold_ore", new CorruptedBlock(Properties.copy(Blocks.GOLD_ORE).randomTicks()));
     public static final Block CORRUPTED_LAPIS_ORE = register("corrupted_lapis_ore", new CorruptedBlock(Properties.copy(Blocks.LAPIS_ORE).randomTicks()));
@@ -77,7 +99,6 @@ public class ModBlocks {
     public static final Block CORRUPTED_EMERALD_ORE = register("corrupted_emerald_ore", new CorruptedBlock(Properties.copy(Blocks.EMERALD_ORE).randomTicks()));
     public static final Block CORRUPTED_DEEPSLATE_COAL_ORE = register("corrupted_deepslate_coal_ore", new CorruptedBlock(Properties.copy(Blocks.DEEPSLATE_COAL_ORE).randomTicks()));
     public static final Block CORRUPTED_DEEPSLATE_IRON_ORE = register("corrupted_deepslate_iron_ore", new CorruptedBlock(Properties.copy(Blocks.DEEPSLATE_IRON_ORE).randomTicks()));
-    public static final Block DEEPSLATE_DEMONITE_ORE = register("deepslate_demonite_ore", new Block(Properties.copy(Blocks.DEEPSLATE_IRON_ORE)));
     public static final Block CORRUPTED_DEEPSLATE_COPPER_ORE = register("corrupted_deepslate_copper_ore", new CorruptedBlock(Properties.copy(Blocks.DEEPSLATE_COPPER_ORE).randomTicks()));
     public static final Block CORRUPTED_DEEPSLATE_GOLD_ORE = register("corrupted_deepslate_gold_ore", new CorruptedBlock(Properties.copy(Blocks.DEEPSLATE_GOLD_ORE).randomTicks()));
     public static final Block CORRUPTED_DEEPSLATE_LAPIS_ORE = register("corrupted_deepslate_lapis_ore", new CorruptedBlock(Properties.copy(Blocks.DEEPSLATE_LAPIS_ORE).randomTicks()));
@@ -89,8 +110,8 @@ public class ModBlocks {
     public static final Block CORRUPTED_ICE = register("corrupted_ice", new CorruptedBlock(Properties.copy(Blocks.ICE).randomTicks()));
     public static final Block CORRUPTED_PACKED_ICE = register("corrupted_packed_ice", new CorruptedBlock(Properties.copy(Blocks.PACKED_ICE).randomTicks()));
     public static final Block CORRUPTED_BLUE_ICE = register("corrupted_blue_ice", new CorruptedBlock(Properties.copy(Blocks.BLUE_ICE).randomTicks()));
-    public static final Block RAW_CRIMTANE_BLOCK = register("raw_crimtane_block", new Block(Properties.copy(Blocks.RAW_IRON_BLOCK)));
-    public static final Block CRIMTANE_BLOCK = register("crimtane_block", new Block(Properties.copy(Blocks.IRON_BLOCK)));
+
+    // Crimson
     public static final Block CRIMSON_GRASS = register("crimson_grass", new CrimsonGrass(Properties.copy(Blocks.GRASS_BLOCK).randomTicks()));
     public static final Block CRIMSON_GRAVEL = register("crimson_gravel", new CrimsonFallingBlock(Properties.copy(Blocks.GRAVEL).randomTicks()));
     public static final Block CRIMSON_SAND = register("crimson_sand", new CrimsonFallingBlock(Properties.copy(Blocks.SAND).randomTicks()));
@@ -105,7 +126,6 @@ public class ModBlocks {
     public static final Block CRIMSON_COBBLED_DEEPSLATE = register("crimson_cobbled_deepslate", new CrimsonBlock(Properties.copy(Blocks.COBBLED_DEEPSLATE).randomTicks()));
     public static final Block CRIMSON_COAL_ORE = register("crimson_coal_ore", new CrimsonBlock(Properties.copy(Blocks.COAL_ORE).randomTicks()));
     public static final Block CRIMSON_IRON_ORE = register("crimson_iron_ore", new CrimsonBlock(Properties.copy(Blocks.IRON_ORE).randomTicks()));
-    public static final Block CRIMTANE_ORE = register("crimtane_ore", new Block(Properties.copy(Blocks.IRON_ORE)));
     public static final Block CRIMSON_COPPER_ORE = register("crimson_copper_ore", new CrimsonBlock(Properties.copy(Blocks.COPPER_ORE).randomTicks()));
     public static final Block CRIMSON_GOLD_ORE = register("crimson_gold_ore", new CrimsonBlock(Properties.copy(Blocks.GOLD_ORE).randomTicks()));
     public static final Block CRIMSON_LAPIS_ORE = register("crimson_lapis_ore", new CrimsonBlock(Properties.copy(Blocks.LAPIS_ORE).randomTicks()));
@@ -114,7 +134,6 @@ public class ModBlocks {
     public static final Block CRIMSON_EMERALD_ORE = register("crimson_emerald_ore", new CrimsonBlock(Properties.copy(Blocks.EMERALD_ORE).randomTicks()));
     public static final Block CRIMSON_DEEPSLATE_COAL_ORE = register("crimson_deepslate_coal_ore", new CrimsonBlock(Properties.copy(Blocks.DEEPSLATE_COAL_ORE).randomTicks()));
     public static final Block CRIMSON_DEEPSLATE_IRON_ORE = register("crimson_deepslate_iron_ore", new CrimsonBlock(Properties.copy(Blocks.DEEPSLATE_IRON_ORE).randomTicks()));
-    public static final Block DEEPSLATE_CRIMTANE_ORE = register("deepslate_crimtane_ore", new Block(Properties.copy(Blocks.DEEPSLATE_IRON_ORE)));
     public static final Block CRIMSON_DEEPSLATE_COPPER_ORE = register("crimson_deepslate_copper_ore", new CrimsonBlock(Properties.copy(Blocks.DEEPSLATE_COPPER_ORE).randomTicks()));
     public static final Block CRIMSON_DEEPSLATE_GOLD_ORE = register("crimson_deepslate_gold_ore", new CrimsonBlock(Properties.copy(Blocks.DEEPSLATE_GOLD_ORE).randomTicks()));
     public static final Block CRIMSON_DEEPSLATE_LAPIS_ORE = register("crimson_deepslate_lapis_ore", new CrimsonBlock(Properties.copy(Blocks.DEEPSLATE_LAPIS_ORE).randomTicks()));

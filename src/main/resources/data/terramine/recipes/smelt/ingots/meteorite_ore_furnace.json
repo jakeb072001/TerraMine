@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:smelting",
+  "group": "meteorite_ingot",
+  "ingredient": {
+    "item": "terramine:meteorite_ore"
+  },
+  "result": "terramine:meteorite_ingot",
+  "experience": 0.8,
+  "cookingtime": 200
+}

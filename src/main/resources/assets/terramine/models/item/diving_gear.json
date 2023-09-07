@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "terramine:item/diving_gear"
+    "layer0": "terramine:item/accessories/diving_gear"
   }
 }

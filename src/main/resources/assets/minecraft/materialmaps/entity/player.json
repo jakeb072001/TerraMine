@@ -3,7 +3,7 @@
     {
       "predicate": {
         "materialPredicate": {
-          "texture": "terramine:textures/entity/trinket/fire_gauntlet_default_glow.png"
+          "texture": "terramine:textures/entity/accessory/glove/fire_gauntlet/fire_gauntlet_default_glow.png"
         }
       },
       "material": "canvas:emissive_transform"
@@ -11,7 +11,7 @@
     {
       "predicate": {
         "materialPredicate": {
-          "texture": "terramine:textures/entity/trinket/fire_gauntlet_slim_glow.png"
+          "texture": "terramine:textures/entity/accessory/glove/fire_gauntlet/fire_gauntlet_slim_glow.png"
         }
       },
       "material": "canvas:emissive_transform"

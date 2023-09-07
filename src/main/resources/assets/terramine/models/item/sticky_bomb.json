@@ -1,7 +1,6 @@
 {
-	"parent": "terramine:item/bomb_template",
-	"credit": "Made with Blockbench",
-	"textures": {
-		"0": "terramine:item/weapons/throwables/bomb/sticky_bomb"
-	}
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "terramine:item/weapons/throwables/bomb/gui/sticky_bomb"
+  }
 }

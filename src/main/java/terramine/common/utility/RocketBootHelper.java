@@ -12,8 +12,8 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.phys.Vec3;
 import terramine.common.init.ModComponents;
 import terramine.common.init.ModItems;
+import terramine.common.misc.AccessoriesHelper;
 import terramine.common.network.ServerPacketHandler;
-import terramine.common.trinkets.TrinketsHelper;
 import terramine.common.utility.equipmentchecks.CloudBottleEquippedCheck;
 
 public class RocketBootHelper {
@@ -85,17 +85,19 @@ public class RocketBootHelper {
                     player.resetFallDistance();
 
                     float speedSideways = (float) (player.isCrouching() ? glideSpeed * 0.5F : glideSpeed);
-                    if (InputHandler.isHoldingForwards(player)) {
-                        player.moveRelative(1, new Vec3(0, 0, speedSideways));
-                    }
-                    if (InputHandler.isHoldingBackwards(player)) {
-                        player.moveRelative(1, new Vec3(0, 0, -speedSideways * 0.8F));
-                    }
-                    if (InputHandler.isHoldingLeft(player)) {
-                        player.moveRelative(1, new Vec3(speedSideways, 0, 0));
-                    }
-                    if (InputHandler.isHoldingRight(player)) {
-                        player.moveRelative(1, new Vec3(-speedSideways, 0, 0));
+                    if (!player.isFallFlying()) {
+                        if (InputHandler.isHoldingForwards(player)) {
+                            player.moveRelative(1, new Vec3(0, 0, speedSideways));
+                        }
+                        if (InputHandler.isHoldingBackwards(player)) {
+                            player.moveRelative(1, new Vec3(0, 0, -speedSideways * 0.8F));
+                        }
+                        if (InputHandler.isHoldingLeft(player)) {
+                            player.moveRelative(1, new Vec3(speedSideways, 0, 0));
+                        }
+                        if (InputHandler.isHoldingRight(player)) {
+                            player.moveRelative(1, new Vec3(-speedSideways, 0, 0));
+                        }
                     }
                 } else {
                     glideDelay++;
@@ -180,39 +182,44 @@ public class RocketBootHelper {
 
     private void fly(Player player, double y) {
         Vec3 motion = player.getDeltaMovement();
+        FriendlyByteBuf passedData = new FriendlyByteBuf(Unpooled.buffer());
+        passedData.writeDouble(motion.x());
+        passedData.writeDouble(y);
+        passedData.writeDouble(motion.z());
+        ClientPlayNetworking.send(ServerPacketHandler.PLAYER_MOVEMENT_PACKET_ID, passedData);
         player.setDeltaMovement(motion.x(), y, motion.z());
     }
 
     private boolean priorityOrder(Player player, int priority) { // todo: change to a better system, don't know how and it's not super important but would be cleaner and easier to manage i would think
         int priorityOrder = 0;
-        if (TrinketsHelper.isEquipped(ModItems.ROCKET_BOOTS, player)) {
+        if (AccessoriesHelper.isEquipped(ModItems.ROCKET_BOOTS, player)) {
             priorityOrder = 1;
         }
-        if (TrinketsHelper.isEquipped(ModItems.SPECTRE_BOOTS, player)) {
+        if (AccessoriesHelper.isEquipped(ModItems.SPECTRE_BOOTS, player)) {
             priorityOrder = 2;
         }
-        if (TrinketsHelper.isEquipped(ModItems.FAIRY_BOOTS, player)) {
+        if (AccessoriesHelper.isEquipped(ModItems.FAIRY_BOOTS, player)) {
             priorityOrder = 3;
         }
-        if (TrinketsHelper.isEquipped(ModItems.LIGHTNING_BOOTS, player)) {
+        if (AccessoriesHelper.isEquipped(ModItems.LIGHTNING_BOOTS, player)) {
             priorityOrder = 4;
         }
-        if (TrinketsHelper.isEquipped(ModItems.FROSTSPARK_BOOTS, player)) {
+        if (AccessoriesHelper.isEquipped(ModItems.FROSTSPARK_BOOTS, player)) {
             priorityOrder = 5;
         }
-        if (TrinketsHelper.isEquipped(ModItems.TERRASPARK_BOOTS, player)) {
+        if (AccessoriesHelper.isEquipped(ModItems.TERRASPARK_BOOTS, player)) {
             priorityOrder = 6;
         }
-        if (TrinketsHelper.isEquipped(ModItems.FLEDGLING_WINGS, player)) {
+        if (AccessoriesHelper.isEquipped(ModItems.FLEDGLING_WINGS, player)) {
             priorityOrder = 7;
         }
-        if (TrinketsHelper.isEquipped(ModItems.ANGEL_WINGS, player)) {
+        if (AccessoriesHelper.isEquipped(ModItems.ANGEL_WINGS, player)) {
             priorityOrder = 8;
         }
-        if (TrinketsHelper.isEquipped(ModItems.DEMON_WINGS, player)) {
+        if (AccessoriesHelper.isEquipped(ModItems.DEMON_WINGS, player)) {
             priorityOrder = 9;
         }
-        if (TrinketsHelper.isEquipped(ModItems.LEAF_WINGS, player)) {
+        if (AccessoriesHelper.isEquipped(ModItems.LEAF_WINGS, player)) {
             priorityOrder = 10;
         }
 

@@ -6,7 +6,7 @@ import net.minecraft.world.entity.ai.attributes.AttributeMap;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import org.jetbrains.annotations.NotNull;
-import terramine.common.item.curio.TrinketTerrariaItem;
+import terramine.common.item.accessories.AccessoryTerrariaItem;
 import terramine.common.potions.effects.TerrariaEffect;
 
 import java.util.UUID;
@@ -28,7 +28,7 @@ public class IronSkinEffect extends TerrariaEffect {
     @Override
     public void removeAttributeModifiers(LivingEntity livingEntity, @NotNull AttributeMap attributeMap, int i) {
         if (livingEntity.getAttributes().hasAttribute(Attributes.ARMOR)) {
-            TrinketTerrariaItem.removeModifier(livingEntity.getAttribute(Attributes.ARMOR), IRONSKIN_ARMOR);
+            AccessoryTerrariaItem.removeModifier(livingEntity.getAttribute(Attributes.ARMOR), IRONSKIN_ARMOR);
         }
         super.removeAttributeModifiers(livingEntity, attributeMap, i);
     }
@@ -36,7 +36,7 @@ public class IronSkinEffect extends TerrariaEffect {
     @Override
     public void applyEffectTick(@NotNull LivingEntity livingEntity, int level) {
         if (livingEntity.getAttributes().hasAttribute(Attributes.ARMOR)) {
-            TrinketTerrariaItem.addModifier(livingEntity.getAttribute(Attributes.ARMOR), IRONSKIN_ARMOR);
+            AccessoryTerrariaItem.addModifier(livingEntity.getAttribute(Attributes.ARMOR), IRONSKIN_ARMOR);
         }
     }
 }

@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "terramine:item/treasure_magnet"
+    "layer0": "terramine:item/accessories/treasure_magnet"
   }
 }

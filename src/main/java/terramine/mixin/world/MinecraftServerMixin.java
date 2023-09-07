@@ -10,13 +10,15 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import terramine.common.components.SyncedBooleanComponent;
 
-@Mixin(MinecraftServer.class)
+// priority is one below Terrablender, fixes crash on world load on newer versions of Terrablender
+@Mixin(value = MinecraftServer.class, priority = 994)
 public class MinecraftServerMixin {
 
     @Shadow @Final protected WorldData worldData;
 
-    @Inject(at = @At("HEAD"), method = "runServer")
-    public void getWorldLevelData(CallbackInfo ci) {
+    @Inject(method = "<init>", at = @At("RETURN"), require = 1)
+    private void onInit(CallbackInfo ci)
+    {
         SyncedBooleanComponent.setLevelData(worldData.overworldData());
     }
 }

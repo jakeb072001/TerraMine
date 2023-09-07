@@ -5,15 +5,17 @@ import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
 import net.minecraft.core.Registry;
 import net.minecraft.world.entity.*;
-import net.minecraft.world.entity.item.PrimedTnt;
-import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.levelgen.Heightmap;
 import terramine.TerraMine;
-import terramine.common.entity.*;
 import terramine.common.entity.block.InstantPrimedTNTEntity;
-import terramine.common.entity.devourer.DevourerBodyEntity;
-import terramine.common.entity.devourer.DevourerEntity;
-import terramine.common.entity.devourer.DevourerTailEntity;
+import terramine.common.entity.mobs.CrimeraEntity;
+import terramine.common.entity.mobs.DemonEyeEntity;
+import terramine.common.entity.mobs.EaterOfSoulsEntity;
+import terramine.common.entity.mobs.MimicEntity;
+import terramine.common.entity.mobs.devourer.DevourerBodyEntity;
+import terramine.common.entity.mobs.devourer.DevourerEntity;
+import terramine.common.entity.mobs.devourer.DevourerTailEntity;
+import terramine.common.entity.projectiles.*;
 import terramine.common.entity.throwables.BombEntity;
 import terramine.common.entity.throwables.DynamiteEntity;
 import terramine.common.entity.throwables.GrenadeEntity;
@@ -84,11 +86,13 @@ public class ModEntities {
 			.build());
 
 	public static final EntityType<FallingStarEntity> FALLING_STAR = register("falling_star", FabricEntityTypeBuilder
-			.<FallingStarEntity>createMob()
-			.entityFactory(FallingStarEntity::new)
+			.create(MobCategory.MISC, FallingStarEntity::new)
 			.dimensions(EntityDimensions.fixed(0.25f, 0.25f))
-			.spawnGroup(MobCategory.MISC)
-			.defaultAttributes(FallingStarEntity::createMobAttributes)
+			.build());
+
+	public static final EntityType<FallingMeteoriteEntity> METEORITE = register("meteorite", FabricEntityTypeBuilder
+			.create(MobCategory.MISC, FallingMeteoriteEntity::new)
+			.dimensions(EntityDimensions.fixed(1f, 1f))
 			.build());
 
 	public static final EntityType<MagicMissileEntity> MAGIC_MISSILE = register("magic_missile", FabricEntityTypeBuilder
@@ -106,6 +110,12 @@ public class ModEntities {
 	public static final EntityType<RainbowMissileEntity> RAINBOW_MISSILE = register("rainbow_missile", FabricEntityTypeBuilder
 			.create(MobCategory.MISC, RainbowMissileEntity::new)
 			.dimensions(EntityDimensions.fixed(0.25f, 0.25f))
+			.disableSummon()
+			.build());
+
+	public static final EntityType<LaserEntity> LASER = register("laser", FabricEntityTypeBuilder
+			.create(MobCategory.MISC, LaserEntity::new)
+			.dimensions(EntityDimensions.fixed(0.60f, 0.10f))
 			.disableSummon()
 			.build());
 

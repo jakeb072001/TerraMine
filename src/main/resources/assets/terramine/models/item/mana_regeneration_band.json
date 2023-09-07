@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "terramine:item/mana_regeneration_band"
+    "layer0": "terramine:item/accessories/mana_regeneration_band"
   }
 }

@@ -8,9 +8,8 @@ import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.util.Mth;
-import net.minecraft.world.entity.monster.Phantom;
 import org.jetbrains.annotations.NotNull;
-import terramine.common.entity.EaterOfSoulsEntity;
+import terramine.common.entity.mobs.EaterOfSoulsEntity;
 
 public class EaterOfSoulsModel<T extends EaterOfSoulsEntity> extends HierarchicalModel<T> {
 

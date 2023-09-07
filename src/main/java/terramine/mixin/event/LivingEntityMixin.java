@@ -4,6 +4,7 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -12,8 +13,8 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
-import terramine.common.events.PlayHurtSoundCallback;
 import terramine.common.events.LivingEntityPotionEffectCallback;
+import terramine.common.events.PlayHurtSoundCallback;
 
 import javax.annotation.Nullable;
 
@@ -32,7 +33,9 @@ public abstract class LivingEntityMixin extends Entity {
 
 	@Inject(method = "playHurtSound", at = @At("HEAD"))
 	private void onServerPlayHurtSound(CallbackInfo info) {
-		PlayHurtSoundCallback.EVENT.invoker().play((LivingEntity) (Object) this, this.getSoundVolume(), this.getVoicePitch());
+		if (((LivingEntity) (Object) this) instanceof Player player) {
+			PlayHurtSoundCallback.EVENT.invoker().play(player, this.getSoundVolume(), this.getVoicePitch());
+		}
 	}
 
 	// from porting-lib, didn't want to import the whole thing so just doing it this way for now

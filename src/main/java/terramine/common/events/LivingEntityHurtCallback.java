@@ -6,7 +6,7 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.LivingEntity;
 
 /**
- * Callback for applying Trinket effects when the wearer was hurt in general, same injection point as Forge's LivingHurtEvent
+ * Callback for applying Accessory effects when the wearer was hurt in general, same injection point as Forge's LivingHurtEvent
  */
 public interface LivingEntityHurtCallback {
 

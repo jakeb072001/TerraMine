@@ -16,7 +16,7 @@ import org.jetbrains.annotations.NotNull;
 import terramine.TerraMine;
 import terramine.client.render.entity.model.monsters.MimicChestLayerModel;
 import terramine.client.render.entity.model.monsters.MimicModel;
-import terramine.common.entity.MimicEntity;
+import terramine.common.entity.mobs.MimicEntity;
 import terramine.common.init.ModModelLayers;
 
 import java.util.ArrayList;

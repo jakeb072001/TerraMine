@@ -36,14 +36,29 @@ public final class ModConfig extends PartitioningSerializer.GlobalData {
 		@ConfigEntry.Gui.Tooltip
 		public boolean disableFallingStars = false;
 		@ConfigEntry.Gui.Tooltip(count = 2)
-		@ConfigEntry.BoundedDiscrete(max = 500, min = 0)
-		public int fallingStarRarity = 20;
+		@ConfigEntry.BoundedDiscrete(max = 100, min = 0)
+		public int fallingStarRarity = 25;
+		@ConfigEntry.Gui.Tooltip
+		public boolean disableMeteorites = false;
+		@ConfigEntry.Gui.Tooltip(count = 3)
+		@ConfigEntry.BoundedDiscrete(max = 100, min = 0)
+		public int meteoriteRarity = 2;
+		@ConfigEntry.Gui.Tooltip(count = 2)
+		public boolean disableHardcoreExtraAccessory = false;
+		@ConfigEntry.Gui.Tooltip
+		public boolean disableDemonHeart = false;
+		@ConfigEntry.Gui.Tooltip
+		@ConfigEntry.BoundedDiscrete(max = 2, min = 0)
+		public int setExtraAccessorySlots = 0;
 	}
 
 	@Config(name = "worldgen")
 	public static final class WorldGen implements ConfigData {
 		@ConfigEntry.Gui.Tooltip(count = 6)
 		public float accessoryRarity = 1;
+		@ConfigEntry.Gui.Tooltip
+		@ConfigEntry.BoundedDiscrete(max = 10, min = 1)
+		public int hellstoneRarity = 3;
 		@ConfigEntry.Gui.Tooltip
 		public boolean evilBiomeEnabled = true;
 		@ConfigEntry.Gui.Tooltip

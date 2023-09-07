@@ -10,7 +10,7 @@ import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
 import terramine.TerraMine;
-import terramine.common.entity.MimicEntity;
+import terramine.common.entity.mobs.MimicEntity;
 import terramine.common.init.ModBlocks;
 import terramine.common.init.ModComponents;
 import terramine.common.init.ModEntities;

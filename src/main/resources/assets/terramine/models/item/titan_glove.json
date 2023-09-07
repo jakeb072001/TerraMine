@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "terramine:item/titan_glove"
+    "layer0": "terramine:item/accessories/titan_glove"
   }
 }

@@ -1,39 +1,54 @@
 package terramine.common.network;
 
 import dev.architectury.networking.NetworkManager;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.Registry;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.particles.SimpleParticleType;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.SimpleMenuProvider;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.phys.Vec3;
 import terramine.TerraMine;
+import terramine.client.render.gui.menu.TerrariaInventoryContainerMenu;
 import terramine.common.init.ModComponents;
 import terramine.common.init.ModItems;
 import terramine.common.network.packet.BoneMealPacket;
 import terramine.common.network.packet.UpdateInputPacket;
+import terramine.extensions.PlayerStorages;
 
 public class ServerPacketHandler {
+    // Server
     public static final ResourceLocation BONE_MEAL_PACKET_ID = TerraMine.id("bone_meal");
     public static final ResourceLocation FALL_DISTANCE_PACKET_ID = TerraMine.id("fall_distance");
     public static final ResourceLocation WALL_JUMP_PACKET_ID = TerraMine.id("wall_jump");
     public static final ResourceLocation DASH_PACKET_ID = TerraMine.id("dash");
     public static final ResourceLocation CONTROLS_PACKET_ID = TerraMine.id("controls_packet");
+    public static final ResourceLocation PLAYER_MOVEMENT_PACKET_ID = TerraMine.id("player_movement");
     public static final ResourceLocation ROCKET_BOOTS_SOUND_PACKET_ID = TerraMine.id("rocket_boots_sound");
     public static final ResourceLocation ROCKET_BOOTS_PARTICLE_PACKET_ID = TerraMine.id("rocket_boots_particles");
     public static final ResourceLocation UPDATE_BIOME_PACKET_ID = TerraMine.id("update_biome");
+    public static final ResourceLocation OPEN_INVENTORY_PACKET_ID = TerraMine.id("open_inventory");
+    public static final ResourceLocation UPDATE_ACCESSORY_VISIBILITY_PACKET_ID = TerraMine.id("update_accessory_visibility");
+
+    // Client
+    public static final ResourceLocation SETUP_INVENTORY_PACKET_ID = TerraMine.id("setup_inventory");
 
     public static void register() {
         ServerPlayNetworking.registerGlobalReceiver(BONE_MEAL_PACKET_ID, BoneMealPacket::receive);
 
-        ServerPlayNetworking.registerGlobalReceiver(CONTROLS_PACKET_ID, (server, player, handler, buf, responseSender) -> {
-            UpdateInputPacket.onMessage(UpdateInputPacket.read(buf), server, player);
-        });
+        ServerPlayNetworking.registerGlobalReceiver(CONTROLS_PACKET_ID, (server, player, handler, buf, responseSender) ->
+                UpdateInputPacket.onMessage(UpdateInputPacket.read(buf), server, player));
 
         ServerPlayNetworking.registerGlobalReceiver(DASH_PACKET_ID, (server, player, handler, buf, responseSender) -> {
             boolean isGear = buf.readBoolean();
@@ -68,6 +83,15 @@ public class ServerPacketHandler {
             boolean wallJumped = buf.readBoolean();
             server.execute(() -> {
                 ModComponents.MOVEMENT_ORDER.get(player).setWallJumped(wallJumped);
+            });
+        });
+
+        ServerPlayNetworking.registerGlobalReceiver(PLAYER_MOVEMENT_PACKET_ID, (server, player, handler, buf, responseSender) -> {
+            double x = buf.readDouble();
+            double y = buf.readDouble();
+            double z = buf.readDouble();
+            server.execute(() -> {
+                player.setDeltaMovement(x, y, z);
             });
         });
 
@@ -108,12 +132,33 @@ public class ServerPacketHandler {
             });
         });
 
+        ServerPlayNetworking.registerGlobalReceiver(OPEN_INVENTORY_PACKET_ID, (server, player, handler, buf, responseSender) ->
+                server.execute(() -> player.openMenu(new SimpleMenuProvider((id, inventory, player2) -> new TerrariaInventoryContainerMenu(player), Component.empty()))));
+
+        ServerPlayNetworking.registerGlobalReceiver(UPDATE_ACCESSORY_VISIBILITY_PACKET_ID, (server, player, handler, buf, responseSender) -> {
+                int slot = buf.readInt();
+                boolean isVisible = buf.readBoolean();
+                server.execute(() -> {
+                    ModComponents.ACCESSORY_VISIBILITY.get(player).setSlotVisibility(slot, isVisible);
+                    ModComponents.ACCESSORY_VISIBILITY.sync(player);
+                });
+        });
+
         NetworkManager.registerReceiver(NetworkManager.s2c(), UPDATE_BIOME_PACKET_ID, (buf, context) -> {
             int chunkX = buf.readInt();
             int chunkZ = buf.readInt();
             if (context.getPlayer() != null) {
                 ((ClientLevel) context.getPlayer().level).onChunkLoaded(new ChunkPos(chunkX, chunkZ));
             }
+        });
+    }
+
+    @Environment(EnvType.CLIENT)
+    public static void registerClient() {
+        ClientPlayNetworking.registerGlobalReceiver(SETUP_INVENTORY_PACKET_ID, (client, handler, buffer, responseSender) -> {
+            int slot = buffer.readInt();
+            ItemStack itemStack = buffer.readItem();
+            client.execute(() -> ((PlayerStorages)client.player).getTerrariaInventory().setItem(slot, itemStack));
         });
     }
 }

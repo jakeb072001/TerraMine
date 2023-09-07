@@ -16,6 +16,8 @@ public class GrenadeEntity extends ExplosiveThrowableEntity {
 
     @Override
     protected void onHitEntity(@NotNull EntityHitResult entityHitResult) {
-        explode();
+        if (entityHitResult.getEntity() != this.getOwner()) {
+            explode();
+        }
     }
 }

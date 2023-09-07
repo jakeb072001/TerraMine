@@ -35,19 +35,20 @@ import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
-import terramine.common.entity.FallingStarEntity;
+import terramine.common.init.ModBlocks;
+import terramine.common.init.ModDamageSource;
+import terramine.common.init.ModTags;
 
 import java.util.*;
 
 public class ExplosionConfigurable extends Explosion {
 
     private static final ExplosionDamageCalculator EXPLOSION_DAMAGE_CALCULATOR = new ExplosionDamageCalculator();
-    private final boolean fire;
+    private final boolean fire, isMeteorite;
     private final Explosion.BlockInteraction blockInteraction;
     private final Random random;
     private final Level level;
     private final double x, y, z;
-    @Nullable
     private final Entity source;
     private final float radius;
     private final DamageSource damageSource;
@@ -55,15 +56,19 @@ public class ExplosionConfigurable extends Explosion {
     private final ObjectArrayList<Pair<ItemStack, BlockPos>> toBlow;
     private final Map<Player, Vec3> hitPlayers;
 
+    public ExplosionConfigurable(Level level, Entity entity, boolean isMeteorite) {
+        this(level, entity, ModDamageSource.METEORITE, null, entity.getX(), entity.getY(), entity.getZ(), 10, 1000, true, isMeteorite, BlockInteraction.DESTROY);
+    }
+
     public ExplosionConfigurable(Level level, @Nullable Entity entity, double x, double y, double z, float radius, float damage, Explosion.BlockInteraction blockInteraction) {
         this(level, entity, null, null, x, y, z, radius, damage, false, false, blockInteraction);
     }
 
-    public ExplosionConfigurable(Level level, @Nullable Entity entity, double x, double y, double z, float radius, float damage, boolean divide, Explosion.BlockInteraction blockInteraction) {
-        this(level, entity, null, null, x, y, z, radius, damage, divide, false, blockInteraction);
+    public ExplosionConfigurable(Level level, @Nullable Entity entity, @Nullable DamageSource damageSource, double x, double y, double z, float radius, float damage, Explosion.BlockInteraction blockInteraction) {
+        this(level, entity, damageSource, null, x, y, z, radius, damage, false, false, blockInteraction);
     }
 
-    public ExplosionConfigurable(Level level, @Nullable Entity entity, @Nullable DamageSource damageSource, @Nullable ExplosionDamageCalculator explosionDamageCalculator, double x, double y, double z, float radius, float damage, boolean divide, boolean fire, Explosion.BlockInteraction blockInteraction) {
+    public ExplosionConfigurable(Level level, @Nullable Entity entity, @Nullable DamageSource damageSource, @Nullable ExplosionDamageCalculator explosionDamageCalculator, double x, double y, double z, float radius, float damage, boolean fire, boolean isMeteorite, Explosion.BlockInteraction blockInteraction) {
         super(level, entity, damageSource, explosionDamageCalculator, x, y, z, radius, fire, blockInteraction);
         this.random = new Random();
         this.toBlow = new ObjectArrayList<>();
@@ -75,10 +80,11 @@ public class ExplosionConfigurable extends Explosion {
         this.y = y;
         this.z = z;
         this.fire = fire;
+        this.isMeteorite = isMeteorite;
         this.blockInteraction = blockInteraction;
         this.damageSource = damageSource == null ? DamageSource.explosion(this) : damageSource;
         this.damageCalculator = explosionDamageCalculator == null ? this.makeDamageCalculator(entity) : explosionDamageCalculator;
-        explode(damage, divide);
+        explode(damage);
         finalizeExplosion(false);
     }
 
@@ -86,7 +92,7 @@ public class ExplosionConfigurable extends Explosion {
         return entity == null ? EXPLOSION_DAMAGE_CALCULATOR : new EntityBasedExplosionDamageCalculator(entity);
     }
 
-    public void explode(float damage, boolean divide) {
+    public void explode(float damage) {
         this.level.gameEvent(this.source, GameEvent.EXPLODE, new BlockPos(this.x, this.y, this.z));
         Set<Pair<ItemStack, BlockPos>> set = Sets.newHashSet();
 
@@ -117,11 +123,11 @@ public class ExplosionConfigurable extends Explosion {
                             }
 
                             Optional<Float> optional = this.damageCalculator.getBlockExplosionResistance(this, this.level, blockPos, blockState, fluidState);
-                            if (optional.isPresent()) {
+                            if (optional.isPresent() && !(isMeteorite && !fluidState.isEmpty())) {
                                 h -= (optional.get() + 0.3F) * 0.3F;
                             }
 
-                            if (h > 0.0F && this.damageCalculator.shouldBlockExplode(this, this.level, blockPos, blockState, h)) {
+                            if (h > 0.0F && this.damageCalculator.shouldBlockExplode(this, this.level, blockPos, blockState, h) && fluidState.isEmpty()) {
                                 set.add(Pair.of(null, blockPos));
                             }
 
@@ -159,19 +165,7 @@ public class ExplosionConfigurable extends Explosion {
                         ab /= ac;
                         double ad = getSeenPercent(vec3, entity);
                         double ae = (1.0D - y) * ad;
-                        boolean noPlayerDamage = false;
-                        if (source instanceof FallingStarEntity) {
-                            if (entity instanceof Player) {
-                                noPlayerDamage = true;
-                            }
-                        }
-                        if (!noPlayerDamage) {
-                            if (divide) {
-                                entity.hurt(this.damageSource, ((float) ((int) ((ae * ae + ae) / 2.0D * 7.0D * (double) q + 1.0D))) / damage);
-                            } else {
-                                entity.hurt(this.damageSource, ((float) ((int) ((ae * ae + ae) / 2.0D * 7.0D * (double) q + 1.0D))) * damage);
-                            }
-                        }
+                        entity.hurt(this.damageSource, ((float) ((int) ((ae * ae + ae) / 2.0D * 7.0D * (double) q + 1.0D))) * damage);
                         double af = ae;
                         if (entity instanceof LivingEntity) {
                             af = ProtectionEnchantment.getExplosionKnockbackAfterDampener((LivingEntity) entity, ae);
@@ -209,7 +203,7 @@ public class ExplosionConfigurable extends Explosion {
             while(var5.hasNext()) {
                 BlockPos blockPos = var5.next().getSecond();
                 BlockState blockState = level.getBlockState(blockPos);
-                net.minecraft.world.level.block.Block block = blockState.getBlock();
+                Block block = blockState.getBlock();
                 if (!blockState.isAir()) {
                     BlockPos blockPos2 = blockPos.immutable();
                     level.getProfiler().push("explosions");
@@ -226,6 +220,12 @@ public class ExplosionConfigurable extends Explosion {
                         }
                     }
 
+                    if (isMeteorite) {
+                        BlockPos replaceBlock = blockPos.below(random.nextInt(2) + 3).offset(random.nextInt(3) - 1, random.nextInt(3) - 1, random.nextInt(3) - 1);
+                        if (blockState.is(ModTags.METEORITE_REPLACE_BLOCKS)) {
+                            this.level.setBlock(replaceBlock, ModBlocks.METEORITE_ORE.defaultBlockState(), 3);
+                        }
+                    }
                     this.level.setBlock(blockPos, Blocks.AIR.defaultBlockState(), 3);
                     block.wasExploded(level, blockPos, this);
                     this.level.getProfiler().pop();
@@ -240,10 +240,9 @@ public class ExplosionConfigurable extends Explosion {
             }
         }
         if (this.fire) {
-
             for (Pair<ItemStack, BlockPos> itemStackBlockPosPair : toBlow) {
                 BlockPos blockPos3 = itemStackBlockPosPair.getSecond();
-                if (this.random.nextInt(3) == 0 && this.level.getBlockState(blockPos3).isAir() && this.level.getBlockState(blockPos3.below()).isSolidRender(this.level, blockPos3.below())) {
+                if (this.random.nextInt(3) == 0 && this.level.getBlockState(blockPos3).isAir() && this.level.getFluidState(blockPos3).isEmpty() && this.level.getBlockState(blockPos3.below()).isSolidRender(this.level, blockPos3.below())) {
                     this.level.setBlockAndUpdate(blockPos3, BaseFireBlock.getState(this.level, blockPos3));
                 }
             }

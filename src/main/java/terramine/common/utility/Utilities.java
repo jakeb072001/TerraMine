@@ -1,20 +1,25 @@
 package terramine.common.utility;
 
+import com.mojang.math.Vector3f;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.minecraft.client.Minecraft;
+import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.ExperienceOrb;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.ProjectileUtil;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ClipContext;
-import net.minecraft.world.phys.AABB;
-import net.minecraft.world.phys.BlockHitResult;
-import net.minecraft.world.phys.EntityHitResult;
-import net.minecraft.world.phys.Vec3;
+import net.minecraft.world.phys.*;
+import terramine.common.item.dye.BasicDye;
 
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.function.Predicate;
 
 public class Utilities { // todo: need to fix bug with magic missile where the projectile will jitter back and forth instead of just staying at its position
+    private static int timer = 0;
 
     public static BlockHitResult rayTraceBlocks(Entity entity, double length, boolean checkLiquids)
     {
@@ -36,6 +41,7 @@ public class Utilities { // todo: need to fix bug with magic missile where the p
     }
 
 
+    // todo: make work better, seems to not work well right now
     /**
      * Rotates the given entity towards its motion vector at the given speed.
      */
@@ -81,9 +87,53 @@ public class Utilities { // todo: need to fix bug with magic missile where the p
         float phi = random.nextFloat() * 2F * (float) Math.PI;
 
         // Uniformly sample an angle of rotation around one of the orthogonal vectors
-        float theta = (float) Math.acos(random.nextDouble((double) Math.cos(angle), 1D));
+        float theta = (float) Math.acos(random.nextDouble(Math.cos(angle), 1D));
 
         // Construct a unit vector uniformly distributed on the spherical cap
         return  coneAxis.scale(Math.cos(theta)).add(u.scale(Math.cos(phi) * Math.sin(theta))).add(v.scale(Math.sin(phi) * Math.sin(theta)));
+    }
+
+    // from Fancy Dyes, I could have easily got this code from elsewhere, but I am using their code to help with my dye system, so I'll give credit where I can
+    public static Vector3f colorFromInt(int color) {
+        float r = (float) (color >> 16 & 0xFF) / 255.0f;
+        float g = (float) (color >> 8 & 0xFF) / 255.0f;
+        float b = (float) (color & 0xFF) / 255.0f;
+        return new Vector3f(r, g, b);
+    }
+
+    public static int intFromColor(Vector3f color) {
+        int r = (int) (color.x() * 255.0f);
+        int g = (int) (color.y() * 255.0f);
+        int b = (int) (color.z() * 255.0f);
+        return (r << 16) | (g << 8) | b;
+    }
+
+    public static int getDyeColour(ItemStack itemStack) {
+        if (itemStack.getItem() instanceof BasicDye dyeItem) {
+            return intFromColor(dyeItem.getColour());
+        }
+
+        return -1;
+    }
+
+    @Environment(EnvType.CLIENT)
+    public static void autoSwing() {
+        Minecraft mc = Minecraft.getInstance();
+        Player player = mc.player;
+        if (player != null && InputHandler.isHoldingAttack(player)) {
+            if (player.getAttackStrengthScale(0) >= 1) {
+                if (mc.hitResult != null && mc.hitResult.getType() == HitResult.Type.ENTITY && !(mc.hitResult instanceof BlockHitResult)) {
+                    Entity entity = ((EntityHitResult) mc.hitResult).getEntity();
+                    if (entity.isAlive() && entity.isAttackable()) {
+                        timer++;
+                        if (timer >= 2 && mc.gameMode != null) {
+                            mc.gameMode.attack(player, entity);
+                            player.swing(InteractionHand.MAIN_HAND);
+                            timer = 0;
+                        }
+                    }
+                }
+            }
+        }
     }
 }

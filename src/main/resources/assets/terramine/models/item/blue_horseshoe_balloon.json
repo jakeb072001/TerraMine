@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "terramine:item/blue_horseshoe_balloon"
+    "layer0": "terramine:item/accessories/blue_horseshoe_balloon"
   }
 }

@@ -2,6 +2,7 @@ package terramine.client.render.entity.renderer.projectiles.throwables;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
+import com.mojang.math.Vector3f;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRenderer;
@@ -10,7 +11,7 @@ import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.NotNull;
 import terramine.TerraMine;
-import terramine.client.render.entity.model.throwables.BombModel;
+import terramine.client.render.entity.model.projectiles.throwables.BombModel;
 import terramine.common.entity.throwables.BombEntity;
 import terramine.common.init.ModModelLayers;
 
@@ -31,6 +32,8 @@ public class BombRenderer extends EntityRenderer<BombEntity> {
         super.render(entity, entityYaw, partialTicks, poseStack, buffer, packedLight);
         poseStack.pushPose();
         this.model.setupAnim(entity, 0.0f, 0.0f, 0.0f, entity.getYRot(), entity.getXRot());
+        poseStack.mulPose(Vector3f.YP.rotationDegrees(entity.getYRot()));
+        poseStack.mulPose(Vector3f.XN.rotationDegrees(entity.getXRot() - 90));
         VertexConsumer vertexConsumer = buffer.getBuffer(this.model.renderType(this.getTextureLocation(entity)));
         this.model.renderToBuffer(poseStack, vertexConsumer, packedLight, OverlayTexture.NO_OVERLAY, 1.0f, 1.0f, 1.0f, 1.0f);
         poseStack.popPose();

@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "terramine:item/cell_phone"
+    "layer0": "terramine:item/accessories/cell_phone"
   }
 }

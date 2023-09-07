@@ -6,9 +6,12 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.model.HumanoidModel;
+import net.minecraft.client.model.geom.ModelLayerLocation;
+import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.locale.Language;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextComponent;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
@@ -23,9 +26,9 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
 import terramine.TerraMine;
+import terramine.common.utility.equipmentchecks.ArmorSetCheck;
 
 import java.util.List;
-import java.util.Objects;
 import java.util.UUID;
 
 // todo: custom models: https://github.com/Luke100000/ImmersiveArmors/blob/1.19.2/common/src/main/java/immersive_armors/mixin/MixinArmorFeatureRenderer.java ?
@@ -76,25 +79,28 @@ public class TerrariaArmor extends ArmorItem {
         return armorType;
     }
 
+
+    public HumanoidModel<LivingEntity> getCustomArmorModel() {
+        return null;
+    }
+
+    public String getCustomArmorLocation() {
+        return null;
+    }
+
+    public static ModelPart bakeLayer(ModelLayerLocation layerLocation) {
+        return Minecraft.getInstance().getEntityModels().bakeLayer(layerLocation);
+    }
+
     @Override
     public void inventoryTick(@NotNull ItemStack itemStack, @NotNull Level level, @NotNull Entity entity, int i, boolean bl) {
         super.inventoryTick(itemStack, level, entity, i, bl);
 
-        boolean isEquipped = false;
+        boolean isEquipped;
         if (entity instanceof LivingEntity livingEntity) {
             ItemStack equippedStack = livingEntity.getItemBySlot(getSlot());
             if (equippedStack == itemStack) {
-                for (ItemStack item : livingEntity.getArmorSlots()) {
-                    if (item.getItem() instanceof TerrariaArmor armorItem) {
-                        isEquipped = Objects.equals(armorItem.getArmorType(), this.getArmorType());
-                        if (!isEquipped) {
-                            break;
-                        }
-                    } else {
-                        isEquipped = false;
-                        break;
-                    }
-                }
+                isEquipped = ArmorSetCheck.isSetEquipped(livingEntity, this.getArmorType());
 
                 if (isEquipped) {
                     if (itemStack.getItem() instanceof TerrariaArmor armor && armor.getSlot() == EquipmentSlot.HEAD) { // do this so the set bonus only happens once and not per armor (4 times the buff)
@@ -122,17 +128,7 @@ public class TerrariaArmor extends ArmorItem {
             // Checks if the player is wearing a full set of one type of armor, then display the set bonus
             boolean isEquipped = false;
             if (Minecraft.getInstance().player != null) {
-                for (ItemStack item : Minecraft.getInstance().player.getArmorSlots()) {
-                    if (item.getItem() instanceof TerrariaArmor armorItem) {
-                        isEquipped = Objects.equals(armorItem.getArmorType(), this.getArmorType());
-                        if (!isEquipped) {
-                            break;
-                        }
-                    } else {
-                        isEquipped = false;
-                        break;
-                    }
-                }
+                isEquipped = ArmorSetCheck.isSetEquipped(Minecraft.getInstance().player, this.getArmorType());
             }
             if (isEquipped) {
                 appendTooltipDescription(tooltip, "item." + TerraMine.MOD_ID + "." + armorType + ".setbonus");
@@ -152,7 +148,7 @@ public class TerrariaArmor extends ArmorItem {
         String[] lines = Language.getInstance().getOrDefault(translKey).split("\n");
 
         for (String line : lines) {
-            tooltip.add(new TextComponent(line).withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(line).withStyle(ChatFormatting.GRAY));
         }
     }
 }

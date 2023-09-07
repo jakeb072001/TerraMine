@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "terramine:item/leaf_wings"
+    "layer0": "terramine:item/accessories/leaf_wings"
   }
 }

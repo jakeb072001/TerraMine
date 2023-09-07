@@ -11,7 +11,7 @@ import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.NotNull;
 import terramine.TerraMine;
 import terramine.client.render.entity.model.monsters.EaterOfSoulsModel;
-import terramine.common.entity.EaterOfSoulsEntity;
+import terramine.common.entity.mobs.EaterOfSoulsEntity;
 import terramine.common.init.ModModelLayers;
 
 @Environment(value=EnvType.CLIENT)

@@ -1,0 +1,16 @@
+{
+    "sources": [
+        {
+            "type": "single",
+            "resource": "terramine:gui/slots/accessory"
+        },
+        {
+            "type": "single",
+            "resource": "terramine:gui/slots/accessory_vanity"
+        },
+		{
+            "type": "single",
+            "resource": "terramine:gui/slots/accessory_dye"
+        }
+    ]
+}

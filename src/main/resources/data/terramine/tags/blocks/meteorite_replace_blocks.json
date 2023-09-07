@@ -1,0 +1,20 @@
+{
+  "replace": false,
+  "values": [
+	"#minecraft:stone_ore_replaceables",
+	"#minecraft:dirt",
+	"#minecraft:sand",
+    "terramine:corrupted_sandstone",
+	"terramine:corrupted_andesite",
+	"terramine:corrupted_diorite",
+	"terramine:corrupted_granite",
+    "terramine:corrupted_stone",
+    "terramine:corrupted_cobblestone",
+    "terramine:crimson_sandstone",
+	"terramine:crimson_andesite",
+	"terramine:crimson_diorite",
+	"terramine:crimson_granite",
+    "terramine:crimson_stone",
+    "terramine:crimson_cobblestone"
+  ]
+}

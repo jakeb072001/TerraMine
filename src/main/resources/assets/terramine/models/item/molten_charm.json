@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "terramine:item/molten_charm"
+    "layer0": "terramine:item/accessories/molten_charm"
   }
 }

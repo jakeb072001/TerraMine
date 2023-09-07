@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "terramine:item/molten_skull_rose"
+    "layer0": "terramine:item/accessories/molten_skull_rose"
   }
 }

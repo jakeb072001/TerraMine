@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "X X",
+    "XXX",
+	"XXX"
+  ],
+  "key": {
+    "X": {
+      "item": "terramine:hellstone_ingot"
+    }
+  },
+  "result": {
+    "item": "terramine:molten_chestplate"
+  }
+}

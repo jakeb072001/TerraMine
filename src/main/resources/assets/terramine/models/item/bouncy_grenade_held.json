@@ -1,0 +1,8 @@
+{
+	"parent": "terramine:item/grenade_template",
+	"credit": "Made with Blockbench",
+	"textures": {
+		"0": "terramine:item/weapons/throwables/grenade/bouncy_grenade",
+		"particle": "terramine:item/weapons/throwables/grenade/bouncy_grenade"
+	}
+}

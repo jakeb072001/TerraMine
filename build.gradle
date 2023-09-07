@@ -1,6 +1,6 @@
 plugins {
     id 'fabric-loom' version '0.12-SNAPSHOT'
-    id 'io.github.juuxel.loom-quiltflower' version '1.7.1'
+    id 'io.github.juuxel.loom-quiltflower' version '1.7.3'
     id 'maven-publish'
     id 'com.github.johnrengelman.shadow' version '7.0.0'
     id 'com.matthewprenger.cursegradle' version '1.4.0'
@@ -10,11 +10,10 @@ plugins {
 repositories {
     maven { url = "https://maven.terraformersmc.com" }
     maven { url = "https://maven.shedaniel.me/" }
-    maven { url = "https://ladysnake.jfrog.io/artifactory/mods" }
+    maven { url = "https://maven.ladysnake.org/releases" }
     maven { url = "https://maven.gegy.dev/" }
     maven { url = "https://mvn.devos.one/snapshots/" }
     maven { url = "https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/" }
-    maven { url "https://maven.bai.lol" }
     maven { url = "https://maven.florens.be/releases" }
     maven { url = "https://maven.parchmentmc.org" }
     maven {
@@ -29,6 +28,7 @@ repositories {
             includeGroupByRegex "com.github.*"
         }
     }
+    maven { url "https://maven.bai.lol" }
     maven {
         url "https://maven.jamieswhiteshirt.com/libs-release"
         content {
@@ -70,10 +70,7 @@ dependencies {
     modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 
     // Dependencies
-    modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}+${minecraft_version}"
-    modImplementation("dev.emi:trinkets:${project.trinkets_version}") {
-        transitive = false
-    }
+    modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}+${project.minecraft_version}"
     modImplementation "me.shedaniel.cloth:cloth-config-fabric:${project.cloth_config_version}"
     modImplementation "com.github.glitchfiend:TerraBlender-fabric:${project.minecraft_version}-${project.terrablender_version}"
     // modImplementation "software.bernie.geckolib:geckolib-fabric-1.19:${project.geckolib_version}"
@@ -88,8 +85,7 @@ dependencies {
     modImplementation include("com.github.emilyploszaj:step-height-entity-attribute:${project.step_height_attr_version}") {
         transitive = false
     }
-    implementation include("com.github.LlamaLad7:MixinExtras:${project.mixinextras_version}")
-    annotationProcessor("com.github.LlamaLad7:MixinExtras:${project.mixinextras_version}")
+    include(implementation(annotationProcessor("com.github.LlamaLad7:MixinExtras:${project.mixinextras_version}")))
 
     // Optional
     modImplementation("com.terraformersmc:modmenu:${project.mod_menu_version}") {
@@ -154,7 +150,6 @@ curseforge {
                 requiredDependency "architectury-api"
                 requiredDependency "cloth-config"
                 requiredDependency "fabric-api"
-                requiredDependency "trinkets"
                 requiredDependency "terrablender-fabric"
                 optionalDependency "continuity"
                 optionalDependency "lambdabettergrass"
@@ -187,7 +182,6 @@ modrinth {
 
     dependencies {
         required.project "fabric-api"
-        required.project "trinkets"
         required.project "architectury-api"
     }
 }

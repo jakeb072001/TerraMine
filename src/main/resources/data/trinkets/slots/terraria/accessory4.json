@@ -1,7 +1,0 @@
-{
-  "icon": "terramine:gui/slots/terraria",
-  "drop_rule": "keep",
-  "tooltip_predicates": [
-    "trinkets:none"
-  ]
-}

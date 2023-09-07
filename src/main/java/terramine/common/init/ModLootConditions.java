@@ -3,7 +3,7 @@ package terramine.common.init;
 import net.minecraft.core.Registry;
 import net.minecraft.world.level.storage.loot.predicates.LootItemConditionType;
 import terramine.TerraMine;
-import terramine.common.loot.ConfigurableRandomChance;
+import terramine.common.misc.ConfigurableRandomChance;
 
 public class ModLootConditions {
 

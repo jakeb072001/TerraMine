@@ -11,7 +11,7 @@ import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.NotNull;
 import terramine.TerraMine;
 import terramine.client.render.entity.model.monsters.DemonEyeModel;
-import terramine.common.entity.DemonEyeEntity;
+import terramine.common.entity.mobs.DemonEyeEntity;
 import terramine.common.init.ModModelLayers;
 
 @Environment(value=EnvType.CLIENT)

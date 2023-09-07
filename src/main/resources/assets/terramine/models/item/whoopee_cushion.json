@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "terramine:item/whoopee_cushion"
+    "layer0": "terramine:item/accessories/whoopee_cushion"
   }
 }

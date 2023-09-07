@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "terramine:item/tiger_climbing_gear"
+    "layer0": "terramine:item/accessories/tiger_climbing_gear"
   }
 }

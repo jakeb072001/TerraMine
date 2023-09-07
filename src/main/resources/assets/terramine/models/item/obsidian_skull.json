@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "terramine:item/obsidian_skull"
+    "layer0": "terramine:item/accessories/obsidian_skull"
   }
 }

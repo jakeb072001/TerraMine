@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "terramine:item/water_walking_boots"
+    "layer0": "terramine:item/accessories/water_walking_boots"
   }
 }

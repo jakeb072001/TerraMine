@@ -1,6 +1,6 @@
 {
   "parent": "terramine:item/base_shield_blocking",
   "textures":{
-    "shield":"terramine:item/cobalt_shield"
+    "shield":"terramine:item/accessories/cobalt_shield"
   }
 }

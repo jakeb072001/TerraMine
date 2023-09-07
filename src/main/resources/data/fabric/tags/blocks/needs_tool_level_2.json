@@ -31,6 +31,9 @@
 	"terramine:crimtane_ore",
     "terramine:deepslate_crimtane_ore",
     "terramine:raw_crimtane_block",
-    "terramine:crimtane_block"
+    "terramine:crimtane_block",
+	"terramine:meteorite_ore",
+    "terramine:raw_meteorite_block",
+	"terramine:meteorite_block"
   ]
 }

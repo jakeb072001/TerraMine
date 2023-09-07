@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XXX",
+    " # ",
+    " # "
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:stick"
+    },
+    "X": {
+      "item": "terramine:hellstone_ingot"
+    }
+  },
+  "result": {
+    "item": "terramine:molten_pickaxe"
+  }
+}

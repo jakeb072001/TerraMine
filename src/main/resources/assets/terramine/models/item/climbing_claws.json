@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "terramine:item/climbing_claws"
+    "layer0": "terramine:item/accessories/climbing_claws"
   }
 }

@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "terramine:item/obsidian_rose"
+    "layer0": "terramine:item/accessories/obsidian_rose"
   }
 }

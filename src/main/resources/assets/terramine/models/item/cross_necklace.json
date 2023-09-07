@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "terramine:item/cross_necklace"
+    "layer0": "terramine:item/accessories/cross_necklace"
   }
 }

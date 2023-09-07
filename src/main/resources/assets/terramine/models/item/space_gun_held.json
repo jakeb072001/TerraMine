@@ -1,0 +1,148 @@
+{
+	"credit": "Made with Blockbench",
+	"texture_size": [32, 32],
+	"textures": {
+		"0": "terramine:item/weapons/magic/space_gun",
+		"particle": "terramine:item/weapons/magic/space_gun"
+	},
+	"gui_light": "front",
+	"elements": [
+		{
+			"from": [7, -0.15432, 8.77583],
+			"to": [9, 4.84568, 10.77583],
+			"rotation": {"angle": -22.5, "axis": "x", "origin": [8, 4, 10]},
+			"faces": {
+				"north": {"uv": [3, 8, 4, 10.5], "texture": "#0"},
+				"east": {"uv": [8, 3.5, 9, 6], "texture": "#0"},
+				"south": {"uv": [4, 8, 5, 10.5], "texture": "#0"},
+				"west": {"uv": [5, 8, 6, 10.5], "texture": "#0"},
+				"up": {"uv": [10, 6, 9, 5], "texture": "#0"},
+				"down": {"uv": [10, 6.5, 9, 7.5], "texture": "#0"}
+			}
+		},
+		{
+			"from": [7, 4, 0],
+			"to": [9, 7, 15],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 4, 10]},
+			"faces": {
+				"north": {"uv": [8, 6.5, 9, 8], "texture": "#0"},
+				"east": {"uv": [0, 0, 7.5, 1.5], "texture": "#0"},
+				"south": {"uv": [6, 8.5, 7, 10], "texture": "#0"},
+				"west": {"uv": [0, 1.5, 7.5, 3], "texture": "#0"},
+				"up": {"uv": [1, 10.5, 0, 3], "texture": "#0"},
+				"down": {"uv": [2, 3, 1, 10.5], "texture": "#0"}
+			}
+		},
+		{
+			"from": [7, 7, 8],
+			"to": [9, 8, 15],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 4, 10]},
+			"faces": {
+				"north": {"uv": [10, 1.5, 11, 2], "texture": "#0"},
+				"east": {"uv": [6, 8, 9.5, 8.5], "texture": "#0"},
+				"south": {"uv": [10, 2, 11, 2.5], "texture": "#0"},
+				"west": {"uv": [8, 6, 11.5, 6.5], "texture": "#0"},
+				"up": {"uv": [9, 3.5, 8, 0], "texture": "#0"},
+				"down": {"uv": [3, 8, 2, 11.5], "texture": "#0"}
+			}
+		},
+		{
+			"from": [7, 8, 13],
+			"to": [9, 9, 15],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 4, 10]},
+			"faces": {
+				"north": {"uv": [10, 2.5, 11, 3], "texture": "#0"},
+				"east": {"uv": [10, 0.5, 11, 1], "texture": "#0"},
+				"south": {"uv": [10, 3, 11, 3.5], "texture": "#0"},
+				"west": {"uv": [10.5, 1, 11.5, 1.5], "texture": "#0"},
+				"up": {"uv": [8, 9.5, 7, 8.5], "texture": "#0"},
+				"down": {"uv": [9, 8.5, 8, 9.5], "texture": "#0"}
+			}
+		},
+		{
+			"from": [6, 3, 1],
+			"to": [10, 8, 2],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 5, 4]},
+			"faces": {
+				"north": {"uv": [2, 3, 4, 5.5], "texture": "#0"},
+				"east": {"uv": [7.5, 0, 8, 2.5], "texture": "#0"},
+				"south": {"uv": [4, 3, 6, 5.5], "texture": "#0"},
+				"west": {"uv": [9, 0, 9.5, 2.5], "texture": "#0"},
+				"up": {"uv": [11, 8, 9, 7.5], "texture": "#0"},
+				"down": {"uv": [11.5, 8, 9.5, 8.5], "texture": "#0"}
+			}
+		},
+		{
+			"from": [6, 3, 3],
+			"to": [10, 8, 4],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 5, 4]},
+			"faces": {
+				"north": {"uv": [2, 5.5, 4, 8], "texture": "#0"},
+				"east": {"uv": [9, 2.5, 9.5, 5], "texture": "#0"},
+				"south": {"uv": [4, 5.5, 6, 8], "texture": "#0"},
+				"west": {"uv": [9, 8.5, 9.5, 11], "texture": "#0"},
+				"up": {"uv": [11.5, 9, 9.5, 8.5], "texture": "#0"},
+				"down": {"uv": [11.5, 9, 9.5, 9.5], "texture": "#0"}
+			}
+		},
+		{
+			"from": [6, 3, 5],
+			"to": [10, 8, 6],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 5, 4]},
+			"faces": {
+				"north": {"uv": [6, 3, 8, 5.5], "texture": "#0"},
+				"east": {"uv": [9.5, 0, 10, 2.5], "texture": "#0"},
+				"south": {"uv": [6, 5.5, 8, 8], "texture": "#0"},
+				"west": {"uv": [9.5, 2.5, 10, 5], "texture": "#0"},
+				"up": {"uv": [11.5, 10, 9.5, 9.5], "texture": "#0"},
+				"down": {"uv": [12, 0, 10, 0.5], "texture": "#0"}
+			}
+		}
+	],
+	"display": {
+		"thirdperson_righthand": {
+			"translation": [0, 5, -2]
+		},
+		"thirdperson_lefthand": {
+			"translation": [0, 0, -2]
+		},
+		"firstperson_righthand": {
+			"translation": [0, 4, 0]
+		},
+		"firstperson_lefthand": {
+			"translation": [0, 4, 0]
+		},
+		"ground": {
+			"translation": [0, 5, 0]
+		},
+		"gui": {
+			"rotation": [0, -90, 0],
+			"translation": [-0.5, 3, 0]
+		},
+		"fixed": {
+			"rotation": [-180, 90, 180],
+			"translation": [0.25, 3, 0.25]
+		}
+	},
+	"groups": [
+		{
+			"name": "space_gun",
+			"origin": [8, 8, 8],
+			"color": 0,
+			"children": [
+				{
+					"name": "base",
+					"origin": [0, 0, 0],
+					"color": 0,
+					"children": [0, 1, 2, 3]
+				},
+				{
+					"name": "rings",
+					"origin": [0, 0, 0],
+					"color": 0,
+					"children": [4, 5, 6]
+				}
+			]
+		}
+	]
+}
