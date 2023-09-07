@@ -91,9 +91,9 @@ public class DemonEyeEntity extends FlyingEntityAI {
     }
 
     @Override
-    public boolean checkSpawnRules(@NotNull LevelAccessor world, @NotNull MobSpawnType spawnReason) {
+    public boolean checkSpawnRules(@NotNull LevelAccessor world, @NotNull MobSpawnType spawnReason) { // todo: look at slimes spawn rules to make spawn more frequently during full moon
         if (isDarkEnoughToSpawn((ServerLevelAccessor) world, this.blockPosition(), random)) {
-            return this.blockPosition().getY() >= 50 && !this.level.isDay();
+            return this.blockPosition().getY() > 50 && !this.level.isDay();
         }
 
         return false;

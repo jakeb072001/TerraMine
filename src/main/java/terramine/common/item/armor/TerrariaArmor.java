@@ -6,8 +6,12 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.model.HumanoidModel;
+import net.minecraft.client.model.geom.ModelLayerLocation;
+import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.locale.Language;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
@@ -73,6 +77,19 @@ public class TerrariaArmor extends ArmorItem {
 
     public String getArmorType() {
         return armorType;
+    }
+
+
+    public HumanoidModel<LivingEntity> getCustomArmorModel() {
+        return null;
+    }
+
+    public String getCustomArmorLocation() {
+        return null;
+    }
+
+    public static ModelPart bakeLayer(ModelLayerLocation layerLocation) {
+        return Minecraft.getInstance().getEntityModels().bakeLayer(layerLocation);
     }
 
     @Override

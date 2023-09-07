@@ -42,7 +42,6 @@ import java.util.List;
 
 // todo: sometimes when clicking a slot the item isn't picked up or placed down
 // todo: also items aren't thrown when clicking outside screen, hasClickedOutside is working correctly so not sure why this is happening
-// todo: add a button to toggle visibility of slots, probably have a button for each row (one shared between accessory and vanity slot 1, one shared between accessory and vanity slot 2, one shared for helmet and vanity, one shared for chest and vanity, etc)
 @Environment(EnvType.CLIENT)
 public class TerrariaInventoryScreen extends EffectRenderingInventoryScreen<TerrariaInventoryContainerMenu> {
     private static final ResourceLocation BUTTON_TEX = TerraMine.id("textures/gui/terraria_slots_button.png");
@@ -86,7 +85,6 @@ public class TerrariaInventoryScreen extends EffectRenderingInventoryScreen<Terr
             }));
         }
 
-        // todo: after rejoining a world or respawning, all slots are set to visible, don't know why this information is not being saved
         for (int i = 0; i < 5 + ModComponents.ACCESSORY_SLOTS_ADDER.get(this.minecraft.player).get(); i++) {
             int finalI = i;
             this.addRenderableWidget(new ToggleImageButton(this.leftPos + 130, this.height / 2 - 105 + (18 * i), 8, 8, 0, 0, 8, 8, i, EYE_TEX, 16, 16, (buttonWidget) -> {

@@ -52,10 +52,6 @@ public class ArmsModel extends HumanoidModel<LivingEntity> {
         return new ArmsModel(AccessoryRenderers.bakeLayer(ModModelLayers.glove(smallArms)));
     }
 
-    public static ArmsModel createGoldenHookModel(boolean smallArms) {
-        return new ArmsModel(AccessoryRenderers.bakeLayer(ModModelLayers.goldenHook(smallArms)));
-    }
-
     public static MeshDefinition createEmptyArms(CubeListBuilder leftArm, CubeListBuilder rightArm, boolean smallArms) {
         MeshDefinition mesh = createMesh(CubeDeformation.NONE, 0);
 

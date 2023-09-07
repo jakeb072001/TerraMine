@@ -44,7 +44,7 @@ public abstract class CreativeModeInventoryScreenMixin extends EffectRenderingIn
         terrariaButton.visible = false;
     }
 
-    // todo: both methods together looks best but probably not the cleanest way, maybe improve later, not too important
+    // todo: both below methods together looks best but probably not the cleanest way, maybe improve later, not too important
     @Inject(method = "selectTab", at = @At("HEAD"))
     private void onSelectTab(CreativeModeTab creativeModeTab, CallbackInfo ci) {
         if (terrariaButton != null) {

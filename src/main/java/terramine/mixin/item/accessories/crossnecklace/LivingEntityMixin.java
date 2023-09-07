@@ -12,7 +12,7 @@ import terramine.common.misc.AccessoriesHelper;
 public abstract class LivingEntityMixin {
 
 	// todo: make work alongside artifacts instead of disabling when installed using TerraMineMixinPlugin
-	// todo: use @WrapOperation to get working with Artifacts (hopefully)
+	// todo: use @WrapOperation and MixinSquared to get working with Artifacts (hopefully)
 
 	/**
 	 * Extends the amount of ticks of vulnerability

@@ -43,7 +43,7 @@ public class CrimsonDesertBiome {
                         .waterColor(0xdc143c)
                         .waterFogColor(0xdc143c)
                         .fogColor(0xdc143c)
-                        .skyColor(0xdc143c) // todo: comment out grass and foliage override to fix pallet crash when biome spread mixin is enabled
+                        .skyColor(0xdc143c)
                         .grassColorOverride(0xdc143c)
                         .foliageColorOverride(0xdc143c)
                         .build())

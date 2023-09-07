@@ -17,6 +17,8 @@ import terramine.common.item.accessories.feet.*;
 import terramine.common.item.accessories.hands.*;
 import terramine.common.item.accessories.necklace.*;
 import terramine.common.item.armor.*;
+import terramine.common.item.armor.vanity.FamiliarVanity;
+import terramine.common.item.armor.vanity.TopHatVanity;
 import terramine.common.item.dye.BasicDye;
 import terramine.common.item.equipment.*;
 import terramine.common.item.equipment.swords.CustomSoundSwordItem;
@@ -242,6 +244,13 @@ public class ModItems {
 	public static final Item MOLTEN_CHESTPLATE = register("molten_chestplate", new MoltenArmor("molten_armor", TerrariaArmorMaterials.MOLTEN, EquipmentSlot.CHEST, new FabricItemSettings().group(TerraMine.ITEM_GROUP_ARMOR)));
 	public static final Item MOLTEN_LEGGINGS = register("molten_leggings", new MoltenArmor("molten_armor", TerrariaArmorMaterials.MOLTEN, EquipmentSlot.LEGS, new FabricItemSettings().group(TerraMine.ITEM_GROUP_ARMOR)));
 	public static final Item MOLTEN_BOOTS = register("molten_boots", new MoltenArmor("molten_armor", TerrariaArmorMaterials.MOLTEN, EquipmentSlot.FEET, new FabricItemSettings().group(TerraMine.ITEM_GROUP_ARMOR)));
+
+	// Vanity Armours
+	public static final Item FAMILIAR_WIG = register("familiar_wig", new FamiliarVanity("familiar_wig", TerrariaArmorMaterials.VANITY, EquipmentSlot.HEAD, new FabricItemSettings().group(TerraMine.ITEM_GROUP_ARMOR)));
+	public static final Item FAMILIAR_SHIRT = register("familiar_shirt", new FamiliarVanity("familiar_shirt", TerrariaArmorMaterials.VANITY, EquipmentSlot.CHEST, new FabricItemSettings().group(TerraMine.ITEM_GROUP_ARMOR)));
+	public static final Item FAMILIAR_PANTS = register("familiar_pants", new FamiliarVanity("familiar_pants", TerrariaArmorMaterials.VANITY, EquipmentSlot.LEGS, new FabricItemSettings().group(TerraMine.ITEM_GROUP_ARMOR)));
+	public static final Item FAMILIAR_SHOES = register("familiar_shoes", new FamiliarVanity("familiar_shoes", TerrariaArmorMaterials.VANITY, EquipmentSlot.FEET, new FabricItemSettings().group(TerraMine.ITEM_GROUP_ARMOR)));
+	public static final Item TOP_HAT = register("top_hat", new TopHatVanity("top_hat", TerrariaArmorMaterials.VANITY, EquipmentSlot.HEAD, new FabricItemSettings().group(TerraMine.ITEM_GROUP_ARMOR)));
 
 
 

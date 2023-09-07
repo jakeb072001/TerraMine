@@ -152,7 +152,6 @@ public class CorruptionHelper extends SpreadingSnowyDirtBlock  {
         }
     }
 
-    // todo: almost works, getting unknown registry element error right now which stops chunk from saving but otherwise spreads perfectly
     // Copied from EvilCraft, may improve later if possible
     public static void setBiome(ServerLevel level, BlockPos posIn, Biome biome) {
         BiomeManager biomeManager = level.getBiomeManager();

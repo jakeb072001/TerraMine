@@ -18,6 +18,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import terramine.TerraMine;
+import terramine.common.block.chests.WaterChestBlock;
 import terramine.common.entity.projectiles.FallingMeteoriteEntity;
 import terramine.common.entity.projectiles.FallingStarEntity;
 import terramine.common.init.ModEntities;
@@ -39,6 +40,8 @@ public abstract class ServerLevelMixin {
     private int tickGoal = -1;
     @Unique
     private long lastTick = 0L;
+    @Unique
+    private boolean meteoriteAttempted;
 
     // might not be the best way of doing this, it shouldn't be too bad for performance though since it should rarely ever check if the meteorite can spawn
     @Inject(at = @At("HEAD"), method = "tickChunk")
@@ -71,8 +74,8 @@ public abstract class ServerLevelMixin {
                 }
             }
 
-            if (level.getDayTime() == 18000L) {
-                if (rand.nextInt(100) < TerraMine.CONFIG.general.meteoriteRarity && level.players().size() > 0 && !TerraMine.CONFIG.general.disableMeteorites) {
+            if (level.getDayTime() == 18000L && !meteoriteAttempted && !TerraMine.CONFIG.general.disableMeteorites) {
+                if (rand.nextInt(100) < TerraMine.CONFIG.general.meteoriteRarity && level.players().size() > 0) {
                     int x = level.random.nextInt(100 / 4);
                     int z = level.random.nextInt(100 / 4);
                     if (level.random.nextBoolean()) x = -x;
@@ -90,7 +93,7 @@ public abstract class ServerLevelMixin {
                                 for (int k = -100; k < 100; k++) {
                                     for (int l = 55; l < 150; l++) {
                                         BlockPos blockPos = new BlockPos(x + j, l, z + k);
-                                        if (level.getBlockState(blockPos).getBlock() instanceof CraftingTableBlock || level.getBlockState(blockPos).getBlock() instanceof ChestBlock) {
+                                        if (level.getBlockState(blockPos).getBlock() instanceof CraftingTableBlock || (level.getBlockState(blockPos).getBlock() instanceof ChestBlock && !(level.getBlockState(blockPos).getBlock() instanceof WaterChestBlock))) {
                                             blocked = true;
                                             break;
                                         }
@@ -111,6 +114,12 @@ public abstract class ServerLevelMixin {
                         }
                     }
                 }
+
+                meteoriteAttempted = true;
+            }
+
+            if (level.isDay()) {
+                meteoriteAttempted = false;
             }
         }
     }

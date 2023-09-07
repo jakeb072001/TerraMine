@@ -10,6 +10,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -23,6 +24,8 @@ import terramine.extensions.PlayerStorages;
 
 @Mixin(Player.class)
 public abstract class PlayerMixin extends LivingEntity implements PlayerStorages {
+
+	@Shadow public abstract boolean isCreative();
 
 	@Unique
 	TerrariaInventory terrariaInventory = new TerrariaInventory(35);
@@ -42,9 +45,11 @@ public abstract class PlayerMixin extends LivingEntity implements PlayerStorages
 		ModComponents.MANA_HANDLER.get(this).update();
 		ModComponents.LAVA_IMMUNITY.get(this).update();
 
-		for (int i = 0; i < 7; i++) {
-			if (terrariaInventory.getItem(i).getItem() instanceof AccessoryTerrariaItem accessoryItem) {
-				accessoryItem.tick(terrariaInventory.getItem(i), (Player) (Object) this);
+		if (!isCreative()) {
+			for (int i = 0; i < 7; i++) {
+				if (terrariaInventory.getItem(i).getItem() instanceof AccessoryTerrariaItem accessoryItem) {
+					accessoryItem.tick(terrariaInventory.getItem(i), (Player) (Object) this);
+				}
 			}
 		}
 
