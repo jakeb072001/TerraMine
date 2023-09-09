@@ -2,7 +2,6 @@ package terramine.common.utility;
 
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.AbstractArrow;
@@ -18,11 +17,13 @@ import org.jetbrains.annotations.NotNull;
 import terramine.common.init.ModDamageSource;
 import terramine.common.init.ModSoundEvents;
 
+import java.util.Random;
+
 import static terramine.common.init.ModAttributes.damageMultiplier;
 
 public class MagicMissileHelper extends AbstractArrow {
 
-    private final RandomSource rand = RandomSource.create();
+    private final Random rand = new Random();
     private Item wandItem;
     private float speed, damage;
     private int timer;

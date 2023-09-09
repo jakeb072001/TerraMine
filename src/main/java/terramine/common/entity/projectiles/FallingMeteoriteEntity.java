@@ -4,17 +4,18 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.BlockTags;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import terramine.common.init.ModSoundEvents;
 import terramine.common.utility.ExplosionConfigurable;
 
+import java.util.Random;
+
 public class FallingMeteoriteEntity extends FallingProjectileEntity {
     private final float xSpeed, zSpeed;
     private int soundTimer;
-    private final RandomSource random = RandomSource.create();
+    private final Random random = new Random();
 
     public FallingMeteoriteEntity(EntityType<? extends FallingMeteoriteEntity> entityType, Level level) {
         super(entityType, level);

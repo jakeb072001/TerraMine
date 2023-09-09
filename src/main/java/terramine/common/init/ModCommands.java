@@ -135,10 +135,10 @@ public class ModCommands {
             i++;
             ModComponents.ACCESSORY_SLOTS_ADDER.get(player).set(value);
             ModComponents.ACCESSORY_SLOTS_ADDER.sync(player);
-            context.getSource().sendSuccess(Component.translatable("commands.setAccessorySlots.pass", value), false);
+            context.getSource().sendSuccess(new TranslatableComponent("commands.setAccessorySlots.pass", value), false);
         } else {
             i--;
-            context.getSource().sendFailure(Component.translatable("commands.setAccessorySlots.fail", value));
+            context.getSource().sendFailure(new TranslatableComponent("commands.setAccessorySlots.fail", value));
         }
         return i;
     }
@@ -146,10 +146,10 @@ public class ModCommands {
         int i = 0;
         if (player != null) {
             i++;
-            context.getSource().sendSuccess(Component.translatable("commands.getAccessorySlots.pass", ModComponents.ACCESSORY_SLOTS_ADDER.get(player).get()), false);
+            context.getSource().sendSuccess(new TranslatableComponent("commands.getAccessorySlots.pass", ModComponents.ACCESSORY_SLOTS_ADDER.get(player).get()), false);
         } else {
             i--;
-            context.getSource().sendFailure(Component.translatable("commands.getAccessorySlots.fail"));
+            context.getSource().sendFailure(new TranslatableComponent("commands.getAccessorySlots.fail"));
         }
         return i;
     }

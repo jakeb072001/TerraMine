@@ -1,16 +1,17 @@
-package terramine.common.item.curio.back;
+package terramine.common.item.accessories.back;
 
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import terramine.common.item.curio.TrinketTerrariaItem;
+import terramine.common.item.accessories.AccessoryTerrariaItem;
 import terramine.common.utility.RocketBootHelper;
 import terramine.common.utility.equipmentchecks.CloudBottleEquippedCheck;
 import terramine.common.utility.equipmentchecks.RocketBootsEquippedCheck;
 
 import java.util.Random;
 
-public class WingsItem extends TrinketTerrariaItem {
+public class WingsItem extends AccessoryTerrariaItem {
 
 	private final RocketBootHelper rocketHelper = new RocketBootHelper();
 	private final double speed, glideSpeed;
@@ -26,7 +27,7 @@ public class WingsItem extends TrinketTerrariaItem {
 	}
 
 	@Override
-	public void curioTick(LivingEntity player, ItemStack stack) {
+	public void curioTick(Player player, ItemStack stack) {
 		int flightTimeCache;
 		double speedCache;
 		if (RocketBootsEquippedCheck.isEquipped(player)) {

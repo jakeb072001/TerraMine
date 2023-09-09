@@ -52,12 +52,6 @@ public class TerrariaInventoryContainerMenu extends AbstractContainerMenu {
         for(i = 0; i < 4; ++i) {
             final EquipmentSlot equipmentSlot = SLOT_IDS[i];
             this.addSlot(new Slot(inventory, 39 - i, 8, -18 + i * 18) {
-                public void set(@NotNull ItemStack itemStack) {
-                    ItemStack itemStack2 = this.getItem();
-                    super.set(itemStack);
-                    player.onEquipItem(equipmentSlot, itemStack2, itemStack);
-                }
-
                 public int getMaxStackSize() {
                     return 1;
                 }
@@ -126,8 +120,8 @@ public class TerrariaInventoryContainerMenu extends AbstractContainerMenu {
         });
 
         // Armor Vanity
-        createExtraArmorSlots(player, terrariaInventory, 26, false);
-        createExtraArmorSlots(player, terrariaInventory, 30, true);
+        createExtraArmorSlots(terrariaInventory, 26, false);
+        createExtraArmorSlots(terrariaInventory, 30, true);
     }
 
     private void createAccessorySlots(Player player, TerrariaInventory terrariaInventory, ResourceLocation texture, int accessoryType) {
@@ -169,16 +163,10 @@ public class TerrariaInventoryContainerMenu extends AbstractContainerMenu {
         }
     }
 
-    private void createExtraArmorSlots(Player player, TerrariaInventory inventory, int slotValue, boolean isDye) {
+    private void createExtraArmorSlots(TerrariaInventory inventory, int slotValue, boolean isDye) {
         for(int i = 0; i < 4; ++i) {
             final EquipmentSlot equipmentSlot = SLOT_IDS[i];
             this.addSlot(new Slot(inventory, slotValue - i, 8 + ((isDye ? 2 : 1) * 18), -18 + i * 18) {
-                public void set(@NotNull ItemStack itemStack) {
-                    ItemStack itemStack2 = this.getItem();
-                    super.set(itemStack);
-                    player.onEquipItem(equipmentSlot, itemStack2, itemStack);
-                }
-
                 public int getMaxStackSize() {
                     return 1;
                 }

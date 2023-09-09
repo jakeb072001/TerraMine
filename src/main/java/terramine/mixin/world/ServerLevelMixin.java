@@ -1,10 +1,11 @@
 package terramine.mixin.world;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.network.chat.ChatType;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.ChestBlock;
@@ -23,6 +24,9 @@ import terramine.common.entity.projectiles.FallingMeteoriteEntity;
 import terramine.common.entity.projectiles.FallingStarEntity;
 import terramine.common.init.ModEntities;
 
+import java.util.Random;
+import java.util.UUID;
+
 // todo: retry spawning a meteorite if it should have spawned but was just blocked
 // todo: make only spawn after evil biome boss is defeated or at least one evil biome orb has been destroyed
 // todo: make have a 50% chance to spawn on the night of defeating an evil biome boss
@@ -33,7 +37,7 @@ public abstract class ServerLevelMixin {
     @Nullable
     public abstract ServerPlayer getRandomPlayer();
     @Unique
-    private final RandomSource rand = RandomSource.create();
+    private final Random rand = new Random();
     @Unique
     private int ticks = 0;
     @Unique
@@ -108,7 +112,7 @@ public abstract class ServerLevelMixin {
                             }
 
                             if (!blocked) {
-                                player.sendSystemMessage(Component.translatable("event." + TerraMine.MOD_ID + ".meteoriteSpawn"));
+                                player.sendMessage(new TranslatableComponent("event." + TerraMine.MOD_ID + ".meteoriteSpawn"), UUID.randomUUID());
                                 level.addFreshEntity(meteorite);
                             }
                         }

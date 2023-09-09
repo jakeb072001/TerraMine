@@ -11,6 +11,7 @@ import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.locale.Language;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TextComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -148,7 +149,7 @@ public class TerrariaArmor extends ArmorItem {
         String[] lines = Language.getInstance().getOrDefault(translKey).split("\n");
 
         for (String line : lines) {
-            tooltip.add(Component.literal(line).withStyle(ChatFormatting.GRAY));
+            tooltip.add(new TextComponent(line).withStyle(ChatFormatting.GRAY));
         }
     }
 }

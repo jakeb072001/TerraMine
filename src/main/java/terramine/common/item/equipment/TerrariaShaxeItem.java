@@ -17,7 +17,6 @@ import net.minecraft.world.level.block.CampfireBlock;
 import net.minecraft.world.level.block.RotatedPillarBlock;
 import net.minecraft.world.level.block.WeatheringCopper;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.gameevent.GameEvent;
 import org.jetbrains.annotations.NotNull;
 import terramine.common.init.ModTags;
 import terramine.extensions.ItemExtensions;
@@ -61,7 +60,6 @@ public class TerrariaShaxeItem extends DiggerItem implements ItemExtensions {
         if (blockState3 != null) {
             if (!level.isClientSide) {
                 level.setBlock(blockPos, blockState3, 11);
-                level.gameEvent(GameEvent.BLOCK_CHANGE, blockPos, GameEvent.Context.of(player, blockState3));
                 if (player != null) {
                     useOnContext.getItemInHand().hurtAndBreak(1, player, (playerx) -> {
                         playerx.broadcastBreakEvent(useOnContext.getHand());
@@ -97,7 +95,6 @@ public class TerrariaShaxeItem extends DiggerItem implements ItemExtensions {
             }
 
             level.setBlock(blockPos, optional4.get(), 11);
-            level.gameEvent(GameEvent.BLOCK_CHANGE, blockPos, GameEvent.Context.of(player, optional4.get()));
             if (player != null) {
                 itemStack.hurtAndBreak(1, player, (playerx) -> {
                     playerx.broadcastBreakEvent(useOnContext.getHand());

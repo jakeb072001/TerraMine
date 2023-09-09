@@ -23,6 +23,7 @@ import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
 import net.minecraft.core.NonNullList;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TextComponent;
 import net.minecraft.network.protocol.game.ServerboundContainerClickPacket;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.LivingEntity;
@@ -59,7 +60,7 @@ public class TerrariaInventoryScreen extends EffectRenderingInventoryScreen<Terr
     private boolean buttonClicked;
 
     public TerrariaInventoryScreen(Player player) {
-        super(new TerrariaInventoryContainerMenu(player), player.getInventory(), Component.empty());
+        super(new TerrariaInventoryContainerMenu(player), player.getInventory(), TextComponent.EMPTY);
         this.passEvents = true;
     }
 

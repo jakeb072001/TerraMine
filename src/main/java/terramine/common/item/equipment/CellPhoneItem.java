@@ -1,4 +1,4 @@
-package terramine.common.item;
+package terramine.common.item.equipment;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.ChatType;
@@ -16,12 +16,12 @@ import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import terramine.common.init.ModSoundEvents;
-import terramine.common.item.curio.TrinketTerrariaItem;
+import terramine.common.item.accessories.AccessoryTerrariaItem;
 
 import java.util.Optional;
 import java.util.UUID;
 
-public class CellPhoneItem extends TrinketTerrariaItem {
+public class CellPhoneItem extends AccessoryTerrariaItem {
 
 	@Override
 	public ItemStack finishUsingItem(ItemStack stack, Level level, LivingEntity entity) {

@@ -2,7 +2,6 @@ package terramine.common.entity.projectiles;
 
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
@@ -14,10 +13,12 @@ import terramine.common.init.ModDamageSource;
 import terramine.common.init.ModItems;
 import terramine.common.init.ModSoundEvents;
 
+import java.util.Random;
+
 public class FallingStarEntity extends FallingProjectileEntity {
     private final float xSpeed, zSpeed;
     private int soundTimer;
-    private final RandomSource random = RandomSource.create();
+    private final Random random = new Random();
 
     public FallingStarEntity(EntityType<? extends FallingStarEntity> entityType, Level level) {
         super(entityType, level);

@@ -9,6 +9,7 @@ import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TextComponent;
 import net.minecraft.resources.ResourceLocation;
 import terramine.common.init.ModComponents;
 
@@ -24,7 +25,7 @@ public class ToggleImageButton extends Button {
     private final int slot;
 
     public ToggleImageButton(int i, int j, int k, int l, int m, int n, int o, int s, int g, ResourceLocation resourceLocation, int p, int q, Button.OnPress onPress) {
-        this(i, j, k, l, m, n, o, s, g, resourceLocation, p, q, onPress, CommonComponents.EMPTY);
+        this(i, j, k, l, m, n, o, s, g, resourceLocation, p, q, onPress, TextComponent.EMPTY);
     }
 
     public ToggleImageButton(int i, int j, int k, int l, int m, int n, int o, int s, int g, ResourceLocation resourceLocation, int p, int q, Button.OnPress onPress, Component component) {

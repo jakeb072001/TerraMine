@@ -28,7 +28,6 @@ repositories {
             includeGroupByRegex "com.github.*"
         }
     }
-    maven { url "https://maven.bai.lol" }
     maven {
         url "https://maven.jamieswhiteshirt.com/libs-release"
         content {
@@ -40,6 +39,7 @@ repositories {
         url = "https://server.bbkr.space/artifactory/libs-release"
     }
     maven { url = 'https://maven.minecraftforge.net/' }
+    maven { url "https://maven.bai.lol" }
 }
 
 allprojects { repositories { maven { url 'https://jitpack.io' } } }

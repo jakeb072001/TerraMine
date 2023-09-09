@@ -10,6 +10,7 @@ import net.minecraft.core.Registry;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TextComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
@@ -133,7 +134,7 @@ public class ServerPacketHandler {
         });
 
         ServerPlayNetworking.registerGlobalReceiver(OPEN_INVENTORY_PACKET_ID, (server, player, handler, buf, responseSender) ->
-                server.execute(() -> player.openMenu(new SimpleMenuProvider((id, inventory, player2) -> new TerrariaInventoryContainerMenu(player), Component.empty()))));
+                server.execute(() -> player.openMenu(new SimpleMenuProvider((id, inventory, player2) -> new TerrariaInventoryContainerMenu(player), TextComponent.EMPTY))));
 
         ServerPlayNetworking.registerGlobalReceiver(UPDATE_ACCESSORY_VISIBILITY_PACKET_ID, (server, player, handler, buf, responseSender) -> {
                 int slot = buf.readInt();

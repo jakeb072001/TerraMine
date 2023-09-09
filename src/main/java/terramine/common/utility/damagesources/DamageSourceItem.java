@@ -1,6 +1,7 @@
 package terramine.common.utility.damagesources;
 
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.damagesource.EntityDamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
@@ -44,8 +45,8 @@ public class DamageSourceItem extends EntityDamageSource {
         String string = "death.attack." + this.msgId;
         String string2 = string + ".item";
         if (itemUsed != null) {
-            return Component.translatable(string2, livingEntity.getDisplayName(), component, itemUsed.getDefaultInstance().getHoverName());
+            return new TranslatableComponent(string2, livingEntity.getDisplayName(), component, itemUsed.getDefaultInstance().getHoverName());
         }
-        return Component.translatable(string, livingEntity.getDisplayName(), component);
+        return new TranslatableComponent(string, livingEntity.getDisplayName(), component);
     }
 }

@@ -8,6 +8,7 @@ import net.minecraft.world.item.*;
 import net.minecraft.world.level.block.ComposterBlock;
 import terramine.TerraMine;
 import terramine.common.item.CraftingItem;
+import terramine.common.item.MagicMirrorItem;
 import terramine.common.item.accessories.AccessoryTerrariaItem;
 import terramine.common.item.accessories.ShieldAccessoryItem;
 import terramine.common.item.accessories.WhoopeeCushionItem;
