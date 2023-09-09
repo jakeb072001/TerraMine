@@ -54,6 +54,7 @@
   ],
   "client": [
     "client.GuiMixin",
+    "client.render.ElytraLayerMixin",
     "client.render.HumanoidArmorLayerMixin",
     "client.render.ItemInHandRendererMixin",
     "client.render.LivingEntityRendererMixin",
