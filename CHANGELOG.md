@@ -4,8 +4,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [1.7.0-1.19] - 2023-09-15
-// todo: update to 1.19.4 and then create a fork for 1.20
+## [1.7.0-1.20] - 2023-09-12
 ### Added
 - Meteorites (only spawn at exactly midnight, default 2% chance)
 - Meteorite armor, tools, and Space Gun
@@ -14,8 +13,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - New GUI (can be accessed by the small button on the bottom right of the player preview in your inventory)
 - Vanity system
 - Dye system (more dyes to be added later, some with custom shading)
-- Various vanity armors // not started
-- Teams (will be used in the future) // not started
 
 ### Changed
 - Throwable explosives now render in 2D in Inventory
