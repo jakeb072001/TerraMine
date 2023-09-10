@@ -12,8 +12,8 @@ import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Equipable;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Wearable;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.gameevent.GameEvent;
 import org.jetbrains.annotations.NotNull;
@@ -47,7 +47,7 @@ public class AccessoryTerrariaItem extends TerrariaItem implements Accessories {
 				if (inventory.getItem(i).isEmpty()) {
 					ItemStack newStack = stack.copy();
 					inventory.setItem(i, newStack);
-					SoundEvent soundEvent = stack.getItem() instanceof Wearable ? stack.getItem().getEquipSound() : null;
+					SoundEvent soundEvent = stack.getItem() instanceof Equipable item ? item.getEquipSound() : null;
 					if (!stack.isEmpty() && soundEvent != null) {
 						player.gameEvent(GameEvent.EQUIP);
 						player.playSound(soundEvent, 1.0F, 1.0F);

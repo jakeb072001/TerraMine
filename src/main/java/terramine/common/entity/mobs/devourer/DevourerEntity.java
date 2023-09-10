@@ -73,7 +73,7 @@ public class DevourerEntity extends Monster implements Enemy {
         @Override
         public void tick() {
             if (entity.isAlive()) {
-                entity.target = entity.level.getNearestPlayer(entity.getX(), entity.getY(), entity.getZ(), entity.getAttribute(Attributes.FOLLOW_RANGE).getValue(), true);
+                entity.target = entity.level().getNearestPlayer(entity.getX(), entity.getY(), entity.getZ(), entity.getAttribute(Attributes.FOLLOW_RANGE).getValue(), true);
                 entity.setNoGravity(true);
 
                 if (entity.target != null && !entity.target.isInvisible()) {
@@ -121,11 +121,11 @@ public class DevourerEntity extends Monster implements Enemy {
     public void tick() {
         super.tick();
 
-        for(int i = 0; i < this.level.players().size(); ++i) {
-            double dist = this.level.players().get(i).position().distanceTo(this.position());
+        for(int i = 0; i < this.level().players().size(); ++i) {
+            double dist = this.level().players().get(i).position().distanceTo(this.position());
             if (dist < this.getAttribute(Attributes.FOLLOW_RANGE).getValue()) {
-                if (!this.level.players().get(i).isCreative() && !this.level.players().get(i).isSpectator()) {
-                    target = this.level.players().get(i);
+                if (!this.level().players().get(i).isCreative() && !this.level().players().get(i).isSpectator()) {
+                    target = this.level().players().get(i);
                 } else {
                     target = null;
                 }
@@ -137,9 +137,9 @@ public class DevourerEntity extends Monster implements Enemy {
 
             for(int i = 0; i < segmentCount; ++i) {
                 if (i == segmentCount - 1) {
-                    this.segments[i] = new DevourerTailEntity(ModEntities.DEVOURER_TAIL, level);
+                    this.segments[i] = new DevourerTailEntity(ModEntities.DEVOURER_TAIL, level());
                 } else {
-                    this.segments[i] = new DevourerBodyEntity(ModEntities.DEVOURER_BODY, level);
+                    this.segments[i] = new DevourerBodyEntity(ModEntities.DEVOURER_BODY, level());
                 }
                 this.segments[i].head = this;
             }
@@ -149,12 +149,12 @@ public class DevourerEntity extends Monster implements Enemy {
             this.tickSegments();
             this.shareEffects();
 
-            if (!this.level.isClientSide()) {
+            if (!this.level().isClientSide()) {
                 this.serverTick();
             }
         }
 
-        if (!this.level.isClientSide() && !this.isSpawned()) {
+        if (!this.level().isClientSide() && !this.isSpawned()) {
             this.setSpawned(true);
         }
     }
@@ -170,7 +170,7 @@ public class DevourerEntity extends Monster implements Enemy {
                 float yaw = this.getYHeadRot();
 
                 this.segments[i].moveTo(x, y, z, pitch, yaw);
-                this.level.addFreshEntity(this.segments[i]);
+                this.level().addFreshEntity(this.segments[i]);
             }
         }
     }
@@ -251,8 +251,8 @@ public class DevourerEntity extends Monster implements Enemy {
         float f = this.getDimensions(this.getPose()).width * 0.8f;
         AABB aABB = AABB.ofSize(this.getEyePosition(), f, 1.0E-6, f);
         return BlockPos.betweenClosedStream(aABB).anyMatch(blockPos -> {
-            BlockState blockState = this.level.getBlockState(blockPos);
-            return !blockState.isAir() && blockState.isSuffocating(this.level, blockPos) && Shapes.joinIsNotEmpty(blockState.getCollisionShape(this.level, blockPos).move(blockPos.getX(), blockPos.getY(), blockPos.getZ()), Shapes.create(aABB), BooleanOp.AND);
+            BlockState blockState = this.level().getBlockState(blockPos);
+            return !blockState.isAir() && blockState.isSuffocating(this.level(), blockPos) && Shapes.joinIsNotEmpty(blockState.getCollisionShape(this.level(), blockPos).move(blockPos.getX(), blockPos.getY(), blockPos.getZ()), Shapes.create(aABB), BooleanOp.AND);
         });
     }
 
@@ -262,13 +262,13 @@ public class DevourerEntity extends Monster implements Enemy {
         super.playerTouch(player);
 
         if (this.isAlive() && this.getAttribute(Attributes.ATTACK_DAMAGE) != null) {
-            player.hurt(DamageSource.mobAttack(this), (float) this.getAttribute(Attributes.ATTACK_DAMAGE).getValue());
+            player.hurt(damageSources().mobAttack(this), (float) this.getAttribute(Attributes.ATTACK_DAMAGE).getValue());
         }
     }
 
     @Override
     public boolean hurt(@NotNull DamageSource source, float f) {
-        if (source != DamageSource.FALL && source != DamageSource.IN_WALL && source != DamageSource.CRAMMING) {
+        if (source != damageSources().fall() && source != damageSources().inWall() && source != damageSources().cramming()) {
             if (this.segments != null) {
                 for (DevourerBodyEntity seg : this.segments) {
                     if (seg != null) {

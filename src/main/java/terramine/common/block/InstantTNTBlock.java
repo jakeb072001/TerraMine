@@ -72,7 +72,7 @@ public class InstantTNTBlock extends TntBlock {
         }
         InstantPrimedTNTEntity primedTnt = ModEntities.INSTANT_TNT.create(level);
         if (primedTnt != null) {
-            primedTnt.setValues(level, (double) blockPos.getX() + 0.5, blockPos.getY(), (double) blockPos.getZ() + 0.5, explosion.getSourceMob());
+            primedTnt.setValues(level, (double) blockPos.getX() + 0.5, blockPos.getY(), (double) blockPos.getZ() + 0.5, explosion.getIndirectSourceEntity());
             level.playSound(null, primedTnt.getX(), primedTnt.getY(), primedTnt.getZ(), SoundEvents.GENERIC_EXPLODE, SoundSource.BLOCKS, 1.0f, 1.0f);
             level.addFreshEntity(primedTnt);
         }

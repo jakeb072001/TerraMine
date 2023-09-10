@@ -4,6 +4,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.Gui;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.entity.player.Player;
@@ -35,7 +36,7 @@ public abstract class GuiMixin {
 	@Unique MutableComponent speedText = Component.translatable(TerraMine.MOD_ID + ".ui.speed");
 
 	@Inject(method = "renderPlayerHealth", require = 0, at = @At(value = "TAIL"))
-	private void renderGuiClock(PoseStack matrices, CallbackInfo ci) {
+	private void renderGuiClock(GuiGraphics guiGraphics, CallbackInfo ci) {
 		Player player = this.getCameraPlayer();
 
 		if (player == null || !getEquippedAccessories(player)) {
@@ -45,8 +46,7 @@ public abstract class GuiMixin {
 		int left = this.screenWidth - 22 - this.getFont().width(getSpeed());
 		int top = this.screenHeight - 73;
 
-		matrices.pushPose();
-		Gui.drawString(matrices, Minecraft.getInstance().font, getSpeed(), left, top, 0xffffff);
+		guiGraphics.drawString(Minecraft.getInstance().font, getSpeed(), left, top, 0xffffff);
 	}
 
 	@Unique

@@ -17,7 +17,7 @@ public class MagicTerrariaItem extends TerrariaItem {
     public int useDuration, manaCost;
 
     public MagicTerrariaItem() {
-        super(new Properties().stacksTo(1).tab(TerraMine.ITEM_GROUP_EQUIPMENT).rarity(Rarity.RARE).fireResistant(), false);
+        super(new Properties().stacksTo(1).rarity(Rarity.RARE).fireResistant(), false);
     }
 
     public void setVars(int useDuration, int manaCost) {

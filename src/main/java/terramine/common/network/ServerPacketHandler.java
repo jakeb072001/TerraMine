@@ -9,6 +9,7 @@ import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.Registry;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.particles.SimpleParticleType;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
@@ -56,14 +57,14 @@ public class ServerPacketHandler {
 
             server.execute(() -> {
                 for (int i = 0; i < 20; ++i) {
-                    double d0 = player.level.random.nextGaussian() * 0.02D;
-                    double d1 = player.level.random.nextGaussian() * 0.02D;
-                    double d2 = player.level.random.nextGaussian() * 0.02D;
+                    double d0 = player.level().random.nextGaussian() * 0.02D;
+                    double d1 = player.level().random.nextGaussian() * 0.02D;
+                    double d2 = player.level().random.nextGaussian() * 0.02D;
                     float random = (player.getRandom().nextFloat() - 0.5F) * 0.1F;
-                    player.getLevel().sendParticles(ParticleTypes.POOF, player.getX() + (double) (player.level.random.nextFloat() * player.getBbWidth() * 2.0F) - (double) player.getBbWidth() - d0 * 10.0D, player.getY() + (double) (player.level.random.nextFloat() * player.getBbHeight()) - d1 * 10.0D, player.getZ() + (double) (player.level.random.nextFloat() * player.getBbWidth() * 2.0F) - (double) player.getBbWidth() - d2 * 10.0D, 1, 0, -0.2D, 0, random);
+                    player.serverLevel().sendParticles(ParticleTypes.POOF, player.getX() + (double) (player.level().random.nextFloat() * player.getBbWidth() * 2.0F) - (double) player.getBbWidth() - d0 * 10.0D, player.getY() + (double) (player.level().random.nextFloat() * player.getBbHeight()) - d1 * 10.0D, player.getZ() + (double) (player.level().random.nextFloat() * player.getBbWidth() * 2.0F) - (double) player.getBbWidth() - d2 * 10.0D, 1, 0, -0.2D, 0, random);
                 }
 
-                player.level.playSound(null, player.blockPosition(), SoundEvents.PHANTOM_FLAP, SoundSource.PLAYERS, 1.0F, 2.0F);
+                player.level().playSound(null, player.blockPosition(), SoundEvents.PHANTOM_FLAP, SoundSource.PLAYERS, 1.0F, 2.0F);
                 if (isGear) {
                     player.getCooldowns().addCooldown(ModItems.MASTER_NINJA_GEAR, cooldown);
                 } else {
@@ -96,19 +97,19 @@ public class ServerPacketHandler {
         });
 
         ServerPlayNetworking.registerGlobalReceiver(ROCKET_BOOTS_SOUND_PACKET_ID, (server, player, handler, buf, responseSender) -> {
-            SoundEvent sound = buf.readById(Registry.SOUND_EVENT);
+            SoundEvent sound = buf.readById(BuiltInRegistries.SOUND_EVENT);
             float soundVolume = buf.readFloat();
             float soundPitch = buf.readFloat();
             server.execute(() -> {
                 if (sound != null) {
-                    player.level.playSound(null, player.blockPosition(), sound, SoundSource.PLAYERS, soundVolume, soundPitch);
+                    player.level().playSound(null, player.blockPosition(), sound, SoundSource.PLAYERS, soundVolume, soundPitch);
                 }
             });
         });
 
         ServerPlayNetworking.registerGlobalReceiver(ROCKET_BOOTS_PARTICLE_PACKET_ID, (server, player, handler, buf, responseSender) -> {
-            SimpleParticleType particle1 = (SimpleParticleType) buf.readById(Registry.PARTICLE_TYPE);
-            SimpleParticleType particle2 = (SimpleParticleType) buf.readById(Registry.PARTICLE_TYPE);
+            SimpleParticleType particle1 = (SimpleParticleType) buf.readById(BuiltInRegistries.PARTICLE_TYPE);
+            SimpleParticleType particle2 = (SimpleParticleType) buf.readById(BuiltInRegistries.PARTICLE_TYPE);
             Vec3 vLeft = new Vec3(-0.15, -1.5, 0).xRot(0).yRot(player.yBodyRot * -0.017453292F);
             Vec3 vRight = new Vec3(0.15, -1.5, 0).xRot(0).yRot(player.yBodyRot * -0.017453292F);
             Vec3 playerPos = player.getPosition(0).add(0, 1.5, 0);
@@ -117,17 +118,17 @@ public class ServerPacketHandler {
             server.execute(() -> {
                 Vec3 v = playerPos.add(vLeft);
                 if (particle1 != null && particle1 != ParticleTypes.DRIPPING_WATER) {
-                    player.getLevel().sendParticles(particle1, v.x, v.y, v.z, 1, 0, -0.2D, 0, random);
+                    player.serverLevel().sendParticles(particle1, v.x, v.y, v.z, 1, 0, -0.2D, 0, random);
                 }
                 if (particle2 != null && particle2 != ParticleTypes.DRIPPING_WATER) {
-                    player.getLevel().sendParticles(particle2, v.x, v.y, v.z, 1, 0, -0.2D, 0, random);
+                    player.serverLevel().sendParticles(particle2, v.x, v.y, v.z, 1, 0, -0.2D, 0, random);
                 }
                 v = playerPos.add(vRight);
                 if (particle1 != null && particle1 != ParticleTypes.DRIPPING_WATER) {
-                    player.getLevel().sendParticles(particle1, v.x, v.y, v.z, 1, 0, -0.2D, 0, random);
+                    player.serverLevel().sendParticles(particle1, v.x, v.y, v.z, 1, 0, -0.2D, 0, random);
                 }
                 if (particle2 != null && particle2 != ParticleTypes.DRIPPING_WATER) {
-                    player.getLevel().sendParticles(particle2, v.x, v.y, v.z, 1, 0, -0.2D, 0, random);
+                    player.serverLevel().sendParticles(particle2, v.x, v.y, v.z, 1, 0, -0.2D, 0, random);
                 }
             });
         });
@@ -148,7 +149,7 @@ public class ServerPacketHandler {
             int chunkX = buf.readInt();
             int chunkZ = buf.readInt();
             if (context.getPlayer() != null) {
-                ((ClientLevel) context.getPlayer().level).onChunkLoaded(new ChunkPos(chunkX, chunkZ));
+                ((ClientLevel) context.getPlayer().level()).onChunkLoaded(new ChunkPos(chunkX, chunkZ));
             }
         });
     }

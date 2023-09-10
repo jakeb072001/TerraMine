@@ -48,8 +48,8 @@ public abstract class EntityMixin {
     @Inject(method = "playStepSound", at = @At("HEAD"))
     private void playSprintStepSound(BlockPos pos, BlockState blockState, CallbackInfo callbackInfo) {
         if ((Entity) (Object) this instanceof LivingEntity self) {
-            if (blockState.getMaterial().isSolid() && self.isSprinting() && isRunningWithBoots(self)) {
-                self.level.playSound(null, self.blockPosition(), ModSoundEvents.SPEEDBOOTS_RUN, SoundSource.PLAYERS, 0.5F, 1);
+            if (blockState.isSolid() && self.isSprinting() && isRunningWithBoots(self)) {
+                self.level().playSound(null, self.blockPosition(), ModSoundEvents.SPEEDBOOTS_RUN, SoundSource.PLAYERS, 0.5F, 1);
             }
         }
     }
@@ -57,8 +57,8 @@ public abstract class EntityMixin {
     @Inject(method = "playStepSound", at = @At("HEAD"))
     private void playWaterStepSound(BlockPos pos, BlockState blockState, CallbackInfo callbackInfo) {
         if ((Entity) (Object) this instanceof LivingEntity self) {
-            if (blockState.getMaterial().isLiquid() && isLiquidRunningWithBoots(self)) {
-                self.level.playSound(null, self.blockPosition(), ModSoundEvents.WATER_STEP, SoundSource.PLAYERS, 0.15F, 1);
+            if (blockState.liquid() && isLiquidRunningWithBoots(self)) {
+                self.level().playSound(null, self.blockPosition(), ModSoundEvents.WATER_STEP, SoundSource.PLAYERS, 0.15F, 1);
             }
         }
     }
@@ -67,7 +67,7 @@ public abstract class EntityMixin {
     private void spawnWaterSprintParticle(CallbackInfo callbackInfo) {
         if ((Entity) (Object) this instanceof LivingEntity self && self.isSprinting()) {
             if (isRunningWithBoots(self)) {
-                if (self.isOnGround() && !self.isCrouching())
+                if (self.onGround() && !self.isCrouching())
                 {
                     Vec3 motion = getDeltaMovement();
                     level.addParticle(ParticleTypes.POOF, getX(), getY() + 0.2F, getZ(), motion.x, motion.y, motion.z);

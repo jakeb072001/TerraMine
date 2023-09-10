@@ -82,7 +82,7 @@ public class ModCommands {
         if (player != null) {
             i++;
             ModComponents.MANA_HANDLER.get(player).setMaxMana(value * 20);
-            context.getSource().sendSuccess(Component.translatable("commands.setMaxMana.pass", player.getDisplayName(), value), false);
+            context.getSource().sendSuccess(() -> Component.translatable("commands.setMaxMana.pass", player.getDisplayName(), value), false);
         } else {
             i--;
             context.getSource().sendFailure(Component.translatable("commands.setMaxMana.fail", value));
@@ -94,9 +94,9 @@ public class ModCommands {
         if (player != null) {
             i++;
             if (ModComponents.MANA_HANDLER.get(player).getMaxMana() == 0) {
-                context.getSource().sendSuccess(Component.translatable("commands.getMaxMana.noMana", player.getDisplayName()), false);
+                context.getSource().sendSuccess(() -> Component.translatable("commands.getMaxMana.noMana", player.getDisplayName()), false);
             } else {
-                context.getSource().sendSuccess(Component.translatable("commands.getMaxMana.pass", player.getDisplayName(), ModComponents.MANA_HANDLER.get(player).getMaxMana() / 20), false);
+                context.getSource().sendSuccess(() -> Component.translatable("commands.getMaxMana.pass", player.getDisplayName(), ModComponents.MANA_HANDLER.get(player).getMaxMana() / 20), false);
             }
         } else {
             i--;
@@ -109,8 +109,8 @@ public class ModCommands {
         int i = 0;
         if (player != null) {
             i++;
-            ModComponents.HARDMODE.get(player.level.getLevelData()).set(value);
-            context.getSource().sendSuccess(Component.translatable("commands.setHardmode.pass", value), false);
+            ModComponents.HARDMODE.get(player.level().getLevelData()).set(value);
+            context.getSource().sendSuccess(() -> Component.translatable("commands.setHardmode.pass", value), false);
         } else {
             i--;
             context.getSource().sendFailure(Component.translatable("commands.setHardmode.fail", value));
@@ -121,7 +121,7 @@ public class ModCommands {
         int i = 0;
         if (player != null) {
             i++;
-            context.getSource().sendSuccess(Component.translatable("commands.getHardmode.pass", ModComponents.HARDMODE.get(player.level.getLevelData()).get()), false);
+            context.getSource().sendSuccess(() -> Component.translatable("commands.getHardmode.pass", ModComponents.HARDMODE.get(player.level().getLevelData()).get()), false);
         } else {
             i--;
             context.getSource().sendFailure(Component.translatable("commands.getHardmode.fail"));
@@ -135,7 +135,7 @@ public class ModCommands {
             i++;
             ModComponents.ACCESSORY_SLOTS_ADDER.get(player).set(value);
             ModComponents.ACCESSORY_SLOTS_ADDER.sync(player);
-            context.getSource().sendSuccess(Component.translatable("commands.setAccessorySlots.pass", value), false);
+            context.getSource().sendSuccess(() -> Component.translatable("commands.setAccessorySlots.pass", value), false);
         } else {
             i--;
             context.getSource().sendFailure(Component.translatable("commands.setAccessorySlots.fail", value));
@@ -146,7 +146,7 @@ public class ModCommands {
         int i = 0;
         if (player != null) {
             i++;
-            context.getSource().sendSuccess(Component.translatable("commands.getAccessorySlots.pass", ModComponents.ACCESSORY_SLOTS_ADDER.get(player).get()), false);
+            context.getSource().sendSuccess(() -> Component.translatable("commands.getAccessorySlots.pass", ModComponents.ACCESSORY_SLOTS_ADDER.get(player).get()), false);
         } else {
             i--;
             context.getSource().sendFailure(Component.translatable("commands.getAccessorySlots.fail"));

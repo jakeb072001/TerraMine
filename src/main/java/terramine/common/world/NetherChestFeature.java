@@ -37,7 +37,7 @@ public class NetherChestFeature extends Feature<NoneFeatureConfiguration> {
 		positions.remove(origin);
 		positions.removeIf(currentPos -> blockLavaCheck(currentPos, level));
 		positions.removeIf(currentPos -> blockLavaCheck(currentPos.above(), level));
-		positions.removeIf(currentPos -> !level.getBlockState(currentPos.below()).getMaterial().blocksMotion());
+		positions.removeIf(currentPos -> !level.getBlockState(currentPos.below()).blocksMotion());
 		if (positions.size() < 1) {
 			return false;
 		}

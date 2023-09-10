@@ -25,7 +25,7 @@ public class HotFloorBlock extends Block {
     @Override
     public void stepOn(@NotNull Level level, @NotNull BlockPos blockPos, @NotNull BlockState blockState, Entity entity) {
         if (!entity.isSteppingCarefully() && entity instanceof LivingEntity && !EnchantmentHelper.hasFrostWalker((LivingEntity)entity)) {
-            entity.hurt(DamageSource.HOT_FLOOR, 1.0F);
+            entity.hurt(level.damageSources().hotFloor(), 1.0F);
         }
 
         super.stepOn(level, blockPos, blockState, entity);

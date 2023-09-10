@@ -38,7 +38,7 @@ public class SurfaceChestFeature extends Feature<NoneFeatureConfiguration> {
 		positions.remove(origin);
 		positions.removeIf(currentPos -> blockWaterCheck(currentPos, level));
 		positions.removeIf(currentPos -> blockWaterCheck(currentPos.above(), level));
-		positions.removeIf(currentPos -> !level.getBlockState(currentPos.below()).getMaterial().blocksMotion());
+		positions.removeIf(currentPos -> !level.getBlockState(currentPos.below()).blocksMotion());
 		if (positions.size() < 1) {
 			return false;
 		}

@@ -7,6 +7,7 @@ import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.level.Level;
 
@@ -16,23 +17,23 @@ public class MoltenArmor extends TerrariaArmor {
     private static final AttributeModifier ATTACK_DAMAGE_BONUS = new AttributeModifier(UUID.fromString("42be22eb-afa1-4f64-819a-28846c1759f3"),
             "molten_armor_set_bonus", 0.10, AttributeModifier.Operation.MULTIPLY_TOTAL);
 
-    public MoltenArmor(String armorType, ArmorMaterial armorMaterial, EquipmentSlot equipmentSlot, Properties properties) {
-        super(armorType, armorMaterial, equipmentSlot, properties);
+    public MoltenArmor(String armorType, ArmorMaterial armorMaterial, Type type, Properties properties) {
+        super(armorType, armorMaterial, type, properties);
 
         ImmutableMultimap.Builder<Attribute, AttributeModifier> builder = ImmutableMultimap.builder();
-        UUID uUID = ARMOR_MODIFIER_UUID_PER_SLOT[equipmentSlot.getIndex()];
+        UUID uUID = ARMOR_MODIFIER_UUID_PER_SLOT[type.getSlot().getIndex()];
         builder.put(Attributes.ARMOR, new AttributeModifier(uUID, "Armor modifier", this.defense, AttributeModifier.Operation.ADDITION));
         builder.put(Attributes.ARMOR_TOUGHNESS, new AttributeModifier(uUID, "Armor toughness", this.toughness, AttributeModifier.Operation.ADDITION));
-        if (equipmentSlot == EquipmentSlot.HEAD) {
+        if (type == ArmorItem.Type.HELMET) {
             builder.put(Attributes.LUCK, new AttributeModifier(uUID, "Molten Attack Crit Chance", 0.07, AttributeModifier.Operation.MULTIPLY_TOTAL));
         }
-        if (equipmentSlot == EquipmentSlot.CHEST) {
+        if (type == ArmorItem.Type.CHESTPLATE) {
             builder.put(Attributes.ATTACK_DAMAGE, new AttributeModifier(uUID, "Molten Attack Damage", 0.07, AttributeModifier.Operation.MULTIPLY_TOTAL));
         }
-        if (equipmentSlot == EquipmentSlot.LEGS) {
+        if (type == ArmorItem.Type.LEGGINGS) {
             builder.put(Attributes.ATTACK_KNOCKBACK, new AttributeModifier(uUID, "Molten Attack Knockback", 0.07, AttributeModifier.Operation.MULTIPLY_TOTAL));
         }
-        if (equipmentSlot == EquipmentSlot.FEET) {
+        if (type == ArmorItem.Type.BOOTS) {
             builder.put(Attributes.ATTACK_SPEED, new AttributeModifier(uUID, "Molten Attack Speed", 0.07, AttributeModifier.Operation.MULTIPLY_TOTAL));
         }
         attributeModifiers = builder.build();

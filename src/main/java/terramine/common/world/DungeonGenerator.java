@@ -3,6 +3,7 @@ package terramine.common.world;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Queues;
 import net.minecraft.core.*;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.LevelHeightAccessor;
 import net.minecraft.world.level.biome.Biome;
@@ -15,10 +16,7 @@ import net.minecraft.world.level.levelgen.WorldgenRandom;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import net.minecraft.world.level.levelgen.structure.PoolElementStructurePiece;
 import net.minecraft.world.level.levelgen.structure.Structure;
-import net.minecraft.world.level.levelgen.structure.pools.EmptyPoolElement;
-import net.minecraft.world.level.levelgen.structure.pools.JigsawJunction;
-import net.minecraft.world.level.levelgen.structure.pools.StructurePoolElement;
-import net.minecraft.world.level.levelgen.structure.pools.StructureTemplatePool;
+import net.minecraft.world.level.levelgen.structure.pools.*;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplateManager;
 import net.minecraft.world.phys.AABB;
@@ -41,7 +39,7 @@ public class DungeonGenerator {
             return Optional.empty();
 
         RegistryAccess registryManager = inContext.registryAccess();
-        Registry<StructureTemplatePool> registry = registryManager.registryOrThrow(Registry.TEMPLATE_POOL_REGISTRY);
+        Registry<StructureTemplatePool> registry = registryManager.registryOrThrow(Registries.TEMPLATE_POOL);
         StructureTemplatePool structurePool = startJigsawName.value();
         StructureTemplatePool startingRoomPool = startRoomPool.value();
 
@@ -144,16 +142,16 @@ public class DungeonGenerator {
 
             // For every structure block in the piece.
             for (StructureTemplate.StructureBlockInfo structureBlock : structurePoolElement.getShuffledJigsawBlocks(this.structureManager, sourcePos, sourceRotation, this.random)) {
-                if(sourceBlock.equals(structureBlock.pos))
+                if(sourceBlock.equals(structureBlock.pos()))
                     continue;
 
                 MutableObject<VoxelShape> structureShape;
-                Direction structureBlockFaceDirection = JigsawBlock.getFrontFacing(structureBlock.state);
-                BlockPos structureBlockPosition = structureBlock.pos;
+                Direction structureBlockFaceDirection = JigsawBlock.getFrontFacing(structureBlock.state());
+                BlockPos structureBlockPosition = structureBlock.pos();
                 BlockPos structureBlockAimPosition = structureBlockPosition.relative(structureBlockFaceDirection);
 
                 // Get pool that structure block is targeting.
-                ResourceLocation structureBlockTargetPoolId = new ResourceLocation(structureBlock.nbt.getString("pool"));
+                ResourceLocation structureBlockTargetPoolId = new ResourceLocation(structureBlock.nbt().getString("pool"));
                 Optional<StructureTemplatePool> targetPool = this.registry.getOptional(structureBlockTargetPoolId);
                 //if (targetPool.isEmpty() || targetPool.get().size() == 0 && !Objects.equals(structureBlockTargetPoolId, StructurePools.EMPTY.getValue())) {
                 if (targetPool.isEmpty() || targetPool.get().size() == 0) {
@@ -164,10 +162,10 @@ public class DungeonGenerator {
                 //boolean ignoredPool = terrainCheckIgnoredPools.contains(structureBlockTargetPoolId);
 
                 // Get end cap pool for target pool.
-                ResourceLocation terminatorPoolId = targetPool.get().getFallback();
-                Optional<StructureTemplatePool> terminatorPool = this.registry.getOptional(terminatorPoolId);
+                StructureTemplatePool terminatorPool = targetPool.get().getFallback().value();
+                //Optional<StructureTemplatePool> terminatorPool = this.registry.getOptional(terminatorPoolId);
                 //if (terminatorPool.isEmpty() || terminatorPool.get().size() == 0 && !Objects.equals(terminatorPoolId, StructurePools.EMPTY.getValue())) {
-                if (terminatorPool.isEmpty() || terminatorPool.get().size() == 0) {
+                if (terminatorPool.size() == 0) {
                     //TerraMine.LOGGER.warn("Empty or non-existent fallback pool: {}", terminatorPoolId);
                     continue;
                 }
@@ -188,7 +186,7 @@ public class DungeonGenerator {
                 if (currentSize < this.maxSize) {
                     possibleElementsToSpawn.addAll(targetPool.get().getShuffledTemplates(this.random)); // Add in pool elements if we haven't reached max size.
                 }
-                possibleElementsToSpawn.addAll(terminatorPool.get().getShuffledTemplates(this.random)); // Add in terminator elements.
+                possibleElementsToSpawn.addAll(terminatorPool.getShuffledTemplates(this.random)); // Add in terminator elements.
 
                 for (StructurePoolElement iteratedStructureElement : possibleElementsToSpawn) {
                     if (iteratedStructureElement == EmptyPoolElement.INSTANCE)
@@ -217,12 +215,12 @@ public class DungeonGenerator {
                     if (!JigsawBlock.canAttach(structureBlock, structureBlockInfo))
                         continue;
 
-                    BlockPos structureBlockPos = structureBlockInfo.pos;
+                    BlockPos structureBlockPos = structureBlockInfo.pos();
                     BlockPos structureBlockAimDelta = structureBlockAimPosition.subtract(structureBlockPos);
                     BoundingBox iteratedStructureBoundingBox = element.getBoundingBox(this.structureManager, structureBlockAimDelta, randomizedRotation);
 
                     int structureBlockY = structureBlockPos.getY();
-                    int o = j - structureBlockY + JigsawBlock.getFrontFacing(structureBlock.state).getStepY();
+                    int o = j - structureBlockY + JigsawBlock.getFrontFacing(structureBlock.state()).getStepY();
                     int adjustedMinY = boundsMinY + o;
                     int pieceYOffset = adjustedMinY - iteratedStructureBoundingBox.minY();
                     BoundingBox offsetBoundingBox = iteratedStructureBoundingBox.move(0, pieceYOffset, 0);

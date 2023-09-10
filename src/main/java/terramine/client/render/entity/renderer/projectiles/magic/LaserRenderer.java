@@ -2,7 +2,7 @@ package terramine.client.render.entity.renderer.projectiles.magic;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.mojang.math.Vector3f;
+import com.mojang.math.Axis;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRenderer;
@@ -31,8 +31,8 @@ public class LaserRenderer extends EntityRenderer<LaserEntity> {
         poseStack.pushPose();
 
         this.model.setupAnim(entity, 0.0f, 0.0f, partialTicks, entity.getYRot(), entity.getXRot());
-        poseStack.mulPose(Vector3f.YP.rotationDegrees(entity.getYRot()));
-        poseStack.mulPose(Vector3f.XN.rotationDegrees(entity.getXRot()));
+        poseStack.mulPose(Axis.YP.rotationDegrees(entity.getYRot()));
+        poseStack.mulPose(Axis.XN.rotationDegrees(entity.getXRot()));
         VertexConsumer vertexConsumer = buffer.getBuffer(this.model.renderType(this.getTextureLocation(entity))).color(0xe0e0e0);
         this.model.renderToBuffer(poseStack, vertexConsumer, packedLight, OverlayTexture.NO_OVERLAY, 0.9f, 0.9f, 0.9f, 1.0f);
 

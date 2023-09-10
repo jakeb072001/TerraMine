@@ -1,10 +1,10 @@
 package terramine.mixin.item.accessories.umbrella.client;
 
 import net.minecraft.client.renderer.ItemModelShaper;
-import net.minecraft.client.renderer.block.model.ItemTransforms;
 import net.minecraft.client.renderer.entity.ItemRenderer;
 import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.client.resources.model.ModelResourceLocation;
+import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -100,10 +100,10 @@ public abstract class ItemRendererMixin {
 	}
 
 	@ModifyVariable(method = "render", argsOnly = true, at = @At(value = "HEAD"))
-	private BakedModel setUmbrellaIconModel(BakedModel model, ItemStack stack, ItemTransforms.TransformType renderMode) {
-		boolean shouldUseIcon = renderMode == ItemTransforms.TransformType.GUI ||
-								renderMode == ItemTransforms.TransformType.GROUND ||
-								renderMode == ItemTransforms.TransformType.FIXED;
+	private BakedModel setUmbrellaIconModel(BakedModel model, ItemStack stack, ItemDisplayContext itemDisplayContext) {
+		boolean shouldUseIcon = itemDisplayContext == ItemDisplayContext.GUI ||
+								itemDisplayContext == ItemDisplayContext.GROUND ||
+								itemDisplayContext == ItemDisplayContext.FIXED;
 
 		if (shouldUseIcon) {
 			if (stack.getItem() == ModItems.UMBRELLA) {

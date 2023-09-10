@@ -23,7 +23,7 @@ public class ObsidianWaterWalkingBootsItem extends AccessoryTerrariaItem {
 		ModComponents.SWIM_ABILITIES.maybeGet(player).ifPresent(swimAbilities -> {
 			if (player.isInWater()) {
 				swimAbilities.setWet(true);
-			} else if (player.isOnGround() || player.getAbilities().flying) {
+			} else if (player.onGround() || player.getAbilities().flying) {
 				swimAbilities.setWet(false);
 			}
 		});

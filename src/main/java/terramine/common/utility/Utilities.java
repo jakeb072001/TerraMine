@@ -1,6 +1,5 @@
 package terramine.common.utility;
 
-import com.mojang.math.Vector3f;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.Minecraft;
@@ -13,6 +12,7 @@ import net.minecraft.world.entity.projectile.ProjectileUtil;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.phys.*;
+import org.joml.Vector3f;
 import terramine.common.item.dye.BasicDye;
 
 import java.util.concurrent.ThreadLocalRandom;
@@ -24,10 +24,10 @@ public class Utilities { // todo: need to fix bug with magic missile where the p
     public static BlockHitResult rayTraceBlocks(Entity entity, double length, boolean checkLiquids)
     {
         if (checkLiquids) {
-            return entity.level.clip(new ClipContext(new Vec3(entity.position().x(), entity.position().y() + (double) entity.getEyeHeight(), entity.position().z()),
+            return entity.level().clip(new ClipContext(new Vec3(entity.position().x(), entity.position().y() + (double) entity.getEyeHeight(), entity.position().z()),
                     entity.getLookAngle().scale(length).add(entity.position().x(), entity.position().y() + (double) entity.getEyeHeight(), entity.position().z()), ClipContext.Block.COLLIDER, ClipContext.Fluid.ANY, entity));
         } else {
-            return entity.level.clip(new ClipContext(new Vec3(entity.position().x(), entity.position().y() + (double) entity.getEyeHeight(), entity.position().z()),
+            return entity.level().clip(new ClipContext(new Vec3(entity.position().x(), entity.position().y() + (double) entity.getEyeHeight(), entity.position().z()),
                     entity.getLookAngle().scale(length).add(entity.position().x(), entity.position().y() + (double) entity.getEyeHeight(), entity.position().z()), ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, entity));
         }
     }
@@ -37,7 +37,7 @@ public class Utilities { // todo: need to fix bug with magic missile where the p
         Vec3 vec3 = new Vec3(entity.position().x(), entity.position().y() + (double) entity.getEyeHeight(), entity.position().z());
         Vec3 vec33 = entity.getLookAngle().scale(length).add(entity.position().x(), entity.position().y() + (double) entity.getEyeHeight(), entity.position().z());
         Predicate<Entity> predicate = entity1 -> !(entity1 instanceof Player || entity1 == self || entity1 instanceof ItemEntity || entity1 instanceof ExperienceOrb);
-        return ProjectileUtil.getEntityHitResult(entity.level, entity, vec3, vec33, (new AABB(vec3, vec33)).inflate(1.0D), predicate);
+        return ProjectileUtil.getEntityHitResult(entity.level(), entity, vec3, vec33, (new AABB(vec3, vec33)).inflate(1.0D), predicate);
     }
 
 

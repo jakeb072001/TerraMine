@@ -2,7 +2,7 @@ package terramine.client.render.entity.renderer.monsters;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.mojang.math.Vector3f;
+import com.mojang.math.Axis;
 import net.minecraft.client.model.geom.EntityModelSet;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
@@ -50,7 +50,7 @@ public class MimicChestLayer extends RenderLayer<MimicEntity, MimicModel> {
         if (!mimic.isInvisible()) {
             matrixStack.pushPose();
 
-            matrixStack.mulPose(Vector3f.XP.rotationDegrees(180));
+            matrixStack.mulPose(Axis.XP.rotationDegrees(180));
             matrixStack.translate(-0.5, -1.5, -0.5);
 
             getParentModel().copyPropertiesTo(chestModel);

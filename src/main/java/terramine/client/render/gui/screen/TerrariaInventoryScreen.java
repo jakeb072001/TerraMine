@@ -3,9 +3,7 @@ package terramine.client.render.gui.screen;
 import com.google.common.collect.Lists;
 import com.mojang.blaze3d.platform.Lighting;
 import com.mojang.blaze3d.systems.RenderSystem;
-import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.math.Quaternion;
-import com.mojang.math.Vector3f;
+import com.mojang.math.Axis;
 import io.netty.buffer.Unpooled;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
@@ -13,12 +11,11 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.ImageButton;
 import net.minecraft.client.gui.screens.inventory.CreativeModeInventoryScreen;
 import net.minecraft.client.gui.screens.inventory.EffectRenderingInventoryScreen;
 import net.minecraft.client.gui.screens.inventory.InventoryScreen;
-import net.minecraft.client.renderer.GameRenderer;
-import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
 import net.minecraft.core.NonNullList;
 import net.minecraft.network.FriendlyByteBuf;
@@ -32,6 +29,9 @@ import net.minecraft.world.inventory.ClickType;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+import org.joml.Matrix4f;
+import org.joml.Quaternionf;
 import terramine.TerraMine;
 import terramine.client.render.gui.ToggleImageButton;
 import terramine.client.render.gui.menu.TerrariaInventoryContainerMenu;
@@ -60,13 +60,12 @@ public class TerrariaInventoryScreen extends EffectRenderingInventoryScreen<Terr
 
     public TerrariaInventoryScreen(Player player) {
         super(new TerrariaInventoryContainerMenu(player), player.getInventory(), Component.empty());
-        this.passEvents = true;
     }
 
     protected void init() {
         super.init();
         rotation = 0;
-        this.minecraft.keyboardHandler.setSendRepeatsToGui(true);
+        //this.minecraft.keyboardHandler.setSendRepeatsToGui(true);
         this.addRenderableWidget(new ImageButton(this.leftPos + 63, this.height / 2 - 100, 8, 8, 0, 0, 8, ROTATE_RIGHT_TEX, 8, 16, (buttonWidget) -> {
             rotation -= 40;
         }));
@@ -75,7 +74,7 @@ public class TerrariaInventoryScreen extends EffectRenderingInventoryScreen<Terr
         }));
         if (this.minecraft.gameMode.hasInfiniteItems()) {
             this.addRenderableWidget(new ImageButton(this.leftPos + 105, this.height / 2 - 40, 8, 8, 0, 0, 8, BUTTON_TEX, 8, 16, (buttonWidget) -> {
-                this.minecraft.setScreen(new CreativeModeInventoryScreen(this.minecraft.player));
+                this.minecraft.setScreen(new CreativeModeInventoryScreen(this.minecraft.player, this.minecraft.player.connection.enabledFeatures(), this.minecraft.options.operatorItemsTab().get()));
                 this.buttonClicked = true;
             }));
         } else {
@@ -96,51 +95,37 @@ public class TerrariaInventoryScreen extends EffectRenderingInventoryScreen<Terr
         }
     }
 
-    protected void renderLabels(@NotNull PoseStack poseStack, int i, int j) {
-        this.font.draw(poseStack, this.title, (float)this.titleLabelX, (float)this.titleLabelY, 4210752);
+    protected void renderLabels(@NotNull GuiGraphics guiGraphics, int i, int j) {
     }
 
-    public void render(@NotNull PoseStack poseStack, int i, int j, float f) {
-        this.renderBackground(poseStack);
-        super.render(poseStack, i, j, f);
-        this.renderTooltip(poseStack, i, j);
+    public void render(@NotNull GuiGraphics guiGraphics, int i, int j, float f) {
+        this.renderBackground(guiGraphics);
+        super.render(guiGraphics, i, j, f);
+        this.renderTooltip(guiGraphics, i, j);
         this.xMouse = (float)i;
         this.yMouse = (float)j;
     }
 
-    protected void renderBg(@NotNull PoseStack poseStack, float f, int i, int j) {
-        RenderSystem.setShader(GameRenderer::getPositionTexShader);
-        RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
-        if (ModComponents.ACCESSORY_SLOTS_ADDER.get(this.minecraft.player).get() == 1) {
-            RenderSystem.setShaderTexture(0, TERRARIA_CONTAINER_6);
-        } else if (ModComponents.ACCESSORY_SLOTS_ADDER.get(this.minecraft.player).get() == 2) {
-            RenderSystem.setShaderTexture(0, TERRARIA_CONTAINER_7);
-        } else {
-            RenderSystem.setShaderTexture(0, TERRARIA_CONTAINER_5);
-        }
+    protected void renderBg(@NotNull GuiGraphics guiGraphics, float f, int i, int j) {
         int k = (this.width - this.imageWidth) / 2;
         int l = (this.height - this.imageHeight) / 2;
-        blit(poseStack, k, l, this.getBlitOffset(), 0f, 0f, this.imageWidth, this.imageHeight, this.imageWidth, this.imageHeight);
-        renderEntityInInventory(k + 88, l + 71, 30, (k + 51f) - this.xMouse, l + 75f - 50f - this.yMouse, this.minecraft.player);
+        if (ModComponents.ACCESSORY_SLOTS_ADDER.get(this.minecraft.player).get() == 1) {
+            guiGraphics.blit(TERRARIA_CONTAINER_6, k, l, 0, 0, this.imageWidth, this.imageHeight, this.imageWidth, this.imageHeight);
+        } else if (ModComponents.ACCESSORY_SLOTS_ADDER.get(this.minecraft.player).get() == 2) {
+            guiGraphics.blit(TERRARIA_CONTAINER_7, k, l, 0, 0, this.imageWidth, this.imageHeight, this.imageWidth, this.imageHeight);
+        } else {
+            guiGraphics.blit(TERRARIA_CONTAINER_5, k, l, 0, 0, this.imageWidth, this.imageHeight, this.imageWidth, this.imageHeight);
+        }
+        //guiGraphics.blit(guiGraphics, k, l, this.getBlitOffset(), 0f, 0f, this.imageWidth, this.imageHeight, this.imageWidth, this.imageHeight);
+        renderEntityInInventoryFollowsMouse(guiGraphics, k + 88, l + 71, 30, (k + 51f) - this.xMouse, l + 75f - 50f - this.yMouse, this.minecraft.player);
     }
 
-    public void renderEntityInInventory(int i, int j, int k, float f, float g, LivingEntity livingEntity) {
+    public void renderEntityInInventoryFollowsMouse(GuiGraphics guiGraphics, int i, int j, int k, float f, float g, LivingEntity livingEntity) {
         float h = (float)Math.atan(f / 40.0F);
         float l = (float)Math.atan(g / 40.0F);
-        PoseStack poseStack = RenderSystem.getModelViewStack();
-        poseStack.pushPose();
-        poseStack.translate(i, j, 1050.0);
-        poseStack.scale(1.0F, 1.0F, -1.0F);
-        RenderSystem.applyModelViewMatrix();
-        PoseStack poseStack2 = new PoseStack();
-        poseStack2.translate(0.0, 0.0, 1000.0);
-        poseStack2.scale((float)k, (float)k, (float)k);
-        Quaternion quaternion = Vector3f.ZP.rotationDegrees(180.0F);
-        Quaternion quaternion2 = Vector3f.XP.rotationDegrees(l * 20.0F);
-        Quaternion quaternion3 = Vector3f.YP.rotationDegrees(rotation);
-        quaternion.mul(quaternion2);
-        quaternion.mul(quaternion3);
-        poseStack2.mulPose(quaternion);
+        Quaternionf quaternionf = (new Quaternionf()).rotateZ(3.1415927F);
+        Quaternionf quaternionf2 = (new Quaternionf()).rotateX(l * 20.0F * 0.017453292F);
+        quaternionf.mul(quaternionf2);
         float m = livingEntity.yBodyRot;
         float n = livingEntity.getYRot();
         float o = livingEntity.getXRot();
@@ -151,24 +136,35 @@ public class TerrariaInventoryScreen extends EffectRenderingInventoryScreen<Terr
         livingEntity.setXRot(-l * 20.0F);
         livingEntity.yHeadRot = livingEntity.getYRot();
         livingEntity.yHeadRotO = livingEntity.getYRot();
-        Lighting.setupForEntityInInventory();
-        EntityRenderDispatcher entityRenderDispatcher = Minecraft.getInstance().getEntityRenderDispatcher();
-        quaternion2.conj();
-        entityRenderDispatcher.overrideCameraOrientation(quaternion2);
-        entityRenderDispatcher.setRenderShadow(false);
-        MultiBufferSource.BufferSource bufferSource = Minecraft.getInstance().renderBuffers().bufferSource();
-        RenderSystem.runAsFancy(() -> {
-            entityRenderDispatcher.render(livingEntity, 0.0, 0.0, 0.0, 0.0F, 1.0F, poseStack2, bufferSource, 15728880);
-        });
-        bufferSource.endBatch();
-        entityRenderDispatcher.setRenderShadow(true);
+        renderEntityInInventory(guiGraphics, i, j, k, quaternionf, quaternionf2, livingEntity);
         livingEntity.yBodyRot = m;
         livingEntity.setYRot(n);
         livingEntity.setXRot(o);
         livingEntity.yHeadRotO = p;
         livingEntity.yHeadRot = q;
-        poseStack.popPose();
-        RenderSystem.applyModelViewMatrix();
+    }
+
+    public void renderEntityInInventory(GuiGraphics guiGraphics, int i, int j, int k, Quaternionf quaternionf, @Nullable Quaternionf quaternionf2, LivingEntity livingEntity) {
+        Quaternionf quaternion = Axis.YP.rotationDegrees(rotation);
+        quaternionf.mul(quaternion);
+        guiGraphics.pose().pushPose();
+        guiGraphics.pose().translate(i, j, 50.0);
+        guiGraphics.pose().mulPoseMatrix((new Matrix4f()).scaling((float)k, (float)k, (float)(-k)));
+        guiGraphics.pose().mulPose(quaternionf);
+        Lighting.setupForEntityInInventory();
+        EntityRenderDispatcher entityRenderDispatcher = Minecraft.getInstance().getEntityRenderDispatcher();
+        if (quaternionf2 != null) {
+            quaternionf2.conjugate();
+            entityRenderDispatcher.overrideCameraOrientation(quaternionf2);
+        }
+
+        entityRenderDispatcher.setRenderShadow(false);
+        RenderSystem.runAsFancy(() -> {
+            entityRenderDispatcher.render(livingEntity, 0.0, 0.0, 0.0, 0.0F, 1.0F, guiGraphics.pose(), guiGraphics.bufferSource(), 15728880);
+        });
+        guiGraphics.flush();
+        entityRenderDispatcher.setRenderShadow(true);
+        guiGraphics.pose().popPose();
         Lighting.setupFor3DItems();
     }
 
@@ -231,6 +227,6 @@ public class TerrariaInventoryScreen extends EffectRenderingInventoryScreen<Terr
 
     public void removed() {
         super.removed();
-        this.minecraft.keyboardHandler.setSendRepeatsToGui(false);
+        //this.minecraft.keyboardHandler.setSendRepeatsToGui(false);
     }
 }

@@ -17,7 +17,7 @@ public class PanicNecklaceItem extends AccessoryTerrariaItem {
 	}
 
 	private static void applyEffects(LivingEntity user, DamageSource source, float amount) {
-		if (!user.level.isClientSide && amount >= 1 && AccessoriesHelper.isEquipped(ModItems.PANIC_NECKLACE, user)) {
+		if (!user.level().isClientSide && amount >= 1 && AccessoriesHelper.isEquipped(ModItems.PANIC_NECKLACE, user)) {
 			user.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 160, 0, false, false));
 		}
 	}

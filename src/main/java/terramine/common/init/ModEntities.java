@@ -4,6 +4,7 @@ import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
 import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
 import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.level.levelgen.Heightmap;
 import terramine.TerraMine;
@@ -146,7 +147,7 @@ public class ModEntities {
 			.build());
 
 	private static <T extends Entity> EntityType<T> register(String name, EntityType<T> entType) {
-		return Registry.register(Registry.ENTITY_TYPE, TerraMine.id(name), entType);
+		return Registry.register(BuiltInRegistries.ENTITY_TYPE, TerraMine.id(name), entType);
 	}
 
 	public static void addToSpawn() {

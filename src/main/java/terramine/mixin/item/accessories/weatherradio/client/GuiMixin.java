@@ -4,6 +4,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.Gui;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.world.entity.player.Player;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -27,7 +28,7 @@ public abstract class GuiMixin {
 	@Shadow public abstract Font getFont();
 
 	@Inject(method = "renderPlayerHealth", require = 0, at = @At(value = "TAIL"))
-	private void renderGuiWeather(PoseStack matrices, CallbackInfo ci) {
+	private void renderGuiWeather(GuiGraphics guiGraphics, CallbackInfo ci) {
 		Player player = this.getCameraPlayer();
 
 		if (player == null || !getEquippedAccessories(player)) {
@@ -37,8 +38,7 @@ public abstract class GuiMixin {
 		int left = this.screenWidth - 22 - this.getFont().width(getWeather());
 		int top = this.screenHeight - 43;
 
-		matrices.pushPose();
-		Gui.drawString(matrices, Minecraft.getInstance().font, getWeather(), left, top, 0xffffff);
+		guiGraphics.drawString(Minecraft.getInstance().font, getWeather(), left, top, 0xffffff);
 	}
 
 	@Unique

@@ -5,7 +5,7 @@ import me.shedaniel.rei.api.client.registry.display.DisplayRegistry;
 import me.shedaniel.rei.api.common.entry.EntryStack;
 import me.shedaniel.rei.api.common.entry.type.VanillaEntryTypes;
 import me.shedaniel.rei.plugin.common.displays.DefaultInformationDisplay;
-import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
 import terramine.common.item.TerrariaItem;
@@ -16,7 +16,7 @@ public class REIPlugin implements REIClientPlugin {
 
 	@Override
 	public void registerDisplays(DisplayRegistry recipeHelper) {
-		Registry.ITEM.stream()
+		BuiltInRegistries.ITEM.stream()
 				.filter(item -> item instanceof TerrariaItem)
 				.map(item -> {
 					DefaultInformationDisplay display = DefaultInformationDisplay.createFromEntry(EntryStack.of(VanillaEntryTypes.ITEM, new ItemStack(item)), item.getDescription());
@@ -26,7 +26,7 @@ public class REIPlugin implements REIClientPlugin {
 					return display;
 				}).forEach(recipeHelper::add);
 
-		Registry.ITEM.stream()
+		BuiltInRegistries.ITEM.stream()
 				.filter(item -> item instanceof TerrariaArmor && !(item instanceof VanityArmor))
 				.map(item -> {
 					DefaultInformationDisplay display = DefaultInformationDisplay.createFromEntry(EntryStack.of(VanillaEntryTypes.ITEM, new ItemStack(item)), item.getDescription());

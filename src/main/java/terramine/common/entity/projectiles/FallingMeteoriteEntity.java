@@ -32,11 +32,11 @@ public class FallingMeteoriteEntity extends FallingProjectileEntity {
         adjustMotion();
         resetFallDistance();
         spawnEffects();
-        if (level.getBlockState(blockPosition().below()).isFaceSturdy(level, blockPosition().below(), Direction.getRandom(random)) && !level.getBlockState(blockPosition().below()).is(BlockTags.LOGS)) {
-            new ExplosionConfigurable(level, this, true);
-            if (!level.isClientSide()) { // checks if the world is not client
-                level.broadcastEntityEvent(this, (byte)3); // particle?
-                level.playSound(null, this.blockPosition(), ModSoundEvents.FALLING_STAR_CRASH, SoundSource.AMBIENT, 2f, 1f);
+        if (level().getBlockState(blockPosition().below()).isFaceSturdy(level(), blockPosition().below(), Direction.getRandom(random)) && !level().getBlockState(blockPosition().below()).is(BlockTags.LOGS)) {
+            new ExplosionConfigurable(level(), this, true);
+            if (!level().isClientSide()) { // checks if the world is not client
+                level().broadcastEntityEvent(this, (byte)3); // particle?
+                level().playSound(null, this.blockPosition(), ModSoundEvents.FALLING_STAR_CRASH, SoundSource.AMBIENT, 2f, 1f);
                 this.discard();
             }
         }
@@ -49,14 +49,14 @@ public class FallingMeteoriteEntity extends FallingProjectileEntity {
     }
 
     private void spawnEffects() {
-        if (level != null) {
+        if (level() != null) {
             Vec3 motion = getDeltaMovement();
-            level.addParticle(ParticleTypes.FIREWORK, position().x, position().y + 0.5f, position().z, motion.x, motion.y, motion.z);
-            level.addParticle(ParticleTypes.ENCHANTED_HIT, position().x, position().y + 0.5f, position().z, motion.x, motion.y, motion.z);
+            level().addParticle(ParticleTypes.FIREWORK, position().x, position().y + 0.5f, position().z, motion.x, motion.y, motion.z);
+            level().addParticle(ParticleTypes.ENCHANTED_HIT, position().x, position().y + 0.5f, position().z, motion.x, motion.y, motion.z);
         }
         soundTimer += 1;
         if (soundTimer >= (random.nextInt(7)) + 5) {
-            level.playSound(null, this.blockPosition(), ModSoundEvents.FALLING_STAR_FALL, SoundSource.AMBIENT, 0.5f, 1f);
+            level().playSound(null, this.blockPosition(), ModSoundEvents.FALLING_STAR_FALL, SoundSource.AMBIENT, 0.5f, 1f);
             soundTimer = 0;
         }
     }
@@ -68,7 +68,7 @@ public class FallingMeteoriteEntity extends FallingProjectileEntity {
         int newChunkX = (int) Math.floor(x / 16.0D);
         int newChunkZ = (int) Math.floor(z / 16.0D);
         if (chunkX != newChunkX || chunkZ != newChunkZ) {
-            if (!level.hasChunk(newChunkX, newChunkZ)) {
+            if (!level().hasChunk(newChunkX, newChunkZ)) {
                 this.remove(RemovalReason.DISCARDED);
                 return;
             }

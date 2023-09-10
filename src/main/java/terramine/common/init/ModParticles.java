@@ -8,16 +8,17 @@ import net.minecraft.client.particle.FlameParticle;
 import net.minecraft.client.particle.PlayerCloudParticle;
 import net.minecraft.core.Registry;
 import net.minecraft.core.particles.SimpleParticleType;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.ResourceLocation;
 import terramine.TerraMine;
 
 public class ModParticles {
 
-    public static final SimpleParticleType BLUE_POOF = FabricParticleTypes.simple();
-    public static final SimpleParticleType GREEN_SPARK = FabricParticleTypes.simple();
+    public static final SimpleParticleType BLUE_POOF = registerServer(TerraMine.id("blue_poof"), FabricParticleTypes.simple());
+    public static final SimpleParticleType GREEN_SPARK = registerServer(TerraMine.id("green_spark"), FabricParticleTypes.simple());
 
-    public static void registerServer() {
-        Registry.register(Registry.PARTICLE_TYPE, TerraMine.id("blue_poof"), BLUE_POOF);
-        Registry.register(Registry.PARTICLE_TYPE, TerraMine.id("green_spark"), GREEN_SPARK);
+    public static SimpleParticleType registerServer(ResourceLocation name, SimpleParticleType type) {
+        return Registry.register(BuiltInRegistries.PARTICLE_TYPE, name, type);
     }
 
     @Environment(EnvType.CLIENT)

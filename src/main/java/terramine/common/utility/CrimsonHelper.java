@@ -11,7 +11,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SnowLayerBlock;
 import net.minecraft.world.level.block.SpreadingSnowyDirtBlock;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.lighting.LayerLightEngine;
+import net.minecraft.world.level.lighting.LightEngine;
 import org.jetbrains.annotations.NotNull;
 import terramine.TerraMine;
 import terramine.common.block.CrimsonSnowLayer;
@@ -34,7 +34,7 @@ public class CrimsonHelper extends SpreadingSnowyDirtBlock  {
         if (blockState2.getFluidState().getAmount() == 8) {
             return true;
         }
-        int i = LayerLightEngine.getLightBlockInto(levelReader, blockState, blockPos, blockState2, blockPos2, Direction.UP, blockState2.getLightBlock(levelReader, blockPos2));
+        int i = LightEngine.getLightBlockInto(levelReader, blockState, blockPos, blockState2, blockPos2, Direction.UP, blockState2.getLightBlock(levelReader, blockPos2));
         return i >= levelReader.getMaxLightLevel();
     }
 

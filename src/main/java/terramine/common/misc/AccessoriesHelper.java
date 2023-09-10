@@ -35,7 +35,7 @@ public final class AccessoriesHelper {
 
 	public static boolean isEquipped(ItemStack itemStack, Player player, boolean ignoreEffectsDisabled) {
 		TerrariaInventory inventory = ((PlayerStorages)player).getTerrariaInventory();
-		if (!player.isCreative()) {
+		if (!player.isCreative() && !player.isSpectator()) {
 			for (int i = 0; i < 7; i++) {
 				if (inventory.getItem(i).getItem() == itemStack.getItem()) {
 					return true;
@@ -60,7 +60,7 @@ public final class AccessoriesHelper {
 	public static List<ItemStack> getAllEquipped(Player player, boolean ignoreEffectsDisabled) {
 		TerrariaInventory inventory = ((PlayerStorages)player).getTerrariaInventory();
 		List<ItemStack> list = new ArrayList<>();
-		if (!player.isCreative()) {
+		if (!player.isCreative() && !player.isSpectator()) {
 			for (int i = 0; i < 7; i++) {
 				if (inventory.getItem(i) != ItemStack.EMPTY) {
 					list.add(inventory.getItem(i));

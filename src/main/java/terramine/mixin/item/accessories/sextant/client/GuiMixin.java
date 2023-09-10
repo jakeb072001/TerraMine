@@ -4,6 +4,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.Gui;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.entity.player.Player;
@@ -38,7 +39,7 @@ public abstract class GuiMixin {
 	@Unique MutableComponent unknownMoonPhaseText = Component.translatable(TerraMine.MOD_ID + ".ui.unknownMoonPhase");
 
 	@Inject(method = "renderPlayerHealth", require = 0, at = @At(value = "TAIL"))
-	private void renderGuiSextant(PoseStack matrices, CallbackInfo ci) {
+	private void renderGuiSextant(GuiGraphics guiGraphics, CallbackInfo ci) {
 		Player player = this.getCameraPlayer();
 
 		if (player == null || !getEquippedAccessories(player)) {
@@ -48,8 +49,7 @@ public abstract class GuiMixin {
 		int left = this.screenWidth - 22 - this.getFont().width(getMoonPhase());
 		int top = this.screenHeight - 53;
 
-		matrices.pushPose();
-		Gui.drawString(matrices, Minecraft.getInstance().font, getMoonPhase(), left, top, 0xffffff);
+		guiGraphics.drawString(Minecraft.getInstance().font, getMoonPhase(), left, top, 0xffffff);
 	}
 
 	@Unique

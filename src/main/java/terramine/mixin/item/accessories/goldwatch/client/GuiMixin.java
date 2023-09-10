@@ -4,6 +4,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.Gui;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.world.entity.player.Player;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -24,7 +25,7 @@ public abstract class GuiMixin {
 	@Shadow public abstract Font getFont();
 
 	@Inject(method = "renderPlayerHealth", require = 0, at = @At(value = "TAIL"))
-	private void renderGuiClock(PoseStack matrices, CallbackInfo ci) {
+	private void renderGuiClock(GuiGraphics guiGraphics, CallbackInfo ci) {
 		Player player = this.getCameraPlayer();
 
 		if (player == null || !getEquippedAccessories(player)) {
@@ -34,8 +35,7 @@ public abstract class GuiMixin {
 		int left = this.screenWidth - 22 - this.getFont().width(getTime());
 		int top = this.screenHeight - 13;
 
-		matrices.pushPose();
-		Gui.drawString(matrices, Minecraft.getInstance().font, getTime(), left, top, 0xffffff);
+		guiGraphics.drawString(Minecraft.getInstance().font, getTime(), left, top, 0xffffff);
 	}
 
 	@Unique
@@ -47,8 +47,8 @@ public abstract class GuiMixin {
 	@Unique
 	private String getTime() {
 		Minecraft mc = Minecraft.getInstance();
-		long time = mc.player.level.getDayTime();
-		long day = mc.player.level.getDayTime() / 24000L;
+		long time = mc.player.level().getDayTime();
+		long day = mc.player.level().getDayTime() / 24000L;
 		long currentTime = time - (24000L * day);
 		long currentHour = (currentTime / 1000L) + 6L;
 		double currentTimeMin = currentTime - ((currentHour - 6L) * 1000L);

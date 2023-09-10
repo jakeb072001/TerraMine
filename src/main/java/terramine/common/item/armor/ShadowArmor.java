@@ -16,11 +16,11 @@ public class ShadowArmor extends TerrariaArmor {
     private static final AttributeModifier MOVEMENT_SPEED_BONUS = new AttributeModifier(UUID.fromString("d42cc1da-db67-462a-9024-ef1ad231409b"),
             "shadow_armor_set_bonus", 0.15, AttributeModifier.Operation.MULTIPLY_TOTAL);
 
-    public ShadowArmor(String armorType, ArmorMaterial armorMaterial, EquipmentSlot equipmentSlot, Properties properties) {
-        super(armorType, armorMaterial, equipmentSlot, properties);
+    public ShadowArmor(String armorType, ArmorMaterial armorMaterial, Type type, Properties properties) {
+        super(armorType, armorMaterial, type, properties);
 
         ImmutableMultimap.Builder<Attribute, AttributeModifier> builder = ImmutableMultimap.builder();
-        UUID uUID = ARMOR_MODIFIER_UUID_PER_SLOT[equipmentSlot.getIndex()];
+        UUID uUID = ARMOR_MODIFIER_UUID_PER_SLOT[type.getSlot().getIndex()];
         builder.put(Attributes.ARMOR, new AttributeModifier(uUID, "Armor modifier", this.defense, AttributeModifier.Operation.ADDITION));
         builder.put(Attributes.ARMOR_TOUGHNESS, new AttributeModifier(uUID, "Armor toughness", this.toughness, AttributeModifier.Operation.ADDITION));
         builder.put(Attributes.ATTACK_SPEED, new AttributeModifier(uUID, "Shadow Attack Speed", 0.07, AttributeModifier.Operation.MULTIPLY_TOTAL));

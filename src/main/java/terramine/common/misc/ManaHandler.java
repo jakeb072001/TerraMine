@@ -35,9 +35,9 @@ public class ManaHandler implements PlayerComponent<Component>, AutoSyncedCompon
         if (provider.getServer() != null) {
             if (currentMana == maxMana && manaRegenDelay <= 0) {
                 manaRegenDelay = (0.7 * ((1 - ((double) currentMana / maxMana)) * 240 + 45)) / manaDelayBonus;
-                provider.level.playSound(null, provider.blockPosition(), ModSoundEvents.MANA_FULL, SoundSource.PLAYERS, 1f, 1f);
+                provider.level().playSound(null, provider.blockPosition(), ModSoundEvents.MANA_FULL, SoundSource.PLAYERS, 1f, 1f);
             } else if (currentMana != maxMana) {
-                manaRegenDelay -= provider.level.getGameRules().getInt(ModCommands.MANA_REGEN_SPEED);
+                manaRegenDelay -= provider.level().getGameRules().getInt(ModCommands.MANA_REGEN_SPEED);
             }
             if (manaRegenDelay <= 0 && currentMana != maxMana) {
                 addCurrentMana(Math.max((int) (Math.abs((((double) maxMana / 7) + 1 + ((double) maxMana / 2) + manaBonus) * (((double) currentMana / maxMana) * 0.8 + 0.2) * 1.15) / 20), 1));
@@ -79,7 +79,7 @@ public class ManaHandler implements PlayerComponent<Component>, AutoSyncedCompon
             if (currentMana > 0) {
                 this.currentMana = Math.min(currentMana + this.currentMana, maxMana);
                 provider.awardStat(Stats.CUSTOM.get(ModStatistics.MANA_USED), currentMana);
-            } else if (currentMana < 0 && !provider.level.getGameRules().getBoolean(ModCommands.MANA_INFINITE)) {
+            } else if (currentMana < 0 && !provider.level().getGameRules().getBoolean(ModCommands.MANA_INFINITE)) {
                 this.currentMana = Math.max(currentMana + this.currentMana, 0);
             }
         }

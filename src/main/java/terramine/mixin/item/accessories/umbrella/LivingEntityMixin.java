@@ -27,7 +27,7 @@ public abstract class LivingEntityMixin extends Entity {
 
 	@ModifyVariable(method = "travel", ordinal = 0, name = "d", at = @At(value = "INVOKE", ordinal = 0, target = "Lnet/minecraft/world/level/Level;getFluidState(Lnet/minecraft/core/BlockPos;)Lnet/minecraft/world/level/material/FluidState;"))
 	private double changeGravity(double gravity) {
-		boolean isFalling = !this.isOnGround() && this.getDeltaMovement().y <= 0.0D;
+		boolean isFalling = !this.onGround() && this.getDeltaMovement().y <= 0.0D;
 		boolean heldMainHand = UmbrellaItem.getHeldStatusForHand((LivingEntity) (Object) this, InteractionHand.MAIN_HAND) == UmbrellaItem.HeldStatus.HELD_UP;
 		boolean heldOffHand = UmbrellaItem.getHeldStatusForHand((LivingEntity) (Object) this, InteractionHand.OFF_HAND) == UmbrellaItem.HeldStatus.HELD_UP;
 		boolean isInWater = this.isInWater() && !ModComponents.SWIM_ABILITIES.maybeGet(this).map(SwimAbilityComponent::isSinking).orElse(false);

@@ -12,9 +12,9 @@ public class FlowerBootsItem extends AccessoryTerrariaItem {
 	@Override
 	public void curioTick(Player player, ItemStack stack) {
 		if (player != null && player.isSprinting()) {
-			Level level = player.level;
+			Level level = player.level();
 			BlockPos blockPos = player.getOnPos();
-			BlockPos blockCropPos = player.getOnPos().offset(0,1.3,0);
+			BlockPos blockCropPos = player.getOnPos().offset(0, (int) 1.3,0);
 			if (level.getBlockState(blockPos).getBlock() instanceof BonemealableBlock && level.isClientSide()) {
 				BoneMealPacket.send(blockPos);
 			}

@@ -1,6 +1,7 @@
 package terramine.common.init;
 
 import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import terramine.TerraMine;
@@ -42,7 +43,7 @@ public class ModSoundEvents {
 
 	private static SoundEvent register(String name) {
 		ResourceLocation id = TerraMine.id(name);
-		return Registry.register(Registry.SOUND_EVENT, id, new SoundEvent(id));
+		return Registry.register(BuiltInRegistries.SOUND_EVENT, id, SoundEvent.createVariableRangeEvent(id));
 	}
 
 	private ModSoundEvents() {

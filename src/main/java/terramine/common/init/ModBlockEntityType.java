@@ -2,6 +2,7 @@ package terramine.common.init;
 
 import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
 import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import terramine.TerraMine;
 import terramine.common.entity.block.*;
@@ -18,14 +19,14 @@ public class ModBlockEntityType {
     public static final BlockEntityType<SafeEntity> SAFE = FabricBlockEntityTypeBuilder.create(SafeEntity::new, ModBlocks.SAFE).build(null);
 
     public static void register() {
-        Registry.register(Registry.BLOCK_ENTITY_TYPE, TerraMine.id("gold_chest"), GOLD_CHEST);
-        Registry.register(Registry.BLOCK_ENTITY_TYPE, TerraMine.id("frozen_chest"), FROZEN_CHEST);
-        Registry.register(Registry.BLOCK_ENTITY_TYPE, TerraMine.id("ivy_chest"), IVY_CHEST);
-        Registry.register(Registry.BLOCK_ENTITY_TYPE, TerraMine.id("sandstone_chest"), SANDSTONE_CHEST);
-        Registry.register(Registry.BLOCK_ENTITY_TYPE, TerraMine.id("water_chest"), WATER_CHEST);
-        Registry.register(Registry.BLOCK_ENTITY_TYPE, TerraMine.id("skyware_chest"), SKYWARE_CHEST);
-        Registry.register(Registry.BLOCK_ENTITY_TYPE, TerraMine.id("shadow_chest"), SHADOW_CHEST);
-        Registry.register(Registry.BLOCK_ENTITY_TYPE, TerraMine.id("piggy_bank"), PIGGY_BANK);
-        Registry.register(Registry.BLOCK_ENTITY_TYPE, TerraMine.id("safe"), SAFE);
+        Registry.register(BuiltInRegistries.BLOCK_ENTITY_TYPE, TerraMine.id("gold_chest"), GOLD_CHEST);
+        Registry.register(BuiltInRegistries.BLOCK_ENTITY_TYPE, TerraMine.id("frozen_chest"), FROZEN_CHEST);
+        Registry.register(BuiltInRegistries.BLOCK_ENTITY_TYPE, TerraMine.id("ivy_chest"), IVY_CHEST);
+        Registry.register(BuiltInRegistries.BLOCK_ENTITY_TYPE, TerraMine.id("sandstone_chest"), SANDSTONE_CHEST);
+        Registry.register(BuiltInRegistries.BLOCK_ENTITY_TYPE, TerraMine.id("water_chest"), WATER_CHEST);
+        Registry.register(BuiltInRegistries.BLOCK_ENTITY_TYPE, TerraMine.id("skyware_chest"), SKYWARE_CHEST);
+        Registry.register(BuiltInRegistries.BLOCK_ENTITY_TYPE, TerraMine.id("shadow_chest"), SHADOW_CHEST);
+        Registry.register(BuiltInRegistries.BLOCK_ENTITY_TYPE, TerraMine.id("piggy_bank"), PIGGY_BANK);
+        Registry.register(BuiltInRegistries.BLOCK_ENTITY_TYPE, TerraMine.id("safe"), SAFE);
     }
 }

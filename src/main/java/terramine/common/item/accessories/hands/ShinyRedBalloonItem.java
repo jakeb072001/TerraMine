@@ -8,6 +8,6 @@ public class ShinyRedBalloonItem extends AccessoryTerrariaItem {
 
     @Override
 	public MobEffectInstance getPermanentEffect() {
-		return new MobEffectInstance(MobEffects.JUMP, 20, 1, true, false);
+		return new MobEffectInstance(MobEffects.JUMP, -1, 1, true, false);
 	}
 }

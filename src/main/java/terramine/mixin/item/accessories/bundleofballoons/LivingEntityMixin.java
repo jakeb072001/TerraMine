@@ -89,7 +89,7 @@ public abstract class LivingEntityMixin extends Entity implements LivingEntityEx
 		jumpWasReleased |= !this.jumping;
 
 		boolean flying = player.getAbilities().flying;
-		if (this.jumping && this.jumpWasReleased && !this.isInWater() && !this.isOnGround() && !this.isPassenger()
+		if (this.jumping && this.jumpWasReleased && !this.isInWater() && !this.onGround() && !this.isPassenger()
 				&& !flying && AccessoriesHelper.isEquipped(ModItems.BUNDLE_OF_BALLOONS, player)) {
 			if (!this.hasDoubleJumped || !this.hasTripleJumped || !this.hasQuadrupleJumped) {
 				this.terramine$doubleJump();
@@ -106,7 +106,7 @@ public abstract class LivingEntityMixin extends Entity implements LivingEntityEx
 
 	@Unique
 	private void resetJumpStatus(Player player) {
-		if ((this.isOnGround() || this.onClimbable() || ModComponents.MOVEMENT_ORDER.get(player).getWallJumped()) && !this.isInWater()) {
+		if ((this.onGround() || this.onClimbable() || ModComponents.MOVEMENT_ORDER.get(player).getWallJumped()) && !this.isInWater()) {
 			this.hasDoubleJumped = false;
 			this.hasTripleJumped = false;
 			this.hasQuadrupleJumped = false;

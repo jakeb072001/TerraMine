@@ -32,7 +32,7 @@ public class BlockBehaviourMixin {
     }
 
     private boolean celestialStoneCheck(Player player) {
-        return ((AccessoriesHelper.isEquipped(ModItems.SUN_STONE, player) && !player.level.isNight()) || (AccessoriesHelper.isEquipped(ModItems.MOON_STONE, player) && player.level.isNight())
+        return ((AccessoriesHelper.isEquipped(ModItems.SUN_STONE, player) && !player.level().isNight()) || (AccessoriesHelper.isEquipped(ModItems.MOON_STONE, player) && player.level().isNight())
                 || AccessoriesHelper.isEquipped(ModItems.CELESTIAL_STONE, player) || AccessoriesHelper.isEquipped(ModItems.CELESTIAL_SHELL, player));
     }
 }

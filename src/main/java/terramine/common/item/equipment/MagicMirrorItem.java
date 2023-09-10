@@ -25,7 +25,7 @@ import java.util.Optional;
 public class MagicMirrorItem extends TerrariaItem {
 
 	public MagicMirrorItem() {
-		super(new Properties().stacksTo(1).tab(TerraMine.ITEM_GROUP_EQUIPMENT).rarity(Rarity.RARE).fireResistant(), false);
+		super(new Properties().stacksTo(1).rarity(Rarity.RARE).fireResistant(), false);
 	}
 
 	@Override

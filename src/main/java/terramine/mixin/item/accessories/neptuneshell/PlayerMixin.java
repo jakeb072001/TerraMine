@@ -50,13 +50,13 @@ public abstract class PlayerMixin  extends LivingEntity {
             }
         }
 
-        if (!this.level.isClientSide()) {
+        if (!this.level().isClientSide()) {
             AttributeInstance attackDamage = this.getAttribute(Attributes.ATTACK_DAMAGE);
             AttributeInstance attackSpeed = this.getAttribute(Attributes.ATTACK_SPEED);
             AttributeInstance movementSpeed = this.getAttribute(Attributes.MOVEMENT_SPEED);
             AttributeInstance armorAdd = this.getAttribute(Attributes.ARMOR);
 
-            boolean isNight = this.level.isNight();
+            boolean isNight = this.level().isNight();
 
             if (attackDamage != null && attackSpeed != null && movementSpeed != null && armorAdd != null) {
                 if ((AccessoriesHelper.isEquipped(ModItems.MOON_STONE, this) && isNight) || (AccessoriesHelper.isEquipped(ModItems.SUN_STONE, this) && !isNight)

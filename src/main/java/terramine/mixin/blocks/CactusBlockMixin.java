@@ -6,7 +6,6 @@ import net.minecraft.tags.FluidTags;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.CactusBlock;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.Material;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -20,12 +19,11 @@ public class CactusBlockMixin {
         boolean cactusSurvive = true;
         for (Direction direction : Direction.Plane.HORIZONTAL) {
             BlockState blockState2 = levelReader.getBlockState(blockPos.relative(direction));
-            Material material = blockState2.getMaterial();
-            if (!material.isSolid() && !levelReader.getFluidState(blockPos.relative(direction)).is(FluidTags.LAVA)) continue;
+            if (!blockState2.isSolid() && !levelReader.getFluidState(blockPos.relative(direction)).is(FluidTags.LAVA)) continue;
             cactusSurvive = false;
         }
 
         BlockState blockState3 = levelReader.getBlockState(blockPos.below());
-        cir.setReturnValue(((cir.getReturnValue() || blockState3.is(ModBlocks.CORRUPTED_SAND) || blockState3.is(ModBlocks.CRIMSON_SAND)) && !levelReader.getBlockState(blockPos.above()).getMaterial().isLiquid() && cactusSurvive));
+        cir.setReturnValue(((cir.getReturnValue() || blockState3.is(ModBlocks.CORRUPTED_SAND) || blockState3.is(ModBlocks.CRIMSON_SAND)) && !levelReader.getFluidState(blockPos.above()).is(FluidTags.LAVA) && cactusSurvive));
     }
 }

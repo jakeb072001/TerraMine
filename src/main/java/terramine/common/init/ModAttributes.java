@@ -1,6 +1,7 @@
 package terramine.common.init;
 
 import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.RangedAttribute;
@@ -23,6 +24,6 @@ public class ModAttributes {
     }
 
     private static Attribute register(String string, Attribute attribute) {
-        return Registry.register(Registry.ATTRIBUTE, TerraMine.id(string), attribute);
+        return Registry.register(BuiltInRegistries.ATTRIBUTE, TerraMine.id(string), attribute);
     }
 }

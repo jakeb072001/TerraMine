@@ -72,14 +72,14 @@ dependencies {
     // Dependencies
     modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}+${project.minecraft_version}"
     modImplementation "me.shedaniel.cloth:cloth-config-fabric:${project.cloth_config_version}"
-    modImplementation "com.github.glitchfiend:TerraBlender-fabric:${project.minecraft_version}-${project.terrablender_version}"
+    modImplementation "com.github.glitchfiend:TerraBlender-fabric:${project.fake_minecraft_version}-${project.terrablender_version}"
     // modImplementation "software.bernie.geckolib:geckolib-fabric-1.19:${project.geckolib_version}"
     modImplementation include("dev.onyxstudios.cardinal-components-api:cardinal-components-base:${project.cca_version}")
     modImplementation include("dev.onyxstudios.cardinal-components-api:cardinal-components-entity:${project.cca_version}")
     modImplementation include("dev.onyxstudios.cardinal-components-api:cardinal-components-level:${project.cca_version}")
     modImplementation include("dev.onyxstudios.cardinal-components-api:cardinal-components-world:${project.cca_version}")
     modImplementation include("be.florens:expandability-fabric:${project.expandability_version}")
-    modImplementation include("io.github.cottonmc:LibGui:${project.libgui_version}")
+    modImplementation include("io.github.cottonmc:LibGui:${project.libgui_version}+${project.fake_minecraft_version}")
     // modImplementation include("io.github.fabricators_of_create:Porting-Lib:${project.porting_lib_version}")
     modImplementation include("com.jamieswhiteshirt:reach-entity-attributes:${project.reach_entity_attr_version}")
     modImplementation include("com.github.emilyploszaj:step-height-entity-attribute:${project.step_height_attr_version}") {
@@ -92,7 +92,7 @@ dependencies {
         transitive = false
     }
     modImplementation "me.shedaniel:RoughlyEnoughItems-fabric:${project.rei_version}"
-    modImplementation("dev.lambdaurora:lambdynamiclights:${project.lamb_dynamic_lights_version}")
+    modImplementation("dev.lambdaurora:lambdynamiclights:${project.lamb_dynamic_lights_version}+${project.minecraft_version}")
 
     // Compat
     modCompileOnly("com.github.apace100:origins-fabric:v${project.origins_version}") {

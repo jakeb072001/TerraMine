@@ -50,8 +50,8 @@ public abstract class LivingEntityMixin extends Entity {
 				ItemStack copy = newStack.copy();
 				String key = TerraMine.MOD_ID + "/accessorySlots";
 				UUID uuid = UUID.nameUUIDFromBytes(key.getBytes());
-				if (!ItemStack.isSame(newStack, oldStack)) {
-					if (!this.level.isClientSide) {
+				if (!ItemStack.isSameItem(newStack, oldStack)) {
+					if (!this.level().isClientSide) {
 						if (!oldStack.isEmpty()) {
 							Multimap<Attribute, AttributeModifier> map = getOldStackAccessory(i).getModifiers(getOldStack(i), player, uuid);
 							Multimap<String, AttributeModifier> slotMap = HashMultimap.create();
@@ -78,7 +78,7 @@ public abstract class LivingEntityMixin extends Entity {
 						}
 					}
 
-					if (!newStack.sameItem(oldStack)) {
+					if (!newStack.is(oldStack.getItem())) {
 						if (oldStack.getItem() instanceof AccessoryTerrariaItem oldItem) {
 							oldItem.onUnequip(oldStack, player);
 						}

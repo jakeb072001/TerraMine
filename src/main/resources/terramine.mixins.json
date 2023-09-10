@@ -80,7 +80,6 @@
     "player.CreativeModeInventoryScreenMixin",
     "player.InventoryScreenMixin",
     "statuseffect.client.GameRendererMixin",
-    "statuseffect.client.LivingEntityMixin",
     "statuseffect.client.MobEffectUtilMixin"
   ],
   "injectors": {

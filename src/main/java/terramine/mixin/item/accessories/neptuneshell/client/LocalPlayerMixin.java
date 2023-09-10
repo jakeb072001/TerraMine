@@ -18,8 +18,8 @@ import terramine.common.misc.AccessoriesHelper;
 @Mixin(LocalPlayer.class)
 public abstract class LocalPlayerMixin extends AbstractClientPlayer {
 
-    public LocalPlayerMixin(ClientLevel world, GameProfile profile, ProfilePublicKey profilePublicKey) {
-        super(world, profile, profilePublicKey);
+    public LocalPlayerMixin(ClientLevel clientLevel, GameProfile gameProfile) {
+        super(clientLevel, gameProfile);
     }
 
     @Inject(at = @At("HEAD"), method = "getWaterVision", cancellable = true)

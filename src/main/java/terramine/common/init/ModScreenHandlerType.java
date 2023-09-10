@@ -1,7 +1,9 @@
 package terramine.common.init;
 
 import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerLevelAccess;
 import net.minecraft.world.inventory.MenuType;
@@ -35,7 +37,7 @@ public class ModScreenHandlerType {
     }
 
     public static <T extends AbstractContainerMenu> MenuType<T> registerSimple(ResourceLocation id, MenuType.MenuSupplier<T> factory) {
-        MenuType<T> type = new MenuType<>(factory);
-        return Registry.register(Registry.MENU, id, type);
+        MenuType<T> type = new MenuType<>(factory, FeatureFlags.VANILLA_SET);
+        return Registry.register(BuiltInRegistries.MENU, id, type);
     }
 }

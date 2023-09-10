@@ -4,6 +4,7 @@ import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Multimaps;
 import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.resources.ResourceLocation;
@@ -35,7 +36,7 @@ public interface Accessories {
             for (int i = 0; i < list.size(); i++) {
                 CompoundTag tag = list.getCompound(i);
 
-                Optional<Attribute> optional = Registry.ATTRIBUTE
+                Optional<Attribute> optional = BuiltInRegistries.ATTRIBUTE
                         .getOptional(ResourceLocation.tryParse(tag.getString("AttributeName")));
 
                 if (optional.isPresent()) {

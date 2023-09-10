@@ -25,7 +25,7 @@ public abstract class EntityMixin {
 				&& AccessoriesHelper.isEquipped(ModItems.WHOOPEE_CUSHION, entity)
 				&& entity.getRandom().nextInt(8) == 0) {
 
-			entity.level.playSound(null, entity.getX(), entity.getY(), entity.getZ(),
+			entity.level().playSound(null, entity.getX(), entity.getY(), entity.getZ(),
 					ModSoundEvents.FART, SoundSource.PLAYERS, 1,
 					0.9F + entity.getRandom().nextFloat() * 0.2F);
 		}

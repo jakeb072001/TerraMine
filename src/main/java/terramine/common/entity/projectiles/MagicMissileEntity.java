@@ -17,7 +17,7 @@ public class MagicMissileEntity extends MagicMissileHelper {
     @Override
     public void createParticles() {
         float random = (rand.nextFloat() - 0.5F) * 0.1F;
-        this.level.addParticle(ParticleTypes.ENCHANTED_HIT, position().x(), position().y(), position().z(), random, -0.2D, random);
-        this.level.addParticle(ModParticles.BLUE_POOF, position().x(), position().y(), position().z(), random, -0.2D, random);
+        this.level().addParticle(ParticleTypes.ENCHANTED_HIT, position().x(), position().y(), position().z(), random, -0.2D, random);
+        this.level().addParticle(ModParticles.BLUE_POOF, position().x(), position().y(), position().z(), random, -0.2D, random);
     }
 }

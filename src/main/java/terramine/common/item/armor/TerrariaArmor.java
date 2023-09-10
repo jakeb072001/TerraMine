@@ -45,14 +45,14 @@ public class TerrariaArmor extends ArmorItem {
             UUID.fromString("2AD3F246-FEE1-4E67-B886-69FD380BB150")
     };
 
-    public TerrariaArmor(String armorType, ArmorMaterial armorMaterial, EquipmentSlot equipmentSlot, Properties properties) {
-        super(armorMaterial, equipmentSlot, properties);
+    public TerrariaArmor(String armorType, ArmorMaterial armorMaterial, Type type, Properties properties) {
+        super(armorMaterial, type, properties);
 
         this.armorType = armorType;
-        this.defense = armorMaterial.getDefenseForSlot(equipmentSlot);
+        this.defense = armorMaterial.getDefenseForType(type);
         this.toughness = armorMaterial.getToughness();
         ImmutableMultimap.Builder<Attribute, AttributeModifier> builder = ImmutableMultimap.builder();
-        UUID uUID = ARMOR_MODIFIER_UUID_PER_SLOT[equipmentSlot.getIndex()];
+        UUID uUID = ARMOR_MODIFIER_UUID_PER_SLOT[type.getSlot().getIndex()];
         builder.put(Attributes.ARMOR, new AttributeModifier(uUID, "Armor modifier", this.defense, AttributeModifier.Operation.ADDITION));
         builder.put(Attributes.ARMOR_TOUGHNESS, new AttributeModifier(uUID, "Armor toughness", this.toughness, AttributeModifier.Operation.ADDITION));
         attributeModifiers = builder.build();
@@ -60,7 +60,7 @@ public class TerrariaArmor extends ArmorItem {
 
     @Override
     public Multimap<Attribute, AttributeModifier> getDefaultAttributeModifiers(@NotNull EquipmentSlot equipmentSlot) {
-        return equipmentSlot == this.slot ? this.attributeModifiers : super.getDefaultAttributeModifiers(equipmentSlot);
+        return equipmentSlot == this.getEquipmentSlot() ? this.attributeModifiers : super.getDefaultAttributeModifiers(equipmentSlot);
     }
 
     public static void addModifier(AttributeInstance instance, AttributeModifier modifier) {
@@ -98,12 +98,12 @@ public class TerrariaArmor extends ArmorItem {
 
         boolean isEquipped;
         if (entity instanceof LivingEntity livingEntity) {
-            ItemStack equippedStack = livingEntity.getItemBySlot(getSlot());
+            ItemStack equippedStack = livingEntity.getItemBySlot(getEquipmentSlot());
             if (equippedStack == itemStack) {
                 isEquipped = ArmorSetCheck.isSetEquipped(livingEntity, this.getArmorType());
 
                 if (isEquipped) {
-                    if (itemStack.getItem() instanceof TerrariaArmor armor && armor.getSlot() == EquipmentSlot.HEAD) { // do this so the set bonus only happens once and not per armor (4 times the buff)
+                    if (itemStack.getItem() instanceof TerrariaArmor armor && armor.getEquipmentSlot() == EquipmentSlot.HEAD) { // do this so the set bonus only happens once and not per armor (4 times the buff)
                         setBonusEffect(livingEntity, level);
                     }
                 } else {

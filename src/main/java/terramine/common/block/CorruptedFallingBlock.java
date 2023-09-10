@@ -12,7 +12,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.FallingBlock;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.Material;
 import org.jetbrains.annotations.NotNull;
 import terramine.common.utility.CorruptionHelper;
 
@@ -49,8 +48,7 @@ public class CorruptedFallingBlock extends CorruptionHelper {
     }
 
     public static boolean isFree(BlockState blockState) {
-        Material material = blockState.getMaterial();
-        return blockState.isAir() || blockState.is(BlockTags.FIRE) || material.isLiquid() || material.isReplaceable();
+        return blockState.isAir() || blockState.is(BlockTags.FIRE) || blockState.liquid() || blockState.canBeReplaced();
     }
 
     @Override

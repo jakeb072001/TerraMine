@@ -1,7 +1,7 @@
 package terramine.client.render.entity.renderer.monsters.devourer;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.math.Vector3f;
+import com.mojang.math.Axis;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -36,6 +36,6 @@ public class DevourerTailRenderer extends MobRenderer<DevourerTailEntity, Devour
     @Override
     protected void setupRotations(@NotNull DevourerTailEntity entity, @NotNull PoseStack poseStack, float f, float g, float h) {
         super.setupRotations(entity, poseStack, f, g, h);
-        poseStack.mulPose(Vector3f.XP.rotationDegrees(entity.getXRot()));
+        poseStack.mulPose(Axis.XP.rotationDegrees(entity.getXRot()));
     }
 }

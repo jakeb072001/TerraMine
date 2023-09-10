@@ -43,7 +43,7 @@ public class CharmOfMythsItem extends AccessoryTerrariaItem {
 
 	/** Called when the potion effects start to apply this effect */
 	private static void onPotionStart(LivingEntity living, MobEffectInstance newEffect, MobEffectInstance oldEffect, @Nullable Entity source) {
-		if (newEffect.getEffect().isBeneficial() && !newEffect.isNoCounter()) {
+		if (newEffect.getEffect().isBeneficial() && !newEffect.isInfiniteDuration()) {
 			if (AccessoriesHelper.isEquipped(ModItems.CHARM_OF_MYTHS, living)) {
 				int duration = (int) (newEffect.getDuration() * 1.25f);
 				((MobEffectInstanceExtensions) newEffect).terramine$setDuration(duration);

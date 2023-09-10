@@ -2,7 +2,6 @@ package terramine;
 
 import dev.architectury.event.events.common.PlayerEvent;
 import net.fabricmc.api.ModInitializer;
-import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.entity.event.v1.ServerPlayerEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
@@ -17,8 +16,6 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.stats.StatFormatter;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.ItemStack;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import terrablender.api.RegionType;
@@ -44,19 +41,6 @@ public class TerraMine implements ModInitializer, TerraBlenderApi {
 
 	public static final String MOD_ID = "terramine";
 	public static final Logger LOGGER = LoggerFactory.getLogger(TerraMine.class);
-	// todo: make tabs have a random item as the icon, pretty easy to do but i want it to work nicely so create an array somewhere with all the items i want as icons for each tab and then use a RandomSource to select a random one
-	/** Example, haven't tested but should work (maybe with some small changes, I don't remember array stuff off the top of my head)
-	 * public static final CreativeModeTab ITEM_GROUP_EQUIPMENT = FabricItemGroupBuilder.build(id("terramine_equipment"), () -> {
-	 * return new ItemStack(Utilities.arrayOfEquipment[randomSource.getInt(Utilities.arrayOfEquipment.length())])
-	 * });
-	 */
-	public static final CreativeModeTab ITEM_GROUP_EQUIPMENT = FabricItemGroupBuilder.build(id("terramine_equipment"), () -> new ItemStack(ModItems.DEMONITE_SWORD));
-	public static final CreativeModeTab ITEM_GROUP_ARMOR = FabricItemGroupBuilder.build(id("terramine_armor"), () -> new ItemStack(ModItems.SHADOW_HELMET));
-	public static final CreativeModeTab ITEM_GROUP_ACCESSORIES = FabricItemGroupBuilder.build(id("terramine_accessories"), () -> new ItemStack(ModItems.TERRASPARK_BOOTS));
-	public static final CreativeModeTab ITEM_GROUP_BLOCKS = FabricItemGroupBuilder.build(id("terramine_blocks"), () -> new ItemStack(ModItems.RAW_DEMONITE_BLOCK));
-	public static final CreativeModeTab ITEM_GROUP_THROWABLES = FabricItemGroupBuilder.build(id("terramine_throwables"), () -> new ItemStack(ModItems.DYNAMITE));
-	public static final CreativeModeTab ITEM_GROUP_STUFF = FabricItemGroupBuilder.build(id("terramine_stuff"), () -> new ItemStack(ModItems.RAW_DEMONITE));
-	public static final CreativeModeTab ITEM_GROUP_DYES = FabricItemGroupBuilder.build(id("terramine_dyes"), () -> new ItemStack(ModItems.BLUE_DYE));
 	public static ModConfig CONFIG;
 	public static final int CONFIG_VERSION = 2; // Increase if config changed in an incompatible way
 	//private static final Map<String, Runnable> COMPAT_HANDLERS = Map.of(
@@ -79,6 +63,8 @@ public class TerraMine implements ModInitializer, TerraBlenderApi {
 		// Force loading init classes
 		// Entities is loaded by items, loot tables can load lazily (no registration)
 		ModItems.TERRASPARK_BOOTS.toString();
+		ModItemGroups.ITEM_GROUP_EQUIPMENT.toString();
+		ModItemGroups.registerItemGroups();
 		ModEntities.addToSpawn();
 		ModSoundEvents.SPECTRE_BOOTS.toString();
 		ModPotions.LESSER_MANA_POTION.toString();
@@ -86,10 +72,9 @@ public class TerraMine implements ModInitializer, TerraBlenderApi {
 		ModScreenHandlerType.register();
 		ModBlockEntityType.register();
 		ModFeatures.register();
-		ModBiomes.registerAll();
 		ModProfessions.GOBLIN_TINKERER_POI.toString();
 		ModProfessions.fillTradeData();
-		ModParticles.registerServer();
+		ModParticles.BLUE_POOF.toString();
 		ModCommands.registerRules();
 		CommandRegistrationCallback.EVENT.register((dispatcher, context, selection) -> {
 			ModCommands.registerCommands(dispatcher);
@@ -146,12 +131,12 @@ public class TerraMine implements ModInitializer, TerraBlenderApi {
 			ModComponents.ACCESSORY_SLOTS_ADDER.sync(player);
 		} else {
 			// check if hardcore and add an extra accessory slot if true, also checks the config to see if the slot should be removed or not
-			if (player.level.getLevelData().isHardcore() && ModComponents.ACCESSORY_SLOTS_ADDER.get(player).get() < 2 && !ModComponents.ACCESSORY_HARDCORE_CHECK.get(player).get() && !CONFIG.general.disableHardcoreExtraAccessory) {
+			if (player.level().getLevelData().isHardcore() && ModComponents.ACCESSORY_SLOTS_ADDER.get(player).get() < 2 && !ModComponents.ACCESSORY_HARDCORE_CHECK.get(player).get() && !CONFIG.general.disableHardcoreExtraAccessory) {
 				ModComponents.ACCESSORY_HARDCORE_CHECK.get(player).set(true);
 				ModComponents.ACCESSORY_HARDCORE_CHECK.sync(player);
 				ModComponents.ACCESSORY_SLOTS_ADDER.get(player).add(1);
 				ModComponents.ACCESSORY_SLOTS_ADDER.sync(player);
-			} else if ((player.level.getLevelData().isHardcore() && ModComponents.ACCESSORY_HARDCORE_CHECK.get(player).get() && CONFIG.general.disableHardcoreExtraAccessory)) {
+			} else if ((player.level().getLevelData().isHardcore() && ModComponents.ACCESSORY_HARDCORE_CHECK.get(player).get() && CONFIG.general.disableHardcoreExtraAccessory)) {
 				ModComponents.ACCESSORY_HARDCORE_CHECK.get(player).set(false);
 				ModComponents.ACCESSORY_HARDCORE_CHECK.sync(player);
 				ModComponents.ACCESSORY_SLOTS_ADDER.get(player).remove(1);

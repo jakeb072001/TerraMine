@@ -4,6 +4,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.Gui;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.entity.player.Player;
@@ -39,7 +40,7 @@ public abstract class GuiMixin {
 	@Shadow public abstract Font getFont();
 
 	@Inject(method = "renderPlayerHealth", require = 0, at = @At(value = "TAIL"))
-	private void renderGuiMetalDetector(PoseStack matrices, CallbackInfo ci) {
+	private void renderGuiMetalDetector(GuiGraphics guiGraphics, CallbackInfo ci) {
 		Player player = this.getCameraPlayer();
 
 		if (player == null || !getEquippedAccessories(player)) {
@@ -59,8 +60,7 @@ public abstract class GuiMixin {
 		int left = this.screenWidth - 22 - this.getFont().width(lastOre);
 		int top = this.screenHeight - 63;
 
-		matrices.pushPose();
-		Gui.drawString(matrices, Minecraft.getInstance().font, lastOre, left, top, 0xffffff);
+		guiGraphics.drawString(Minecraft.getInstance().font, lastOre, left, top, 0xffffff);
 	}
 
 	@Unique

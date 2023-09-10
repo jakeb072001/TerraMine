@@ -40,7 +40,7 @@ public class DemonHeartItem extends TerrariaItemConfigurable {
                 stack.shrink(1);
             }
         }
-        player.level.playSound(null, player.blockPosition(), ModSoundEvents.MANA_CRYSTAL_USE, SoundSource.PLAYERS, 0.50f, 1f);
+        player.level().playSound(null, player.blockPosition(), ModSoundEvents.MANA_CRYSTAL_USE, SoundSource.PLAYERS, 0.50f, 1f);
         return super.finishUsingItem(stack, world, entity);
     }
 

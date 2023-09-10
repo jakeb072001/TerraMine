@@ -24,7 +24,7 @@ public class LevelStorageAccessMixin {
      */
     @Inject(at = @At("HEAD"), method = "saveDataTag(Lnet/minecraft/core/RegistryAccess;Lnet/minecraft/world/level/storage/WorldData;Lnet/minecraft/nbt/CompoundTag;)V")
     public void randomEvilType(RegistryAccess registryAccess, WorldData worldData, CompoundTag compoundTag, CallbackInfo ci) {
-        random.setSeed(worldData.worldGenSettings().seed());
+        random.setSeed(worldData.worldGenOptions().seed());
         ModComponents.EVIL_TYPE.get(worldData.overworldData()).set(random.nextBoolean());
     }
 }

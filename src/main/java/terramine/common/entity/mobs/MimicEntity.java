@@ -136,7 +136,7 @@ public class MimicEntity extends Mob implements Enemy {
 			if (isDormant) {
 				isDormant = false;
 			}
-		} else if (!onGround) {
+		} else if (!onGround()) {
 			ticksInAir++;
 		} else if (ticksInAir > 0) {
 			playSound(getLandingSound(), getSoundVolume(), getVoicePitch());
@@ -154,7 +154,7 @@ public class MimicEntity extends Mob implements Enemy {
 		// noinspection ConstantConditions
 		if (attackCooldown <= 0 && player.getCommandSenderWorld().getDifficulty() != Difficulty.PEACEFUL && hasLineOfSight(player)
 				&& distanceToSqr(player.getBoundingBox().getCenter().subtract(0, getBoundingBox().getYsize() / 2, 0)) < 1
-				&& player.hurt(DamageSource.mobAttack(this), (float) getAttribute(Attributes.ATTACK_DAMAGE).getValue())) {
+				&& player.hurt(damageSources().mobAttack(this), (float) getAttribute(Attributes.ATTACK_DAMAGE).getValue())) {
 			attackCooldown = 20;
 			doEnchantDamageEffects(this, player);
 		}
@@ -172,12 +172,12 @@ public class MimicEntity extends Mob implements Enemy {
 			setTarget(player);
 		}
 
-		if (ticksInAir <= 0 && source.isProjectile() && !source.isBypassMagic()) {
+		if (ticksInAir <= 0 && source.isIndirect()) {
 			playSound(ModSoundEvents.MIMIC_HURT, getSoundVolume(), getVoicePitch());
 			return false;
 		}
 
-		if (isOnGround() && getRandom().nextBoolean() && getMoveControl() instanceof MimicMovementController mimicMoveControl) {
+		if (onGround() && getRandom().nextBoolean() && getMoveControl() instanceof MimicMovementController mimicMoveControl) {
 			mimicMoveControl.setDirection(getRandom().nextInt(4) * 90, true);
 		}
 
@@ -274,7 +274,7 @@ public class MimicEntity extends Mob implements Enemy {
 
 		@Override
 		public boolean canUse() {
-			return mimic.getTarget() == null && (mimic.onGround || mimic.isInWater() || mimic.isInLava() || mimic.hasEffect(MobEffects.LEVITATION));
+			return mimic.getTarget() == null && (mimic.onGround() || mimic.isInWater() || mimic.isInLava() || mimic.hasEffect(MobEffects.LEVITATION));
 		}
 
 		@Override
@@ -375,7 +375,7 @@ public class MimicEntity extends Mob implements Enemy {
 				mimic.setZza(0);
 			} else {
 				operation = Operation.WAIT;
-				if (mimic.onGround) {
+				if (mimic.onGround()) {
 					// noinspection ConstantConditions
 					mimic.setSpeed((float) (speedModifier * mimic.getAttribute(Attributes.MOVEMENT_SPEED).getValue()));
 					if (jumpDelay-- > 0) {

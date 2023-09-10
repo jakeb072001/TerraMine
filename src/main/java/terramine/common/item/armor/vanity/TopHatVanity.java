@@ -9,8 +9,8 @@ import terramine.client.render.accessory.model.HeadModel;
 import terramine.common.init.ModModelLayers;
 
 public class TopHatVanity extends VanityArmor {
-    public TopHatVanity(String armorType, ArmorMaterial armorMaterial, EquipmentSlot equipmentSlot, Properties properties) {
-        super(armorType, armorMaterial, equipmentSlot, properties);
+    public TopHatVanity(String armorType, ArmorMaterial armorMaterial, Type type, Properties properties) {
+        super(armorType, armorMaterial, type, properties);
     }
 
     @Override

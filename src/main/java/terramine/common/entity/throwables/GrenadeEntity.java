@@ -11,7 +11,7 @@ public class GrenadeEntity extends ExplosiveThrowableEntity {
     public GrenadeEntity(EntityType<? extends ThrowableProjectile> entityType, Level level) {
         super(entityType, level);
         setStats(3, 2f, 0.6f);
-        explosionType = BlockInteraction.NONE;
+        explosionType = BlockInteraction.KEEP;
     }
 
     @Override

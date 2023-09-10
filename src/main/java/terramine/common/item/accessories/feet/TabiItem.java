@@ -22,7 +22,7 @@ public class TabiItem extends AccessoryTerrariaItem {
 
     @Override
 	protected void curioTick(Player player, ItemStack stack) {
-		if (player.level.isClientSide) {
+		if (player.level().isClientSide) {
 			if (!AccessoriesHelper.isEquipped(ModItems.MASTER_NINJA_GEAR, player)) {
 				if (timer++ >= 6) {
 					if (upPressed) {

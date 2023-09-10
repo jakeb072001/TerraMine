@@ -1,10 +1,12 @@
 package terramine.common.entity.mobs;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Vec3i;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.damagesource.DamageSources;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -61,14 +63,14 @@ public class FlyingEntityAI extends Monster implements Enemy {
                     flyingEntity.bounce = true;
                 }
 
-                boolean isDay = flyingEntity.level.isDay();
+                boolean isDay = flyingEntity.level().isDay();
 
                 double motionY;
                 double motionX;
                 double motionZ;
                 flyingEntity.setNoGravity(true);
                 flyingEntity.fallDistance = 0;
-                Level world = flyingEntity.level;
+                Level world = flyingEntity.level();
                 Player target;
 
                 /*
@@ -84,22 +86,22 @@ public class FlyingEntityAI extends Monster implements Enemy {
                 }
                  */
 
-                target = flyingEntity.level.getNearestPlayer(flyingEntity.getX(), flyingEntity.getY(), flyingEntity.getZ(), flyingEntity.getAttribute(Attributes.FOLLOW_RANGE).getValue(), true);
+                target = flyingEntity.level().getNearestPlayer(flyingEntity.getX(), flyingEntity.getY(), flyingEntity.getZ(), flyingEntity.getAttribute(Attributes.FOLLOW_RANGE).getValue(), true);
 
-                if (world.getBlockState(new BlockPos(flyingEntity.position().x(), flyingEntity.position().y() - 1, flyingEntity.position().z())).getBlock().defaultBlockState() == Blocks.WATER.defaultBlockState()) {
+                if (world.getBlockState(new BlockPos((int) flyingEntity.position().x(), (int) (flyingEntity.position().y() - 1), (int) flyingEntity.position().z())).getBlock().defaultBlockState() == Blocks.WATER.defaultBlockState()) {
                     if (flyingEntity.velY < 0) {
                         flyingEntity.velY = 3;
                     }
                 }
 
                 if (!flyingEntity.isSpectator()) {
-                    if (world.getBlockState(new BlockPos(flyingEntity.position().x, flyingEntity.position().y - 0.5f, flyingEntity.position().z)).getMaterial().isSolid()) {
+                    if (world.getBlockState(new BlockPos((int) flyingEntity.position().x, (int) (flyingEntity.position().y - 0.5f), (int) flyingEntity.position().z)).isSolid()) {
                         flyingEntity.velY = 2.0f;
                     }
                 }
 
                 if (flyingEntity.bounce) {
-                    if (!flyingEntity.onGround) {
+                    if (!flyingEntity.onGround()) {
                         flyingEntity.velX = flyingEntity.oldVelX * -0.5;
                         if (flyingEntity.velX > 0 && flyingEntity.velX < 4) {
                             flyingEntity.velX = 4;
@@ -116,7 +118,7 @@ public class FlyingEntityAI extends Monster implements Enemy {
                         }
                     }
 
-                    if (flyingEntity.onGround) {
+                    if (flyingEntity.onGround()) {
                         flyingEntity.velY = flyingEntity.oldVelY * -0.5;
                         if (flyingEntity.velY > 0 && flyingEntity.velY < 2) {
                             flyingEntity.velY = 2;
@@ -127,7 +129,7 @@ public class FlyingEntityAI extends Monster implements Enemy {
                     }
                 }
 
-                if (flyingEntity.dayEscape && isDay && flyingEntity.level.canSeeSky(new BlockPos(flyingEntity.getEyePosition()))) {
+                if (flyingEntity.dayEscape && isDay && flyingEntity.level().canSeeSky(new BlockPos(new Vec3i((int) flyingEntity.getEyePosition().x, (int) flyingEntity.getEyePosition().y, (int) flyingEntity.getEyePosition().z)))) {
                     if (!flyingEntity.doOnce) {
                         flyingEntity.velX = flyingEntity.random.nextInt(-2, 3);
                         flyingEntity.velZ = flyingEntity.random.nextInt(-2, 3);
@@ -247,7 +249,7 @@ public class FlyingEntityAI extends Monster implements Enemy {
         super.playerTouch(player);
 
         if (this.isAlive()) {
-            player.hurt(DamageSource.mobAttack(this), (float) this.getAttribute(Attributes.ATTACK_DAMAGE).getValue());
+            player.hurt(damageSources().mobAttack(this), (float) this.getAttribute(Attributes.ATTACK_DAMAGE).getValue());
         }
     }
 

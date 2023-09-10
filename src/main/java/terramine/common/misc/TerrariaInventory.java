@@ -147,7 +147,7 @@ public class TerrariaInventory extends SimpleContainer {
 
     public boolean contains(ItemStack itemStack) {
         for (ItemStack itemStack2 : this.items) {
-            if (!itemStack2.isEmpty() && itemStack2.sameItem(itemStack)) {
+            if (!itemStack2.isEmpty() && itemStack2.is(itemStack.getItem())) {
                 return true;
             }
         }

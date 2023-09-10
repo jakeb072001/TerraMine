@@ -19,7 +19,7 @@ import terramine.common.utility.ExplosionConfigurable;
 public abstract class ExplosiveThrowableEntity extends ThrowableProjectile {
     public static final EntityDataAccessor<Boolean> STICKY = SynchedEntityData.defineId(ExplosiveThrowableEntity.class, EntityDataSerializers.BOOLEAN);
     public static final EntityDataAccessor<Boolean> BOUNCY = SynchedEntityData.defineId(ExplosiveThrowableEntity.class, EntityDataSerializers.BOOLEAN);
-    protected BlockInteraction explosionType = BlockInteraction.BREAK;
+    protected BlockInteraction explosionType = BlockInteraction.DESTROY;
     private int timer = 0;
     private int fuseTime = 0;
     private float radius = 0;
@@ -81,14 +81,14 @@ public abstract class ExplosiveThrowableEntity extends ThrowableProjectile {
     }
 
     protected void explode() {
-        if (!this.level.isClientSide) {
-            new ExplosionConfigurable(level, this, this.position().x(), this.position().y(), this.position().z(), radius, damage, explosionType);
+        if (!this.level().isClientSide) {
+            new ExplosionConfigurable(level(), this, this.position().x(), this.position().y(), this.position().z(), radius, damage, explosionType);
             this.discard();
         }
 
-        level.playSound(null, this.blockPosition(), ModSoundEvents.BOMB, SoundSource.AMBIENT, 1f, 1f);
-        level.addParticle(ParticleTypes.SMOKE, this.getX(), this.getY() + 0.5, this.getZ(), 0.0, 0.0, 0.0);
-        level.addParticle(ParticleTypes.EXPLOSION_EMITTER, this.getX(), this.getY(), this.getZ(), 1.0, 0.0, 0.0);
+        level().playSound(null, this.blockPosition(), ModSoundEvents.BOMB, SoundSource.AMBIENT, 1f, 1f);
+        level().addParticle(ParticleTypes.SMOKE, this.getX(), this.getY() + 0.5, this.getZ(), 0.0, 0.0, 0.0);
+        level().addParticle(ParticleTypes.EXPLOSION_EMITTER, this.getX(), this.getY(), this.getZ(), 1.0, 0.0, 0.0);
     }
 
     @Override

@@ -72,13 +72,13 @@ public class DevourerBodyEntity extends Monster implements Enemy {
         super.playerTouch(player);
 
         if (this.isAlive() && this.getAttribute(Attributes.ATTACK_DAMAGE) != null) {
-            player.hurt(DamageSource.mobAttack(this), (float) this.getAttribute(Attributes.ATTACK_DAMAGE).getValue());
+            player.hurt(damageSources().mobAttack(this), (float) this.getAttribute(Attributes.ATTACK_DAMAGE).getValue());
         }
     }
 
     @Override
     public boolean hurt(@NotNull DamageSource source, float f) {
-        if (source != DamageSource.FALL && source != DamageSource.IN_WALL && source != DamageSource.CRAMMING) {
+        if (source != damageSources().fall() && source != damageSources().inWall() && source != damageSources().cramming()) {
             if (this.head != null) {
                 if (f != 0) {
                     this.head.hurt(source, f);
@@ -95,8 +95,8 @@ public class DevourerBodyEntity extends Monster implements Enemy {
         float f = this.getDimensions(this.getPose()).width * 0.8f;
         AABB aABB = AABB.ofSize(this.getEyePosition(), f, 1.0E-6, f);
         return BlockPos.betweenClosedStream(aABB).anyMatch(blockPos -> {
-            BlockState blockState = this.level.getBlockState(blockPos);
-            return !blockState.isAir() && blockState.isSuffocating(this.level, blockPos) && Shapes.joinIsNotEmpty(blockState.getCollisionShape(this.level, blockPos).move(blockPos.getX(), blockPos.getY(), blockPos.getZ()), Shapes.create(aABB), BooleanOp.AND);
+            BlockState blockState = this.level().getBlockState(blockPos);
+            return !blockState.isAir() && blockState.isSuffocating(this.level(), blockPos) && Shapes.joinIsNotEmpty(blockState.getCollisionShape(this.level(), blockPos).move(blockPos.getX(), blockPos.getY(), blockPos.getZ()), Shapes.create(aABB), BooleanOp.AND);
         });
     }
 

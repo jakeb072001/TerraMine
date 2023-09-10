@@ -13,18 +13,18 @@
   },
   "criteria": {
     "kill_mimic": {
-      "trigger": "minecraft:player_killed_entity",
       "conditions": {
         "entity": [
           {
             "condition": "minecraft:entity_properties",
+            "entity": "this",
             "predicate": {
               "type": "terramine:mimic"
-            },
-            "entity": "this"
+            }
           }
         ]
-      }
+      },
+      "trigger": "minecraft:player_killed_entity"
     }
   }
 }

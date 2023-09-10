@@ -15,11 +15,11 @@ import java.util.UUID;
 public class CrimsonArmor extends TerrariaArmor {
     private int timer;
 
-    public CrimsonArmor(String armorType, ArmorMaterial armorMaterial, EquipmentSlot equipmentSlot, Properties properties) {
-        super(armorType, armorMaterial, equipmentSlot, properties);
+    public CrimsonArmor(String armorType, ArmorMaterial armorMaterial, Type type, Properties properties) {
+        super(armorType, armorMaterial, type, properties);
 
         ImmutableMultimap.Builder<Attribute, AttributeModifier> builder = ImmutableMultimap.builder();
-        UUID uUID = ARMOR_MODIFIER_UUID_PER_SLOT[equipmentSlot.getIndex()];
+        UUID uUID = ARMOR_MODIFIER_UUID_PER_SLOT[type.getSlot().getIndex()];
         builder.put(Attributes.ARMOR, new AttributeModifier(uUID, "Armor modifier", this.defense, AttributeModifier.Operation.ADDITION));
         builder.put(Attributes.ARMOR_TOUGHNESS, new AttributeModifier(uUID, "Armor toughness", this.toughness, AttributeModifier.Operation.ADDITION));
         builder.put(Attributes.ATTACK_DAMAGE, new AttributeModifier(uUID, "Crimson Attack Damage", 0.02, AttributeModifier.Operation.MULTIPLY_TOTAL));

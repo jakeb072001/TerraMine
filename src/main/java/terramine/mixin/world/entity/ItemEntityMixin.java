@@ -25,7 +25,7 @@ public abstract class ItemEntityMixin extends Entity {
     @Inject(method = "tick", at = @At("TAIL"))
     public void daytimeVanish(CallbackInfo ci) {
         if (this.getItem().is(ModItems.FAKE_FALLEN_STAR)) {
-            if (this.level.isDay() && !this.level.isClientSide) {
+            if (this.level().isDay() && !this.level().isClientSide) {
                 this.discard();
             }
         }

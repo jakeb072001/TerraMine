@@ -208,7 +208,7 @@ public class TerrariaInventoryContainerMenu extends AbstractContainerMenu {
 
     private void onEquipAccessory(Player player, ItemStack itemStack, ItemStack itemStack2) {
         boolean bl = itemStack2.isEmpty() && itemStack.isEmpty();
-        if (!bl && !ItemStack.isSameIgnoreDurability(itemStack, itemStack2)) {
+        if (!bl && !ItemStack.isSameItem(itemStack, itemStack2)) {
             if (itemStack2.getItem() instanceof AccessoryTerrariaItem accessory) {
                 AccessoryTerrariaItem.SoundInfo sound = accessory.getEquipSoundInfo();
                 player.playSound(sound.soundEvent(), sound.volume(), sound.pitch());

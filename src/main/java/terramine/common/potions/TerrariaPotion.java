@@ -1,6 +1,7 @@
 package terramine.common.potions;
 
 import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.item.alchemy.Potion;
@@ -32,7 +33,7 @@ public class TerrariaPotion extends Potion {
 
     public int registerTree(String namespace, String base) {
         if (registered) return 0;
-        Registry.register(Registry.POTION, namespace + ":" + base, this);
+        Registry.register(BuiltInRegistries.POTION, namespace + ":" + base, this);
         registered = true;
         int registeredTotal = 1;
         if (extended != null) {

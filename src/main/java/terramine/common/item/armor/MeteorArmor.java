@@ -16,11 +16,11 @@ import java.util.UUID;
 
 public class MeteorArmor extends TerrariaArmor {
 
-    public MeteorArmor(String armorType, ArmorMaterial armorMaterial, EquipmentSlot equipmentSlot, Properties properties) {
-        super(armorType, armorMaterial, equipmentSlot, properties);
+    public MeteorArmor(String armorType, ArmorMaterial armorMaterial, Type type, Properties properties) {
+        super(armorType, armorMaterial, type, properties);
 
         ImmutableMultimap.Builder<Attribute, AttributeModifier> builder = ImmutableMultimap.builder();
-        UUID uUID = ARMOR_MODIFIER_UUID_PER_SLOT[equipmentSlot.getIndex()];
+        UUID uUID = ARMOR_MODIFIER_UUID_PER_SLOT[type.getSlot().getIndex()];
         builder.put(Attributes.ARMOR, new AttributeModifier(uUID, "Armor modifier", this.defense, AttributeModifier.Operation.ADDITION));
         builder.put(Attributes.ARMOR_TOUGHNESS, new AttributeModifier(uUID, "Armor toughness", this.toughness, AttributeModifier.Operation.ADDITION));
         builder.put(ModAttributes.MAGIC_ATTACK_DAMAGE, new AttributeModifier(uUID, "Meteor Magic Damage", 0.09, AttributeModifier.Operation.MULTIPLY_TOTAL));

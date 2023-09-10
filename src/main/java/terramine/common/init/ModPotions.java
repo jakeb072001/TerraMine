@@ -1,6 +1,7 @@
 package terramine.common.init;
 
 import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.item.alchemy.Potion;
 import terramine.TerraMine;
 import terramine.common.potions.TerrariaPotion;
@@ -18,6 +19,6 @@ public class ModPotions {
     public static final Potion SUPER_MANA_POTION = register("super_mana", new TerrariaPotion.TerrariaPotionInstant("super_mana", ModMobEffects.INSTANT_MANA, 5));
 
     public static Potion register(String name, Potion potion) {
-        return Registry.register(Registry.POTION, TerraMine.id(name), potion);
+        return Registry.register(BuiltInRegistries.POTION, TerraMine.id(name), potion);
     }
 }

@@ -22,7 +22,7 @@ public class MasterNinjaGearItem extends AccessoryTerrariaItem {
 
     @Override
 	protected void curioTick(Player player, ItemStack stack) {
-		if (player.level.isClientSide) {
+		if (player.level().isClientSide) {
 			if (timer++ >= 6) {
 				if (upPressed) {
 					upPressed = false;

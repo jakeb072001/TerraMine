@@ -11,14 +11,13 @@ import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.DispenserBlock;
 import org.jetbrains.annotations.NotNull;
-import terramine.TerraMine;
 import terramine.common.init.ModItems;
 import terramine.common.item.TerrariaItem;
 
 public class UmbrellaItem extends TerrariaItem {
 
 	public UmbrellaItem() {
-		super(new Properties().stacksTo(1).tab(TerraMine.ITEM_GROUP_EQUIPMENT).rarity(Rarity.RARE).fireResistant(), false);
+		super(new Properties().stacksTo(1).rarity(Rarity.RARE).fireResistant(), false);
 		DispenserBlock.registerBehavior(this, ArmorItem.DISPENSE_ITEM_BEHAVIOR);
 	}
 

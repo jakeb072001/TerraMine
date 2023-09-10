@@ -21,8 +21,7 @@ import terramine.common.network.ServerPacketHandler;
 
 @Mixin(CreativeModeInventoryScreen.class)
 public abstract class CreativeModeInventoryScreenMixin extends EffectRenderingInventoryScreen<CreativeModeInventoryScreen.ItemPickerMenu> {
-    @Shadow public abstract int getSelectedTab();
-
+    @Shadow private static CreativeModeTab selectedTab;
     @Unique
     private static final ResourceLocation BUTTON_TEX = TerraMine.id("textures/gui/terraria_slots_button.png");
 
@@ -48,14 +47,14 @@ public abstract class CreativeModeInventoryScreenMixin extends EffectRenderingIn
     @Inject(method = "selectTab", at = @At("HEAD"))
     private void onSelectTab(CreativeModeTab creativeModeTab, CallbackInfo ci) {
         if (terrariaButton != null) {
-            terrariaButton.visible = creativeModeTab == CreativeModeTab.TAB_INVENTORY;
+            terrariaButton.visible = creativeModeTab.getType() == CreativeModeTab.Type.INVENTORY;
         }
     }
 
     @Inject(method = "containerTick", at = @At("HEAD"))
     private void onTick(CallbackInfo ci) {
         if (terrariaButton != null) {
-            terrariaButton.visible = getSelectedTab() == CreativeModeTab.TAB_INVENTORY.getId();
+            terrariaButton.visible = selectedTab.getType().equals(CreativeModeTab.Type.INVENTORY);
         }
     }
 }

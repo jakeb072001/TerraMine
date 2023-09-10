@@ -5,6 +5,7 @@ import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.minecraft.core.Registry;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.particles.SimpleParticleType;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.entity.LivingEntity;
@@ -49,7 +50,7 @@ public class RocketBootHelper {
     }
 
     private void realFly(double speed, double glideSpeed, int priority, boolean wings, Player player) {
-        if (player.isOnGround() || ModComponents.MOVEMENT_ORDER.get(player).getWallJumped())
+        if (player.onGround() || ModComponents.MOVEMENT_ORDER.get(player).getWallJumped())
         {
             if (timer > 0)
             {
@@ -120,7 +121,7 @@ public class RocketBootHelper {
                     fly(player, Math.abs(Math.min(motionY + currentAccel, currentSpeedVertical)));
                     if ((wings && soundTimer >= 6) || (!wings && soundTimer >= 4)) {
                         FriendlyByteBuf passedData = new FriendlyByteBuf(Unpooled.buffer());
-                        passedData.writeId(Registry.SOUND_EVENT, sound);
+                        passedData.writeId(BuiltInRegistries.SOUND_EVENT, sound);
                         passedData.writeFloat(soundVolume);
                         passedData.writeFloat(soundPitch);
                         ClientPlayNetworking.send(ServerPacketHandler.ROCKET_BOOTS_SOUND_PACKET_ID, passedData);
@@ -129,14 +130,14 @@ public class RocketBootHelper {
 
                     FriendlyByteBuf passedData = new FriendlyByteBuf(Unpooled.buffer());
                     if (particle1 != null) {
-                        passedData.writeId(Registry.PARTICLE_TYPE, particle1);
+                        passedData.writeId(BuiltInRegistries.PARTICLE_TYPE, particle1);
                     } else {
-                        passedData.writeId(Registry.PARTICLE_TYPE, ParticleTypes.DRIPPING_WATER);
+                        passedData.writeId(BuiltInRegistries.PARTICLE_TYPE, ParticleTypes.DRIPPING_WATER);
                     }
                     if (particle2 != null) {
-                        passedData.writeId(Registry.PARTICLE_TYPE, particle2);
+                        passedData.writeId(BuiltInRegistries.PARTICLE_TYPE, particle2);
                     } else {
-                        passedData.writeId(Registry.PARTICLE_TYPE, ParticleTypes.DRIPPING_WATER);
+                        passedData.writeId(BuiltInRegistries.PARTICLE_TYPE, ParticleTypes.DRIPPING_WATER);
                     }
                     ClientPlayNetworking.send(ServerPacketHandler.ROCKET_BOOTS_PARTICLE_PACKET_ID, passedData);
                 }

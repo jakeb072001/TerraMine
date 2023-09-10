@@ -19,7 +19,7 @@ public class CustomSoundSwordItem extends SwordItem implements ItemExtensions {
     @Override
     public boolean onEntitySwing(ItemStack stack, LivingEntity entity) {
         float pitch = (float) (entity.getRandom().nextFloat() * (1.15 - 0.85) + 0.85);
-        entity.level.playSound(null, entity.blockPosition(), swingSound, SoundSource.PLAYERS, 0.5f, pitch);
+        entity.level().playSound(null, entity.blockPosition(), swingSound, SoundSource.PLAYERS, 0.5f, pitch);
         return false;
     }
 

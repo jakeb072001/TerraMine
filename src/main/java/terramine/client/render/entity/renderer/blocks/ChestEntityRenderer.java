@@ -2,7 +2,7 @@ package terramine.client.render.entity.renderer.blocks;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.mojang.math.Vector3f;
+import com.mojang.math.Axis;
 import it.unimi.dsi.fastutil.ints.Int2IntFunction;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -56,7 +56,7 @@ public class ChestEntityRenderer<T extends ChestEntity> extends ChestRenderer<T>
         poseStack.pushPose();
         float g = blockState.getValue(ChestBlock.FACING).toYRot();
         poseStack.translate(0.5, 0.5, 0.5);
-        poseStack.mulPose(Vector3f.YP.rotationDegrees(-g));
+        poseStack.mulPose(Axis.YP.rotationDegrees(-g));
         poseStack.translate(-0.5, -0.5, -0.5);
         DoubleBlockCombiner.NeighborCombineResult<? extends ChestEntity> properties;
         properties = bl ? chestBlock.combine(blockState, level, blockEntity.getBlockPos(), true) : DoubleBlockCombiner.Combiner::acceptNone;

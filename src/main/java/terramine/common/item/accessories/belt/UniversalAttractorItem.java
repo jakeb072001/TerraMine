@@ -17,7 +17,7 @@ public class UniversalAttractorItem extends AccessoryTerrariaItem {
 	protected void curioTick(Player player, ItemStack stack) {
 		Vec3 playerPos = player.position().add(0, 0.75, 0);
 		AABB itemRange = new AABB(playerPos, playerPos).inflate(5);
-		List<ItemEntity> items = player.level.getEntitiesOfClass(ItemEntity.class, itemRange);
+		List<ItemEntity> items = player.level().getEntitiesOfClass(ItemEntity.class, itemRange);
 
 		int pulled = 0;
 		for (ItemEntity item : items) {

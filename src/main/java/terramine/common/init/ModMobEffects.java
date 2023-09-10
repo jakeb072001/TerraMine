@@ -1,6 +1,7 @@
 package terramine.common.init;
 
 import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import terramine.TerraMine;
@@ -23,6 +24,6 @@ public class ModMobEffects {
     public static final MobEffect WEREWOLF = register("werewolf", new BlankEffect(MobEffectCategory.BENEFICIAL, 0x7e5d3f, false));
 
     public static MobEffect register(String name, MobEffect effect) {
-        return Registry.register(Registry.MOB_EFFECT, TerraMine.id(name), effect);
+        return Registry.register(BuiltInRegistries.MOB_EFFECT, TerraMine.id(name), effect);
     }
 }

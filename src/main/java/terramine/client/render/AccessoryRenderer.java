@@ -1,7 +1,7 @@
 package terramine.client.render;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.math.Vector3f;
+import com.mojang.math.Axis;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.HumanoidModel;
@@ -60,16 +60,16 @@ public interface AccessoryRenderer {
                                 AbstractClientPlayer player, float headYaw, float headPitch) {
 
         if (player.isVisuallySwimming() || player.isFallFlying()) {
-            poseStack.mulPose(Vector3f.ZP.rotationDegrees(model.head.zRot));
-            poseStack.mulPose(Vector3f.YP.rotationDegrees(headYaw));
-            poseStack.mulPose(Vector3f.XP.rotationDegrees(-45.0F));
+            poseStack.mulPose(Axis.ZP.rotationDegrees(model.head.zRot));
+            poseStack.mulPose(Axis.YP.rotationDegrees(headYaw));
+            poseStack.mulPose(Axis.XP.rotationDegrees(-45.0F));
         } else {
 
             if (player.isCrouching() && !model.riding) {
                 poseStack.translate(0.0F, 0.25F, 0.0F);
             }
-            poseStack.mulPose(Vector3f.YP.rotationDegrees(headYaw));
-            poseStack.mulPose(Vector3f.XP.rotationDegrees(headPitch));
+            poseStack.mulPose(Axis.YP.rotationDegrees(headYaw));
+            poseStack.mulPose(Axis.XP.rotationDegrees(headPitch));
         }
         poseStack.translate(0.0F, -0.25F, -0.3F);
     }
@@ -82,9 +82,9 @@ public interface AccessoryRenderer {
 
         if (player.isCrouching() && !model.riding && !player.isSwimming()) {
             poseStack.translate(0.0F, 0.2F, 0.0F);
-            poseStack.mulPose(Vector3f.XP.rotation(model.body.xRot));
+            poseStack.mulPose(Axis.XP.rotation(model.body.xRot));
         }
-        poseStack.mulPose(Vector3f.YP.rotation(model.body.yRot));
+        poseStack.mulPose(Axis.YP.rotation(model.body.yRot));
         poseStack.translate(0.0F, 0.4F, -0.16F);
     }
 
@@ -97,11 +97,11 @@ public interface AccessoryRenderer {
         if (player.isCrouching() && !model.riding && !player.isSwimming()) {
             poseStack.translate(0.0F, 0.2F, 0.0F);
         }
-        poseStack.mulPose(Vector3f.YP.rotation(model.body.yRot));
+        poseStack.mulPose(Axis.YP.rotation(model.body.yRot));
         poseStack.translate(-0.3125F, 0.15625F, 0.0F);
-        poseStack.mulPose(Vector3f.ZP.rotation(model.rightArm.zRot));
-        poseStack.mulPose(Vector3f.YP.rotation(model.rightArm.yRot));
-        poseStack.mulPose(Vector3f.XP.rotation(model.rightArm.xRot));
+        poseStack.mulPose(Axis.ZP.rotation(model.rightArm.zRot));
+        poseStack.mulPose(Axis.YP.rotation(model.rightArm.yRot));
+        poseStack.mulPose(Axis.XP.rotation(model.rightArm.xRot));
         poseStack.translate(-0.0625F, 0.625F, 0.0F);
     }
 
@@ -114,11 +114,11 @@ public interface AccessoryRenderer {
         if (player.isCrouching() && !model.riding && !player.isSwimming()) {
             poseStack.translate(0.0F, 0.2F, 0.0F);
         }
-        poseStack.mulPose(Vector3f.YP.rotation(model.body.yRot));
+        poseStack.mulPose(Axis.YP.rotation(model.body.yRot));
         poseStack.translate(0.3125F, 0.15625F, 0.0F);
-        poseStack.mulPose(Vector3f.ZP.rotation(model.leftArm.zRot));
-        poseStack.mulPose(Vector3f.YP.rotation(model.leftArm.yRot));
-        poseStack.mulPose(Vector3f.XP.rotation(model.leftArm.xRot));
+        poseStack.mulPose(Axis.ZP.rotation(model.leftArm.zRot));
+        poseStack.mulPose(Axis.YP.rotation(model.leftArm.yRot));
+        poseStack.mulPose(Axis.XP.rotation(model.leftArm.xRot));
         poseStack.translate(0.0625F, 0.625F, 0.0F);
     }
 
@@ -132,9 +132,9 @@ public interface AccessoryRenderer {
             poseStack.translate(0.0F, 0.0F, 0.25F);
         }
         poseStack.translate(-0.125F, 0.75F, 0.0F);
-        poseStack.mulPose(Vector3f.ZP.rotation(model.rightLeg.zRot));
-        poseStack.mulPose(Vector3f.YP.rotation(model.rightLeg.yRot));
-        poseStack.mulPose(Vector3f.XP.rotation(model.rightLeg.xRot));
+        poseStack.mulPose(Axis.ZP.rotation(model.rightLeg.zRot));
+        poseStack.mulPose(Axis.YP.rotation(model.rightLeg.yRot));
+        poseStack.mulPose(Axis.XP.rotation(model.rightLeg.xRot));
         poseStack.translate(0.0F, 0.75F, 0.0F);
     }
 
@@ -148,9 +148,9 @@ public interface AccessoryRenderer {
             poseStack.translate(0.0F, 0.0F, 0.25F);
         }
         poseStack.translate(0.125F, 0.75F, 0.0F);
-        poseStack.mulPose(Vector3f.ZP.rotation(model.leftLeg.zRot));
-        poseStack.mulPose(Vector3f.YP.rotation(model.leftLeg.yRot));
-        poseStack.mulPose(Vector3f.XP.rotation(model.leftLeg.xRot));
+        poseStack.mulPose(Axis.ZP.rotation(model.leftLeg.zRot));
+        poseStack.mulPose(Axis.YP.rotation(model.leftLeg.yRot));
+        poseStack.mulPose(Axis.XP.rotation(model.leftLeg.xRot));
         poseStack.translate(0.0F, 0.75F, 0.0F);
     }
 }

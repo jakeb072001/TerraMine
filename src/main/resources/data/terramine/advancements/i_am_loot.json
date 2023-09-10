@@ -13,16 +13,21 @@
   },
   "criteria": {
     "gold_chest": {
-      "trigger": "minecraft:item_used_on_block",
       "conditions": {
-        "location": {
-          "block": {
-            "blocks": [
-              "terramine:gold_chest"
-            ]
+        "location": [
+          {
+            "condition": "minecraft:location_check",
+            "predicate": {
+              "block": {
+                "blocks": [
+                  "terramine:trapped_gold_chest"
+                ]
+              }
+            }
           }
-        }
-      }
+        ]
+      },
+      "trigger": "minecraft:item_used_on_block"
     }
   }
 }

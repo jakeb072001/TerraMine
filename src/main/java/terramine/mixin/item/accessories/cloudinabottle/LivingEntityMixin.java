@@ -76,7 +76,7 @@ public abstract class LivingEntityMixin extends Entity implements LivingEntityEx
 			this.resetFallDistance();
 
 			// Send double jump packet to server if we're on the client
-			if (this.level.isClientSide) {
+			if (this.level().isClientSide) {
 				sendDoubleJumpPacket();
 			}
 
@@ -132,7 +132,7 @@ public abstract class LivingEntityMixin extends Entity implements LivingEntityEx
 		jumpWasReleased |= !this.jumping;
 
 		boolean flying = player.getAbilities().flying;
-		if (this.jumping && this.jumpWasReleased && !this.isInWater() && !this.isOnGround() && !this.isPassenger()
+		if (this.jumping && this.jumpWasReleased && !this.isInWater() && !this.onGround() && !this.isPassenger()
 				&& !this.hasDoubleJumped && !flying && AccessoriesHelper.isEquipped(ModItems.CLOUD_IN_A_BOTTLE, player)
 				&& !AccessoriesHelper.isEquipped(ModItems.BUNDLE_OF_BALLOONS, player)) {
 			this.terramine$doubleJump();
@@ -142,7 +142,7 @@ public abstract class LivingEntityMixin extends Entity implements LivingEntityEx
 
 	@Unique
 	private void resetJumpStatus(Player player) {
-		if ((this.isOnGround() || this.onClimbable() || ModComponents.MOVEMENT_ORDER.get(player).getWallJumped()) && !this.isInWater()) {
+		if ((this.onGround() || this.onClimbable() || ModComponents.MOVEMENT_ORDER.get(player).getWallJumped()) && !this.isInWater()) {
 			quadJumped = 0;
 			this.hasDoubleJumped = false;
 			this.jumpWasReleased = false;

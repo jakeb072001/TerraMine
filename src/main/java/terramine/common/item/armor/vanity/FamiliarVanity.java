@@ -5,8 +5,8 @@ import net.minecraft.world.item.ArmorMaterial;
 import terramine.TerraMine;
 
 public class FamiliarVanity extends VanityArmor {
-    public FamiliarVanity(String armorType, ArmorMaterial armorMaterial, EquipmentSlot equipmentSlot, Properties properties) {
-        super(armorType, armorMaterial, equipmentSlot, properties);
+    public FamiliarVanity(String armorType, ArmorMaterial armorMaterial, Type type, Properties properties) {
+        super(armorType, armorMaterial, type, properties);
     }
 
     @Override

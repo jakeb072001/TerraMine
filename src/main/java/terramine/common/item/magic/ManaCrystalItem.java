@@ -44,7 +44,7 @@ public class ManaCrystalItem extends TerrariaItemConfigurable {
         if (pitch < 0.75f) {
             pitch = 0.75F;
         }
-        player.level.playSound(null, player.blockPosition(), ModSoundEvents.MANA_CRYSTAL_USE, SoundSource.PLAYERS, 0.50f, pitch);
+        player.level().playSound(null, player.blockPosition(), ModSoundEvents.MANA_CRYSTAL_USE, SoundSource.PLAYERS, 0.50f, pitch);
         return super.finishUsingItem(stack, world, entity);
     }
 

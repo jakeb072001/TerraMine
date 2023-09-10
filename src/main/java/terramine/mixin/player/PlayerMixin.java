@@ -27,6 +27,8 @@ public abstract class PlayerMixin extends LivingEntity implements PlayerStorages
 
 	@Shadow public abstract boolean isCreative();
 
+	@Shadow public abstract boolean isSpectator();
+
 	@Unique
 	TerrariaInventory terrariaInventory = new TerrariaInventory(35);
 
@@ -45,7 +47,7 @@ public abstract class PlayerMixin extends LivingEntity implements PlayerStorages
 		ModComponents.MANA_HANDLER.get(this).update();
 		ModComponents.LAVA_IMMUNITY.get(this).update();
 
-		if (!isCreative()) {
+		if (!isCreative() && !isSpectator()) {
 			for (int i = 0; i < 7; i++) {
 				if (terrariaInventory.getItem(i).getItem() instanceof AccessoryTerrariaItem accessoryItem) {
 					accessoryItem.tick(terrariaInventory.getItem(i), (Player) (Object) this);
@@ -53,7 +55,7 @@ public abstract class PlayerMixin extends LivingEntity implements PlayerStorages
 			}
 		}
 
-		if (!this.level.isClientSide && this.tickCount % 15 == 0) {
+		if (!this.level().isClientSide && this.tickCount % 15 == 0) {
 			AccessoriesHelper.getAllEquipped((Player) (Object) this).forEach(stack -> {
 				if (stack.getItem() instanceof AccessoryTerrariaItem accessoryItem) {
 					MobEffectInstance effect = accessoryItem.getPermanentEffect();

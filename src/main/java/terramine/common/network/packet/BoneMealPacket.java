@@ -24,12 +24,12 @@ public class BoneMealPacket {
     public static void receive(MinecraftServer server, ServerPlayer player, ServerGamePacketListenerImpl network, FriendlyByteBuf buf, PacketSender sender) {
         BlockPos pos = BlockPos.of(buf.readLong());
         server.execute(() -> {
-                BlockState state = player.level.getBlockState(pos);
+                BlockState state = player.level().getBlockState(pos);
                 if (state.getBlock() instanceof BonemealableBlock fertilizable) {
-                    if (fertilizable.isBonemealSuccess(player.level, player.getRandom(), pos, state)) {
-                        fertilizable.performBonemeal(player.server.getLevel(player.level.dimension()), player.getRandom(), pos, state);
-                        player.level.levelEvent(2005, pos, 0);
-                        player.level.playSound(null, pos, SoundEvents.BONE_MEAL_USE, SoundSource.BLOCKS, 1, 1);
+                    if (fertilizable.isBonemealSuccess(player.level(), player.getRandom(), pos, state)) {
+                        fertilizable.performBonemeal(player.server.getLevel(player.level().dimension()), player.getRandom(), pos, state);
+                        player.level().levelEvent(2005, pos, 0);
+                        player.level().playSound(null, pos, SoundEvents.BONE_MEAL_USE, SoundSource.BLOCKS, 1, 1);
                     }
                 }
         });

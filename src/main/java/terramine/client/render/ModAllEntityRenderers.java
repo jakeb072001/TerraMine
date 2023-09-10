@@ -3,12 +3,8 @@ package terramine.client.render;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.rendering.v1.BlockEntityRendererRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
-import net.fabricmc.fabric.api.event.client.ClientSpriteRegistryCallback;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.Sheets;
 import net.minecraft.client.renderer.entity.TntRenderer;
-import net.minecraft.world.inventory.InventoryMenu;
-import terramine.TerraMine;
 import terramine.client.render.entity.renderer.blocks.ChestEntityRenderer;
 import terramine.client.render.entity.renderer.misc.FallingStarRenderer;
 import terramine.client.render.entity.renderer.misc.MeteoriteRenderer;
@@ -26,7 +22,6 @@ import terramine.client.render.entity.renderer.projectiles.magic.RainbowMissileR
 import terramine.client.render.entity.renderer.projectiles.throwables.BombRenderer;
 import terramine.client.render.entity.renderer.projectiles.throwables.DynamiteRenderer;
 import terramine.client.render.entity.renderer.projectiles.throwables.GrenadeRenderer;
-import terramine.client.render.gui.menu.TerrariaInventoryContainerMenu;
 import terramine.common.init.ModBlockEntityType;
 import terramine.common.init.ModBlocks;
 import terramine.common.init.ModEntities;
@@ -54,7 +49,6 @@ public class ModAllEntityRenderers {
         BlockEntityRendererRegistry.register(ModBlockEntityType.WATER_CHEST, ChestEntityRenderer::new);
         BlockEntityRendererRegistry.register(ModBlockEntityType.SKYWARE_CHEST, ChestEntityRenderer::new);
         BlockEntityRendererRegistry.register(ModBlockEntityType.SHADOW_CHEST, ChestEntityRenderer::new);
-        registerTextures();
 
         // Entity Renderers
         EntityRendererRegistry.register(ModEntities.MIMIC, MimicRenderer::new);
@@ -74,26 +68,5 @@ public class ModAllEntityRenderers {
         EntityRendererRegistry.register(ModEntities.GRENADE, GrenadeRenderer::new);
         EntityRendererRegistry.register(ModEntities.BOMB, BombRenderer::new);
         EntityRendererRegistry.register(ModEntities.INSTANT_TNT, TntRenderer::new);
-    }
-
-    // todo: remove and use atlas json in 1.19.3 and later
-    private static void registerTextures() {
-        ClientSpriteRegistryCallback.event(Sheets.CHEST_SHEET).register((atlas, registry) -> {
-            registry.register(TerraMine.id("block/chests/gold/gold_chest"));
-            registry.register(TerraMine.id("block/chests/frozen/frozen_chest"));
-            registry.register(TerraMine.id("block/chests/ivy/ivy_chest"));
-            registry.register(TerraMine.id("block/chests/sandstone/sandstone_chest"));
-            registry.register(TerraMine.id("block/chests/water/water_chest"));
-            registry.register(TerraMine.id("block/chests/skyware/skyware_chest"));
-            registry.register(TerraMine.id("block/chests/shadow/shadow_chest"));
-            registry.register(TerraMine.id("block/chests/player/piggy_bank/piggy_bank"));
-            registry.register(TerraMine.id("block/chests/player/safe/safe"));
-        });
-
-        ClientSpriteRegistryCallback.event(InventoryMenu.BLOCK_ATLAS).register((atlas, registry) -> {
-            registry.register(TerrariaInventoryContainerMenu.EMPTY_ACCESSORY_SLOT);
-            registry.register(TerrariaInventoryContainerMenu.EMPTY_ACCESSORY_VANITY_SLOT);
-            registry.register(TerrariaInventoryContainerMenu.EMPTY_ACCESSORY_DYE_SLOT);
-        });
     }
 }

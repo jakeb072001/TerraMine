@@ -72,7 +72,7 @@ public abstract class LivingEntityMixin extends Entity implements LivingEntityEx
 		jumpWasReleased |= !this.jumping;
 
 		boolean flying = player.getAbilities().flying;
-		if (this.jumping && this.jumpWasReleased && !this.isInWater() && !this.isOnGround() && !this.isPassenger()
+		if (this.jumping && this.jumpWasReleased && !this.isInWater() && !this.onGround() && !this.isPassenger()
 				&& !this.hasDoubleJumped && !flying && AccessoriesHelper.isEquipped(ModItems.BLUE_HORSESHOE_BALLOON, player)
 				&& !AccessoriesHelper.isEquipped(ModItems.BUNDLE_OF_BALLOONS, player) && !AccessoriesHelper.isEquipped(ModItems.CLOUD_IN_A_BOTTLE, player)
 				&& !AccessoriesHelper.isEquipped(ModItems.CLOUD_IN_A_BALLOON, player)) {
@@ -83,7 +83,7 @@ public abstract class LivingEntityMixin extends Entity implements LivingEntityEx
 
 	@Unique
 	private void resetJumpStatus(Player player) {
-		if ((this.isOnGround() || this.onClimbable() || ModComponents.MOVEMENT_ORDER.get(player).getWallJumped()) && !this.isInWater()) {
+		if ((this.onGround() || this.onClimbable() || ModComponents.MOVEMENT_ORDER.get(player).getWallJumped()) && !this.isInWater()) {
 			this.hasDoubleJumped = false;
 			this.jumpWasReleased = false;
 			ModComponents.MOVEMENT_ORDER.get(player).setCloudFinished(false);

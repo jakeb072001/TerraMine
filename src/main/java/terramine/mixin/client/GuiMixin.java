@@ -3,7 +3,7 @@ package terramine.mixin.client;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.gui.Gui;
-import net.minecraft.client.gui.GuiComponent;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
 import org.spongepowered.asm.mixin.Mixin;
@@ -26,7 +26,7 @@ public abstract class GuiMixin {
 	@Shadow protected abstract Player getCameraPlayer();
 
 	@Inject(method = "renderPlayerHealth", require = 0, at = @At(value = "TAIL"))
-	private void renderManaBar(PoseStack matrices, CallbackInfo ci) {
+	private void renderManaBar(GuiGraphics guiGraphics, CallbackInfo ci) {
 		Player player = this.getCameraPlayer();
 
 		if (player != null) {
@@ -40,19 +40,16 @@ public abstract class GuiMixin {
 				count = maxMana;
 			}
 
-			matrices.pushPose();
-			RenderSystem.setShaderTexture(0, MANA_ICONS_TEXTURE);
 			for (int i = 0; i < count + 1; i++) {
 				if (i == count) {
 					if (currentMana <= maxMana) {
 						float countFloat = currentMana / 20F + 10;
-						RenderSystem.setShaderColor(1, 1, 1, (countFloat) % ((int) (countFloat)));
+						guiGraphics.setColor(1, 1, 1, (countFloat) % ((int) (countFloat)));
 					}
 				}
-				GuiComponent.blit(matrices, left, top - i * 10, -90, 0, 0, 10, 11, 10, 11);
-				RenderSystem.setShaderColor(1, 1, 1, 1);
+				guiGraphics.blit(MANA_ICONS_TEXTURE, left, top - i * 10, -90, 0, 0, 10, 11, 10, 11);
+				guiGraphics.setColor(1, 1, 1, 1);
 			}
-			matrices.popPose();
 		};
 	}
 }

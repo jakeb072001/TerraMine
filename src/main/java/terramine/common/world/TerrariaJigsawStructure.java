@@ -55,7 +55,7 @@ public class TerrariaJigsawStructure extends Structure {
         ChunkPos chunkPos = generationContext.chunkPos();
         int i = this.startHeight.sample(generationContext.random(), new WorldGenerationContext(generationContext.chunkGenerator(), generationContext.heightAccessor()));
         BlockPos blockPos = new BlockPos(chunkPos.getMinBlockX(), i, chunkPos.getMinBlockZ());
-        Pools.forceBootstrap();
+        //Pools.forceBootstrap();
         return DungeonGenerator.generate(generationContext, blockPos, maxDepth, startPool, startRoomPool);
         //return JigsawPlacement.addPieces(generationContext, this.startPool, this.startJigsawName, this.maxDepth, blockPos, this.useExpansionHack, this.projectStartToHeightmap, this.maxDistanceFromCenter);
     }

@@ -27,12 +27,12 @@ public class InstantPrimedTNTEntity extends PrimedTnt {
     @Override
     public void tick() {
         this.discard();
-        if (!this.level.isClientSide) {
+        if (!this.level().isClientSide) {
             this.explode();
         }
     }
 
     private void explode() {
-        new ExplosionConfigurable(level, this, this.position().x(), this.position().y(), this.position().z(), 20F, 100f, Explosion.BlockInteraction.BREAK);
+        new ExplosionConfigurable(level(), this, this.position().x(), this.position().y(), this.position().z(), 20F, 100f, Explosion.BlockInteraction.DESTROY);
     }
 }

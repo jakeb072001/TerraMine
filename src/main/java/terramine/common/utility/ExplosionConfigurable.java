@@ -33,6 +33,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.storage.loot.LootContext;
+import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
@@ -46,6 +47,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 
+// todo: meteorite explosion (and maybe others) causes de-sync issue, blocks appear to be missing but if the player walks into an area of explosion they will get caught on blocks
 public class ExplosionConfigurable extends Explosion {
 
     private static final ExplosionDamageCalculator EXPLOSION_DAMAGE_CALCULATOR = new ExplosionDamageCalculator();
@@ -62,7 +64,7 @@ public class ExplosionConfigurable extends Explosion {
     private final Map<Player, Vec3> hitPlayers;
 
     public ExplosionConfigurable(Level level, Entity entity, boolean isMeteorite) {
-        this(level, entity, ModDamageSource.METEORITE, null, entity.getX(), entity.getY(), entity.getZ(), 10, 1000, true, isMeteorite, BlockInteraction.DESTROY);
+        this(level, entity, ModDamageSource.getSource(level.damageSources(), ModDamageSource.METEORITE), null, entity.getX(), entity.getY(), entity.getZ(), 10, 1000, true, isMeteorite, BlockInteraction.DESTROY);
     }
 
     public ExplosionConfigurable(Level level, @Nullable Entity entity, double x, double y, double z, float radius, float damage, Explosion.BlockInteraction blockInteraction) {
@@ -87,7 +89,7 @@ public class ExplosionConfigurable extends Explosion {
         this.fire = fire;
         this.isMeteorite = isMeteorite;
         this.blockInteraction = blockInteraction;
-        this.damageSource = damageSource == null ? DamageSource.explosion(this) : damageSource;
+        this.damageSource = damageSource == null ? level.damageSources().explosion(this) : damageSource;
         this.damageCalculator = explosionDamageCalculator == null ? this.makeDamageCalculator(entity) : explosionDamageCalculator;
         explode(damage);
         finalizeExplosion(false);
@@ -98,7 +100,7 @@ public class ExplosionConfigurable extends Explosion {
     }
 
     public void explode(float damage) {
-        this.level.gameEvent(this.source, GameEvent.EXPLODE, new BlockPos(this.x, this.y, this.z));
+        this.level.gameEvent(this.source, GameEvent.EXPLODE, new BlockPos((int) this.x, (int) this.y, (int) this.z));
         Set<Pair<ItemStack, BlockPos>> set = Sets.newHashSet();
 
         int k;
@@ -120,7 +122,7 @@ public class ExplosionConfigurable extends Explosion {
                         double o = this.z;
 
                         for(; h > 0.0F; h -= 0.22500001F) {
-                            BlockPos blockPos = new BlockPos(m, n, o);
+                            BlockPos blockPos = new BlockPos((int) m, (int) n, (int) o);
                             BlockState blockState = this.level.getBlockState(blockPos);
                             FluidState fluidState = this.level.getFluidState(blockPos);
                             if (!this.level.isInWorldBounds(blockPos)) {
@@ -189,7 +191,7 @@ public class ExplosionConfigurable extends Explosion {
     }
 
     public void finalizeExplosion(boolean bl) {
-        boolean bl2 = this.blockInteraction != BlockInteraction.NONE;
+        boolean bl2 = this.blockInteraction != BlockInteraction.KEEP;
         if (this.level.isClientSide) {
             this.level.playLocalSound(this.x, this.y, this.z, SoundEvents.GENERIC_EXPLODE, SoundSource.BLOCKS, 4.0f, (1.0f + (random.nextFloat() - random.nextFloat()) * 0.2f) * 0.7f, false);
         }
@@ -202,7 +204,7 @@ public class ExplosionConfigurable extends Explosion {
         }
         if (bl2) {
             ObjectArrayList<Pair<ItemStack, BlockPos>> objectArrayList = new ObjectArrayList<>();
-            boolean bl3 = getSourceMob() instanceof Player;
+            boolean bl3 = getIndirectSourceEntity() instanceof Player;
             Util.shuffle(toBlow, random);
             ObjectListIterator<Pair<ItemStack, BlockPos>> var5 = toBlow.iterator();
 
@@ -212,17 +214,21 @@ public class ExplosionConfigurable extends Explosion {
                 Block block = blockState.getBlock();
                 if (!blockState.isAir()) {
                     BlockPos blockPos2 = blockPos.immutable();
-                    level.getProfiler().push("explosions");
+                    this.level.getProfiler().push("explosion_blocks");
                     if (block.dropFromExplosion(this)) {
-                        if (level instanceof ServerLevel serverLevel) {
-                            BlockEntity blockEntity = blockState.hasBlockEntity() ? level.getBlockEntity(blockPos) : null;
-                            LootContext.Builder builder = (new LootContext.Builder(serverLevel)).withRandom(random).withParameter(LootContextParams.ORIGIN, Vec3.atCenterOf(blockPos)).withParameter(LootContextParams.TOOL, ItemStack.EMPTY).withOptionalParameter(LootContextParams.BLOCK_ENTITY, blockEntity).withOptionalParameter(LootContextParams.THIS_ENTITY, this.source);
-                            if (blockInteraction == Explosion.BlockInteraction.DESTROY) {
-                                builder.withParameter(LootContextParams.EXPLOSION_RADIUS, radius);
+                        Level var11 = this.level;
+                        if (var11 instanceof ServerLevel) {
+                            ServerLevel serverLevel = (ServerLevel)var11;
+                            BlockEntity blockEntity = blockState.hasBlockEntity() ? this.level.getBlockEntity(blockPos) : null;
+                            LootParams.Builder builder = (new LootParams.Builder(serverLevel)).withParameter(LootContextParams.ORIGIN, Vec3.atCenterOf(blockPos)).withParameter(LootContextParams.TOOL, ItemStack.EMPTY).withOptionalParameter(LootContextParams.BLOCK_ENTITY, blockEntity).withOptionalParameter(LootContextParams.THIS_ENTITY, this.source);
+                            if (this.blockInteraction == Explosion.BlockInteraction.DESTROY_WITH_DECAY) {
+                                builder.withParameter(LootContextParams.EXPLOSION_RADIUS, this.radius);
                             }
 
                             blockState.spawnAfterBreak(serverLevel, blockPos, ItemStack.EMPTY, bl3);
-                            blockState.getDrops(builder).forEach((itemStack) -> addBlockDrops(objectArrayList, itemStack, blockPos2));
+                            blockState.getDrops(builder).forEach((itemStack) -> {
+                                addBlockDrops(objectArrayList, itemStack, blockPos2);
+                            });
                         }
                     }
 

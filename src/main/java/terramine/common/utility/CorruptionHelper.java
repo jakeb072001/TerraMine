@@ -3,7 +3,7 @@ package terramine.common.utility;
 import dev.architectury.networking.NetworkManager;
 import io.netty.buffer.Unpooled;
 import net.minecraft.core.*;
-import net.minecraft.data.BuiltinRegistries;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.protocol.game.ClientboundLevelChunkWithLightPacket;
 import net.minecraft.resources.ResourceKey;
@@ -24,19 +24,15 @@ import net.minecraft.world.level.block.SnowLayerBlock;
 import net.minecraft.world.level.block.SpreadingSnowyDirtBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.chunk.*;
-import net.minecraft.world.level.lighting.LayerLightEngine;
+import net.minecraft.world.level.lighting.LightEngine;
 import org.jetbrains.annotations.NotNull;
 import terramine.TerraMine;
 import terramine.common.block.CorruptedSnowLayer;
 import terramine.common.init.ModBiomes;
 import terramine.common.init.ModBlocks;
 import terramine.common.network.ServerPacketHandler;
-import terramine.common.world.biome.CorruptionBiome;
-import terramine.common.world.biome.CorruptionDesertBiome;
-import terramine.common.world.biome.CrimsonBiome;
-import terramine.common.world.biome.CrimsonDesertBiome;
 
-import java.util.Objects;
+import java.util.Optional;
 
 public class CorruptionHelper extends SpreadingSnowyDirtBlock  {
     protected CorruptionHelper(Properties properties) {
@@ -55,7 +51,7 @@ public class CorruptionHelper extends SpreadingSnowyDirtBlock  {
         if (blockState2.getFluidState().getAmount() == 8) {
             return true;
         }
-        int i = LayerLightEngine.getLightBlockInto(levelReader, blockState, blockPos, blockState2, blockPos2, Direction.UP, blockState2.getLightBlock(levelReader, blockPos2));
+        int i = LightEngine.getLightBlockInto(levelReader, blockState, blockPos, blockState2, blockPos2, Direction.UP, blockState2.getLightBlock(levelReader, blockPos2));
         return i >= levelReader.getMaxLightLevel();
     }
 
@@ -137,15 +133,15 @@ public class CorruptionHelper extends SpreadingSnowyDirtBlock  {
                 && !serverLevel.getBiome(blockPos).is(ModBiomes.CRIMSON) && !serverLevel.getBiome(blockPos).is(ModBiomes.CRIMSON_DESERT)) {
             if (!isCrimson) {
                 if (serverLevel.getBiome(blockPos).is(Biomes.DESERT)) {
-                    setBiome(serverLevel, blockPos, CorruptionDesertBiome.CORRUPTION_DESERT);
+                    setBiome(serverLevel, blockPos, ModBiomes.CORRUPTION_DESERT);
                 } else {
-                    setBiome(serverLevel, blockPos, CorruptionBiome.CORRUPTION);
+                    setBiome(serverLevel, blockPos, ModBiomes.CORRUPTION);
                 }
             } else {
                 if (serverLevel.getBiome(blockPos).is(Biomes.DESERT)) {
-                    setBiome(serverLevel, blockPos, CrimsonDesertBiome.CRIMSON_DESERT);
+                    setBiome(serverLevel, blockPos, ModBiomes.CRIMSON_DESERT);
                 } else {
-                    setBiome(serverLevel, blockPos, CrimsonBiome.CRIMSON);
+                    setBiome(serverLevel, blockPos, ModBiomes.CRIMSON);
                 }
             }
             updateChunkAfterBiomeChange(serverLevel, new ChunkPos(blockPos));
@@ -153,7 +149,7 @@ public class CorruptionHelper extends SpreadingSnowyDirtBlock  {
     }
 
     // Copied from EvilCraft, may improve later if possible
-    public static void setBiome(ServerLevel level, BlockPos posIn, Biome biome) {
+    public static void setBiome(ServerLevel level, BlockPos posIn, ResourceKey<Biome> biome) {
         BiomeManager biomeManager = level.getBiomeManager();
         // Worldgen applies some funk "magnifier" position transformation to a "noise position",
         // which can change the pos into some other internal pos.
@@ -201,10 +197,11 @@ public class CorruptionHelper extends SpreadingSnowyDirtBlock  {
             // Due to some weird thing in MC, different instances of the same biome can exist.
             // This hack allows us to convert to the biome instance that is required for chunk serialization.
             // This avoids weird errors in the form of "Received invalid biome id: -1" (#818)
-            Registry<Biome> biomeRegistry = level.registryAccess().registryOrThrow(Registry.BIOME_REGISTRY);
-            Holder<Biome> biomeHack = biomeRegistry.getOrCreateHolderOrThrow(ResourceKey.create(Registry.BIOME_REGISTRY, Objects.requireNonNull(BuiltinRegistries.BIOME.getKey(biome))));
-            if (biomeHack == null)
+            Registry<Biome> biomeRegistry = level.registryAccess().registryOrThrow(Registries.BIOME);
+            Optional<Holder.Reference<Biome>> biomeHack = biomeRegistry.getHolder(biome);
+            if (biomeHack.isEmpty()) {
                 return;
+            }
 
             // Update biome in chunk
             // Based on ChunkAccess#getNoiseBiome
@@ -212,7 +209,7 @@ public class CorruptionHelper extends SpreadingSnowyDirtBlock  {
             int maxHeight = minBuildHeight + QuartPos.fromBlock(chunk.getHeight()) - 1;
             int dummyY = Mth.clamp(i3, minBuildHeight, maxHeight);
             int sectionIndex = chunk.getSectionIndex(QuartPos.toBlock(dummyY));
-            ((PalettedContainer<Holder<Biome>>) chunk.sections[sectionIndex].getBiomes()).set(l2 & 3, dummyY & 3, j3 & 3, biomeHack);
+            ((PalettedContainer<Holder<Biome>>) chunk.sections[sectionIndex].getBiomes()).set(l2 & 3, dummyY & 3, j3 & 3, biomeHack.get());
 
             chunk.setUnsaved(true);
         } else {
@@ -228,7 +225,7 @@ public class CorruptionHelper extends SpreadingSnowyDirtBlock  {
             return;
         }
         ((ServerChunkCache) level.getChunkSource()).chunkMap.getPlayers(chunkPos, false).forEach((player) -> {
-            player.connection.send(new ClientboundLevelChunkWithLightPacket(chunkSafe, ((ServerChunkCache) level.getChunkSource()).chunkMap.getLightEngine(), null, null, true));
+            player.connection.send(new ClientboundLevelChunkWithLightPacket(chunkSafe, ((ServerChunkCache) level.getChunkSource()).chunkMap.getLightEngine(), null, null));
             FriendlyByteBuf passedData = new FriendlyByteBuf(Unpooled.buffer());
             passedData.writeInt(chunkPos.x);
             passedData.writeInt(chunkPos.z);

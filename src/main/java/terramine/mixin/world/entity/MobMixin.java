@@ -27,7 +27,7 @@ public abstract class MobMixin extends LivingEntity {
             float f = 0.25F + (float) EnchantmentHelper.getBlockEfficiency(this) * 0.05F;
             if (this.random.nextFloat() < f) {
                 player.getCooldowns().addCooldown(itemStack2.getItem(), 100);
-                this.level.broadcastEntityEvent(player, (byte) 30);
+                this.level().broadcastEntityEvent(player, (byte) 30);
             }
         }
     }

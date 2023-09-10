@@ -30,8 +30,7 @@ public abstract class LivingEntityMixin extends Entity {
     @Shadow
     protected abstract float getJumpPower();
 
-    @Shadow
-    public abstract double getJumpBoostPower();
+    @Shadow public abstract float getJumpBoostPower();
 
     @Inject(at = @At("HEAD"), method = "canBreatheUnderwater", cancellable = true)
     public void doWaterBreathing(CallbackInfoReturnable<Boolean> info) {
@@ -53,7 +52,7 @@ public abstract class LivingEntityMixin extends Entity {
     private void invokeDoubleJump(CallbackInfo info) {
         LivingEntity self = (LivingEntity) (Object) this;
         boolean flying = self instanceof Player player && player.getAbilities().flying;
-        if (this.jumping && this.isInWater() && !this.isOnGround() && !this.isPassenger() && !flying && isShell()) {
+        if (this.jumping && this.isInWater() && !this.onGround() && !this.isPassenger() && !flying && isShell()) {
             double d = (double)this.getJumpPower() + this.getJumpBoostPower();
             Vec3 vec3 = this.getDeltaMovement();
             this.setDeltaMovement(vec3.x, d, vec3.z);

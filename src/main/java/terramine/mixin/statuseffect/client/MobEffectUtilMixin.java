@@ -18,7 +18,7 @@ public abstract class MobEffectUtilMixin {
 	private static void setFromTerraMineString(MobEffectInstance effect, float multiplier, CallbackInfoReturnable<String> info) {
 		LocalPlayer player = Minecraft.getInstance().player;
 
-		if (player != null && effect.isNoCounter()) {
+		if (player != null && effect.isInfiniteDuration()) {
 			AccessoriesHelper.getAllEquipped(player).forEach(stack -> {
 				MobEffectInstance accessoryEffect = ((AccessoryTerrariaItem) stack.getItem()).getPermanentEffect();
 

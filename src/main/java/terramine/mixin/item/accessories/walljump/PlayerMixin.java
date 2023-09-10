@@ -46,9 +46,8 @@ public abstract class PlayerMixin extends AbstractClientPlayer {
     private Set<Direction> staleWalls = new HashSet<>();
     private final Minecraft mc = Minecraft.getInstance();
 
-
-    public PlayerMixin(ClientLevel level, GameProfile profile, ProfilePublicKey profilePublicKey) {
-        super(level, profile, profilePublicKey);
+    public PlayerMixin(ClientLevel clientLevel, GameProfile gameProfile) {
+        super(clientLevel, gameProfile);
     }
 
 
@@ -69,7 +68,7 @@ public abstract class PlayerMixin extends AbstractClientPlayer {
 
 
     private void doWallJump() {
-        if(this.onGround || this.isFallFlying() || !this.level.getFluidState(this.blockPosition()).isEmpty() || this.isImmobile()) {
+        if(this.onGround() || this.isFallFlying() || !this.level().getFluidState(this.blockPosition()).isEmpty() || this.isImmobile()) {
             this.ticksWallClinged = 0;
             this.clingX = Double.NaN;
             this.clingZ = Double.NaN;
@@ -115,10 +114,10 @@ public abstract class PlayerMixin extends AbstractClientPlayer {
             return;
         }
 
-        if(!InputHandler.isHoldingShift(this) || this.onGround || !this.level.getFluidState(this.blockPosition()).isEmpty() || this.walls.isEmpty()) {
+        if(!InputHandler.isHoldingShift(this) || this.onGround() || !this.level().getFluidState(this.blockPosition()).isEmpty() || this.walls.isEmpty()) {
             this.ticksWallClinged = 0;
 
-            if((this.getSpeed() != 0) && !this.onGround && !this.walls.isEmpty()) {
+            if((this.getSpeed() != 0) && !this.onGround() && !this.walls.isEmpty()) {
                 this.fallDistance = 0.0F;
                 this.wallJump(0.55F);
                 this.staleWalls = new HashSet<>(this.walls);
@@ -181,7 +180,7 @@ public abstract class PlayerMixin extends AbstractClientPlayer {
     private boolean canWallCling() {
         if(this.onClimbable() || this.getForward().y() > 0.1)
             return false;
-        if(!this.level.noCollision(this.getBoundingBox().inflate(0, -0.8, 0)))
+        if(!this.level().noCollision(this.getBoundingBox().inflate(0, -0.8, 0)))
             return false;
         if(this.getY() < this.lastJumpY - 1)
             return true;
@@ -215,7 +214,7 @@ public abstract class PlayerMixin extends AbstractClientPlayer {
 
         for (AABB axis : axes) {
             direction = Direction.fromYRot(i++);
-            if(!this.level.noCollision(axis)) {
+            if(!this.level().noCollision(axis)) {
                 this.walls.add(direction);
                 this.horizontalCollision = false;
             }
@@ -232,7 +231,7 @@ public abstract class PlayerMixin extends AbstractClientPlayer {
     private BlockPos getWallPos() {
 
         BlockPos clingPos = this.blockPosition().relative(this.getClingDirection());
-        return this.level.getBlockState(clingPos).getMaterial().isSolid() ? clingPos : clingPos.relative(Direction.UP);
+        return this.level().getBlockState(clingPos).isSolid() ? clingPos : clingPos.relative(Direction.UP);
     }
 
 
@@ -264,23 +263,23 @@ public abstract class PlayerMixin extends AbstractClientPlayer {
 
 
     private void playHitSound(BlockPos blockPos) {
-        BlockState blockState = this.level.getBlockState(blockPos);
+        BlockState blockState = this.level().getBlockState(blockPos);
         SoundType soundType = blockState.getBlock().getSoundType(blockState);
         this.playSound(soundType.getHitSound(), soundType.getVolume() * 0.25F, soundType.getPitch());
     }
 
     private void playBreakSound(BlockPos blockPos) {
-        BlockState blockState = this.level.getBlockState(blockPos);
+        BlockState blockState = this.level().getBlockState(blockPos);
         SoundType soundType = blockState.getBlock().getSoundType(blockState);
         this.playSound(soundType.getFallSound(), soundType.getVolume() * 0.5F, soundType.getPitch());
     }
 
     private void spawnWallParticle(BlockPos blockPos) {
-        BlockState blockState = this.level.getBlockState(blockPos);
+        BlockState blockState = this.level().getBlockState(blockPos);
         if(blockState.getRenderShape() != RenderShape.INVISIBLE) {
             Vec3 pos = this.position();
             Vec3i motion = this.getClingDirection().getNormal();
-            this.level.addParticle(new BlockParticleOption(ParticleTypes.BLOCK, blockState), pos.x(), pos.y(), pos.z(), motion.getX() * -1.0D, -1.0D, motion.getZ() * -1.0D);
+            this.level().addParticle(new BlockParticleOption(ParticleTypes.BLOCK, blockState), pos.x(), pos.y(), pos.z(), motion.getX() * -1.0D, -1.0D, motion.getZ() * -1.0D);
         }
     }
 }
