@@ -33,9 +33,8 @@ public class FallingMeteoriteEntity extends FallingProjectileEntity {
         resetFallDistance();
         spawnEffects();
         if (level().getBlockState(blockPosition().below()).isFaceSturdy(level(), blockPosition().below(), Direction.getRandom(random)) && !level().getBlockState(blockPosition().below()).is(BlockTags.LOGS)) {
-            new ExplosionConfigurable(level(), this, true);
-            if (!level().isClientSide()) { // checks if the world is not client
-                level().broadcastEntityEvent(this, (byte)3); // particle?
+            if (!level().isClientSide) { // checks if the world is not client
+                new ExplosionConfigurable(level(), this, true);
                 level().playSound(null, this.blockPosition(), ModSoundEvents.FALLING_STAR_CRASH, SoundSource.AMBIENT, 2f, 1f);
                 this.discard();
             }
