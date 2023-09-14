@@ -29,7 +29,7 @@
       "above_bottom": 8
     },
     "probability": 0.01,
-    "replaceable": "#terramine:overworld_carver_replaceables",
+    "replaceable": [],
     "shape": {
       "distance_factor": {
         "type": "minecraft:uniform",

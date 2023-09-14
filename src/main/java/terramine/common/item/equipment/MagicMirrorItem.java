@@ -16,7 +16,6 @@ import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
-import terramine.TerraMine;
 import terramine.common.init.ModSoundEvents;
 import terramine.common.item.TerrariaItem;
 

@@ -6,7 +6,6 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
-import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
@@ -22,8 +21,8 @@ import terramine.common.init.ModComponents;
 import terramine.common.item.TerrariaItem;
 import terramine.common.misc.AccessoriesHelper;
 import terramine.common.misc.TerrariaInventory;
-import terramine.extensions.PlayerStorages;
 import terramine.extensions.Accessories;
+import terramine.extensions.PlayerStorages;
 
 import java.util.UUID;
 

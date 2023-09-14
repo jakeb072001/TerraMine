@@ -1,9 +1,6 @@
 package terramine.common.init;
 
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
-import net.fabricmc.fabric.api.datagen.v1.provider.FabricDynamicRegistryProvider;
 import net.minecraft.core.HolderGetter;
-import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstapContext;
 import net.minecraft.resources.ResourceKey;
@@ -15,8 +12,6 @@ import terramine.common.world.biome.CorruptionBiome;
 import terramine.common.world.biome.CorruptionDesertBiome;
 import terramine.common.world.biome.CrimsonBiome;
 import terramine.common.world.biome.CrimsonDesertBiome;
-
-import java.util.concurrent.CompletableFuture;
 
 import static terramine.TerraMine.id;
 

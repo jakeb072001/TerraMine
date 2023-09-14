@@ -4,7 +4,10 @@ import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 import net.minecraft.core.RegistrySetBuilder;
 import net.minecraft.core.registries.Registries;
-import terramine.common.init.*;
+import terramine.common.init.ModBiomes;
+import terramine.common.init.ModCarvers;
+import terramine.common.init.ModFeatures;
+import terramine.common.init.ModPlacedFeatures;
 import terramine.common.misc.TerraMineRegistryProvider;
 
 public class TerraMineDataGenerator implements DataGeneratorEntrypoint {

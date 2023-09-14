@@ -1,6 +1,5 @@
 package terramine.common.item.armor.vanity;
 
-import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.ArmorMaterial;
 import terramine.TerraMine;
 

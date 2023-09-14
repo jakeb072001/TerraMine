@@ -1,11 +1,8 @@
 package terramine.common.init;
 
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
-import net.fabricmc.fabric.api.datagen.v1.provider.FabricDynamicRegistryProvider;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderGetter;
-import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstapContext;
 import net.minecraft.data.worldgen.placement.MiscOverworldPlacements;
@@ -22,7 +19,6 @@ import net.minecraft.world.level.levelgen.placement.*;
 import net.minecraft.world.level.material.Fluids;
 
 import java.util.List;
-import java.util.concurrent.CompletableFuture;
 
 import static terramine.TerraMine.CONFIG;
 import static terramine.TerraMine.id;

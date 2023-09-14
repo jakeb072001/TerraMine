@@ -1,9 +1,9 @@
-// 1.20.1	2023-09-14T15:45:50.3989453	TerraMine/TerraMine
+// 1.20.1	2023-09-14T18:40:23.2055861	TerraMine/TerraMine
 1bbe1fd4d2382c564d5af579e3934667d12f62e5 data\terramine\worldgen\placed_feature\disk_corrupt_sand.json
 9e229acefd2f99484ca46b4ad994a6c1a004dfb9 data\terramine\worldgen\placed_feature\disk_crimson_sand.json
 05efee5435d021bf6f2a6e2386fd5b4f743cf75b data\terramine\worldgen\biome\corruption.json
 b03c0a027d3e6b96c7f1228825427242df6a9734 data\terramine\worldgen\configured_feature\surface_chest.json
-f31e7a10779d2977914777ccaf249ffc6b39faf1 data\terramine\worldgen\configured_carver\corruption_pit.json
+70799f112a37bf06bb98e8630364ab22b0b9e0ba data\terramine\worldgen\configured_carver\corruption_pit.json
 ff7d1fdd1c24922b1bcf18acafcb2d28e94ad215 data\terramine\worldgen\placed_feature\disk_corrupt_gravel.json
 0ed770b4626dcde033d8851db9c1190a2bb79a71 data\terramine\worldgen\placed_feature\nether_chest.json
 fb56b2bd0c6df6982d5c660ee61f39b90a03aa87 data\terramine\worldgen\configured_feature\nether_chest.json
@@ -32,5 +32,5 @@ fe4947127f5713f78f0c92e42966f39b024c11da data\terramine\worldgen\configured_feat
 b0b738ec008763a62d53c7a6232d9c8c12646b4d data\terramine\worldgen\biome\corruption_desert.json
 2e6232c8f7bb3676b2fe43ab9b9bd7d85128f288 data\terramine\worldgen\placed_feature\disk_crimson_gravel.json
 a9fc041df6fc754d52b9df273129379d39aa572d data\terramine\worldgen\configured_feature\disk_corrupt_sand.json
-9c6bd7560c8cc6218a59fe766abb9b1b7cf2742d data\terramine\worldgen\placed_feature\ore_demonite_upper.json
 a1e2b9b7f34da17b52fb0a351fb715abfb64f2e4 data\terramine\worldgen\placed_feature\surface_chest.json
+9c6bd7560c8cc6218a59fe766abb9b1b7cf2742d data\terramine\worldgen\placed_feature\ore_demonite_upper.json

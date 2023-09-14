@@ -5,7 +5,6 @@ import dev.onyxstudios.cca.api.v3.component.sync.AutoSyncedComponent;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerPlayer;
-import terramine.TerraMine;
 
 public class SyncedIntegerComponent implements Component, AutoSyncedComponent {
 

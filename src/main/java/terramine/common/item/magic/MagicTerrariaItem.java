@@ -9,7 +9,6 @@ import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
-import terramine.TerraMine;
 import terramine.common.init.ModComponents;
 import terramine.common.item.TerrariaItem;
 

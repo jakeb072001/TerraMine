@@ -1,7 +1,6 @@
 package terramine.extensions;
 
 import net.minecraft.world.SimpleContainer;
-import terramine.client.render.gui.menu.TerrariaInventoryContainerMenu;
 import terramine.common.misc.TerrariaInventory;
 
 public interface PlayerStorages {
