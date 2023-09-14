@@ -115,16 +115,6 @@ public class AccessoryTerrariaItem extends TerrariaItem implements Accessories {
 		return null;
 	}
 
-	/**
-	 * Used to give an Accessory a permanent status effect while wearing it.
-	 * The StatusEffectInstance is applied every 15 ticks so a duration greater than that is required.
-	 *
-	 * @return The {@link MobEffectInstance} to be applied while wearing this accessory
-	 */
-	public MobEffectInstance getPermanentEffect() {
-		return null;
-	}
-
 	private void playExtraHurtSound(Player player, float volume, float pitch) { // keeping for now, may use for moon charm and Neptune's shell
 		SoundEvent hurtSound = getExtraHurtSound();
 

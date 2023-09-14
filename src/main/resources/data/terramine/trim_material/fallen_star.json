@@ -1,0 +1,9 @@
+{
+  "asset_name": "fallen_star",
+  "description": {
+    "color": "#312b09",
+    "translate": "trim_material.terramine.fallen_star"
+  },
+  "ingredient": "terramine:fallen_star",
+  "item_model_index": 0.84005
+}

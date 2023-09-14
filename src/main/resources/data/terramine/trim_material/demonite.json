@@ -1,0 +1,9 @@
+{
+  "asset_name": "demonite",
+  "description": {
+    "color": "#2c2549",
+    "translate": "trim_material.terramine.demonite"
+  },
+  "ingredient": "terramine:demonite_ingot",
+  "item_model_index": 0.84001
+}

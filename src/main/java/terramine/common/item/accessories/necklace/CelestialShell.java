@@ -29,22 +29,24 @@ public class CelestialShell extends AccessoryTerrariaItem {
     }
 
     @Override
-    public MobEffectInstance getPermanentEffect() {
-        if (shell && inWater) {
-            return new MobEffectInstance(ModMobEffects.MERFOLK, -1, 0, true, false);
-        }
-        if (wolf && isNight && !inWater) {
-            return new MobEffectInstance(ModMobEffects.WEREWOLF, -1, 0, true, false);
-        }
-        return null;
-    }
-
-    @Override
     protected void curioTick(Player player, ItemStack stack) {
         inWater = player.isInWater();
 
         if (!player.level().isClientSide()) {
             isNight = player.level().isNight();
+        }
+
+        if (player.tickCount % 15 == 0) {
+            if (shell && inWater) {
+                player.addEffect(new MobEffectInstance(ModMobEffects.MERFOLK, -1, 0, true, false));
+            } else {
+                player.removeEffect(ModMobEffects.MERFOLK);
+            }
+            if (wolf && isNight && !inWater) {
+                player.addEffect(new MobEffectInstance(ModMobEffects.WEREWOLF, -1, 0, true, false));
+            } else {
+                player.removeEffect(ModMobEffects.WEREWOLF);
+            }
         }
 
         if (((wolf || moon) && isNight) || (sun && !isNight)) {
@@ -85,5 +87,7 @@ public class CelestialShell extends AccessoryTerrariaItem {
                 ModComponents.SWIM_ABILITIES.sync(player);
             });
         }
+        player.removeEffect(ModMobEffects.MERFOLK);
+        player.removeEffect(ModMobEffects.WEREWOLF);
     }
 }

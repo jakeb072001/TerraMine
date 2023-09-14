@@ -78,9 +78,7 @@
     "item.accessories.walljump.PlayerMixin",
     "item.accessories.weatherradio.client.GuiMixin",
     "player.CreativeModeInventoryScreenMixin",
-    "player.InventoryScreenMixin",
-    "statuseffect.client.GameRendererMixin",
-    "statuseffect.client.MobEffectUtilMixin"
+    "player.InventoryScreenMixin"
   ],
   "injectors": {
     "defaultRequire": 1,

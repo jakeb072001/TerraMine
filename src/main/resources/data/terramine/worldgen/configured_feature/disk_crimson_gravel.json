@@ -13,7 +13,10 @@
       "fallback": {
         "type": "minecraft:simple_state_provider",
         "state": {
-          "Name": "terramine:crimson_gravel"
+          "Name": "terramine:crimson_gravel",
+          "Properties": {
+            "snowy": "false"
+          }
         }
       },
       "rules": []

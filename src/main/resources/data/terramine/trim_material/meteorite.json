@@ -1,0 +1,9 @@
+{
+  "asset_name": "meteorite",
+  "description": {
+    "color": "#362427",
+    "translate": "trim_material.terramine.meteorite"
+  },
+  "ingredient": "terramine:meteorite_ingot",
+  "item_model_index": 0.84003
+}

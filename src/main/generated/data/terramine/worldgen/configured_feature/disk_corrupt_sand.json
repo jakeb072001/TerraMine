@@ -13,28 +13,13 @@
       "fallback": {
         "type": "minecraft:simple_state_provider",
         "state": {
-          "Name": "terramine:corrupted_sand"
-        }
-      },
-      "rules": [
-        {
-          "if_true": {
-            "type": "minecraft:matching_blocks",
-            "blocks": "minecraft:air",
-            "offset": [
-              0,
-              -1,
-              0
-            ]
-          },
-          "then": {
-            "type": "minecraft:simple_state_provider",
-            "state": {
-              "Name": "terramine:corrupted_sandstone"
-            }
+          "Name": "terramine:corrupted_sand",
+          "Properties": {
+            "snowy": "false"
           }
         }
-      ]
+      },
+      "rules": []
     },
     "target": {
       "type": "minecraft:matching_blocks",

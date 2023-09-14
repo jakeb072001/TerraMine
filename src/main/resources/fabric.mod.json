@@ -30,6 +30,9 @@
     "preLaunch": [
       "terramine.TerraMineMixinExtras"
     ],
+    "fabric-datagen": [
+      "terramine.TerraMineDataGenerator"
+    ],
     "terramine:compat_handlers": [
       "terramine.common.compat.HaemaCompat",
       "terramine.common.compat.OriginsCompat"

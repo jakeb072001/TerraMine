@@ -3,7 +3,6 @@ package terramine.mixin.player;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.world.SimpleContainer;
-import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -17,7 +16,6 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import terramine.common.init.ModComponents;
 import terramine.common.item.accessories.AccessoryTerrariaItem;
-import terramine.common.misc.AccessoriesHelper;
 import terramine.common.misc.TerrariaInventory;
 import terramine.extensions.ItemExtensions;
 import terramine.extensions.PlayerStorages;
@@ -53,18 +51,6 @@ public abstract class PlayerMixin extends LivingEntity implements PlayerStorages
 					accessoryItem.tick(terrariaInventory.getItem(i), (Player) (Object) this);
 				}
 			}
-		}
-
-		if (!this.level().isClientSide && this.tickCount % 15 == 0) {
-			AccessoriesHelper.getAllEquipped((Player) (Object) this).forEach(stack -> {
-				if (stack.getItem() instanceof AccessoryTerrariaItem accessoryItem) {
-					MobEffectInstance effect = accessoryItem.getPermanentEffect();
-
-					if (effect != null) {
-						this.addEffect(effect);
-					}
-				}
-			});
 		}
 	}
 

@@ -1,0 +1,9 @@
+{
+  "asset_name": "hellstone",
+  "description": {
+    "color": "#3c1b18",
+    "translate": "trim_material.terramine.hellstone"
+  },
+  "ingredient": "terramine:hellstone_ingot",
+  "item_model_index": 0.84004
+}

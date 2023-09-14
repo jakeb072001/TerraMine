@@ -1,0 +1,24 @@
+{
+  "values": [
+    "#minecraft:base_stone_overworld",
+    "#minecraft:dirt",
+    "#minecraft:sand",
+    "#minecraft:terracotta",
+    "#minecraft:iron_ores",
+    "#minecraft:copper_ores",
+	"#terramine:demonite_ores",
+	"#terramine:crimtane_ores",
+	"#terramine:corruption_stone_ore_replaceables",
+	"#terramine:crimson_stone_ore_replaceables",
+    "minecraft:water",
+    "minecraft:gravel",
+    "minecraft:suspicious_gravel",
+    "minecraft:sandstone",
+    "minecraft:red_sandstone",
+    "minecraft:calcite",
+    "minecraft:snow",
+    "minecraft:packed_ice",
+    "minecraft:raw_iron_block",
+    "minecraft:raw_copper_block"
+  ]
+}

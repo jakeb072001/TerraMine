@@ -1,5 +1,5 @@
 plugins {
-    id 'fabric-loom' version '0.12-SNAPSHOT'
+    id 'fabric-loom' version '1.0-SNAPSHOT'
     id 'io.github.juuxel.loom-quiltflower' version '1.7.3'
     id 'maven-publish'
     id 'com.github.johnrengelman.shadow' version '7.0.0'
@@ -51,15 +51,30 @@ archivesBaseName = project.archives_base_name
 version = project.mod_version + '+' + project.minecraft_version
 group = project.maven_group
 
-loom {
-    accessWidenerPath = file("src/main/resources/terramine.accesswidener")
+sourceSets {
+    main {
+        resources {
+            srcDirs += [
+                    'src/main/generated'
+            ]
+        }
+    }
 }
 
-sourceSets {
-    testmod {
-        compileClasspath += main.compileClasspath
-        runtimeClasspath += main.runtimeClasspath
+loom {
+    runs {
+        datagen {
+            inherit client
+            name "Data Generation"
+            vmArg "-Dfabric-api.datagen"
+            vmArg "-Dfabric-api.datagen.output-dir=${file("src/main/generated")}"
+            vmArg "-Dfabric-api.datagen.modid=${project.archives_base_name}"
+
+            runDir "build/datagen"
+        }
     }
+
+    accessWidenerPath = file("src/main/resources/terramine.accesswidener")
 }
 
 dependencies {
@@ -128,9 +143,12 @@ java {
 }
 
 jar {
+    from file('src/main/generated')
     from("LICENSE") {
         rename { "${it}_${project.archivesBaseName}"}
     }
+
+    dependsOn 'runDatagen'
 }
 
 curseforge {

@@ -70,6 +70,7 @@ public final class ModConfig extends PartitioningSerializer.GlobalData {
 		@ConfigEntry.Gui.CollapsibleObject()
 		public Structures structures = new Structures();
 
+		// todo: dont think any of this currently works, need to make work with json somehow, look into how Artifacts does their campsites
 		public static final class CaveChest {
 			@ConfigEntry.Gui.Tooltip
 			public boolean disableChests = false;

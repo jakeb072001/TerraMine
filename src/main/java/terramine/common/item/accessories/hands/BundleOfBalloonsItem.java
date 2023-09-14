@@ -11,6 +11,8 @@ import net.minecraft.server.network.ServerGamePacketListenerImpl;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import terramine.TerraMine;
 import terramine.common.item.accessories.AccessoryTerrariaItem;
 import terramine.extensions.LivingEntityExtensions;
@@ -42,8 +44,13 @@ public class BundleOfBalloonsItem extends AccessoryTerrariaItem {
 		return new SoundInfo(SoundEvents.BOTTLE_FILL_DRAGONBREATH);
 	}
 
-    @Override
-	public MobEffectInstance getPermanentEffect() {
-		return new MobEffectInstance(MobEffects.JUMP, -1, 1, true, false);
+	@Override
+	public void onEquip(ItemStack stack, Player player) {
+		player.addEffect(new MobEffectInstance(MobEffects.JUMP, -1, 1, true, false));
+	}
+
+	@Override
+	public void onUnequip(ItemStack stack, Player player) {
+		player.removeEffect(MobEffects.JUMP);
 	}
 }

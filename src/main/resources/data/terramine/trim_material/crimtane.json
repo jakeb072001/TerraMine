@@ -1,0 +1,9 @@
+{
+  "asset_name": "crimtane",
+  "description": {
+    "color": "#2d191d",
+    "translate": "trim_material.terramine.crimtane"
+  },
+  "ingredient": "terramine:crimtane_ingot",
+  "item_model_index": 0.84002
+}
