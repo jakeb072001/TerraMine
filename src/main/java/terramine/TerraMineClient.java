@@ -51,6 +51,9 @@ public class TerraMineClient implements ClientModInitializer {
 		// Particle register
 		ModParticles.registerClient();
 
+		// Colour Provider register
+		ModColourProviders.registerProviders();
+
 		// Screen Handler
 		ModScreenHandler.register();
 

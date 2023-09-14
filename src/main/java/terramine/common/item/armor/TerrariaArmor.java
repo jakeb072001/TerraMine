@@ -80,7 +80,7 @@ public class TerrariaArmor extends ArmorItem {
         return armorType;
     }
 
-
+    @Environment(EnvType.CLIENT)
     public HumanoidModel<LivingEntity> getCustomArmorModel() {
         return null;
     }
@@ -89,6 +89,7 @@ public class TerrariaArmor extends ArmorItem {
         return null;
     }
 
+    @Environment(EnvType.CLIENT)
     public static ModelPart bakeLayer(ModelLayerLocation layerLocation) {
         return Minecraft.getInstance().getEntityModels().bakeLayer(layerLocation);
     }

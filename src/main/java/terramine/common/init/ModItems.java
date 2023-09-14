@@ -1,6 +1,5 @@
 package terramine.common.init;
 
-import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.core.Registry;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -28,7 +27,6 @@ import terramine.common.item.magic.*;
 import terramine.common.item.throwables.BombItem;
 import terramine.common.item.throwables.DynamiteItem;
 import terramine.common.item.throwables.GrenadeItem;
-import terramine.common.utility.Utilities;
 
 @SuppressWarnings("unused")
 public class ModItems {
@@ -50,16 +48,16 @@ public class ModItems {
 	// todo: make dye craft-able, some will also be obtainable from enemies and other things
 	// todo: maybe also make work like potions, so only one item is registered and doesn't need a model per item, maybe
 	// Dye Items (uses hex)
-	public static final Item RED_DYE = registerDye("red_dye", new BasicDye(0xFF0000));
-	public static final Item GREEN_DYE = registerDye("green_dye", new BasicDye(0x008000));
-	public static final Item BLUE_DYE = registerDye("blue_dye", new BasicDye(0x0000FF));
-	public static final Item YELLOW_DYE = registerDye("yellow_dye", new BasicDye(0xFFFF00));
-	public static final Item ORANGE_DYE = registerDye("orange_dye", new BasicDye(0xFFA500));
-	public static final Item PURPLE_DYE = registerDye("purple_dye", new BasicDye(0x800080));
-	public static final Item PINK_DYE = registerDye("pink_dye", new BasicDye(0xFFC0CB));
-	public static final Item BROWN_DYE = registerDye("brown_dye", new BasicDye(0x964B00));
-	public static final Item GRAY_DYE = registerDye("gray_dye", new BasicDye(0x808080));
-	public static final Item BLACK_DYE = registerDye("black_dye", new BasicDye(0x000000));
+	public static final Item RED_DYE = register("red_dye", new BasicDye(0xFF0000));
+	public static final Item GREEN_DYE = register("green_dye", new BasicDye(0x008000));
+	public static final Item BLUE_DYE = register("blue_dye", new BasicDye(0x0000FF));
+	public static final Item YELLOW_DYE = register("yellow_dye", new BasicDye(0xFFFF00));
+	public static final Item ORANGE_DYE = register("orange_dye", new BasicDye(0xFFA500));
+	public static final Item PURPLE_DYE = register("purple_dye", new BasicDye(0x800080));
+	public static final Item PINK_DYE = register("pink_dye", new BasicDye(0xFFC0CB));
+	public static final Item BROWN_DYE = register("brown_dye", new BasicDye(0x964B00));
+	public static final Item GRAY_DYE = register("gray_dye", new BasicDye(0x808080));
+	public static final Item BLACK_DYE = register("black_dye", new BasicDye(0x000000));
 
 	// Crafting Items
 	public static final Item LENS = register("lens", new CraftingItem(new FabricItemSettings().group(TerraMine.ITEM_GROUP_STUFF), false));
@@ -251,7 +249,7 @@ public class ModItems {
 	public static final Item FAMILIAR_SHIRT = register("familiar_shirt", new FamiliarVanity("familiar_shirt", TerrariaArmorMaterials.VANITY, EquipmentSlot.CHEST, new FabricItemSettings().group(TerraMine.ITEM_GROUP_ARMOR)));
 	public static final Item FAMILIAR_PANTS = register("familiar_pants", new FamiliarVanity("familiar_pants", TerrariaArmorMaterials.VANITY, EquipmentSlot.LEGS, new FabricItemSettings().group(TerraMine.ITEM_GROUP_ARMOR)));
 	public static final Item FAMILIAR_SHOES = register("familiar_shoes", new FamiliarVanity("familiar_shoes", TerrariaArmorMaterials.VANITY, EquipmentSlot.FEET, new FabricItemSettings().group(TerraMine.ITEM_GROUP_ARMOR)));
-	public static final Item TOP_HAT = register("top_hat", new TopHatVanity("top_hat", TerrariaArmorMaterials.VANITY, EquipmentSlot.HEAD, new FabricItemSettings().group(TerraMine.ITEM_GROUP_ARMOR)));
+	//public static final Item TOP_HAT = register("top_hat", new TopHatVanity("top_hat", TerrariaArmorMaterials.VANITY, EquipmentSlot.HEAD, new FabricItemSettings().group(TerraMine.ITEM_GROUP_ARMOR)));
 
 
 
@@ -383,11 +381,6 @@ public class ModItems {
 	public static final Item CRIMSON_BLUE_ICE = register("crimson_blue_ice", new BlockItem(ModBlocks.CRIMSON_BLUE_ICE, new FabricItemSettings().group(TerraMine.ITEM_GROUP_BLOCKS)));
 
 	private static Item register(String name, Item item) {
-		return Registry.register(Registry.ITEM, TerraMine.id(name), item);
-	}
-
-	private static Item registerDye(String name, Item item) {
-		ColorProviderRegistry.ITEM.register((stack, tintIndex) -> tintIndex == 0 ? Utilities.getDyeColour(stack) : -1, item);
 		return Registry.register(Registry.ITEM, TerraMine.id(name), item);
 	}
 

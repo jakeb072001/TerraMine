@@ -1,5 +1,7 @@
 package terramine.common.item.armor.vanity;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
@@ -13,6 +15,7 @@ public class TopHatVanity extends VanityArmor {
         super(armorType, armorMaterial, equipmentSlot, properties);
     }
 
+    @Environment(EnvType.CLIENT)
     @Override
     public HumanoidModel<LivingEntity> getCustomArmorModel() {
         return new HeadModel(bakeLayer(ModModelLayers.TOP_HAT));
