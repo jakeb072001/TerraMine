@@ -4,7 +4,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [1.7.0-1.20.1] - 2023-09-14
+## [1.7.0-1.20] - 2023-09-14
 ### Added
 - Meteorites (only spawn at exactly midnight, default 2% chance)
 - Meteorite armor, tools, and Space Gun
@@ -25,7 +25,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Removed
 - Trinkets dependency (Trinkets still works alongside this mod but the accessories will no longer use Trinkets)
 
-## [1.6.0-1.20.1] - 2022-10-23
+## [1.6.0-1.19] - 2022-10-23
 ### Added
 - Devourer (Still WIP, movement will be improved and some things may need to be changed to make easier to fight)
 - Grenades, Bombs, and Dynamite (with Sticky and Bouncy variants!)
@@ -238,6 +238,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Initial release
 
+[1.7.0-1.20]: https://github.com/jakeb072001/TerraMine/compare/v1.6.1-1.19...v1.7.0-1.20
 [1.6.1-1.19]: https://github.com/jakeb072001/TerraMine/compare/v1.6.0-1.19...v1.6.1-1.19
 [1.6.0-1.19]: https://github.com/jakeb072001/TerraMine/compare/v1.5.1...v1.6.0-1.19
 [1.5.1]: https://github.com/jakeb072001/TerraMine/compare/v1.5.0...v1.5.1
