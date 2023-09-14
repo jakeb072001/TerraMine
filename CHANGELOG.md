@@ -21,7 +21,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 - Elytra and Wings together allowing the player to fly at incredible speed (still pretty powerful together but more balanced)
 - Various bugs with flying (such as arrows firing straight down and the player being rocketed to the ground when hit in the air)
-- 
+  
 ### Removed
 - Trinkets dependency (Trinkets still works alongside this mod but the accessories will no longer use Trinkets)
 
