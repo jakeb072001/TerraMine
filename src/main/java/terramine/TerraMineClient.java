@@ -13,10 +13,7 @@ import net.minecraft.server.packs.PackType;
 import terramine.client.render.HeldItemModels;
 import terramine.client.render.ModAllEntityRenderers;
 import terramine.client.render.accessory.AccessoryRenderers;
-import terramine.common.init.ModItems;
-import terramine.common.init.ModModelLayers;
-import terramine.common.init.ModParticles;
-import terramine.common.init.ModScreenHandler;
+import terramine.common.init.*;
 import terramine.common.network.ServerPacketHandler;
 import terramine.common.utility.KeyBindingsHandler;
 
@@ -53,6 +50,9 @@ public class TerraMineClient implements ClientModInitializer {
 
 		// Particle register
 		ModParticles.registerClient();
+
+		// Colour Provider register
+		ModColourProviders.registerProviders();
 
 		// Screen Handler
 		ModScreenHandler.register();

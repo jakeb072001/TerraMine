@@ -142,14 +142,6 @@ public class ServerPacketHandler {
                     ModComponents.ACCESSORY_VISIBILITY.sync(player);
                 });
         });
-
-        NetworkManager.registerReceiver(NetworkManager.s2c(), UPDATE_BIOME_PACKET_ID, (buf, context) -> {
-            int chunkX = buf.readInt();
-            int chunkZ = buf.readInt();
-            if (context.getPlayer() != null) {
-                ((ClientLevel) context.getPlayer().level()).onChunkLoaded(new ChunkPos(chunkX, chunkZ));
-            }
-        });
     }
 
     @Environment(EnvType.CLIENT)
@@ -158,6 +150,14 @@ public class ServerPacketHandler {
             int slot = buffer.readInt();
             ItemStack itemStack = buffer.readItem();
             client.execute(() -> ((PlayerStorages)client.player).getTerrariaInventory().setItem(slot, itemStack));
+        });
+
+        NetworkManager.registerReceiver(NetworkManager.s2c(), UPDATE_BIOME_PACKET_ID, (buf, context) -> {
+            int chunkX = buf.readInt();
+            int chunkZ = buf.readInt();
+            if (context.getPlayer() != null) {
+                ((ClientLevel) context.getPlayer().level()).onChunkLoaded(new ChunkPos(chunkX, chunkZ));
+            }
         });
     }
 }

@@ -38,6 +38,7 @@ public abstract class ElytraLayerMixin<T extends LivingEntity, M extends EntityM
         super(renderLayerParent);
     }
 
+    // todo: other players don't see on server, fix
     @Redirect(method = "render*", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/ItemStack;is(Lnet/minecraft/world/item/Item;)Z"))
     private boolean hideElytra(ItemStack itemStack, Item item, PoseStack poseStack, MultiBufferSource multiBufferSource, int i, LivingEntity livingEntity, float f, float g, float h, float j, float k, float l) {
         if (livingEntity instanceof Player player) {

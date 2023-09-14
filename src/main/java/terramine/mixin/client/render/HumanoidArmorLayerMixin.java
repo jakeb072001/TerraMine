@@ -51,7 +51,7 @@ public abstract class HumanoidArmorLayerMixin<T extends LivingEntity, M extends 
 		super(renderLayerParent);
 	}
 
-	// todo: no clue if other players see correctly, check into this
+	// todo: other players don't see on server, fix
 	@ModifyVariable(method = "renderArmorPiece", at = @At("STORE"), ordinal = 0)
 	private ItemStack vanityArmor(ItemStack itemStack, PoseStack poseStack, MultiBufferSource multiBufferSource, T livingEntity, EquipmentSlot equipmentSlot, int i, A humanoidModel) {
 		if (livingEntity instanceof Player player) {
@@ -88,7 +88,6 @@ public abstract class HumanoidArmorLayerMixin<T extends LivingEntity, M extends 
 		}
 	}
 
-	// todo: maybe remove later, 1.19.2 fabric api has this already, this is for 1.19 and 1.18
 	@Inject(method = "getArmorLocation", at = @At(value = "HEAD"), cancellable = true)
 	private void getArmorTexture(ArmorItem item, boolean secondLayer, String overlay, CallbackInfoReturnable<ResourceLocation> cir) {
 		if (item instanceof TerrariaArmor terrariaArmor) {
