@@ -28,8 +28,10 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+import terramine.TerraMine;
 import terramine.common.item.armor.TerrariaArmor;
 import terramine.common.item.armor.vanity.FamiliarVanity;
+import terramine.common.item.armor.vanity.VanityArmor;
 import terramine.common.item.dye.BasicDye;
 import terramine.extensions.PlayerStorages;
 
@@ -63,6 +65,7 @@ public abstract class HumanoidArmorLayerMixin<T extends LivingEntity, M extends 
 		return itemStack;
 	}
 
+	// todo: other players don't see on server, fix
 	// todo: look more into FancyDyes for special shaders, once working for armor implement into the accessory renderers
 	@WrapOperation(
 			method = "renderArmorPiece",
@@ -90,20 +93,9 @@ public abstract class HumanoidArmorLayerMixin<T extends LivingEntity, M extends 
 
 	@Inject(method = "getArmorLocation", at = @At(value = "HEAD"), cancellable = true)
 	private void getArmorTexture(ArmorItem item, boolean secondLayer, String overlay, CallbackInfoReturnable<ResourceLocation> cir) {
-		if (item instanceof TerrariaArmor terrariaArmor) {
-			if (terrariaArmor.getCustomArmorLocation() == null) {
-				final String name = item.getMaterial().getName();
-				final int separator = name.indexOf(ResourceLocation.NAMESPACE_SEPARATOR);
-
-				if (separator != -1) {
-					final String namespace = name.substring(0, separator);
-					final String path = name.substring(separator + 1);
-					final String texture = String.format(Locale.ROOT, "%s:textures/models/armor/%s_layer_%d%s.png", namespace, path, secondLayer ? 2 : 1, overlay == null ? "" : "_" + overlay);
-
-					cir.setReturnValue(ARMOR_LOCATION_CACHE.computeIfAbsent(texture, ResourceLocation::new));
-				}
-			} else {
-				cir.setReturnValue(ARMOR_LOCATION_CACHE.computeIfAbsent(terrariaArmor.getCustomArmorLocation(), ResourceLocation::new));
+		if (item instanceof VanityArmor vanityArmor) {
+			if (vanityArmor.getCustomArmorLocation() != null) {
+				cir.setReturnValue(ARMOR_LOCATION_CACHE.computeIfAbsent(TerraMine.MOD_ID + ":textures/models/vanity/" + vanityArmor.getCustomArmorLocation() + ".png", ResourceLocation::new));
 			}
 		}
 	}

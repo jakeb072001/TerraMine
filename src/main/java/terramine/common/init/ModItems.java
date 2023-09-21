@@ -248,7 +248,7 @@ public class ModItems {
 	public static final Item FAMILIAR_SHIRT = register("familiar_shirt", new FamiliarVanity("familiar_shirt", TerrariaArmorMaterials.VANITY, ArmorItem.Type.CHESTPLATE, new FabricItemSettings()));
 	public static final Item FAMILIAR_PANTS = register("familiar_pants", new FamiliarVanity("familiar_pants", TerrariaArmorMaterials.VANITY, ArmorItem.Type.LEGGINGS, new FabricItemSettings()));
 	public static final Item FAMILIAR_SHOES = register("familiar_shoes", new FamiliarVanity("familiar_shoes", TerrariaArmorMaterials.VANITY, ArmorItem.Type.BOOTS, new FabricItemSettings()));
-	//public static final Item TOP_HAT = register("top_hat", new TopHatVanity("top_hat", TerrariaArmorMaterials.VANITY, ArmorItem.Type.HELMET, new FabricItemSettings()));
+	public static final Item TOP_HAT = register("top_hat", new TopHatVanity("top_hat", TerrariaArmorMaterials.VANITY, ArmorItem.Type.HELMET, new FabricItemSettings()));
 
 
 

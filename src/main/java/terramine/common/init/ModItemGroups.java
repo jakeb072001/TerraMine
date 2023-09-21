@@ -102,7 +102,7 @@ public class ModItemGroups {
             entries.accept(ModItems.FAMILIAR_SHIRT);
             entries.accept(ModItems.FAMILIAR_PANTS);
             entries.accept(ModItems.FAMILIAR_SHOES);
-            //entries.accept(ModItems.TOP_HAT);
+            entries.accept(ModItems.TOP_HAT);
         });
 
         ItemGroupEvents.modifyEntriesEvent(createKey("terramine_accessories")).register(id("third_phase"), entries -> {

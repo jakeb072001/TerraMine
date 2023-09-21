@@ -39,7 +39,9 @@ public class FireGauntletItem extends AccessoryTerrariaItem {
 
 	@Override
 	public void curioTick(Player player, ItemStack stack) {
-		autoSwing();
+		if (player.isLocalPlayer()) {
+			autoSwing();
+		}
 	}
 
 	@Override

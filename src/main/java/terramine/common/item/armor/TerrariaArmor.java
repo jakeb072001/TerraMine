@@ -84,10 +84,6 @@ public class TerrariaArmor extends ArmorItem {
         return null;
     }
 
-    public String getCustomArmorLocation() {
-        return null;
-    }
-
     @Environment(EnvType.CLIENT)
     public static ModelPart bakeLayer(ModelLayerLocation layerLocation) {
         return Minecraft.getInstance().getEntityModels().bakeLayer(layerLocation);

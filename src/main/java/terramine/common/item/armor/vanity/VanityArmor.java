@@ -8,6 +8,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
+import terramine.TerraMine;
 import terramine.common.item.armor.TerrariaArmor;
 
 import java.util.List;
@@ -20,5 +21,9 @@ public class VanityArmor extends TerrariaArmor {
     @Override
     @Environment(EnvType.CLIENT)
     public void appendHoverText(@NotNull ItemStack stack, Level world, @NotNull List<Component> tooltip, @NotNull TooltipFlag flags) {
+    }
+
+    public String getCustomArmorLocation() {
+        return "empty";
     }
 }

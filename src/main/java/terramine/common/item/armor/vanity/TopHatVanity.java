@@ -23,6 +23,6 @@ public class TopHatVanity extends VanityArmor {
 
     @Override
     public String getCustomArmorLocation() {
-        return TerraMine.MOD_ID + ":textures/models/vanity/top_hat.png";
+        return "top_hat";
     }
 }

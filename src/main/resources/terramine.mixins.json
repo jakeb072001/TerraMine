@@ -57,7 +57,6 @@
     "client.render.ElytraLayerMixin",
     "client.render.HumanoidArmorLayerMixin",
     "client.render.ItemInHandRendererMixin",
-    "client.render.LivingEntityRendererMixin",
     "client.render.PlayerItemInHandLayerMixin",
     "client.render.PlayerRendererMixin",
     "event.client.LivingEntityMixin",
