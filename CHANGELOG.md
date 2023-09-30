@@ -29,7 +29,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 - Elytra and Wings together allowing the player to fly at incredible speed (still pretty powerful together but more balanced)
 - Various bugs with flying (such as arrows firing straight down and the player being rocketed to the ground when hit in the air)
-- 
+  
 ### Removed
 - Trinkets dependency (Trinkets still works alongside this mod but the accessories will no longer use Trinkets)
 
@@ -246,8 +246,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Initial release
 
-[1.7.0-1.20]: https://github.com/jakeb072001/TerraMine/compare/v1.6.1-1.19...v1.7.0-1.20
-[1.6.1-1.19]: https://github.com/jakeb072001/TerraMine/compare/v1.6.0-1.19...v1.6.1-1.19
+[1.7.0-1.20]: https://github.com/jakeb072001/TerraMine/compare/v1.6.0-1.19...v1.7.0-1.20
 [1.6.0-1.19]: https://github.com/jakeb072001/TerraMine/compare/v1.5.1...v1.6.0-1.19
 [1.5.1]: https://github.com/jakeb072001/TerraMine/compare/v1.5.0...v1.5.1
 [1.5.0]: https://github.com/jakeb072001/TerraMine/compare/v1.4.0...v1.5.0
