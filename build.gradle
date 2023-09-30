@@ -177,7 +177,7 @@ curseforge {
             }
 
             mainArtifact(remapJar.archiveFile) {
-                displayName = "TerraMine " + project.mod_version
+                displayName = "[" + project.fake_minecraft_version + "] " + "TerraMine " + project.mod_version
             }
 
             afterEvaluate {
@@ -194,7 +194,7 @@ curseforge {
 modrinth {
     token = System.getenv("MODRINTH_TOKEN")
     projectId = "terramine"
-    versionName = "TerraMine " + project.mod_version
+    versionName = "[" + project.fake_minecraft_version + "] " + "TerraMine " + project.mod_version
     versionNumber = project.mod_version
     versionType = "beta"
     uploadFile = remapJar
@@ -202,6 +202,7 @@ modrinth {
 
     dependencies {
         required.project "fabric-api"
+        required.project "cloth-config"
         required.project "architectury-api"
     }
 }

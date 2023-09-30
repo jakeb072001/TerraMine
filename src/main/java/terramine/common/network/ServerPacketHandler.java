@@ -6,6 +6,7 @@ import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.client.multiplayer.ClientLevel;
+import net.minecraft.client.player.AbstractClientPlayer;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -25,6 +26,8 @@ import terramine.common.init.ModItems;
 import terramine.common.network.packet.BoneMealPacket;
 import terramine.common.network.packet.UpdateInputPacket;
 import terramine.extensions.PlayerStorages;
+
+import java.util.UUID;
 
 public class ServerPacketHandler {
     // Server
@@ -149,7 +152,10 @@ public class ServerPacketHandler {
         ClientPlayNetworking.registerGlobalReceiver(SETUP_INVENTORY_PACKET_ID, (client, handler, buffer, responseSender) -> {
             int slot = buffer.readInt();
             ItemStack itemStack = buffer.readItem();
-            client.execute(() -> ((PlayerStorages)client.player).getTerrariaInventory().setItem(slot, itemStack));
+            UUID uuid = buffer.readUUID();
+            client.execute(() -> {
+                ((PlayerStorages) client.level.getPlayerByUUID(uuid)).getTerrariaInventory().setItem(slot, itemStack);
+            });
         });
 
         NetworkManager.registerReceiver(NetworkManager.s2c(), UPDATE_BIOME_PACKET_ID, (buf, context) -> {

@@ -111,13 +111,27 @@ public class TerraMine implements ModInitializer, TerraBlenderApi {
 	}
 
 	// maybe move into inventory itself or something? works perfectly like this though, so I'll just leave it for now
+	// probably not the best way of doing this, but it works for now, maybe look into improving later though
 	private void syncInventory(ServerPlayer player) {
 		TerrariaInventory terrariaInventory = ((PlayerStorages)player).getTerrariaInventory();
 		for (int i = 0; i < terrariaInventory.getContainerSize(); i++) {
 			FriendlyByteBuf buf = PacketByteBufs.create();
 			buf.writeInt(i);
 			buf.writeItem(terrariaInventory.getItem(i));
-			ServerPlayNetworking.send(player, ServerPacketHandler.SETUP_INVENTORY_PACKET_ID, buf);
+			buf.writeUUID(player.getUUID());
+			for (ServerPlayer otherPlayer : player.serverLevel().players()) {
+				ServerPlayNetworking.send(otherPlayer, ServerPacketHandler.SETUP_INVENTORY_PACKET_ID, buf);
+			}
+		}
+		for (ServerPlayer otherPlayer : player.serverLevel().players()) {
+			TerrariaInventory otherTerrariaInventory = ((PlayerStorages)otherPlayer).getTerrariaInventory();
+			for (int i = 0; i < otherTerrariaInventory.getContainerSize(); i++) {
+				FriendlyByteBuf buf = PacketByteBufs.create();
+				buf.writeInt(i);
+				buf.writeItem(otherTerrariaInventory.getItem(i));
+				buf.writeUUID(otherPlayer.getUUID());
+				ServerPlayNetworking.send(player, ServerPacketHandler.SETUP_INVENTORY_PACKET_ID, buf);
+			}
 		}
 	}
 

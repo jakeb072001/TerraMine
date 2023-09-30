@@ -11,7 +11,7 @@ import terramine.common.init.ModItems;
 
 public enum TerrariaArmorMaterials implements ArmorMaterial {
 
-    VANITY("vanity", 1000, new int[]{0, 0, 0, 0}, 0, SoundEvents.ARMOR_EQUIP_LEATHER, 0, 0, Ingredient.of(ItemStack.EMPTY)),
+    VANITY("vanity", -1, new int[]{0, 0, 0, 0}, 0, SoundEvents.ARMOR_EQUIP_LEATHER, 0, 0, Ingredient.of(ItemStack.EMPTY)),
     SHADOW("shadow", 20, new int[]{3, 5, 7, 2}, 10, SoundEvents.ARMOR_EQUIP_IRON, 1.0F, 0.0F, Ingredient.of(ModItems.DEMONITE_INGOT)),
     ANCIENT_SHADOW("ancient_shadow", SHADOW), // same stats as Shadow material but uses a different armor model/texture
     CRIMSON("crimson", 20, new int[]{3, 5, 7, 2}, 10, SoundEvents.ARMOR_EQUIP_IRON, 1.0F, 0.0F, Ingredient.of(ModItems.CRIMTANE_INGOT)),

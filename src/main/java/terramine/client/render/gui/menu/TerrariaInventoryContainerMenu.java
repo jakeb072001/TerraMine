@@ -1,7 +1,11 @@
 package terramine.client.render.gui.menu;
 
 import com.mojang.datafixers.util.Pair;
+import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
+import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
+import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.player.Inventory;
@@ -20,6 +24,7 @@ import terramine.common.item.accessories.AccessoryTerrariaItem;
 import terramine.common.item.accessories.ShieldAccessoryItem;
 import terramine.common.item.dye.BasicDye;
 import terramine.common.misc.TerrariaInventory;
+import terramine.common.network.ServerPacketHandler;
 import terramine.extensions.PlayerStorages;
 
 public class TerrariaInventoryContainerMenu extends AbstractContainerMenu {
@@ -103,6 +108,11 @@ public class TerrariaInventoryContainerMenu extends AbstractContainerMenu {
 
         // Shield Vanity
         this.addSlot(new Slot(terrariaInventory, 21, 80, 54) {
+            public void set(@NotNull ItemStack itemStack) {
+                super.set(itemStack);
+                updatePacket(player, terrariaInventory, 21);
+            }
+
             public boolean mayPlace(@NotNull ItemStack itemStack) {
                 return itemStack.getItem() instanceof ShieldItem || itemStack.getItem() instanceof ShieldAccessoryItem;
             }
@@ -112,6 +122,11 @@ public class TerrariaInventoryContainerMenu extends AbstractContainerMenu {
             }
         });
         this.addSlot(new Slot(terrariaInventory, 22, 98, 54) {
+            public void set(@NotNull ItemStack itemStack) {
+                super.set(itemStack);
+                updatePacket(player, terrariaInventory, 22);
+            }
+
             public boolean mayPlace(@NotNull ItemStack itemStack) {
                 return itemStack.getItem() instanceof BasicDye;
             }
@@ -132,17 +147,18 @@ public class TerrariaInventoryContainerMenu extends AbstractContainerMenu {
 
     private void createAccessorySlots(Player player, TerrariaInventory terrariaInventory, ResourceLocation texture, int accessoryType) {
         for(int i = 0; i < 7; ++i) {
-            int j = i;
-            this.addSlot(new Slot(terrariaInventory, i + (accessoryType * 7), 116 + (accessoryType * 18), -18 + i * 18) {
+            int finalI = i;
+            this.addSlot(new Slot(terrariaInventory, finalI + (accessoryType * 7), 116 + (accessoryType * 18), -18 + finalI * 18) {
                 public void set(@NotNull ItemStack itemStack) {
                     ItemStack itemStack2 = this.getItem();
                     super.set(itemStack);
                     onEquipAccessory(player, itemStack2, itemStack);
+                    updatePacket(player, terrariaInventory, finalI + (accessoryType * 7));
                 }
 
                 public boolean isActive() {
                     // allows for adding slots during gameplay, for the 2 extra accessory slots players can get
-                    return j < (5 + ModComponents.ACCESSORY_SLOTS_ADDER.get(player).get());
+                    return finalI < (5 + ModComponents.ACCESSORY_SLOTS_ADDER.get(player).get());
                 }
 
                 public int getMaxStackSize() {
@@ -169,14 +185,16 @@ public class TerrariaInventoryContainerMenu extends AbstractContainerMenu {
         }
     }
 
-    private void createExtraArmorSlots(Player player, TerrariaInventory inventory, int slotValue, boolean isDye) {
+    private void createExtraArmorSlots(Player player, TerrariaInventory terrariaInventory, int slotValue, boolean isDye) {
         for(int i = 0; i < 4; ++i) {
             final EquipmentSlot equipmentSlot = SLOT_IDS[i];
-            this.addSlot(new Slot(inventory, slotValue - i, 8 + ((isDye ? 2 : 1) * 18), -18 + i * 18) {
+            int finalI = i;
+            this.addSlot(new Slot(terrariaInventory, slotValue - finalI, 8 + ((isDye ? 2 : 1) * 18), -18 + finalI * 18) {
                 public void set(@NotNull ItemStack itemStack) {
                     ItemStack itemStack2 = this.getItem();
                     super.set(itemStack);
                     player.onEquipItem(equipmentSlot, itemStack2, itemStack);
+                    updatePacket(player, terrariaInventory, slotValue - finalI);
                 }
 
                 public int getMaxStackSize() {
@@ -212,6 +230,18 @@ public class TerrariaInventoryContainerMenu extends AbstractContainerMenu {
             if (itemStack2.getItem() instanceof AccessoryTerrariaItem accessory) {
                 AccessoryTerrariaItem.SoundInfo sound = accessory.getEquipSoundInfo();
                 player.playSound(sound.soundEvent(), sound.volume(), sound.pitch());
+            }
+        }
+    }
+
+    private void updatePacket(Player player, TerrariaInventory terrariaInventory, int slot) {
+        FriendlyByteBuf buf = PacketByteBufs.create();
+        buf.writeInt(slot);
+        buf.writeItem(terrariaInventory.getItem(slot));
+        buf.writeUUID(player.getUUID());
+        for (Player otherPlayer : player.level().players()) {
+            if (otherPlayer instanceof ServerPlayer serverPlayer) {
+                ServerPlayNetworking.send(serverPlayer, ServerPacketHandler.SETUP_INVENTORY_PACKET_ID, buf);
             }
         }
     }

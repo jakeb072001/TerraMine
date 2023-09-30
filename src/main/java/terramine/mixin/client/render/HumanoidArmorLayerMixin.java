@@ -35,7 +35,6 @@ import terramine.common.item.armor.vanity.VanityArmor;
 import terramine.common.item.dye.BasicDye;
 import terramine.extensions.PlayerStorages;
 
-import java.util.Locale;
 import java.util.Map;
 
 @Mixin(HumanoidArmorLayer.class)
@@ -53,7 +52,6 @@ public abstract class HumanoidArmorLayerMixin<T extends LivingEntity, M extends 
 		super(renderLayerParent);
 	}
 
-	// todo: other players don't see on server, fix
 	@ModifyVariable(method = "renderArmorPiece", at = @At("STORE"), ordinal = 0)
 	private ItemStack vanityArmor(ItemStack itemStack, PoseStack poseStack, MultiBufferSource multiBufferSource, T livingEntity, EquipmentSlot equipmentSlot, int i, A humanoidModel) {
 		if (livingEntity instanceof Player player) {
@@ -65,7 +63,6 @@ public abstract class HumanoidArmorLayerMixin<T extends LivingEntity, M extends 
 		return itemStack;
 	}
 
-	// todo: other players don't see on server, fix
 	// todo: look more into FancyDyes for special shaders, once working for armor implement into the accessory renderers
 	@WrapOperation(
 			method = "renderArmorPiece",

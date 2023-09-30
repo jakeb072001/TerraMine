@@ -35,16 +35,15 @@ public class CellPhoneItem extends AccessoryTerrariaItem {
 
 					//Player Spawn
 					optionalSpawnVec.ifPresentOrElse(spawnVec -> {
+						serverLevel.playSound(null, serverPlayer.blockPosition(), ModSoundEvents.MAGIC_MIRROR_USE, SoundSource.PLAYERS, 0.4f, 1f);
 						serverPlayer.teleportTo(serverLevel, spawnVec.x(), spawnVec.y(), spawnVec.z(), serverPlayer.getRespawnAngle(), 0.5F);
 						serverLevel.playSound(null, spawnpoint, ModSoundEvents.MAGIC_MIRROR_USE, SoundSource.PLAYERS, 0.4f, 1f);
-					}, () -> {
-						worldSpawn(serverPlayer, serverLevel);
-					});
+					}, () -> worldSpawn(serverPlayer, serverLevel));
 				} else {
 					worldSpawn(serverPlayer, serverLevel);
 				}
 			} else {
-				((ServerPlayer) player).sendSystemMessage(Component.translatable("magic_mirror.fail"));
+				player.sendSystemMessage(Component.translatable("magic_mirror.fail"));
 				level.playSound(null, player.blockPosition(), net.minecraft.sounds.SoundEvents.SHULKER_BULLET_HURT, SoundSource.BLOCKS, 1f, 1f);
 			}
 		}
@@ -72,6 +71,7 @@ public class CellPhoneItem extends AccessoryTerrariaItem {
 
 	public void worldSpawn(ServerPlayer serverPlayer, ServerLevel serverWorld) {
 		BlockPos spawnpoint = serverWorld.getSharedSpawnPos();
+		serverWorld.playSound(null, serverPlayer.blockPosition(), ModSoundEvents.MAGIC_MIRROR_USE, SoundSource.PLAYERS, 0.4f, 1f);
 		serverPlayer.teleportTo(serverWorld, spawnpoint.getX(), spawnpoint.getY(), spawnpoint.getZ(), serverPlayer.getRespawnAngle(), 0.5F);
 		while (!serverWorld.isEmptyBlock(serverPlayer.blockPosition())) {
 			serverPlayer.teleportTo(serverPlayer.getX(), serverPlayer.getY() + 1.0D, serverPlayer.getZ());
