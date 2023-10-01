@@ -114,24 +114,20 @@ public class TerraMine implements ModInitializer, TerraBlenderApi {
 	// probably not the best way of doing this, but it works for now, maybe look into improving later though
 	private void syncInventory(ServerPlayer player) {
 		TerrariaInventory terrariaInventory = ((PlayerStorages)player).getTerrariaInventory();
+		FriendlyByteBuf buf = PacketByteBufs.create();
+		FriendlyByteBuf buf2 = PacketByteBufs.create();
+		buf.writeUUID(player.getUUID());
 		for (int i = 0; i < terrariaInventory.getContainerSize(); i++) {
-			FriendlyByteBuf buf = PacketByteBufs.create();
-			buf.writeInt(i);
 			buf.writeItem(terrariaInventory.getItem(i));
-			buf.writeUUID(player.getUUID());
-			for (ServerPlayer otherPlayer : player.serverLevel().players()) {
-				ServerPlayNetworking.send(otherPlayer, ServerPacketHandler.SETUP_INVENTORY_PACKET_ID, buf);
-			}
 		}
 		for (ServerPlayer otherPlayer : player.serverLevel().players()) {
 			TerrariaInventory otherTerrariaInventory = ((PlayerStorages)otherPlayer).getTerrariaInventory();
+			buf2.writeUUID(otherPlayer.getUUID());
 			for (int i = 0; i < otherTerrariaInventory.getContainerSize(); i++) {
-				FriendlyByteBuf buf = PacketByteBufs.create();
-				buf.writeInt(i);
-				buf.writeItem(otherTerrariaInventory.getItem(i));
-				buf.writeUUID(otherPlayer.getUUID());
-				ServerPlayNetworking.send(player, ServerPacketHandler.SETUP_INVENTORY_PACKET_ID, buf);
+				buf2.writeItem(otherTerrariaInventory.getItem(i));
 			}
+			ServerPlayNetworking.send(player, ServerPacketHandler.SETUP_INVENTORY_PACKET_ID, buf2);
+			ServerPlayNetworking.send(otherPlayer, ServerPacketHandler.SETUP_INVENTORY_PACKET_ID, buf);
 		}
 	}
 

@@ -241,7 +241,7 @@ public class TerrariaInventoryContainerMenu extends AbstractContainerMenu {
         buf.writeUUID(player.getUUID());
         for (Player otherPlayer : player.level().players()) {
             if (otherPlayer instanceof ServerPlayer serverPlayer) {
-                ServerPlayNetworking.send(serverPlayer, ServerPacketHandler.SETUP_INVENTORY_PACKET_ID, buf);
+                ServerPlayNetworking.send(serverPlayer, ServerPacketHandler.UPDATE_INVENTORY_PACKET_ID, buf);
             }
         }
     }

@@ -1,12 +1,12 @@
 package terramine.common.network;
 
+import com.google.common.collect.Lists;
 import dev.architectury.networking.NetworkManager;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.client.multiplayer.ClientLevel;
-import net.minecraft.client.player.AbstractClientPlayer;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -27,6 +27,7 @@ import terramine.common.network.packet.BoneMealPacket;
 import terramine.common.network.packet.UpdateInputPacket;
 import terramine.extensions.PlayerStorages;
 
+import java.util.ArrayList;
 import java.util.UUID;
 
 public class ServerPacketHandler {
@@ -45,6 +46,7 @@ public class ServerPacketHandler {
 
     // Client
     public static final ResourceLocation SETUP_INVENTORY_PACKET_ID = TerraMine.id("setup_inventory");
+    public static final ResourceLocation UPDATE_INVENTORY_PACKET_ID = TerraMine.id("update_inventory");
 
     public static void register() {
         ServerPlayNetworking.registerGlobalReceiver(BONE_MEAL_PACKET_ID, BoneMealPacket::receive);
@@ -150,6 +152,19 @@ public class ServerPacketHandler {
     @Environment(EnvType.CLIENT)
     public static void registerClient() {
         ClientPlayNetworking.registerGlobalReceiver(SETUP_INVENTORY_PACKET_ID, (client, handler, buffer, responseSender) -> {
+            UUID uuid = buffer.readUUID();
+            ArrayList<ItemStack> items = Lists.newArrayList();
+            for (int i = 0; i < 35; i++) {
+                items.add(buffer.readItem());
+            }
+            client.execute(() -> {
+                for (int i = 0; i < items.size(); i++) {
+                    ((PlayerStorages) client.level.getPlayerByUUID(uuid)).getTerrariaInventory().setItem(i, items.get(i));
+                }
+            });
+        });
+
+        ClientPlayNetworking.registerGlobalReceiver(UPDATE_INVENTORY_PACKET_ID, (client, handler, buffer, responseSender) -> {
             int slot = buffer.readInt();
             ItemStack itemStack = buffer.readItem();
             UUID uuid = buffer.readUUID();
