@@ -10,7 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 - Players crashing on server when equipping an accessory with auto swing
-- Accessories and vanity not renderer for other players on server
+- Accessories and vanity not rendering for other players on server
 
 ## [1.7.0-1.20] - 2023-09-14
 ### Added
