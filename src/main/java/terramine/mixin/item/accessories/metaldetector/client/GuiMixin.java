@@ -73,6 +73,8 @@ public abstract class GuiMixin {
 		Minecraft mc = Minecraft.getInstance();
 		StringBuilder sb = new StringBuilder();
 		boolean ancientDebris = false;
+		boolean hellstone = false;
+		boolean meteorite = false;
 		boolean emeraldOre = false;
 		boolean diamondOre = false;
 		boolean goldOre = false;
@@ -98,6 +100,10 @@ public abstract class GuiMixin {
 			for (BlockState block : blocksList) {
 				if (checkBlocks(block, Blocks.ANCIENT_DEBRIS)) {
 					ancientDebris = true;
+				} else if (checkBlocks(block, ModBlocks.HELLSTONE_ORE)) {
+					hellstone = true;
+				} else if (checkBlocks(block, ModBlocks.METEORITE_ORE)) {
+					meteorite = true;
 				} else if (checkBlocks(block, Blocks.EMERALD_ORE, Blocks.DEEPSLATE_EMERALD_ORE)) {
 					emeraldOre = true;
 				} else if (checkBlocks(block, Blocks.DIAMOND_ORE, Blocks.DEEPSLATE_DIAMOND_ORE)) {
@@ -125,6 +131,10 @@ public abstract class GuiMixin {
 		}
 		if (ancientDebris) {
 			createText(Blocks.ANCIENT_DEBRIS, sb);
+		} else if (hellstone) {
+			createText(ModBlocks.HELLSTONE_ORE, sb);
+		} else if (meteorite) {
+			createText(ModBlocks.METEORITE_ORE, sb);
 		} else if (emeraldOre) {
 			createText(Blocks.EMERALD_ORE, sb);
 		} else if (diamondOre) {

@@ -12,6 +12,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
 import terramine.common.init.ModComponents;
 
+// todo: level is null so hardmode explosion resist doesn't work correctly
 public class HotFloorBlock extends Block {
     private Level level;
     private final boolean hardmodeExplosionResist;
@@ -19,6 +20,11 @@ public class HotFloorBlock extends Block {
     public HotFloorBlock(Properties properties) {
         super(properties);
         this.hardmodeExplosionResist = true;
+    }
+
+    public HotFloorBlock(Properties properties, boolean hardmodeExplosionResist) {
+        super(properties);
+        this.hardmodeExplosionResist = hardmodeExplosionResist;
     }
 
     @Override
@@ -32,7 +38,7 @@ public class HotFloorBlock extends Block {
 
     @Override
     public void tick(@NotNull BlockState blockState, @NotNull ServerLevel serverLevel, @NotNull BlockPos blockPos, @NotNull RandomSource random) {
-        level = serverLevel;
+        this.level = serverLevel;
     }
 
     @Override

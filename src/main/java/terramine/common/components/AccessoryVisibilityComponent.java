@@ -2,11 +2,15 @@ package terramine.common.components;
 
 import dev.onyxstudios.cca.api.v3.component.Component;
 import dev.onyxstudios.cca.api.v3.component.sync.AutoSyncedComponent;
+import io.netty.buffer.Unpooled;
+import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 import org.jetbrains.annotations.NotNull;
+import terramine.common.init.ModComponents;
+import terramine.common.network.ServerPacketHandler;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -26,6 +30,15 @@ public class AccessoryVisibilityComponent implements Component, AutoSyncedCompon
 
     public void setSlotVisibility(int slot, boolean visible) {
         slotVisibility.put(slot, visible);
+        if (!player.isLocalPlayer()) {
+            FriendlyByteBuf buf = new FriendlyByteBuf(Unpooled.buffer());
+            buf.writeInt(slot);
+            buf.writeBoolean(visible);
+            buf.writeUUID(player.getUUID());
+            for (ServerPlayer otherPlayer : player.getServer().getLevel(player.level().dimension()).players()) {
+                ServerPlayNetworking.send(otherPlayer, ServerPacketHandler.UPDATE_ACCESSORY_VISIBILITY_PACKET_ID, buf);
+            }
+        }
     }
 
     public boolean getSlotVisibility(int slot) {

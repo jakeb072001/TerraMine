@@ -40,6 +40,7 @@
     "item.accessories.umbrella.LivingEntityMixin",
     "item.accessories.whoopeecushion.EntityMixin",
     "item.armors.molten.EntityMixin",
+    "player.PlayerListMixin",
     "player.PlayerMixin",
     "statuseffect.LivingEntityMixin",
     "statuseffect.MobEffectInstanceMixin",
@@ -54,6 +55,7 @@
   ],
   "client": [
     "client.GuiMixin",
+    "client.render.CustomHeadLayerMixin",
     "client.render.ElytraLayerMixin",
     "client.render.HumanoidArmorLayerMixin",
     "client.render.ItemInHandRendererMixin",

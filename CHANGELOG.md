@@ -4,6 +4,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.7.2-1.20] - 2023-10-02
+### Changed
+- Skulls and Pumpkin now work with vanity system
+- Metal detector now detects Hellstone and Meteorite
+
+### Fixed
+- Changing dimension forgets equipped accessories and vanity until reequipped
+- Hiding accessories not displaying for other players on server
+- Crash with Apoli (Origins mod)
+
 ## [1.7.1-1.20] - 2023-09-30
 ### Changed
 - Magic Mirror sound now plays at the original and destination locations
@@ -11,6 +21,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 - Players crashing on server when equipping an accessory with auto swing
 - Accessories and vanity not rendering for other players on server
+- Pumpkin and skulls not working correctly with vanity system
 
 ## [1.7.0-1.20] - 2023-09-14
 ### Added

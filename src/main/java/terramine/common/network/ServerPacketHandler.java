@@ -7,9 +7,11 @@ import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.client.multiplayer.ClientLevel;
+import net.minecraft.core.NonNullList;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
@@ -28,6 +30,7 @@ import terramine.common.network.packet.UpdateInputPacket;
 import terramine.extensions.PlayerStorages;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 public class ServerPacketHandler {
@@ -42,11 +45,14 @@ public class ServerPacketHandler {
     public static final ResourceLocation ROCKET_BOOTS_PARTICLE_PACKET_ID = TerraMine.id("rocket_boots_particles");
     public static final ResourceLocation UPDATE_BIOME_PACKET_ID = TerraMine.id("update_biome");
     public static final ResourceLocation OPEN_INVENTORY_PACKET_ID = TerraMine.id("open_inventory");
-    public static final ResourceLocation UPDATE_ACCESSORY_VISIBILITY_PACKET_ID = TerraMine.id("update_accessory_visibility");
 
     // Client
     public static final ResourceLocation SETUP_INVENTORY_PACKET_ID = TerraMine.id("setup_inventory");
     public static final ResourceLocation UPDATE_INVENTORY_PACKET_ID = TerraMine.id("update_inventory");
+    public static final ResourceLocation SETUP_ACCESSORY_VISIBILITY_PACKET_ID = TerraMine.id("setup_accessory_visibility");
+
+    // Both
+    public static final ResourceLocation UPDATE_ACCESSORY_VISIBILITY_PACKET_ID = TerraMine.id("update_accessory_visibility");
 
     public static void register() {
         ServerPlayNetworking.registerGlobalReceiver(BONE_MEAL_PACKET_ID, BoneMealPacket::receive);
@@ -168,8 +174,30 @@ public class ServerPacketHandler {
             int slot = buffer.readInt();
             ItemStack itemStack = buffer.readItem();
             UUID uuid = buffer.readUUID();
+            client.execute(() -> ((PlayerStorages) client.level.getPlayerByUUID(uuid)).getTerrariaInventory().setItem(slot, itemStack));
+        });
+
+        ClientPlayNetworking.registerGlobalReceiver(UPDATE_ACCESSORY_VISIBILITY_PACKET_ID, (client, handler, buffer, responseSender) -> {
+            int slot = buffer.readInt();
+            boolean isVisible = buffer.readBoolean();
+            UUID uuid = buffer.readUUID();
             client.execute(() -> {
-                ((PlayerStorages) client.level.getPlayerByUUID(uuid)).getTerrariaInventory().setItem(slot, itemStack);
+                ModComponents.ACCESSORY_VISIBILITY.get(client.level.getPlayerByUUID(uuid)).setSlotVisibility(slot, isVisible);
+                ModComponents.ACCESSORY_VISIBILITY.sync(client.level.getPlayerByUUID(uuid));
+            });
+        });
+
+        ClientPlayNetworking.registerGlobalReceiver(SETUP_ACCESSORY_VISIBILITY_PACKET_ID, (client, handler, buffer, responseSender) -> {
+            List<Boolean> visibility = Lists.newArrayList();
+            for (int i = 0; i < 7; i++) {
+                visibility.add(buffer.readBoolean());
+            }
+            UUID uuid = buffer.readUUID();
+            client.execute(() -> {
+                for (int i = 0; i < visibility.size(); i++) {
+                    ModComponents.ACCESSORY_VISIBILITY.get(client.level.getPlayerByUUID(uuid)).setSlotVisibility(i, visibility.get(i));
+                }
+                ModComponents.ACCESSORY_VISIBILITY.sync(client.level.getPlayerByUUID(uuid));
             });
         });
 

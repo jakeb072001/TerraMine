@@ -92,6 +92,7 @@ public class TerraMine implements ModInitializer, TerraBlenderApi {
 				((PlayerStorages) newPlayer).setSafeInventory(((PlayerStorages) oldPlayer).getSafeInventory());
 			}
 		});
+		PlayerEvent.CHANGE_DIMENSION.register((player, oldLevel, newLevel) -> syncInventory(player));
 		PlayerEvent.PLAYER_RESPAWN.register((player, bl) -> syncInventory(player));
 		PlayerEvent.PLAYER_JOIN.register(this::syncInventory);
 		PlayerEvent.PLAYER_JOIN.register(this::onPlayerJoin);
@@ -110,18 +111,20 @@ public class TerraMine implements ModInitializer, TerraBlenderApi {
 		LOGGER.info("Finished initialization");
 	}
 
+	// todo: causing nbt problems right now
 	// maybe move into inventory itself or something? works perfectly like this though, so I'll just leave it for now
 	// probably not the best way of doing this, but it works for now, maybe look into improving later though
 	private void syncInventory(ServerPlayer player) {
 		TerrariaInventory terrariaInventory = ((PlayerStorages)player).getTerrariaInventory();
 		FriendlyByteBuf buf = PacketByteBufs.create();
-		FriendlyByteBuf buf2 = PacketByteBufs.create();
+		FriendlyByteBuf buf2;
 		buf.writeUUID(player.getUUID());
 		for (int i = 0; i < terrariaInventory.getContainerSize(); i++) {
 			buf.writeItem(terrariaInventory.getItem(i));
 		}
 		for (ServerPlayer otherPlayer : player.serverLevel().players()) {
 			TerrariaInventory otherTerrariaInventory = ((PlayerStorages)otherPlayer).getTerrariaInventory();
+			buf2 = PacketByteBufs.create();
 			buf2.writeUUID(otherPlayer.getUUID());
 			for (int i = 0; i < otherTerrariaInventory.getContainerSize(); i++) {
 				buf2.writeItem(otherTerrariaInventory.getItem(i));
