@@ -15,6 +15,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import terramine.common.init.ModComponents;
+import terramine.common.init.ModMobEffects;
 import terramine.common.item.accessories.AccessoryTerrariaItem;
 import terramine.common.misc.TerrariaInventory;
 import terramine.extensions.ItemExtensions;
@@ -51,6 +52,9 @@ public abstract class PlayerMixin extends LivingEntity implements PlayerStorages
 					accessoryItem.tick(terrariaInventory.getItem(i), (Player) (Object) this);
 				}
 			}
+		} else {
+			removeEffect(ModMobEffects.WEREWOLF);
+			removeEffect(ModMobEffects.MERFOLK);
 		}
 	}
 

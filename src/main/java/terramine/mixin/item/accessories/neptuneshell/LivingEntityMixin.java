@@ -63,7 +63,7 @@ public abstract class LivingEntityMixin extends Entity {
     public void addWerewolfJump(CallbackInfoReturnable<Float> info) {
         LivingEntity self = (LivingEntity) (Object) this;
         if (self.hasEffect(ModMobEffects.WEREWOLF)) {
-            info.setReturnValue(info.getReturnValue() + 0.1);
+            info.setReturnValue(info.getReturnValue() + 0.11f);
         }
     }
 

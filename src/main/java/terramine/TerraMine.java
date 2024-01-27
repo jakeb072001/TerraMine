@@ -111,7 +111,6 @@ public class TerraMine implements ModInitializer, TerraBlenderApi {
 		LOGGER.info("Finished initialization");
 	}
 
-	// todo: causing nbt problems right now
 	// maybe move into inventory itself or something? works perfectly like this though, so I'll just leave it for now
 	// probably not the best way of doing this, but it works for now, maybe look into improving later though
 	private void syncInventory(ServerPlayer player) {
