@@ -58,9 +58,9 @@ public abstract class LivingEntityMixin extends Entity {
             this.setDeltaMovement(vec3.x, d, vec3.z);
         }
     }
-
+    
     @Inject(at = @At("RETURN"), method = "getJumpBoostPower", cancellable = true)
-    public void addWerewolfJump(CallbackInfoReturnable<Double> info) {
+    public void addWerewolfJump(CallbackInfoReturnable<Float> info) {
         LivingEntity self = (LivingEntity) (Object) this;
         if (self.hasEffect(ModMobEffects.WEREWOLF)) {
             info.setReturnValue(info.getReturnValue() + 0.1);
