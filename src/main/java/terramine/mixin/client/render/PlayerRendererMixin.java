@@ -61,7 +61,7 @@ public abstract class PlayerRendererMixin extends LivingEntityRenderer<AbstractC
 		}
 
 		for (int i = 0; i < allEquippedGloves.size(); i++) {
-			if (!ModComponents.ACCESSORY_VISIBILITY.get(player).getSlotVisibility(i)) {
+			if (!((PlayerStorages) player).getSlotVisibility(i)) {
 				continue;
 			}
 			ItemStack stack = allEquippedGloves.get(i);

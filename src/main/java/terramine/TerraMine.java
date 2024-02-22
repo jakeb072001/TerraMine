@@ -30,6 +30,7 @@ import terramine.common.init.*;
 import terramine.common.misc.TerrariaInventory;
 import terramine.common.network.ServerPacketHandler;
 import terramine.common.utility.InputHandler;
+import terramine.common.utility.PlayerInventories;
 import terramine.common.world.biome.BiomeAdder;
 import terramine.common.world.biome.BiomeAdderCrimsonForced;
 import terramine.common.world.biome.BiomeSurfaceRules;
@@ -90,6 +91,9 @@ public class TerraMine implements ModInitializer, TerraBlenderApi {
 				((PlayerStorages) newPlayer).setTerrariaInventory(((PlayerStorages) oldPlayer).getTerrariaInventory());
 				((PlayerStorages) newPlayer).setPiggyBankInventory(((PlayerStorages) oldPlayer).getPiggyBankInventory());
 				((PlayerStorages) newPlayer).setSafeInventory(((PlayerStorages) oldPlayer).getSafeInventory());
+				for (int i = 0; i < 7; i++) {
+					((PlayerStorages) newPlayer).setSlotVisibility(i, ((PlayerStorages) oldPlayer).getSlotVisibility(i));
+				}
 			}
 		});
 		PlayerEvent.CHANGE_DIMENSION.register((player, oldLevel, newLevel) -> syncInventory(player));
@@ -130,6 +134,10 @@ public class TerraMine implements ModInitializer, TerraBlenderApi {
 			}
 			ServerPlayNetworking.send(player, ServerPacketHandler.SETUP_INVENTORY_PACKET_ID, buf2);
 			ServerPlayNetworking.send(otherPlayer, ServerPacketHandler.SETUP_INVENTORY_PACKET_ID, buf);
+
+			for (int i = 0; i < 7; i++) {
+				((PlayerStorages) otherPlayer).setSlotVisibility(i, ((PlayerStorages) otherPlayer).getSlotVisibility(i));
+			}
 		}
 	}
 

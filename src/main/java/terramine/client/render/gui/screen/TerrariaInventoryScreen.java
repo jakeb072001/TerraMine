@@ -37,6 +37,7 @@ import terramine.client.render.gui.ToggleImageButton;
 import terramine.client.render.gui.menu.TerrariaInventoryContainerMenu;
 import terramine.common.init.ModComponents;
 import terramine.common.network.ServerPacketHandler;
+import terramine.extensions.PlayerStorages;
 
 import java.util.List;
 
@@ -89,7 +90,7 @@ public class TerrariaInventoryScreen extends EffectRenderingInventoryScreen<Terr
             this.addRenderableWidget(new ToggleImageButton(this.leftPos + 130, this.height / 2 - 105 + (18 * i), 8, 8, 0, 0, 8, 8, i, EYE_TEX, 16, 16, (buttonWidget) -> {
                 FriendlyByteBuf buf = new FriendlyByteBuf(Unpooled.buffer());
                 buf.writeInt(finalI);
-                buf.writeBoolean(!ModComponents.ACCESSORY_VISIBILITY.get(this.minecraft.player).getSlotVisibility(finalI));
+                buf.writeBoolean(!((PlayerStorages) this.minecraft.player).getSlotVisibility(finalI));
                 ClientPlayNetworking.send(ServerPacketHandler.UPDATE_ACCESSORY_VISIBILITY_PACKET_ID, buf);
             }));
         }
@@ -121,7 +122,7 @@ public class TerrariaInventoryScreen extends EffectRenderingInventoryScreen<Terr
     }
 
     public void renderEntityInInventoryFollowsMouse(GuiGraphics guiGraphics, int i, int j, int k, float f, float g, LivingEntity livingEntity) {
-        float h = (float)Math.atan(f / 40.0F);
+        float h = (float)Math.atan((f + 35) / 40.0F);
         float l = (float)Math.atan(g / 40.0F);
         Quaternionf quaternionf = (new Quaternionf()).rotateZ(3.1415927F);
         Quaternionf quaternionf2 = (new Quaternionf()).rotateX(l * 20.0F * 0.017453292F);

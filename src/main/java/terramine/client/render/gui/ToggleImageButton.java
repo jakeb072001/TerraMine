@@ -9,6 +9,7 @@ import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import terramine.common.init.ModComponents;
+import terramine.extensions.PlayerStorages;
 
 @Environment(EnvType.CLIENT)
 public class ToggleImageButton extends Button {
@@ -48,7 +49,7 @@ public class ToggleImageButton extends Button {
 
         if (!this.isActive()) {
             g += this.xDiffTex * 2;
-        } else if (!ModComponents.ACCESSORY_VISIBILITY.get(Minecraft.getInstance().player).getSlotVisibility(slot)) {
+        } else if (!((PlayerStorages) Minecraft.getInstance().player).getSlotVisibility(slot)) {
             g += this.xDiffTex;
         }
 

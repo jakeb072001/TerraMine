@@ -7,11 +7,9 @@ import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.client.multiplayer.ClientLevel;
-import net.minecraft.core.NonNullList;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
@@ -49,7 +47,6 @@ public class ServerPacketHandler {
     // Client
     public static final ResourceLocation SETUP_INVENTORY_PACKET_ID = TerraMine.id("setup_inventory");
     public static final ResourceLocation UPDATE_INVENTORY_PACKET_ID = TerraMine.id("update_inventory");
-    public static final ResourceLocation SETUP_ACCESSORY_VISIBILITY_PACKET_ID = TerraMine.id("setup_accessory_visibility");
 
     // Both
     public static final ResourceLocation UPDATE_ACCESSORY_VISIBILITY_PACKET_ID = TerraMine.id("update_accessory_visibility");
@@ -148,10 +145,7 @@ public class ServerPacketHandler {
         ServerPlayNetworking.registerGlobalReceiver(UPDATE_ACCESSORY_VISIBILITY_PACKET_ID, (server, player, handler, buf, responseSender) -> {
                 int slot = buf.readInt();
                 boolean isVisible = buf.readBoolean();
-                server.execute(() -> {
-                    ModComponents.ACCESSORY_VISIBILITY.get(player).setSlotVisibility(slot, isVisible);
-                    ModComponents.ACCESSORY_VISIBILITY.sync(player);
-                });
+                server.execute(() -> ((PlayerStorages) player).setSlotVisibility(slot, isVisible));
         });
     }
 
@@ -182,22 +176,9 @@ public class ServerPacketHandler {
             boolean isVisible = buffer.readBoolean();
             UUID uuid = buffer.readUUID();
             client.execute(() -> {
-                ModComponents.ACCESSORY_VISIBILITY.get(client.level.getPlayerByUUID(uuid)).setSlotVisibility(slot, isVisible);
-                ModComponents.ACCESSORY_VISIBILITY.sync(client.level.getPlayerByUUID(uuid));
-            });
-        });
-
-        ClientPlayNetworking.registerGlobalReceiver(SETUP_ACCESSORY_VISIBILITY_PACKET_ID, (client, handler, buffer, responseSender) -> {
-            List<Boolean> visibility = Lists.newArrayList();
-            for (int i = 0; i < 7; i++) {
-                visibility.add(buffer.readBoolean());
-            }
-            UUID uuid = buffer.readUUID();
-            client.execute(() -> {
-                for (int i = 0; i < visibility.size(); i++) {
-                    ModComponents.ACCESSORY_VISIBILITY.get(client.level.getPlayerByUUID(uuid)).setSlotVisibility(i, visibility.get(i));
+                if (client.level.getPlayerByUUID(uuid) != null) {
+                    ((PlayerStorages) client.level.getPlayerByUUID(uuid)).setSlotVisibility(slot, isVisible);
                 }
-                ModComponents.ACCESSORY_VISIBILITY.sync(client.level.getPlayerByUUID(uuid));
             });
         });
 

@@ -8,6 +8,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Eye of Cthulhu and Eater of Worlds //-- Not yet done
 - Teams //-- Not yet done
+- 
+### Fixed
+- Accessory visibility not syncing correctly for other players
+- Player in accessory inventory not looking at mouse position correctly
 
 ## [1.7.2-1.20.1] - 2024-02-21
 ### Changed

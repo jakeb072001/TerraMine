@@ -43,7 +43,7 @@ public class BaseAccessoryRenderer implements AccessoryRenderer {
 
     @Override
     public final void render(ItemStack itemStack, int dyeSlot, int realSlot, EntityModel<? extends LivingEntity> contextModel, PoseStack poseStack, MultiBufferSource multiBufferSource, int light, Player player, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
-        if (!ModComponents.ACCESSORY_VISIBILITY.get(player).getSlotVisibility(realSlot)) {
+        if (!((PlayerStorages) player).getSlotVisibility(realSlot)) {
             return;
         }
         HumanoidModel<LivingEntity> model = getModel();

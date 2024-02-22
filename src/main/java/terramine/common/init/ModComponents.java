@@ -34,8 +34,6 @@ public class ModComponents implements EntityComponentInitializer, LevelComponent
 			ComponentRegistryV3.INSTANCE.getOrCreate(TerraMine.id("lava_immunity"), LavaImmunityComponent.class);
 	public static final ComponentKey<SyncedBooleanComponent> SPACE_GUN_FREE =
 			ComponentRegistryV3.INSTANCE.getOrCreate(TerraMine.id("space_gun_free"), SyncedBooleanComponent.class);
-	public static final ComponentKey<AccessoryVisibilityComponent> ACCESSORY_VISIBILITY =
-			ComponentRegistryV3.INSTANCE.getOrCreate(TerraMine.id("accessory_visibility"), AccessoryVisibilityComponent.class);
 	public static final ComponentKey<SyncedIntegerComponent> ACCESSORY_SLOTS_ADDER =
 			ComponentRegistryV3.INSTANCE.getOrCreate(TerraMine.id("accessory_slots_adder"), SyncedIntegerComponent.class);
 	public static final ComponentKey<SyncedBooleanComponent> ACCESSORY_HARDCORE_CHECK =
@@ -62,7 +60,6 @@ public class ModComponents implements EntityComponentInitializer, LevelComponent
 		registry.registerForPlayers(MOVEMENT_ORDER, MovementOrderComponent::new, RespawnCopyStrategy.LOSSLESS_ONLY);
 		registry.registerForPlayers(LAVA_IMMUNITY, LavaImmunityComponent::new, RespawnCopyStrategy.LOSSLESS_ONLY);
 		registry.registerForPlayers(SPACE_GUN_FREE, player -> new SyncedBooleanComponent("space_gun_free"), RespawnCopyStrategy.LOSSLESS_ONLY);
-		registry.registerForPlayers(ACCESSORY_VISIBILITY, AccessoryVisibilityComponent::new, RespawnCopyStrategy.CHARACTER);
 		registry.registerForPlayers(ACCESSORY_SLOTS_ADDER, player -> new SyncedIntegerComponent("extraSlots"), RespawnCopyStrategy.CHARACTER);
 		registry.registerForPlayers(ACCESSORY_HARDCORE_CHECK, player -> new SyncedBooleanComponent("addedHardcoreSlot"), RespawnCopyStrategy.CHARACTER);
 		registry.registerForPlayers(ACCESSORY_DEMON_HEART_CHECK, player -> new SyncedBooleanComponent("addedDemonHeartSlot"), RespawnCopyStrategy.CHARACTER);

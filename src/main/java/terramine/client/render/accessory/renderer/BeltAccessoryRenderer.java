@@ -43,7 +43,7 @@ public class BeltAccessoryRenderer implements AccessoryRenderer {
 
     @Override
     public final void render(ItemStack stack, int dyeSlot, int realSlot, EntityModel<? extends LivingEntity> contextModel, PoseStack poseStack, MultiBufferSource multiBufferSource, int light, Player player, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
-        if (!ModComponents.ACCESSORY_VISIBILITY.get(player).getSlotVisibility(realSlot)) {
+        if (!((PlayerStorages) player).getSlotVisibility(realSlot)) {
             return;
         }
         BeltModel model = getModel();

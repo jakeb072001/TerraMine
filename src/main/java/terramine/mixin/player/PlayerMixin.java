@@ -1,7 +1,11 @@
 package terramine.mixin.player;
 
+import io.netty.buffer.Unpooled;
+import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -18,8 +22,12 @@ import terramine.common.init.ModComponents;
 import terramine.common.init.ModMobEffects;
 import terramine.common.item.accessories.AccessoryTerrariaItem;
 import terramine.common.misc.TerrariaInventory;
+import terramine.common.network.ServerPacketHandler;
 import terramine.extensions.ItemExtensions;
 import terramine.extensions.PlayerStorages;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @Mixin(Player.class)
 public abstract class PlayerMixin extends LivingEntity implements PlayerStorages {
@@ -27,6 +35,8 @@ public abstract class PlayerMixin extends LivingEntity implements PlayerStorages
 	@Shadow public abstract boolean isCreative();
 
 	@Shadow public abstract boolean isSpectator();
+
+	@Shadow public abstract boolean isLocalPlayer();
 
 	@Unique
 	TerrariaInventory terrariaInventory = new TerrariaInventory(35);
@@ -36,6 +46,9 @@ public abstract class PlayerMixin extends LivingEntity implements PlayerStorages
 
 	@Unique
 	SimpleContainer safeInventory = new SimpleContainer(40);
+
+	@Unique
+	public Map<Integer, Boolean> slotVisibility = new HashMap<>();
 
 	public PlayerMixin(EntityType<? extends LivingEntity> entityType, Level level) {
 		super(entityType, level);
@@ -82,6 +95,11 @@ public abstract class PlayerMixin extends LivingEntity implements PlayerStorages
 	}
 
 	@Override
+	public boolean getSlotVisibility(int slot) {
+		return slotVisibility.getOrDefault(slot, true);
+	}
+
+	@Override
 	public void setTerrariaInventory(TerrariaInventory terrariaInventory) {
 		this.terrariaInventory = terrariaInventory;
 	}
@@ -96,11 +114,30 @@ public abstract class PlayerMixin extends LivingEntity implements PlayerStorages
 		this.safeInventory = safeInventory;
 	}
 
+	@Override
+	public void setSlotVisibility(int slot, boolean visible) {
+		slotVisibility.put(slot, visible);
+		if (!this.isLocalPlayer()) {
+			FriendlyByteBuf buf = new FriendlyByteBuf(Unpooled.buffer());
+			buf.writeInt(slot);
+			buf.writeBoolean(visible);
+			buf.writeUUID(getUUID());
+			if (getServer() != null) {
+				for (ServerPlayer otherPlayer : getServer().getLevel(level().dimension()).players()) {
+					ServerPlayNetworking.send(otherPlayer, ServerPacketHandler.UPDATE_ACCESSORY_VISIBILITY_PACKET_ID, buf);
+				}
+			}
+		}
+	}
+
 	@Inject(method = "addAdditionalSaveData", at = @At("TAIL"))
 	public void writePlayerInventories(CompoundTag tag, CallbackInfo ci) {
 		tag.put("terrariaItems", getTags(terrariaInventory));
 		tag.put("piggyBankItems", getTags(piggyBankInventory));
 		tag.put("safeItems", getTags(safeInventory));
+		for (int i = 0; i < 7; i++) {
+			tag.putBoolean("slotVisibility/" + i, getSlotVisibility(i));
+		}
 	}
 
 	@Inject(method = "readAdditionalSaveData", at = @At("TAIL"))
@@ -113,6 +150,11 @@ public abstract class PlayerMixin extends LivingEntity implements PlayerStorages
 		}
 		if (tag.contains("safeItems", 9)) {
 			readTags(tag.getList("safeItems", 10), safeInventory);
+		}
+		for (int i = 0; i < 7; i++) {
+			if (tag.contains("slotVisibility/" + i)) {
+				setSlotVisibility(i, tag.getBoolean("slotVisibility/" + i));
+			}
 		}
 	}
 

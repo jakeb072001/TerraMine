@@ -11,9 +11,13 @@ public interface PlayerStorages {
 
 	SimpleContainer getSafeInventory();
 
+	boolean getSlotVisibility(int slot);
+
 	void setTerrariaInventory(TerrariaInventory terrariaInventory);
 
 	void setPiggyBankInventory(SimpleContainer piggyBankInventory);
 
 	void setSafeInventory(SimpleContainer safeInventory);
+
+	void setSlotVisibility(int slot, boolean visible);
 }
