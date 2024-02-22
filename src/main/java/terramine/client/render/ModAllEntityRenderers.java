@@ -62,7 +62,7 @@ public class ModAllEntityRenderers {
         /**
          * Testing, remove later
          */
-        EntityRendererRegistry.register(ModEntities.TEST_BOSS, TestBossRenderer::new);
+        //EntityRendererRegistry.register(ModEntities.TEST_BOSS, TestBossRenderer::new);
 
         EntityRendererRegistry.register(ModEntities.FALLING_STAR, FallingStarRenderer::new);
         EntityRendererRegistry.register(ModEntities.METEORITE, MeteoriteRenderer::new);

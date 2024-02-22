@@ -8,7 +8,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Eye of Cthulhu and Eater of Worlds //-- Not yet done
 - Teams //-- Not yet done
-- 
+
+## [1.7.3-1.20.1] - 2024-02-22
 ### Fixed
 - Accessory visibility not syncing correctly for other players
 - Player in accessory inventory not looking at mouse position correctly
@@ -268,6 +269,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Initial release
 
+[1.8.0-1.20.1]: https://github.com/jakeb072001/TerraMine/compare/v1.7.3-1.20.1...v1.8.0-1.20.1
+[1.7.3-1.20.1]: https://github.com/jakeb072001/TerraMine/compare/v1.7.2-1.20.1...v1.7.3-1.20.1
 [1.7.2-1.20.1]: https://github.com/jakeb072001/TerraMine/compare/v1.7.1-1.20...v1.7.2-1.20.1
 [1.7.1-1.20]: https://github.com/jakeb072001/TerraMine/compare/v1.7.0-1.20...v1.7.1-1.20
 [1.7.0-1.20]: https://github.com/jakeb072001/TerraMine/compare/v1.6.0-1.19...v1.7.0-1.20
