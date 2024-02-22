@@ -23,7 +23,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.function.Predicate;
 
 /**
- * Heavy WIP, needs to
+ * Heavy WIP, needs to:
  * Display a boss health bar,
  * Track the bosses total health (eg, devourer and twins aren't one entity),
  * Attack only players on the same team if player that started the combat was on a team, otherwise only target the player that spawned the boss, and for natural spawns target everyone that was around where the boss spawned,
