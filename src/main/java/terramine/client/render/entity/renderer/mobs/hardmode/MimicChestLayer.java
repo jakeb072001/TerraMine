@@ -1,4 +1,4 @@
-package terramine.client.render.entity.renderer.monsters;
+package terramine.client.render.entity.renderer.mobs.hardmode;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
@@ -14,9 +14,9 @@ import net.minecraft.client.resources.model.Material;
 import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.NotNull;
 import terramine.TerraMine;
-import terramine.client.render.entity.model.monsters.MimicChestLayerModel;
-import terramine.client.render.entity.model.monsters.MimicModel;
-import terramine.common.entity.mobs.MimicEntity;
+import terramine.client.render.entity.model.mobs.hardmode.MimicChestLayerModel;
+import terramine.client.render.entity.model.mobs.hardmode.MimicModel;
+import terramine.common.entity.mobs.hardmode.MimicEntity;
 import terramine.common.init.ModModelLayers;
 
 import java.util.ArrayList;

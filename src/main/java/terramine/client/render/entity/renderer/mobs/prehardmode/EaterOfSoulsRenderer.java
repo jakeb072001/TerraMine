@@ -1,4 +1,4 @@
-package terramine.client.render.entity.renderer.monsters;
+package terramine.client.render.entity.renderer.mobs.prehardmode;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
@@ -10,8 +10,8 @@ import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.NotNull;
 import terramine.TerraMine;
-import terramine.client.render.entity.model.monsters.EaterOfSoulsModel;
-import terramine.common.entity.mobs.EaterOfSoulsEntity;
+import terramine.client.render.entity.model.mobs.prehardmode.EaterOfSoulsModel;
+import terramine.common.entity.mobs.prehardmode.EaterOfSoulsEntity;
 import terramine.common.init.ModModelLayers;
 
 @Environment(value=EnvType.CLIENT)

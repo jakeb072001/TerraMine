@@ -1,4 +1,4 @@
-package terramine.client.render.entity.model.monsters;
+package terramine.client.render.entity.model.mobs.prehardmode;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
@@ -10,7 +10,7 @@ import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.model.geom.builders.MeshDefinition;
 import net.minecraft.client.renderer.RenderType;
 import org.jetbrains.annotations.NotNull;
-import terramine.common.entity.mobs.DemonEyeEntity;
+import terramine.common.entity.mobs.prehardmode.DemonEyeEntity;
 
 public class DemonEyeModel<T extends DemonEyeEntity> extends HierarchicalModel<T> {
 

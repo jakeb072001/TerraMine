@@ -1,4 +1,4 @@
-package terramine.client.render.entity.renderer.monsters;
+package terramine.client.render.entity.renderer.mobs.hardmode;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -7,8 +7,8 @@ import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.NotNull;
 import terramine.TerraMine;
-import terramine.client.render.entity.model.monsters.MimicModel;
-import terramine.common.entity.mobs.MimicEntity;
+import terramine.client.render.entity.model.mobs.hardmode.MimicModel;
+import terramine.common.entity.mobs.hardmode.MimicEntity;
 import terramine.common.init.ModModelLayers;
 
 public class MimicRenderer extends MobRenderer<MimicEntity, MimicModel> {

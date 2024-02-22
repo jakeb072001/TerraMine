@@ -10,7 +10,7 @@ import dev.onyxstudios.cca.api.v3.level.LevelComponentInitializer;
 import net.minecraft.world.entity.item.ItemEntity;
 import terramine.TerraMine;
 import terramine.common.components.*;
-import terramine.common.entity.mobs.DemonEyeEntity;
+import terramine.common.entity.mobs.prehardmode.DemonEyeEntity;
 import terramine.common.misc.ManaHandler;
 
 public class ModComponents implements EntityComponentInitializer, LevelComponentInitializer {

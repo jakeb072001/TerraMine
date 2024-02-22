@@ -9,7 +9,13 @@ import terramine.TerraMine;
 import terramine.client.render.accessory.model.*;
 import terramine.client.render.entity.model.misc.FallingStarModel;
 import terramine.client.render.entity.model.misc.MeteoriteModel;
-import terramine.client.render.entity.model.monsters.*;
+import terramine.client.render.entity.model.mobs.bosses.TestBossModel;
+import terramine.client.render.entity.model.mobs.hardmode.MimicChestLayerModel;
+import terramine.client.render.entity.model.mobs.hardmode.MimicModel;
+import terramine.client.render.entity.model.mobs.prehardmode.CrimeraModel;
+import terramine.client.render.entity.model.mobs.prehardmode.DemonEyeModel;
+import terramine.client.render.entity.model.mobs.prehardmode.DevourerModel;
+import terramine.client.render.entity.model.mobs.prehardmode.EaterOfSoulsModel;
 import terramine.client.render.entity.model.projectiles.magic.LaserModel;
 import terramine.client.render.entity.model.projectiles.throwables.BombModel;
 import terramine.client.render.entity.model.projectiles.throwables.DynamiteModel;
@@ -24,6 +30,11 @@ public class ModModelLayers {
     public static final ModelLayerLocation EATER_OF_SOULS = register(createLocation("eater_of_souls"), EaterOfSoulsModel::createLayer);
     public static final ModelLayerLocation DEVOURER = register(createLocation("devourer"), DevourerModel::createLayer);
     public static final ModelLayerLocation CRIMERA = register(createLocation("crimera"), CrimeraModel::createLayer);
+
+    /**
+     * Testing, remove later
+     */
+    public static final ModelLayerLocation TEST_BOSS = register(createLocation("test_boss"), TestBossModel::createLayer);
 
     // Misc
     public static final ModelLayerLocation FALLING_STAR = register(createLocation("falling_star"), FallingStarModel::createLayer);

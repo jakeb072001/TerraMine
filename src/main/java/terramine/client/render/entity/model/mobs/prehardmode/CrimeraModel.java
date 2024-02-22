@@ -1,4 +1,4 @@
-package terramine.client.render.entity.model.monsters;
+package terramine.client.render.entity.model.mobs.prehardmode;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
@@ -9,7 +9,7 @@ import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.util.Mth;
 import org.jetbrains.annotations.NotNull;
-import terramine.common.entity.mobs.CrimeraEntity;
+import terramine.common.entity.mobs.prehardmode.CrimeraEntity;
 
 public class CrimeraModel<T extends CrimeraEntity> extends HierarchicalModel<T> {
 

@@ -1,4 +1,4 @@
-package terramine.client.render.entity.model.monsters;
+package terramine.client.render.entity.model.mobs.prehardmode;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
@@ -9,7 +9,7 @@ import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.util.Mth;
 import org.jetbrains.annotations.NotNull;
-import terramine.common.entity.mobs.EaterOfSoulsEntity;
+import terramine.common.entity.mobs.prehardmode.EaterOfSoulsEntity;
 
 public class EaterOfSoulsModel<T extends EaterOfSoulsEntity> extends HierarchicalModel<T> {
 

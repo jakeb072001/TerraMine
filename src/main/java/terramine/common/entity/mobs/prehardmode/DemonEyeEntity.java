@@ -1,4 +1,4 @@
-package terramine.common.entity.mobs;
+package terramine.common.entity.mobs.prehardmode;
 
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -14,6 +14,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.ServerLevelAccessor;
 import org.jetbrains.annotations.NotNull;
+import terramine.common.entity.mobs.FlyingEntityAI;
 import terramine.common.init.ModLootTables;
 
 public class DemonEyeEntity extends FlyingEntityAI {

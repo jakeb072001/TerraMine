@@ -1,4 +1,4 @@
-package terramine.common.entity.mobs.devourer;
+package terramine.common.entity.mobs.prehardmode.devourer;
 
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;

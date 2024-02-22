@@ -1,4 +1,4 @@
-package terramine.client.render.entity.model.monsters;
+package terramine.client.render.entity.model.mobs.hardmode;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
@@ -8,7 +8,7 @@ import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.CubeListBuilder;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.model.geom.builders.MeshDefinition;
-import terramine.common.entity.mobs.MimicEntity;
+import terramine.common.entity.mobs.hardmode.MimicEntity;
 
 public class MimicChestLayerModel extends EntityModel<MimicEntity> {
 

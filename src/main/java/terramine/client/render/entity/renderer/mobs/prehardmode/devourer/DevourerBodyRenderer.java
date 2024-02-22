@@ -1,4 +1,4 @@
-package terramine.client.render.entity.renderer.monsters.devourer;
+package terramine.client.render.entity.renderer.mobs.prehardmode.devourer;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
@@ -10,8 +10,8 @@ import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.NotNull;
 import terramine.TerraMine;
-import terramine.client.render.entity.model.monsters.DevourerModel;
-import terramine.common.entity.mobs.devourer.DevourerBodyEntity;
+import terramine.client.render.entity.model.mobs.prehardmode.DevourerModel;
+import terramine.common.entity.mobs.prehardmode.devourer.DevourerBodyEntity;
 import terramine.common.init.ModModelLayers;
 
 @Environment(value=EnvType.CLIENT)

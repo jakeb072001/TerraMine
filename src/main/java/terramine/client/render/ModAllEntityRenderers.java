@@ -8,13 +8,14 @@ import net.minecraft.client.renderer.entity.TntRenderer;
 import terramine.client.render.entity.renderer.blocks.ChestEntityRenderer;
 import terramine.client.render.entity.renderer.misc.FallingStarRenderer;
 import terramine.client.render.entity.renderer.misc.MeteoriteRenderer;
-import terramine.client.render.entity.renderer.monsters.CrimeraRenderer;
-import terramine.client.render.entity.renderer.monsters.DemonEyeRenderer;
-import terramine.client.render.entity.renderer.monsters.EaterOfSoulsRenderer;
-import terramine.client.render.entity.renderer.monsters.MimicRenderer;
-import terramine.client.render.entity.renderer.monsters.devourer.DevourerBodyRenderer;
-import terramine.client.render.entity.renderer.monsters.devourer.DevourerHeadRenderer;
-import terramine.client.render.entity.renderer.monsters.devourer.DevourerTailRenderer;
+import terramine.client.render.entity.renderer.mobs.bosses.TestBossRenderer;
+import terramine.client.render.entity.renderer.mobs.prehardmode.CrimeraRenderer;
+import terramine.client.render.entity.renderer.mobs.prehardmode.DemonEyeRenderer;
+import terramine.client.render.entity.renderer.mobs.prehardmode.EaterOfSoulsRenderer;
+import terramine.client.render.entity.renderer.mobs.hardmode.MimicRenderer;
+import terramine.client.render.entity.renderer.mobs.prehardmode.devourer.DevourerBodyRenderer;
+import terramine.client.render.entity.renderer.mobs.prehardmode.devourer.DevourerHeadRenderer;
+import terramine.client.render.entity.renderer.mobs.prehardmode.devourer.DevourerTailRenderer;
 import terramine.client.render.entity.renderer.projectiles.magic.FlamelashMissileRenderer;
 import terramine.client.render.entity.renderer.projectiles.magic.LaserRenderer;
 import terramine.client.render.entity.renderer.projectiles.magic.MagicMissileRenderer;
@@ -58,6 +59,11 @@ public class ModAllEntityRenderers {
         EntityRendererRegistry.register(ModEntities.DEVOURER_BODY, DevourerBodyRenderer::new);
         EntityRendererRegistry.register(ModEntities.DEVOURER_TAIL, DevourerTailRenderer::new);
         EntityRendererRegistry.register(ModEntities.CRIMERA, CrimeraRenderer::new);
+        /**
+         * Testing, remove later
+         */
+        EntityRendererRegistry.register(ModEntities.TEST_BOSS, TestBossRenderer::new);
+
         EntityRendererRegistry.register(ModEntities.FALLING_STAR, FallingStarRenderer::new);
         EntityRendererRegistry.register(ModEntities.METEORITE, MeteoriteRenderer::new);
         EntityRendererRegistry.register(ModEntities.MAGIC_MISSILE, MagicMissileRenderer::new);

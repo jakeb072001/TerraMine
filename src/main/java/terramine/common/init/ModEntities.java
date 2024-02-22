@@ -9,13 +9,14 @@ import net.minecraft.world.entity.*;
 import net.minecraft.world.level.levelgen.Heightmap;
 import terramine.TerraMine;
 import terramine.common.entity.block.InstantPrimedTNTEntity;
-import terramine.common.entity.mobs.CrimeraEntity;
-import terramine.common.entity.mobs.DemonEyeEntity;
-import terramine.common.entity.mobs.EaterOfSoulsEntity;
-import terramine.common.entity.mobs.MimicEntity;
-import terramine.common.entity.mobs.devourer.DevourerBodyEntity;
-import terramine.common.entity.mobs.devourer.DevourerEntity;
-import terramine.common.entity.mobs.devourer.DevourerTailEntity;
+import terramine.common.entity.mobs.bosses.TestBoss;
+import terramine.common.entity.mobs.prehardmode.CrimeraEntity;
+import terramine.common.entity.mobs.prehardmode.DemonEyeEntity;
+import terramine.common.entity.mobs.prehardmode.EaterOfSoulsEntity;
+import terramine.common.entity.mobs.hardmode.MimicEntity;
+import terramine.common.entity.mobs.prehardmode.devourer.DevourerBodyEntity;
+import terramine.common.entity.mobs.prehardmode.devourer.DevourerEntity;
+import terramine.common.entity.mobs.prehardmode.devourer.DevourerTailEntity;
 import terramine.common.entity.projectiles.*;
 import terramine.common.entity.throwables.BombEntity;
 import terramine.common.entity.throwables.DynamiteEntity;
@@ -84,6 +85,18 @@ public class ModEntities {
 			.spawnGroup(MobCategory.MONSTER)
 			.defaultAttributes(CrimeraEntity::createMobAttributes)
 			.spawnRestriction(SpawnPlacements.Type.NO_RESTRICTIONS, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, CrimeraEntity::checkMobSpawnRules)
+			.build());
+
+	/**
+	 * Testing, remove later
+	 */
+	public static final EntityType<TestBoss> TEST_BOSS = register("test_boss", FabricEntityTypeBuilder
+			.<TestBoss>createMob()
+			.entityFactory(TestBoss::new)
+			.dimensions(EntityDimensions.fixed(1f, 2f))
+			.spawnGroup(MobCategory.MONSTER)
+			.defaultAttributes(TestBoss::createMobAttributes)
+			.spawnRestriction(SpawnPlacements.Type.NO_RESTRICTIONS, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, TestBoss::checkMobSpawnRules)
 			.build());
 
 	public static final EntityType<FallingStarEntity> FALLING_STAR = register("falling_star", FabricEntityTypeBuilder

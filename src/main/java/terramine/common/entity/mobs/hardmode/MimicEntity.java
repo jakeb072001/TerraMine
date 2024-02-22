@@ -1,4 +1,4 @@
-package terramine.common.entity.mobs;
+package terramine.common.entity.mobs.hardmode;
 
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
