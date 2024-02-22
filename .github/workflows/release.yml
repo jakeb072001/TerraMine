@@ -38,7 +38,7 @@ jobs:
         with:
           files: build/libs/*.jar
           body: ${{ steps.changelog_reader.outputs.changes }}
-          draft: ${{ steps.changelog_reader.outputs.status == 'unreleased' }}
-          prerelease: ${{ steps.changelog_reader.outputs.status == 'prereleased' }}
+          draft: false
+          prerelease: false
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
