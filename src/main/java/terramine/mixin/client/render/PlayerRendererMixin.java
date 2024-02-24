@@ -50,7 +50,7 @@ public abstract class PlayerRendererMixin extends LivingEntityRenderer<AbstractC
 
 	@Unique
 	private static void renderArm(PoseStack matrixStack, MultiBufferSource buffer, int light, AbstractClientPlayer player, HumanoidArm handSide) {
-		if (!TerraMine.CONFIG.general.showFirstPersonGloves) {
+		if (!TerraMine.CONFIG.client.showFirstPersonGloves) {
 			return;
 		}
 

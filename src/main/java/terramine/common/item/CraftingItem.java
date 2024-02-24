@@ -22,7 +22,7 @@ public class CraftingItem extends TerrariaItemConfigurable {
     @Override
     @Environment(EnvType.CLIENT)
     public void appendHoverText(@NotNull ItemStack stack, Level world, @NotNull List<Component> tooltip, @NotNull TooltipFlag flags) {
-        if (TerraMine.CONFIG.general.showTooltips && hasTooltip) {
+        if (TerraMine.CONFIG.client.showTooltips && hasTooltip) {
             appendTooltipDescription(tooltip, this.getDescriptionId() + ".tooltip");
         }
     }

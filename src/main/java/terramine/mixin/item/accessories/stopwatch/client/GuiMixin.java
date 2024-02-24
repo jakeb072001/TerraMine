@@ -72,7 +72,7 @@ public abstract class GuiMixin {
 			}
 			speed = speed / speeds.size();
 			sb.append(speedText.getString()).append(": ");
-			if (TerraMine.CONFIG.general.stopwatchMPH) {
+			if (TerraMine.CONFIG.client.stopwatchMPH) {
 				sb.append(df.format(speed * 2.23693629));
 				sb.append(" mph");
 			} else {

@@ -13,6 +13,10 @@ public final class ModConfig extends PartitioningSerializer.GlobalData {
 	@ConfigEntry.Gui.TransitiveObject
 	public General general = new General();
 
+	@ConfigEntry.Category("client")
+	@ConfigEntry.Gui.TransitiveObject
+	public Client client = new Client();
+
 	@ConfigEntry.Category("worldgen")
 	@ConfigEntry.Gui.TransitiveObject
 	public WorldGen worldgen = new WorldGen();
@@ -22,12 +26,6 @@ public final class ModConfig extends PartitioningSerializer.GlobalData {
 		@SuppressWarnings("unused")
 		@ConfigEntry.Gui.Excluded
 		public int configVersion = TerraMine.CONFIG_VERSION;
-		@ConfigEntry.Gui.Tooltip(count = 2)
-		public boolean showFirstPersonGloves = true;
-		@ConfigEntry.Gui.Tooltip(count = 2)
-		public boolean showTooltips = true;
-		@ConfigEntry.Gui.Tooltip
-		public boolean stopwatchMPH = false;
 		@ConfigEntry.Gui.Tooltip(count = 3)
 		public boolean disableEvilSpread = false;
 		@ConfigEntry.Gui.Tooltip(count = 2)
@@ -50,6 +48,18 @@ public final class ModConfig extends PartitioningSerializer.GlobalData {
 		@ConfigEntry.Gui.Tooltip
 		@ConfigEntry.BoundedDiscrete(max = 2, min = 0)
 		public int setExtraAccessorySlots = 0;
+	}
+
+	@Config(name = "client")
+	public static final class Client implements ConfigData {
+		@ConfigEntry.Gui.Tooltip(count = 2)
+		public boolean showFirstPersonGloves = true;
+		@ConfigEntry.Gui.Tooltip(count = 2)
+		public boolean showTooltips = true;
+		@ConfigEntry.Gui.Tooltip
+		public boolean stopwatchMPH = false;
+		@ConfigEntry.Gui.Tooltip(count = 2)
+		public boolean rememberTeam = false;
 	}
 
 	@Config(name = "worldgen")

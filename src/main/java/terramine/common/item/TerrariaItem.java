@@ -34,7 +34,7 @@ public abstract class TerrariaItem extends Item {
 	@Override
 	@Environment(EnvType.CLIENT)
 	public void appendHoverText(@NotNull ItemStack stack, Level world, @NotNull List<Component> tooltip, @NotNull TooltipFlag flags) {
-		if (TerraMine.CONFIG.general.showTooltips && showTooltip) {
+		if (TerraMine.CONFIG.client.showTooltips && showTooltip) {
 			appendTooltipDescription(tooltip, this.getDescriptionId() + ".tooltip");
 		}
 	}

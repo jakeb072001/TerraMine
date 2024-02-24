@@ -32,6 +32,8 @@ public class ModComponents implements EntityComponentInitializer, LevelComponent
 			ComponentRegistryV3.INSTANCE.getOrCreate(TerraMine.id("movement_order"), MovementOrderComponent.class);
 	public static final ComponentKey<LavaImmunityComponent> LAVA_IMMUNITY =
 			ComponentRegistryV3.INSTANCE.getOrCreate(TerraMine.id("lava_immunity"), LavaImmunityComponent.class);
+	public static final ComponentKey<TeamsComponent> TEAMS =
+			ComponentRegistryV3.INSTANCE.getOrCreate(TerraMine.id("teams"), TeamsComponent.class);
 	public static final ComponentKey<SyncedBooleanComponent> SPACE_GUN_FREE =
 			ComponentRegistryV3.INSTANCE.getOrCreate(TerraMine.id("space_gun_free"), SyncedBooleanComponent.class);
 	public static final ComponentKey<SyncedIntegerComponent> ACCESSORY_SLOTS_ADDER =
@@ -59,6 +61,7 @@ public class ModComponents implements EntityComponentInitializer, LevelComponent
 		registry.registerForPlayers(DPS_METER_DAMAGE, DPSDamageCounterComponent::new, RespawnCopyStrategy.LOSSLESS_ONLY);
 		registry.registerForPlayers(MOVEMENT_ORDER, MovementOrderComponent::new, RespawnCopyStrategy.LOSSLESS_ONLY);
 		registry.registerForPlayers(LAVA_IMMUNITY, LavaImmunityComponent::new, RespawnCopyStrategy.LOSSLESS_ONLY);
+		registry.registerForPlayers(TEAMS, TeamsComponent::new, RespawnCopyStrategy.CHARACTER);
 		registry.registerForPlayers(SPACE_GUN_FREE, player -> new SyncedBooleanComponent("space_gun_free"), RespawnCopyStrategy.LOSSLESS_ONLY);
 		registry.registerForPlayers(ACCESSORY_SLOTS_ADDER, player -> new SyncedIntegerComponent("extraSlots"), RespawnCopyStrategy.CHARACTER);
 		registry.registerForPlayers(ACCESSORY_HARDCORE_CHECK, player -> new SyncedBooleanComponent("addedHardcoreSlot"), RespawnCopyStrategy.CHARACTER);

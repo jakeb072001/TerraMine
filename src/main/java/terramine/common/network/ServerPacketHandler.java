@@ -23,6 +23,7 @@ import terramine.TerraMine;
 import terramine.client.render.gui.menu.TerrariaInventoryContainerMenu;
 import terramine.common.init.ModComponents;
 import terramine.common.init.ModItems;
+import terramine.common.misc.TeamColours;
 import terramine.common.network.packet.BoneMealPacket;
 import terramine.common.network.packet.UpdateInputPacket;
 import terramine.extensions.PlayerStorages;
@@ -50,6 +51,7 @@ public class ServerPacketHandler {
 
     // Both
     public static final ResourceLocation UPDATE_ACCESSORY_VISIBILITY_PACKET_ID = TerraMine.id("update_accessory_visibility");
+    public static final ResourceLocation UPDATE_TEAM_PACKET_ID = TerraMine.id("update_team");
 
     public static void register() {
         ServerPlayNetworking.registerGlobalReceiver(BONE_MEAL_PACKET_ID, BoneMealPacket::receive);
@@ -146,6 +148,14 @@ public class ServerPacketHandler {
                 int slot = buf.readInt();
                 boolean isVisible = buf.readBoolean();
                 server.execute(() -> ((PlayerStorages) player).setSlotVisibility(slot, isVisible));
+        });
+
+        ServerPlayNetworking.registerGlobalReceiver(UPDATE_TEAM_PACKET_ID, (server, player, handler, buf, responseSender) -> {
+            int slot = buf.readInt();
+            server.execute(() -> {
+                ModComponents.TEAMS.get(player).setTeamColour(TeamColours.getTeam(slot));
+                ModComponents.TEAMS.sync(player);
+            });
         });
     }
 

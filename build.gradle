@@ -86,6 +86,7 @@ dependencies {
 
     // Dependencies
     modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}+${project.minecraft_version}"
+    modImplementation "curse.maven:architectury-api-419699:${project.architectury_version}"
     modImplementation "me.shedaniel.cloth:cloth-config-fabric:${project.cloth_config_version}"
     modImplementation "com.github.glitchfiend:TerraBlender-fabric:${project.fake_minecraft_version}-${project.terrablender_version}"
     // modImplementation "software.bernie.geckolib:geckolib-fabric-1.19:${project.geckolib_version}"
@@ -107,6 +108,9 @@ dependencies {
     }
     modImplementation "me.shedaniel:RoughlyEnoughItems-fabric:${project.rei_version}"
     modImplementation("dev.lambdaurora:lambdynamiclights:${project.lamb_dynamic_lights_version}+${project.minecraft_version}")
+
+    //modImplementation "curse.maven:ftb-teams-fabric-438497:${project.ftb_teams_version}"
+    //modImplementation "curse.maven:ftb-library-fabric-438495:${project.ftb_library_version}"
 
     // Compat
     modCompileOnly("com.github.apace100:origins-fabric:v${project.origins_version}") {

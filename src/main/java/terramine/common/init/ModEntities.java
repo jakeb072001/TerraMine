@@ -89,7 +89,7 @@ public class ModEntities {
 
 	/**
 	 * Testing, remove later
-	 *
+	 */
 	public static final EntityType<TestBoss> TEST_BOSS = register("test_boss", FabricEntityTypeBuilder
 			.<TestBoss>createMob()
 			.entityFactory(TestBoss::new)
@@ -98,7 +98,6 @@ public class ModEntities {
 			.defaultAttributes(TestBoss::createMobAttributes)
 			.spawnRestriction(SpawnPlacements.Type.NO_RESTRICTIONS, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, TestBoss::checkMobSpawnRules)
 			.build());
-	*/
 
 	public static final EntityType<FallingStarEntity> FALLING_STAR = register("falling_star", FabricEntityTypeBuilder
 			.create(MobCategory.MISC, FallingStarEntity::new)

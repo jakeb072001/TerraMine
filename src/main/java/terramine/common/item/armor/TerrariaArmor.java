@@ -119,7 +119,7 @@ public class TerrariaArmor extends ArmorItem {
     @Override
     @Environment(EnvType.CLIENT)
     public void appendHoverText(@NotNull ItemStack stack, Level world, @NotNull List<Component> tooltip, @NotNull TooltipFlag flags) {
-        if (TerraMine.CONFIG.general.showTooltips) {
+        if (TerraMine.CONFIG.client.showTooltips) {
             appendTooltipDescription(tooltip, this.getDescriptionId() + ".tooltip");
 
             // Checks if the player is wearing a full set of one type of armor, then display the set bonus

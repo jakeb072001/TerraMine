@@ -1,6 +1,7 @@
 package terramine.common.entity.mobs.prehardmode.devourer;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.util.Mth;
 import net.minecraft.world.damagesource.DamageSource;
@@ -23,7 +24,6 @@ import net.minecraft.world.phys.shapes.Shapes;
 import org.jetbrains.annotations.NotNull;
 import terramine.common.init.ModSoundEvents;
 
-// todo: better way to save the head entity, use whatever method the DevourerEntity uses to save segments
 public class DevourerBodyEntity extends Monster implements Enemy {
     public DevourerEntity head = null;
 
@@ -115,6 +115,26 @@ public class DevourerBodyEntity extends Monster implements Enemy {
         float k = (float)((Mth.atan2(h, i) * 57.2957763671875));
         this.setXRot(this.rotlerp(this.getXRot(), k, g));
         this.setYRot(this.rotlerp(this.getYRot(), j, f));
+    }
+
+    @Override
+    public void addAdditionalSaveData(@NotNull CompoundTag tag) {
+        super.addAdditionalSaveData(tag);
+        tag.putInt("headEntity", head.getId());
+    }
+
+    @Override
+    public void readAdditionalSaveData(@NotNull CompoundTag tag) {
+        super.readAdditionalSaveData(tag);
+        if (tag.contains("headEntity")) {
+            if (level().getEntity(tag.getInt("headEntity")) instanceof DevourerEntity devourerHead) {
+                setHead(devourerHead);
+            }
+        }
+    }
+
+    public void setHead(DevourerEntity head) {
+        this.head = head;
     }
 
     private void shareEffects() {

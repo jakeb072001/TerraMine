@@ -27,10 +27,10 @@ import terramine.common.compat.CompatHandler;
 import terramine.common.config.ConfigHelper;
 import terramine.common.config.ModConfig;
 import terramine.common.init.*;
+import terramine.common.misc.TeamColours;
 import terramine.common.misc.TerrariaInventory;
 import terramine.common.network.ServerPacketHandler;
 import terramine.common.utility.InputHandler;
-import terramine.common.utility.PlayerInventories;
 import terramine.common.world.biome.BiomeAdder;
 import terramine.common.world.biome.BiomeAdderCrimsonForced;
 import terramine.common.world.biome.BiomeSurfaceRules;
@@ -95,6 +95,7 @@ public class TerraMine implements ModInitializer, TerraBlenderApi {
 					((PlayerStorages) newPlayer).setSlotVisibility(i, ((PlayerStorages) oldPlayer).getSlotVisibility(i));
 				}
 			}
+			ModComponents.TEAMS.get(newPlayer).setTeamColour(ModComponents.TEAMS.get(oldPlayer).getTeamColour());
 		});
 		PlayerEvent.CHANGE_DIMENSION.register((player, oldLevel, newLevel) -> syncInventory(player));
 		PlayerEvent.PLAYER_RESPAWN.register((player, bl) -> syncInventory(player));

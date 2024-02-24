@@ -1,6 +1,7 @@
 package terramine.common.entity.mobs.prehardmode.devourer;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.network.protocol.game.ClientboundAddEntityPacket;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -17,6 +18,7 @@ import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.control.LookControl;
 import net.minecraft.world.entity.ai.control.MoveControl;
+import net.minecraft.world.entity.boss.EnderDragonPart;
 import net.minecraft.world.entity.monster.Enemy;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
@@ -33,7 +35,6 @@ import terramine.common.init.ModSoundEvents;
 
 // todo: movement needs to be like Devourer from Terraria, using flying entity AI for testing
 // probably don't use gravity and just curve downwards through code when having left the ground
-// todo: need to add segments to save data somehow, otherwise the devourer creates new segments each world load causing a lot of noise
 public class DevourerEntity extends Monster implements Enemy {
     public static final EntityDataAccessor<Boolean> SPAWNED = SynchedEntityData.defineId(DevourerEntity.class, EntityDataSerializers.BOOLEAN);
     public DevourerBodyEntity[] segments;
@@ -133,15 +134,17 @@ public class DevourerEntity extends Monster implements Enemy {
         }
 
         if (!this.isSpawned()) {
-            this.segments = new DevourerBodyEntity[segmentCount];
+            if (this.segments == null) {
+                this.segments = new DevourerBodyEntity[segmentCount];
 
-            for(int i = 0; i < segmentCount; ++i) {
-                if (i == segmentCount - 1) {
-                    this.segments[i] = new DevourerTailEntity(ModEntities.DEVOURER_TAIL, level());
-                } else {
-                    this.segments[i] = new DevourerBodyEntity(ModEntities.DEVOURER_BODY, level());
+                for (int i = 0; i < segmentCount; ++i) {
+                    if (i == segmentCount - 1) {
+                        this.segments[i] = new DevourerTailEntity(ModEntities.DEVOURER_TAIL, level());
+                    } else {
+                        this.segments[i] = new DevourerBodyEntity(ModEntities.DEVOURER_BODY, level());
+                    }
+                    this.segments[i].setHead(this);
                 }
-                this.segments[i].head = this;
             }
         }
 

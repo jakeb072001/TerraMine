@@ -24,7 +24,7 @@ public abstract class TerrariaItemConfigurable extends Item {
 	@Override
 	@Environment(EnvType.CLIENT)
 	public void appendHoverText(@NotNull ItemStack stack, Level world, @NotNull List<Component> tooltip, @NotNull TooltipFlag flags) {
-		if (TerraMine.CONFIG.general.showTooltips) {
+		if (TerraMine.CONFIG.client.showTooltips) {
 			appendTooltipDescription(tooltip, this.getDescriptionId() + ".tooltip");
 		}
 	}

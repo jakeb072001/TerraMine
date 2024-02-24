@@ -63,33 +63,7 @@ public class TestBoss extends BossEntityAI {
     }
 
     public void aiStep() {
-        if (this.isAlive()) {
-            boolean bl = this.isSunSensitive() && this.isSunBurnTick();
-            if (bl) {
-                ItemStack itemStack = this.getItemBySlot(EquipmentSlot.HEAD);
-                if (!itemStack.isEmpty()) {
-                    if (itemStack.isDamageableItem()) {
-                        itemStack.setDamageValue(itemStack.getDamageValue() + this.random.nextInt(2));
-                        if (itemStack.getDamageValue() >= itemStack.getMaxDamage()) {
-                            this.broadcastBreakEvent(EquipmentSlot.HEAD);
-                            this.setItemSlot(EquipmentSlot.HEAD, ItemStack.EMPTY);
-                        }
-                    }
-
-                    bl = false;
-                }
-
-                if (bl) {
-                    this.setSecondsOnFire(8);
-                }
-            }
-        }
-
         super.aiStep();
-    }
-
-    protected boolean isSunSensitive() {
-        return true;
     }
 
     public boolean hurt(@NotNull DamageSource damageSource, float f) {
@@ -103,15 +77,7 @@ public class TestBoss extends BossEntityAI {
     }
 
     public boolean doHurtTarget(@NotNull Entity entity) {
-        boolean bl = super.doHurtTarget(entity);
-        if (bl) {
-            float f = this.level().getCurrentDifficultyAt(this.blockPosition()).getEffectiveDifficulty();
-            if (this.getMainHandItem().isEmpty() && this.isOnFire() && this.random.nextFloat() < f * 0.3F) {
-                entity.setSecondsOnFire(2 * (int)f);
-            }
-        }
-
-        return bl;
+        return super.doHurtTarget(entity);
     }
 
     protected SoundEvent getAmbientSound() {
@@ -138,19 +104,6 @@ public class TestBoss extends BossEntityAI {
         return MobType.UNDEAD;
     }
 
-    protected void populateDefaultEquipmentSlots(@NotNull RandomSource randomSource, @NotNull DifficultyInstance difficultyInstance) {
-        super.populateDefaultEquipmentSlots(randomSource, difficultyInstance);
-        if (randomSource.nextFloat() < (this.level().getDifficulty() == Difficulty.HARD ? 0.05F : 0.01F)) {
-            int i = randomSource.nextInt(3);
-            if (i == 0) {
-                this.setItemSlot(EquipmentSlot.MAINHAND, new ItemStack(Items.IRON_SWORD));
-            } else {
-                this.setItemSlot(EquipmentSlot.MAINHAND, new ItemStack(Items.IRON_SHOVEL));
-            }
-        }
-
-    }
-
     public void addAdditionalSaveData(@NotNull CompoundTag compoundTag) {
         super.addAdditionalSaveData(compoundTag);
     }
@@ -164,19 +117,11 @@ public class TestBoss extends BossEntityAI {
     }
 
     protected float getStandingEyeHeight(@NotNull Pose pose, @NotNull EntityDimensions entityDimensions) {
-        return this.isBaby() ? 0.93F : 1.74F;
-    }
-
-    public boolean canHoldItem(ItemStack itemStack) {
-        return (!itemStack.is(Items.EGG) || !this.isBaby() || !this.isPassenger()) && super.canHoldItem(itemStack);
-    }
-
-    public boolean wantsToPickUp(ItemStack itemStack) {
-        return !itemStack.is(Items.GLOW_INK_SAC) && super.wantsToPickUp(itemStack);
+        return 1.74F;
     }
 
     public double getMyRidingOffset() {
-        return this.isBaby() ? 0.0 : -0.45;
+        return -0.45;
     }
 
     protected void dropCustomDeathLoot(@NotNull DamageSource damageSource, int i, boolean bl) {
@@ -191,7 +136,6 @@ public class TestBoss extends BossEntityAI {
                 }
             }
         }
-
     }
 
     protected ItemStack getSkull() {

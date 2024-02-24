@@ -84,6 +84,7 @@
       "terramine:dps_meter_damage",
       "terramine:movement_order",
       "terramine:lava_immunity",
+      "terramine:teams",
       "terramine:space_gun_free",
       "terramine:accessory_slots_adder",
       "terramine:accessory_hardcore_check",

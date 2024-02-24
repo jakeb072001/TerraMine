@@ -13,6 +13,8 @@ import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.ImageButton;
+import net.minecraft.client.gui.components.ImageWidget;
+import net.minecraft.client.gui.components.StringWidget;
 import net.minecraft.client.gui.screens.inventory.CreativeModeInventoryScreen;
 import net.minecraft.client.gui.screens.inventory.EffectRenderingInventoryScreen;
 import net.minecraft.client.gui.screens.inventory.InventoryScreen;
@@ -33,9 +35,11 @@ import org.jetbrains.annotations.Nullable;
 import org.joml.Matrix4f;
 import org.joml.Quaternionf;
 import terramine.TerraMine;
+import terramine.client.render.gui.ArmorValueTextWidget;
 import terramine.client.render.gui.ToggleImageButton;
 import terramine.client.render.gui.menu.TerrariaInventoryContainerMenu;
 import terramine.common.init.ModComponents;
+import terramine.common.misc.TeamColours;
 import terramine.common.network.ServerPacketHandler;
 import terramine.extensions.PlayerStorages;
 
@@ -49,6 +53,8 @@ public class TerrariaInventoryScreen extends EffectRenderingInventoryScreen<Terr
     private static final ResourceLocation ROTATE_LEFT_TEX = TerraMine.id("textures/gui/terraria_rotate_left_button.png");
     private static final ResourceLocation ROTATE_RIGHT_TEX = TerraMine.id("textures/gui/terraria_rotate_right_button.png");
     private static final ResourceLocation EYE_TEX = TerraMine.id("textures/gui/visibility.png");
+    private static final ResourceLocation TEAM_TEX = TerraMine.id("textures/gui/teams/team_button.png");
+    private static final ResourceLocation SHIELD_TEX = TerraMine.id("textures/gui/armor.png");
     private static final ResourceLocation TERRARIA_CONTAINER_5 = TerraMine.id("textures/gui/container/terraria_slots_5.png");
     private static final ResourceLocation TERRARIA_CONTAINER_6 = TerraMine.id("textures/gui/container/terraria_slots_6.png");
     private static final ResourceLocation TERRARIA_CONTAINER_7 = TerraMine.id("textures/gui/container/terraria_slots_7.png");
@@ -85,15 +91,29 @@ public class TerrariaInventoryScreen extends EffectRenderingInventoryScreen<Terr
             }));
         }
 
+        // Accessory slot visibility toggle buttons
         for (int i = 0; i < 5 + ModComponents.ACCESSORY_SLOTS_ADDER.get(this.minecraft.player).get(); i++) {
             int finalI = i;
-            this.addRenderableWidget(new ToggleImageButton(this.leftPos + 130, this.height / 2 - 105 + (18 * i), 8, 8, 0, 0, 8, 8, i, EYE_TEX, 16, 16, (buttonWidget) -> {
+            this.addRenderableWidget(new ToggleImageButton(this.leftPos + 130, this.height / 2 - 105 + (18 * i), 8, 8, 0, 0, 8, 8, i, false, EYE_TEX, 16, 16, (buttonWidget) -> {
                 FriendlyByteBuf buf = new FriendlyByteBuf(Unpooled.buffer());
                 buf.writeInt(finalI);
                 buf.writeBoolean(!((PlayerStorages) this.minecraft.player).getSlotVisibility(finalI));
                 ClientPlayNetworking.send(ServerPacketHandler.UPDATE_ACCESSORY_VISIBILITY_PACKET_ID, buf);
             }));
         }
+
+        // Teams buttons
+        for (int i = 0; i < 6; i++) {
+            int finalI = i;
+            this.addRenderableWidget(new ToggleImageButton(this.leftPos + 6 + (10 * i) - (i > 2 ? 30 : 0), this.height / 2 - 20 - (i > 2 ? 0 : 10), 10, 10, 0, 20 * i, 10, 10, i + 1, true, TEAM_TEX, 20, 120, (buttonWidget) -> {
+                FriendlyByteBuf buf = new FriendlyByteBuf(Unpooled.buffer());
+                buf.writeInt(finalI + 1);
+                ClientPlayNetworking.send(ServerPacketHandler.UPDATE_TEAM_PACKET_ID, buf);
+            }));
+        }
+
+        this.addRenderableWidget(new ImageWidget(this.leftPos + 39, this.height / 2 - 29, 19, 19, SHIELD_TEX));
+        this.addRenderableWidget(new ArmorValueTextWidget(this.leftPos + 48, this.height / 2 - 20, 1, 1, this.font));
     }
 
     protected void renderLabels(@NotNull GuiGraphics guiGraphics, int i, int j) {

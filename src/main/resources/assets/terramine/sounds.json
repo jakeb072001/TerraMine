@@ -131,6 +131,11 @@
       "terramine:enemies/mobkilled"
     ]
   },
+  "entity.boss.music.boss_music_1": {
+    "sounds": [
+      "terramine:enemies/boss/music/bossmusic1"
+    ]
+  },
   "block.water.step": {
     "sounds": [
       "entity/fish/flop1",
