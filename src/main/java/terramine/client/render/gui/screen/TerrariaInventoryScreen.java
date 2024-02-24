@@ -73,10 +73,10 @@ public class TerrariaInventoryScreen extends EffectRenderingInventoryScreen<Terr
         super.init();
         rotation = 0;
         //this.minecraft.keyboardHandler.setSendRepeatsToGui(true);
-        this.addRenderableWidget(new ImageButton(this.leftPos + 63, this.height / 2 - 100, 8, 8, 0, 0, 8, ROTATE_RIGHT_TEX, 8, 16, (buttonWidget) -> {
+        this.addRenderableWidget(new ToggleImageButton(this.leftPos + 63, this.height / 2 - 100, 8, 8, 0, 0, 8, 0, 0, false, ROTATE_RIGHT_TEX, 8, 16, (buttonWidget) -> {
             rotation -= 40;
         }));
-        this.addRenderableWidget(new ImageButton(this.leftPos + 104, this.height / 2 - 100, 8, 8, 0, 0, 8, ROTATE_LEFT_TEX, 8, 16, (buttonWidget) -> {
+        this.addRenderableWidget(new ToggleImageButton(this.leftPos + 104, this.height / 2 - 100, 8, 8, 0, 0, 8, 0, 0, false, ROTATE_LEFT_TEX, 8, 16, (buttonWidget) -> {
             rotation += 40;
         }));
         if (this.minecraft.gameMode.hasInfiniteItems()) {
