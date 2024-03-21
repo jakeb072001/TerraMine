@@ -321,6 +321,8 @@ public class ModItemGroups {
             entries.accept(ModItems.BLACK_LENS);
             entries.accept(ModItems.ROTTEN_CHUNK);
             entries.accept(ModItems.VERTEBRA);
+            entries.accept(ModItems.VILE_MUSHROOM);
+            entries.accept(ModItems.VICIOUS_MUSHROOM);
             entries.accept(ModItems.RAW_METEORITE);
             entries.accept(ModItems.METEORITE_INGOT);
             entries.accept(ModItems.RAW_DEMONITE);
@@ -333,8 +335,8 @@ public class ModItemGroups {
             entries.accept(ModItems.FALLEN_STAR);
             entries.accept(ModItems.MANA_CRYSTAL);
             entries.accept(ModItems.DEMON_HEART);
-            entries.accept(ModItems.VILE_MUSHROOM);
-            entries.accept(ModItems.VICIOUS_MUSHROOM);
+            entries.accept(ModItems.SUSPICIOUS_LOOKING_EYE);
+            entries.accept(ModItems.EYE_OF_CTHULHU_TREASURE_BAG);
         });
 
         ItemGroupEvents.modifyEntriesEvent(createKey("terramine_dyes")).register(id("seventh_phase"), entries -> {

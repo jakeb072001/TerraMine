@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "terramine:item/treasure_bags/eater_of_worlds_treasure_bag"
+  }
+}

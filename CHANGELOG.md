@@ -6,8 +6,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [1.8.0-1.20.1] - 2024-04-01
 ### Added
-- Eye of Cthulhu and Eater of Worlds //-- Not yet done
-- Teams //-- Not yet done
+- Eye of Cthulhu and Eater of Worlds //-- Not yet started
+- Teams system //-- WIP
+- Armor value display
+
+### Fixed
+- Various accessory menu buttons stuck highlighting after clicking them
 
 ## [1.7.3-1.20.1] - 2024-02-22
 ### Fixed

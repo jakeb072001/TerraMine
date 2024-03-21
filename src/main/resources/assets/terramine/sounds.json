@@ -136,6 +136,11 @@
       "terramine:enemies/boss/music/bossmusic1"
     ]
   },
+  "entity.boss.boss_roar_0": {
+    "sounds": [
+      "terramine:enemies/boss/roar0"
+    ]
+  },
   "block.water.step": {
     "sounds": [
       "entity/fish/flop1",

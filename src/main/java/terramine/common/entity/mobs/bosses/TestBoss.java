@@ -5,9 +5,6 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.util.RandomSource;
-import net.minecraft.world.Difficulty;
-import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
@@ -16,11 +13,8 @@ import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.animal.IronGolem;
 import net.minecraft.world.entity.animal.Turtle;
-import net.minecraft.world.entity.monster.*;
 import net.minecraft.world.entity.npc.AbstractVillager;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.*;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
@@ -50,30 +44,12 @@ public class TestBoss extends BossEntityAI {
         this.targetSelector.addGoal(5, new NearestAttackableTargetGoal(this, Turtle.class, 10, true, false, Turtle.BABY_ON_LAND_SELECTOR));
     }
 
-    public int getExperienceReward() {
-        if (this.isBaby()) {
-            this.xpReward = (int)((double)this.xpReward * 2.5);
-        }
-
-        return super.getExperienceReward();
-    }
-
     public void tick() {
         super.tick();
     }
 
     public void aiStep() {
         super.aiStep();
-    }
-
-    public boolean hurt(@NotNull DamageSource damageSource, float f) {
-        if (!super.hurt(damageSource, f)) {
-            return false;
-        } else if (!(this.level() instanceof ServerLevel)) {
-            return false;
-        } else {
-            return true;
-        }
     }
 
     public boolean doHurtTarget(@NotNull Entity entity) {
@@ -122,24 +98,6 @@ public class TestBoss extends BossEntityAI {
 
     public double getMyRidingOffset() {
         return -0.45;
-    }
-
-    protected void dropCustomDeathLoot(@NotNull DamageSource damageSource, int i, boolean bl) {
-        super.dropCustomDeathLoot(damageSource, i, bl);
-        Entity entity = damageSource.getEntity();
-        if (entity instanceof Creeper creeper) {
-            if (creeper.canDropMobsSkull()) {
-                ItemStack itemStack = this.getSkull();
-                if (!itemStack.isEmpty()) {
-                    creeper.increaseDroppedSkulls();
-                    this.spawnAtLocation(itemStack);
-                }
-            }
-        }
-    }
-
-    protected ItemStack getSkull() {
-        return new ItemStack(Items.ZOMBIE_HEAD);
     }
 
     public static AttributeSupplier.@NotNull Builder createMobAttributes() {

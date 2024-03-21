@@ -17,12 +17,14 @@ import terramine.common.item.accessories.hands.*;
 import terramine.common.item.accessories.necklace.*;
 import terramine.common.item.armor.*;
 import terramine.common.item.armor.vanity.FamiliarVanity;
-import terramine.common.item.armor.vanity.TopHatVanity;
 import terramine.common.item.dye.BasicDye;
 import terramine.common.item.equipment.*;
 import terramine.common.item.equipment.swords.CustomSoundSwordItem;
 import terramine.common.item.equipment.swords.VolcanoSwordItem;
 import terramine.common.item.magic.*;
+import terramine.common.item.misc.BossSpawnItem;
+import terramine.common.item.misc.DemonHeartItem;
+import terramine.common.item.misc.TreasureBagItem;
 import terramine.common.item.throwables.BombItem;
 import terramine.common.item.throwables.DynamiteItem;
 import terramine.common.item.throwables.GrenadeItem;
@@ -36,6 +38,7 @@ public class ModItems {
 	public static final Item EATER_OF_SOULS_SPAWN_EGG = register("eater_of_souls_spawn_egg", new SpawnEggItem(ModEntities.EATER_OF_SOULS, 0x735c5f, 0x999190, new Item.Properties()));
 	public static final Item DEVOURER_SPAWN_EGG = register("devourer_spawn_egg", new SpawnEggItem(ModEntities.DEVOURER, 0x999190, 0x735c5f, new Item.Properties()));
 	public static final Item CRIMERA_SPAWN_EGG = register("crimera_spawn_egg", new SpawnEggItem(ModEntities.CRIMERA, 0x72261f, 0xac524d, new Item.Properties()));
+	public static final Item SUSPICIOUS_LOOKING_EYE = register("suspicious_looking_eye", new BossSpawnItem(ModEntities.TEST_BOSS, new FabricItemSettings().stacksTo(16).rarity(Rarity.RARE)));
 	public static final Item UMBRELLA = register("umbrella", new UmbrellaItem());
 	public static final Item WHOOPEE_CUSHION = register("whoopee_cushion", new WhoopeeCushionItem());
 	public static final Item MAGIC_MIRROR = register("magic_mirror", new MagicMirrorItem());
@@ -57,6 +60,10 @@ public class ModItems {
 	public static final Item BROWN_DYE = register("brown_dye", new BasicDye(0x964B00));
 	public static final Item GRAY_DYE = register("gray_dye", new BasicDye(0x808080));
 	public static final Item BLACK_DYE = register("black_dye", new BasicDye(0x000000));
+
+	// Treasure Bags
+	// todo: need a way to set loot tables here
+	public static final Item EYE_OF_CTHULHU_TREASURE_BAG = register("eye_of_cthulhu_treasure_bag", new TreasureBagItem(new FabricItemSettings().stacksTo(1).rarity(Rarity.EPIC)));
 
 	// Crafting Items
 	public static final Item LENS = register("lens", new CraftingItem(new FabricItemSettings(), false));

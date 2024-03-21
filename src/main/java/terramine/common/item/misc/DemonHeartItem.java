@@ -1,4 +1,4 @@
-package terramine.common.item.magic;
+package terramine.common.item.misc;
 
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.server.level.ServerPlayer;

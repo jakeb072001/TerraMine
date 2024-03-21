@@ -1,5 +1,6 @@
 package terramine.common.item.equipment;
 
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
@@ -43,7 +44,7 @@ public class CellPhoneItem extends AccessoryTerrariaItem {
 					worldSpawn(serverPlayer, serverLevel);
 				}
 			} else {
-				player.sendSystemMessage(Component.translatable("magic_mirror.fail"));
+				player.sendSystemMessage(Component.translatable("text.magic_mirror.fail").withStyle(ChatFormatting.RED));
 				level.playSound(null, player.blockPosition(), net.minecraft.sounds.SoundEvents.SHULKER_BULLET_HURT, SoundSource.BLOCKS, 1f, 1f);
 			}
 		}
