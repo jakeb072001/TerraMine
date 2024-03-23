@@ -62,8 +62,7 @@ public class ModItems {
 	public static final Item BLACK_DYE = register("black_dye", new BasicDye(0x000000));
 
 	// Treasure Bags
-	// todo: need a way to set loot tables here
-	public static final Item EYE_OF_CTHULHU_TREASURE_BAG = register("eye_of_cthulhu_treasure_bag", new TreasureBagItem(new FabricItemSettings().stacksTo(1).rarity(Rarity.EPIC)));
+	public static final Item EYE_OF_CTHULHU_TREASURE_BAG = register("eye_of_cthulhu_treasure_bag", new TreasureBagItem(new FabricItemSettings().stacksTo(1).rarity(Rarity.EPIC).fireResistant(), ModLootTables.EYE_OF_CTHULHU));
 
 	// Crafting Items
 	public static final Item LENS = register("lens", new CraftingItem(new FabricItemSettings(), false));

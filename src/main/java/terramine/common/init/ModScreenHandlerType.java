@@ -10,9 +10,11 @@ import net.minecraft.world.inventory.MenuType;
 import terramine.TerraMine;
 import terramine.client.render.gui.menu.ChestBlockContainerMenu;
 import terramine.client.render.gui.menu.TerrariaInventoryContainerMenu;
+import terramine.client.render.gui.menu.TreasureBagInventoryContainerMenu;
 
 public class ModScreenHandlerType {
     public static MenuType<TerrariaInventoryContainerMenu> TERRARIA_CONTAINER;
+    public static MenuType<TreasureBagInventoryContainerMenu> TREASURE_BAG_CONTAINER;
     public static MenuType<ChestBlockContainerMenu> GOLD_CHEST;
     public static MenuType<ChestBlockContainerMenu> FROZEN_CHEST;
     public static MenuType<ChestBlockContainerMenu> IVY_CHEST;
@@ -25,6 +27,7 @@ public class ModScreenHandlerType {
 
     public static void register() {
         TERRARIA_CONTAINER = registerSimple(TerraMine.id("terraria_container"), (syncId, inventory) -> new TerrariaInventoryContainerMenu(inventory.player));
+        TREASURE_BAG_CONTAINER = registerSimple(TerraMine.id("treasure_bag_container"), (syncId, inventory) -> new TreasureBagInventoryContainerMenu(inventory.player));
         GOLD_CHEST = registerSimple(TerraMine.id("gold_chest"), (syncId, inventory) -> new ChestBlockContainerMenu(40, GOLD_CHEST, syncId, inventory, ContainerLevelAccess.NULL));
         FROZEN_CHEST = registerSimple(TerraMine.id("frozen_chest"), (syncId, inventory) -> new ChestBlockContainerMenu(40, FROZEN_CHEST, syncId, inventory, ContainerLevelAccess.NULL));
         IVY_CHEST = registerSimple(TerraMine.id("ivy_chest"), (syncId, inventory) -> new ChestBlockContainerMenu(40, IVY_CHEST, syncId, inventory, ContainerLevelAccess.NULL));

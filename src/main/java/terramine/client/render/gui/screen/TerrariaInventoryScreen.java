@@ -46,7 +46,6 @@ import terramine.extensions.PlayerStorages;
 import java.util.List;
 
 // todo: sometimes when clicking a slot the item isn't picked up or placed down
-// todo: also items aren't thrown when clicking outside screen, hasClickedOutside is working correctly so not sure why this is happening
 @Environment(EnvType.CLIENT)
 public class TerrariaInventoryScreen extends EffectRenderingInventoryScreen<TerrariaInventoryContainerMenu> {
     private static final ResourceLocation BUTTON_TEX = TerraMine.id("textures/gui/terraria_slots_button.png");
@@ -137,7 +136,6 @@ public class TerrariaInventoryScreen extends EffectRenderingInventoryScreen<Terr
         } else {
             guiGraphics.blit(TERRARIA_CONTAINER_5, k, l, 0, 0, this.imageWidth, this.imageHeight, this.imageWidth, this.imageHeight);
         }
-        //guiGraphics.blit(guiGraphics, k, l, this.getBlitOffset(), 0f, 0f, this.imageWidth, this.imageHeight, this.imageWidth, this.imageHeight);
         renderEntityInInventoryFollowsMouse(guiGraphics, k + 88, l + 71, 30, (k + 51f) - this.xMouse, l + 75f - 50f - this.yMouse, this.minecraft.player);
     }
 
@@ -206,6 +204,7 @@ public class TerrariaInventoryScreen extends EffectRenderingInventoryScreen<Terr
         }
     }
 
+    // todo: fix, items don't throw out of inventory
     protected boolean hasClickedOutside(double d, double e, int i, int j, int k) {
         return d < (double)i || e < (double)j - 26 || d >= (double)(i + this.imageWidth) || e >= (double)(j + this.imageHeight - 26);
     }

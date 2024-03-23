@@ -12,11 +12,17 @@ import java.util.List;
 
 public class ModLootTables {
 
+	// Mobs
 	public static final ResourceLocation MIMIC = TerraMine.id("entities/mimic");
 	public static final ResourceLocation DEMON_EYE = TerraMine.id("entities/demon_eye");
 	public static final ResourceLocation EATER_OF_SOULS = TerraMine.id("entities/eater_of_souls");
 	public static final ResourceLocation DEVOURER = TerraMine.id("entities/devourer");
 	public static final ResourceLocation CRIMERA = TerraMine.id("entities/crimera");
+
+	// Treasure Bags
+	public static final ResourceLocation EYE_OF_CTHULHU = TerraMine.id("items/treasure_bag/eye_of_cthulhu");
+
+	// Chests
 	public static final ResourceLocation SURFACE_CHEST = TerraMine.id("chests/surface_chest");
 	public static final ResourceLocation OCEAN_CHEST = TerraMine.id("chests/ocean_chest");
 	public static final ResourceLocation CAVE_CHEST = TerraMine.id("chests/cave_chest");

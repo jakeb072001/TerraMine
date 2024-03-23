@@ -15,10 +15,12 @@ import net.minecraft.world.entity.animal.IronGolem;
 import net.minecraft.world.entity.animal.Turtle;
 import net.minecraft.world.entity.npc.AbstractVillager;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.level.*;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
 import terramine.common.entity.mobs.BossEntityAI;
+import terramine.common.init.ModItems;
 
 /**
  * Testing, remove later
@@ -98,6 +100,10 @@ public class TestBoss extends BossEntityAI {
 
     public double getMyRidingOffset() {
         return -0.45;
+    }
+
+    protected Item treasureBagItem() {
+        return ModItems.EYE_OF_CTHULHU_TREASURE_BAG;
     }
 
     public static AttributeSupplier.@NotNull Builder createMobAttributes() {

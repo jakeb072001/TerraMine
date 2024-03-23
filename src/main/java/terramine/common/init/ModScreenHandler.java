@@ -3,12 +3,15 @@ package terramine.common.init;
 import net.minecraft.client.gui.screens.MenuScreens;
 import terramine.client.render.gui.menu.ChestBlockContainerMenu;
 import terramine.client.render.gui.menu.TerrariaInventoryContainerMenu;
+import terramine.client.render.gui.menu.TreasureBagInventoryContainerMenu;
 import terramine.client.render.gui.screen.ChestBlockScreen;
 import terramine.client.render.gui.screen.TerrariaInventoryScreen;
+import terramine.client.render.gui.screen.TreasureBagInventoryScreen;
 
 public class ModScreenHandler {
     public static void register() {
         MenuScreens.<TerrariaInventoryContainerMenu, TerrariaInventoryScreen>register(ModScreenHandlerType.TERRARIA_CONTAINER, (description, inventory, title) -> new TerrariaInventoryScreen(inventory.player));
+        MenuScreens.<TreasureBagInventoryContainerMenu, TreasureBagInventoryScreen>register(ModScreenHandlerType.TREASURE_BAG_CONTAINER, (description, inventory, title) -> new TreasureBagInventoryScreen(inventory.player));
         MenuScreens.<ChestBlockContainerMenu, ChestBlockScreen>register(ModScreenHandlerType.GOLD_CHEST, (description, inventory, title) -> new ChestBlockScreen(description, inventory.player, title));
         MenuScreens.<ChestBlockContainerMenu, ChestBlockScreen>register(ModScreenHandlerType.FROZEN_CHEST, (description, inventory, title) -> new ChestBlockScreen(description, inventory.player, title));
         MenuScreens.<ChestBlockContainerMenu, ChestBlockScreen>register(ModScreenHandlerType.IVY_CHEST, (description, inventory, title) -> new ChestBlockScreen(description, inventory.player, title));

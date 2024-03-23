@@ -29,7 +29,6 @@ import terramine.common.network.packet.UpdateInputPacket;
 import terramine.extensions.PlayerStorages;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
 public class ServerPacketHandler {
@@ -44,6 +43,7 @@ public class ServerPacketHandler {
     public static final ResourceLocation ROCKET_BOOTS_PARTICLE_PACKET_ID = TerraMine.id("rocket_boots_particles");
     public static final ResourceLocation UPDATE_BIOME_PACKET_ID = TerraMine.id("update_biome");
     public static final ResourceLocation OPEN_INVENTORY_PACKET_ID = TerraMine.id("open_inventory");
+    public static final ResourceLocation UPDATE_TEAM_PACKET_ID = TerraMine.id("update_team");
 
     // Client
     public static final ResourceLocation SETUP_INVENTORY_PACKET_ID = TerraMine.id("setup_inventory");
@@ -51,7 +51,6 @@ public class ServerPacketHandler {
 
     // Both
     public static final ResourceLocation UPDATE_ACCESSORY_VISIBILITY_PACKET_ID = TerraMine.id("update_accessory_visibility");
-    public static final ResourceLocation UPDATE_TEAM_PACKET_ID = TerraMine.id("update_team");
 
     public static void register() {
         ServerPlayNetworking.registerGlobalReceiver(BONE_MEAL_PACKET_ID, BoneMealPacket::receive);

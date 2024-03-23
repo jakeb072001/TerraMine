@@ -6,6 +6,7 @@ import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.TntRenderer;
 import terramine.client.render.entity.renderer.blocks.ChestEntityRenderer;
+import terramine.client.render.entity.renderer.misc.ClientItemEntityRenderer;
 import terramine.client.render.entity.renderer.misc.FallingStarRenderer;
 import terramine.client.render.entity.renderer.misc.MeteoriteRenderer;
 import terramine.client.render.entity.renderer.mobs.bosses.TestBossRenderer;
@@ -63,6 +64,8 @@ public class ModAllEntityRenderers {
          * Testing, remove later
          */
         EntityRendererRegistry.register(ModEntities.TEST_BOSS, TestBossRenderer::new);
+
+        EntityRendererRegistry.register(ModEntities.CLIENT_ITEM, ClientItemEntityRenderer::new);
 
         EntityRendererRegistry.register(ModEntities.FALLING_STAR, FallingStarRenderer::new);
         EntityRendererRegistry.register(ModEntities.METEORITE, MeteoriteRenderer::new);

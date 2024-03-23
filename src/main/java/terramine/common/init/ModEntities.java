@@ -6,6 +6,7 @@ import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.level.levelgen.Heightmap;
 import terramine.TerraMine;
 import terramine.common.entity.block.InstantPrimedTNTEntity;
@@ -21,6 +22,7 @@ import terramine.common.entity.projectiles.*;
 import terramine.common.entity.throwables.BombEntity;
 import terramine.common.entity.throwables.DynamiteEntity;
 import terramine.common.entity.throwables.GrenadeEntity;
+import terramine.common.misc.ClientItemEntity;
 
 public class ModEntities {
 
@@ -97,6 +99,13 @@ public class ModEntities {
 			.spawnGroup(MobCategory.MONSTER)
 			.defaultAttributes(TestBoss::createMobAttributes)
 			.spawnRestriction(SpawnPlacements.Type.NO_RESTRICTIONS, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, TestBoss::checkMobSpawnRules)
+			.build());
+
+	public static final EntityType<ClientItemEntity> CLIENT_ITEM = register("client_item", FabricEntityTypeBuilder
+			.create(MobCategory.MISC, ClientItemEntity::new)
+			.dimensions(EntityDimensions.fixed(0.25F, 0.25F))
+			.trackRangeBlocks(6)
+			.trackedUpdateRate(20)
 			.build());
 
 	public static final EntityType<FallingStarEntity> FALLING_STAR = register("falling_star", FabricEntityTypeBuilder

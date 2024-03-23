@@ -17,13 +17,16 @@ import net.minecraft.world.entity.ai.targeting.TargetingConditions;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.monster.Enemy;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.*;
 import net.minecraft.world.phys.AABB;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import terramine.common.init.ModComponents;
+import terramine.common.init.ModEntities;
 import terramine.common.init.ModItems;
+import terramine.common.misc.ClientItemEntity;
 import terramine.common.misc.TeamColours;
 
 // TODO: Boss Stuff
@@ -34,7 +37,7 @@ import terramine.common.misc.TeamColours;
  * Track the bosses total health (eg, devourer and twins aren't one entity),
  * Drop loot bag for players that where targeted by boss (which will be a custom entity that's client sided, once picked up is a normal item though and is a storage container you can open and take items from but not put items in),
  * Limit quantity of Bosses that can spawn within an area of a specified size,
- * Make the boss leave once it is day.
+ * Make the boss leave once it is day or there are no nearby players that the boss can target.
  * <p>
  * First, make a team system, by default it will just use preset colours that each player can select just like in Terraria. But if FTB Teams or similar is installed then allow for proper team creation (best for bigger servers).
  */
@@ -116,7 +119,7 @@ public class BossEntityAI extends PathfinderMob implements Enemy {
         this.bossEvent.removePlayer(serverPlayer);
     }
 
-    public void readAdditionalSaveData(CompoundTag compoundTag) {
+    public void readAdditionalSaveData(@NotNull CompoundTag compoundTag) {
         super.readAdditionalSaveData(compoundTag);
         if (this.hasCustomName()) {
             this.bossEvent.setName(this.getDisplayName());
@@ -146,7 +149,7 @@ public class BossEntityAI extends PathfinderMob implements Enemy {
 
     public void checkDespawn() {}
 
-    protected boolean canRide(Entity entity) {
+    protected boolean canRide(@NotNull Entity entity) {
         return false;
     }
 
@@ -179,14 +182,17 @@ public class BossEntityAI extends PathfinderMob implements Enemy {
     protected void dropAllDeathLoot(@NotNull DamageSource damageSource) {
         for (Player player : this.level().getNearbyPlayers(TargetingConditions.DEFAULT, this, new AABB(this.position(), this.position()).inflate(32)) ) {
             if (checkPlayerTeam(player)) {
-                // todo: drop custom loot bag item entity that's client sided for each player within a certain distance
-                // todo: maybe just make it not render for other players and not be able to be picked up by other players? that way it's still on the server
-                // todo: create a beacon effect on the client side for the players bag to make it easier to find
-                ItemEntity itemEntity = new ItemEntity(this.level(), this.getX(), this.getY(), this.getZ(), ModItems.EYE_OF_CTHULHU_TREASURE_BAG.getDefaultInstance());
+                ClientItemEntity itemEntity = new ClientItemEntity(ModEntities.CLIENT_ITEM, this.level());
+                itemEntity.setValues(this.level(), treasureBagItem().getDefaultInstance(), this.getX(), this.getY(), this.getZ());
+                itemEntity.setClientPlayer(player.getUUID());
                 this.level().addFreshEntity(itemEntity);
             }
         }
         this.dropExperience();
+    }
+
+    protected Item treasureBagItem() {
+        return ModItems.EYE_OF_CTHULHU_TREASURE_BAG;
     }
 
     // Boss can only attack players on the same team as the player that summoned the boss

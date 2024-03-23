@@ -4,41 +4,30 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
-import net.minecraft.world.entity.*;
+import net.minecraft.world.SimpleMenuProvider;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
-import terramine.TerraMine;
+import terramine.client.render.gui.menu.TreasureBagInventoryContainerMenu;
 import terramine.common.item.TerrariaItemConfigurable;
+import terramine.common.misc.TreasureBagInventory;
 
 import java.util.List;
 
-// todo: make sure is client sided only, only local player can see and pickup the item
 public class TreasureBagItem extends TerrariaItemConfigurable {
-    public TreasureBagItem(Properties properties) {
+    public TreasureBagInventory treasureBagInventory;
+    protected ResourceLocation lootTable;
+
+    public TreasureBagItem(Properties properties, ResourceLocation lootTable) {
         super(properties);
-    }
-
-    @Override
-    public ItemStack finishUsingItem(@NotNull ItemStack itemStack, @NotNull Level level, @NotNull LivingEntity entity) {
-        Player player = (Player) entity;
-        if (player instanceof ServerPlayer) {
-            CriteriaTriggers.CONSUME_ITEM.trigger((ServerPlayer)player, itemStack);
-        }
-
-        if (!level.isClientSide) {
-            // Open custom inventory with a few slots filled with items from the bosses loot table
-            if (!player.getAbilities().instabuild) {
-                itemStack.shrink(1);
-            }
-        }
-        return super.finishUsingItem(itemStack, level, entity);
+        this.lootTable = lootTable;
     }
 
     @Override
@@ -47,15 +36,27 @@ public class TreasureBagItem extends TerrariaItemConfigurable {
     }
 
     @Override
-    public InteractionResultHolder<ItemStack> use(@NotNull Level world, Player user, @NotNull InteractionHand hand) {
-        ItemStack itemstack = user.getItemInHand(hand);
-        user.startUsingItem(hand);
-        return InteractionResultHolder.consume(itemstack);
+    public InteractionResultHolder<ItemStack> use(@NotNull Level level, Player player, @NotNull InteractionHand hand) {
+        ItemStack itemStack = player.getItemInHand(hand);
+        TreasureBagInventory treasureBagInventory = new TreasureBagInventory(itemStack, player, lootTable);
+        this.treasureBagInventory = treasureBagInventory;
+        player.startUsingItem(hand);
+
+        if (player instanceof ServerPlayer) {
+            CriteriaTriggers.CONSUME_ITEM.trigger((ServerPlayer)player, itemStack);
+        }
+
+        if (!level.isClientSide) {
+            TreasureBagInventoryContainerMenu menu = new TreasureBagInventoryContainerMenu(player, treasureBagInventory);
+            player.openMenu(new SimpleMenuProvider((id, inventory, player2) -> menu, Component.empty()));
+        }
+
+        return InteractionResultHolder.consume(itemStack);
     }
 
     @Override
     public int getUseDuration(@NotNull ItemStack stack) {
-        return 0;
+        return 1;
     }
 
     @Override
