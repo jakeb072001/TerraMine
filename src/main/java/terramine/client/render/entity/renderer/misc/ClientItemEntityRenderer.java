@@ -1,5 +1,6 @@
 package terramine.client.render.entity.renderer.misc;
 
+import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import net.fabricmc.api.EnvType;
@@ -7,6 +8,7 @@ import net.fabricmc.api.Environment;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.ItemRenderer;
@@ -16,16 +18,16 @@ import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import terramine.common.misc.ClientItemEntity;
 
-// todo: not correctly working, host of lan can see their bag but other player can not
+import static net.minecraft.client.renderer.blockentity.BeaconRenderer.renderPart;
+
 @Environment(EnvType.CLIENT)
-public class ClientItemEntityRenderer extends EntityRenderer<ItemEntity> {
+public class ClientItemEntityRenderer extends EntityRenderer<ClientItemEntity> {
     private final ItemRenderer itemRenderer;
     private final RandomSource random = RandomSource.create();
 
@@ -36,12 +38,12 @@ public class ClientItemEntityRenderer extends EntityRenderer<ItemEntity> {
         this.shadowStrength = 0.75F;
     }
 
-    public void render(@NotNull ItemEntity itemEntity, float f, float g, @NotNull PoseStack poseStack, @NotNull MultiBufferSource multiBufferSource, int i) {
+    public void render(@NotNull ClientItemEntity itemEntity, float f, float g, @NotNull PoseStack poseStack, @NotNull MultiBufferSource multiBufferSource, int i) {
         LocalPlayer player = Minecraft.getInstance().player;
-        if (itemEntity instanceof ClientItemEntity clientItemEntity && player != null && player.getUUID() == clientItemEntity.getClientPlayer()) {
+        if (player.getUUID().equals(itemEntity.getClientPlayer())) {
             poseStack.pushPose();
-            this.shadowRadius = 0.15F;
             ItemStack itemStack = itemEntity.getItem();
+            this.shadowRadius = 0.15F;
             int j = itemStack.isEmpty() ? 187 : Item.getId(itemStack.getItem()) + itemStack.getDamageValue();
             this.random.setSeed(j);
             BakedModel bakedModel = this.itemRenderer.getModel(itemStack, itemEntity.level(), null, itemEntity.getId());
@@ -70,11 +72,68 @@ public class ClientItemEntityRenderer extends EntityRenderer<ItemEntity> {
 
             poseStack.popPose();
             super.render(itemEntity, f, g, poseStack, multiBufferSource, i);
+            renderBeacon(itemEntity, f, itemEntity.level().getGameTime(), poseStack, multiBufferSource);
+        } else {
+            this.shadowRadius = 0;
         }
     }
 
+    // Code from LootBeams, may make look neater later
+    // todo: make beam fade in and out nicely, minor thing to do later
+    private void renderBeacon(ClientItemEntity item, float pticks, long worldtime, PoseStack stack, MultiBufferSource buffer) {
+        RenderSystem.enableDepthTest();
+        float beamAlpha = 0.75f;
+        //Fade out when close
+        double distance = Minecraft.getInstance().player.distanceToSqr(item);
+        double fadeDistance = 1000 * 4;
+        if (distance < 3) {
+            beamAlpha *= Math.max(0, distance - 4);
+        } else if (distance > fadeDistance * 0.75f) {
+            float fade = (float) (distance - fadeDistance * 0.75f);
+            beamAlpha *= Math.max(0, 1 - fade);
+        }
+        // Don't render beam if its too transparent
+        if (beamAlpha <= 0.01f) {
+            return;
+        }
+
+        float beamRadius = 0.05f;
+        float glowRadius = beamRadius + (beamRadius * 0.2f);
+        float beamHeight = 100f;
+        float yOffset = -0.3f;
+
+        float R = (float) (Math.sin(worldtime * 0.1f) * 0.5 + 0.5);
+        float G = (float) (Math.sin(worldtime * 0.1f + 2 * Math.PI / 3) * 0.5 + 0.5);
+        float B = (float) (Math.sin(worldtime * 0.1f + 4 * Math.PI / 3) * 0.5 + 0.5);
+
+        stack.pushPose();
+
+        //Render main beam
+        stack.pushPose();
+        float rotation = (float) Math.floorMod(worldtime, 40L) + pticks;
+        stack.mulPose(Axis.YP.rotationDegrees(rotation * 2.25F - 45.0F));
+        stack.translate(0, yOffset, 0);
+        stack.translate(0, 1, 0);
+        stack.mulPose(Axis.XP.rotationDegrees(180));
+        stack.mulPose(Axis.XP.rotationDegrees(-180));
+        renderPart(stack, buffer.getBuffer(RenderType.lightning()), R, G, B, beamAlpha, 0, (int) beamHeight, 0.0F, beamRadius, beamRadius, 0.0F, -beamRadius, 0.0F, 0.0F, -beamRadius, 0f,1f, 0f, 1f);
+        stack.popPose();
+
+        //Render glow around main beam
+        stack.pushPose();
+        stack.translate(0, yOffset, 0);
+        stack.translate(0, 1, 0);
+        stack.mulPose(Axis.XP.rotationDegrees(180));
+        stack.mulPose(Axis.XP.rotationDegrees(-180));
+        renderPart(stack, buffer.getBuffer(RenderType.lightning()), R, G, B, beamAlpha * 0.4f, 0, (int) beamHeight, -glowRadius, -glowRadius, glowRadius, -glowRadius, -beamRadius, glowRadius, glowRadius, glowRadius, 0f,1f, 0f, 1f);
+        stack.popPose();
+
+        stack.popPose();
+        RenderSystem.disableDepthTest();
+    }
+
     @Override
-    public @NotNull ResourceLocation getTextureLocation(@NotNull ItemEntity itemEntity) {
+    public @NotNull ResourceLocation getTextureLocation(@NotNull ClientItemEntity itemEntity) {
         return TextureAtlas.LOCATION_BLOCKS;
     }
 }

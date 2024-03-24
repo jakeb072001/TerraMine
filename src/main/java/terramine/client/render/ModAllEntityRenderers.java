@@ -53,6 +53,7 @@ public class ModAllEntityRenderers {
         BlockEntityRendererRegistry.register(ModBlockEntityType.SHADOW_CHEST, ChestEntityRenderer::new);
 
         // Entity Renderers
+        // Monsters
         EntityRendererRegistry.register(ModEntities.MIMIC, MimicRenderer::new);
         EntityRendererRegistry.register(ModEntities.DEMON_EYE, DemonEyeRenderer::new);
         EntityRendererRegistry.register(ModEntities.EATER_OF_SOULS, EaterOfSoulsRenderer::new);
@@ -60,13 +61,14 @@ public class ModAllEntityRenderers {
         EntityRendererRegistry.register(ModEntities.DEVOURER_BODY, DevourerBodyRenderer::new);
         EntityRendererRegistry.register(ModEntities.DEVOURER_TAIL, DevourerTailRenderer::new);
         EntityRendererRegistry.register(ModEntities.CRIMERA, CrimeraRenderer::new);
+
+        // Bosses
         /**
          * Testing, remove later
          */
         EntityRendererRegistry.register(ModEntities.TEST_BOSS, TestBossRenderer::new);
 
-        EntityRendererRegistry.register(ModEntities.CLIENT_ITEM, ClientItemEntityRenderer::new);
-
+        // Projectiles
         EntityRendererRegistry.register(ModEntities.FALLING_STAR, FallingStarRenderer::new);
         EntityRendererRegistry.register(ModEntities.METEORITE, MeteoriteRenderer::new);
         EntityRendererRegistry.register(ModEntities.MAGIC_MISSILE, MagicMissileRenderer::new);
@@ -77,5 +79,8 @@ public class ModAllEntityRenderers {
         EntityRendererRegistry.register(ModEntities.GRENADE, GrenadeRenderer::new);
         EntityRendererRegistry.register(ModEntities.BOMB, BombRenderer::new);
         EntityRendererRegistry.register(ModEntities.INSTANT_TNT, TntRenderer::new);
+
+        // Misc
+        EntityRendererRegistry.register(ModEntities.CLIENT_ITEM, ClientItemEntityRenderer::new);
     }
 }

@@ -73,58 +73,26 @@ public class TreasureBagInventoryContainerMenu extends AbstractContainerMenu {
     public @NotNull ItemStack quickMoveStack(@NotNull Player player, int i) {
         ItemStack itemStack = ItemStack.EMPTY;
         Slot slot = this.slots.get(i);
-        if (slot != null && slot.hasItem()) {
+        if (slot.hasItem()) {
             ItemStack itemStack2 = slot.getItem();
             itemStack = itemStack2.copy();
-            EquipmentSlot equipmentSlot = Mob.getEquipmentSlotForItem(itemStack);
-            int extraSlots = ModComponents.ACCESSORY_SLOTS_ADDER.get(player).get();
-            if (i == 0) {
-                if (!this.moveItemStackTo(itemStack2, 9, 45, true)) {
-                    return ItemStack.EMPTY;
-                }
-
-                slot.onQuickCraft(itemStack2, itemStack);
-            } else if (i >= 45 && i < 76) {
-                if (!this.moveItemStackTo(itemStack2, 9, 45, false)) {
-                    return ItemStack.EMPTY;
-                }
-            } else if (itemStack2.getItem() instanceof ShieldItem) {
-                if (!this.moveItemStackTo(itemStack2, 67, 68, false)) {
-                    if (!this.moveItemStackTo(itemStack2, 9, 45, false)) {
-                        return ItemStack.EMPTY;
-                    }
-                }
-            } else if (i >= 1 && i < 5) {
-                if (!this.moveItemStackTo(itemStack2, 9, 45, false)) {
+            if (i >= 1 && i < 5) {
+                if (!this.moveItemStackTo(itemStack2, 9, 41, false)) {
                     return ItemStack.EMPTY;
                 }
             } else if (i >= 5 && i < 9) {
-                if (!this.moveItemStackTo(itemStack2, 9, 45, false)) {
-                    return ItemStack.EMPTY;
-                }
-            } else if (equipmentSlot.getType() == EquipmentSlot.Type.ARMOR && !this.slots.get(8 - equipmentSlot.getIndex()).hasItem()) {
-                int j = 8 - equipmentSlot.getIndex();
-                if (!this.moveItemStackTo(itemStack2, j, j + 1, false)) {
-                    return ItemStack.EMPTY;
-                }
-            } else if (equipmentSlot.getType() == EquipmentSlot.Type.ARMOR && !this.slots.get(72 - equipmentSlot.getIndex()).hasItem()) {
-                int j = 72 - equipmentSlot.getIndex();
-                if (!this.moveItemStackTo(itemStack2, j, j + 1, false)) {
-                    return ItemStack.EMPTY;
-                }
-            } else if (equipmentSlot == EquipmentSlot.OFFHAND && !this.slots.get(45).hasItem()) {
-                if (!this.moveItemStackTo(itemStack2, 45, 46, false)) {
+                if (!this.moveItemStackTo(itemStack2, 9, 41, false)) {
                     return ItemStack.EMPTY;
                 }
             } else if (i >= 9 && i < 36) {
-                if (!this.moveItemStackTo(itemStack2, 36, 45, false)) {
+                if (!this.moveItemStackTo(itemStack2, 36, 41, false)) {
                     return ItemStack.EMPTY;
                 }
-            } else if (i >= 36 && i < 45) {
+            } else if (i >= 36 && i < 41) {
                 if (!this.moveItemStackTo(itemStack2, 9, 36, false)) {
                     return ItemStack.EMPTY;
                 }
-            } else if (!this.moveItemStackTo(itemStack2, 9, 45, false)) {
+            } else if (!this.moveItemStackTo(itemStack2, 9, 41, false)) {
                 return ItemStack.EMPTY;
             }
 

@@ -104,8 +104,7 @@ public class ModEntities {
 	public static final EntityType<ClientItemEntity> CLIENT_ITEM = register("client_item", FabricEntityTypeBuilder
 			.create(MobCategory.MISC, ClientItemEntity::new)
 			.dimensions(EntityDimensions.fixed(0.25F, 0.25F))
-			.trackRangeBlocks(6)
-			.trackedUpdateRate(20)
+			.disableSummon()
 			.build());
 
 	public static final EntityType<FallingStarEntity> FALLING_STAR = register("falling_star", FabricEntityTypeBuilder

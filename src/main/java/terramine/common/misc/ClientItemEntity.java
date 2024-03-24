@@ -10,21 +10,22 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
+import terramine.common.init.ModEntities;
 
 import java.util.Optional;
 import java.util.UUID;
 
-// todo: Add beacon type effect, https://github.com/shiroroku/LootBeams is a good example of how to do this
 public class ClientItemEntity extends ItemEntity {
-    private static final EntityDataAccessor<Optional<UUID>> DATA_PLAYER = SynchedEntityData.defineId(ClientItemEntity.class, EntityDataSerializers.OPTIONAL_UUID);;
+    private static final EntityDataAccessor<Optional<UUID>> DATA_PLAYER = SynchedEntityData.defineId(ClientItemEntity.class, EntityDataSerializers.OPTIONAL_UUID);
 
     public ClientItemEntity(EntityType<? extends ClientItemEntity> entityType, Level level) {
         super(entityType, level);
+        this.noCulling = true;
     }
 
-    public void setValues(Level level, ItemStack itemStack, double d, double e, double f) {
+    public void setValues(ItemStack itemStack, double d, double e, double f) {
         this.setPos(d, e, f);
-        this.setDeltaMovement(level.random.nextDouble() * 0.2 - 0.1, 0.2, level.random.nextDouble() * 0.2 - 0.1);
+        this.setDeltaMovement(random.nextDouble() * 0.2 - 0.1, 0.2, random.nextDouble() * 0.2 - 0.1);
         this.setItem(itemStack);
     }
 
@@ -37,23 +38,32 @@ public class ClientItemEntity extends ItemEntity {
     }
 
     public void playerTouch(@NotNull Player player) {
-        if (player.getUUID() == getClientPlayer()) {
+        if (player.getUUID().equals(getClientPlayer())) {
             super.playerTouch(player);
         }
     }
 
+    public @NotNull ItemEntity copy() {
+        ClientItemEntity clientItemEntity = new ClientItemEntity(ModEntities.CLIENT_ITEM, this.level());
+        clientItemEntity.setValues(this.getItem(), this.getX(), this.getY(), this.getZ());
+        clientItemEntity.setClientPlayer(this.getClientPlayer());
+        return clientItemEntity;
+    }
+
     protected void defineSynchedData() {
-        this.getEntityData().define(DATA_PLAYER, Optional.empty());
         super.defineSynchedData();
+        this.getEntityData().define(DATA_PLAYER, Optional.empty());
     }
 
     public void addAdditionalSaveData(@NotNull CompoundTag compoundTag) {
+        super.addAdditionalSaveData(compoundTag);
         if (getClientPlayer() != null) {
             compoundTag.putUUID("client_player", getClientPlayer());
         }
     }
 
-    public void readAdditionalSaveData(CompoundTag compoundTag) {
+    public void readAdditionalSaveData(@NotNull CompoundTag compoundTag) {
+        super.readAdditionalSaveData(compoundTag);
         if (compoundTag.hasUUID("client_player")) {
             setClientPlayer(compoundTag.getUUID("client_player"));
         }

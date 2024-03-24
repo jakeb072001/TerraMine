@@ -66,7 +66,7 @@
     "cloth-config2": ">=11.0",
     "step-height-entity-attribute": ">=1.2.0",
     "reach-entity-attributes": ">=2.4.0",
-    "architectury": ">=6.0.0"
+    "architectury": ">=9.0.0"
   },
   "suggests": {
     "modmenu": "*"
