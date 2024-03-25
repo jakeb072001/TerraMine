@@ -25,7 +25,7 @@ import org.jetbrains.annotations.Nullable;
 import terramine.common.init.ModComponents;
 import terramine.common.init.ModEntities;
 import terramine.common.init.ModItems;
-import terramine.common.misc.ClientItemEntity;
+import terramine.common.entity.misc.ClientItemEntity;
 import terramine.common.misc.TeamColours;
 
 // TODO: Boss Stuff

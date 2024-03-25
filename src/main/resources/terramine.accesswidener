@@ -5,12 +5,17 @@ accessible field net/minecraft/world/level/biome/BiomeManager biomeZoomSeed J
 accessible field net/minecraft/world/level/chunk/ChunkAccess sections [Lnet/minecraft/world/level/chunk/LevelChunkSection;
 accessible field net/minecraft/world/item/AxeItem STRIPPABLES Ljava/util/Map;
 accessible field net/minecraft/world/item/ShovelItem FLATTENABLES Ljava/util/Map;
+accessible field net/minecraft/world/level/storage/loot/LootTable randomSequence Lnet/minecraft/resources/ResourceLocation;
+accessible field net/minecraft/world/level/storage/loot/LootTable compositeFunction Ljava/util/function/BiFunction;
+accessible field net/minecraft/world/level/storage/loot/LootPool compositeCondition Ljava/util/function/Predicate;
+accessible field net/minecraft/world/level/storage/loot/LootPool compositeFunction Ljava/util/function/BiFunction;
 
 accessible method net/minecraft/client/renderer/RenderType create (Ljava/lang/String;Lcom/mojang/blaze3d/vertex/VertexFormat;Lcom/mojang/blaze3d/vertex/VertexFormat$Mode;IZZLnet/minecraft/client/renderer/RenderType$CompositeState;)Lnet/minecraft/client/renderer/RenderType$CompositeRenderType;
 accessible method net/minecraft/client/renderer/blockentity/BeaconRenderer renderPart (Lcom/mojang/blaze3d/vertex/PoseStack;Lcom/mojang/blaze3d/vertex/VertexConsumer;FFFFIIFFFFFFFFFFFF)V
 accessible method net/minecraft/client/renderer/item/ItemProperties register (Lnet/minecraft/world/item/Item;Lnet/minecraft/resources/ResourceLocation;Lnet/minecraft/client/renderer/item/ClampedItemPropertyFunction;)V
 accessible method net/minecraft/world/level/biome/BiomeManager getFiddledDistance (JIIIDDD)D
 accessible method net/minecraft/server/level/ChunkMap getLightEngine ()Lnet/minecraft/server/level/ThreadedLevelLightEngine;
+accessible method net/minecraft/world/level/storage/loot/LootTable getAvailableSlots (Lnet/minecraft/world/Container;Lnet/minecraft/util/RandomSource;)Ljava/util/List;
 accessible method net/minecraft/world/entity/Mob rotlerp (FFF)F
 
 accessible	class	net/minecraft/world/entity/npc/VillagerTrades$DyedArmorForEmeralds

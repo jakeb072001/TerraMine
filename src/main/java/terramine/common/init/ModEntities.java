@@ -6,7 +6,6 @@ import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.entity.*;
-import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.level.levelgen.Heightmap;
 import terramine.TerraMine;
 import terramine.common.entity.block.InstantPrimedTNTEntity;
@@ -22,7 +21,7 @@ import terramine.common.entity.projectiles.*;
 import terramine.common.entity.throwables.BombEntity;
 import terramine.common.entity.throwables.DynamiteEntity;
 import terramine.common.entity.throwables.GrenadeEntity;
-import terramine.common.misc.ClientItemEntity;
+import terramine.common.entity.misc.ClientItemEntity;
 
 public class ModEntities {
 

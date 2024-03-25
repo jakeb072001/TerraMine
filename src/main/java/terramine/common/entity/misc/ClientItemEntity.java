@@ -1,4 +1,4 @@
-package terramine.common.misc;
+package terramine.common.entity.misc;
 
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -15,6 +15,7 @@ import terramine.common.init.ModEntities;
 import java.util.Optional;
 import java.util.UUID;
 
+// todo: add config option to allow creative players to see and pickup all treasure bags
 public class ClientItemEntity extends ItemEntity {
     private static final EntityDataAccessor<Optional<UUID>> DATA_PLAYER = SynchedEntityData.defineId(ClientItemEntity.class, EntityDataSerializers.OPTIONAL_UUID);
 

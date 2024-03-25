@@ -22,7 +22,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
-import terramine.common.misc.ClientItemEntity;
+import terramine.common.entity.misc.ClientItemEntity;
 
 import static net.minecraft.client.renderer.blockentity.BeaconRenderer.renderPart;
 

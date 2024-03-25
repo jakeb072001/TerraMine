@@ -20,6 +20,8 @@ public class ModLootTables {
 	public static final ResourceLocation CRIMERA = TerraMine.id("entities/crimera");
 
 	// Treasure Bags
+	public static final ResourceLocation EYE_OF_CTHULHU_CORRUPTION = TerraMine.id("items/treasure_bag/eye_of_cthulhu_corruption");
+	public static final ResourceLocation EYE_OF_CTHULHU_CRIMSON = TerraMine.id("items/treasure_bag/eye_of_cthulhu_crimson");
 	public static final ResourceLocation EYE_OF_CTHULHU = TerraMine.id("items/treasure_bag/eye_of_cthulhu");
 
 	// Chests
