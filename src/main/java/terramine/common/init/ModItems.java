@@ -24,6 +24,7 @@ import terramine.common.item.equipment.swords.VolcanoSwordItem;
 import terramine.common.item.magic.*;
 import terramine.common.item.misc.BossSpawnItem;
 import terramine.common.item.misc.DemonHeartItem;
+import terramine.common.item.misc.EvilSeeds;
 import terramine.common.item.misc.TreasureBagItem;
 import terramine.common.item.throwables.BombItem;
 import terramine.common.item.throwables.DynamiteItem;
@@ -44,6 +45,9 @@ public class ModItems {
 	public static final Item MAGIC_MIRROR = register("magic_mirror", new MagicMirrorItem());
 	public static final Item COBALT_SHIELD = register("cobalt_shield", new ShieldAccessoryItem(new FabricItemSettings().maxDamage(2500).fireproof().rarity(Rarity.RARE), Items.DIAMOND));
 	public static final Item OBSIDIAN_SHIELD = register("obsidian_shield", new ShieldAccessoryItem(new FabricItemSettings().maxDamage(2500).fireproof().rarity(Rarity.RARE), Items.OBSIDIAN));
+	// todo: make Shield of Cthulhu and add it to Treasure Bag loot table (replace familiar wig)
+	public static final Item CORRUPT_SEEDS = register("corrupt_seeds", new EvilSeeds(new FabricItemSettings(), ModBlocks.CORRUPTED_GRASS));
+	public static final Item CRIMSON_SEEDS = register("crimson_seeds", new EvilSeeds(new FabricItemSettings(), ModBlocks.CRIMSON_GRASS));
 
 	// todo: add many more dyes, need to create a model/item for each one but its just copy paste
 	// todo: also add some custom shader dyes, need to add a system to render the dyes first though
@@ -255,6 +259,7 @@ public class ModItems {
 	public static final Item FAMILIAR_PANTS = register("familiar_pants", new FamiliarVanity("familiar_pants", TerrariaArmorMaterials.VANITY, ArmorItem.Type.LEGGINGS, new FabricItemSettings()));
 	public static final Item FAMILIAR_SHOES = register("familiar_shoes", new FamiliarVanity("familiar_shoes", TerrariaArmorMaterials.VANITY, ArmorItem.Type.BOOTS, new FabricItemSettings()));
 	//public static final Item TOP_HAT = register("top_hat", new TopHatVanity("top_hat", TerrariaArmorMaterials.VANITY, ArmorItem.Type.HELMET, new FabricItemSettings()));
+	// todo: make Eye of Cthulhu mask and add it to Treasure Bag loot table (replace familiar wig)
 
 
 

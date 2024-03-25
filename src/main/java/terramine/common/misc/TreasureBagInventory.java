@@ -19,12 +19,10 @@ import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
-import net.minecraft.world.level.storage.loot.entries.LootPoolEntry;
 import net.minecraft.world.level.storage.loot.entries.LootPoolEntryContainer;
 import net.minecraft.world.level.storage.loot.functions.LootItemFunction;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
-import org.apache.commons.lang3.mutable.MutableInt;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import terramine.TerraMine;
@@ -55,8 +53,6 @@ public class TreasureBagInventory implements ImplementedInventory {
     public void unpackLootTable(@Nullable Player player, ResourceLocation lootTableLocation, long lootTableSeed) {
         if (lootTableLocation != null && player.level().getServer() != null) {
             LootTable lootTable = player.level().getServer().getLootData().getLootTable(lootTableLocation);
-            LootTable lootTable2 = player.level().getServer().getLootData().getLootTable(ModLootTables.EYE_OF_CTHULHU_CORRUPTION);
-            LootTable lootTable3 = player.level().getServer().getLootData().getLootTable(ModLootTables.EYE_OF_CTHULHU_CRIMSON);
             if (player instanceof ServerPlayer) {
                 CriteriaTriggers.GENERATE_LOOT.trigger((ServerPlayer)player, lootTableLocation);
             }
@@ -66,10 +62,12 @@ public class TreasureBagInventory implements ImplementedInventory {
 
             // eye of cthulhu has some different loot in crimson and corruption worlds
             if (lootTableLocation == ModLootTables.EYE_OF_CTHULHU && TerraMine.CONFIG.worldgen.evilBiomeEnabled) {
+                LootTable lootTable2 = player.level().getServer().getLootData().getLootTable(ModLootTables.EYE_OF_CTHULHU_CORRUPTION);
+                LootTable lootTable3 = player.level().getServer().getLootData().getLootTable(ModLootTables.EYE_OF_CTHULHU_CRIMSON);
                 if ((!ModComponents.EVIL_TYPE.get(Objects.requireNonNull(player.getServer()).getWorldData()).get() && !TerraMine.CONFIG.worldgen.forceCrimson) || TerraMine.CONFIG.worldgen.forceCorruption) {
                     fill(lootTable2, this, builder.create(LootContextParamSets.CHEST), lootTableSeed);
                 }
-                if ((ModComponents.EVIL_TYPE.get(Objects.requireNonNull(player.getServer()).getWorldData()).get() && !TerraMine.CONFIG.worldgen.forceCorruption) || TerraMine.CONFIG.worldgen.forceCrimson) {
+                if ((ModComponents.EVIL_TYPE.get(player.getServer().getWorldData()).get() && !TerraMine.CONFIG.worldgen.forceCorruption) || TerraMine.CONFIG.worldgen.forceCrimson) {
                     fill(lootTable3, this, builder.create(LootContextParamSets.CHEST), lootTableSeed);
                 }
             }

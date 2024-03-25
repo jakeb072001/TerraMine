@@ -323,6 +323,8 @@ public class ModItemGroups {
             entries.accept(ModItems.VERTEBRA);
             entries.accept(ModItems.VILE_MUSHROOM);
             entries.accept(ModItems.VICIOUS_MUSHROOM);
+            entries.accept(ModItems.CORRUPT_SEEDS);
+            entries.accept(ModItems.CRIMSON_SEEDS);
             entries.accept(ModItems.RAW_METEORITE);
             entries.accept(ModItems.METEORITE_INGOT);
             entries.accept(ModItems.RAW_DEMONITE);

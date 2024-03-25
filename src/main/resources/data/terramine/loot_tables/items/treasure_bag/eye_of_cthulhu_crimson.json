@@ -13,14 +13,14 @@
               "function": "set_count",
               "count": {
                 "min": 10,
-                "max": 30
+                "max": 25
               }
             }
           ]
         },
         {
           "type": "minecraft:item",
-          "name": "minecraft:wheat_seeds",
+          "name": "terramine:crimson_seeds",
           "weight": 100,
           "functions": [
             {
