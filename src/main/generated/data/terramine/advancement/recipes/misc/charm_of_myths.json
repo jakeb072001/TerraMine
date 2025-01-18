@@ -1,0 +1,43 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_band_of_regeneration": {
+      "conditions": {
+        "items": [
+          {
+            "items": "terramine:band_of_regeneration"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_philosophers_stone": {
+      "conditions": {
+        "items": [
+          {
+            "items": "terramine:philosophers_stone"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "terramine:charm_of_myths"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_band_of_regeneration",
+      "has_philosophers_stone"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "terramine:charm_of_myths"
+    ]
+  }
+}

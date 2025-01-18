@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "terramine:mana_regeneration_band",
+    "terramine:shackle"
+  ],
+  "result": {
+    "count": 1,
+    "id": "terramine:magic_cuffs"
+  }
+}

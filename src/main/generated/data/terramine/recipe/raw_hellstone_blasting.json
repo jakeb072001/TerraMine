@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:blasting",
+  "category": "misc",
+  "cookingtime": 100,
+  "experience": 0.7,
+  "ingredient": "terramine:hellstone_ore",
+  "result": {
+    "id": "terramine:raw_hellstone"
+  }
+}

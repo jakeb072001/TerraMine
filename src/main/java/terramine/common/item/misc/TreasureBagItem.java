@@ -41,7 +41,7 @@ public class TreasureBagItem extends TerrariaItemConfigurable {
     }
 
     @Override
-    public InteractionResult use(@NotNull Level level, Player player, @NotNull InteractionHand hand) {
+    public @NotNull InteractionResult use(Level level, Player player, InteractionHand hand) {
         ItemStack itemStack = player.getItemInHand(hand);
         TreasureBagInventory treasureBagInventory = new TreasureBagInventory(itemStack, player, lootTable);
         this.treasureBagInventory = treasureBagInventory;

@@ -1,0 +1,54 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_ranger_emblem": {
+      "conditions": {
+        "items": [
+          {
+            "items": "terramine:ranger_emblem"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_sorcerer_emblem": {
+      "conditions": {
+        "items": [
+          {
+            "items": "terramine:sorcerer_emblem"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "terramine:avenger_emblem"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_warrior_emblem": {
+      "conditions": {
+        "items": [
+          {
+            "items": "terramine:warrior_emblem"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_ranger_emblem",
+      "has_warrior_emblem",
+      "has_sorcerer_emblem"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "terramine:avenger_emblem"
+    ]
+  }
+}

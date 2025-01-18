@@ -8,6 +8,7 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.equipment.ArmorType;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.ComposterBlock;
 import terramine.TerraMine;
 import terramine.common.item.CraftingItem;
@@ -43,6 +44,7 @@ import terramine.common.item.projectiles.arrows.UnholyArrowItem;
 import terramine.common.item.projectiles.throwables.BombItem;
 import terramine.common.item.projectiles.throwables.DynamiteItem;
 import terramine.common.item.projectiles.throwables.GrenadeItem;
+import terramine.common.utility.ArmorItemRegister;
 
 import java.util.function.Function;
 
@@ -62,8 +64,8 @@ public class ModItems {
 	public static final Item COBALT_SHIELD = register("cobalt_shield", key -> new ShieldAccessoryLikeItem(new Item.Properties().setId(key).repairable(Items.DIAMOND).durability(2500).fireResistant().rarity(Rarity.RARE)));
 	public static final Item OBSIDIAN_SHIELD = register("obsidian_shield", key -> new ShieldAccessoryLikeItem(new Item.Properties().setId(key).repairable(Items.OBSIDIAN).durability(2500).fireResistant().rarity(Rarity.RARE)));
 	public static final Item SHIELD_OF_CTHULHU = register("shield_of_cthulhu", key -> new ShieldOfCthulhuItem(new Item.Properties().setId(key).repairable(Items.ROTTEN_FLESH).durability(2500).fireResistant().rarity(Rarity.RARE)));
-	public static final Item CORRUPT_SEEDS = register("corrupt_seeds", key -> new EvilSeeds(new Item.Properties().setId(key), ModBlocks.CORRUPTED_GRASS));
-	public static final Item CRIMSON_SEEDS = register("crimson_seeds", key -> new EvilSeeds(new Item.Properties().setId(key), ModBlocks.CRIMSON_GRASS));
+	public static final Item CORRUPT_SEEDS = register("corrupt_seeds", key -> new EvilSeeds(new Item.Properties().setId(key), ModBlocks.CORRUPTED_GRASS.BLOCK));
+	public static final Item CRIMSON_SEEDS = register("crimson_seeds", key -> new EvilSeeds(new Item.Properties().setId(key), ModBlocks.CRIMSON_GRASS.BLOCK));
 
 	// todo: add many more dyes, need to create a model/item for each one but its just copy paste
 	// todo: also add some custom shader dyes, need to add a system to render the dyes first though
@@ -109,9 +111,9 @@ public class ModItems {
 	public static final Item HELLSTONE_INGOT = register("hellstone_ingot", key -> new CraftingItem(new Item.Properties().setId(key).fireResistant(), true));
 
 	// Magic Items
-	public static final Item MAGIC_MISSILE_ITEM = register("magic_missile", key -> new MagicMissileItem(key));
-	public static final Item FLAMELASH_ITEM = register("flamelash", key -> new FlamelashItem(key));
-	public static final Item RAINBOW_ROD_ITEM = register("rainbow_rod", key -> new RainbowRodItem(key));
+	public static final Item MAGIC_MISSILE_ITEM = register("magic_missile", MagicMissileItem::new);
+	public static final Item FLAMELASH_ITEM = register("flamelash", FlamelashItem::new);
+	public static final Item RAINBOW_ROD_ITEM = register("rainbow_rod", RainbowRodItem::new);
 	public static final Item FAKE_FALLEN_STAR = register("fake_fallen_star", key -> new CraftingItem(new Item.Properties().setId(key), true));
 	public static final Item FALLEN_STAR = register("fallen_star", key -> new CraftingItem(new Item.Properties().setId(key).stacksTo(64).rarity(Rarity.UNCOMMON), true));
 	public static final Item MANA_CRYSTAL = register("mana_crystal", key -> new ManaCrystalItem(new Item.Properties().setId(key).stacksTo(64).rarity(Rarity.RARE)));
@@ -255,26 +257,11 @@ public class ModItems {
 
 	// Armours
 	// todo: make another register method that registers a full set of armor instead of registering per piece, don't know the best way to do this since the item is different (ShadowArmor, CrimsonArmor)
-	public static final Item SHADOW_HELMET = register("shadow_helmet", key -> new ShadowArmor("shadow_armor", TerrariaArmorMaterials.SHADOW, ArmorType.HELMET, new Item.Properties().setId(key)));
-	public static final Item SHADOW_CHESTPLATE = register("shadow_chestplate", key -> new ShadowArmor("shadow_armor", TerrariaArmorMaterials.SHADOW, ArmorType.CHESTPLATE, new Item.Properties().setId(key)));
-	public static final Item SHADOW_LEGGINGS = register("shadow_leggings", key -> new ShadowArmor("shadow_armor", TerrariaArmorMaterials.SHADOW, ArmorType.LEGGINGS, new Item.Properties().setId(key)));
-	public static final Item SHADOW_BOOTS = register("shadow_boots", key -> new ShadowArmor("shadow_armor", TerrariaArmorMaterials.SHADOW, ArmorType.BOOTS, new Item.Properties().setId(key)));
-	public static final Item ANCIENT_SHADOW_HELMET = register("ancient_shadow_helmet", key -> new ShadowArmor("shadow_armor", TerrariaArmorMaterials.ANCIENT_SHADOW, ArmorType.HELMET, new Item.Properties().setId(key)));
-	public static final Item ANCIENT_SHADOW_CHESTPLATE = register("ancient_shadow_chestplate", key -> new ShadowArmor("shadow_armor", TerrariaArmorMaterials.ANCIENT_SHADOW, ArmorType.CHESTPLATE, new Item.Properties().setId(key)));
-	public static final Item ANCIENT_SHADOW_LEGGINGS = register("ancient_shadow_leggings", key -> new ShadowArmor("shadow_armor", TerrariaArmorMaterials.ANCIENT_SHADOW, ArmorType.LEGGINGS, new Item.Properties().setId(key)));
-	public static final Item ANCIENT_SHADOW_BOOTS = register("ancient_shadow_boots", key -> new ShadowArmor("shadow_armor", TerrariaArmorMaterials.ANCIENT_SHADOW, ArmorType.BOOTS, new Item.Properties().setId(key)));
-	public static final Item CRIMSON_HELMET = register("crimson_helmet", key -> new CrimsonArmor("crimson_armor", TerrariaArmorMaterials.CRIMSON, ArmorType.HELMET, new Item.Properties().setId(key)));
-	public static final Item CRIMSON_CHESTPLATE = register("crimson_chestplate", key -> new CrimsonArmor("crimson_armor", TerrariaArmorMaterials.CRIMSON, ArmorType.CHESTPLATE, new Item.Properties().setId(key)));
-	public static final Item CRIMSON_LEGGINGS = register("crimson_leggings", key -> new CrimsonArmor("crimson_armor", TerrariaArmorMaterials.CRIMSON, ArmorType.LEGGINGS, new Item.Properties().setId(key)));
-	public static final Item CRIMSON_BOOTS = register("crimson_boots", key -> new CrimsonArmor("crimson_armor", TerrariaArmorMaterials.CRIMSON, ArmorType.BOOTS, new Item.Properties().setId(key)));
-	public static final Item METEOR_HELMET = register("meteor_helmet", key -> new MeteorArmor("meteor_armor", TerrariaArmorMaterials.METEOR, ArmorType.HELMET, new Item.Properties().setId(key)));
-	public static final Item METEOR_CHESTPLATE = register("meteor_chestplate", key -> new MeteorArmor("meteor_armor", TerrariaArmorMaterials.METEOR, ArmorType.CHESTPLATE, new Item.Properties().setId(key)));
-	public static final Item METEOR_LEGGINGS = register("meteor_leggings", key -> new MeteorArmor("meteor_armor", TerrariaArmorMaterials.METEOR, ArmorType.LEGGINGS, new Item.Properties().setId(key)));
-	public static final Item METEOR_BOOTS = register("meteor_boots", key -> new MeteorArmor("meteor_armor", TerrariaArmorMaterials.METEOR, ArmorType.BOOTS, new Item.Properties().setId(key)));
-	public static final Item MOLTEN_HELMET = register("molten_helmet", key -> new MoltenArmor("molten_armor", TerrariaArmorMaterials.MOLTEN, ArmorType.HELMET, new Item.Properties().setId(key)));
-	public static final Item MOLTEN_CHESTPLATE = register("molten_chestplate", key -> new MoltenArmor("molten_armor", TerrariaArmorMaterials.MOLTEN, ArmorType.CHESTPLATE, new Item.Properties().setId(key)));
-	public static final Item MOLTEN_LEGGINGS = register("molten_leggings", key -> new MoltenArmor("molten_armor", TerrariaArmorMaterials.MOLTEN, ArmorType.LEGGINGS, new Item.Properties().setId(key)));
-	public static final Item MOLTEN_BOOTS = register("molten_boots", key -> new MoltenArmor("molten_armor", TerrariaArmorMaterials.MOLTEN, ArmorType.BOOTS, new Item.Properties().setId(key)));
+	public static final ArmorItemRegister SHADOW_ARMOR = new ArmorItemRegister("shadow", "shadow_armor", TerrariaArmorMaterials.SHADOW);
+	public static final ArmorItemRegister ANCIENT_SHADOW_ARMOR = new ArmorItemRegister("ancient_shadow", "shadow_armor", TerrariaArmorMaterials.ANCIENT_SHADOW);
+	public static final ArmorItemRegister CRIMSON_ARMOR = new ArmorItemRegister("crimson", "crimson_armor", TerrariaArmorMaterials.CRIMSON);
+	public static final ArmorItemRegister METEOR_ARMOR = new ArmorItemRegister("meteor", "meteor_armor", TerrariaArmorMaterials.METEOR);
+	public static final ArmorItemRegister MOLTEN_ARMOR = new ArmorItemRegister("molten", "molten_armor", TerrariaArmorMaterials.MOLTEN);
 
 	// Vanity Armours
 	public static final Item FAMILIAR_WIG = register("familiar_wig", key -> new FamiliarVanity("familiar_wig", TerrariaArmorMaterials.VANITY, ArmorType.HELMET, new Item.Properties().setId(key)));
@@ -284,149 +271,11 @@ public class ModItems {
 	//public static final Item TOP_HAT = register("top_hat", key -> new TopHatVanity("top_hat", TerrariaArmorMaterials.VANITY, ArmorType.HELMET, new FabricItemSettings()));
 	// todo: make Eye of Cthulhu mask and add it to Treasure Bag loot table (replace familiar wig)
 
-
-
-	///////////////// Blocks /////////////////
-
-	// Chests
-	public static final Item GOLD_CHEST = register("gold_chest", key -> new BlockItem(ModBlocks.GOLD_CHEST, new Item.Properties().setId(key)));
-	public static final Item TRAPPED_GOLD_CHEST = register("trapped_gold_chest", key -> new BlockItem(ModBlocks.TRAPPED_GOLD_CHEST, new Item.Properties().setId(key)));
-	public static final Item FROZEN_CHEST = register("frozen_chest", key -> new BlockItem(ModBlocks.FROZEN_CHEST, new Item.Properties().setId(key)));
-	public static final Item TRAPPED_FROZEN_CHEST = register("trapped_frozen_chest", key -> new BlockItem(ModBlocks.TRAPPED_FROZEN_CHEST, new Item.Properties().setId(key)));
-	public static final Item IVY_CHEST = register("ivy_chest", key -> new BlockItem(ModBlocks.IVY_CHEST, new Item.Properties().setId(key)));
-	public static final Item TRAPPED_IVY_CHEST = register("trapped_ivy_chest", key -> new BlockItem(ModBlocks.TRAPPED_IVY_CHEST, new Item.Properties().setId(key)));
-	public static final Item SANDSTONE_CHEST = register("sandstone_chest", key -> new BlockItem(ModBlocks.SANDSTONE_CHEST, new Item.Properties().setId(key)));
-	public static final Item TRAPPED_SANDSTONE_CHEST = register("trapped_sandstone_chest", key -> new BlockItem(ModBlocks.TRAPPED_SANDSTONE_CHEST, new Item.Properties().setId(key)));
-	public static final Item WATER_CHEST = register("water_chest", key -> new BlockItem(ModBlocks.WATER_CHEST, new Item.Properties().setId(key)));
-	public static final Item SKYWARE_CHEST = register("skyware_chest", key -> new BlockItem(ModBlocks.SKYWARE_CHEST, new Item.Properties().setId(key)));
-	public static final Item SHADOW_CHEST = register("shadow_chest", key -> new BlockItem(ModBlocks.SHADOW_CHEST, new Item.Properties().setId(key)));
-	public static final Item PIGGY_BANK = register("piggy_bank", key -> new BlockItem(ModBlocks.PIGGY_BANK, new Item.Properties().setId(key)));
-	public static final Item SAFE = register("safe", key -> new BlockItem(ModBlocks.SAFE, new Item.Properties().setId(key)));
-
-	// Metals
-	public static final Item METEORITE_ORE = register("meteorite_ore", key -> new BlockItem(ModBlocks.METEORITE_ORE, new Item.Properties().setId(key)));
-	public static final Item RAW_METEORITE_BLOCK = register("raw_meteorite_block", key -> new BlockItem(ModBlocks.RAW_METEORITE_BLOCK, new Item.Properties().setId(key)));
-	public static final Item METEORITE_BLOCK = register("meteorite_block", key -> new BlockItem(ModBlocks.METEORITE_BLOCK, new Item.Properties().setId(key)));
-	public static final Item DEMONITE_ORE = register("demonite_ore", key -> new BlockItem(ModBlocks.DEMONITE_ORE, new Item.Properties().setId(key)));
-	public static final Item DEEPSLATE_DEMONITE_ORE = register("deepslate_demonite_ore", key -> new BlockItem(ModBlocks.DEEPSLATE_DEMONITE_ORE, new Item.Properties().setId(key)));
-	public static final Item RAW_DEMONITE_BLOCK = register("raw_demonite_block", key -> new BlockItem(ModBlocks.RAW_DEMONITE_BLOCK, new Item.Properties().setId(key)));
-	public static final Item DEMONITE_BLOCK = register("demonite_block", key -> new BlockItem(ModBlocks.DEMONITE_BLOCK, new Item.Properties().setId(key)));
-	public static final Item CRIMTANE_ORE = register("crimtane_ore", key -> new BlockItem(ModBlocks.CRIMTANE_ORE, new Item.Properties().setId(key)));
-	public static final Item DEEPSLATE_CRIMTANE_ORE = register("deepslate_crimtane_ore", key -> new BlockItem(ModBlocks.DEEPSLATE_CRIMTANE_ORE, new Item.Properties().setId(key)));
-	public static final Item RAW_CRIMTANE_BLOCK = register("raw_crimtane_block", key -> new BlockItem(ModBlocks.RAW_CRIMTANE_BLOCK, new Item.Properties().setId(key)));
-	public static final Item CRIMTANE_BLOCK = register("crimtane_block", key -> new BlockItem(ModBlocks.CRIMTANE_BLOCK, new Item.Properties().setId(key)));
-	public static final Item HELLSTONE_ORE = register("hellstone_ore", key -> new BlockItem(ModBlocks.HELLSTONE_ORE, new Item.Properties().setId(key).fireResistant()));
-	public static final Item RAW_HELLSTONE_BLOCK = register("raw_hellstone_block", key -> new BlockItem(ModBlocks.RAW_HELLSTONE_BLOCK, new Item.Properties().setId(key).fireResistant()));
-	public static final Item HELLSTONE_BLOCK = register("hellstone_block", key -> new BlockItem(ModBlocks.HELLSTONE_BLOCK, new Item.Properties().setId(key).fireResistant()));
-
-	// Misc
-	public static final Item REDSTONE_STONE = register("redstone_stone", key -> new BlockItem(ModBlocks.REDSTONE_STONE, new Item.Properties().setId(key)));
-	public static final Item REDSTONE_DEEPSLATE = register("redstone_deepslate", key -> new BlockItem(ModBlocks.REDSTONE_DEEPSLATE, new Item.Properties().setId(key)));
-	public static final Item INSTANT_TNT = register("instant_tnt", key -> new BlockItem(ModBlocks.INSTANT_TNT, new Item.Properties().setId(key)));
-	public static final Item TINKERER_TABLE = register("tinkerer_workshop", key -> new BlockItem(ModBlocks.TINKERER_TABLE, new Item.Properties().setId(key)));
-
-	// Building
-	public static final Item SUNPLATE_BLOCK = register("sunplate_block", key -> new BlockItem(ModBlocks.SUNPLATE_BLOCK, new Item.Properties().setId(key)));
-	public static final Item CLOUD = register("cloud", key -> new BlockItem(ModBlocks.CLOUD, new Item.Properties().setId(key)));
-	public static final Item RAIN_CLOUD = register("rain_cloud", key -> new BlockItem(ModBlocks.RAIN_CLOUD, new Item.Properties().setId(key)));
-	public static final Item BLUE_BRICKS = register("blue_brick", key -> new BlockItem(ModBlocks.BLUE_BRICKS, new Item.Properties().setId(key)));
-	public static final Item CRACKED_BLUE_BRICKS = register("cracked_blue_brick", key -> new BlockItem(ModBlocks.CRACKED_BLUE_BRICKS, new Item.Properties().setId(key)));
-	public static final Item FANCY_BLUE_BRICKS = register("fancy_blue_brick", key -> new BlockItem(ModBlocks.FANCY_BLUE_BRICKS, new Item.Properties().setId(key)));
-	public static final Item GREEN_BRICKS = register("green_brick", key -> new BlockItem(ModBlocks.GREEN_BRICKS, new Item.Properties().setId(key)));
-	public static final Item CRACKED_GREEN_BRICKS = register("cracked_green_brick", key -> new BlockItem(ModBlocks.CRACKED_GREEN_BRICKS, new Item.Properties().setId(key)));
-	public static final Item FANCY_GREEN_BRICKS = register("fancy_green_brick", key -> new BlockItem(ModBlocks.FANCY_GREEN_BRICKS, new Item.Properties().setId(key)));
-	public static final Item PURPLE_BRICKS = register("purple_brick", key -> new BlockItem(ModBlocks.PURPLE_BRICKS, new Item.Properties().setId(key)));
-	public static final Item CRACKED_PURPLE_BRICKS = register("cracked_purple_brick", key -> new BlockItem(ModBlocks.CRACKED_PURPLE_BRICKS, new Item.Properties().setId(key)));
-	public static final Item FANCY_PURPLE_BRICKS = register("fancy_purple_brick", key -> new BlockItem(ModBlocks.FANCY_PURPLE_BRICKS, new Item.Properties().setId(key)));
-
-	// Vegetation
-	public static final Item VILE_MUSHROOM = registerPlant("vile_mushroom", 0.65f, key -> new BlockItem(ModBlocks.VILE_MUSHROOM, new Item.Properties().setId(key)));
-	public static final Item VICIOUS_MUSHROOM = registerPlant("vicious_mushroom", 0.65f, key -> new BlockItem(ModBlocks.VICIOUS_MUSHROOM, new Item.Properties().setId(key)));
-
-	// Corruption
-	public static final Item CORRUPTED_GRASS_BLOCK = register("corrupted_grass", key -> new BlockItem(ModBlocks.CORRUPTED_GRASS, new Item.Properties().setId(key)));
-	public static final Item CORRUPTED_GRAVEL = register("corrupted_gravel", key -> new BlockItem(ModBlocks.CORRUPTED_GRAVEL, new Item.Properties().setId(key)));
-	public static final Item CORRUPTED_SAND = register("corrupted_sand", key -> new BlockItem(ModBlocks.CORRUPTED_SAND, new Item.Properties().setId(key)));
-	public static final Item CORRUPTED_GLASS = register("corrupted_glass", key -> new BlockItem(ModBlocks.CORRUPTED_GLASS, new Item.Properties().setId(key)));
-	public static final Item CORRUPTED_SANDSTONE = register("corrupted_sandstone", key -> new BlockItem(ModBlocks.CORRUPTED_SANDSTONE, new Item.Properties().setId(key)));
-	public static final Item CORRUPTED_ANDESITE = register("corrupted_andesite", key -> new BlockItem(ModBlocks.CORRUPTED_ANDESITE, new Item.Properties().setId(key)));
-	public static final Item CORRUPTED_DIORITE = register("corrupted_diorite", key -> new BlockItem(ModBlocks.CORRUPTED_DIORITE, new Item.Properties().setId(key)));
-	public static final Item CORRUPTED_GRANITE = register("corrupted_granite", key -> new BlockItem(ModBlocks.CORRUPTED_GRANITE, new Item.Properties().setId(key)));
-	public static final Item CORRUPTED_STONE = register("corrupted_stone", key -> new BlockItem(ModBlocks.CORRUPTED_STONE, new Item.Properties().setId(key)));
-	public static final Item CORRUPTED_DEEPSLATE = register("corrupted_deepslate", key -> new BlockItem(ModBlocks.CORRUPTED_DEEPSLATE, new Item.Properties().setId(key)));
-	public static final Item CORRUPTED_COBBLESTONE = register("corrupted_cobblestone", key -> new BlockItem(ModBlocks.CORRUPTED_COBBLESTONE, new Item.Properties().setId(key)));
-	public static final Item CORRUPTED_COBBLED_DEEPSLATE = register("corrupted_cobbled_deepslate", key -> new BlockItem(ModBlocks.CORRUPTED_COBBLED_DEEPSLATE, new Item.Properties().setId(key)));
-	public static final Item CORRUPTED_COAL_ORE = register("corrupted_coal_ore", key -> new BlockItem(ModBlocks.CORRUPTED_COAL_ORE, new Item.Properties().setId(key)));
-	public static final Item CORRUPTED_IRON_ORE = register("corrupted_iron_ore", key -> new BlockItem(ModBlocks.CORRUPTED_IRON_ORE, new Item.Properties().setId(key)));
-	public static final Item CORRUPTED_COPPER_ORE = register("corrupted_copper_ore", key -> new BlockItem(ModBlocks.CORRUPTED_COPPER_ORE, new Item.Properties().setId(key)));
-	public static final Item CORRUPTED_GOLD_ORE = register("corrupted_gold_ore", key -> new BlockItem(ModBlocks.CORRUPTED_GOLD_ORE, new Item.Properties().setId(key)));
-	public static final Item CORRUPTED_LAPIS_ORE = register("corrupted_lapis_ore", key -> new BlockItem(ModBlocks.CORRUPTED_LAPIS_ORE, new Item.Properties().setId(key)));
-	public static final Item CORRUPTED_REDSTONE_ORE = register("corrupted_redstone_ore", key -> new BlockItem(ModBlocks.CORRUPTED_REDSTONE_ORE, new Item.Properties().setId(key)));
-	public static final Item CORRUPTED_DIAMOND_ORE = register("corrupted_diamond_ore", key -> new BlockItem(ModBlocks.CORRUPTED_DIAMOND_ORE, new Item.Properties().setId(key)));
-	public static final Item CORRUPTED_EMERALD_ORE = register("corrupted_emerald_ore", key -> new BlockItem(ModBlocks.CORRUPTED_EMERALD_ORE, new Item.Properties().setId(key)));
-	public static final Item CORRUPTED_DEEPSLATE_COAL_ORE = register("corrupted_deepslate_coal_ore", key -> new BlockItem(ModBlocks.CORRUPTED_DEEPSLATE_COAL_ORE, new Item.Properties().setId(key)));
-	public static final Item CORRUPTED_DEEPSLATE_IRON_ORE = register("corrupted_deepslate_iron_ore", key -> new BlockItem(ModBlocks.CORRUPTED_DEEPSLATE_IRON_ORE, new Item.Properties().setId(key)));
-	public static final Item CORRUPTED_DEEPSLATE_COPPER_ORE = register("corrupted_deepslate_copper_ore", key -> new BlockItem(ModBlocks.CORRUPTED_DEEPSLATE_COPPER_ORE, new Item.Properties().setId(key)));
-	public static final Item CORRUPTED_DEEPSLATE_GOLD_ORE = register("corrupted_deepslate_gold_ore", key -> new BlockItem(ModBlocks.CORRUPTED_DEEPSLATE_GOLD_ORE, new Item.Properties().setId(key)));
-	public static final Item CORRUPTED_DEEPSLATE_LAPIS_ORE = register("corrupted_deepslate_lapis_ore", key -> new BlockItem(ModBlocks.CORRUPTED_DEEPSLATE_LAPIS_ORE, new Item.Properties().setId(key)));
-	public static final Item CORRUPTED_DEEPSLATE_REDSTONE_ORE = register("corrupted_deepslate_redstone_ore", key -> new BlockItem(ModBlocks.CORRUPTED_DEEPSLATE_REDSTONE_ORE, new Item.Properties().setId(key)));
-	public static final Item CORRUPTED_DEEPSLATE_DIAMOND_ORE = register("corrupted_deepslate_diamond_ore", key -> new BlockItem(ModBlocks.CORRUPTED_DEEPSLATE_DIAMOND_ORE, new Item.Properties().setId(key)));
-	public static final Item CORRUPTED_DEEPSLATE_EMERALD_ORE = register("corrupted_deepslate_emerald_ore", key -> new BlockItem(ModBlocks.CORRUPTED_DEEPSLATE_EMERALD_ORE, new Item.Properties().setId(key)));
-	public static final Item CORRUPTED_SNOW_LAYER = register("corrupted_snow_layer", key -> new BlockItem(ModBlocks.CORRUPTED_SNOW_LAYER, new Item.Properties().setId(key)));
-	public static final Item CORRUPTED_SNOW_BLOCK = register("corrupted_snow", key -> new BlockItem(ModBlocks.CORRUPTED_SNOW, new Item.Properties().setId(key)));
-	public static final Item CORRUPTED_ICE = register("corrupted_ice", key -> new BlockItem(ModBlocks.CORRUPTED_ICE, new Item.Properties().setId(key)));
-	public static final Item CORRUPTED_PACKED_ICE = register("corrupted_packed_ice", key -> new BlockItem(ModBlocks.CORRUPTED_PACKED_ICE, new Item.Properties().setId(key)));
-	public static final Item CORRUPTED_BLUE_ICE = register("corrupted_blue_ice", key -> new BlockItem(ModBlocks.CORRUPTED_BLUE_ICE, new Item.Properties().setId(key)));
-
-	// Crimson
-	public static final Item CRIMSON_GRASS_BLOCK = register("crimson_grass", key -> new BlockItem(ModBlocks.CRIMSON_GRASS, new Item.Properties().setId(key)));
-	public static final Item CRIMSON_GRAVEL = register("crimson_gravel", key -> new BlockItem(ModBlocks.CRIMSON_GRAVEL, new Item.Properties().setId(key)));
-	public static final Item CRIMSON_SAND = register("crimson_sand", key -> new BlockItem(ModBlocks.CRIMSON_SAND, new Item.Properties().setId(key)));
-	public static final Item CRIMSON_GLASS = register("crimson_glass", key -> new BlockItem(ModBlocks.CRIMSON_GLASS, new Item.Properties().setId(key)));
-	public static final Item CRIMSON_SANDSTONE = register("crimson_sandstone", key -> new BlockItem(ModBlocks.CRIMSON_SANDSTONE, new Item.Properties().setId(key)));
-	public static final Item CRIMSON_ANDESITE = register("crimson_andesite", key -> new BlockItem(ModBlocks.CRIMSON_ANDESITE, new Item.Properties().setId(key)));
-	public static final Item CRIMSON_DIORITE = register("crimson_diorite", key -> new BlockItem(ModBlocks.CRIMSON_DIORITE, new Item.Properties().setId(key)));
-	public static final Item CRIMSON_GRANITE = register("crimson_granite", key -> new BlockItem(ModBlocks.CRIMSON_GRANITE, new Item.Properties().setId(key)));
-	public static final Item CRIMSON_STONE = register("crimson_stone", key -> new BlockItem(ModBlocks.CRIMSON_STONE, new Item.Properties().setId(key)));
-	public static final Item CRIMSON_DEEPSLATE = register("crimson_deepslate", key -> new BlockItem(ModBlocks.CRIMSON_DEEPSLATE, new Item.Properties().setId(key)));
-	public static final Item CRIMSON_COBBLESTONE = register("crimson_cobblestone", key -> new BlockItem(ModBlocks.CRIMSON_COBBLESTONE, new Item.Properties().setId(key)));
-	public static final Item CRIMSON_COBBLED_DEEPSLATE = register("crimson_cobbled_deepslate", key -> new BlockItem(ModBlocks.CRIMSON_COBBLED_DEEPSLATE, new Item.Properties().setId(key)));
-	public static final Item CRIMSON_COAL_ORE = register("crimson_coal_ore", key -> new BlockItem(ModBlocks.CRIMSON_COAL_ORE, new Item.Properties().setId(key)));
-	public static final Item CRIMSON_IRON_ORE = register("crimson_iron_ore", key -> new BlockItem(ModBlocks.CRIMSON_IRON_ORE, new Item.Properties().setId(key)));
-	public static final Item CRIMSON_COPPER_ORE = register("crimson_copper_ore", key -> new BlockItem(ModBlocks.CRIMSON_COPPER_ORE, new Item.Properties().setId(key)));
-	public static final Item CRIMSON_GOLD_ORE = register("crimson_gold_ore", key -> new BlockItem(ModBlocks.CRIMSON_GOLD_ORE, new Item.Properties().setId(key)));
-	public static final Item CRIMSON_LAPIS_ORE = register("crimson_lapis_ore", key -> new BlockItem(ModBlocks.CRIMSON_LAPIS_ORE, new Item.Properties().setId(key)));
-	public static final Item CRIMSON_REDSTONE_ORE = register("crimson_redstone_ore", key -> new BlockItem(ModBlocks.CRIMSON_REDSTONE_ORE, new Item.Properties().setId(key)));
-	public static final Item CRIMSON_DIAMOND_ORE = register("crimson_diamond_ore", key -> new BlockItem(ModBlocks.CRIMSON_DIAMOND_ORE, new Item.Properties().setId(key)));
-	public static final Item CRIMSON_EMERALD_ORE = register("crimson_emerald_ore", key -> new BlockItem(ModBlocks.CRIMSON_EMERALD_ORE, new Item.Properties().setId(key)));
-	public static final Item CRIMSON_DEEPSLATE_COAL_ORE = register("crimson_deepslate_coal_ore", key -> new BlockItem(ModBlocks.CRIMSON_DEEPSLATE_COAL_ORE, new Item.Properties().setId(key)));
-	public static final Item CRIMSON_DEEPSLATE_IRON_ORE = register("crimson_deepslate_iron_ore", key -> new BlockItem(ModBlocks.CRIMSON_DEEPSLATE_IRON_ORE, new Item.Properties().setId(key)));
-	public static final Item CRIMSON_DEEPSLATE_COPPER_ORE = register("crimson_deepslate_copper_ore", key -> new BlockItem(ModBlocks.CRIMSON_DEEPSLATE_COPPER_ORE, new Item.Properties().setId(key)));
-	public static final Item CRIMSON_DEEPSLATE_GOLD_ORE = register("crimson_deepslate_gold_ore", key -> new BlockItem(ModBlocks.CRIMSON_DEEPSLATE_GOLD_ORE, new Item.Properties().setId(key)));
-	public static final Item CRIMSON_DEEPSLATE_LAPIS_ORE = register("crimson_deepslate_lapis_ore", key -> new BlockItem(ModBlocks.CRIMSON_DEEPSLATE_LAPIS_ORE, new Item.Properties().setId(key)));
-	public static final Item CRIMSON_DEEPSLATE_REDSTONE_ORE = register("crimson_deepslate_redstone_ore", key -> new BlockItem(ModBlocks.CRIMSON_DEEPSLATE_REDSTONE_ORE, new Item.Properties().setId(key)));
-	public static final Item CRIMSON_DEEPSLATE_DIAMOND_ORE = register("crimson_deepslate_diamond_ore", key -> new BlockItem(ModBlocks.CRIMSON_DEEPSLATE_DIAMOND_ORE, new Item.Properties().setId(key)));
-	public static final Item CRIMSON_DEEPSLATE_EMERALD_ORE = register("crimson_deepslate_emerald_ore", key -> new BlockItem(ModBlocks.CRIMSON_DEEPSLATE_EMERALD_ORE, new Item.Properties().setId(key)));
-	public static final Item CRIMSON_SNOW_LAYER = register("crimson_snow_layer", key -> new BlockItem(ModBlocks.CRIMSON_SNOW_LAYER, new Item.Properties().setId(key)));
-	public static final Item CRIMSON_SNOW_BLOCK = register("crimson_snow", key -> new BlockItem(ModBlocks.CRIMSON_SNOW, new Item.Properties().setId(key)));
-	public static final Item CRIMSON_ICE = register("crimson_ice", key -> new BlockItem(ModBlocks.CRIMSON_ICE, new Item.Properties().setId(key)));
-	public static final Item CRIMSON_PACKED_ICE = register("crimson_packed_ice", key -> new BlockItem(ModBlocks.CRIMSON_PACKED_ICE, new Item.Properties().setId(key)));
-	public static final Item CRIMSON_BLUE_ICE = register("crimson_blue_ice", key -> new BlockItem(ModBlocks.CRIMSON_BLUE_ICE, new Item.Properties().setId(key)));
-
 	private static Item register(String name, Function<ResourceKey<Item>, Item> itemFactory) {
 		ResourceLocation resourceLocation = TerraMine.id(name);
 		ResourceKey<Item> key = ResourceKey.create(Registries.ITEM, resourceLocation);
 		Item item = itemFactory.apply(key);
 
-		return Registry.register(BuiltInRegistries.ITEM, key, item);
-	}
-
-	private static Item registerPlant(String name, float chance, Function<ResourceKey<Item>, Item> itemFactory) {
-		ResourceLocation resourceLocation = TerraMine.id(name);
-		ResourceKey<Item> key = ResourceKey.create(Registries.ITEM, resourceLocation);
-		Item item = itemFactory.apply(key);
-
-		ComposterBlock.COMPOSTABLES.put(item, chance);
 		return Registry.register(BuiltInRegistries.ITEM, key, item);
 	}
 }

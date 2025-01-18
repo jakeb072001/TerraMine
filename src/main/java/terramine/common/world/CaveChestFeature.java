@@ -86,29 +86,29 @@ public class CaveChestFeature extends Feature<NoneFeatureConfiguration> {
 			}
 		} else if (random.nextInt(5) == 0) {
 			if (frozen) {
-				this.setBlock(level, pos, ModBlocks.TRAPPED_FROZEN_CHEST.defaultBlockState().setValue(ChestBlock.FACING, Direction.Plane.HORIZONTAL.getRandomDirection(random)));
+				this.setBlock(level, pos, ModBlocks.TRAPPED_FROZEN_CHEST.BLOCK.defaultBlockState().setValue(ChestBlock.FACING, Direction.Plane.HORIZONTAL.getRandomDirection(random)));
 			} else if (jungle) {
-				this.setBlock(level, pos, ModBlocks.TRAPPED_IVY_CHEST.defaultBlockState().setValue(ChestBlock.FACING, Direction.Plane.HORIZONTAL.getRandomDirection(random)));
+				this.setBlock(level, pos, ModBlocks.TRAPPED_IVY_CHEST.BLOCK.defaultBlockState().setValue(ChestBlock.FACING, Direction.Plane.HORIZONTAL.getRandomDirection(random)));
 			} else if (desert) {
-				this.setBlock(level, pos, ModBlocks.TRAPPED_SANDSTONE_CHEST.defaultBlockState().setValue(ChestBlock.FACING, Direction.Plane.HORIZONTAL.getRandomDirection(random)));
+				this.setBlock(level, pos, ModBlocks.TRAPPED_SANDSTONE_CHEST.BLOCK.defaultBlockState().setValue(ChestBlock.FACING, Direction.Plane.HORIZONTAL.getRandomDirection(random)));
 			} else {
-				this.setBlock(level, pos, ModBlocks.TRAPPED_GOLD_CHEST.defaultBlockState().setValue(ChestBlock.FACING, Direction.Plane.HORIZONTAL.getRandomDirection(random)));
+				this.setBlock(level, pos, ModBlocks.TRAPPED_GOLD_CHEST.BLOCK.defaultBlockState().setValue(ChestBlock.FACING, Direction.Plane.HORIZONTAL.getRandomDirection(random)));
 			}
 			if (pos.getY() >= 4) {
-				this.setBlock(level, pos.below(), ModBlocks.REDSTONE_STONE.defaultBlockState());
+				this.setBlock(level, pos.below(), ModBlocks.REDSTONE_STONE.BLOCK.defaultBlockState());
 			} else {
-				this.setBlock(level, pos.below(), ModBlocks.REDSTONE_DEEPSLATE.defaultBlockState());
+				this.setBlock(level, pos.below(), ModBlocks.REDSTONE_DEEPSLATE.BLOCK.defaultBlockState());
 			}
-			this.setBlock(level, pos.below().below(), ModBlocks.INSTANT_TNT.defaultBlockState());
+			this.setBlock(level, pos.below().below(), ModBlocks.INSTANT_TNT.BLOCK.defaultBlockState());
 		} else {
 			if (frozen) {
-				this.setBlock(level, pos, ModBlocks.FROZEN_CHEST.defaultBlockState().setValue(ChestBlock.FACING, Direction.Plane.HORIZONTAL.getRandomDirection(random)));
+				this.setBlock(level, pos, ModBlocks.FROZEN_CHEST.BLOCK.defaultBlockState().setValue(ChestBlock.FACING, Direction.Plane.HORIZONTAL.getRandomDirection(random)));
 			} else if (jungle) {
-				this.setBlock(level, pos, ModBlocks.IVY_CHEST.defaultBlockState().setValue(ChestBlock.FACING, Direction.Plane.HORIZONTAL.getRandomDirection(random)));
+				this.setBlock(level, pos, ModBlocks.IVY_CHEST.BLOCK.defaultBlockState().setValue(ChestBlock.FACING, Direction.Plane.HORIZONTAL.getRandomDirection(random)));
 			} else if (desert) {
-				this.setBlock(level, pos, ModBlocks.SANDSTONE_CHEST.defaultBlockState().setValue(ChestBlock.FACING, Direction.Plane.HORIZONTAL.getRandomDirection(random)));
+				this.setBlock(level, pos, ModBlocks.SANDSTONE_CHEST.BLOCK.defaultBlockState().setValue(ChestBlock.FACING, Direction.Plane.HORIZONTAL.getRandomDirection(random)));
 			} else {
-				this.setBlock(level, pos, ModBlocks.GOLD_CHEST.defaultBlockState().setValue(ChestBlock.FACING, Direction.Plane.HORIZONTAL.getRandomDirection(random)));
+				this.setBlock(level, pos, ModBlocks.GOLD_CHEST.BLOCK.defaultBlockState().setValue(ChestBlock.FACING, Direction.Plane.HORIZONTAL.getRandomDirection(random)));
 			}
 		}
 

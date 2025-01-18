@@ -1,0 +1,65 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_corrupted_deepslate_redstone_ore": {
+      "conditions": {
+        "items": [
+          {
+            "items": "terramine:corrupted_deepslate_redstone_ore"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_corrupted_redstone_ore": {
+      "conditions": {
+        "items": [
+          {
+            "items": "terramine:corrupted_redstone_ore"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_crimson_deepslate_redstone_ore": {
+      "conditions": {
+        "items": [
+          {
+            "items": "terramine:crimson_deepslate_redstone_ore"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_crimson_redstone_ore": {
+      "conditions": {
+        "items": [
+          {
+            "items": "terramine:crimson_redstone_ore"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:redstone_blasting"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_corrupted_redstone_ore",
+      "has_corrupted_deepslate_redstone_ore",
+      "has_crimson_redstone_ore",
+      "has_crimson_deepslate_redstone_ore"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:redstone_blasting"
+    ]
+  }
+}

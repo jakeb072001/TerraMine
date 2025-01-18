@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "terramine:moon_charm",
+    "terramine:neptune_shell"
+  ],
+  "result": {
+    "count": 1,
+    "id": "terramine:moon_shell"
+  }
+}

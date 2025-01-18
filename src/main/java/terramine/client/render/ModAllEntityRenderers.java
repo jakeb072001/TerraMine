@@ -35,16 +35,16 @@ public class ModAllEntityRenderers {
 
     public static void register() {
         // Block RenderLayer
-        BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.CORRUPTED_GLASS, RenderType.translucent());
-        BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.CORRUPTED_ICE, RenderType.translucent());
-        BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.CRIMSON_GLASS, RenderType.translucent());
-        BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.CRIMSON_ICE, RenderType.translucent());
-        BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.CLOUD, RenderType.translucent());
-        BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.RAIN_CLOUD, RenderType.translucent());
-        BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.VILE_MUSHROOM, RenderType.cutout());
-        BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.POTTED_VILE_MUSHROOM, RenderType.cutout());
-        BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.VICIOUS_MUSHROOM, RenderType.cutout());
-        BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.POTTED_VICIOUS_MUSHROOM, RenderType.cutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.CORRUPTED_GLASS.BLOCK, RenderType.translucent());
+        BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.CORRUPTED_ICE.BLOCK, RenderType.translucent());
+        BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.CRIMSON_GLASS.BLOCK, RenderType.translucent());
+        BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.CRIMSON_ICE.BLOCK, RenderType.translucent());
+        BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.CLOUD.BLOCK, RenderType.translucent());
+        BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.RAIN_CLOUD.BLOCK, RenderType.translucent());
+        BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.VILE_MUSHROOM.BLOCK, RenderType.cutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.POTTED_VILE_MUSHROOM.BLOCK, RenderType.cutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.VICIOUS_MUSHROOM.BLOCK, RenderType.cutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.POTTED_VICIOUS_MUSHROOM.BLOCK, RenderType.cutout());
 
         // Block Entity Renderer
         BlockEntityRendererRegistry.register(ModBlockEntityType.GOLD_CHEST, ChestEntityRenderer::new);

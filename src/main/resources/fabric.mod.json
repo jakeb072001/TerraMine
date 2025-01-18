@@ -31,7 +31,7 @@
       "terramine.TerraMineMixinExtras"
     ],
     "fabric-datagen": [
-      "terramine.TerraMineDataGenerator"
+      "terramine.datagen.TerraMineDataGenerator"
     ],
     "terramine:compat_handlers": [
       "terramine.common.compat.HaemaCompat",

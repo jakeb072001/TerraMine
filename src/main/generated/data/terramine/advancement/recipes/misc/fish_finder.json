@@ -1,0 +1,43 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_sextant": {
+      "conditions": {
+        "items": [
+          {
+            "items": "terramine:sextant"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "terramine:fish_finder"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_weather_radio": {
+      "conditions": {
+        "items": [
+          {
+            "items": "terramine:weather_radio"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_weather_radio",
+      "has_sextant"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "terramine:fish_finder"
+    ]
+  }
+}

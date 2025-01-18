@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    [
+      "terramine:obsidian_skull",
+      "terramine:obsidian_skull_rose"
+    ],
+    [
+      "terramine:magma_skull",
+      "terramine:magma_stone"
+    ]
+  ],
+  "result": {
+    "count": 1,
+    "id": "terramine:molten_skull_rose"
+  }
+}

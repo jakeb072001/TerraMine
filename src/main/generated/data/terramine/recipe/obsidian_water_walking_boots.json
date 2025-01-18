@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "terramine:obsidian_skull",
+    "terramine:water_walking_boots"
+  ],
+  "result": {
+    "count": 1,
+    "id": "terramine:obsidian_water_walking_boots"
+  }
+}

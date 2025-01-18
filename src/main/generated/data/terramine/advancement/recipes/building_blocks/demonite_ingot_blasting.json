@@ -1,0 +1,54 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_deepslate_demonite_ore": {
+      "conditions": {
+        "items": [
+          {
+            "items": "terramine:deepslate_demonite_ore"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_demonite_ore": {
+      "conditions": {
+        "items": [
+          {
+            "items": "terramine:demonite_ore"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_raw_demonite": {
+      "conditions": {
+        "items": [
+          {
+            "items": "terramine:raw_demonite"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:demonite_ingot_blasting"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_raw_demonite",
+      "has_demonite_ore",
+      "has_deepslate_demonite_ore"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:demonite_ingot_blasting"
+    ]
+  }
+}

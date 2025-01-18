@@ -11,7 +11,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.NotNull;
-import terramine.common.init.ModTags;
+import terramine.datagen.ModTags;
 
 public class EvilMushroom extends BushBlock {
     public static final MapCodec<AzaleaBlock> CODEC = AzaleaBlock.simpleCodec(AzaleaBlock::new);

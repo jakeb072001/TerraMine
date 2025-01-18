@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "terramine:lightning_boots",
+    "terramine:ice_skates"
+  ],
+  "result": {
+    "count": 1,
+    "id": "terramine:frostspark_boots"
+  }
+}

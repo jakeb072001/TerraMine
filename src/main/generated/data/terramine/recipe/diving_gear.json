@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "terramine:diving_helmet",
+    "terramine:flippers"
+  ],
+  "result": {
+    "count": 1,
+    "id": "terramine:diving_gear"
+  }
+}

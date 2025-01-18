@@ -3,27 +3,27 @@ package terramine.common.world.biome;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.SurfaceRules;
-import terramine.common.init.ModBiomes;
+import terramine.datagen.ModBiomes;
 import terramine.common.init.ModBlocks;
 
 public class BiomeSurfaceRules extends SurfaceRules {
     private static final RuleSource DIRT = makeStateRule(Blocks.DIRT);
 
     // Corruption
-    private static final RuleSource CORRUPTED_STONE = makeStateRule(ModBlocks.CORRUPTED_STONE);
-    private static final RuleSource CORRUPTED_DEEPSLATE = makeStateRule(ModBlocks.CORRUPTED_DEEPSLATE); // todo: get corruption surface rules to change all blocks up to and including some deepslate
-    private static final RuleSource CORRUPTED_SANDSTONE = makeStateRule(ModBlocks.CORRUPTED_SANDSTONE);
-    private static final RuleSource CORRUPTED_GRAVEL = makeStateRule(ModBlocks.CORRUPTED_GRAVEL);
-    private static final RuleSource CORRUPTED_GRASS = makeStateRule(ModBlocks.CORRUPTED_GRASS);
-    private static final RuleSource CORRUPTED_SAND = makeStateRule(ModBlocks.CORRUPTED_SAND);
+    private static final RuleSource CORRUPTED_STONE = makeStateRule(ModBlocks.CORRUPTED_STONE.BLOCK);
+    private static final RuleSource CORRUPTED_DEEPSLATE = makeStateRule(ModBlocks.CORRUPTED_DEEPSLATE.BLOCK); // todo: get corruption surface rules to change all blocks up to and including some deepslate
+    private static final RuleSource CORRUPTED_SANDSTONE = makeStateRule(ModBlocks.CORRUPTED_SANDSTONE.BLOCK);
+    private static final RuleSource CORRUPTED_GRAVEL = makeStateRule(ModBlocks.CORRUPTED_GRAVEL.BLOCK);
+    private static final RuleSource CORRUPTED_GRASS = makeStateRule(ModBlocks.CORRUPTED_GRASS.BLOCK);
+    private static final RuleSource CORRUPTED_SAND = makeStateRule(ModBlocks.CORRUPTED_SAND.BLOCK);
 
     // Crimson
-    private static final RuleSource CRIMSON_STONE = makeStateRule(ModBlocks.CRIMSON_STONE);
-    private static final RuleSource CRIMSON_DEEPSLATE = makeStateRule(ModBlocks.CRIMSON_DEEPSLATE);
-    private static final RuleSource CRIMSON_SANDSTONE = makeStateRule(ModBlocks.CRIMSON_SANDSTONE);
-    private static final RuleSource CRIMSON_GRAVEL = makeStateRule(ModBlocks.CRIMSON_GRAVEL);
-    private static final RuleSource CRIMSON_GRASS = makeStateRule(ModBlocks.CRIMSON_GRASS);
-    private static final RuleSource CRIMSON_SAND = makeStateRule(ModBlocks.CRIMSON_SAND);
+    private static final RuleSource CRIMSON_STONE = makeStateRule(ModBlocks.CRIMSON_STONE.BLOCK);
+    private static final RuleSource CRIMSON_DEEPSLATE = makeStateRule(ModBlocks.CRIMSON_DEEPSLATE.BLOCK);
+    private static final RuleSource CRIMSON_SANDSTONE = makeStateRule(ModBlocks.CRIMSON_SANDSTONE.BLOCK);
+    private static final RuleSource CRIMSON_GRAVEL = makeStateRule(ModBlocks.CRIMSON_GRAVEL.BLOCK);
+    private static final RuleSource CRIMSON_GRASS = makeStateRule(ModBlocks.CRIMSON_GRASS.BLOCK);
+    private static final RuleSource CRIMSON_SAND = makeStateRule(ModBlocks.CRIMSON_SAND.BLOCK);
 
     public static RuleSource makeRules()
     {

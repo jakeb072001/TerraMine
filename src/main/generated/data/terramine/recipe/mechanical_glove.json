@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "terramine:power_glove",
+    "terramine:avenger_emblem"
+  ],
+  "result": {
+    "count": 1,
+    "id": "terramine:mechanical_glove"
+  }
+}

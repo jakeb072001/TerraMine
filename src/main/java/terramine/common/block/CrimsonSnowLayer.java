@@ -73,8 +73,8 @@ public class CrimsonSnowLayer extends CrimsonHelper {
     @Override
     public boolean canSurvive(@NotNull BlockState blockState, LevelReader levelReader, BlockPos blockPos) {
         BlockState blockState2 = levelReader.getBlockState(blockPos.below());
-        if (blockState2.is(Blocks.ICE) || blockState2.is(Blocks.PACKED_ICE) || blockState2.is(Blocks.BARRIER) || blockState2.is(ModBlocks.CORRUPTED_ICE) || blockState2.is(ModBlocks.CORRUPTED_PACKED_ICE)
-                || blockState2.is(ModBlocks.CRIMSON_ICE) || blockState2.is(ModBlocks.CRIMSON_PACKED_ICE)) {
+        if (blockState2.is(Blocks.ICE) || blockState2.is(Blocks.PACKED_ICE) || blockState2.is(Blocks.BARRIER) || blockState2.is(ModBlocks.CORRUPTED_ICE.BLOCK) || blockState2.is(ModBlocks.CORRUPTED_PACKED_ICE.BLOCK)
+                || blockState2.is(ModBlocks.CRIMSON_ICE.BLOCK) || blockState2.is(ModBlocks.CRIMSON_PACKED_ICE.BLOCK)) {
             return false;
         }
         if (blockState2.is(Blocks.HONEY_BLOCK) || blockState2.is(Blocks.SOUL_SAND)) {

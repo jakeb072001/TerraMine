@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "A": "#terramine:accessory",
+    "B": "minecraft:book",
+    "C": "minecraft:crafting_table"
+  },
+  "pattern": [
+    "A",
+    "B",
+    "C"
+  ],
+  "result": {
+    "count": 1,
+    "id": "terramine:tinkerer_workshop"
+  }
+}

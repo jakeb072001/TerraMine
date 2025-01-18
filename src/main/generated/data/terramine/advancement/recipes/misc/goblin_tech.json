@@ -1,0 +1,54 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_dps_meter": {
+      "conditions": {
+        "items": [
+          {
+            "items": "terramine:dps_meter"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_metal_detector": {
+      "conditions": {
+        "items": [
+          {
+            "items": "terramine:metal_detector"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_stopwatch": {
+      "conditions": {
+        "items": [
+          {
+            "items": "terramine:stopwatch"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "terramine:goblin_tech"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_metal_detector",
+      "has_stopwatch",
+      "has_dps_meter"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "terramine:goblin_tech"
+    ]
+  }
+}

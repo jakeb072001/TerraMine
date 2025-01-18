@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:smelting",
+  "category": "blocks",
+  "cookingtime": 200,
+  "experience": 6.0,
+  "ingredient": "terramine:raw_meteorite_block",
+  "result": {
+    "id": "terramine:meteorite_block"
+  }
+}

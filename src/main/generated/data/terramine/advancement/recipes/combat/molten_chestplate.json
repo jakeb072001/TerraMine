@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_hellstone_ingot": {
+      "conditions": {
+        "items": [
+          {
+            "items": "terramine:hellstone_ingot"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "terramine:molten_chestplate"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_hellstone_ingot"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "terramine:molten_chestplate"
+    ]
+  }
+}

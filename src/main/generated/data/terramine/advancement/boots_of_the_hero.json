@@ -1,0 +1,34 @@
+{
+  "parent": "terramine:accessorise",
+  "criteria": {
+    "find_accessory": {
+      "conditions": {
+        "items": [
+          {
+            "items": "terramine:terraspark_boots"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "terramine.advancements.boots_of_the_hero.description"
+    },
+    "frame": "challenge",
+    "icon": {
+      "count": 1,
+      "id": "terramine:terraspark_boots"
+    },
+    "title": {
+      "translate": "terramine.advancements.boots_of_the_hero.title"
+    }
+  },
+  "requirements": [
+    [
+      "find_accessory"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

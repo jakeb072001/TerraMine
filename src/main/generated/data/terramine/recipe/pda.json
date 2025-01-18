@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "terramine:gps",
+    "terramine:fish_finder",
+    "terramine:goblin_tech"
+  ],
+  "result": {
+    "count": 1,
+    "id": "terramine:pda"
+  }
+}

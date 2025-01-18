@@ -59,7 +59,7 @@ public class SurfaceChestFeature extends Feature<NoneFeatureConfiguration> {
 
 	public void generateContainer(WorldGenLevel level, BlockPos pos, RandomSource random) {
 		if (level.isWaterAt(pos)) {
-			this.setBlock(level, pos, ModBlocks.WATER_CHEST.defaultBlockState().setValue(ChestBlock.FACING, Direction.Plane.HORIZONTAL.getRandomDirection(random)).setValue(ChestBlock.WATERLOGGED, true));
+			this.setBlock(level, pos, ModBlocks.WATER_CHEST.BLOCK.defaultBlockState().setValue(ChestBlock.FACING, Direction.Plane.HORIZONTAL.getRandomDirection(random)).setValue(ChestBlock.WATERLOGGED, true));
 			RandomizableContainer.setBlockEntityLootTable(level, random, pos, ModLootTables.OCEAN_CHEST);
 		} else {
 			if (ModComponents.HARDMODE.get(level.getLevelData()).get() && random.nextFloat() * 100 < TerraMine.CONFIG.worldgen.caveChest.mimicChance) {

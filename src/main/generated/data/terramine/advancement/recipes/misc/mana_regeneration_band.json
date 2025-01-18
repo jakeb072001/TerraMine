@@ -1,0 +1,43 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_band_of_regeneration": {
+      "conditions": {
+        "items": [
+          {
+            "items": "terramine:band_of_regeneration"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_band_of_starpower": {
+      "conditions": {
+        "items": [
+          {
+            "items": "terramine:band_of_starpower"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "terramine:mana_regeneration_band"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_band_of_regeneration",
+      "has_band_of_starpower"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "terramine:mana_regeneration_band"
+    ]
+  }
+}

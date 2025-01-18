@@ -1,0 +1,43 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_meteorite_ingot": {
+      "conditions": {
+        "items": [
+          {
+            "items": "terramine:meteorite_ingot"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_stick": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:stick"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "terramine:meteor_shaxe"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_meteorite_ingot",
+      "has_stick"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "terramine:meteor_shaxe"
+    ]
+  }
+}

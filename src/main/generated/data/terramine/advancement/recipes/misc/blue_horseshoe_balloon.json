@@ -1,0 +1,43 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_cloud_in_a_balloon": {
+      "conditions": {
+        "items": [
+          {
+            "items": "terramine:cloud_in_a_balloon"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_lucky_horseshoe": {
+      "conditions": {
+        "items": [
+          {
+            "items": "terramine:lucky_horseshoe"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "terramine:blue_horseshoe_balloon"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_cloud_in_a_balloon",
+      "has_lucky_horseshoe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "terramine:blue_horseshoe_balloon"
+    ]
+  }
+}

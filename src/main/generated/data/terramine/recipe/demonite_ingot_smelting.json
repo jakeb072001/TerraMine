@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:smelting",
+  "category": "misc",
+  "cookingtime": 200,
+  "experience": 0.7,
+  "ingredient": [
+    "terramine:raw_demonite",
+    "terramine:demonite_ore",
+    "terramine:deepslate_demonite_ore"
+  ],
+  "result": {
+    "id": "terramine:demonite_ingot"
+  }
+}

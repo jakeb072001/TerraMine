@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:blasting",
+  "category": "misc",
+  "cookingtime": 100,
+  "experience": 0.7,
+  "ingredient": [
+    "terramine:raw_meteorite",
+    "terramine:meteorite_ore"
+  ],
+  "result": {
+    "id": "terramine:meteorite_ingot"
+  }
+}

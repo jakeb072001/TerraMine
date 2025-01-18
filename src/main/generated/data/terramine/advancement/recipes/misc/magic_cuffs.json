@@ -1,0 +1,43 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_mana_regeneration_band": {
+      "conditions": {
+        "items": [
+          {
+            "items": "terramine:mana_regeneration_band"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_shackle": {
+      "conditions": {
+        "items": [
+          {
+            "items": "terramine:shackle"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "terramine:magic_cuffs"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_mana_regeneration_band",
+      "has_shackle"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "terramine:magic_cuffs"
+    ]
+  }
+}

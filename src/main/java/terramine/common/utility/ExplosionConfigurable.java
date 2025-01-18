@@ -38,7 +38,7 @@ import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
 import terramine.common.init.ModBlocks;
 import terramine.common.init.ModDamageSource;
-import terramine.common.init.ModTags;
+import terramine.datagen.ModTags;
 
 import java.util.List;
 import java.util.Map;
@@ -235,7 +235,7 @@ public class ExplosionConfigurable extends ServerExplosion {
                     if (isMeteorite) {
                         BlockPos replaceBlock = blockPos.below(random.nextInt(2) + 3).offset(random.nextInt(3) - 1, random.nextInt(3) - 1, random.nextInt(3) - 1);
                         if (blockState.is(ModTags.METEORITE_REPLACE_BLOCKS)) {
-                            this.level.setBlock(replaceBlock, ModBlocks.METEORITE_ORE.defaultBlockState(), 3);
+                            this.level.setBlock(replaceBlock, ModBlocks.METEORITE_ORE.BLOCK.defaultBlockState(), 3);
                         }
                     }
                     this.level.setBlock(blockPos, Blocks.AIR.defaultBlockState(), 3);

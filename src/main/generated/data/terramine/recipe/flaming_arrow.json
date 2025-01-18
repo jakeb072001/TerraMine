@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": "minecraft:torch",
+    "X": "minecraft:arrow"
+  },
+  "pattern": [
+    "XXX",
+    "XCX",
+    "XXX"
+  ],
+  "result": {
+    "count": 9,
+    "id": "terramine:flaming_arrow"
+  }
+}

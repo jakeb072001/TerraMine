@@ -1,0 +1,33 @@
+{
+  "parent": "terramine:root",
+  "criteria": {
+    "find_accessory": {
+      "conditions": {
+        "items": [
+          {
+            "items": "#terramine:accessory"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "terramine.advancements.accessorise.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "terramine:aglet"
+    },
+    "title": {
+      "translate": "terramine.advancements.accessorise.title"
+    }
+  },
+  "requirements": [
+    [
+      "find_accessory"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

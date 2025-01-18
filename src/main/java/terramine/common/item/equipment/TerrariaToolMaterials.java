@@ -1,11 +1,8 @@
 package terramine.common.item.equipment;
 
 import net.minecraft.tags.BlockTags;
-import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.ToolMaterial;
-import net.minecraft.world.item.crafting.Ingredient;
-import terramine.common.init.ModItems;
-import terramine.common.init.ModTags;
+import terramine.datagen.ModTags;
 
 public record TerrariaToolMaterials() {
     public static final ToolMaterial DEMONITE;

@@ -1,0 +1,43 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_magma_stone": {
+      "conditions": {
+        "items": [
+          {
+            "items": "terramine:magma_stone"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_mechanical_glove": {
+      "conditions": {
+        "items": [
+          {
+            "items": "terramine:mechanical_glove"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "terramine:fire_gauntlet"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_mechanical_glove",
+      "has_magma_stone"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "terramine:fire_gauntlet"
+    ]
+  }
+}

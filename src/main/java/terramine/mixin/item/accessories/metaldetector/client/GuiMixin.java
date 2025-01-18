@@ -97,9 +97,9 @@ public abstract class GuiMixin {
 			for (BlockState block : blocksList) {
 				if (checkBlocks(block, Blocks.ANCIENT_DEBRIS)) {
 					ancientDebris = true;
-				} else if (checkBlocks(block, ModBlocks.HELLSTONE_ORE)) {
+				} else if (checkBlocks(block, ModBlocks.HELLSTONE_ORE.BLOCK)) {
 					hellstone = true;
-				} else if (checkBlocks(block, ModBlocks.METEORITE_ORE)) {
+				} else if (checkBlocks(block, ModBlocks.METEORITE_ORE.BLOCK)) {
 					meteorite = true;
 				} else if (checkBlocks(block, Blocks.EMERALD_ORE, Blocks.DEEPSLATE_EMERALD_ORE)) {
 					emeraldOre = true;
@@ -107,9 +107,9 @@ public abstract class GuiMixin {
 					diamondOre = true;
 				} else if (checkBlocks(block, Blocks.GOLD_ORE, Blocks.DEEPSLATE_GOLD_ORE, Blocks.NETHER_GOLD_ORE)) {
 					goldOre = true;
-				} else if (checkBlocks(block, ModBlocks.DEMONITE_ORE, ModBlocks.DEEPSLATE_DEMONITE_ORE)) {
+				} else if (checkBlocks(block, ModBlocks.DEMONITE_ORE.BLOCK, ModBlocks.DEEPSLATE_DEMONITE_ORE.BLOCK)) {
 					demoniteOre = true;
-				} else if (checkBlocks(block, ModBlocks.CRIMTANE_ORE, ModBlocks.DEEPSLATE_CRIMTANE_ORE)) {
+				} else if (checkBlocks(block, ModBlocks.CRIMTANE_ORE.BLOCK, ModBlocks.DEEPSLATE_CRIMTANE_ORE.BLOCK)) {
 					crimtaneOre = true;
 				} else if (checkBlocks(block, Blocks.LAPIS_ORE, Blocks.DEEPSLATE_LAPIS_ORE)) {
 					lapisOre = true;
@@ -129,9 +129,9 @@ public abstract class GuiMixin {
 		if (ancientDebris) {
 			createText(Blocks.ANCIENT_DEBRIS, sb);
 		} else if (hellstone) {
-			createText(ModBlocks.HELLSTONE_ORE, sb);
+			createText(ModBlocks.HELLSTONE_ORE.BLOCK, sb);
 		} else if (meteorite) {
-			createText(ModBlocks.METEORITE_ORE, sb);
+			createText(ModBlocks.METEORITE_ORE.BLOCK, sb);
 		} else if (emeraldOre) {
 			createText(Blocks.EMERALD_ORE, sb);
 		} else if (diamondOre) {
@@ -139,9 +139,9 @@ public abstract class GuiMixin {
 		} else if (goldOre) {
 			createText(Blocks.GOLD_ORE, sb);
 		} else if (demoniteOre) {
-			createText(ModBlocks.DEMONITE_ORE, sb);
+			createText(ModBlocks.DEMONITE_ORE.BLOCK, sb);
 		} else if (crimtaneOre) {
-			createText(ModBlocks.CRIMTANE_ORE, sb);
+			createText(ModBlocks.CRIMTANE_ORE.BLOCK, sb);
 		} else if (lapisOre) {
 			createText(Blocks.LAPIS_ORE, sb);
 		} else if (redstoneOre) {

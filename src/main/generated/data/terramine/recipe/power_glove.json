@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "terramine:titan_glove",
+    "terramine:feral_claws"
+  ],
+  "result": {
+    "count": 1,
+    "id": "terramine:power_glove"
+  }
+}

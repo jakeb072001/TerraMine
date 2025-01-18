@@ -1,0 +1,54 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_arrow": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:arrow"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "terramine:unholy_arrow"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_vertebra": {
+      "conditions": {
+        "items": [
+          {
+            "items": "terramine:vertebra"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_worm_tooth": {
+      "conditions": {
+        "items": [
+          {
+            "items": "terramine:worm_tooth"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_arrow",
+      "has_worm_tooth",
+      "has_vertebra"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "terramine:unholy_arrow"
+    ]
+  }
+}

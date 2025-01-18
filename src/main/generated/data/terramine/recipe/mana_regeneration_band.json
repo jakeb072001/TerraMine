@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "terramine:band_of_regeneration",
+    "terramine:band_of_starpower"
+  ],
+  "result": {
+    "count": 1,
+    "id": "terramine:mana_regeneration_band"
+  }
+}

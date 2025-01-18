@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "terramine:flower_boots",
+    "terramine:spectre_boots"
+  ],
+  "result": {
+    "count": 1,
+    "id": "terramine:fairy_boots"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "terramine:band_of_regeneration",
+    "terramine:philosophers_stone"
+  ],
+  "result": {
+    "count": 1,
+    "id": "terramine:charm_of_myths"
+  }
+}

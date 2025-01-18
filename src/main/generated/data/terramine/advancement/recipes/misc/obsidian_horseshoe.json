@@ -1,0 +1,43 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_lucky_horseshoe": {
+      "conditions": {
+        "items": [
+          {
+            "items": "terramine:lucky_horseshoe"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_obsidian_skull": {
+      "conditions": {
+        "items": [
+          {
+            "items": "terramine:obsidian_skull"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "terramine:obsidian_horseshoe"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_obsidian_skull",
+      "has_lucky_horseshoe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "terramine:obsidian_horseshoe"
+    ]
+  }
+}

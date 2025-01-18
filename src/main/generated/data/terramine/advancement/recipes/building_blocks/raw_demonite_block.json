@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_raw_demonite": {
+      "conditions": {
+        "items": [
+          {
+            "items": "terramine:raw_demonite"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "terramine:raw_demonite_block"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_raw_demonite"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "terramine:raw_demonite_block"
+    ]
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_obsidian": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:obsidian"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_raw_hellstone": {
+      "conditions": {
+        "items": [
+          {
+            "items": "terramine:raw_hellstone"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "terramine:raw_hellstone_hardened"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_raw_hellstone",
+      "has_obsidian"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "terramine:raw_hellstone_hardened"
+    ]
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_magic_mirror": {
+      "conditions": {
+        "items": [
+          {
+            "items": "terramine:magic_mirror"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_pda": {
+      "conditions": {
+        "items": [
+          {
+            "items": "terramine:pda"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "terramine:cell_phone"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_pda",
+      "has_magic_mirror"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "terramine:cell_phone"
+    ]
+  }
+}

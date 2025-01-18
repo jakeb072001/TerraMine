@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "terramine:metal_detector",
+    "terramine:stopwatch",
+    "terramine:dps_meter"
+  ],
+  "result": {
+    "count": 1,
+    "id": "terramine:goblin_tech"
+  }
+}

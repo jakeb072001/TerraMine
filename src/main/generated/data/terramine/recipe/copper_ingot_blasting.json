@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:blasting",
+  "category": "misc",
+  "cookingtime": 100,
+  "experience": 0.7,
+  "ingredient": [
+    "terramine:corrupted_copper_ore",
+    "terramine:corrupted_deepslate_copper_ore",
+    "terramine:crimson_copper_ore",
+    "terramine:crimson_deepslate_copper_ore"
+  ],
+  "result": {
+    "id": "minecraft:copper_ingot"
+  }
+}

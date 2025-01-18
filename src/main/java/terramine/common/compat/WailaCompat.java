@@ -21,13 +21,13 @@ public class WailaCompat implements IWailaPlugin {
         @Override
         public BlockState getOverride(IBlockAccessor accessor, IPluginConfig config) {
             if (accessor.getBlock().equals(ModBlocks.TRAPPED_GOLD_CHEST)) {
-                return ModBlocks.GOLD_CHEST.defaultBlockState();
+                return ModBlocks.GOLD_CHEST.BLOCK.defaultBlockState();
             } else if (accessor.getBlock().equals(ModBlocks.TRAPPED_FROZEN_CHEST)) {
-                return ModBlocks.FROZEN_CHEST.defaultBlockState();
+                return ModBlocks.FROZEN_CHEST.BLOCK.defaultBlockState();
             } else if (accessor.getBlock().equals(ModBlocks.TRAPPED_IVY_CHEST)) {
-                return ModBlocks.IVY_CHEST.defaultBlockState();
+                return ModBlocks.IVY_CHEST.BLOCK.defaultBlockState();
             } else if (accessor.getBlock().equals(ModBlocks.TRAPPED_SANDSTONE_CHEST)) {
-                return ModBlocks.SANDSTONE_CHEST.defaultBlockState();
+                return ModBlocks.SANDSTONE_CHEST.BLOCK.defaultBlockState();
             } else {
                 return accessor.getBlockState();
             }

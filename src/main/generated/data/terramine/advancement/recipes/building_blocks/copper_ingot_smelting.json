@@ -1,0 +1,65 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_corrupted_copper_ore": {
+      "conditions": {
+        "items": [
+          {
+            "items": "terramine:corrupted_copper_ore"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_corrupted_deepslate_copper_ore": {
+      "conditions": {
+        "items": [
+          {
+            "items": "terramine:corrupted_deepslate_copper_ore"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_crimson_copper_ore": {
+      "conditions": {
+        "items": [
+          {
+            "items": "terramine:crimson_copper_ore"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_crimson_deepslate_copper_ore": {
+      "conditions": {
+        "items": [
+          {
+            "items": "terramine:crimson_deepslate_copper_ore"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:copper_ingot_smelting"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_corrupted_copper_ore",
+      "has_corrupted_deepslate_copper_ore",
+      "has_crimson_copper_ore",
+      "has_crimson_deepslate_copper_ore"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:copper_ingot_smelting"
+    ]
+  }
+}

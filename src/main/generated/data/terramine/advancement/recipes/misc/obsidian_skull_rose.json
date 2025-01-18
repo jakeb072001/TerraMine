@@ -1,0 +1,43 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_obsidian_rose": {
+      "conditions": {
+        "items": [
+          {
+            "items": "terramine:obsidian_rose"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_obsidian_skull": {
+      "conditions": {
+        "items": [
+          {
+            "items": "terramine:obsidian_skull"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "terramine:obsidian_skull_rose"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_obsidian_skull",
+      "has_obsidian_rose"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "terramine:obsidian_skull_rose"
+    ]
+  }
+}

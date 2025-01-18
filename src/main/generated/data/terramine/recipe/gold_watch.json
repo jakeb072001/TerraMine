@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "minecraft:clock"
+  ],
+  "result": {
+    "count": 1,
+    "id": "terramine:gold_watch"
+  }
+}

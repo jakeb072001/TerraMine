@@ -28,7 +28,7 @@ import net.minecraft.world.level.lighting.LightEngine;
 import org.jetbrains.annotations.NotNull;
 import terramine.TerraMine;
 import terramine.common.block.CorruptedSnowLayer;
-import terramine.common.init.ModBiomes;
+import terramine.datagen.ModBiomes;
 import terramine.common.init.ModBlocks;
 import terramine.common.network.ServerPacketHandler;
 import terramine.common.network.types.IntBoolUUIDNetworkType;
@@ -52,7 +52,7 @@ public class CorruptionHelper extends SpreadingSnowyDirtBlock  {
         if (blockState2.is(Blocks.SNOW) && blockState2.getValue(SnowLayerBlock.LAYERS) == 1) {
             return false;
         }
-        if (blockState2.is(ModBlocks.CORRUPTED_SNOW_LAYER) && blockState2.getValue(CorruptedSnowLayer.LAYERS) == 1) {
+        if (blockState2.is(ModBlocks.CORRUPTED_SNOW_LAYER.BLOCK) && blockState2.getValue(CorruptedSnowLayer.LAYERS) == 1) {
             return false;
         }
         if (blockState2.getFluidState().getAmount() == 8) {
@@ -70,14 +70,14 @@ public class CorruptionHelper extends SpreadingSnowyDirtBlock  {
     @Override
     public void randomTick(@NotNull BlockState blockState, @NotNull ServerLevel serverLevel, @NotNull BlockPos blockPos, @NotNull RandomSource random) {
         if (!TerraMine.CONFIG.general.disableEvilSpread) { // allows user to disable spreading in configs
-            BlockState grass = ModBlocks.CORRUPTED_GRASS.defaultBlockState();
-            BlockState snow_layer = ModBlocks.CORRUPTED_SNOW_LAYER.defaultBlockState();
+            BlockState grass = ModBlocks.CORRUPTED_GRASS.BLOCK.defaultBlockState();
+            BlockState snow_layer = ModBlocks.CORRUPTED_SNOW_LAYER.BLOCK.defaultBlockState();
 
             for (int i = 0; i < 4; ++i) { // corrupted grass spread to grass and dirt
                 if (random.nextInt(TerraMine.CONFIG.general.evilSpreadRarity + 1) == 1) {
                     BlockPos blockPos2 = blockPos.offset(random.nextInt(3) - 1, random.nextInt(3) - 1, random.nextInt(3) - 1);
                     if ((!serverLevel.getBlockState(blockPos2).is(Blocks.GRASS_BLOCK) && !serverLevel.getBlockState(blockPos2).is(Blocks.DIRT)) || canNotPropagate(grass, serverLevel, blockPos2)) continue;
-                    serverLevel.setBlockAndUpdate(blockPos2, grass.setValue(SNOWY, (serverLevel.getBlockState(blockPos2.above()).is(Blocks.SNOW) || serverLevel.getBlockState(blockPos2.above()).is(ModBlocks.CORRUPTED_SNOW_LAYER))));
+                    serverLevel.setBlockAndUpdate(blockPos2, grass.setValue(SNOWY, (serverLevel.getBlockState(blockPos2.above()).is(Blocks.SNOW) || serverLevel.getBlockState(blockPos2.above()).is(ModBlocks.CORRUPTED_SNOW_LAYER.BLOCK))));
                     spreadBiome(serverLevel, blockPos2, false);
                 }
             }
@@ -123,13 +123,13 @@ public class CorruptionHelper extends SpreadingSnowyDirtBlock  {
         }
     }
 
-    private void spreadBlock(Block toSpread, Block spreadTo, ServerLevel serverLevel, BlockPos blockPos, RandomSource random) {
+    private void spreadBlock(BlockItemRegister toSpread, Block spreadTo, ServerLevel serverLevel, BlockPos blockPos, RandomSource random) {
         for (int i = 0; i < 4; ++i) {
             if (random.nextInt(TerraMine.CONFIG.general.evilSpreadRarity + 1) == 1) {
-                BlockState block = toSpread.defaultBlockState();
+                BlockState block = toSpread.BLOCK.defaultBlockState();
                 BlockPos blockPos2 = blockPos.offset(random.nextInt(3) - 1, random.nextInt(3) - 1, random.nextInt(3) - 1);
                 if (!serverLevel.getBlockState(blockPos2).is(spreadTo)) continue;
-                serverLevel.setBlockAndUpdate(blockPos2, block.setValue(SNOWY, (serverLevel.getBlockState(blockPos2.above()).is(Blocks.SNOW) || serverLevel.getBlockState(blockPos2.above()).is(ModBlocks.CORRUPTED_SNOW_LAYER))));
+                serverLevel.setBlockAndUpdate(blockPos2, block.setValue(SNOWY, (serverLevel.getBlockState(blockPos2.above()).is(Blocks.SNOW) || serverLevel.getBlockState(blockPos2.above()).is(ModBlocks.CORRUPTED_SNOW_LAYER.BLOCK))));
                 spreadBiome(serverLevel, blockPos2, false);
             }
         }

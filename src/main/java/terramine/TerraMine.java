@@ -33,6 +33,7 @@ import terramine.common.utility.InputHandler;
 import terramine.common.world.biome.BiomeAdder;
 import terramine.common.world.biome.BiomeAdderCrimsonForced;
 import terramine.common.world.biome.BiomeSurfaceRules;
+import terramine.datagen.ModFeatures;
 import terramine.extensions.PlayerStorages;
 
 import java.util.ArrayList;

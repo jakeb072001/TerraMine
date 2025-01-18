@@ -9,6 +9,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 
 import static terramine.TerraMine.id;
@@ -19,7 +20,7 @@ public class ModItemGroups {
             .title(Component.translatable("itemGroup.terramine.terramine_equipment"))
             .build());
     public static final CreativeModeTab ITEM_GROUP_ARMOR = registerCreativeTab("terramine_armor", FabricItemGroup.builder()
-            .icon(() -> new ItemStack(ModItems.SHADOW_HELMET))
+            .icon(() -> new ItemStack(ModItems.SHADOW_ARMOR.getHelmet()))
             .title(Component.translatable("itemGroup.terramine.terramine_armor"))
             .build());
     public static final CreativeModeTab ITEM_GROUP_ACCESSORIES = registerCreativeTab("terramine_accessories", FabricItemGroup.builder()
@@ -27,7 +28,7 @@ public class ModItemGroups {
             .title(Component.translatable("itemGroup.terramine.terramine_accessories"))
             .build());
     public static final CreativeModeTab ITEM_GROUP_BLOCKS = registerCreativeTab("terramine_blocks", FabricItemGroup.builder()
-            .icon(() -> new ItemStack(ModItems.RAW_DEMONITE_BLOCK))
+            .icon(() -> new ItemStack(ModBlocks.RAW_DEMONITE_BLOCK.ITEM))
             .title(Component.translatable("itemGroup.terramine.terramine_blocks"))
             .build());
     public static final CreativeModeTab ITEM_GROUP_THROWABLES = registerCreativeTab("terramine_throwables", FabricItemGroup.builder()
@@ -78,26 +79,21 @@ public class ModItemGroups {
         });
 
         ItemGroupEvents.modifyEntriesEvent(createKey("terramine_armor")).register(id("second_phase"), entries -> {
-            entries.accept(ModItems.SHADOW_HELMET);
-            entries.accept(ModItems.SHADOW_CHESTPLATE);
-            entries.accept(ModItems.SHADOW_LEGGINGS);
-            entries.accept(ModItems.SHADOW_BOOTS);
-            entries.accept(ModItems.ANCIENT_SHADOW_HELMET);
-            entries.accept(ModItems.ANCIENT_SHADOW_CHESTPLATE);
-            entries.accept(ModItems.ANCIENT_SHADOW_LEGGINGS);
-            entries.accept(ModItems.ANCIENT_SHADOW_BOOTS);
-            entries.accept(ModItems.CRIMSON_HELMET);
-            entries.accept(ModItems.CRIMSON_CHESTPLATE);
-            entries.accept(ModItems.CRIMSON_LEGGINGS);
-            entries.accept(ModItems.CRIMSON_BOOTS);
-            entries.accept(ModItems.METEOR_HELMET);
-            entries.accept(ModItems.METEOR_CHESTPLATE);
-            entries.accept(ModItems.METEOR_LEGGINGS);
-            entries.accept(ModItems.METEOR_BOOTS);
-            entries.accept(ModItems.MOLTEN_HELMET);
-            entries.accept(ModItems.MOLTEN_CHESTPLATE);
-            entries.accept(ModItems.MOLTEN_LEGGINGS);
-            entries.accept(ModItems.MOLTEN_BOOTS);
+            for (Item armorPiece : ModItems.SHADOW_ARMOR.getSet()) {
+                entries.accept(armorPiece);
+            }
+            for (Item armorPiece : ModItems.ANCIENT_SHADOW_ARMOR.getSet()) {
+                entries.accept(armorPiece);
+            }
+            for (Item armorPiece : ModItems.CRIMSON_ARMOR.getSet()) {
+                entries.accept(armorPiece);
+            }
+            for (Item armorPiece : ModItems.METEOR_ARMOR.getSet()) {
+                entries.accept(armorPiece);
+            }
+            for (Item armorPiece : ModItems.MOLTEN_ARMOR.getSet()) {
+                entries.accept(armorPiece);
+            }
             entries.accept(ModItems.FAMILIAR_WIG);
             entries.accept(ModItems.FAMILIAR_SHIRT);
             entries.accept(ModItems.FAMILIAR_PANTS);
@@ -197,112 +193,112 @@ public class ModItemGroups {
         });
 
         ItemGroupEvents.modifyEntriesEvent(createKey("terramine_blocks")).register(id("fourth_phase"), entries -> {
-            entries.accept(ModItems.GOLD_CHEST);
-            entries.accept(ModItems.TRAPPED_GOLD_CHEST);
-            entries.accept(ModItems.FROZEN_CHEST);
-            entries.accept(ModItems.TRAPPED_FROZEN_CHEST);
-            entries.accept(ModItems.IVY_CHEST);
-            entries.accept(ModItems.TRAPPED_IVY_CHEST);
-            entries.accept(ModItems.SANDSTONE_CHEST);
-            entries.accept(ModItems.TRAPPED_SANDSTONE_CHEST);
-            entries.accept(ModItems.WATER_CHEST);
-            entries.accept(ModItems.SKYWARE_CHEST);
-            entries.accept(ModItems.SHADOW_CHEST);
-            entries.accept(ModItems.PIGGY_BANK);
-            entries.accept(ModItems.SAFE);
-            entries.accept(ModItems.METEORITE_ORE);
-            entries.accept(ModItems.RAW_METEORITE_BLOCK);
-            entries.accept(ModItems.METEORITE_BLOCK);
-            entries.accept(ModItems.DEMONITE_ORE);
-            entries.accept(ModItems.DEEPSLATE_DEMONITE_ORE);
-            entries.accept(ModItems.RAW_DEMONITE_BLOCK);
-            entries.accept(ModItems.DEMONITE_BLOCK);
-            entries.accept(ModItems.CRIMTANE_ORE);
-            entries.accept(ModItems.DEEPSLATE_CRIMTANE_ORE);
-            entries.accept(ModItems.RAW_CRIMTANE_BLOCK);
-            entries.accept(ModItems.CRIMTANE_BLOCK);
-            entries.accept(ModItems.HELLSTONE_ORE);
-            entries.accept(ModItems.RAW_HELLSTONE_BLOCK);
-            entries.accept(ModItems.HELLSTONE_BLOCK);
-            entries.accept(ModItems.TINKERER_TABLE);
-            entries.accept(ModItems.SUNPLATE_BLOCK);
-            entries.accept(ModItems.CLOUD);
-            entries.accept(ModItems.RAIN_CLOUD);
-            entries.accept(ModItems.BLUE_BRICKS);
-            entries.accept(ModItems.CRACKED_BLUE_BRICKS);
-            entries.accept(ModItems.FANCY_BLUE_BRICKS);
-            entries.accept(ModItems.GREEN_BRICKS);
-            entries.accept(ModItems.CRACKED_GREEN_BRICKS);
-            entries.accept(ModItems.FANCY_GREEN_BRICKS);
-            entries.accept(ModItems.PURPLE_BRICKS);
-            entries.accept(ModItems.CRACKED_PURPLE_BRICKS);
-            entries.accept(ModItems.FANCY_PURPLE_BRICKS);
-            entries.accept(ModItems.CORRUPTED_GRASS_BLOCK);
-            entries.accept(ModItems.CORRUPTED_GRAVEL);
-            entries.accept(ModItems.CORRUPTED_SAND);
-            entries.accept(ModItems.CORRUPTED_GLASS);
-            entries.accept(ModItems.CORRUPTED_SANDSTONE);
-            entries.accept(ModItems.CORRUPTED_ANDESITE);
-            entries.accept(ModItems.CORRUPTED_DIORITE);
-            entries.accept(ModItems.CORRUPTED_GRANITE);
-            entries.accept(ModItems.CORRUPTED_STONE);
-            entries.accept(ModItems.CORRUPTED_DEEPSLATE);
-            entries.accept(ModItems.CORRUPTED_COBBLESTONE);
-            entries.accept(ModItems.CORRUPTED_COBBLED_DEEPSLATE);
-            entries.accept(ModItems.CORRUPTED_COAL_ORE);
-            entries.accept(ModItems.CORRUPTED_IRON_ORE);
-            entries.accept(ModItems.CORRUPTED_COPPER_ORE);
-            entries.accept(ModItems.CORRUPTED_GOLD_ORE);
-            entries.accept(ModItems.CORRUPTED_LAPIS_ORE);
-            entries.accept(ModItems.CORRUPTED_REDSTONE_ORE);
-            entries.accept(ModItems.CORRUPTED_DIAMOND_ORE);
-            entries.accept(ModItems.CORRUPTED_EMERALD_ORE);
-            entries.accept(ModItems.CORRUPTED_DEEPSLATE_COAL_ORE);
-            entries.accept(ModItems.CORRUPTED_DEEPSLATE_IRON_ORE);
-            entries.accept(ModItems.CORRUPTED_DEEPSLATE_COPPER_ORE);
-            entries.accept(ModItems.CORRUPTED_DEEPSLATE_GOLD_ORE);
-            entries.accept(ModItems.CORRUPTED_DEEPSLATE_LAPIS_ORE);
-            entries.accept(ModItems.CORRUPTED_DEEPSLATE_REDSTONE_ORE);
-            entries.accept(ModItems.CORRUPTED_DEEPSLATE_DIAMOND_ORE);
-            entries.accept(ModItems.CORRUPTED_DEEPSLATE_EMERALD_ORE);
-            entries.accept(ModItems.CORRUPTED_SNOW_LAYER);
-            entries.accept(ModItems.CORRUPTED_SNOW_BLOCK);
-            entries.accept(ModItems.CORRUPTED_ICE);
-            entries.accept(ModItems.CORRUPTED_PACKED_ICE);
-            entries.accept(ModItems.CORRUPTED_BLUE_ICE);
-            entries.accept(ModItems.CRIMSON_GRASS_BLOCK);
-            entries.accept(ModItems.CRIMSON_GRAVEL);
-            entries.accept(ModItems.CRIMSON_SAND);
-            entries.accept(ModItems.CRIMSON_GLASS);
-            entries.accept(ModItems.CRIMSON_SANDSTONE);
-            entries.accept(ModItems.CRIMSON_ANDESITE);
-            entries.accept(ModItems.CRIMSON_DIORITE);
-            entries.accept(ModItems.CRIMSON_GRANITE);
-            entries.accept(ModItems.CRIMSON_STONE);
-            entries.accept(ModItems.CRIMSON_DEEPSLATE);
-            entries.accept(ModItems.CRIMSON_COBBLESTONE);
-            entries.accept(ModItems.CRIMSON_COBBLED_DEEPSLATE);
-            entries.accept(ModItems.CRIMSON_COAL_ORE);
-            entries.accept(ModItems.CRIMSON_IRON_ORE);
-            entries.accept(ModItems.CRIMSON_COPPER_ORE);
-            entries.accept(ModItems.CRIMSON_GOLD_ORE);
-            entries.accept(ModItems.CRIMSON_LAPIS_ORE);
-            entries.accept(ModItems.CRIMSON_REDSTONE_ORE);
-            entries.accept(ModItems.CRIMSON_DIAMOND_ORE);
-            entries.accept(ModItems.CRIMSON_EMERALD_ORE);
-            entries.accept(ModItems.CRIMSON_DEEPSLATE_COAL_ORE);
-            entries.accept(ModItems.CRIMSON_DEEPSLATE_IRON_ORE);
-            entries.accept(ModItems.CRIMSON_DEEPSLATE_COPPER_ORE);
-            entries.accept(ModItems.CRIMSON_DEEPSLATE_GOLD_ORE);
-            entries.accept(ModItems.CRIMSON_DEEPSLATE_LAPIS_ORE);
-            entries.accept(ModItems.CRIMSON_DEEPSLATE_REDSTONE_ORE);
-            entries.accept(ModItems.CRIMSON_DEEPSLATE_DIAMOND_ORE);
-            entries.accept(ModItems.CRIMSON_DEEPSLATE_EMERALD_ORE);
-            entries.accept(ModItems.CRIMSON_SNOW_LAYER);
-            entries.accept(ModItems.CRIMSON_SNOW_BLOCK);
-            entries.accept(ModItems.CRIMSON_ICE);
-            entries.accept(ModItems.CRIMSON_PACKED_ICE);
-            entries.accept(ModItems.CRIMSON_BLUE_ICE);
+            entries.accept(ModBlocks.GOLD_CHEST.ITEM);
+            entries.accept(ModBlocks.TRAPPED_GOLD_CHEST.ITEM);
+            entries.accept(ModBlocks.FROZEN_CHEST.ITEM);
+            entries.accept(ModBlocks.TRAPPED_FROZEN_CHEST.ITEM);
+            entries.accept(ModBlocks.IVY_CHEST.ITEM);
+            entries.accept(ModBlocks.TRAPPED_IVY_CHEST.ITEM);
+            entries.accept(ModBlocks.SANDSTONE_CHEST.ITEM);
+            entries.accept(ModBlocks.TRAPPED_SANDSTONE_CHEST.ITEM);
+            entries.accept(ModBlocks.WATER_CHEST.ITEM);
+            entries.accept(ModBlocks.SKYWARE_CHEST.ITEM);
+            entries.accept(ModBlocks.SHADOW_CHEST.ITEM);
+            entries.accept(ModBlocks.PIGGY_BANK.ITEM);
+            entries.accept(ModBlocks.SAFE.ITEM);
+            entries.accept(ModBlocks.METEORITE_ORE.ITEM);
+            entries.accept(ModBlocks.RAW_METEORITE_BLOCK.ITEM);
+            entries.accept(ModBlocks.METEORITE_BLOCK.ITEM);
+            entries.accept(ModBlocks.DEMONITE_ORE.ITEM);
+            entries.accept(ModBlocks.DEEPSLATE_DEMONITE_ORE.ITEM);
+            entries.accept(ModBlocks.RAW_DEMONITE_BLOCK.ITEM);
+            entries.accept(ModBlocks.DEMONITE_BLOCK.ITEM);
+            entries.accept(ModBlocks.CRIMTANE_ORE.ITEM);
+            entries.accept(ModBlocks.DEEPSLATE_CRIMTANE_ORE.ITEM);
+            entries.accept(ModBlocks.RAW_CRIMTANE_BLOCK.ITEM);
+            entries.accept(ModBlocks.CRIMTANE_BLOCK.ITEM);
+            entries.accept(ModBlocks.HELLSTONE_ORE.ITEM);
+            entries.accept(ModBlocks.RAW_HELLSTONE_BLOCK.ITEM);
+            entries.accept(ModBlocks.HELLSTONE_BLOCK.ITEM);
+            entries.accept(ModBlocks.TINKERER_TABLE.ITEM);
+            entries.accept(ModBlocks.SUNPLATE_BLOCK.ITEM);
+            entries.accept(ModBlocks.CLOUD.ITEM);
+            entries.accept(ModBlocks.RAIN_CLOUD.ITEM);
+            entries.accept(ModBlocks.BLUE_BRICKS.ITEM);
+            entries.accept(ModBlocks.CRACKED_BLUE_BRICKS.ITEM);
+            entries.accept(ModBlocks.FANCY_BLUE_BRICKS.ITEM);
+            entries.accept(ModBlocks.GREEN_BRICKS.ITEM);
+            entries.accept(ModBlocks.CRACKED_GREEN_BRICKS.ITEM);
+            entries.accept(ModBlocks.FANCY_GREEN_BRICKS.ITEM);
+            entries.accept(ModBlocks.PURPLE_BRICKS.ITEM);
+            entries.accept(ModBlocks.CRACKED_PURPLE_BRICKS.ITEM);
+            entries.accept(ModBlocks.FANCY_PURPLE_BRICKS.ITEM);
+            entries.accept(ModBlocks.CORRUPTED_GRASS.ITEM);
+            entries.accept(ModBlocks.CORRUPTED_GRAVEL.ITEM);
+            entries.accept(ModBlocks.CORRUPTED_SAND.ITEM);
+            entries.accept(ModBlocks.CORRUPTED_GLASS.ITEM);
+            entries.accept(ModBlocks.CORRUPTED_SANDSTONE.ITEM);
+            entries.accept(ModBlocks.CORRUPTED_ANDESITE.ITEM);
+            entries.accept(ModBlocks.CORRUPTED_DIORITE.ITEM);
+            entries.accept(ModBlocks.CORRUPTED_GRANITE.ITEM);
+            entries.accept(ModBlocks.CORRUPTED_STONE.ITEM);
+            entries.accept(ModBlocks.CORRUPTED_DEEPSLATE.ITEM);
+            entries.accept(ModBlocks.CORRUPTED_COBBLESTONE.ITEM);
+            entries.accept(ModBlocks.CORRUPTED_COBBLED_DEEPSLATE.ITEM);
+            entries.accept(ModBlocks.CORRUPTED_COAL_ORE.ITEM);
+            entries.accept(ModBlocks.CORRUPTED_IRON_ORE.ITEM);
+            entries.accept(ModBlocks.CORRUPTED_COPPER_ORE.ITEM);
+            entries.accept(ModBlocks.CORRUPTED_GOLD_ORE.ITEM);
+            entries.accept(ModBlocks.CORRUPTED_LAPIS_ORE.ITEM);
+            entries.accept(ModBlocks.CORRUPTED_REDSTONE_ORE.ITEM);
+            entries.accept(ModBlocks.CORRUPTED_DIAMOND_ORE.ITEM);
+            entries.accept(ModBlocks.CORRUPTED_EMERALD_ORE.ITEM);
+            entries.accept(ModBlocks.CORRUPTED_DEEPSLATE_COAL_ORE.ITEM);
+            entries.accept(ModBlocks.CORRUPTED_DEEPSLATE_IRON_ORE.ITEM);
+            entries.accept(ModBlocks.CORRUPTED_DEEPSLATE_COPPER_ORE.ITEM);
+            entries.accept(ModBlocks.CORRUPTED_DEEPSLATE_GOLD_ORE.ITEM);
+            entries.accept(ModBlocks.CORRUPTED_DEEPSLATE_LAPIS_ORE.ITEM);
+            entries.accept(ModBlocks.CORRUPTED_DEEPSLATE_REDSTONE_ORE.ITEM);
+            entries.accept(ModBlocks.CORRUPTED_DEEPSLATE_DIAMOND_ORE.ITEM);
+            entries.accept(ModBlocks.CORRUPTED_DEEPSLATE_EMERALD_ORE.ITEM);
+            entries.accept(ModBlocks.CORRUPTED_SNOW_LAYER.ITEM);
+            entries.accept(ModBlocks.CORRUPTED_SNOW.ITEM);
+            entries.accept(ModBlocks.CORRUPTED_ICE.ITEM);
+            entries.accept(ModBlocks.CORRUPTED_PACKED_ICE.ITEM);
+            entries.accept(ModBlocks.CORRUPTED_BLUE_ICE.ITEM);
+            entries.accept(ModBlocks.CRIMSON_GRASS.ITEM);
+            entries.accept(ModBlocks.CRIMSON_GRAVEL.ITEM);
+            entries.accept(ModBlocks.CRIMSON_SAND.ITEM);
+            entries.accept(ModBlocks.CRIMSON_GLASS.ITEM);
+            entries.accept(ModBlocks.CRIMSON_SANDSTONE.ITEM);
+            entries.accept(ModBlocks.CRIMSON_ANDESITE.ITEM);
+            entries.accept(ModBlocks.CRIMSON_DIORITE.ITEM);
+            entries.accept(ModBlocks.CRIMSON_GRANITE.ITEM);
+            entries.accept(ModBlocks.CRIMSON_STONE.ITEM);
+            entries.accept(ModBlocks.CRIMSON_DEEPSLATE.ITEM);
+            entries.accept(ModBlocks.CRIMSON_COBBLESTONE.ITEM);
+            entries.accept(ModBlocks.CRIMSON_COBBLED_DEEPSLATE.ITEM);
+            entries.accept(ModBlocks.CRIMSON_COAL_ORE.ITEM);
+            entries.accept(ModBlocks.CRIMSON_IRON_ORE.ITEM);
+            entries.accept(ModBlocks.CRIMSON_COPPER_ORE.ITEM);
+            entries.accept(ModBlocks.CRIMSON_GOLD_ORE.ITEM);
+            entries.accept(ModBlocks.CRIMSON_LAPIS_ORE.ITEM);
+            entries.accept(ModBlocks.CRIMSON_REDSTONE_ORE.ITEM);
+            entries.accept(ModBlocks.CRIMSON_DIAMOND_ORE.ITEM);
+            entries.accept(ModBlocks.CRIMSON_EMERALD_ORE.ITEM);
+            entries.accept(ModBlocks.CRIMSON_DEEPSLATE_COAL_ORE.ITEM);
+            entries.accept(ModBlocks.CRIMSON_DEEPSLATE_IRON_ORE.ITEM);
+            entries.accept(ModBlocks.CRIMSON_DEEPSLATE_COPPER_ORE.ITEM);
+            entries.accept(ModBlocks.CRIMSON_DEEPSLATE_GOLD_ORE.ITEM);
+            entries.accept(ModBlocks.CRIMSON_DEEPSLATE_LAPIS_ORE.ITEM);
+            entries.accept(ModBlocks.CRIMSON_DEEPSLATE_REDSTONE_ORE.ITEM);
+            entries.accept(ModBlocks.CRIMSON_DEEPSLATE_DIAMOND_ORE.ITEM);
+            entries.accept(ModBlocks.CRIMSON_DEEPSLATE_EMERALD_ORE.ITEM);
+            entries.accept(ModBlocks.CRIMSON_SNOW_LAYER.ITEM);
+            entries.accept(ModBlocks.CRIMSON_SNOW.ITEM);
+            entries.accept(ModBlocks.CRIMSON_ICE.ITEM);
+            entries.accept(ModBlocks.CRIMSON_PACKED_ICE.ITEM);
+            entries.accept(ModBlocks.CRIMSON_BLUE_ICE.ITEM);
         });
 
         ItemGroupEvents.modifyEntriesEvent(createKey("terramine_throwables")).register(id("fifth_phase"), entries -> {
@@ -325,8 +321,8 @@ public class ModItemGroups {
             entries.accept(ModItems.BLACK_LENS);
             entries.accept(ModItems.ROTTEN_CHUNK);
             entries.accept(ModItems.VERTEBRA);
-            entries.accept(ModItems.VILE_MUSHROOM);
-            entries.accept(ModItems.VICIOUS_MUSHROOM);
+            entries.accept(ModBlocks.VILE_MUSHROOM.ITEM);
+            entries.accept(ModBlocks.VICIOUS_MUSHROOM.ITEM);
             entries.accept(ModItems.CORRUPT_SEEDS);
             entries.accept(ModItems.CRIMSON_SEEDS);
             entries.accept(ModItems.RAW_METEORITE);

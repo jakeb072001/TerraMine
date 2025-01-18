@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_meteorite_ingot": {
+      "conditions": {
+        "items": [
+          {
+            "items": "terramine:meteorite_ingot"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "terramine:meteor_chestplate"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_meteorite_ingot"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "terramine:meteor_chestplate"
+    ]
+  }
+}

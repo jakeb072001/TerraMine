@@ -1,0 +1,43 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_flower_boots": {
+      "conditions": {
+        "items": [
+          {
+            "items": "terramine:flower_boots"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_spectre_boots": {
+      "conditions": {
+        "items": [
+          {
+            "items": "terramine:spectre_boots"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "terramine:fairy_boots"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_flower_boots",
+      "has_spectre_boots"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "terramine:fairy_boots"
+    ]
+  }
+}

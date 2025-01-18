@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "terramine:cloud_in_a_balloon",
+    "terramine:cloud_in_a_balloon",
+    "terramine:cloud_in_a_balloon"
+  ],
+  "result": {
+    "count": 1,
+    "id": "terramine:bundle_of_balloons"
+  }
+}

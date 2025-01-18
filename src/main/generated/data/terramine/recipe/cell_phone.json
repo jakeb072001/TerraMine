@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "terramine:pda",
+    "terramine:magic_mirror"
+  ],
+  "result": {
+    "count": 1,
+    "id": "terramine:cell_phone"
+  }
+}

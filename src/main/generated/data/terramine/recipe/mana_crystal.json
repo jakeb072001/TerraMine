@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "terramine:fallen_star"
+  ],
+  "result": {
+    "count": 1,
+    "id": "terramine:mana_crystal"
+  }
+}

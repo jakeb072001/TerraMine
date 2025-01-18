@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_gold_watch": {
+      "conditions": {
+        "items": [
+          {
+            "items": "terramine:gold_watch"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:clock"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_gold_watch"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:clock"
+    ]
+  }
+}

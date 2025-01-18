@@ -1,0 +1,71 @@
+{
+  "parent": "terramine:root",
+  "criteria": {
+    "trapped_frozen_chest": {
+      "conditions": {
+        "location": [
+          {
+            "block": "terramine:trapped_frozen_chest",
+            "condition": "minecraft:block_state_property"
+          }
+        ]
+      },
+      "trigger": "minecraft:any_block_use"
+    },
+    "trapped_gold_chest": {
+      "conditions": {
+        "location": [
+          {
+            "block": "terramine:trapped_gold_chest",
+            "condition": "minecraft:block_state_property"
+          }
+        ]
+      },
+      "trigger": "minecraft:any_block_use"
+    },
+    "trapped_ivy_chest": {
+      "conditions": {
+        "location": [
+          {
+            "block": "terramine:trapped_ivy_chest",
+            "condition": "minecraft:block_state_property"
+          }
+        ]
+      },
+      "trigger": "minecraft:any_block_use"
+    },
+    "trapped_sandstone_chest": {
+      "conditions": {
+        "location": [
+          {
+            "block": "terramine:trapped_sandstone_chest",
+            "condition": "minecraft:block_state_property"
+          }
+        ]
+      },
+      "trigger": "minecraft:any_block_use"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "terramine.advancements.dead_men_tell_no_tales.description"
+    },
+    "hidden": true,
+    "icon": {
+      "count": 1,
+      "id": "terramine:trapped_gold_chest"
+    },
+    "title": {
+      "translate": "terramine.advancements.dead_men_tell_no_tales.title"
+    }
+  },
+  "requirements": [
+    [
+      "trapped_gold_chest",
+      "trapped_frozen_chest",
+      "trapped_ivy_chest",
+      "trapped_sandstone_chest"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

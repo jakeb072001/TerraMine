@@ -9,7 +9,7 @@ import net.minecraft.world.level.biome.*;
 import net.minecraft.world.level.levelgen.carver.ConfiguredWorldCarver;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 import terramine.common.init.ModEntities;
-import terramine.common.init.ModPlacedFeatures;
+import terramine.datagen.ModPlacedFeatures;
 
 public class CorruptionBiome {
     public static Biome createCorruption(HolderGetter<PlacedFeature> holderGetter, HolderGetter<ConfiguredWorldCarver<?>> holderGetter2) {

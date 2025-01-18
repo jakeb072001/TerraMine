@@ -1,0 +1,43 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_moon_charm": {
+      "conditions": {
+        "items": [
+          {
+            "items": "terramine:moon_charm"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_neptune_shell": {
+      "conditions": {
+        "items": [
+          {
+            "items": "terramine:neptune_shell"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "terramine:moon_shell"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_moon_charm",
+      "has_neptune_shell"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "terramine:moon_shell"
+    ]
+  }
+}

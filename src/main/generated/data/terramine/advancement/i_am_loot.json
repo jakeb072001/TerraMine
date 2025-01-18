@@ -1,0 +1,46 @@
+{
+  "parent": "terramine:root",
+  "criteria": {
+    "gold_chest": {
+      "conditions": {
+        "location": [
+          {
+            "block": "terramine:gold_chest",
+            "condition": "minecraft:block_state_property"
+          }
+        ]
+      },
+      "trigger": "minecraft:any_block_use"
+    },
+    "trapped_gold_chest": {
+      "conditions": {
+        "location": [
+          {
+            "block": "terramine:trapped_gold_chest",
+            "condition": "minecraft:block_state_property"
+          }
+        ]
+      },
+      "trigger": "minecraft:any_block_use"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "terramine.advancements.i_am_loot.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "terramine:gold_chest"
+    },
+    "title": {
+      "translate": "terramine.advancements.i_am_loot.title"
+    }
+  },
+  "requirements": [
+    [
+      "gold_chest",
+      "trapped_gold_chest"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "terramine:cloud_in_a_balloon",
+    "terramine:lucky_horseshoe"
+  ],
+  "result": {
+    "count": 1,
+    "id": "terramine:blue_horseshoe_balloon"
+  }
+}

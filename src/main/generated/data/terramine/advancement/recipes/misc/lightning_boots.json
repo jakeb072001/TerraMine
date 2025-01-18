@@ -1,0 +1,54 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_aglet": {
+      "conditions": {
+        "items": [
+          {
+            "items": "terramine:aglet"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_anklet": {
+      "conditions": {
+        "items": [
+          {
+            "items": "terramine:anklet"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_spectre_boots": {
+      "conditions": {
+        "items": [
+          {
+            "items": "terramine:spectre_boots"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "terramine:lightning_boots"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_spectre_boots",
+      "has_anklet",
+      "has_aglet"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "terramine:lightning_boots"
+    ]
+  }
+}

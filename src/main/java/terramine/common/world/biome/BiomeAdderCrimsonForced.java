@@ -10,7 +10,7 @@ import net.minecraft.world.level.biome.Climate;
 import terrablender.api.Region;
 import terrablender.api.RegionType;
 import terramine.TerraMine;
-import terramine.common.init.ModBiomes;
+import terramine.datagen.ModBiomes;
 
 import java.util.function.Consumer;
 

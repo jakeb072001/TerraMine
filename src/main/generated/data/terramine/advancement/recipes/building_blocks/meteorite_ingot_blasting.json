@@ -1,0 +1,43 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_meteorite_ore": {
+      "conditions": {
+        "items": [
+          {
+            "items": "terramine:meteorite_ore"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_raw_meteorite": {
+      "conditions": {
+        "items": [
+          {
+            "items": "terramine:raw_meteorite"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:meteorite_ingot_blasting"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_raw_meteorite",
+      "has_meteorite_ore"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:meteorite_ingot_blasting"
+    ]
+  }
+}

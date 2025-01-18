@@ -20,7 +20,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import terramine.common.init.ModTags;
+import terramine.datagen.ModTags;
 import terramine.extensions.ItemExtensions;
 
 import java.util.Optional;

@@ -1,0 +1,43 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_cloud_in_a_bottle": {
+      "conditions": {
+        "items": [
+          {
+            "items": "terramine:cloud_in_a_bottle"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_shiny_red_balloon": {
+      "conditions": {
+        "items": [
+          {
+            "items": "terramine:shiny_red_balloon"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "terramine:cloud_in_a_balloon"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_shiny_red_balloon",
+      "has_cloud_in_a_bottle"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "terramine:cloud_in_a_balloon"
+    ]
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "S": "minecraft:stick",
+    "X": "terramine:hellstone_ingot"
+  },
+  "pattern": [
+    " XX",
+    "XSX",
+    " S "
+  ],
+  "result": {
+    "count": 1,
+    "id": "terramine:molten_shaxe"
+  }
+}

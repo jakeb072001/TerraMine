@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "terramine:frostspark_boots",
+    "terramine:lava_waders"
+  ],
+  "result": {
+    "count": 1,
+    "id": "terramine:terraspark_boots"
+  }
+}

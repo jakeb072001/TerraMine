@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "terramine:sun_stone",
+    "terramine:moon_stone"
+  ],
+  "result": {
+    "count": 1,
+    "id": "terramine:celestial_stone"
+  }
+}

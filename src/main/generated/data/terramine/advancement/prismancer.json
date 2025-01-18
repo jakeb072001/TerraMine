@@ -1,0 +1,35 @@
+{
+  "parent": "terramine:star_power",
+  "criteria": {
+    "find_accessory": {
+      "conditions": {
+        "items": [
+          {
+            "items": "terramine:rainbow_rod"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "terramine.advancements.prismancer.description"
+    },
+    "frame": "challenge",
+    "hidden": true,
+    "icon": {
+      "count": 1,
+      "id": "terramine:rainbow_rod"
+    },
+    "title": {
+      "translate": "terramine.advancements.prismancer.title"
+    }
+  },
+  "requirements": [
+    [
+      "find_accessory"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

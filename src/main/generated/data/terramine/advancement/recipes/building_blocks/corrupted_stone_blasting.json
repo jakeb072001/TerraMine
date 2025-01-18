@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_corrupted_cobblestone": {
+      "conditions": {
+        "items": [
+          {
+            "items": "terramine:corrupted_cobblestone"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:corrupted_stone_blasting"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_corrupted_cobblestone"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:corrupted_stone_blasting"
+    ]
+  }
+}

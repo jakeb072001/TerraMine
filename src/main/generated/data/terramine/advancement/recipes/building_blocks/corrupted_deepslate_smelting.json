@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_corrupted_cobbled_deepslate": {
+      "conditions": {
+        "items": [
+          {
+            "items": "terramine:corrupted_cobbled_deepslate"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:corrupted_deepslate_smelting"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_corrupted_cobbled_deepslate"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:corrupted_deepslate_smelting"
+    ]
+  }
+}

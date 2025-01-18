@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:blasting",
+  "category": "misc",
+  "cookingtime": 100,
+  "experience": 0.7,
+  "ingredient": [
+    "terramine:raw_crimtane",
+    "terramine:crimtane_ore",
+    "terramine:deepslate_crimtane_ore"
+  ],
+  "result": {
+    "id": "terramine:crimtane_ingot"
+  }
+}

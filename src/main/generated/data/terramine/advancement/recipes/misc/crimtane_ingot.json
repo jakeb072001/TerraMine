@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_crimtane_block": {
+      "conditions": {
+        "items": [
+          {
+            "items": "terramine:crimtane_block"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "terramine:crimtane_ingot"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_crimtane_block"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "terramine:crimtane_ingot"
+    ]
+  }
+}

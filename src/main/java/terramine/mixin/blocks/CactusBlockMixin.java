@@ -24,6 +24,6 @@ public class CactusBlockMixin {
         }
 
         BlockState blockState3 = levelReader.getBlockState(blockPos.below());
-        cir.setReturnValue(((cir.getReturnValue() || blockState3.is(ModBlocks.CORRUPTED_SAND) || blockState3.is(ModBlocks.CRIMSON_SAND)) && !levelReader.getFluidState(blockPos.above()).is(FluidTags.LAVA) && cactusSurvive));
+        cir.setReturnValue(((cir.getReturnValue() || blockState3.is(ModBlocks.CORRUPTED_SAND.BLOCK) || blockState3.is(ModBlocks.CRIMSON_SAND.BLOCK)) && !levelReader.getFluidState(blockPos.above()).is(FluidTags.LAVA) && cactusSurvive));
     }
 }

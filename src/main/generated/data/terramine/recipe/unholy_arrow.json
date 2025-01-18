@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": [
+      "terramine:worm_tooth",
+      "terramine:vertebra"
+    ],
+    "X": "minecraft:arrow"
+  },
+  "pattern": [
+    " X ",
+    "XCX",
+    " X "
+  ],
+  "result": {
+    "count": 4,
+    "id": "terramine:unholy_arrow"
+  }
+}

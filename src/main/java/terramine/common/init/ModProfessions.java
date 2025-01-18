@@ -16,7 +16,7 @@ import terramine.TerraMine;
 import java.util.List;
 
 public class ModProfessions {
-    public static final PoiType GOBLIN_TINKERER_POI = register("goblin_tinkerer", 1, 1, ModBlocks.TINKERER_TABLE);
+    public static final PoiType GOBLIN_TINKERER_POI = register("goblin_tinkerer", 1, 1, ModBlocks.TINKERER_TABLE.BLOCK);
     public static final VillagerProfession GOBLIN_TINKERER = register("goblin_tinkerer", GOBLIN_TINKERER_POI, ModSoundEvents.FART); // todo: change sound to something else later, using for placeholder right now
 
     public static void fillTradeData() {

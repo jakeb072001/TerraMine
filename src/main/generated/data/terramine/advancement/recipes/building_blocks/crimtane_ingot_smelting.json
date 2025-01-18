@@ -1,0 +1,54 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_crimtane_ore": {
+      "conditions": {
+        "items": [
+          {
+            "items": "terramine:crimtane_ore"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_deepslate_crimtane_ore": {
+      "conditions": {
+        "items": [
+          {
+            "items": "terramine:deepslate_crimtane_ore"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_raw_crimtane": {
+      "conditions": {
+        "items": [
+          {
+            "items": "terramine:raw_crimtane"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:crimtane_ingot_smelting"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_raw_crimtane",
+      "has_crimtane_ore",
+      "has_deepslate_crimtane_ore"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:crimtane_ingot_smelting"
+    ]
+  }
+}

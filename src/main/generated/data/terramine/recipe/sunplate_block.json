@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "X": "minecraft:stone",
+    "Y": "terramine:fallen_star"
+  },
+  "pattern": [
+    "XXX",
+    "XYX",
+    "XXX"
+  ],
+  "result": {
+    "count": 9,
+    "id": "terramine:sunplate_block"
+  }
+}

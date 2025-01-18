@@ -1,0 +1,65 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_corrupted_deepslate_iron_ore": {
+      "conditions": {
+        "items": [
+          {
+            "items": "terramine:corrupted_deepslate_iron_ore"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_corrupted_iron_ore": {
+      "conditions": {
+        "items": [
+          {
+            "items": "terramine:corrupted_iron_ore"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_crimson_deepslate_iron_ore": {
+      "conditions": {
+        "items": [
+          {
+            "items": "terramine:crimson_deepslate_iron_ore"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_crimson_iron_ore": {
+      "conditions": {
+        "items": [
+          {
+            "items": "terramine:crimson_iron_ore"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:iron_ingot_smelting"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_corrupted_iron_ore",
+      "has_corrupted_deepslate_iron_ore",
+      "has_crimson_iron_ore",
+      "has_crimson_deepslate_iron_ore"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:iron_ingot_smelting"
+    ]
+  }
+}

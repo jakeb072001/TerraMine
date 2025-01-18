@@ -13,7 +13,7 @@ import net.minecraft.world.level.levelgen.heightproviders.HeightProvider;
 import net.minecraft.world.level.levelgen.structure.Structure;
 import net.minecraft.world.level.levelgen.structure.StructureType;
 import net.minecraft.world.level.levelgen.structure.pools.StructureTemplatePool;
-import terramine.common.init.ModFeatures;
+import terramine.datagen.ModFeatures;
 
 import java.util.Optional;
 

@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "terramine:spectre_boots",
+    "terramine:anklet",
+    "terramine:aglet"
+  ],
+  "result": {
+    "count": 1,
+    "id": "terramine:lightning_boots"
+  }
+}

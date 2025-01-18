@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "terramine:obsidian_skull",
+    "terramine:lava_charm"
+  ],
+  "result": {
+    "count": 1,
+    "id": "terramine:molten_charm"
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "parent": "terramine:root",
+  "criteria": {
+    "location": {
+      "conditions": {
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "location": {
+                "structures": "#terramine:dungeon"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:location"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "terramine.advancements.dungeon_crawler.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "terramine:purple_brick"
+    },
+    "title": {
+      "translate": "terramine.advancements.dungeon_crawler.title"
+    }
+  },
+  "requirements": [
+    [
+      "location"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

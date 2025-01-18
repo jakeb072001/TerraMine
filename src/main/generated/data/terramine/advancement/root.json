@@ -1,0 +1,28 @@
+{
+  "criteria": {
+    "tick": {
+      "trigger": "minecraft:tick"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "background": "terramine:textures/block/corruption/corrupt_stone.png",
+    "description": {
+      "translate": "terramine.advancements.root.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "terramine:hermes_boots"
+    },
+    "show_toast": false,
+    "title": {
+      "translate": "terramine.advancements.root.title"
+    }
+  },
+  "requirements": [
+    [
+      "tick"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_corrupted_sand": {
+      "conditions": {
+        "items": [
+          {
+            "items": "terramine:corrupted_sand"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:corrupted_glass_smelting"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_corrupted_sand"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:corrupted_glass_smelting"
+    ]
+  }
+}

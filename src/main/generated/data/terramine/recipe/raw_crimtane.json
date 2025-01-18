@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "terramine:raw_crimtane_block"
+  ],
+  "result": {
+    "count": 9,
+    "id": "terramine:raw_crimtane"
+  }
+}

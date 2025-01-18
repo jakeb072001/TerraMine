@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "terramine:mechanical_glove",
+    "terramine:magma_stone"
+  ],
+  "result": {
+    "count": 1,
+    "id": "terramine:fire_gauntlet"
+  }
+}

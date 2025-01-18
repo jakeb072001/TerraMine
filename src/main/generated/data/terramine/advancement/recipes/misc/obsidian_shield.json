@@ -1,0 +1,43 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_cobalt_shield": {
+      "conditions": {
+        "items": [
+          {
+            "items": "terramine:cobalt_shield"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_obsidian_skull": {
+      "conditions": {
+        "items": [
+          {
+            "items": "terramine:obsidian_skull"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "terramine:obsidian_shield"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_obsidian_skull",
+      "has_cobalt_shield"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "terramine:obsidian_shield"
+    ]
+  }
+}

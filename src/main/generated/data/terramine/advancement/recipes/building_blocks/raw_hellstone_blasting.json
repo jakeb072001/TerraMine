@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_hellstone_ore": {
+      "conditions": {
+        "items": [
+          {
+            "items": "terramine:hellstone_ore"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:raw_hellstone_blasting"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_hellstone_ore"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:raw_hellstone_blasting"
+    ]
+  }
+}

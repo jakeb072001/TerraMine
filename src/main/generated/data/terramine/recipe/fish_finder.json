@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "terramine:weather_radio",
+    "terramine:sextant"
+  ],
+  "result": {
+    "count": 1,
+    "id": "terramine:fish_finder"
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:blasting",
+  "category": "misc",
+  "cookingtime": 100,
+  "experience": 0.7,
+  "ingredient": [
+    "terramine:corrupted_emerald_ore",
+    "terramine:corrupted_deepslate_emerald_ore",
+    "terramine:crimson_emerald_ore",
+    "terramine:crimson_deepslate_emerald_ore"
+  ],
+  "result": {
+    "id": "minecraft:emerald"
+  }
+}

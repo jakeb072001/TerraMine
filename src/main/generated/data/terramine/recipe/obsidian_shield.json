@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "terramine:obsidian_skull",
+    "terramine:cobalt_shield"
+  ],
+  "result": {
+    "count": 1,
+    "id": "terramine:obsidian_shield"
+  }
+}

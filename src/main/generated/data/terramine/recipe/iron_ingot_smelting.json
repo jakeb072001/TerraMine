@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:smelting",
+  "category": "misc",
+  "cookingtime": 200,
+  "experience": 0.7,
+  "ingredient": [
+    "terramine:corrupted_iron_ore",
+    "terramine:corrupted_deepslate_iron_ore",
+    "terramine:crimson_iron_ore",
+    "terramine:crimson_deepslate_iron_ore"
+  ],
+  "result": {
+    "id": "minecraft:iron_ingot"
+  }
+}

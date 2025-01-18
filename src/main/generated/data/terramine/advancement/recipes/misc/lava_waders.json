@@ -1,0 +1,76 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_lava_charm": {
+      "conditions": {
+        "items": [
+          {
+            "items": "terramine:lava_charm"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_molten_charm": {
+      "conditions": {
+        "items": [
+          {
+            "items": "terramine:molten_charm"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_obsidian_rose": {
+      "conditions": {
+        "items": [
+          {
+            "items": "terramine:obsidian_rose"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_obsidian_water_walking_boots": {
+      "conditions": {
+        "items": [
+          {
+            "items": "terramine:obsidian_water_walking_boots"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "terramine:lava_waders"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_water_walking_boots": {
+      "conditions": {
+        "items": [
+          {
+            "items": "terramine:water_walking_boots"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_obsidian_rose",
+      "has_water_walking_boots",
+      "has_obsidian_water_walking_boots",
+      "has_molten_charm",
+      "has_lava_charm"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "terramine:lava_waders"
+    ]
+  }
+}

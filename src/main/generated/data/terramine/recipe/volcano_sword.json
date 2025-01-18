@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "S": "minecraft:blaze_rod",
+    "X": "terramine:hellstone_ingot"
+  },
+  "pattern": [
+    "X",
+    "X",
+    "S"
+  ],
+  "result": {
+    "count": 1,
+    "id": "terramine:volcano_sword"
+  }
+}

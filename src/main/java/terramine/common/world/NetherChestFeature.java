@@ -67,7 +67,7 @@ public class NetherChestFeature extends Feature<NoneFeatureConfiguration> {
 				level.addFreshEntity(mimic);
 			}
 		} else {
-			this.setBlock(level, pos, ModBlocks.SHADOW_CHEST.defaultBlockState().setValue(ChestBlock.FACING, Direction.Plane.HORIZONTAL.getRandomDirection(random)));
+			this.setBlock(level, pos, ModBlocks.SHADOW_CHEST.BLOCK.defaultBlockState().setValue(ChestBlock.FACING, Direction.Plane.HORIZONTAL.getRandomDirection(random)));
 			RandomizableContainer.setBlockEntityLootTable(level, random, pos, ModLootTables.SHADOW_CHEST);
 		}
 	}

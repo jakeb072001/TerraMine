@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_raw_hellstone": {
+      "conditions": {
+        "items": [
+          {
+            "items": "terramine:raw_hellstone"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "terramine:raw_hellstone_block"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_raw_hellstone"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "terramine:raw_hellstone_block"
+    ]
+  }
+}

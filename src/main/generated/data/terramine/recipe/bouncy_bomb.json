@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "terramine:sticky_bomb",
+    "#c:slime_balls"
+  ],
+  "result": {
+    "count": 1,
+    "id": "terramine:bouncy_bomb"
+  }
+}

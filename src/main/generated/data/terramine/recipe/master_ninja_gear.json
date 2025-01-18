@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "terramine:tiger_climbing_gear",
+    "terramine:tabi",
+    "terramine:black_belt"
+  ],
+  "result": {
+    "count": 1,
+    "id": "terramine:master_ninja_gear"
+  }
+}
