@@ -9,6 +9,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
+import terramine.client.render.HeldItemModels;
 import terramine.common.init.ModEntities;
 import terramine.common.init.ModSoundEvents;
 import terramine.common.utility.MagicMissileHelper;
@@ -16,7 +17,7 @@ import terramine.common.utility.MagicMissileHelper;
 public class FlamelashItem extends MagicTerrariaItem {
 
     public FlamelashItem(ResourceKey<Item> key) {
-        super(key);
+        super(key, HeldItemModels.FLAMELASH_HELD_MODEL);
         this.setVars(7, 21);
     }
 

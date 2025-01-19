@@ -7,23 +7,16 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.DispenserBlock;
 import org.jetbrains.annotations.NotNull;
+import terramine.client.render.HeldItemModels;
 import terramine.common.init.ModItems;
 import terramine.common.item.TerrariaItem;
 
 public class UmbrellaItem extends TerrariaItem {
 
 	public UmbrellaItem(ResourceKey<Item> key) {
-		super(new Properties().setId(key).stacksTo(1).rarity(Rarity.RARE).fireResistant(), false);
-		//DispenserBlock.registerBehavior(this, ArmorItem.DISPENSE_ITEM_BEHAVIOR);
+		super(new Properties().setId(key).stacksTo(1).rarity(Rarity.RARE).fireResistant().overrideModel(HeldItemModels.UMBRELLA_HELD_MODEL), false);
 	}
-
-    /* TODO: wait for fapi/lib
-    @Override
-    public boolean isShield(ItemStack stack, LivingEntity entity) {
-        return true;
-    }*/
 
 	public static HeldStatus getHeldStatusForHand(LivingEntity entity, InteractionHand hand) {
 		if (entity.getItemInHand(hand).getItem() != ModItems.UMBRELLA) {

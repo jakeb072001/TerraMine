@@ -5,6 +5,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.DiggerItem;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -14,6 +15,7 @@ import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import terramine.common.item.equipment.TerrariaToolMaterials;
+import terramine.common.item.equipment.tools.TerrariaPickaxeItem;
 
 public class DungeonBlock extends Block {
     public static final BooleanProperty PLACED = BooleanProperty.create("player_placed");
@@ -47,7 +49,6 @@ public class DungeonBlock extends Block {
         }
     }
 
-    //todo: fix
     /**
      * Makes Dungeon Bricks indestructible when below y-60 unless mined with Netherite or better Pickaxe.
      * Also allows the block to be mined if placed by a player.
@@ -59,9 +60,9 @@ public class DungeonBlock extends Block {
 
         if (state.getValue(PLACED) || pos.getY() >= 60) {
             return super.getDestroyProgress(state, player, getter, pos);
-        }// else if (cei.getItem() instanceof DiggerItem tool && tool.getTier() instanceof TerrariaToolMaterials terrariaTiers && terrariaTiers.getLevel() >= 4) {
-        //    return super.getDestroyProgress(state, player, getter, pos);
-        //}
+        } else if (cei.getItem() instanceof DiggerItem tool && (cei.getItem() == Items.NETHERITE_PICKAXE || (tool instanceof TerrariaPickaxeItem terrariaPickaxeItem && terrariaPickaxeItem.canBreakDungeon()))) {
+            return super.getDestroyProgress(state, player, getter, pos);
+        }
 
         return 0;
     }

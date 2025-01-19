@@ -6,9 +6,9 @@ import net.minecraft.world.item.PickaxeItem;
 import net.minecraft.world.item.ToolMaterial;
 import org.jetbrains.annotations.NotNull;
 
-public class MoltenPickaxeItem extends PickaxeItem {
+public class MoltenPickaxeItem extends TerrariaPickaxeItem {
     public MoltenPickaxeItem(ToolMaterial tier, float f, float g, Properties properties) {
-        super(tier, f, g, properties);
+        super(tier, f, g, true, properties);
     }
 
     @Override

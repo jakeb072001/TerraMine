@@ -1,7 +1,6 @@
 package terramine.mixin.item.accessories.umbrella.client;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -40,19 +39,25 @@ public abstract class LivingEntityRendererMixin<T extends LivingEntity, S extend
 		this.livingEntity = livingEntity;
 	}
 
-	// todo: fix
+	// todo: not working, unsure why
 	@Inject(method = "render*", at = @At("HEAD"))
-	private void renderUmbrella(S renderState, PoseStack matrixStack, MultiBufferSource vertexConsumerProvider, int i, CallbackInfo info) {
+	private void renderUmbrella(S renderState, PoseStack poseStack, MultiBufferSource multiBufferSource, int i, CallbackInfo info) {
 		boolean heldMainHand = UmbrellaItem.getHeldStatusForHand(livingEntity, InteractionHand.MAIN_HAND) == UmbrellaItem.HeldStatus.HELD_UP;
 		boolean heldOffHand = UmbrellaItem.getHeldStatusForHand(livingEntity, InteractionHand.OFF_HAND) == UmbrellaItem.HeldStatus.HELD_UP;
-		boolean rightHanded = Minecraft.getInstance().options.mainHand().get() == HumanoidArm.RIGHT;
+		boolean rightHanded = renderState.mainArm == HumanoidArm.RIGHT;
 
-		if ((heldMainHand && rightHanded) || (heldOffHand && !rightHanded)) {
-			//model.poseRightArm(renderState, HumanoidModel.ArmPose.THROW_SPEAR);
-		}
+		if (renderState instanceof HumanoidRenderState humanoidRenderState) {
+			if (model instanceof HumanoidModel<?>) {
+				HumanoidModel<HumanoidRenderState> humanoidModel = (HumanoidModel<HumanoidRenderState>) model;
 
-		if ((heldMainHand && !rightHanded) || (heldOffHand && rightHanded)) {
-			//model.poseLeftArm(renderState, HumanoidModel.ArmPose.THROW_SPEAR);
+				if ((heldMainHand && rightHanded) || (heldOffHand && !rightHanded)) {
+					humanoidModel.poseRightArm(humanoidRenderState, HumanoidModel.ArmPose.THROW_SPEAR);
+				}
+
+				if ((heldMainHand && !rightHanded) || (heldOffHand && rightHanded)) {
+					humanoidModel.poseLeftArm(humanoidRenderState, HumanoidModel.ArmPose.THROW_SPEAR);
+				}
+			}
 		}
 	}
 }

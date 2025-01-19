@@ -1,6 +1,7 @@
 package terramine.common.item.magic;
 
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
@@ -17,8 +18,8 @@ import terramine.common.item.TerrariaItem;
 public class MagicTerrariaItem extends TerrariaItem {
     public int useDuration, manaCost;
 
-    public MagicTerrariaItem(ResourceKey<Item> key) {
-        super(new Properties().setId(key).stacksTo(1).rarity(Rarity.RARE).fireResistant(), false);
+    public MagicTerrariaItem(ResourceKey<Item> key, ResourceLocation model) {
+        super(new Properties().setId(key).stacksTo(1).rarity(Rarity.RARE).fireResistant().overrideModel(model), false);
     }
 
     public void setVars(int useDuration, int manaCost) {

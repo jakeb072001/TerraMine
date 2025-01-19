@@ -11,6 +11,7 @@ import net.minecraft.world.item.equipment.ArmorType;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.ComposterBlock;
 import terramine.TerraMine;
+import terramine.client.render.HeldItemModels;
 import terramine.common.item.CraftingItem;
 import terramine.common.item.accessories.AccessoryTerrariaItem;
 import terramine.common.item.accessories.ShieldAccessoryLikeItem;
@@ -32,6 +33,7 @@ import terramine.common.item.equipment.UmbrellaItem;
 import terramine.common.item.equipment.swords.CustomSoundSwordItem;
 import terramine.common.item.equipment.swords.VolcanoSwordItem;
 import terramine.common.item.equipment.tools.MoltenPickaxeItem;
+import terramine.common.item.equipment.tools.TerrariaPickaxeItem;
 import terramine.common.item.equipment.tools.TerrariaShaxeItem;
 import terramine.common.item.magic.*;
 import terramine.common.item.misc.BossSpawnItem;
@@ -219,17 +221,18 @@ public class ModItems {
 	public static final Item LEAF_WINGS = register("leaf_wings", key -> new WingsItem(0.5D, 0.05D, 80, 10, ModSoundEvents.WINGS_FLAP, key));
 
 	// Tools
-	public static final Item DEMONITE_PICKAXE = register("demonite_pickaxe", key -> new PickaxeItem(TerrariaToolMaterials.DEMONITE, 1F, -2.8F, new Item.Properties().setId(key)));
+	public static final Item DEMONITE_PICKAXE = register("demonite_pickaxe", key -> new TerrariaPickaxeItem(TerrariaToolMaterials.DEMONITE, 1F, -2.8F, new Item.Properties().setId(key)));
 	public static final Item DEMONITE_AXE = register("demonite_axe", key -> new AxeItem(TerrariaToolMaterials.DEMONITE, 6F, -3.1F, new Item.Properties().setId(key)));
 	public static final Item DEMONITE_SHOVEL = register("demonite_shovel", key -> new ShovelItem(TerrariaToolMaterials.DEMONITE, 1.5F, -3F, new Item.Properties().setId(key)));
 	public static final Item DEMONITE_HOE = register("demonite_hoe", key -> new HoeItem(TerrariaToolMaterials.DEMONITE, -2F, -1F, new Item.Properties().setId(key)));
-	public static final Item CRIMTANE_PICKAXE = register("crimtane_pickaxe", key -> new PickaxeItem(TerrariaToolMaterials.CRIMTANE, 1F, -2.8F, new Item.Properties().setId(key)));
+	public static final Item CRIMTANE_PICKAXE = register("crimtane_pickaxe", key -> new TerrariaPickaxeItem(TerrariaToolMaterials.CRIMTANE, 1F, -2.8F, new Item.Properties().setId(key)));
 	public static final Item CRIMTANE_AXE = register("crimtane_axe", key -> new AxeItem(TerrariaToolMaterials.CRIMTANE, 6.5F, -3.1F, new Item.Properties().setId(key)));
 	public static final Item CRIMTANE_SHOVEL = register("crimtane_shovel", key -> new ShovelItem(TerrariaToolMaterials.CRIMTANE, 1.5F, -3F, new Item.Properties().setId(key)));
 	public static final Item CRIMTANE_HOE = register("crimtane_hoe", key -> new HoeItem(TerrariaToolMaterials.CRIMTANE, -2, -1F, new Item.Properties().setId(key)));
-	public static final Item METEOR_SHAXE = register("meteor_shaxe", key -> new TerrariaShaxeItem(TerrariaToolMaterials.METEOR, 7F, -3.1F, new Item.Properties().setId(key)));
+	public static final Item METEOR_SHAXE = register("meteor_shaxe", key -> new TerrariaShaxeItem(TerrariaToolMaterials.METEOR, 7F, -3.1F, new Item.Properties().setId(key).fireResistant()));
 	public static final Item MOLTEN_PICKAXE = register("molten_pickaxe", key -> new MoltenPickaxeItem(TerrariaToolMaterials.MOLTEN, 1F, -2.8F, new Item.Properties().setId(key).fireResistant()));
 	public static final Item MOLTEN_SHAXE = register("molten_shaxe", key -> new TerrariaShaxeItem(TerrariaToolMaterials.MOLTEN, true, 7.5F, -3.1F, new Item.Properties().setId(key).fireResistant()));
+	// reminder: any pickaxe better than molten needs a true boolean added after the g float
 
 	// Weapons
 	public static final Item DEMONITE_SWORD = register("demonite_sword", key -> new SwordItem(TerrariaToolMaterials.DEMONITE, 3F, -2.4F, new Item.Properties().setId(key)));
@@ -243,17 +246,17 @@ public class ModItems {
 
 	// Throwables
 	// Grenades
-	public static final Item GRENADE = register("grenade", key -> new GrenadeItem(new Item.Properties().setId(key), false, false));
-	public static final Item STICKY_GRENADE = register("sticky_grenade", key -> new GrenadeItem(new Item.Properties().setId(key), true, false));
-	public static final Item BOUNCY_GRENADE = register("bouncy_grenade", key -> new GrenadeItem(new Item.Properties().setId(key), false, true));
+	public static final Item GRENADE = register("grenade", key -> new GrenadeItem(new Item.Properties().setId(key).overrideModel(HeldItemModels.GRENADE_HELD_MODEL), false, false));
+	public static final Item STICKY_GRENADE = register("sticky_grenade", key -> new GrenadeItem(new Item.Properties().setId(key).overrideModel(HeldItemModels.STICKY_GRENADE_HELD_MODEL), true, false));
+	public static final Item BOUNCY_GRENADE = register("bouncy_grenade", key -> new GrenadeItem(new Item.Properties().setId(key).overrideModel(HeldItemModels.BOUNCY_GRENADE_HELD_MODEL), false, true));
 	// Bombs
-	public static final Item BOMB = register("bomb", key -> new BombItem(new Item.Properties().setId(key), false, false));
-	public static final Item STICKY_BOMB = register("sticky_bomb", key -> new BombItem(new Item.Properties().setId(key), true, false));
-	public static final Item BOUNCY_BOMB = register("bouncy_bomb", key -> new BombItem(new Item.Properties().setId(key), false, true));
+	public static final Item BOMB = register("bomb", key -> new BombItem(new Item.Properties().setId(key).overrideModel(HeldItemModels.BOMB_HELD_MODEL), false, false));
+	public static final Item STICKY_BOMB = register("sticky_bomb", key -> new BombItem(new Item.Properties().setId(key).overrideModel(HeldItemModels.STICKY_BOMB_HELD_MODEL), true, false));
+	public static final Item BOUNCY_BOMB = register("bouncy_bomb", key -> new BombItem(new Item.Properties().setId(key).overrideModel(HeldItemModels.BOUNCY_BOMB_HELD_MODEL), false, true));
 	// Dynamite
-	public static final Item DYNAMITE = register("dynamite", key -> new DynamiteItem(new Item.Properties().setId(key), false, false));
-	public static final Item STICKY_DYNAMITE = register("sticky_dynamite", key -> new DynamiteItem(new Item.Properties().setId(key), true, false));
-	public static final Item BOUNCY_DYNAMITE = register("bouncy_dynamite", key -> new DynamiteItem(new Item.Properties().setId(key), false, true));
+	public static final Item DYNAMITE = register("dynamite", key -> new DynamiteItem(new Item.Properties().setId(key).overrideModel(HeldItemModels.DYNAMITE_HELD_MODEL), false, false));
+	public static final Item STICKY_DYNAMITE = register("sticky_dynamite", key -> new DynamiteItem(new Item.Properties().setId(key).overrideModel(HeldItemModels.STICKY_DYNAMITE_HELD_MODEL), true, false));
+	public static final Item BOUNCY_DYNAMITE = register("bouncy_dynamite", key -> new DynamiteItem(new Item.Properties().setId(key).overrideModel(HeldItemModels.BOUNCY_DYNAMITE_HELD_MODEL), false, true));
 
 	// Armours
 	// todo: make another register method that registers a full set of armor instead of registering per piece, don't know the best way to do this since the item is different (ShadowArmor, CrimsonArmor)

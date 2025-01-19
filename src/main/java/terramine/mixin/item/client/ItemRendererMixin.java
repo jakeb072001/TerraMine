@@ -1,4 +1,4 @@
-package terramine.mixin.item.accessories.umbrella.client;
+package terramine.mixin.item.client;
 
 import net.minecraft.client.renderer.ItemModelShaper;
 import net.minecraft.client.renderer.entity.ItemRenderer;
@@ -13,7 +13,6 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import terramine.TerraMine;
-import terramine.client.render.HeldItemModels;
 import terramine.common.init.ModItems;
 
 // Priority is higher so that we can inject into canvas' renderItem overwrite
@@ -50,55 +49,6 @@ public abstract class ItemRendererMixin {
 	private static final ResourceLocation STICKY_DYNAMITE_ICON_MODEL = TerraMine.id("sticky_dynamite");
 	@Unique
 	private static final ResourceLocation BOUNCY_DYNAMITE_ICON_MODEL = TerraMine.id("bouncy_dynamite");
-
-	// todo: doesn't work currently, seems the models are registering as block models
-	@ModifyVariable(method = "getModel", at = @At(value = "INVOKE_ASSIGN", target = "Lnet/minecraft/client/renderer/entity/ItemRenderer;resolveModelOverride(Lnet/minecraft/client/resources/model/BakedModel;Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/level/Level;Lnet/minecraft/world/entity/LivingEntity;I)Lnet/minecraft/client/resources/model/BakedModel;"), ordinal = 0)
-	private BakedModel setCustomHeldModels(BakedModel bakedModel, ItemStack stack) {
-		if (stack.getItem() == ModItems.UMBRELLA) {
-			return this.itemModelShaper.getItemModel(HeldItemModels.UMBRELLA_HELD_MODEL);
-		}
-		if (stack.getItem() == ModItems.MAGIC_MISSILE_ITEM) {
-			return this.itemModelShaper.getItemModel(HeldItemModels.MAGIC_MISSILE_HELD_MODEL);
-		}
-		if (stack.getItem() == ModItems.FLAMELASH_ITEM) {
-			return this.itemModelShaper.getItemModel(HeldItemModels.FLAMELASH_HELD_MODEL);
-		}
-		if (stack.getItem() == ModItems.RAINBOW_ROD_ITEM) {
-			return this.itemModelShaper.getItemModel(HeldItemModels.RAINBOW_ROD_HELD_MODEL);
-		}
-		if (stack.getItem() == ModItems.SPACE_GUN) {
-			return this.itemModelShaper.getItemModel(HeldItemModels.SPACE_GUN_HELD_MODEL);
-		}
-		if (stack.getItem() == ModItems.GRENADE) {
-			return this.itemModelShaper.getItemModel(HeldItemModels.GRENADE_HELD_MODEL);
-		}
-		if (stack.getItem() == ModItems.STICKY_GRENADE) {
-			return this.itemModelShaper.getItemModel(HeldItemModels.STICKY_GRENADE_HELD_MODEL);
-		}
-		if (stack.getItem() == ModItems.BOUNCY_GRENADE) {
-			return this.itemModelShaper.getItemModel(HeldItemModels.BOUNCY_GRENADE_HELD_MODEL);
-		}
-		if (stack.getItem() == ModItems.BOMB) {
-			return this.itemModelShaper.getItemModel(HeldItemModels.BOMB_HELD_MODEL);
-		}
-		if (stack.getItem() == ModItems.STICKY_BOMB) {
-			return this.itemModelShaper.getItemModel(HeldItemModels.STICKY_BOMB_HELD_MODEL);
-		}
-		if (stack.getItem() == ModItems.BOUNCY_BOMB) {
-			return this.itemModelShaper.getItemModel(HeldItemModels.BOUNCY_BOMB_HELD_MODEL);
-		}
-		if (stack.getItem() == ModItems.DYNAMITE) {
-			return this.itemModelShaper.getItemModel(HeldItemModels.DYNAMITE_HELD_MODEL);
-		}
-		if (stack.getItem() == ModItems.STICKY_DYNAMITE) {
-			return this.itemModelShaper.getItemModel(HeldItemModels.STICKY_DYNAMITE_HELD_MODEL);
-		}
-		if (stack.getItem() == ModItems.BOUNCY_DYNAMITE) {
-			return this.itemModelShaper.getItemModel(HeldItemModels.BOUNCY_DYNAMITE_HELD_MODEL);
-		}
-
-		return bakedModel;
-	}
 
 	@ModifyVariable(method = "render", argsOnly = true, at = @At(value = "HEAD"))
 	private BakedModel setCustomInventoryModels(BakedModel model, ItemStack stack, ItemDisplayContext itemDisplayContext) {

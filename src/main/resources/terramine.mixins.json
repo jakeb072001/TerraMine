@@ -73,7 +73,7 @@
     "item.accessories.stopwatch.client.GuiMixin",
     "item.accessories.terrasparkboots.client.GuiMixin",
     "item.accessories.umbrella.client.HumanoidModelMixin",
-    "item.accessories.umbrella.client.ItemRendererMixin",
+    "item.client.ItemRendererMixin",
     "item.accessories.umbrella.client.LivingEntityRendererMixin",
     "item.accessories.walljump.PlayerMixin",
     "item.accessories.weatherradio.client.GuiMixin",

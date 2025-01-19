@@ -39,7 +39,7 @@ public abstract class HumanoidModelMixin<T extends HumanoidRenderState> extends 
 		boolean heldMainHand = UmbrellaItem.getHeldStatusForHand(humanoidRenderState.getMainHandItem(), humanoidRenderState.isUsingItem, humanoidRenderState.useItemHand, InteractionHand.MAIN_HAND) == UmbrellaItem.HeldStatus.HELD_UP;
 		// can't get the offhand item for some reason, so just use left hand for now
 		boolean heldOffHand = UmbrellaItem.getHeldStatusForHand(humanoidRenderState.leftHandItem, humanoidRenderState.isUsingItem, humanoidRenderState.useItemHand, InteractionHand.OFF_HAND) == UmbrellaItem.HeldStatus.HELD_UP;
-		boolean rightHanded = Minecraft.getInstance().options.mainHand().get() == HumanoidArm.RIGHT;
+		boolean rightHanded = humanoidRenderState.mainArm == HumanoidArm.RIGHT;
 
 		if ((heldMainHand && rightHanded) || (heldOffHand && !rightHanded)) {
 			this.rightArm.xRot /= 8;

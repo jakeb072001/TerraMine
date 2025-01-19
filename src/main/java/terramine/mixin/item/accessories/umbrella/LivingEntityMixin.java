@@ -12,8 +12,6 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
-import terramine.common.components.SwimAbilityComponent;
-import terramine.common.init.ModComponents;
 import terramine.common.item.equipment.UmbrellaItem;
 
 @Mixin(LivingEntity.class)
@@ -26,16 +24,14 @@ public abstract class LivingEntityMixin extends Entity {
 	@Shadow
 	public abstract boolean hasEffect(Holder<MobEffect> effect);
 
-	// todo: doesn't work, redo
-	//@ModifyVariable(method = "travelInAir", ordinal = 0, name = "d", at = @At(value = "INVOKE", ordinal = 0, target = "Lnet/minecraft/world/level/Level;getFluidState(Lnet/minecraft/core/BlockPos;)Lnet/minecraft/world/level/material/FluidState;"))
 	@ModifyVariable(method = "travelInAir", ordinal = 0, name = "d", at = @At("STORE"))
 	private double changeGravity(double gravity) {
 		boolean isFalling = !this.onGround() && this.getDeltaMovement().y <= 0.0D;
 		boolean heldMainHand = UmbrellaItem.getHeldStatusForHand((LivingEntity) (Object) this, InteractionHand.MAIN_HAND) == UmbrellaItem.HeldStatus.HELD_UP;
 		boolean heldOffHand = UmbrellaItem.getHeldStatusForHand((LivingEntity) (Object) this, InteractionHand.OFF_HAND) == UmbrellaItem.HeldStatus.HELD_UP;
 
-		if ((heldMainHand || heldOffHand) && isFalling && !this.hasEffect(MobEffects.SLOW_FALLING) ) {
-			gravity -= 0.07;
+		if ((heldMainHand || heldOffHand) && isFalling && !this.hasEffect(MobEffects.SLOW_FALLING)) {
+			gravity = gravity / 1.5;
 			this.fallDistance = 0;
 		}
 
