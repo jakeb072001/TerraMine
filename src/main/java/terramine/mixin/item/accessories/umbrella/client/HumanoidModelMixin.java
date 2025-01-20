@@ -1,6 +1,5 @@
 package terramine.mixin.item.accessories.umbrella.client;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ArmedModel;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.HeadedModel;
@@ -16,7 +15,9 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import terramine.common.item.equipment.UmbrellaItem;
+import terramine.extensions.EntityRenderStateExtensions;
 
 @Mixin(HumanoidModel.class)
 public abstract class HumanoidModelMixin<T extends HumanoidRenderState> extends EntityModel<T> implements ArmedModel, HeadedModel {
@@ -32,21 +33,43 @@ public abstract class HumanoidModelMixin<T extends HumanoidRenderState> extends 
 		super(modelPart);
 	}
 
-	// Target is unresolved because method owner is a generic T
-	// Seems to work fine, but has failed to apply once or twice in dev (in a fresh runtime)
-	@Inject(method = "setupAnim(Lnet/minecraft/client/renderer/entity/state/HumanoidRenderState;)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/model/HumanoidModel;setupAttackAnimation(Lnet/minecraft/client/renderer/entity/state/HumanoidRenderState;F)V"))
+	@Inject(
+			method = "setupAnim(Lnet/minecraft/client/renderer/entity/state/HumanoidRenderState;)V",
+			at = @At(value = "FIELD",
+					target = "Lnet/minecraft/client/model/HumanoidModel;rightLeg:Lnet/minecraft/client/model/geom/ModelPart;",
+					ordinal = 0)
+	)
 	private void reduceHandSwing(T humanoidRenderState, CallbackInfo ci) {
-		boolean heldMainHand = UmbrellaItem.getHeldStatusForHand(humanoidRenderState.getMainHandItem(), humanoidRenderState.isUsingItem, humanoidRenderState.useItemHand, InteractionHand.MAIN_HAND) == UmbrellaItem.HeldStatus.HELD_UP;
-		// can't get the offhand item for some reason, so just use left hand for now
-		boolean heldOffHand = UmbrellaItem.getHeldStatusForHand(humanoidRenderState.leftHandItem, humanoidRenderState.isUsingItem, humanoidRenderState.useItemHand, InteractionHand.OFF_HAND) == UmbrellaItem.HeldStatus.HELD_UP;
-		boolean rightHanded = humanoidRenderState.mainArm == HumanoidArm.RIGHT;
+		if (((EntityRenderStateExtensions)humanoidRenderState).terrariaCraft$getLivingEntity() instanceof LivingEntity livingEntity) {
+			boolean mainHandHeldUp = UmbrellaItem.getHeldStatusForHand(livingEntity, InteractionHand.MAIN_HAND) == UmbrellaItem.HeldStatus.HELD_UP;
+			boolean offHandHeldUp = UmbrellaItem.getHeldStatusForHand(livingEntity, InteractionHand.OFF_HAND) == UmbrellaItem.HeldStatus.HELD_UP;
+			boolean rightHanded = humanoidRenderState.mainArm == HumanoidArm.RIGHT;
 
-		if ((heldMainHand && rightHanded) || (heldOffHand && !rightHanded)) {
-			this.rightArm.xRot /= 8;
+			if ((mainHandHeldUp && rightHanded) || (offHandHeldUp && !rightHanded)) {
+				this.rightArm.xRot /= 8;
+			}
+
+			if ((mainHandHeldUp && !rightHanded) || (offHandHeldUp && rightHanded)) {
+				this.leftArm.xRot /= 8;
+			}
 		}
+	}
 
-		if ((heldMainHand && !rightHanded) || (heldOffHand && rightHanded)) {
-			this.leftArm.xRot /= 8;
+	// todo: pose doesn't seem to be working for zombie, i think i need to inject into AnimationUtils animateZombieArms and manually change xRot after its set
+	@Inject(method = "getArmPose", at = @At("RETURN"), cancellable = true)
+	private void renderUmbrella(T humanoidRenderState, HumanoidArm humanoidArm, CallbackInfoReturnable<HumanoidModel.ArmPose> cir) {
+		if (((EntityRenderStateExtensions)humanoidRenderState).terrariaCraft$getLivingEntity() instanceof LivingEntity livingEntity) {
+			boolean mainHandHeldUp = UmbrellaItem.getHeldStatusForHand(livingEntity, InteractionHand.MAIN_HAND) == UmbrellaItem.HeldStatus.HELD_UP;
+			boolean offHandHeldUp = UmbrellaItem.getHeldStatusForHand(livingEntity, InteractionHand.OFF_HAND) == UmbrellaItem.HeldStatus.HELD_UP;
+			boolean isRightHanded = humanoidRenderState.mainArm == HumanoidArm.RIGHT;
+
+			boolean isRightArm = humanoidArm == HumanoidArm.RIGHT;
+			boolean umbrellaMatchesRight = (mainHandHeldUp && isRightHanded) || (offHandHeldUp && !isRightHanded);
+			boolean umbrellaMatchesLeft = (mainHandHeldUp && !isRightHanded) || (offHandHeldUp && isRightHanded);
+
+			if ((isRightArm && umbrellaMatchesRight) || (!isRightArm && umbrellaMatchesLeft)) {
+				cir.setReturnValue(HumanoidModel.ArmPose.THROW_SPEAR);
+			}
 		}
 	}
 }

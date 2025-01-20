@@ -11,6 +11,7 @@ import terramine.common.item.equipment.UmbrellaItem;
 @Mixin(Entity.class)
 public abstract class EntityMixin {
 
+	// todo: make also block sun for mobs
 	@Inject(method = "isInRain", at = @At("RETURN"), cancellable = true)
 	private void umbrellaBlocksRain(CallbackInfoReturnable<Boolean> info) {
 		//noinspection ConstantConditions
