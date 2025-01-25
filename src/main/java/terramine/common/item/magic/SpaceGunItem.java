@@ -9,7 +9,6 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
-import terramine.client.render.HeldItemModels;
 import terramine.common.entity.projectiles.LaserEntity;
 import terramine.common.init.ModComponents;
 import terramine.common.init.ModEntities;
@@ -19,7 +18,7 @@ import terramine.common.init.ModSoundEvents;
 public class SpaceGunItem extends MagicTerrariaItem {
 
     public SpaceGunItem(ResourceKey<Item> key) {
-        super(key, HeldItemModels.SPACE_GUN_HELD_MODEL);
+        super(key);
         this.setVars(2, 6);
     }
 

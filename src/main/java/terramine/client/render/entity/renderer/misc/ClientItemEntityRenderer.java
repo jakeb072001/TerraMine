@@ -11,17 +11,15 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
-import net.minecraft.client.renderer.entity.ItemRenderer;
+import net.minecraft.client.renderer.entity.state.ItemClusterRenderState;
 import net.minecraft.client.renderer.entity.state.ItemEntityRenderState;
+import net.minecraft.client.renderer.item.ItemModelResolver;
+import net.minecraft.client.renderer.item.ItemStackRenderState;
 import net.minecraft.client.renderer.texture.OverlayTexture;
-import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.item.ItemEntity;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemDisplayContext;
-import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import terramine.common.entity.misc.ClientItemEntity;
 
@@ -30,13 +28,13 @@ import static net.minecraft.client.renderer.blockentity.BeaconRenderer.renderPar
 @Environment(EnvType.CLIENT)
 public class ClientItemEntityRenderer extends EntityRenderer<ClientItemEntity, ItemEntityRenderState> {
     public static final ResourceLocation BEAM_LOCATION = ResourceLocation.withDefaultNamespace("textures/entity/beacon_beam.png");
-    private final ItemRenderer itemRenderer;
+    private final ItemModelResolver itemModelResolver;
     private final RandomSource random = RandomSource.create();
     private ClientItemEntity itemEntity;
 
     public ClientItemEntityRenderer(EntityRendererProvider.Context context) {
         super(context);
-        this.itemRenderer = context.getItemRenderer();
+        this.itemModelResolver = context.getItemModelResolver();
         this.shadowRadius = 0;
         this.shadowStrength = 0.75F;
     }
@@ -51,29 +49,22 @@ public class ClientItemEntityRenderer extends EntityRenderer<ClientItemEntity, I
         super.extractRenderState(itemEntity, itemEntityRenderState, f);
         itemEntityRenderState.ageInTicks = (float)itemEntity.getAge() + f;
         itemEntityRenderState.bobOffset = itemEntity.bobOffs;
-        ItemStack itemStack = itemEntity.getItem();
-        itemEntityRenderState.item = itemStack.copy();
         this.itemEntity = itemEntity;
-        itemEntityRenderState.itemModel = this.itemRenderer.getModel(itemStack, itemEntity.level(), null, itemEntity.getId());
+        itemEntityRenderState.extractItemGroupRenderState(itemEntity, itemEntity.getItem(), this.itemModelResolver);
     }
 
     @Override
     public void render(@NotNull ItemEntityRenderState itemEntityRenderState, @NotNull PoseStack poseStack, @NotNull MultiBufferSource multiBufferSource, int i) {
         LocalPlayer player = Minecraft.getInstance().player;
         if (player.getUUID().equals(itemEntity.getClientPlayer())) {
-            BakedModel bakedModel = itemEntityRenderState.itemModel;
-            if (bakedModel != null) {
+            if (!itemEntityRenderState.item.isEmpty()) {
                 poseStack.pushPose();
-                this.shadowRadius = 0.15F;
-                ItemStack itemStack = itemEntityRenderState.item;
-                this.random.setSeed(getSeedForItemStack(itemStack));
-                boolean bl = bakedModel.isGui3d();
                 float g = Mth.sin(itemEntityRenderState.ageInTicks / 10.0F + itemEntityRenderState.bobOffset) * 0.1F + 0.1F;
-                float h = bakedModel.getTransforms().getTransform(ItemDisplayContext.GROUND).scale.y();
+                float h = itemEntityRenderState.item.transform().scale.y();
                 poseStack.translate(0.0F, g + 0.25F * h, 0.0F);
                 float j = ItemEntity.getSpin(itemEntityRenderState.ageInTicks, itemEntityRenderState.bobOffset);
                 poseStack.mulPose(Axis.YP.rotation(j));
-                renderMultipleFromCount(this.itemRenderer, poseStack, multiBufferSource, i, itemStack, bakedModel, bl, this.random);
+                renderMultipleFromCount(poseStack, multiBufferSource, i, itemEntityRenderState, this.random);
                 poseStack.popPose();
                 super.render(itemEntityRenderState, poseStack, multiBufferSource, i);
                 renderBeacon(itemEntity, itemEntityRenderState.ageInTicks, itemEntity.level().getGameTime(), poseStack, multiBufferSource);
@@ -81,10 +72,6 @@ public class ClientItemEntityRenderer extends EntityRenderer<ClientItemEntity, I
         } else {
             this.shadowRadius = 0;
         }
-    }
-
-    public static int getSeedForItemStack(ItemStack itemStack) {
-        return itemStack.isEmpty() ? 187 : Item.getId(itemStack.getItem()) + itemStack.getDamageValue();
     }
 
     // Code from LootBeams, may make look neater later
@@ -142,11 +129,14 @@ public class ClientItemEntityRenderer extends EntityRenderer<ClientItemEntity, I
         RenderSystem.disableDepthTest();
     }
 
-    public static void renderMultipleFromCount(ItemRenderer itemRenderer, PoseStack poseStack, MultiBufferSource multiBufferSource, int i, ItemStack itemStack, BakedModel bakedModel, boolean bl, RandomSource randomSource) {
-        int j = getRenderedAmount(itemStack.getCount());
-        float f = bakedModel.getTransforms().ground.scale.x();
-        float g = bakedModel.getTransforms().ground.scale.y();
-        float h = bakedModel.getTransforms().ground.scale.z();
+    public static void renderMultipleFromCount(PoseStack poseStack, MultiBufferSource multiBufferSource, int i, ItemClusterRenderState itemClusterRenderState, RandomSource randomSource) {
+        randomSource.setSeed(itemClusterRenderState.seed);
+        int j = itemClusterRenderState.count;
+        ItemStackRenderState itemStackRenderState = itemClusterRenderState.item;
+        boolean bl = itemStackRenderState.isGui3d();
+        float f = itemStackRenderState.transform().scale.x();
+        float g = itemStackRenderState.transform().scale.y();
+        float h = itemStackRenderState.transform().scale.z();
         float l;
         float m;
         if (!bl) {
@@ -171,23 +161,11 @@ public class ClientItemEntityRenderer extends EntityRenderer<ClientItemEntity, I
                 }
             }
 
-            itemRenderer.render(itemStack, ItemDisplayContext.GROUND, false, poseStack, multiBufferSource, i, OverlayTexture.NO_OVERLAY, bakedModel);
+            itemStackRenderState.render(poseStack, multiBufferSource, i, OverlayTexture.NO_OVERLAY);
             poseStack.popPose();
             if (!bl) {
                 poseStack.translate(0.0F * f, 0.0F * g, 0.09375F * h);
             }
-        }
-    }
-
-    static int getRenderedAmount(int i) {
-        if (i <= 1) {
-            return 1;
-        } else if (i <= 16) {
-            return 2;
-        } else if (i <= 32) {
-            return 3;
-        } else {
-            return i <= 48 ? 4 : 5;
         }
     }
 }

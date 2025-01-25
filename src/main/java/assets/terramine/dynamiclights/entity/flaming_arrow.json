@@ -1,0 +1,10 @@
+{
+  "match": {
+    "type": "terramine:flaming_arrow"
+  },
+  "luminance": {
+    "type": "lambdynlights:wet_sensitive",
+    "dry": 7,
+    "wet": 0
+  }
+}

@@ -105,6 +105,7 @@ public class Utilities { // todo: need to fix bug with magic missile where the p
     }
 
     // from Fancy Dyes, I could have easily got this code from elsewhere, but I am using their code to help with my dye system, so I'll give credit where I can
+    // todo: probably don't need anymore
     public static Vector3f colorFromInt(int color) {
         float r = (float) (color >> 16 & 0xFF) / 255.0f;
         float g = (float) (color >> 8 & 0xFF) / 255.0f;

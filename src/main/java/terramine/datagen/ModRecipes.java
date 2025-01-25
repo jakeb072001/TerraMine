@@ -254,7 +254,7 @@ public class ModRecipes extends FabricRecipeProvider {
                                 has((TagKey<Item>) ingredient)
                         );
                     } else if (ingredient instanceof Ingredient ingredient1) {
-                        for (Holder<Item> item : ingredient1.items()) {
+                        for (Holder<Item> item : ingredient1.items().toList()) {
                             builder.unlockedBy(
                                     getHasName(item.value()),
                                     has(item.value())
@@ -316,7 +316,7 @@ public class ModRecipes extends FabricRecipeProvider {
                                 has((TagKey<Item>) ingredient)
                         );
                     } else if (ingredient instanceof Ingredient ingredient1) {
-                        for (Holder<Item> item : ingredient1.items()) {
+                        for (Holder<Item> item : ingredient1.items().toList()) {
                             builder.unlockedBy(
                                     getHasName(item.value()),
                                     has(item.value())
@@ -379,7 +379,7 @@ public class ModRecipes extends FabricRecipeProvider {
                                 has((TagKey<Item>) ingredient)
                         );
                     } else if (ingredient instanceof Ingredient ingredient1) {
-                        for (Holder<Item> item : ingredient1.items()) {
+                        for (Holder<Item> item : ingredient1.items().toList()) {
                             builder.unlockedBy(
                                     getHasName(item.value()),
                                     has(item.value())

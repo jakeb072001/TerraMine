@@ -197,9 +197,6 @@
 			}
 		}
 	],
-	"overrides": [
-		{"predicate": {"blocking": 1}, "model": "terramine:item/shield_of_cthulhu_blocking"}
-	],
 	"display": {
 		"thirdperson_righthand": {
 			"rotation": [0, 90, 0],

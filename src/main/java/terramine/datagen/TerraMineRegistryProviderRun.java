@@ -1,17 +1,21 @@
 package terramine.datagen;
 
+import com.mojang.serialization.Codec;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricDynamicRegistryProvider;
+import net.minecraft.client.resources.model.EquipmentClientInfo;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataProvider;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.equipment.EquipmentModel;
+import net.minecraft.data.PackOutput;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.item.equipment.EquipmentAsset;
 import org.jetbrains.annotations.NotNull;
 import terramine.common.item.armor.TerrariaEquipmentModels;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 import java.util.concurrent.CompletableFuture;
 
 public class TerraMineRegistryProviderRun extends FabricDynamicRegistryProvider {
@@ -20,8 +24,7 @@ public class TerraMineRegistryProviderRun extends FabricDynamicRegistryProvider 
     public TerraMineRegistryProviderRun(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
         super(output, registriesFuture);
 
-        // todo: update location to just equipment for 1.21.4 update
-        this.pathProvider = output.createPathProvider(FabricDataOutput.Target.RESOURCE_PACK, "models/equipment");
+        this.pathProvider = output.createPathProvider(FabricDataOutput.Target.RESOURCE_PACK, "equipment");
     }
 
     @Override
@@ -30,13 +33,16 @@ public class TerraMineRegistryProviderRun extends FabricDynamicRegistryProvider 
 
     @Override
     public CompletableFuture<?> run(CachedOutput cachedOutput) {
-        Map<ResourceLocation, EquipmentModel> map = new HashMap<>();
-        TerrariaEquipmentModels.bootstrap((resourceLocation, equipmentModel) -> {
-            if (map.putIfAbsent(resourceLocation, equipmentModel) != null) {
-                throw new IllegalStateException("Tried to register equipment model twice for id: " + resourceLocation);
+        Map<ResourceKey<EquipmentAsset>, EquipmentClientInfo> map = new HashMap<>();
+        TerrariaEquipmentModels.bootstrap((resourceKey, equipmentClientInfo) -> {
+            if (map.putIfAbsent(resourceKey, equipmentClientInfo) != null) {
+                throw new IllegalStateException("Tried to register equipment asset twice for id: " + resourceKey);
             }
         });
-        return DataProvider.saveAll(cachedOutput, EquipmentModel.CODEC, this.pathProvider, map);
+        Codec<EquipmentClientInfo> var10001 = EquipmentClientInfo.CODEC;
+        PackOutput.PathProvider var10002 = this.pathProvider;
+        Objects.requireNonNull(var10002);
+        return DataProvider.saveAll(cachedOutput, var10001, var10002::json, map);
     }
 
     @Override

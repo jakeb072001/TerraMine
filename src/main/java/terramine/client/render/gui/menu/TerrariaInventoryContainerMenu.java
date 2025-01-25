@@ -1,6 +1,5 @@
 package terramine.client.render.gui.menu;
 
-import com.mojang.datafixers.util.Pair;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
@@ -27,16 +26,17 @@ import terramine.common.network.types.ItemNetworkType;
 import terramine.extensions.PlayerStorages;
 
 import java.util.List;
+import java.util.Map;
 
 public class TerrariaInventoryContainerMenu extends AbstractContainerMenu {
-    public static final ResourceLocation EMPTY_ARMOR_SLOT_HELMET = ResourceLocation.withDefaultNamespace("item/empty_armor_slot_helmet");
-    public static final ResourceLocation EMPTY_ARMOR_SLOT_CHESTPLATE = ResourceLocation.withDefaultNamespace("item/empty_armor_slot_chestplate");
-    public static final ResourceLocation EMPTY_ARMOR_SLOT_LEGGINGS = ResourceLocation.withDefaultNamespace("item/empty_armor_slot_leggings");
-    public static final ResourceLocation EMPTY_ARMOR_SLOT_BOOTS = ResourceLocation.withDefaultNamespace("item/empty_armor_slot_boots");
-    public static final ResourceLocation EMPTY_ACCESSORY_SLOT = TerraMine.id("gui/slots/accessory");
-    public static final ResourceLocation EMPTY_ACCESSORY_VANITY_SLOT = TerraMine.id("gui/slots/accessory_vanity");
-    public static final ResourceLocation EMPTY_ACCESSORY_DYE_SLOT = TerraMine.id("gui/slots/accessory_dye");
-    static final ResourceLocation[] TEXTURE_EMPTY_SLOTS;
+    public static final ResourceLocation EMPTY_ARMOR_SLOT_HELMET = ResourceLocation.withDefaultNamespace("container/slot/helmet");
+    public static final ResourceLocation EMPTY_ARMOR_SLOT_CHESTPLATE = ResourceLocation.withDefaultNamespace("container/slot/chestplate");
+    public static final ResourceLocation EMPTY_ARMOR_SLOT_LEGGINGS = ResourceLocation.withDefaultNamespace("container/slot/leggings");
+    public static final ResourceLocation EMPTY_ARMOR_SLOT_BOOTS = ResourceLocation.withDefaultNamespace("container/slot/boots");
+    public static final ResourceLocation EMPTY_ACCESSORY_SLOT = TerraMine.id("slots/accessory");
+    public static final ResourceLocation EMPTY_ACCESSORY_VANITY_SLOT = TerraMine.id("slots/accessory_vanity");
+    public static final ResourceLocation EMPTY_ACCESSORY_DYE_SLOT = TerraMine.id("slots/accessory_dye");
+    private static final Map<EquipmentSlot, ResourceLocation> TEXTURE_EMPTY_SLOTS;
     private static final EquipmentSlot[] SLOT_IDS;
 
     public TerrariaInventoryContainerMenu(final Player player) {
@@ -77,8 +77,8 @@ public class TerrariaInventoryContainerMenu extends AbstractContainerMenu {
                     return (itemStack.isEmpty() || player.isCreative() || !EnchantmentHelper.has(itemStack, EnchantmentEffectComponents.PREVENT_ARMOR_CHANGE)) && super.mayPickup(player);
                 }
 
-                public Pair<ResourceLocation, ResourceLocation> getNoItemIcon() {
-                    return Pair.of(InventoryMenu.BLOCK_ATLAS, TEXTURE_EMPTY_SLOTS[equipmentSlot.getIndex()]);
+                public ResourceLocation getNoItemIcon() {
+                    return TEXTURE_EMPTY_SLOTS.get(equipmentSlot);
                 }
             });
         }
@@ -97,8 +97,8 @@ public class TerrariaInventoryContainerMenu extends AbstractContainerMenu {
 
         // Shield
         this.addSlot(new Slot(inventory, 40, 62, 54) {
-            public Pair<ResourceLocation, ResourceLocation> getNoItemIcon() {
-                return Pair.of(InventoryMenu.BLOCK_ATLAS, InventoryMenu.EMPTY_ARMOR_SLOT_SHIELD);
+            public ResourceLocation getNoItemIcon() {
+                return InventoryMenu.EMPTY_ARMOR_SLOT_SHIELD;
             }
         });
 
@@ -118,8 +118,8 @@ public class TerrariaInventoryContainerMenu extends AbstractContainerMenu {
                 return itemStack.getItem() instanceof ShieldItem || itemStack.getItem() instanceof ShieldAccessoryLikeItem;
             }
 
-            public Pair<ResourceLocation, ResourceLocation> getNoItemIcon() {
-                return Pair.of(InventoryMenu.BLOCK_ATLAS, InventoryMenu.EMPTY_ARMOR_SLOT_SHIELD);
+            public ResourceLocation getNoItemIcon() {
+                return InventoryMenu.EMPTY_ARMOR_SLOT_SHIELD;
             }
         });
         this.addSlot(new Slot(terrariaInventory, 22, 98, 54) {
@@ -136,8 +136,8 @@ public class TerrariaInventoryContainerMenu extends AbstractContainerMenu {
                 return 1;
             }
 
-            public Pair<ResourceLocation, ResourceLocation> getNoItemIcon() {
-                return Pair.of(InventoryMenu.BLOCK_ATLAS, EMPTY_ACCESSORY_DYE_SLOT);
+            public ResourceLocation getNoItemIcon() {
+                return EMPTY_ACCESSORY_DYE_SLOT;
             }
         });
 
@@ -178,9 +178,8 @@ public class TerrariaInventoryContainerMenu extends AbstractContainerMenu {
                     return !itemStack.isEmpty() && super.mayPickup(player);
                 }
 
-                public Pair<ResourceLocation, ResourceLocation> getNoItemIcon() {
-                    // assets\minecraft\atlases\blocks.json
-                    return Pair.of(InventoryMenu.BLOCK_ATLAS, texture);
+                public ResourceLocation getNoItemIcon() {
+                    return texture;
                 }
             });
         }
@@ -214,12 +213,12 @@ public class TerrariaInventoryContainerMenu extends AbstractContainerMenu {
                     return !itemStack.isEmpty() && super.mayPickup(player);
                 }
 
-                public Pair<ResourceLocation, ResourceLocation> getNoItemIcon() {
+                public ResourceLocation getNoItemIcon() {
                     // assets\minecraft\atlases\blocks.json
                     if (isDye) {
-                        return Pair.of(InventoryMenu.BLOCK_ATLAS, EMPTY_ACCESSORY_DYE_SLOT);
+                        return EMPTY_ACCESSORY_DYE_SLOT;
                     }
-                    return Pair.of(InventoryMenu.BLOCK_ATLAS, TEXTURE_EMPTY_SLOTS[equipmentSlot.getIndex()]);
+                    return TEXTURE_EMPTY_SLOTS.get(equipmentSlot);
                 }
             });
         }
@@ -347,7 +346,7 @@ public class TerrariaInventoryContainerMenu extends AbstractContainerMenu {
     }
 
     static {
-        TEXTURE_EMPTY_SLOTS = new ResourceLocation[]{EMPTY_ARMOR_SLOT_BOOTS, EMPTY_ARMOR_SLOT_LEGGINGS, EMPTY_ARMOR_SLOT_CHESTPLATE, EMPTY_ARMOR_SLOT_HELMET};
+        TEXTURE_EMPTY_SLOTS = Map.of(EquipmentSlot.FEET, EMPTY_ARMOR_SLOT_BOOTS, EquipmentSlot.LEGS, EMPTY_ARMOR_SLOT_LEGGINGS, EquipmentSlot.CHEST, EMPTY_ARMOR_SLOT_CHESTPLATE, EquipmentSlot.HEAD, EMPTY_ARMOR_SLOT_HELMET);
         SLOT_IDS = new EquipmentSlot[]{EquipmentSlot.HEAD, EquipmentSlot.CHEST, EquipmentSlot.LEGS, EquipmentSlot.FEET};
     }
 }

@@ -18,9 +18,14 @@ import terramine.common.block.chests.*;
 import terramine.common.block.plants.EvilMushroom;
 import terramine.common.utility.BlockItemRegister;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.function.Function;
 
 public class ModBlocks {
+    public static List<Item> BLOCK_ITEMS = new ArrayList<>();
+    public static List<Item> BLOCK_PLANTS = new ArrayList<>();
+
     // Chests
     public static final BlockItemRegister GOLD_CHEST = new BlockItemRegister("gold_chest", key -> new GoldChestBlock(Properties.of().setId(key).mapColor(MapColor.GOLD).strength(3.0f, 6.0f).sound(SoundType.METAL).requiresCorrectToolForDrops(), false, () -> ModBlockEntityType.GOLD_CHEST));
     public static final BlockItemRegister TRAPPED_GOLD_CHEST = new BlockItemRegister("trapped_gold_chest", key -> new GoldChestBlock(Properties.of().setId(key).mapColor(MapColor.GOLD).strength(3.0f, 6.0f).sound(SoundType.METAL).requiresCorrectToolForDrops(), true, () -> ModBlockEntityType.GOLD_CHEST));
@@ -74,9 +79,9 @@ public class ModBlocks {
 
     // Vegetation
     public static final BlockItemRegister VILE_MUSHROOM = new BlockItemRegister("vile_mushroom", key -> new EvilMushroom(true, Properties.of().setId(key).mapColor(MapColor.COLOR_PURPLE).pushReaction(PushReaction.DESTROY).noCollission().instabreak().sound(SoundType.GRASS).lightLevel(blockState -> 1).hasPostProcess(ModBlocks::always)), 0.65f);
-    public static final BlockItemRegister POTTED_VILE_MUSHROOM = new BlockItemRegister("potted_vile_mushroom", key -> new FlowerPotBlock(VILE_MUSHROOM.BLOCK, BlockBehaviour.Properties.of().setId(key).mapColor(MapColor.COLOR_PURPLE).pushReaction(PushReaction.DESTROY).instabreak().noOcclusion()));
+    public static final BlockItemRegister POTTED_VILE_MUSHROOM = new BlockItemRegister("potted_vile_mushroom", key -> new FlowerPotBlock(VILE_MUSHROOM.BLOCK, BlockBehaviour.Properties.of().setId(key).mapColor(MapColor.COLOR_PURPLE).pushReaction(PushReaction.DESTROY).instabreak().noOcclusion()), false);
     public static final BlockItemRegister VICIOUS_MUSHROOM = new BlockItemRegister("vicious_mushroom", key -> new EvilMushroom(false, Properties.of().setId(key).mapColor(MapColor.COLOR_RED).pushReaction(PushReaction.DESTROY).noCollission().instabreak().sound(SoundType.GRASS).lightLevel(blockState -> 1).hasPostProcess(ModBlocks::always)), 0.65f);
-    public static final BlockItemRegister POTTED_VICIOUS_MUSHROOM = new BlockItemRegister("potted_vicious_mushroom", key -> new FlowerPotBlock(VICIOUS_MUSHROOM.BLOCK, BlockBehaviour.Properties.of().setId(key).mapColor(MapColor.COLOR_RED).pushReaction(PushReaction.DESTROY).instabreak().noOcclusion()));
+    public static final BlockItemRegister POTTED_VICIOUS_MUSHROOM = new BlockItemRegister("potted_vicious_mushroom", key -> new FlowerPotBlock(VICIOUS_MUSHROOM.BLOCK, BlockBehaviour.Properties.of().setId(key).mapColor(MapColor.COLOR_RED).pushReaction(PushReaction.DESTROY).instabreak().noOcclusion()), false);
 
     // Corruption
     public static final BlockItemRegister CORRUPTED_GRASS = new BlockItemRegister("corrupted_grass", key -> new CorruptedGrass(Properties.ofFullCopy(Blocks.GRASS_BLOCK).setId(key).randomTicks()));

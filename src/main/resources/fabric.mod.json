@@ -45,9 +45,6 @@
     ],
     "rei_client": [
       "terramine.client.integrations.REIPlugin"
-    ],
-    "dynamiclights": [
-      "terramine.client.integrations.DynamicLightPlugin"
     ]
   },
   "mixins": [
@@ -56,15 +53,18 @@
   "accessWidener": "terramine.accesswidener",
 
   "depends": {
-    "minecraft": ">=1.20.6",
-    "fabricloader": ">=0.14.0",
-    "fabric": ">=0.83.0",
-    "expandability": ">=9.0.0",
-    "terrablender": ">=3.0.0.0",
-    "cardinal-components-base": ">=5.0.0",
-    "cardinal-components-entity": ">=5.0.0",
-    "cloth-config2": ">=11.0",
-    "architectury": ">=9.0.0"
+    "minecraft": ">=1.21.4",
+    "fabricloader": ">=0.16.9",
+    "fabric": ">=0.110.5",
+    "expandability": ">=13.0.0",
+    "terrablender": ">=4.3.0.0",
+    "cardinal-components-base": ">=6.2.0",
+    "cardinal-components-entity": ">=6.2.0",
+    "cardinal-components-level": ">=6.2.0",
+    "cardinal-components-world": ">=6.2.0",
+    "libgui": ">=12.0.1",
+    "cloth-config2": ">=17.0.142",
+    "architectury": ">=15.0.1"
   },
   "suggests": {
     "modmenu": "*"

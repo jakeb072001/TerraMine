@@ -9,6 +9,7 @@ import net.fabricmc.fabric.api.loot.v2.LootTableEvents;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.fabricmc.loader.api.FabricLoader;
 import net.fabricmc.loader.api.ModContainer;
+import net.minecraft.client.color.item.ItemTintSources;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.stats.StatFormatter;
@@ -22,6 +23,7 @@ import terrablender.api.Regions;
 import terrablender.api.SurfaceRuleManager;
 import terrablender.api.TerraBlenderApi;
 import terrablender.worldgen.TBSurfaceRuleData;
+import terramine.client.render.color.TerrariaDye;
 import terramine.common.compat.CompatHandler;
 import terramine.common.config.ConfigHelper;
 import terramine.common.config.ModConfig;
@@ -80,6 +82,7 @@ public class TerraMine implements ModInitializer, TerraBlenderApi {
 		ModProfessions.fillTradeData();
 		ModParticles.BLUE_POOF.toString();
 		ModCommands.registerRules();
+		ItemTintSources.ID_MAPPER.put(id("terraria_dye"), TerrariaDye.MAP_CODEC);
 		CommandRegistrationCallback.EVENT.register((dispatcher, context, selection) -> {
 			ModCommands.registerCommands(dispatcher);
 		});

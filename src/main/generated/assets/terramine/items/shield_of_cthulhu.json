@@ -1,0 +1,14 @@
+{
+  "model": {
+    "type": "minecraft:condition",
+    "on_false": {
+      "type": "minecraft:model",
+      "model": "terramine:item/shield_of_cthulhu"
+    },
+    "on_true": {
+      "type": "minecraft:model",
+      "model": "terramine:item/shield_of_cthulhu_blocking"
+    },
+    "property": "minecraft:using_item"
+  }
+}

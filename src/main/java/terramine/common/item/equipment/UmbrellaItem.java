@@ -8,14 +8,14 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
-import terramine.client.render.HeldItemModels;
 import terramine.common.init.ModItems;
 import terramine.common.item.TerrariaItem;
 
 public class UmbrellaItem extends TerrariaItem {
 
+	// todo: use the new item model definition json files
 	public UmbrellaItem(ResourceKey<Item> key) {
-		super(new Properties().setId(key).stacksTo(1).rarity(Rarity.RARE).fireResistant().overrideModel(HeldItemModels.UMBRELLA_HELD_MODEL), false);
+		super(new Properties().setId(key).stacksTo(1).rarity(Rarity.RARE).fireResistant(), false);
 	}
 
 	public static HeldStatus getHeldStatusForHand(LivingEntity entity, InteractionHand hand) {
@@ -25,19 +25,6 @@ public class UmbrellaItem extends TerrariaItem {
 
 		if (entity.isUsingItem() && entity.getUsedItemHand() == hand && !entity.getUseItem().isEmpty()
 				&& entity.getUseItem().getUseAnimation() == ItemUseAnimation.BLOCK) {
-			return HeldStatus.BLOCKING;
-		}
-
-		return HeldStatus.HELD_UP;
-	}
-
-	public static HeldStatus getHeldStatusForHand(ItemStack itemStack, boolean isUsingItem, InteractionHand usedItemHand, InteractionHand hand) {
-		if (itemStack.getItem() != ModItems.UMBRELLA) {
-			return HeldStatus.NONE;
-		}
-
-		if (isUsingItem && usedItemHand == hand && !itemStack.isEmpty()
-				&& itemStack.getUseAnimation() == ItemUseAnimation.BLOCK) {
 			return HeldStatus.BLOCKING;
 		}
 

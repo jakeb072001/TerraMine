@@ -1,0 +1,6 @@
+{
+  "model": {
+    "type": "minecraft:model",
+    "model": "terramine:block/meteorite_block"
+  }
+}

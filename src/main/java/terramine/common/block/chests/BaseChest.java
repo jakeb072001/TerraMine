@@ -78,11 +78,6 @@ public class BaseChest extends ChestBlock {
     }
 
     @Override
-    public @NotNull RenderShape getRenderShape(@NotNull BlockState blockState) {
-        return RenderShape.ENTITYBLOCK_ANIMATED;
-    }
-
-    @Override
     public BlockState getStateForPlacement(BlockPlaceContext blockPlaceContext) {
         Direction direction = blockPlaceContext.getHorizontalDirection().getOpposite();
         FluidState fluidState = blockPlaceContext.getLevel().getFluidState(blockPlaceContext.getClickedPos());

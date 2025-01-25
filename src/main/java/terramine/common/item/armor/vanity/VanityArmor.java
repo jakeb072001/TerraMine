@@ -12,8 +12,8 @@ import terramine.common.item.armor.TerrariaArmor;
 import java.util.List;
 
 public class VanityArmor extends TerrariaArmor {
-    public VanityArmor(String armorType, ArmorMaterial holder, ArmorType type, Properties properties) {
-        super(armorType, holder, type, properties);
+    public VanityArmor(ArmorMaterial holder, ArmorType type, Properties properties) {
+        super("vanity", holder, type, properties);
     }
 
     @Override

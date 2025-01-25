@@ -66,7 +66,6 @@ public class GloveAccessoryRenderer implements AccessoryRenderer {
         ArmsModel model = getModel(hasSlimArms);
 
         model.setupAnim(new PlayerRenderState());
-        //model.prepareMobModel(player, limbSwing, limbSwingAmount, partialTicks);
         AccessoryRenderer.followBodyRotations(player, model);
 
         if (stack.getItem() instanceof AccessoryTerrariaItem item) {

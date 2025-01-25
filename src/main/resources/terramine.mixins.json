@@ -74,10 +74,8 @@
     "item.accessories.terrasparkboots.client.GuiMixin",
     "item.accessories.umbrella.client.AbstractZombieModelMixin",
     "item.accessories.umbrella.client.HumanoidModelMixin",
-    "item.accessories.umbrella.client.PlayerModelMixin",
     "item.accessories.walljump.PlayerMixin",
     "item.accessories.weatherradio.client.GuiMixin",
-    "item.client.ItemRendererMixin",
     "player.CreativeModeInventoryScreenMixin",
     "player.EntityRendererMixin",
     "player.InventoryScreenMixin"

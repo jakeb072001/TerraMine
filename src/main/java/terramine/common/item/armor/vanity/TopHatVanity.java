@@ -10,8 +10,8 @@ import terramine.common.init.ModModelLayers;
 
 // todo: custom models don't work on server
 public class TopHatVanity extends VanityArmor {
-    public TopHatVanity(String armorType, ArmorMaterial armorMaterial, ArmorType type, Properties properties) {
-        super(armorType, armorMaterial, type, properties);
+    public TopHatVanity(ArmorMaterial armorMaterial, ArmorType type, Properties properties) {
+        super(armorMaterial, type, properties);
     }
 
     @Environment(EnvType.CLIENT)

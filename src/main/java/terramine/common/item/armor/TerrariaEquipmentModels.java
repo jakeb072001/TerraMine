@@ -1,21 +1,29 @@
 package terramine.common.item.armor;
 
+import net.minecraft.client.resources.model.EquipmentClientInfo;
+import net.minecraft.core.Registry;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.equipment.EquipmentModel;
+import net.minecraft.world.item.equipment.EquipmentAsset;
 
 import java.util.function.BiConsumer;
 
 import static terramine.TerraMine.id;
 
 public interface TerrariaEquipmentModels {
-    ResourceLocation VANITY = id("vanity");
-    ResourceLocation SHADOW = id("shadow");
-    ResourceLocation ANCIENT_SHADOW = id("ancient_shadow");
-    ResourceLocation CRIMSON = id("crimson");
-    ResourceLocation METEOR = id("meteor");
-    ResourceLocation MOLTEN = id("molten");
+    ResourceKey<? extends Registry<EquipmentAsset>> ROOT_ID = ResourceKey.createRegistryKey(ResourceLocation.withDefaultNamespace("equipment_asset"));
+    ResourceKey<EquipmentAsset> VANITY = createId("vanity");
+    ResourceKey<EquipmentAsset> SHADOW = createId("shadow");
+    ResourceKey<EquipmentAsset> ANCIENT_SHADOW = createId("ancient_shadow");
+    ResourceKey<EquipmentAsset> CRIMSON = createId("crimson");
+    ResourceKey<EquipmentAsset> METEOR = createId("meteor");
+    ResourceKey<EquipmentAsset> MOLTEN = createId("molten");
 
-    static void bootstrap(BiConsumer<ResourceLocation, EquipmentModel> biConsumer) {
+    static ResourceKey<EquipmentAsset> createId(String string) {
+        return ResourceKey.create(ROOT_ID, id(string));
+    }
+
+    static void bootstrap(BiConsumer<ResourceKey<EquipmentAsset>, EquipmentClientInfo> biConsumer) {
         biConsumer.accept(VANITY, onlyHumanoid("vanity"));
         biConsumer.accept(SHADOW, onlyHumanoid("shadow"));
         biConsumer.accept(ANCIENT_SHADOW, onlyHumanoid("ancient_shadow"));
@@ -24,7 +32,7 @@ public interface TerrariaEquipmentModels {
         biConsumer.accept(MOLTEN, onlyHumanoid("molten"));
     }
 
-    private static EquipmentModel onlyHumanoid(String string) {
-        return EquipmentModel.builder().addHumanoidLayers(id(string)).build();
+    private static EquipmentClientInfo onlyHumanoid(String string) {
+        return EquipmentClientInfo.builder().addHumanoidLayers(id(string)).build();
     }
 }

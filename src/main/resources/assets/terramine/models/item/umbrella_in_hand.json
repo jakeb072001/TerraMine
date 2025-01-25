@@ -1,11 +1,3 @@
 {
-  "parent": "terramine:item/umbrella_base",
-  "overrides": [
-    {
-      "predicate": {
-        "blocking": 1
-      },
-      "model": "terramine:item/umbrella_blocking"
-    }
-  ]
+  "parent": "terramine:item/umbrella_base"
 }

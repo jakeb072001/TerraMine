@@ -12,6 +12,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ShieldItem;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Constant;
 import terramine.common.item.accessories.ShieldAccessoryLikeItem;
 import terramine.extensions.PlayerStorages;
 
@@ -26,20 +27,31 @@ public abstract class ItemInHandRendererMixin {
         ItemStack itemStack2 = itemStack;
 
         if (interactionHand == InteractionHand.OFF_HAND) {
-            Item checkItem = abstractClientPlayer.getUseItem().getItem();
-            if (checkItem instanceof ShieldItem || checkItem instanceof ShieldAccessoryLikeItem) {
-                if (((PlayerStorages) abstractClientPlayer).getTerrariaInventory().getItem(21) != ItemStack.EMPTY) {
-                    abstractClientPlayer.useItem = ((PlayerStorages) abstractClientPlayer).getTerrariaInventory().getItem(21);
-                }
-            }
-            checkItem = itemStack.getItem();
+            Item checkItem = itemStack.getItem();
             if (checkItem instanceof ShieldItem || checkItem instanceof ShieldAccessoryLikeItem) {
                 if (((PlayerStorages) abstractClientPlayer).getTerrariaInventory().getItem(21) != ItemStack.EMPTY) {
                     itemStack2 = ((PlayerStorages) abstractClientPlayer).getTerrariaInventory().getItem(21);
                 }
             }
         }
+        if (abstractClientPlayer.getUsedItemHand() == InteractionHand.OFF_HAND) {
+            Item checkItem = abstractClientPlayer.getUseItem().getItem();
+            if (checkItem instanceof ShieldItem || checkItem instanceof ShieldAccessoryLikeItem) {
+                if (((PlayerStorages) abstractClientPlayer).getTerrariaInventory().getItem(21) != ItemStack.EMPTY) {
+                    abstractClientPlayer.useItem = ((PlayerStorages) abstractClientPlayer).getTerrariaInventory().getItem(21);
+                }
+            }
+        }
 
         original.call(instance, abstractClientPlayer, f, g, interactionHand, h, itemStack2, i, poseStack, multiBufferSource, j);
+    }
+
+    // Copied from FabricShieldLib, credits to Starexify (Nova on disc) for the fix (I was going to change the json rotation which would probably be better but that would have taken forever)
+    @WrapOperation(
+            method = "renderArmWithItem",
+            constant = @Constant(classValue = ShieldItem.class)
+    )
+    private boolean wrapInstanceCheck(Object instance, Operation<Boolean> original) {
+        return original.call(instance) || instance instanceof ShieldAccessoryLikeItem;
     }
 }

@@ -1,0 +1,6 @@
+{
+  "match": {
+    "type": "terramine:laser"
+  },
+  "luminance": 5
+}

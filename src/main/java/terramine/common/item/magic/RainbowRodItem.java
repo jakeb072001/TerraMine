@@ -9,7 +9,6 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
-import terramine.client.render.HeldItemModels;
 import terramine.common.init.ModEntities;
 import terramine.common.init.ModSoundEvents;
 import terramine.common.utility.MagicMissileHelper;
@@ -17,7 +16,7 @@ import terramine.common.utility.MagicMissileHelper;
 public class RainbowRodItem extends MagicTerrariaItem {
 
     public RainbowRodItem(ResourceKey<Item> key) {
-        super(key, HeldItemModels.RAINBOW_ROD_HELD_MODEL);
+        super(key);
         this.setVars(6, 21);
     }
 
