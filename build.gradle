@@ -91,7 +91,7 @@ dependencies {
     modImplementation include("org.ladysnake.cardinal-components-api:cardinal-components-entity:${project.cca_version}")
     modImplementation include("org.ladysnake.cardinal-components-api:cardinal-components-level:${project.cca_version}")
     modImplementation include("org.ladysnake.cardinal-components-api:cardinal-components-world:${project.cca_version}")
-    modImplementation include("be.florens:expandability-fabric:${project.expandability_version}")
+    modImplementation include("com.github.jakeb072001.ExpandAbility:expandability-fabric:${project.expandability_version}")
     modImplementation include("io.github.cottonmc:LibGui:${project.libgui_version}+${project.fake_minecraft_version}")
 
     // Optional
