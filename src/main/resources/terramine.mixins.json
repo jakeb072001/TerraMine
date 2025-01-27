@@ -9,7 +9,6 @@
     "blocks.DeadBushBlockMixin",
     "blocks.SnowLayerBlockMixin",
     "blocks.SugarCaneBlockMixin",
-    "compat.origins.ConditionFactoryAccessor",
     "event.EnchantmentHelperMixin",
     "event.LivingEntitiesMixin",
     "event.LivingEntityMixin",

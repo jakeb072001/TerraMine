@@ -1,6 +1,5 @@
 package terramine.common.compat;
 
-import com.williambl.haema.api.VampireBurningEvents;
 import net.fabricmc.fabric.api.util.TriState;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
@@ -9,8 +8,10 @@ import terramine.common.item.equipment.UmbrellaItem;
 
 public class HaemaCompat implements CompatHandler {
 
+
 	@Override
 	public void run() {
+		/**
 		VampireBurningEvents.INSTANCE.getVETO().register(new VampireBurningEvents.Veto() {
 			@NotNull
 			@Override
@@ -24,6 +25,7 @@ public class HaemaCompat implements CompatHandler {
 				return 20;
 			}
 		});
+		 **/
 	}
 
 	@Override
