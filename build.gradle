@@ -105,18 +105,18 @@ dependencies {
     //modImplementation "curse.maven:ftb-library-fabric-438495:${project.ftb_library_version}"
 
     // Compat
-    modCompileOnly("com.github.apace100:origins-fabric:v${project.origins_version}") {
-        transitive = false
-    }
-    modCompileOnly("com.github.apace100:apoli:v${project.apoli_version}") {
-        transitive = false
-    }
-    modCompileOnly("com.github.apace100:calio:v${project.calio_version}") {
-        transitive = false
-    }
-    modCompileOnly("curse.maven:haema-391257:${project.haema_version}") {
-        transitive = false
-    }
+    //modCompileOnly("com.github.apace100:origins-fabric:v${project.origins_version}") {
+    //    transitive = false
+    //}
+    //modCompileOnly("com.github.apace100:apoli:v${project.apoli_version}") {
+    //    transitive = false
+    //}
+    //modCompileOnly("com.github.apace100:calio:v${project.calio_version}") {
+    //    transitive = false
+    //}
+    //modCompileOnly("curse.maven:haema-391257:${project.haema_version}") {
+    //    transitive = false
+    //}
     modCompileOnly "mcp.mobius.waila:wthit-api:fabric-${project.wthit_version}"
 }
 
