@@ -4,11 +4,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [1.8.0-1.21] - 2024-12-30
-### Added
-- Eye of Cthulhu and Eater of Worlds //-- Not yet started
-- Treasure Bags
-- Shield of Cthulhu and Worm Scarf //-- Not yet started
+## [1.7.6-1.20.6] - 2025-02-01
+### Fixed
+- Networking issues (oops, guess i forgot to test)
+
+## [1.7.5-1.20.6] - 2025-01-08
+### Fixed
+- Crash caused by Devourer entity
 
 ## [1.7.4-1.20.6] - 2024-11-22
 ### Changed
@@ -290,7 +292,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Initial release
 
-[1.8.0-1.20.6]: https://github.com/jakeb072001/TerraMine/compare/v1.7.4-1.20.6...v1.8.0-1.21
+[1.7.6-1.20.6]: https://github.com/jakeb072001/TerraMine/compare/v1.7.5-1.20.6...v1.7.6-1.20.6
+[1.7.5-1.20.6]: https://github.com/jakeb072001/TerraMine/compare/v1.7.4-1.20.6...v1.7.5-1.20.6
 [1.7.4-1.20.6]: https://github.com/jakeb072001/TerraMine/compare/v1.7.4-1.20.1...v1.7.4-1.20.6
 [1.7.4-1.20.1]: https://github.com/jakeb072001/TerraMine/compare/v1.7.3-1.20.1...v1.7.4-1.20.1
 [1.7.3-1.20.1]: https://github.com/jakeb072001/TerraMine/compare/v1.7.2-1.20.1...v1.7.3-1.20.1
