@@ -7,6 +7,7 @@ import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.phys.Vec3;
 import terramine.common.init.ModComponents;
 import terramine.common.init.ModItems;
@@ -16,6 +17,9 @@ import terramine.common.network.types.DoubleNetworkType;
 import terramine.common.network.types.FloatSoundNetworkType;
 import terramine.common.network.types.ParticleNetworkType;
 import terramine.common.utility.equipmentchecks.CloudBottleEquippedCheck;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class RocketBootHelper {
     private SimpleParticleType particle1;
@@ -120,15 +124,15 @@ public class RocketBootHelper {
                 if (InputHandler.isHoldingJump(player)) {
                     fly(player, Math.abs(Math.min(motionY + currentAccel, currentSpeedVertical)));
                     if ((wings && soundTimer >= 6) || (!wings && soundTimer >= 4)) {
-                        ClientPlayNetworking.send(new FloatSoundNetworkType(soundVolume, soundPitch, sound).setCustomType(ServerPacketHandler.ROCKET_BOOTS_SOUND_PACKET_ID));
+                        ClientPlayNetworking.send(new FloatSoundNetworkType(soundVolume, soundPitch, sound, ServerPacketHandler.ROCKET_BOOTS_SOUND_PACKET_ID));
                         soundTimer = 0;
                     }
 
                     if (particle1 != null) {
-                        ClientPlayNetworking.send(new ParticleNetworkType(particle1).setCustomType(ServerPacketHandler.ROCKET_BOOTS_PARTICLE_PACKET_ID));
+                        ClientPlayNetworking.send(new ParticleNetworkType(particle1, ServerPacketHandler.ROCKET_BOOTS_PARTICLE_PACKET_ID));
                     }
                     if (particle2 != null) {
-                        ClientPlayNetworking.send(new ParticleNetworkType(particle2).setCustomType(ServerPacketHandler.ROCKET_BOOTS_PARTICLE_PACKET_ID));
+                        ClientPlayNetworking.send(new ParticleNetworkType(particle2, ServerPacketHandler.ROCKET_BOOTS_PARTICLE_PACKET_ID));
                     }
                 }
 
@@ -175,43 +179,30 @@ public class RocketBootHelper {
         passedData.writeDouble(motion.x());
         passedData.writeDouble(y);
         passedData.writeDouble(motion.z());
-        ClientPlayNetworking.send(new DoubleNetworkType(motion.x(), y, motion.z()).setCustomType(ServerPacketHandler.PLAYER_MOVEMENT_PACKET_ID));
+        ClientPlayNetworking.send(new DoubleNetworkType(motion.x(), y, motion.z(), ServerPacketHandler.PLAYER_MOVEMENT_PACKET_ID));
         player.setDeltaMovement(motion.x(), y, motion.z());
     }
 
-    private boolean priorityOrder(Player player, int priority) { // todo: change to a better system, don't know how and it's not super important but would be cleaner and easier to manage i would think
-        int priorityOrder = 0;
-        if (AccessoriesHelper.isEquipped(ModItems.ROCKET_BOOTS, player)) {
-            priorityOrder = 1;
-        }
-        if (AccessoriesHelper.isEquipped(ModItems.SPECTRE_BOOTS, player)) {
-            priorityOrder = 2;
-        }
-        if (AccessoriesHelper.isEquipped(ModItems.FAIRY_BOOTS, player)) {
-            priorityOrder = 3;
-        }
-        if (AccessoriesHelper.isEquipped(ModItems.LIGHTNING_BOOTS, player)) {
-            priorityOrder = 4;
-        }
-        if (AccessoriesHelper.isEquipped(ModItems.FROSTSPARK_BOOTS, player)) {
-            priorityOrder = 5;
-        }
-        if (AccessoriesHelper.isEquipped(ModItems.TERRASPARK_BOOTS, player)) {
-            priorityOrder = 6;
-        }
-        if (AccessoriesHelper.isEquipped(ModItems.FLEDGLING_WINGS, player)) {
-            priorityOrder = 7;
-        }
-        if (AccessoriesHelper.isEquipped(ModItems.ANGEL_WINGS, player)) {
-            priorityOrder = 8;
-        }
-        if (AccessoriesHelper.isEquipped(ModItems.DEMON_WINGS, player)) {
-            priorityOrder = 9;
-        }
-        if (AccessoriesHelper.isEquipped(ModItems.LEAF_WINGS, player)) {
-            priorityOrder = 10;
-        }
+    private boolean priorityOrder(Player player, int priority) {
+        Map<Item, Integer> itemPriorityMap = new HashMap<>() {{
+            put(ModItems.ROCKET_BOOTS, 1);
+            put(ModItems.SPECTRE_BOOTS, 2);
+            put(ModItems.FAIRY_BOOTS, 3);
+            put(ModItems.LIGHTNING_BOOTS, 4);
+            put(ModItems.FROSTSPARK_BOOTS, 5);
+            put(ModItems.TERRASPARK_BOOTS, 6);
+            put(ModItems.FLEDGLING_WINGS, 7);
+            put(ModItems.ANGEL_WINGS, 8);
+            put(ModItems.DEMON_WINGS, 9);
+            put(ModItems.LEAF_WINGS, 10);
+        }};
 
-        return priority >= priorityOrder;
+        int maxPriority = itemPriorityMap.entrySet().stream()
+                .filter(entry -> AccessoriesHelper.isEquipped(entry.getKey(), player))
+                .mapToInt(Map.Entry::getValue)
+                .max()
+                .orElse(0);
+
+        return priority >= maxPriority;
     }
 }

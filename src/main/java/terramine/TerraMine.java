@@ -1,5 +1,6 @@
 package terramine;
 
+import com.google.common.collect.Lists;
 import dev.architectury.event.events.common.PlayerEvent;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
@@ -9,7 +10,6 @@ import net.fabricmc.fabric.api.loot.v2.LootTableEvents;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.fabricmc.loader.api.FabricLoader;
 import net.fabricmc.loader.api.ModContainer;
-import net.minecraft.client.color.item.ItemTintSources;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.stats.StatFormatter;
@@ -23,7 +23,6 @@ import terrablender.api.Regions;
 import terrablender.api.SurfaceRuleManager;
 import terrablender.api.TerraBlenderApi;
 import terrablender.worldgen.TBSurfaceRuleData;
-import terramine.client.render.color.TerrariaDye;
 import terramine.common.compat.CompatHandler;
 import terramine.common.config.ConfigHelper;
 import terramine.common.config.ModConfig;
@@ -38,7 +37,6 @@ import terramine.common.world.biome.BiomeSurfaceRules;
 import terramine.datagen.ModFeatures;
 import terramine.extensions.PlayerStorages;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -82,7 +80,6 @@ public class TerraMine implements ModInitializer, TerraBlenderApi {
 		ModProfessions.fillTradeData();
 		ModParticles.BLUE_POOF.toString();
 		ModCommands.registerRules();
-		ItemTintSources.ID_MAPPER.put(id("terraria_dye"), TerrariaDye.MAP_CODEC);
 		CommandRegistrationCallback.EVENT.register((dispatcher, context, selection) -> {
 			ModCommands.registerCommands(dispatcher);
 		});
@@ -124,24 +121,25 @@ public class TerraMine implements ModInitializer, TerraBlenderApi {
 
 	// maybe move into inventory itself or something? works perfectly like this though, so I'll just leave it for now
 	// probably not the best way of doing this, but it works for now, maybe look into improving later though
+	// todo: maybe move to using lists instead of sending so many packets
 	private void syncInventory(ServerPlayer player) {
-		TerrariaInventory terrariaInventory = ((PlayerStorages)player).getTerrariaInventory();
-		List<ItemStack> localItems = new ArrayList<>(List.of());
-		List<ItemStack> remoteItems = new ArrayList<>(List.of());
-		for (int i = 0; i < terrariaInventory.getContainerSize(); i++) {
-			localItems.add(terrariaInventory.getItem(i));
-		}
+		PlayerStorages playerStorage = (PlayerStorages) player;
+		TerrariaInventory terrariaInventory = playerStorage.getTerrariaInventory();
+
 		for (ServerPlayer otherPlayer : player.serverLevel().players()) {
-			TerrariaInventory otherTerrariaInventory = ((PlayerStorages)otherPlayer).getTerrariaInventory();
+			PlayerStorages otherStorage = (PlayerStorages) otherPlayer;
+			TerrariaInventory otherTerrariaInventory = otherStorage.getTerrariaInventory();
 			for (int i = 0; i < otherTerrariaInventory.getContainerSize(); i++) {
-				remoteItems.add(otherTerrariaInventory.getItem(i));
+				ServerPlayNetworking.send(player, new ItemNetworkType(otherTerrariaInventory.getItem(i), i, otherPlayer.getUUID(), ServerPacketHandler.UPDATE_INVENTORY_PACKET_ID));
+			}
+			if (player != otherPlayer) {
+				for (int i = 0; i < terrariaInventory.getContainerSize(); i++) {
+					ServerPlayNetworking.send(otherPlayer, new ItemNetworkType(terrariaInventory.getItem(i), i, player.getUUID(), ServerPacketHandler.UPDATE_INVENTORY_PACKET_ID));
+				}
 			}
 
-			ServerPlayNetworking.send(player, new ItemNetworkType(remoteItems, 0, otherPlayer.getUUID()).setCustomType(ServerPacketHandler.SETUP_INVENTORY_PACKET_ID));
-			ServerPlayNetworking.send(otherPlayer, new ItemNetworkType(localItems, 0, player.getUUID()).setCustomType(ServerPacketHandler.SETUP_INVENTORY_PACKET_ID));
-
 			for (int i = 0; i < 7; i++) {
-				((PlayerStorages) otherPlayer).setSlotVisibility(i, ((PlayerStorages) otherPlayer).getSlotVisibility(i));
+				otherStorage.setSlotVisibility(i, otherStorage.getSlotVisibility(i));
 			}
 		}
 	}

@@ -32,7 +32,7 @@ public class WaterChestBlock extends BaseChest {
     }
 
     @Override
-    public BlockEntityType<? extends WaterChestEntity> blockEntityType() {
+    public @NotNull BlockEntityType<? extends WaterChestEntity> blockEntityType() {
         return (BlockEntityType)this.blockEntityType.get();
     }
 }

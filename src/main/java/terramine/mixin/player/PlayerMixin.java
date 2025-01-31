@@ -119,7 +119,7 @@ public abstract class PlayerMixin extends LivingEntity implements PlayerStorages
 		if (!this.isLocalPlayer()) {
 			if (getServer() != null) {
 				for (ServerPlayer otherPlayer : getServer().getLevel(level().dimension()).players()) {
-					ServerPlayNetworking.send(otherPlayer, new IntBoolUUIDNetworkType(slot, 0, visible, getUUID()).setCustomType(ServerPacketHandler.UPDATE_ACCESSORY_VISIBILITY_PACKET_ID));
+					ServerPlayNetworking.send(otherPlayer, new IntBoolUUIDNetworkType(slot, 0, visible, getUUID(), ServerPacketHandler.UPDATE_ACCESSORY_VISIBILITY_PACKET_ID));
 				}
 			}
 		}

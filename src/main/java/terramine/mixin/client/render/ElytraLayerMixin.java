@@ -40,6 +40,7 @@ import terramine.extensions.PlayerStorages;
 import java.util.Iterator;
 import java.util.List;
 
+// todo: if using shaders and dye is applied to armour or elytra, then they just wont render
 @Mixin(WingsLayer.class)
 public abstract class ElytraLayerMixin<S extends HumanoidRenderState, M extends EntityModel<S>> extends RenderLayer<S, M> {
     @Unique

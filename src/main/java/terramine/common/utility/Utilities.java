@@ -236,7 +236,7 @@ public class Utilities { // todo: need to fix bug with magic missile where the p
 
     @Environment(EnvType.CLIENT)
     private static void sendDash(Item item) {
-        ClientPlayNetworking.send(new ItemNetworkType(List.of(item.getDefaultInstance()), 0, UUID.randomUUID()).setCustomType(ServerPacketHandler.DASH_PACKET_ID));
+        ClientPlayNetworking.send(new ItemNetworkType(item.getDefaultInstance(), 0, UUID.randomUUID(), ServerPacketHandler.DASH_PACKET_ID));
     }
 
     @Environment(EnvType.CLIENT)

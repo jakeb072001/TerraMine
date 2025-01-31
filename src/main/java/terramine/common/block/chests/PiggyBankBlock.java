@@ -59,7 +59,7 @@ public class PiggyBankBlock extends BaseChest {
     }
 
     @Override
-    public BlockEntityType<? extends PiggyBankEntity> blockEntityType() {
+    public @NotNull BlockEntityType<? extends PiggyBankEntity> blockEntityType() {
         return (BlockEntityType)this.blockEntityType.get();
     }
 }

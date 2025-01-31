@@ -32,7 +32,7 @@ public class SandstoneChestBlock extends BaseChest {
     }
 
     @Override
-    public BlockEntityType<? extends SandstoneChestEntity> blockEntityType() {
+    public @NotNull BlockEntityType<? extends SandstoneChestEntity> blockEntityType() {
         return (BlockEntityType)this.blockEntityType.get();
     }
 }

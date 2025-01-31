@@ -32,7 +32,7 @@ public class GoldChestBlock extends BaseChest {
     }
 
     @Override
-    public BlockEntityType<? extends GoldChestEntity> blockEntityType() {
+    public @NotNull BlockEntityType<? extends GoldChestEntity> blockEntityType() {
         return (BlockEntityType)this.blockEntityType.get();
     }
 }

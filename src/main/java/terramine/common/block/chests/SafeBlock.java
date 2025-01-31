@@ -30,7 +30,7 @@ public class SafeBlock extends BaseChest {
     }
 
     @Override
-    public VoxelShape getShape(@NotNull BlockState blockState, @NotNull BlockGetter blockGetter, @NotNull BlockPos blockPos, @NotNull CollisionContext collisionContext) {
+    public @NotNull VoxelShape getShape(@NotNull BlockState blockState, @NotNull BlockGetter blockGetter, @NotNull BlockPos blockPos, @NotNull CollisionContext collisionContext) {
         return SHAPE;
     }
 
@@ -56,7 +56,7 @@ public class SafeBlock extends BaseChest {
     }
 
     @Override
-    public BlockEntityType<? extends SafeEntity> blockEntityType() {
+    public @NotNull BlockEntityType<? extends SafeEntity> blockEntityType() {
         return (BlockEntityType)this.blockEntityType.get();
     }
 }

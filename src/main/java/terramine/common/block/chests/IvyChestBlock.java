@@ -32,7 +32,7 @@ public class IvyChestBlock extends BaseChest {
     }
 
     @Override
-    public BlockEntityType<? extends IvyChestEntity> blockEntityType() {
+    public @NotNull BlockEntityType<? extends IvyChestEntity> blockEntityType() {
         return (BlockEntityType)this.blockEntityType.get();
     }
 }

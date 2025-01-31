@@ -32,7 +32,7 @@ public class ShadowChestBlock extends BaseChest {
     }
 
     @Override
-    public BlockEntityType<? extends ShadowChestEntity> blockEntityType() {
+    public @NotNull BlockEntityType<? extends ShadowChestEntity> blockEntityType() {
         return (BlockEntityType)this.blockEntityType.get();
     }
 }

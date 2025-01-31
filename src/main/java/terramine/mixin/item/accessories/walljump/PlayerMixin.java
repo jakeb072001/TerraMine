@@ -19,6 +19,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -38,13 +39,21 @@ import java.util.UUID;
 @Mixin(LocalPlayer.class)
 public abstract class PlayerMixin extends AbstractClientPlayer {
 
+    @Unique
     public int ticksWallClinged;
+    @Unique
     private int ticksKeyDown;
+    @Unique
     private double clingX;
+    @Unique
     private double clingZ;
+    @Unique
     private double lastJumpY = Double.MAX_VALUE;
+    @Unique
     private Set<Direction> walls = new HashSet<>();
+    @Unique
     private Set<Direction> staleWalls = new HashSet<>();
+    @Unique
     private final Minecraft mc = Minecraft.getInstance();
 
     public PlayerMixin(ClientLevel clientLevel, GameProfile gameProfile) {
@@ -94,7 +103,7 @@ public abstract class PlayerMixin extends AbstractClientPlayer {
                     this.spawnWallParticle(this.getWallPos());
 
                     ModComponents.MOVEMENT_ORDER.get(this).setWallJumped(true);
-                    ClientPlayNetworking.send(new IntBoolUUIDNetworkType(0, 0, true, UUID.randomUUID()).setCustomType(ServerPacketHandler.WALL_JUMP_PACKET_ID));
+                    ClientPlayNetworking.send(new IntBoolUUIDNetworkType(0, 0, true, UUID.randomUUID(), ServerPacketHandler.WALL_JUMP_PACKET_ID));
                 }
             } else if (this.ticksKeyDown > 0 && this.ticksKeyDown < 4 && !this.walls.isEmpty()) {
                 this.ticksWallClinged = 1;
@@ -105,7 +114,7 @@ public abstract class PlayerMixin extends AbstractClientPlayer {
                 this.spawnWallParticle(this.getWallPos());
 
                 ModComponents.MOVEMENT_ORDER.get(this).setWallJumped(true);
-                ClientPlayNetworking.send(new IntBoolUUIDNetworkType(0, 0, true, UUID.randomUUID()).setCustomType(ServerPacketHandler.WALL_JUMP_PACKET_ID));
+                ClientPlayNetworking.send(new IntBoolUUIDNetworkType(0, 0, true, UUID.randomUUID(), ServerPacketHandler.WALL_JUMP_PACKET_ID));
             }
 
             return;
@@ -121,7 +130,7 @@ public abstract class PlayerMixin extends AbstractClientPlayer {
             }
 
             ModComponents.MOVEMENT_ORDER.get(this).setWallJumped(false);
-            ClientPlayNetworking.send(new IntBoolUUIDNetworkType(0, 0,false, UUID.randomUUID()).setCustomType(ServerPacketHandler.WALL_JUMP_PACKET_ID));
+            ClientPlayNetworking.send(new IntBoolUUIDNetworkType(0, 0,false, UUID.randomUUID(), ServerPacketHandler.WALL_JUMP_PACKET_ID));
 
             return;
         }
@@ -163,7 +172,7 @@ public abstract class PlayerMixin extends AbstractClientPlayer {
         if(this.fallDistance > 2) {
             this.fallDistance = 0;
 
-            ClientPlayNetworking.send(new FloatSoundNetworkType((float) (motionY * motionY * 8), 0, ModSoundEvents.FART).setCustomType(ServerPacketHandler.FALL_DISTANCE_PACKET_ID));
+            ClientPlayNetworking.send(new FloatSoundNetworkType((float) (motionY * motionY * 8), 0, ModSoundEvents.FART, ServerPacketHandler.FALL_DISTANCE_PACKET_ID));
         }
 
         this.setDeltaMovement(0.0, motionY, 0.0);

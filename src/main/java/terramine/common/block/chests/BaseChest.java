@@ -45,6 +45,11 @@ public class BaseChest extends ChestBlock {
         return null;
     }
 
+    // todo: vanilla chest doesn't need this, need to figure out why both block and entity is rendering
+    protected @NotNull RenderShape getRenderShape(BlockState blockState) {
+        return RenderShape.INVISIBLE;
+    }
+
     @Override
     public @NotNull InteractionResult useWithoutItem(BlockState blockState, Level level, BlockPos blockPos, Player player, BlockHitResult blockHitResult) {
         if (level instanceof ServerLevel serverLevel) {

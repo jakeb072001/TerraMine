@@ -1,6 +1,6 @@
 {
   "parent": "terramine:item/big_sword_base",
   "textures": {
-    "layer0": "terramine:item/tools/crimtane/crimtane_sword"
+    "layer0": "terramine:item/weapons/swords/crimtane_sword"
   }
 }

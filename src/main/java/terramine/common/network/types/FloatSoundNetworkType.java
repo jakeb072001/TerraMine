@@ -4,41 +4,31 @@ import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import org.jetbrains.annotations.NotNull;
-import terramine.TerraMine;
 
-public record FloatSoundNetworkType(float float1, float float2, SoundEvent soundEvent) implements CustomPacketPayload {
-    public static Type<FloatSoundNetworkType> typeCustom;
-    public static final Type<FloatSoundNetworkType> TYPE = new Type<>(TerraMine.id("two_float_sound_type"));
-    public static final StreamCodec<RegistryFriendlyByteBuf, FloatSoundNetworkType> CODEC = StreamCodec.composite(
-            ByteBufCodecs.FLOAT, FloatSoundNetworkType::float1,
-            ByteBufCodecs.FLOAT, FloatSoundNetworkType::float2,
-            SoundEvent.DIRECT_STREAM_CODEC, FloatSoundNetworkType::soundEvent,
-            FloatSoundNetworkType::new);
+import java.util.HashMap;
+import java.util.Map;
+
+public record FloatSoundNetworkType(float float1, float float2, SoundEvent soundEvent, Type<? extends CustomPacketPayload> type) implements CustomPacketPayload {
+    private static final Map<ResourceLocation, Type<FloatSoundNetworkType>> TYPE_MAP = new HashMap<>();
+
+    public static StreamCodec<RegistryFriendlyByteBuf, FloatSoundNetworkType> createCodec(ResourceLocation type) {
+        return StreamCodec.composite(
+                ByteBufCodecs.FLOAT, FloatSoundNetworkType::float1,
+                ByteBufCodecs.FLOAT, FloatSoundNetworkType::float2,
+                SoundEvent.DIRECT_STREAM_CODEC, FloatSoundNetworkType::soundEvent,
+                (float1, float2, soundEvent) -> new FloatSoundNetworkType(float1, float2, soundEvent, FloatSoundNetworkType.registerType(type))
+        );
+    }
+
+    public static Type<FloatSoundNetworkType> registerType(ResourceLocation id) {
+        return TYPE_MAP.computeIfAbsent(id, Type::new);
+    }
 
     @Override
     public @NotNull Type<? extends CustomPacketPayload> type() {
-        if (typeCustom != null) {
-            return typeCustom;
-        }
-        return TYPE;
-    }
-
-    public FloatSoundNetworkType setCustomType(Type<FloatSoundNetworkType> type) {
-        typeCustom = type;
-        return this;
-    }
-
-    public float getFloat1() {
-        return float1;
-    }
-
-    public float getFloat2() {
-        return float2;
-    }
-
-    public SoundEvent getSoundEvent() {
-        return soundEvent;
+        return type;
     }
 }

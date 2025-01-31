@@ -30,7 +30,7 @@ import terramine.common.misc.AccessoriesHelper;
 public abstract class EntityMixin {
 
     @Shadow
-    public Level level;
+    private Level level;
 
     @Shadow @Final
     protected RandomSource random;

@@ -36,31 +36,8 @@ public class ChestEntity extends ChestBlockEntity {
     String name;
     MenuType<ChestBlockContainerMenu> menu;
     boolean trapped;
-    private final ContainerOpenersCounter openersCounter = new ContainerOpenersCounter(){
-        @Override
-        protected void onOpen(@NotNull Level level, @NotNull BlockPos blockPos, @NotNull BlockState blockState) {
-            playSound(level, blockPos, blockState, SoundEvents.CHEST_OPEN);
-        }
-
-        @Override
-        protected void onClose(@NotNull Level level, @NotNull BlockPos blockPos, @NotNull BlockState blockState) {
-            playSound(level, blockPos, blockState, SoundEvents.CHEST_CLOSE);
-        }
-
-        @Override
-        protected void openerCountChanged(@NotNull Level level, @NotNull BlockPos blockPos, @NotNull BlockState blockState, int i, int j) {
-            signalOpenCount(level, blockPos, blockState, i, j);
-        }
-
-        @Override
-        protected boolean isOwnContainer(Player player) {
-            if (player.containerMenu instanceof ChestBlockContainerMenu) {
-                Container container = ((ChestBlockContainerMenu)player.containerMenu).getContainer();
-                return container == ChestEntity.this || container instanceof CompoundContainer && ((CompoundContainer)container).contains(ChestEntity.this);
-            }
-            return false;
-        }
-    };
+    private final ContainerOpenersCounter openersCounter;
+    private final ChestLidController chestLidController;
 
 
     public ChestEntity(String name, MenuType<ChestBlockContainerMenu> menu, BlockEntityType type, BlockPos pos, BlockState state) {
@@ -68,6 +45,33 @@ public class ChestEntity extends ChestBlockEntity {
         this.name = name;
         this.menu = menu;
         this.setItems(NonNullList.withSize(40, ItemStack.EMPTY));
+        openersCounter = new ContainerOpenersCounter(){
+            @Override
+            protected void onOpen(@NotNull Level level, @NotNull BlockPos blockPos, @NotNull BlockState blockState) {
+                playSound(level, blockPos, blockState, SoundEvents.CHEST_OPEN);
+            }
+
+            @Override
+            protected void onClose(@NotNull Level level, @NotNull BlockPos blockPos, @NotNull BlockState blockState) {
+                playSound(level, blockPos, blockState, SoundEvents.CHEST_CLOSE);
+            }
+
+            @Override
+            protected void openerCountChanged(@NotNull Level level, @NotNull BlockPos blockPos, @NotNull BlockState blockState, int i, int j) {
+                signalOpenCount(level, blockPos, blockState, i, j);
+            }
+
+            @Override
+            protected boolean isOwnContainer(Player player) {
+                if (player.containerMenu instanceof ChestBlockContainerMenu) {
+                    Container container = ((ChestBlockContainerMenu)player.containerMenu).getContainer();
+                    return container == ChestEntity.this || container instanceof CompoundContainer && ((CompoundContainer)container).contains(ChestEntity.this);
+                }
+                return false;
+            }
+        };
+
+        this.chestLidController = new ChestLidController();
     }
 
     public void setTrapped(boolean trapped) {
@@ -80,11 +84,9 @@ public class ChestEntity extends ChestBlockEntity {
     }
 
     @Override
-    protected Component getDefaultName() {
+    protected @NotNull Component getDefaultName() {
         return Component.translatable("entity." + TerraMine.MOD_ID + "." + name);
     }
-
-    private final ChestLidController chestLidController = new ChestLidController();
 
     public static void clientTick(Level level, BlockPos blockPos, BlockState blockState, ChestEntity chestBlockEntity) {
         chestBlockEntity.chestLidController.tickLid();

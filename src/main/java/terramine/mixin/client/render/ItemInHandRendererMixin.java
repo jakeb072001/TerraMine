@@ -14,6 +14,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Constant;
 import terramine.common.item.accessories.ShieldAccessoryLikeItem;
+import terramine.common.item.equipment.UmbrellaItem;
 import terramine.extensions.PlayerStorages;
 
 @Mixin(ItemInHandRenderer.class)
@@ -52,6 +53,6 @@ public abstract class ItemInHandRendererMixin {
             constant = @Constant(classValue = ShieldItem.class)
     )
     private boolean wrapInstanceCheck(Object instance, Operation<Boolean> original) {
-        return original.call(instance) || instance instanceof ShieldAccessoryLikeItem;
+        return original.call(instance) || instance instanceof ShieldAccessoryLikeItem || instance instanceof UmbrellaItem;
     }
 }

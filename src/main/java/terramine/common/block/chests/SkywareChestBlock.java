@@ -32,7 +32,7 @@ public class SkywareChestBlock extends BaseChest {
     }
 
     @Override
-    public BlockEntityType<? extends SkywareChestEntity> blockEntityType() {
+    public @NotNull BlockEntityType<? extends SkywareChestEntity> blockEntityType() {
         return (BlockEntityType)this.blockEntityType.get();
     }
 }

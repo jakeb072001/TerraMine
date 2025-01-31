@@ -237,7 +237,7 @@ public class TerrariaInventoryContainerMenu extends AbstractContainerMenu {
     private void updatePacket(Player player, TerrariaInventory terrariaInventory, int slot) {
         for (Player otherPlayer : player.level().players()) {
             if (otherPlayer instanceof ServerPlayer serverPlayer) {
-                ServerPlayNetworking.send(serverPlayer, new ItemNetworkType(List.of(terrariaInventory.getItem(slot)), slot, player.getUUID()).setCustomType(ServerPacketHandler.UPDATE_INVENTORY_PACKET_ID));
+                ServerPlayNetworking.send(serverPlayer, new ItemNetworkType(terrariaInventory.getItem(slot), slot, player.getUUID(), ServerPacketHandler.UPDATE_INVENTORY_PACKET_ID));
             }
         }
     }

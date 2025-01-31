@@ -36,7 +36,7 @@ public abstract class InventoryScreenMixin extends AbstractContainerScreen<Inven
         if (!this.minecraft.gameMode.hasInfiniteItems()) {
             this.addRenderableWidget(new ToggleImageButton(this.leftPos + 66, this.height / 2 - 14, 8, 8, 0, 0, 8, 0, 0, false, BUTTON_TEX, 8, 16, (buttonWidget) -> {
                 //this.minecraft.setScreen(new TerrariaInventoryHandler(this.minecraft.player));
-                ClientPlayNetworking.send(new LongNetworkType(0L).setCustomType(ServerPacketHandler.OPEN_INVENTORY_PACKET_ID));
+                ClientPlayNetworking.send(new LongNetworkType(0L, ServerPacketHandler.OPEN_INVENTORY_PACKET_ID));
                 this.buttonClicked = true;
             }));
         }

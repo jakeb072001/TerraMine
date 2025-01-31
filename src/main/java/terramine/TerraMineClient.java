@@ -7,9 +7,11 @@ import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
 import net.fabricmc.fabric.api.resource.ResourcePackActivationType;
 import net.fabricmc.loader.api.FabricLoader;
+import net.minecraft.client.color.item.ItemTintSources;
 import net.minecraft.server.packs.PackType;
 import terramine.client.render.ModAllEntityRenderers;
 import terramine.client.render.accessory.AccessoryRenderers;
+import terramine.client.render.color.TerrariaDye;
 import terramine.common.init.*;
 import terramine.common.network.ServerPacketHandler;
 import terramine.common.utility.KeyBindingsHandler;
@@ -23,6 +25,9 @@ public class TerraMineClient implements ClientModInitializer {
 		FabricLoader.getInstance().getModContainer(TerraMine.MOD_ID).ifPresent(container -> {
 			ResourceManagerHelper.registerBuiltinResourcePack(TerraMine.id("terramine_ctm"), container, "TerraMine CTM", ResourcePackActivationType.NORMAL);
 		});
+
+		// Client Packet Handler
+		ServerPacketHandler.registerClient();
 
 		// Keybinding Handler
 		ClientTickEvents.END_CLIENT_TICK.register(KeyBindingsHandler::onClientTick);
@@ -40,7 +45,7 @@ public class TerraMineClient implements ClientModInitializer {
 		// Screen Handler
 		ModScreenHandler.register();
 
-		// Client Packet Handler
-		ServerPacketHandler.registerClient();
+		// Item Tint Register
+		ItemTintSources.ID_MAPPER.put(TerraMine.id("terraria_dye"), TerrariaDye.MAP_CODEC);
 	}
 }

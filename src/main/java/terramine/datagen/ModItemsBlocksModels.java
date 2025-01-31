@@ -89,7 +89,7 @@ public class ModItemsBlocksModels extends FabricModelProvider {
         generateUmbrella(itemModelGenerators, ModItems.UMBRELLA);
 
         // Dyes
-        ResourceLocation resourceLocation = ModelTemplates.TWO_LAYERED_ITEM.create(id("item/dye"), TextureMapping.layered(id("item/dye"), id("item/dye_overlay")), itemModelGenerators.modelOutput);
+        ResourceLocation resourceLocation = ModelTemplates.TWO_LAYERED_ITEM.create(id("item/dye"), TextureMapping.layered(id("item/misc/dye"), id("item/misc/dye_overlay")), itemModelGenerators.modelOutput);
         for (Item item : ModItems.DYES) {
             itemModelGenerators.itemModelOutput.accept(item, ItemModelUtils.tintedModel(resourceLocation, ItemModelUtils.constantTint(-1), new TerrariaDye()));
         }

@@ -32,7 +32,7 @@ public class FrozenChestBlock extends BaseChest {
     }
 
     @Override
-    public BlockEntityType<? extends FrozenChestEntity> blockEntityType() {
+    public @NotNull BlockEntityType<? extends FrozenChestEntity> blockEntityType() {
         return (BlockEntityType)this.blockEntityType.get();
     }
 }

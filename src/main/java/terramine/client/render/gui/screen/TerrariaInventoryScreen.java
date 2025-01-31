@@ -97,7 +97,7 @@ public class TerrariaInventoryScreen extends AbstractContainerScreen<TerrariaInv
         for (int i = 0; i < 5 + ModComponents.ACCESSORY_SLOTS_ADDER.get(this.minecraft.player).get(); i++) {
             int finalI = i;
             this.addRenderableWidget(new ToggleImageButton(this.leftPos + 130, this.height / 2 - 105 + (18 * i), 8, 8, 0, 0, 8, 8, i, false, EYE_TEX, 16, 16, (buttonWidget) -> {
-                ClientPlayNetworking.send(new IntBoolUUIDNetworkType(finalI, 0, !((PlayerStorages) this.minecraft.player).getSlotVisibility(finalI), UUID.randomUUID()).setCustomType(ServerPacketHandler.UPDATE_ACCESSORY_VISIBILITY_PACKET_ID));
+                ClientPlayNetworking.send(new IntBoolUUIDNetworkType(finalI, 0, !((PlayerStorages) this.minecraft.player).getSlotVisibility(finalI), UUID.randomUUID(), ServerPacketHandler.UPDATE_ACCESSORY_VISIBILITY_PACKET_ID));
             }));
         }
 
@@ -105,7 +105,7 @@ public class TerrariaInventoryScreen extends AbstractContainerScreen<TerrariaInv
         for (int i = 0; i < 6; i++) {
             int finalI = i;
             this.addRenderableWidget(new ToggleImageButton(this.leftPos + 6 + (10 * i) - (i > 2 ? 30 : 0), this.height / 2 - 20 - (i > 2 ? 0 : 10), 10, 10, 0, 20 * i, 10, 10, i + 1, true, TEAM_TEX, 20, 120, (buttonWidget) -> {
-                ClientPlayNetworking.send(new IntBoolUUIDNetworkType(finalI + 1, 0, false, UUID.randomUUID()).setCustomType(ServerPacketHandler.UPDATE_TEAM_PACKET_ID));
+                ClientPlayNetworking.send(new IntBoolUUIDNetworkType(finalI + 1, 0, false, UUID.randomUUID(), ServerPacketHandler.UPDATE_TEAM_PACKET_ID));
             }));
         }
 

@@ -4,40 +4,31 @@ import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
+import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.NotNull;
 import terramine.TerraMine;
 
-public record DoubleNetworkType(double double1, double double2, double double3) implements CustomPacketPayload {
-    public static Type<DoubleNetworkType> typeCustom;
-    public static final Type<DoubleNetworkType> TYPE = new Type<>(TerraMine.id("triple_double_type"));
-    public static final StreamCodec<RegistryFriendlyByteBuf, DoubleNetworkType> CODEC = StreamCodec.composite(
-            ByteBufCodecs.DOUBLE, DoubleNetworkType::double1,
-            ByteBufCodecs.DOUBLE, DoubleNetworkType::double2,
-            ByteBufCodecs.DOUBLE, DoubleNetworkType::double3,
-            DoubleNetworkType::new);
+import java.util.HashMap;
+import java.util.Map;
+
+public record DoubleNetworkType(double double1, double double2, double double3, Type<? extends CustomPacketPayload> type) implements CustomPacketPayload {
+    private static final Map<ResourceLocation, Type<DoubleNetworkType>> TYPE_MAP = new HashMap<>();
+
+    public static StreamCodec<RegistryFriendlyByteBuf, DoubleNetworkType> createCodec(ResourceLocation type) {
+        return StreamCodec.composite(
+                ByteBufCodecs.DOUBLE, DoubleNetworkType::double1,
+                ByteBufCodecs.DOUBLE, DoubleNetworkType::double2,
+                ByteBufCodecs.DOUBLE, DoubleNetworkType::double3,
+                (double1, double2, double3) -> new DoubleNetworkType(double1, double2, double3, DoubleNetworkType.registerType(type))
+        );
+    }
+
+    public static Type<DoubleNetworkType> registerType(ResourceLocation id) {
+        return TYPE_MAP.computeIfAbsent(id, Type::new);
+    }
 
     @Override
     public @NotNull Type<? extends CustomPacketPayload> type() {
-        if (typeCustom != null) {
-            return typeCustom;
-        }
-        return TYPE;
-    }
-
-    public DoubleNetworkType setCustomType(Type<DoubleNetworkType> type) {
-        typeCustom = type;
-        return this;
-    }
-
-    public double getDouble1() {
-        return double1;
-    }
-
-    public double getDouble2() {
-        return double2;
-    }
-
-    public double getDouble3() {
-        return double3;
+        return type;
     }
 }
