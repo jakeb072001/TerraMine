@@ -7,8 +7,7 @@ import net.minecraft.core.registries.Registries;
 import terramine.TerraMine;
 
 public class TerraMineDataGenerator implements DataGeneratorEntrypoint {
-    // todo:
-    // https://wiki.fabricmc.net/tutorial:datagen_loot
+    // todo: https://wiki.fabricmc.net/tutorial:datagen_loot
 
     @Override
     public void onInitializeDataGenerator(FabricDataGenerator fabricDataGenerator) {

@@ -13,7 +13,6 @@ import terramine.common.item.TerrariaItem;
 
 public class UmbrellaItem extends TerrariaItem {
 
-	// todo: use the new item model definition json files
 	public UmbrellaItem(ResourceKey<Item> key) {
 		super(new Properties().setId(key).stacksTo(1).rarity(Rarity.RARE).fireResistant(), false);
 	}

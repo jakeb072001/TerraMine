@@ -1,20 +1,34 @@
 package terramine.mixin.client.render;
 
+import com.llamalad7.mixinextras.injector.wrapmethod.WrapMethod;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.math.Axis;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.AbstractClientPlayer;
 import net.minecraft.client.renderer.ItemInHandRenderer;
 import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.entity.state.ArmedEntityRenderState;
+import net.minecraft.client.renderer.item.ItemModelResolver;
+import net.minecraft.client.renderer.item.ItemStackRenderState;
+import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.entity.HumanoidArm;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ShieldItem;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Constant;
 import terramine.common.item.accessories.ShieldAccessoryLikeItem;
+import terramine.common.item.dye.BasicDye;
 import terramine.common.item.equipment.UmbrellaItem;
+import terramine.common.utility.Utilities;
+import terramine.extensions.EntityRenderStateExtensions;
 import terramine.extensions.PlayerStorages;
 
 @Mixin(ItemInHandRenderer.class)
@@ -45,6 +59,26 @@ public abstract class ItemInHandRendererMixin {
         }
 
         original.call(instance, abstractClientPlayer, f, g, interactionHand, h, itemStack2, i, poseStack, multiBufferSource, j);
+    }
+
+    @WrapMethod(method = "renderItem")
+    private void shieldDye(LivingEntity livingEntity, ItemStack itemStack, ItemDisplayContext itemDisplayContext, boolean bl, PoseStack poseStack, MultiBufferSource multiBufferSource, int i, Operation<Void> original) {
+        HumanoidArm humanoidArm = livingEntity.getMainArm().getOpposite();
+        boolean bl3 = humanoidArm == HumanoidArm.RIGHT;
+        if (livingEntity instanceof Player player && itemDisplayContext.equals(bl3 ? ItemDisplayContext.FIRST_PERSON_RIGHT_HAND : ItemDisplayContext.FIRST_PERSON_LEFT_HAND)) {
+            if (!itemStack.isEmpty()) {
+                if (itemStack.getItem() instanceof ShieldItem || itemStack.getItem() instanceof ShieldAccessoryLikeItem) {
+                    if (((PlayerStorages) player).getTerrariaInventory().getItem(22).getItem() instanceof BasicDye dye) {
+                        ItemStackRenderState scratchItemStackRenderState = new ItemStackRenderState();
+                        new ItemModelResolver(Minecraft.getInstance().getModelManager()).updateForTopItem(scratchItemStackRenderState, itemStack, itemDisplayContext, bl, livingEntity.level(), livingEntity, livingEntity.getId() + itemDisplayContext.ordinal());
+                        Utilities.renderItemCustomDye(scratchItemStackRenderState, poseStack, multiBufferSource, i, OverlayTexture.NO_OVERLAY, dye.getColourInt());
+                        return;
+                    }
+                }
+            }
+        }
+
+        original.call(livingEntity, itemStack, itemDisplayContext, bl, poseStack, multiBufferSource, i);
     }
 
     // Copied from FabricShieldLib, credits to Starexify (Nova on disc) for the fix (I was going to change the json rotation which would probably be better but that would have taken forever)

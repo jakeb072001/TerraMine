@@ -23,7 +23,6 @@ import terramine.common.misc.TreasureBagInventory;
 
 import java.util.List;
 
-// todo: not generating loot
 public class TreasureBagItem extends TerrariaItemConfigurable {
     public TreasureBagInventory treasureBagInventory;
     protected ResourceKey<LootTable> lootTable;

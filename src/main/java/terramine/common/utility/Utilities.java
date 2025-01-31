@@ -1,31 +1,55 @@
 package terramine.common.utility;
 
+import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
+import com.mojang.math.MatrixUtil;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.model.ShieldModel;
+import net.minecraft.client.model.geom.EntityModelSet;
+import net.minecraft.client.model.geom.ModelLayers;
+import net.minecraft.client.model.geom.ModelPart;
+import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.Sheets;
+import net.minecraft.client.renderer.block.model.BakedQuad;
+import net.minecraft.client.renderer.blockentity.BannerRenderer;
+import net.minecraft.client.renderer.entity.ItemRenderer;
+import net.minecraft.client.renderer.item.ItemStackRenderState;
+import net.minecraft.client.resources.model.Material;
+import net.minecraft.client.resources.model.ModelBakery;
+import net.minecraft.core.Direction;
+import net.minecraft.core.component.DataComponentMap;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.ARGB;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.ExperienceOrb;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.ProjectileUtil;
+import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ClipContext;
+import net.minecraft.world.level.block.entity.BannerPatternLayers;
 import net.minecraft.world.phys.*;
+import org.jetbrains.annotations.Nullable;
 import org.joml.Matrix4f;
 import org.joml.Vector3f;
 import terramine.common.item.dye.BasicDye;
 import terramine.common.network.ServerPacketHandler;
 import terramine.common.network.types.ItemNetworkType;
 
+import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.function.Function;
@@ -254,5 +278,101 @@ public class Utilities { // todo: need to fix bug with magic missile where the p
         vertexConsumer.addVertex(matrix4f, (float)i, (float)(j + l), 0.0F).setUv(uMin, vMax).setColor(1, 1, 1, v);
         vertexConsumer.addVertex(matrix4f, (float)(i + k), (float)(j + l), 0.0F).setUv(uMax, vMax).setColor(1, 1, 1, v);
         vertexConsumer.addVertex(matrix4f, (float)(i + k), (float)j, 0.0F).setUv(uMax, vMin).setColor(1, 1, 1, v);
+    }
+
+    @Environment(EnvType.CLIENT)
+    public static void renderItemCustomDye(ItemStackRenderState itemStackRenderState, PoseStack poseStack, MultiBufferSource multiBufferSource, int i, int j, int dyeColour) {
+        for(int k = 0; k < itemStackRenderState.activeLayerCount; ++k) {
+            poseStack.pushPose();
+            itemStackRenderState.layers[k].transform().apply(itemStackRenderState.isLeftHand, poseStack);
+            poseStack.translate(-0.5F, -0.5F, -0.5F);
+            if (itemStackRenderState.layers[k].specialRenderer != null) {
+                shieldSpecialRender(new ShieldModel(EntityModelSet.vanilla().bakeLayer(ModelLayers.SHIELD)), (DataComponentMap) itemStackRenderState.layers[k].argumentForSpecialRendering, itemStackRenderState.displayContext, poseStack, multiBufferSource, i, j, itemStackRenderState.layers[k].foilType != ItemStackRenderState.FoilType.NONE, dyeColour);
+            } else if (itemStackRenderState.layers[k].model != null) {
+                VertexConsumer vertexConsumer;
+                if (itemStackRenderState.layers[k].foilType == ItemStackRenderState.FoilType.SPECIAL) {
+                    PoseStack.Pose pose = poseStack.last().copy();
+                    if (itemStackRenderState.displayContext == ItemDisplayContext.GUI) {
+                        MatrixUtil.mulComponentWise(pose.pose(), 0.5F);
+                    } else if (itemStackRenderState.displayContext.firstPerson()) {
+                        MatrixUtil.mulComponentWise(pose.pose(), 0.75F);
+                    }
+
+                    vertexConsumer = ItemRenderer.getCompassFoilBuffer(multiBufferSource, itemStackRenderState.layers[k].renderType, pose);
+                } else {
+                    vertexConsumer = ItemRenderer.getFoilBuffer(multiBufferSource, itemStackRenderState.layers[k].renderType, true, itemStackRenderState.layers[k].foilType != ItemStackRenderState.FoilType.NONE);
+                }
+
+                RandomSource randomSource = RandomSource.create();
+                Direction[] var9 = Direction.values();
+
+                for (Direction direction : var9) {
+                    randomSource.setSeed(42L);
+                    renderQuadList(poseStack, vertexConsumer, itemStackRenderState.layers[k].model.getQuads(null, direction, randomSource), itemStackRenderState.layers[k].tintLayers, i, j, dyeColour);
+                }
+
+                randomSource.setSeed(42L);
+                renderQuadList(poseStack, vertexConsumer, itemStackRenderState.layers[k].model.getQuads(null, null, randomSource), itemStackRenderState.layers[k].tintLayers, i, j, dyeColour);
+            }
+
+            poseStack.popPose();
+        }
+    }
+
+    private static void renderQuadList(PoseStack poseStack, VertexConsumer vertexConsumer, List<BakedQuad> list, int[] is, int i, int j, int dyeColour) {
+        PoseStack.Pose pose = poseStack.last();
+
+        BakedQuad bakedQuad;
+        float f;
+        float g;
+        float h;
+        float l;
+        for(Iterator<BakedQuad> var7 = list.iterator(); var7.hasNext(); vertexConsumer.putBulkData(pose, bakedQuad, g, h, l, f, i, j)) {
+            bakedQuad = var7.next();
+            if (bakedQuad.isTinted()) {
+                int k = ItemRenderer.getLayerColorSafe(is, bakedQuad.getTintIndex());
+                f = (float)ARGB.alpha(k) / 255.0F;
+                g = (float)ARGB.red(dyeColour) / 255.0F;
+                h = (float)ARGB.green(dyeColour) / 255.0F;
+                l = (float)ARGB.blue(dyeColour) / 255.0F;
+            } else {
+                f = 1.0F;
+                g = (float)ARGB.red(dyeColour) / 255.0F;
+                h = (float)ARGB.green(dyeColour) / 255.0F;
+                l = (float)ARGB.blue(dyeColour) / 255.0F;
+            }
+        }
+    }
+
+    public static void shieldSpecialRender(ShieldModel shieldModel, @Nullable DataComponentMap dataComponentMap, ItemDisplayContext itemDisplayContext, PoseStack poseStack, MultiBufferSource multiBufferSource, int i, int j, boolean bl, int dyeColour) {
+        BannerPatternLayers bannerPatternLayers = dataComponentMap != null ? dataComponentMap.getOrDefault(DataComponents.BANNER_PATTERNS, BannerPatternLayers.EMPTY) : BannerPatternLayers.EMPTY;
+        DyeColor dyeColor = dataComponentMap != null ? dataComponentMap.get(DataComponents.BASE_COLOR) : null;
+        boolean bl2 = !bannerPatternLayers.layers().isEmpty() || dyeColor != null;
+        poseStack.pushPose();
+        poseStack.scale(1.0F, -1.0F, -1.0F);
+        Material material = bl2 ? ModelBakery.SHIELD_BASE : ModelBakery.NO_PATTERN_SHIELD;
+        VertexConsumer vertexConsumer = material.sprite().wrap(ItemRenderer.getFoilBuffer(multiBufferSource, shieldModel.renderType(material.atlasLocation()), itemDisplayContext == ItemDisplayContext.GUI, bl));
+        shieldModel.handle().render(poseStack, vertexConsumer, i, j, dyeColour);
+        if (bl2) {
+            renderPatterns(poseStack, multiBufferSource, i, j, shieldModel.plate(), material, false, Objects.requireNonNullElse(dyeColor, DyeColor.WHITE), bannerPatternLayers, bl, false, dyeColour);
+        } else {
+            shieldModel.plate().render(poseStack, vertexConsumer, i, j, dyeColour);
+        }
+
+        poseStack.popPose();
+    }
+
+    // todo: dye banner pattern (need to multiply g with dyeColour, or add them, idk)
+    public static void renderPatterns(PoseStack poseStack, MultiBufferSource multiBufferSource, int i, int j, ModelPart modelPart, Material material, boolean bl, DyeColor dyeColor, BannerPatternLayers bannerPatternLayers, boolean bl2, boolean bl3, int customDyeColour) {
+        modelPart.render(poseStack, material.buffer(multiBufferSource, RenderType::entitySolid, bl3, bl2), i, j, customDyeColour);
+        int g = dyeColor.getTextureDiffuseColor();
+        modelPart.render(poseStack, (bl ? Sheets.BANNER_BASE : Sheets.SHIELD_BASE).buffer(multiBufferSource, RenderType::entityNoOutline), i, j, g);
+
+        for(int k = 0; k < 16 && k < bannerPatternLayers.layers().size(); ++k) {
+            BannerPatternLayers.Layer layer = bannerPatternLayers.layers().get(k);
+            Material material2 = bl ? Sheets.getBannerMaterial(layer.pattern()) : Sheets.getShieldMaterial(layer.pattern());
+            g = layer.color().getTextureDiffuseColor();
+            modelPart.render(poseStack, material2.buffer(multiBufferSource, RenderType::entityNoOutline), i, j, g);
+        }
     }
 }

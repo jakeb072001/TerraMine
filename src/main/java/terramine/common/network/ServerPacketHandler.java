@@ -35,7 +35,6 @@ import terramine.extensions.PlayerStorages;
 import java.lang.reflect.Method;
 import java.util.*;
 
-// todo: terraria inventory not syncing on player join or changing dimension (player join on dedicated server works but not change dimension, seems it's happening too early)
 public class ServerPacketHandler {
     private static final Map<UUID, List<Runnable>> pendingUpdates = new HashMap<>();
 

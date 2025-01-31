@@ -26,7 +26,6 @@ public class TerrariaInventory extends SimpleContainer {
         return this.modifiersByOperation.get(operation);
     }
 
-    // todo: not sure if UUID is fine
     public void addModifier(AttributeModifier modifier) {
         this.modifiers.put(UUID.fromString(modifier.toString()), modifier);
         this.getModifiersByOperation(modifier.operation()).add(modifier);
@@ -51,7 +50,6 @@ public class TerrariaInventory extends SimpleContainer {
         this.cachedModifiers.remove(attributeModifier);
     }
 
-    // todo: not sure if UUID is fine
     public void clearCachedModifiers() {
         for (AttributeModifier cachedModifier : this.cachedModifiers) {
             this.removeModifier(UUID.fromString(cachedModifier.toString()));

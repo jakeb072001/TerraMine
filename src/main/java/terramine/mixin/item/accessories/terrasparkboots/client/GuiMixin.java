@@ -22,7 +22,6 @@ public abstract class GuiMixin {
 
 	@Shadow protected abstract Player getCameraPlayer();
 
-	// todo: doesn't seem to be rendering at all?
 	@Inject(method = "renderPlayerHealth", at = @At(value = "TAIL"))
 	private void renderLavaCharm(GuiGraphics guiGraphics, CallbackInfo ci) {
 		Player player = this.getCameraPlayer();

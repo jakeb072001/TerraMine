@@ -30,6 +30,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import terramine.common.item.dye.BasicDye;
+import terramine.common.utility.Utilities;
 import terramine.extensions.EntityRenderStateExtensions;
 import terramine.extensions.PlayerStorages;
 
@@ -86,19 +87,15 @@ public abstract class CustomHeadLayerMixin<S extends LivingEntityRenderState, M 
         original.call(direction, f, g, poseStack, multiBufferSource, i, skullModelBase, renderType);
     }
 
-    // todo: add dye support to items displayed on head, should be possible but a lot of work, also use the same method for shield dye
-    /**
     @WrapOperation(
             method = "render(Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;ILnet/minecraft/client/renderer/entity/state/LivingEntityRenderState;FF)V",
             at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/item/ItemStackRenderState;render(Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;II)V")
     )
     private void headSkullDye(ItemStackRenderState instance, PoseStack poseStack, MultiBufferSource multiBufferSource, int i, int j, Operation<Void> original) {
         if (dyeItem != null) {
-            // almost works, but can't control colour, probably need to do some custom stuff in a helper class
-            original.call(instance, poseStack, multiBufferSource, i, 2);
+            Utilities.renderItemCustomDye(instance, poseStack, multiBufferSource, i, OverlayTexture.NO_OVERLAY, dyeItem.getColourInt());
             return;
         }
         original.call(instance, poseStack, multiBufferSource, i, j);
     }
-    **/
 }

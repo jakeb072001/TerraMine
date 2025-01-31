@@ -20,7 +20,6 @@ public abstract class EntityMixin {
 
     @Shadow public abstract DamageSources damageSources();
 
-    // todo: may need testing
     @Inject(at = @At("HEAD"), method = "isInvulnerableToBase", cancellable = true)
     private void lavaImmunity(DamageSource damageSource, CallbackInfoReturnable<Boolean> cir) {
         if ((Entity) (Object) this instanceof LivingEntity entity) {
