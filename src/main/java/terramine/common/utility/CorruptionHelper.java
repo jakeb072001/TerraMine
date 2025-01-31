@@ -234,7 +234,7 @@ public class CorruptionHelper extends SpreadingSnowyDirtBlock  {
         ((ServerChunkCache) level.getChunkSource()).chunkMap.getPlayers(chunkPos, false).forEach((player) -> {
             player.connection.send(new ClientboundLevelChunkWithLightPacket(chunkSafe, ((ServerChunkCache) level.getChunkSource()).chunkMap.getLightEngine(), null, null));
             //NetworkManager.sendToPlayer(player, new IntBoolUUIDNetworkType(chunkPos.x, chunkPos.z, false, UUID.randomUUID()).setCustomType(ServerPacketHandler.UPDATE_BIOME_PACKET_ID));
-            ServerPlayNetworking.send(player, new IntBoolUUIDNetworkType(chunkPos.x, chunkPos.z, false, UUID.randomUUID()).setCustomType(ServerPacketHandler.UPDATE_BIOME_PACKET_ID));
+            ServerPlayNetworking.send(player, new IntBoolUUIDNetworkType(chunkPos.x, chunkPos.z, false, UUID.randomUUID(), ServerPacketHandler.UPDATE_BIOME_PACKET_ID));
         });
     }
 }

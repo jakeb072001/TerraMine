@@ -35,7 +35,7 @@ public abstract class CreativeModeInventoryScreenMixin extends EffectRenderingIn
     protected void onInit(CallbackInfo ci) {
         if (this.minecraft.gameMode.hasInfiniteItems()) {
             this.addRenderableWidget(terrariaButton = new ToggleImageButton(this.leftPos + 96, this.height / 2 - 28, 8, 8, 0, 0, 8, 0, 0, false, BUTTON_TEX, 8, 16, (buttonWidget) -> {
-                ClientPlayNetworking.send(new LongNetworkType(0L).setCustomType(ServerPacketHandler.OPEN_INVENTORY_PACKET_ID));
+                ClientPlayNetworking.send(new LongNetworkType(0L, ServerPacketHandler.OPEN_INVENTORY_PACKET_ID));
             }));
         }
 

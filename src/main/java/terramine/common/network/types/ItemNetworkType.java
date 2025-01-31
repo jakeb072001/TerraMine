@@ -5,44 +5,33 @@ import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
-import terramine.TerraMine;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
-public record ItemNetworkType(List<ItemStack> itemStack, int integer, UUID uuid) implements CustomPacketPayload {
-    public static CustomPacketPayload.Type<ItemNetworkType> typeCustom;
-    public static final CustomPacketPayload.Type<ItemNetworkType> TYPE = new CustomPacketPayload.Type<>(TerraMine.id("item_int_uuid_type"));
-    public static final StreamCodec<RegistryFriendlyByteBuf, ItemNetworkType> CODEC = StreamCodec.composite(
-            ItemStack.OPTIONAL_STREAM_CODEC.apply(ByteBufCodecs.list()), ItemNetworkType::itemStack,
-            ByteBufCodecs.INT, ItemNetworkType::integer,
-            UUIDUtil.STREAM_CODEC, ItemNetworkType::uuid,
-            ItemNetworkType::new);
+public record ItemNetworkType(ItemStack itemStack, int integer, UUID uuid, Type<? extends CustomPacketPayload> type) implements CustomPacketPayload {
+    private static final Map<ResourceLocation, Type<ItemNetworkType>> TYPE_MAP = new HashMap<>();
+
+    public static StreamCodec<RegistryFriendlyByteBuf, ItemNetworkType> createCodec(ResourceLocation type) {
+        return StreamCodec.composite(
+                ItemStack.OPTIONAL_STREAM_CODEC, ItemNetworkType::itemStack,
+                ByteBufCodecs.INT, ItemNetworkType::integer,
+                UUIDUtil.STREAM_CODEC, ItemNetworkType::uuid,
+                (itemStacks, integer, uuid) -> new ItemNetworkType(itemStacks, integer, uuid, ItemNetworkType.registerType(type))
+        );
+    }
+
+    public static Type<ItemNetworkType> registerType(ResourceLocation id) {
+        return TYPE_MAP.computeIfAbsent(id, Type::new);
+    }
 
     @Override
-    public CustomPacketPayload.@NotNull Type<? extends CustomPacketPayload> type() {
-        if (typeCustom != null) {
-            return typeCustom;
-        }
-        return TYPE;
-    }
-
-    public ItemNetworkType setCustomType(Type<ItemNetworkType> type) {
-        typeCustom = type;
-        return this;
-    }
-
-    public List<ItemStack> getItemStacks() {
-        return itemStack;
-    }
-
-    public int getInteger() {
-        return integer;
-    }
-
-    public UUID getUUID() {
-        return uuid;
+    public @NotNull Type<? extends CustomPacketPayload> type() {
+        return type;
     }
 }

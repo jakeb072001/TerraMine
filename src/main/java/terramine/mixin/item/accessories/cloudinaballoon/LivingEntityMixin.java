@@ -49,7 +49,7 @@ public abstract class LivingEntityMixin extends Entity implements LivingEntityEx
 	@Unique
 	@Environment(EnvType.CLIENT)
 	private static void sendDoubleJumpPacket() {
-		ClientPlayNetworking.send(new LongNetworkType(0L).setCustomType(ServerPacketHandler.C2S_DOUBLE_JUMPED_ID));
+		ClientPlayNetworking.send(new LongNetworkType(0L, ServerPacketHandler.C2S_DOUBLE_JUMPED_ID));
 	}
 
 	@ModifyVariable(method = "causeFallDamage", ordinal = 0, at = @At("HEAD"), argsOnly = true)

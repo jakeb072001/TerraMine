@@ -63,6 +63,6 @@ public class KeyBindingsHandler {
     public static void sendToServer(UpdateInputPacket packet) {
         List<Boolean> booleanList = new java.util.ArrayList<>(List.of());
         UpdateInputPacket.write(packet, booleanList);
-        ClientPlayNetworking.send(new InputNetworkType(booleanList).setCustomType(ServerPacketHandler.CONTROLS_PACKET_ID));
+        ClientPlayNetworking.send(new InputNetworkType(booleanList, ServerPacketHandler.CONTROLS_PACKET_ID));
     }
 }

@@ -13,11 +13,11 @@ import terramine.common.network.types.LongNetworkType;
 
 public class BoneMealPacket {
     public static void send(BlockPos pos) {
-        ClientPlayNetworking.send(new LongNetworkType(pos.asLong()).setCustomType(ServerPacketHandler.BONE_MEAL_PACKET_ID));
+        ClientPlayNetworking.send(new LongNetworkType(pos.asLong(), ServerPacketHandler.BONE_MEAL_PACKET_ID));
     }
 
     public static void receive(LongNetworkType type, ServerPlayNetworking.Context context) {
-        BlockPos pos = BlockPos.of(type.getLong());
+        BlockPos pos = BlockPos.of(type.savedLong());
         context.player().server.execute(() -> {
             ServerPlayer player = context.player();
                 BlockState state = player.level().getBlockState(pos);

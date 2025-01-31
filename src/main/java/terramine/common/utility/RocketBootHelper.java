@@ -120,15 +120,15 @@ public class RocketBootHelper {
                 if (InputHandler.isHoldingJump(player)) {
                     fly(player, Math.abs(Math.min(motionY + currentAccel, currentSpeedVertical)));
                     if ((wings && soundTimer >= 6) || (!wings && soundTimer >= 4)) {
-                        ClientPlayNetworking.send(new FloatSoundNetworkType(soundVolume, soundPitch, sound).setCustomType(ServerPacketHandler.ROCKET_BOOTS_SOUND_PACKET_ID));
+                        ClientPlayNetworking.send(new FloatSoundNetworkType(soundVolume, soundPitch, sound, ServerPacketHandler.ROCKET_BOOTS_SOUND_PACKET_ID));
                         soundTimer = 0;
                     }
 
                     if (particle1 != null) {
-                        ClientPlayNetworking.send(new ParticleNetworkType(particle1).setCustomType(ServerPacketHandler.ROCKET_BOOTS_PARTICLE_PACKET_ID));
+                        ClientPlayNetworking.send(new ParticleNetworkType(particle1, ServerPacketHandler.ROCKET_BOOTS_PARTICLE_PACKET_ID));
                     }
                     if (particle2 != null) {
-                        ClientPlayNetworking.send(new ParticleNetworkType(particle2).setCustomType(ServerPacketHandler.ROCKET_BOOTS_PARTICLE_PACKET_ID));
+                        ClientPlayNetworking.send(new ParticleNetworkType(particle2, ServerPacketHandler.ROCKET_BOOTS_PARTICLE_PACKET_ID));
                     }
                 }
 
@@ -175,7 +175,7 @@ public class RocketBootHelper {
         passedData.writeDouble(motion.x());
         passedData.writeDouble(y);
         passedData.writeDouble(motion.z());
-        ClientPlayNetworking.send(new DoubleNetworkType(motion.x(), y, motion.z()).setCustomType(ServerPacketHandler.PLAYER_MOVEMENT_PACKET_ID));
+        ClientPlayNetworking.send(new DoubleNetworkType(motion.x(), y, motion.z(), ServerPacketHandler.PLAYER_MOVEMENT_PACKET_ID));
         player.setDeltaMovement(motion.x(), y, motion.z());
     }
 

@@ -120,24 +120,25 @@ public class TerraMine implements ModInitializer, TerraBlenderApi {
 
 	// maybe move into inventory itself or something? works perfectly like this though, so I'll just leave it for now
 	// probably not the best way of doing this, but it works for now, maybe look into improving later though
+	// todo: maybe move to using lists instead of sending so many packets
 	private void syncInventory(ServerPlayer player) {
-		TerrariaInventory terrariaInventory = ((PlayerStorages)player).getTerrariaInventory();
-		List<ItemStack> localItems = new ArrayList<>(List.of());
-		List<ItemStack> remoteItems = new ArrayList<>(List.of());
-		for (int i = 0; i < terrariaInventory.getContainerSize(); i++) {
-			localItems.add(terrariaInventory.getItem(i));
-		}
+		PlayerStorages playerStorage = (PlayerStorages) player;
+		TerrariaInventory terrariaInventory = playerStorage.getTerrariaInventory();
+
 		for (ServerPlayer otherPlayer : player.serverLevel().players()) {
-			TerrariaInventory otherTerrariaInventory = ((PlayerStorages)otherPlayer).getTerrariaInventory();
+			PlayerStorages otherStorage = (PlayerStorages) otherPlayer;
+			TerrariaInventory otherTerrariaInventory = otherStorage.getTerrariaInventory();
 			for (int i = 0; i < otherTerrariaInventory.getContainerSize(); i++) {
-				remoteItems.add(otherTerrariaInventory.getItem(i));
+				ServerPlayNetworking.send(player, new ItemNetworkType(otherTerrariaInventory.getItem(i), i, otherPlayer.getUUID(), ServerPacketHandler.UPDATE_INVENTORY_PACKET_ID));
+			}
+			if (player != otherPlayer) {
+				for (int i = 0; i < terrariaInventory.getContainerSize(); i++) {
+					ServerPlayNetworking.send(otherPlayer, new ItemNetworkType(terrariaInventory.getItem(i), i, player.getUUID(), ServerPacketHandler.UPDATE_INVENTORY_PACKET_ID));
+				}
 			}
 
-			ServerPlayNetworking.send(player, new ItemNetworkType(remoteItems, 0, otherPlayer.getUUID()).setCustomType(ServerPacketHandler.SETUP_INVENTORY_PACKET_ID));
-			ServerPlayNetworking.send(otherPlayer, new ItemNetworkType(localItems, 0, player.getUUID()).setCustomType(ServerPacketHandler.SETUP_INVENTORY_PACKET_ID));
-
 			for (int i = 0; i < 7; i++) {
-				((PlayerStorages) otherPlayer).setSlotVisibility(i, ((PlayerStorages) otherPlayer).getSlotVisibility(i));
+				otherStorage.setSlotVisibility(i, otherStorage.getSlotVisibility(i));
 			}
 		}
 	}
