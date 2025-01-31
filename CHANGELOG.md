@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [1.7.6-1.21.4] - 2025-02-01
 ### Changed
 - Updated to 1.21.4
+- Shield and carved pumpkin now support dyes
 - Various small changes and fixes
 
 ## [1.7.6-1.20.6] - 2025-02-01
