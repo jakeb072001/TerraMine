@@ -12,13 +12,13 @@ import net.minecraft.world.item.ItemStack;
 import terramine.extensions.EntityRenderStateExtensions;
 import terramine.extensions.PlayerStorages;
 
-public class AccessoryFeatureRenderer<T extends EntityRenderState, M extends EntityModel<T>> extends RenderLayer<T, M> {
-    public AccessoryFeatureRenderer(RenderLayerParent<T, M> context) {
+public class AccessoryFeatureRenderer<S extends EntityRenderState, M extends EntityModel<? super S>> extends RenderLayer<S, M> {
+    public AccessoryFeatureRenderer(RenderLayerParent<S, M> context) {
         super(context);
     }
 
     @Override
-    public void render(PoseStack poseStack, MultiBufferSource multiBufferSource, int light, T entityRenderState, float f, float g) {
+    public void render(PoseStack poseStack, MultiBufferSource multiBufferSource, int light, S entityRenderState, float f, float g) {
         if (((EntityRenderStateExtensions)entityRenderState).terrariaCraft$getLivingEntity() instanceof Player player) {
             for (int i = 0; i < 7; i++) {
                 ItemStack itemStack = ((PlayerStorages) player).getTerrariaInventory().getItem(i);

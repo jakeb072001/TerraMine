@@ -26,7 +26,8 @@ public class AccessoryRenderers implements SimpleSynchronousResourceReloadListen
     @Override
     public void onResourceManagerReload(@NotNull ResourceManager resourceManager) {
         // head
-        register(ModItems.DIVING_HELMET, new BaseAccessoryRenderer("diving_helmet", new HeadModel(bakeLayer(ModModelLayers.DIVING_HELMET), RenderType::entityTranslucent)));
+        //register(ModItems.DIVING_HELMET, new BaseAccessoryRenderer("diving_helmet", new HeadModel(bakeLayer(ModModelLayers.DIVING_HELMET))));
+        register(ModItems.DIVING_GEAR, new BaseAccessoryRenderer("diving_gear", new HeadModel(bakeLayer(ModModelLayers.DIVING_GEAR))));
 
         // necklace
         register(ModItems.CROSS_NECKLACE, new BaseAccessoryRenderer("cross_necklace", new NecklaceModel(bakeLayer(ModModelLayers.CROSS_NECKLACE))));

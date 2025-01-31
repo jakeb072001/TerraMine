@@ -7,6 +7,7 @@ import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.CubeDeformation;
 import net.minecraft.client.model.geom.builders.CubeListBuilder;
 import net.minecraft.client.model.geom.builders.MeshDefinition;
+import net.minecraft.client.model.geom.builders.PartDefinition;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.state.HumanoidRenderState;
 import net.minecraft.world.entity.LivingEntity;
@@ -20,6 +21,12 @@ public class LegsModel extends HumanoidModel<HumanoidRenderState> {
     public static MeshDefinition createLegs(float delta, CubeListBuilder leftLeg, CubeListBuilder rightLeg) {
         CubeDeformation deformation = new CubeDeformation(delta);
         MeshDefinition mesh = createMesh(CubeDeformation.NONE, 0);
+        PartDefinition partDefinition = mesh.getRoot();
+        PartDefinition partDefinition2 = partDefinition.clearChild("head");
+        partDefinition2.clearChild("hat");
+        partDefinition.clearChild("body");
+        partDefinition.clearChild("left_arm");
+        partDefinition.clearChild("right_arm");
 
         mesh.getRoot().addOrReplaceChild(
                 "left_leg",

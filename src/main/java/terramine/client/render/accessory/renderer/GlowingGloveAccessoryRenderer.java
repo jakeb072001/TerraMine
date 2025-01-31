@@ -38,13 +38,12 @@ public class GlowingGloveAccessoryRenderer extends GloveAccessoryRenderer {
         super.renderArm(model, poseStack, multiBufferSource, player, slot, armSide, light, hasSlimArms, hasFoil);
         RenderType renderType = RenderTypes.unlit(getGlowTexture(hasSlimArms));
         VertexConsumer builder = ItemRenderer.getFoilBuffer(multiBufferSource, renderType, false, hasFoil);
-        // todo: add dye support, it just doesn't render using whats commented out
-        /**
+
         if (((PlayerStorages)player).getTerrariaInventory().getItem(slot + 14).getItem() instanceof BasicDye dye) {
             model.renderArm(armSide, poseStack, builder, LightTexture.pack(15, 15), OverlayTexture.NO_OVERLAY, dye.getColourInt());
             return;
         }
-         **/
+
         model.renderArm(armSide, poseStack, builder, LightTexture.pack(15, 15), OverlayTexture.NO_OVERLAY, -1);
     }
 
@@ -52,12 +51,12 @@ public class GlowingGloveAccessoryRenderer extends GloveAccessoryRenderer {
     protected void renderFirstPersonArm(ArmsModel model, ModelPart arm, PoseStack poseStack, MultiBufferSource multiBufferSource, Player player, int slot, int light, boolean hasSlimArms, boolean hasFoil) {
         super.renderFirstPersonArm(model, arm, poseStack, multiBufferSource, player, slot, light, hasSlimArms, hasFoil);
         VertexConsumer builder = ItemRenderer.getFoilBuffer(multiBufferSource, RenderTypes.unlit(getGlowTexture(hasSlimArms)), false, hasFoil);
-        /**
+
         if (((PlayerStorages)player).getTerrariaInventory().getItem(slot + 14).getItem() instanceof BasicDye dye) {
             arm.render(poseStack, builder, LightTexture.pack(15, 15), OverlayTexture.NO_OVERLAY, dye.getColourInt());
             return;
         }
-         **/
+
         arm.render(poseStack, builder, LightTexture.pack(15, 15), OverlayTexture.NO_OVERLAY);
     }
 }

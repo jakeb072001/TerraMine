@@ -1,37 +1,32 @@
 package terramine.client.render.accessory.model;
 
-import com.google.common.collect.ImmutableList;
-import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.CubeDeformation;
 import net.minecraft.client.model.geom.builders.CubeListBuilder;
 import net.minecraft.client.model.geom.builders.MeshDefinition;
+import net.minecraft.client.model.geom.builders.PartDefinition;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.state.HumanoidRenderState;
-import net.minecraft.world.entity.LivingEntity;
 
 public class NecklaceModel extends HumanoidModel<HumanoidRenderState> {
 
     public NecklaceModel(ModelPart part) {
-        super(part, RenderType::entityTranslucent);
-    }
-
-    @Override
-    public void setupAnim(HumanoidRenderState renderState) {
-        super.setupAnim(renderState);
-        //poseStack.pushPose();
-        //poseStack.scale(0.5F, 0.5F, 0.5F);
-        //body.render(poseStack, buffer, light, overlay, red, green, blue, alpha);
-        //poseStack.popPose();
+        super(part, RenderType::entityCutoutNoCull);
     }
 
     public static MeshDefinition createNecklace(CubeListBuilder body) {
         MeshDefinition mesh = createMesh(CubeDeformation.NONE, 0);
+        PartDefinition partDefinition = mesh.getRoot();
+        PartDefinition partDefinition2 = partDefinition.clearChild("head");
+        partDefinition2.clearChild("hat");
+        partDefinition.clearChild("left_arm");
+        partDefinition.clearChild("right_arm");
+        partDefinition.clearChild("left_leg");
+        partDefinition.clearChild("right_leg");
 
-        mesh.getRoot().addOrReplaceChild(
+        partDefinition.addOrReplaceChild(
                 "body",
                 body.texOffs(0, 0)
                         .addBox(-(2 * 8) / 2F, -1 / 2F, -(2 * 4 + 1) / 2F, 2 * 8, 2 * 12 + 1, 2 * 4 + 1),
@@ -43,8 +38,15 @@ public class NecklaceModel extends HumanoidModel<HumanoidRenderState> {
 
     public static MeshDefinition createCenteredNecklace(CubeListBuilder body) {
         MeshDefinition mesh = createMesh(CubeDeformation.NONE, 0);
+        PartDefinition partDefinition = mesh.getRoot();
+        PartDefinition partDefinition2 = partDefinition.clearChild("head");
+        partDefinition2.clearChild("hat");
+        partDefinition.clearChild("left_arm");
+        partDefinition.clearChild("right_arm");
+        partDefinition.clearChild("left_leg");
+        partDefinition.clearChild("right_leg");
 
-        mesh.getRoot().addOrReplaceChild(
+        partDefinition.addOrReplaceChild(
                 "body",
                 body.texOffs(0, 0)
                         .addBox(-(2 * 8 + 1) / 2F, -1 / 2F, -(2 * 4 + 1) / 2F, 2 * 8 + 1, 2 * 12 + 1, 2 * 4 + 1),

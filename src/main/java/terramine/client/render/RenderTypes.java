@@ -26,7 +26,7 @@ public abstract class RenderTypes extends RenderType {
 				// TODO (from forge): .setShaderState(RENDERTYPE_ENTITY_TRANSLUCENT_UNLIT_SHADER)
 				.setShaderState(RENDERTYPE_ENTITY_CUTOUT_NO_CULL_SHADER)
 				.setTextureState(new TextureStateShard(textureLocation, TriState.FALSE, false))
-				.setTransparencyState(TRANSLUCENT_TRANSPARENCY)
+				.setTransparencyState(NO_TRANSPARENCY)
 				.setCullState(NO_CULL)
 				.setLightmapState(LIGHTMAP)
 				.setOverlayState(OVERLAY)

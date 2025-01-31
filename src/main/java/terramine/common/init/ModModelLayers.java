@@ -52,7 +52,7 @@ public class ModModelLayers {
     public static final ModelLayerLocation TOP_HAT = register(createLocation("top_hat"), layer(HeadModel.createTopHat(), 64, 32));
 
     // Accessories
-    public static final ModelLayerLocation DIVING_HELMET = register(createLocation("diving_helmet"), layer(HeadModel.createDivingHelmet(), 64, 32));
+    public static final ModelLayerLocation DIVING_GEAR = register(createLocation("diving_gear"), layer(HeadModel.createDivingGear(), 64, 32));
 
     public static final ModelLayerLocation CROSS_NECKLACE = register(createLocation("cross_necklace"), layer(NecklaceModel.createCrossNecklace(), 64, 48));
     public static final ModelLayerLocation PANIC_NECKLACE = register(createLocation("panic_necklace"), layer(NecklaceModel.createPanicNecklace(), 64, 48));

@@ -10,6 +10,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Treasure Bags
 - Shield of Cthulhu and Worm Scarf //-- Not yet started
 
+## [1.7.7-1.21.4] - 2025-02-02
+### Fixed
+- Accessories rendering their texture onto the player model
+- Some accessories becoming invisible if dyed
+- Dye not applying to Fire Gauntlet emissive texture
+
 ## [1.7.6-1.21.4] - 2025-02-01
 ### Changed
 - Updated to 1.21.4
@@ -304,7 +310,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Initial release
 
-[1.8.0-1.20.6]: https://github.com/jakeb072001/TerraMine/compare/v1.7.4-1.20.6...v1.8.0-1.21
+[1.8.0-1.20.6]: https://github.com/jakeb072001/TerraMine/compare/v1.7.7-1.21.4...v1.8.0-1.21.4
+[1.7.7-1.21.4]: https://github.com/jakeb072001/TerraMine/compare/v1.7.6-1.21.4...v1.7.7-1.21.4
 [1.7.6-1.21.4]: https://github.com/jakeb072001/TerraMine/compare/v1.7.6-1.20.6...v1.7.6-1.21.4
 [1.7.6-1.20.6]: https://github.com/jakeb072001/TerraMine/compare/v1.7.5-1.20.6...v1.7.6-1.20.6
 [1.7.5-1.20.6]: https://github.com/jakeb072001/TerraMine/compare/v1.7.4-1.20.6...v1.7.5-1.20.6

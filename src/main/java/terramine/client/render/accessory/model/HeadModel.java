@@ -1,16 +1,15 @@
 package terramine.client.render.accessory.model;
 
-import com.google.common.collect.ImmutableList;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.CubeDeformation;
 import net.minecraft.client.model.geom.builders.CubeListBuilder;
 import net.minecraft.client.model.geom.builders.MeshDefinition;
+import net.minecraft.client.model.geom.builders.PartDefinition;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.state.HumanoidRenderState;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.LivingEntity;
 
 import java.util.function.Function;
 
@@ -26,8 +25,14 @@ public class HeadModel extends HumanoidModel<HumanoidRenderState> {
 
     public static MeshDefinition createEmptyHat(CubeListBuilder head) {
         MeshDefinition mesh = createMesh(CubeDeformation.NONE, 0);
+        PartDefinition partDefinition = mesh.getRoot();
+        partDefinition.clearChild("body");
+        partDefinition.clearChild("left_arm");
+        partDefinition.clearChild("right_arm");
+        partDefinition.clearChild("left_leg");
+        partDefinition.clearChild("right_leg");
 
-        mesh.getRoot().addOrReplaceChild(
+        partDefinition.addOrReplaceChild(
                 "head",
                 head,
                 PartPose.ZERO
@@ -47,8 +52,14 @@ public class HeadModel extends HumanoidModel<HumanoidRenderState> {
 
     public static MeshDefinition createDiagonalHat(CubeListBuilder head, CubeListBuilder diagonalParts, String partName) {
         MeshDefinition mesh = createHat(head);
+        PartDefinition partDefinition = mesh.getRoot();
+        partDefinition.clearChild("body");
+        partDefinition.clearChild("left_arm");
+        partDefinition.clearChild("right_arm");
+        partDefinition.clearChild("left_leg");
+        partDefinition.clearChild("right_leg");
 
-        mesh.getRoot().getChild("head").addOrReplaceChild(
+        partDefinition.getChild("head").addOrReplaceChild(
                 partName,
                 diagonalParts,
                 PartPose.rotation(45 * (float) Math.PI / 180, 0, 0)
@@ -65,7 +76,7 @@ public class HeadModel extends HumanoidModel<HumanoidRenderState> {
         return createEmptyHat(head);
     }
 
-    public static MeshDefinition createDivingHelmet() {
+    public static MeshDefinition createDivingGear() {
         CubeListBuilder head = CubeListBuilder.create();
         CubeListBuilder tube = CubeListBuilder.create();
 

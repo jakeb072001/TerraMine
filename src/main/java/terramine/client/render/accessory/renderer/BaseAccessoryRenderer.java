@@ -18,6 +18,7 @@ import net.minecraft.world.item.ItemStack;
 import org.joml.Vector3f;
 import terramine.TerraMine;
 import terramine.client.render.AccessoryRenderer;
+import terramine.client.render.accessory.model.NecklaceModel;
 import terramine.common.item.dye.BasicDye;
 import terramine.extensions.PlayerStorages;
 
@@ -55,13 +56,16 @@ public class BaseAccessoryRenderer implements AccessoryRenderer {
         render(poseStack, multiBufferSource, player, dyeSlot, light, itemStack.hasFoil());
     }
 
-    protected void render(PoseStack matrixStack, MultiBufferSource buffer, Player player, int slot, int light, boolean hasFoil) {
+    protected void render(PoseStack poseStack, MultiBufferSource buffer, Player player, int slot, int light, boolean hasFoil) {
         RenderType renderType = model.renderType(getTexture());
         VertexConsumer vertexBuilder = ItemRenderer.getFoilBuffer(buffer, renderType, false, hasFoil);
+        if (model instanceof NecklaceModel) {
+            poseStack.scale(0.5f, 0.5f, 0.5f);
+        }
         if (((PlayerStorages)player).getTerrariaInventory().getItem(slot + 14).getItem() instanceof BasicDye dye) {
-            model.renderToBuffer(matrixStack, vertexBuilder, light, OverlayTexture.NO_OVERLAY, dye.getColourInt());
+            model.renderToBuffer(poseStack, vertexBuilder, light, OverlayTexture.NO_OVERLAY, dye.getColourInt());
             return;
         }
-        model.renderToBuffer(matrixStack, vertexBuilder, light, OverlayTexture.NO_OVERLAY, -1);
+        model.renderToBuffer(poseStack, vertexBuilder, light, OverlayTexture.NO_OVERLAY, -1);
     }
 }

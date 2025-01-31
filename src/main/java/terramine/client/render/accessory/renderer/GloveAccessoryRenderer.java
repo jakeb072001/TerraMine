@@ -111,9 +111,7 @@ public class GloveAccessoryRenderer implements AccessoryRenderer {
         RenderType renderType = model.renderType(getTexture(hasSlimArms));
         VertexConsumer builder = ItemRenderer.getFoilBuffer(buffer, renderType, false, hasFoil);
         if (((PlayerStorages)player).getTerrariaInventory().getItem(slot + 14).getItem() instanceof BasicDye dye) {
-            Vector3f color = dye.getColour();
-            builder.setColor(color.x(), color.y(), color.z(), 1);
-            arm.render(matrixStack, builder, light, OverlayTexture.NO_OVERLAY, 1);
+            arm.render(matrixStack, builder, light, OverlayTexture.NO_OVERLAY, dye.getColourInt());
             return;
         }
         arm.render(matrixStack, builder, light, OverlayTexture.NO_OVERLAY);

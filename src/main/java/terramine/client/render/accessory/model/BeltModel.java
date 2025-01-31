@@ -7,6 +7,7 @@ import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.CubeDeformation;
 import net.minecraft.client.model.geom.builders.CubeListBuilder;
 import net.minecraft.client.model.geom.builders.MeshDefinition;
+import net.minecraft.client.model.geom.builders.PartDefinition;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.state.HumanoidRenderState;
 import net.minecraft.resources.ResourceLocation;
@@ -69,8 +70,15 @@ public class BeltModel extends HumanoidModel<HumanoidRenderState> {
     private static MeshDefinition createBelt(CubeListBuilder charm) {
         CubeDeformation deformation = new CubeDeformation(0.5F);
         MeshDefinition mesh = createMesh(CubeDeformation.NONE, 0);
+        PartDefinition partDefinition = mesh.getRoot();
+        PartDefinition partDefinition2 = partDefinition.clearChild("head");
+        partDefinition2.clearChild("hat");
+        partDefinition.clearChild("left_arm");
+        partDefinition.clearChild("right_arm");
+        partDefinition.clearChild("left_leg");
+        partDefinition.clearChild("right_leg");
 
-        mesh.getRoot().addOrReplaceChild(
+        partDefinition.addOrReplaceChild(
                 "body",
                 CubeListBuilder.create()
                         .texOffs(0, 0)
@@ -78,7 +86,7 @@ public class BeltModel extends HumanoidModel<HumanoidRenderState> {
                 PartPose.ZERO
         );
 
-        mesh.getRoot().getChild("body").addOrReplaceChild(
+        partDefinition.getChild("body").addOrReplaceChild(
                 "charm",
                 charm,
                 PartPose.ZERO

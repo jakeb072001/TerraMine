@@ -9,6 +9,7 @@ import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.CubeDeformation;
 import net.minecraft.client.model.geom.builders.CubeListBuilder;
 import net.minecraft.client.model.geom.builders.MeshDefinition;
+import net.minecraft.client.model.geom.builders.PartDefinition;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.state.HumanoidRenderState;
 import net.minecraft.resources.ResourceLocation;
@@ -45,13 +46,19 @@ public class ArmsModel extends HumanoidModel<HumanoidRenderState> {
 
     public static MeshDefinition createEmptyArms(CubeListBuilder leftArm, CubeListBuilder rightArm, boolean smallArms) {
         MeshDefinition mesh = createMesh(CubeDeformation.NONE, 0);
+        PartDefinition partDefinition = mesh.getRoot();
+        PartDefinition partDefinition2 = partDefinition.clearChild("head");
+        partDefinition2.clearChild("hat");
+        partDefinition.clearChild("body");
+        partDefinition.clearChild("left_leg");
+        partDefinition.clearChild("right_leg");
 
-        mesh.getRoot().addOrReplaceChild(
+        partDefinition.addOrReplaceChild(
                 "left_arm",
                 leftArm,
                 PartPose.offset(5, smallArms ? 2.5F : 2, 0)
         );
-        mesh.getRoot().addOrReplaceChild(
+        partDefinition.addOrReplaceChild(
                 "right_arm",
                 rightArm,
                 PartPose.offset(-5, smallArms ? 2.5F : 2, 0)

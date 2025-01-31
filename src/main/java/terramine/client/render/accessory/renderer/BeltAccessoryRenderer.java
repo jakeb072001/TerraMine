@@ -50,7 +50,6 @@ public class BeltAccessoryRenderer implements AccessoryRenderer {
         BeltModel model = getModel();
 
         model.setupAnim(new PlayerRenderState());
-        //model.prepareMobModel(player, limbSwing, limbSwingAmount, partialTicks);
         model.setCharmPosition(1); // change later so that 1 is the slot number for the item
         AccessoryRenderer.followBodyRotations(player, model);
         render(poseStack, multiBufferSource, player, dyeSlot, light, stack.hasFoil());
