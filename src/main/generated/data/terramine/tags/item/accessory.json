@@ -1,9 +1,6 @@
 {
   "values": [
     "terramine:whoopee_cushion",
-    "terramine:cobalt_shield",
-    "terramine:obsidian_shield",
-    "terramine:shield_of_cthulhu",
     "terramine:gold_watch",
     "terramine:depth_meter",
     "terramine:compass",
@@ -88,6 +85,9 @@
     "terramine:fledgling_wings",
     "terramine:angel_wings",
     "terramine:demon_wings",
-    "terramine:leaf_wings"
+    "terramine:leaf_wings",
+    "terramine:cobalt_shield",
+    "terramine:obsidian_shield",
+    "terramine:shield_of_cthulhu"
   ]
 }
