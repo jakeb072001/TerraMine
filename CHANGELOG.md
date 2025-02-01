@@ -10,7 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Treasure Bags
 - Shield of Cthulhu and Worm Scarf //-- Not yet started
 
-## [1.7.7-1.21.4] - 2025-02-02
+## [1.7.7-1.21.4] - 2025-02-01
 ### Fixed
 - Accessories rendering their texture onto the player model
 - Some accessories becoming invisible if dyed
