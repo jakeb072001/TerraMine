@@ -1,6 +1,5 @@
 package terramine.client.render.accessory.model;
 
-import com.google.common.collect.ImmutableList;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
@@ -10,7 +9,6 @@ import net.minecraft.client.model.geom.builders.MeshDefinition;
 import net.minecraft.client.model.geom.builders.PartDefinition;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.state.HumanoidRenderState;
-import net.minecraft.world.entity.LivingEntity;
 
 public class LegsModel extends HumanoidModel<HumanoidRenderState> {
 
@@ -77,7 +75,7 @@ public class LegsModel extends HumanoidModel<HumanoidRenderState> {
         return createSleevedLegs(0.51F, leftLeg, rightLeg);
     }
 
-    public static MeshDefinition createAquaDashers() {
+    public static MeshDefinition createWaterWalkingBoots() {
         CubeListBuilder leftLeg = CubeListBuilder.create();
         CubeListBuilder rightLeg = CubeListBuilder.create();
 
@@ -105,7 +103,7 @@ public class LegsModel extends HumanoidModel<HumanoidRenderState> {
         return createLegs(0.5F, leftLeg, rightLeg);
     }
 
-    public static MeshDefinition createRunningShoes() {
+    public static MeshDefinition createHermesBoots() {
         return createShoes(0.5F, CubeListBuilder.create(), CubeListBuilder.create());
     }
 }

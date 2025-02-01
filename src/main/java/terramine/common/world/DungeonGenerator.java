@@ -155,7 +155,7 @@ public class DungeonGenerator {
                 BlockPos structureBlockAimPosition = structureBlockPosition.relative(structureBlockFaceDirection);
 
                 // Get pool that structure block is targeting.
-                ResourceLocation structureBlockTargetPoolId = ResourceLocation.withDefaultNamespace(structureBlock.info().nbt().getString("pool"));
+                ResourceLocation structureBlockTargetPoolId = ResourceLocation.read(structureBlock.info().nbt().getString("pool")).getOrThrow();
                 Optional<StructureTemplatePool> targetPool = this.registry.getOptional(structureBlockTargetPoolId);
                 //if (targetPool.isEmpty() || targetPool.get().size() == 0 && !Objects.equals(structureBlockTargetPoolId, StructurePools.EMPTY.getValue())) {
                 if (targetPool.isEmpty() || targetPool.get().size() == 0) {

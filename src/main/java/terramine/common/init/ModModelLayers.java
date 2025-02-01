@@ -4,7 +4,6 @@ import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.model.geom.builders.MeshDefinition;
-import net.minecraft.resources.ResourceLocation;
 import terramine.TerraMine;
 import terramine.client.render.accessory.model.*;
 import terramine.client.render.entity.model.misc.FallingStarModel;
@@ -66,8 +65,8 @@ public class ModModelLayers {
     public static final ModelLayerLocation GLOVE = register(createLocation("gloves"), layer(ArmsModel.createSleevedArms(false), 32, 32));
     public static final ModelLayerLocation SLIM_GLOVE = register(createLocation("slim_gloves"), layer(ArmsModel.createSleevedArms(true), 32, 32));
 
-    public static final ModelLayerLocation AQUA_DASHERS = register(createLocation("aqua_dashers"), layer(LegsModel.createAquaDashers(), 32, 32));
-    public static final ModelLayerLocation RUNNING_SHOES = register(createLocation("running_shoes"), layer(LegsModel.createRunningShoes(), 32, 32));
+    public static final ModelLayerLocation WATER_WALKING_BOOTS = register(createLocation("water_walking_boots"), layer(LegsModel.createWaterWalkingBoots(), 32, 32));
+    public static final ModelLayerLocation HERMES_BOOTS = register(createLocation("hermes_boots"), layer(LegsModel.createHermesBoots(), 32, 32));
     public static final ModelLayerLocation FLIPPERS = register(createLocation("flippers"), layer(LegsModel.createFlippers(), 64, 64));
 
     public static final ModelLayerLocation WHOOPEE_CUSHION = register(createLocation("whoopee_cushion"), layer(HeadModel.createWhoopeeCushion(), 32, 16));

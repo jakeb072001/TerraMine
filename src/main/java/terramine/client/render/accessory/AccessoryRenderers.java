@@ -4,7 +4,6 @@ import net.fabricmc.fabric.api.resource.SimpleSynchronousResourceReloadListener;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
-import net.minecraft.client.renderer.RenderType;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.world.item.Item;
@@ -44,8 +43,8 @@ public class AccessoryRenderers implements SimpleSynchronousResourceReloadListen
         register(ModItems.FIRE_GAUNTLET, new GlowingGloveAccessoryRenderer("fire_gauntlet", ArmsModel.createGloveModel(false), ArmsModel.createGloveModel(true)));
 
         // feet
-        register(ModItems.LAVA_WADERS, new BaseAccessoryRenderer("aqua_dashers", new LegsModel(bakeLayer(ModModelLayers.AQUA_DASHERS))));
-        register(ModItems.HERMES_BOOTS, new BaseAccessoryRenderer("running_shoes", new LegsModel(bakeLayer(ModModelLayers.RUNNING_SHOES))));
+        register(ModItems.WATER_WALKING_BOOTS, new BaseAccessoryRenderer("water_walking_boots", new LegsModel(bakeLayer(ModModelLayers.WATER_WALKING_BOOTS))));
+        register(ModItems.HERMES_BOOTS, new BaseAccessoryRenderer("hermes_boots", new LegsModel(bakeLayer(ModModelLayers.HERMES_BOOTS))));
         register(ModItems.FLIPPERS, new BaseAccessoryRenderer("flippers", new LegsModel(bakeLayer(ModModelLayers.FLIPPERS))));
 
         // curio

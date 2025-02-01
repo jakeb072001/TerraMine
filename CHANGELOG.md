@@ -310,7 +310,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Initial release
 
-[1.8.0-1.20.6]: https://github.com/jakeb072001/TerraMine/compare/v1.7.7-1.21.4...v1.8.0-1.21.4
+[1.8.0-1.21.4]: https://github.com/jakeb072001/TerraMine/compare/v1.7.7-1.21.4...v1.8.0-1.21.4
 [1.7.7-1.21.4]: https://github.com/jakeb072001/TerraMine/compare/v1.7.6-1.21.4...v1.7.7-1.21.4
 [1.7.6-1.21.4]: https://github.com/jakeb072001/TerraMine/compare/v1.7.6-1.20.6...v1.7.6-1.21.4
 [1.7.6-1.20.6]: https://github.com/jakeb072001/TerraMine/compare/v1.7.5-1.20.6...v1.7.6-1.20.6
