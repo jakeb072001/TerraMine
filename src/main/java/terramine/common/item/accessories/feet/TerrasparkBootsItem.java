@@ -18,6 +18,7 @@ import terramine.common.init.ModSoundEvents;
 import terramine.common.item.accessories.AccessoryTerrariaItem;
 import terramine.common.misc.AccessoriesHelper;
 import terramine.common.utility.RocketBootHelper;
+import terramine.common.utility.equipmentchecks.ShellEquippedCheck;
 
 public class TerrasparkBootsItem extends AccessoryTerrariaItem {
 
@@ -77,7 +78,7 @@ public class TerrasparkBootsItem extends AccessoryTerrariaItem {
 	private static boolean onFluidCollision(LivingEntity entity, FluidState fluidState) {
 		if (entity instanceof Player player) {
 			entity.resetFallDistance();
-			return AccessoriesHelper.isEquipped(ModItems.TERRASPARK_BOOTS, player) && !player.isCrouching();
+			return AccessoriesHelper.isEquipped(ModItems.TERRASPARK_BOOTS, player) && !player.isCrouching() && !entity.isUnderWater();
 		}
 		return false;
 	}

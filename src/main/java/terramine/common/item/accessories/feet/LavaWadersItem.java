@@ -11,6 +11,7 @@ import terramine.common.init.ModComponents;
 import terramine.common.init.ModItems;
 import terramine.common.item.accessories.AccessoryTerrariaItem;
 import terramine.common.misc.AccessoriesHelper;
+import terramine.common.utility.equipmentchecks.ShellEquippedCheck;
 
 public class LavaWadersItem extends AccessoryTerrariaItem {
 
@@ -36,7 +37,7 @@ public class LavaWadersItem extends AccessoryTerrariaItem {
 	private static boolean onFluidCollision(LivingEntity entity, FluidState fluidState) {
 		if (entity instanceof Player player) {
 			entity.resetFallDistance();
-			return AccessoriesHelper.isEquipped(ModItems.LAVA_WADERS, player) && !entity.isCrouching();
+			return AccessoriesHelper.isEquipped(ModItems.LAVA_WADERS, player) && !entity.isCrouching() && !entity.isUnderWater();
 		}
 		return false;
 	}

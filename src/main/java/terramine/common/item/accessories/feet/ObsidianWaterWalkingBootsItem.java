@@ -12,6 +12,7 @@ import terramine.common.init.ModComponents;
 import terramine.common.init.ModItems;
 import terramine.common.item.accessories.AccessoryTerrariaItem;
 import terramine.common.misc.AccessoriesHelper;
+import terramine.common.utility.equipmentchecks.ShellEquippedCheck;
 
 public class ObsidianWaterWalkingBootsItem extends AccessoryTerrariaItem {
 
@@ -35,7 +36,7 @@ public class ObsidianWaterWalkingBootsItem extends AccessoryTerrariaItem {
 	}
 
 	private static boolean onFluidCollision(LivingEntity entity, FluidState fluidState) {
-		if (AccessoriesHelper.isEquipped(ModItems.OBSIDIAN_WATER_WALKING_BOOTS, entity) && !entity.isCrouching()) {
+		if (AccessoriesHelper.isEquipped(ModItems.OBSIDIAN_WATER_WALKING_BOOTS, entity) && !entity.isCrouching() && !entity.isUnderWater()) {
 			entity.resetFallDistance();
 			return !fluidState.is(FluidTags.LAVA);
 		}
