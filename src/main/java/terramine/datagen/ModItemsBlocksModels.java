@@ -14,7 +14,6 @@ import terramine.client.render.color.TerrariaDye;
 import terramine.common.init.ModBlocks;
 import terramine.common.init.ModItems;
 import terramine.common.item.armor.TerrariaArmor;
-import terramine.common.item.equipment.UmbrellaItem;
 import terramine.common.item.projectiles.throwables.BombItem;
 import terramine.common.item.projectiles.throwables.DynamiteItem;
 import terramine.common.item.projectiles.throwables.GrenadeItem;

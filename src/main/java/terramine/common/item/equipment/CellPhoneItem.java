@@ -23,8 +23,6 @@ import org.jetbrains.annotations.NotNull;
 import terramine.common.init.ModSoundEvents;
 import terramine.common.item.accessories.AccessoryTerrariaItem;
 
-import java.util.Optional;
-
 public class CellPhoneItem extends AccessoryTerrariaItem {
 
 	public CellPhoneItem(ResourceKey<Item> key) {

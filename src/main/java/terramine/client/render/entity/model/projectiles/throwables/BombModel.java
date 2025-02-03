@@ -1,14 +1,10 @@
 package terramine.client.render.entity.model.projectiles.throwables;
 
-import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
-import org.jetbrains.annotations.NotNull;
 import terramine.client.render.entity.states.TerrariaEntityRenderState;
-import terramine.common.entity.throwables.BombEntity;
 
 public class BombModel extends EntityModel<TerrariaEntityRenderState> {
     protected final ModelPart bomb;

@@ -19,8 +19,6 @@ import terramine.common.item.accessories.AccessoryTerrariaItem;
 import terramine.common.misc.AccessoriesHelper;
 import terramine.common.utility.RocketBootHelper;
 
-import java.util.UUID;
-
 public class TerrasparkBootsItem extends AccessoryTerrariaItem {
 
 	public static final AttributeModifier SPEED_BOOST_MODIFIER_WALK = new AttributeModifier(TerraMine.id("terraspark_boots_movement_speed_walk"), 0.08, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL);

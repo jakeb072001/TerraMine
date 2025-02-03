@@ -13,9 +13,7 @@ import org.jetbrains.annotations.NotNull;
 import terramine.TerraMine;
 import terramine.client.render.entity.model.projectiles.throwables.BombModel;
 import terramine.client.render.entity.states.TerrariaEntityRenderState;
-import terramine.common.entity.throwables.BombEntity;
-import terramine.common.entity.throwables.DynamiteEntity;
-import terramine.common.entity.throwables.GrenadeEntity;
+import terramine.common.entity.projectiles.throwables.BombEntity;
 import terramine.common.init.ModModelLayers;
 
 public class BombRenderer extends EntityRenderer<BombEntity, TerrariaEntityRenderState> {

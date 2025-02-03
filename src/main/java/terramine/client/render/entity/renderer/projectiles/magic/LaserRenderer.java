@@ -14,8 +14,6 @@ import terramine.TerraMine;
 import terramine.client.render.entity.model.projectiles.magic.LaserModel;
 import terramine.client.render.entity.states.TerrariaEntityRenderState;
 import terramine.common.entity.projectiles.LaserEntity;
-import terramine.common.entity.throwables.DynamiteEntity;
-import terramine.common.entity.throwables.GrenadeEntity;
 import terramine.common.init.ModModelLayers;
 
 public class LaserRenderer extends EntityRenderer<LaserEntity, TerrariaEntityRenderState> {

@@ -177,7 +177,7 @@ public class ModAdvancements extends FabricAdvancementProvider {
 
         AdvancementHolder crimsonAdvancement = Advancement.Builder.advancement().parent(rootAdvancement)
                 .display(
-                        ModBlocks.CORRUPTED_GRASS.ITEM,
+                        ModBlocks.CRIMSON_GRASS.ITEM,
                         Component.translatable("terramine.advancements.the_crimson.title"),
                         Component.translatable("terramine.advancements.the_crimson.description"),
                         null, // children to parent advancements don't need a background set

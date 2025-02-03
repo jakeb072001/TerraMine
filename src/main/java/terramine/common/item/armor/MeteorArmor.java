@@ -13,8 +13,6 @@ import terramine.TerraMine;
 import terramine.common.init.ModAttributes;
 import terramine.common.init.ModComponents;
 
-import java.util.UUID;
-
 public class MeteorArmor extends TerrariaArmor {
 
     public MeteorArmor(String armorType, ArmorMaterial holder, ArmorType type, Properties properties) {

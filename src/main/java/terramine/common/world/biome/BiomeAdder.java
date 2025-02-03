@@ -11,8 +11,8 @@ import terrablender.api.Region;
 import terrablender.api.RegionType;
 import terramine.TerraMine;
 import terramine.common.components.SyncedBooleanComponent;
-import terramine.datagen.ModBiomes;
 import terramine.common.init.ModComponents;
+import terramine.datagen.ModBiomes;
 
 import java.util.function.Consumer;
 

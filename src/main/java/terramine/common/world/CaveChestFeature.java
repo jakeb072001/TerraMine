@@ -62,6 +62,7 @@ public class CaveChestFeature extends Feature<NoneFeatureConfiguration> {
 		boolean frozen = false;
 		boolean jungle = false;
 		boolean desert = false;
+		boolean inWater = level.isWaterAt(pos);
 
 		if (level.getBiome(offsetPos).value().coldEnoughToSnow(offsetPos, 0)) {
 			frozen = true;
@@ -86,13 +87,13 @@ public class CaveChestFeature extends Feature<NoneFeatureConfiguration> {
 			}
 		} else if (random.nextInt(5) == 0) {
 			if (frozen) {
-				this.setBlock(level, pos, ModBlocks.TRAPPED_FROZEN_CHEST.BLOCK.defaultBlockState().setValue(ChestBlock.FACING, Direction.Plane.HORIZONTAL.getRandomDirection(random)));
+				this.setBlock(level, pos, ModBlocks.TRAPPED_FROZEN_CHEST.BLOCK.defaultBlockState().setValue(ChestBlock.FACING, Direction.Plane.HORIZONTAL.getRandomDirection(random)).setValue(ChestBlock.WATERLOGGED, inWater));
 			} else if (jungle) {
-				this.setBlock(level, pos, ModBlocks.TRAPPED_IVY_CHEST.BLOCK.defaultBlockState().setValue(ChestBlock.FACING, Direction.Plane.HORIZONTAL.getRandomDirection(random)));
+				this.setBlock(level, pos, ModBlocks.TRAPPED_IVY_CHEST.BLOCK.defaultBlockState().setValue(ChestBlock.FACING, Direction.Plane.HORIZONTAL.getRandomDirection(random)).setValue(ChestBlock.WATERLOGGED, inWater));
 			} else if (desert) {
-				this.setBlock(level, pos, ModBlocks.TRAPPED_SANDSTONE_CHEST.BLOCK.defaultBlockState().setValue(ChestBlock.FACING, Direction.Plane.HORIZONTAL.getRandomDirection(random)));
+				this.setBlock(level, pos, ModBlocks.TRAPPED_SANDSTONE_CHEST.BLOCK.defaultBlockState().setValue(ChestBlock.FACING, Direction.Plane.HORIZONTAL.getRandomDirection(random)).setValue(ChestBlock.WATERLOGGED, inWater));
 			} else {
-				this.setBlock(level, pos, ModBlocks.TRAPPED_GOLD_CHEST.BLOCK.defaultBlockState().setValue(ChestBlock.FACING, Direction.Plane.HORIZONTAL.getRandomDirection(random)));
+				this.setBlock(level, pos, ModBlocks.TRAPPED_GOLD_CHEST.BLOCK.defaultBlockState().setValue(ChestBlock.FACING, Direction.Plane.HORIZONTAL.getRandomDirection(random)).setValue(ChestBlock.WATERLOGGED, inWater));
 			}
 			if (pos.getY() >= 4) {
 				this.setBlock(level, pos.below(), ModBlocks.REDSTONE_STONE.BLOCK.defaultBlockState());
@@ -102,13 +103,13 @@ public class CaveChestFeature extends Feature<NoneFeatureConfiguration> {
 			this.setBlock(level, pos.below().below(), ModBlocks.INSTANT_TNT.BLOCK.defaultBlockState());
 		} else {
 			if (frozen) {
-				this.setBlock(level, pos, ModBlocks.FROZEN_CHEST.BLOCK.defaultBlockState().setValue(ChestBlock.FACING, Direction.Plane.HORIZONTAL.getRandomDirection(random)));
+				this.setBlock(level, pos, ModBlocks.FROZEN_CHEST.BLOCK.defaultBlockState().setValue(ChestBlock.FACING, Direction.Plane.HORIZONTAL.getRandomDirection(random)).setValue(ChestBlock.WATERLOGGED, inWater));
 			} else if (jungle) {
-				this.setBlock(level, pos, ModBlocks.IVY_CHEST.BLOCK.defaultBlockState().setValue(ChestBlock.FACING, Direction.Plane.HORIZONTAL.getRandomDirection(random)));
+				this.setBlock(level, pos, ModBlocks.IVY_CHEST.BLOCK.defaultBlockState().setValue(ChestBlock.FACING, Direction.Plane.HORIZONTAL.getRandomDirection(random)).setValue(ChestBlock.WATERLOGGED, inWater));
 			} else if (desert) {
-				this.setBlock(level, pos, ModBlocks.SANDSTONE_CHEST.BLOCK.defaultBlockState().setValue(ChestBlock.FACING, Direction.Plane.HORIZONTAL.getRandomDirection(random)));
+				this.setBlock(level, pos, ModBlocks.SANDSTONE_CHEST.BLOCK.defaultBlockState().setValue(ChestBlock.FACING, Direction.Plane.HORIZONTAL.getRandomDirection(random)).setValue(ChestBlock.WATERLOGGED, inWater));
 			} else {
-				this.setBlock(level, pos, ModBlocks.GOLD_CHEST.BLOCK.defaultBlockState().setValue(ChestBlock.FACING, Direction.Plane.HORIZONTAL.getRandomDirection(random)));
+				this.setBlock(level, pos, ModBlocks.GOLD_CHEST.BLOCK.defaultBlockState().setValue(ChestBlock.FACING, Direction.Plane.HORIZONTAL.getRandomDirection(random)).setValue(ChestBlock.WATERLOGGED, inWater));
 			}
 		}
 

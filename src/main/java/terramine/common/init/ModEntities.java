@@ -3,14 +3,15 @@ package terramine.common.init;
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
 import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityType;
-import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.*;
-import net.minecraft.world.entity.projectile.AbstractArrow;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.MobCategory;
+import net.minecraft.world.entity.SpawnPlacementTypes;
 import net.minecraft.world.level.levelgen.Heightmap;
 import terramine.TerraMine;
 import terramine.common.entity.block.InstantPrimedTNTEntity;
@@ -27,9 +28,9 @@ import terramine.common.entity.projectiles.*;
 import terramine.common.entity.projectiles.arrows.FlamingArrowEntity;
 import terramine.common.entity.projectiles.arrows.JesterArrowEntity;
 import terramine.common.entity.projectiles.arrows.UnholyArrowEntity;
-import terramine.common.entity.throwables.BombEntity;
-import terramine.common.entity.throwables.DynamiteEntity;
-import terramine.common.entity.throwables.GrenadeEntity;
+import terramine.common.entity.projectiles.throwables.BombEntity;
+import terramine.common.entity.projectiles.throwables.DynamiteEntity;
+import terramine.common.entity.projectiles.throwables.GrenadeEntity;
 
 public class ModEntities {
 
@@ -42,34 +43,34 @@ public class ModEntities {
 	public static final EntityType<DemonEyeEntity> DEMON_EYE = register(TerraMine.id("demon_eye"), FabricEntityType.Builder
 			.createMob(DemonEyeEntity::new, MobCategory.MONSTER, (builder) ->
 					builder.defaultAttributes(DemonEyeEntity::createMobAttributes).spawnRestriction(SpawnPlacementTypes.NO_RESTRICTIONS, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, DemonEyeEntity::checkMobSpawnRules))
-			.sized(0.53f, 0.53f));
+			.sized(0.53f, 0.8f));
 
 	public static final EntityType<EaterOfSoulsEntity> EATER_OF_SOULS = register(TerraMine.id("eater_of_souls"), FabricEntityType.Builder
 			.createMob(EaterOfSoulsEntity::new, MobCategory.MONSTER, (builder) ->
 					builder.defaultAttributes(EaterOfSoulsEntity::createMobAttributes).spawnRestriction(SpawnPlacementTypes.NO_RESTRICTIONS, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, EaterOfSoulsEntity::checkMobSpawnRules))
-			.sized(1f, 0.6f));
+			.sized(1.2f, 0.9f));
 
 	public static final EntityType<DevourerEntity> DEVOURER = register(TerraMine.id("devourer"), FabricEntityType.Builder
 			.createMob(DevourerEntity::new, MobCategory.MONSTER, (builder) ->
 					builder.defaultAttributes(DevourerEntity::createMobAttributes).spawnRestriction(SpawnPlacementTypes.NO_RESTRICTIONS, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, DevourerEntity::checkMobSpawnRules))
-			.sized(0.8f, 0.4f));
+			.sized(0.8f, 0.75f));
 
 	public static final EntityType<DevourerBodyEntity> DEVOURER_BODY = register(TerraMine.id("devourer_body"), FabricEntityType.Builder
 			.createMob(DevourerBodyEntity::new, MobCategory.MONSTER, (builder) ->
 					builder.defaultAttributes(DevourerBodyEntity::createMobAttributes))
-			.sized(0.8f, 0.4f)
+			.sized(0.8f, 0.75f)
 			.noSummon());
 
 	public static final EntityType<DevourerTailEntity> DEVOURER_TAIL = register(TerraMine.id("devourer_tail"), FabricEntityType.Builder
 			.createMob(DevourerTailEntity::new, MobCategory.MONSTER, (builder) ->
 					builder.defaultAttributes(DevourerTailEntity::createMobAttributes))
-			.sized(0.8f, 0.4f)
+			.sized(0.8f, 0.75f)
 			.noSummon());
 
 	public static final EntityType<CrimeraEntity> CRIMERA = register(TerraMine.id("crimera"), FabricEntityType.Builder
 			.createMob(CrimeraEntity::new, MobCategory.MONSTER, (builder) ->
 					builder.defaultAttributes(CrimeraEntity::createMobAttributes).spawnRestriction(SpawnPlacementTypes.NO_RESTRICTIONS, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, CrimeraEntity::checkMobSpawnRules))
-			.sized(0.85f, 0.5f));
+			.sized(1.05f, 0.8f));
 
 	/**
 	 * Testing, remove later

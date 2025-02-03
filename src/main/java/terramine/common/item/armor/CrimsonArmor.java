@@ -12,8 +12,6 @@ import net.minecraft.world.item.equipment.ArmorType;
 import net.minecraft.world.level.Level;
 import terramine.TerraMine;
 
-import java.util.UUID;
-
 public class CrimsonArmor extends TerrariaArmor {
     private int timer;
 

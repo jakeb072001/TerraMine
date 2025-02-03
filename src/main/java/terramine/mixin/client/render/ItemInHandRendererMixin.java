@@ -4,12 +4,10 @@ import com.llamalad7.mixinextras.injector.wrapmethod.WrapMethod;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.math.Axis;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.AbstractClientPlayer;
 import net.minecraft.client.renderer.ItemInHandRenderer;
 import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.entity.state.ArmedEntityRenderState;
 import net.minecraft.client.renderer.item.ItemModelResolver;
 import net.minecraft.client.renderer.item.ItemStackRenderState;
 import net.minecraft.client.renderer.texture.OverlayTexture;
@@ -28,7 +26,6 @@ import terramine.common.item.accessories.ShieldAccessoryLikeItem;
 import terramine.common.item.dye.BasicDye;
 import terramine.common.item.equipment.UmbrellaItem;
 import terramine.common.utility.Utilities;
-import terramine.extensions.EntityRenderStateExtensions;
 import terramine.extensions.PlayerStorages;
 
 @Mixin(ItemInHandRenderer.class)

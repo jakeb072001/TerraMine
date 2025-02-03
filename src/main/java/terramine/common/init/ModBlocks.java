@@ -12,7 +12,6 @@ import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
-import terramine.TerraMine;
 import terramine.common.block.*;
 import terramine.common.block.chests.*;
 import terramine.common.block.plants.EvilMushroom;
@@ -20,7 +19,6 @@ import terramine.common.utility.BlockItemRegister;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Function;
 
 public class ModBlocks {
     public static List<Item> BLOCK_ITEMS = new ArrayList<>();
@@ -83,6 +81,8 @@ public class ModBlocks {
     public static final BlockItemRegister VICIOUS_MUSHROOM = new BlockItemRegister("vicious_mushroom", key -> new EvilMushroom(false, Properties.of().setId(key).mapColor(MapColor.COLOR_RED).pushReaction(PushReaction.DESTROY).noCollission().instabreak().sound(SoundType.GRASS).lightLevel(blockState -> 1).hasPostProcess(ModBlocks::always)), 0.65f);
     public static final BlockItemRegister POTTED_VICIOUS_MUSHROOM = new BlockItemRegister("potted_vicious_mushroom", key -> new FlowerPotBlock(VICIOUS_MUSHROOM.BLOCK, BlockBehaviour.Properties.of().setId(key).mapColor(MapColor.COLOR_RED).pushReaction(PushReaction.DESTROY).instabreak().noOcclusion()), false);
 
+    // todo: maybe find a better way to add evil version of each block, maybe have a component that stores which evil type the block is if its even evil, then in the block renderer for the texture change the namespace to terramine and append _corruption or something to the texture
+    //  this way i can just mixin to the blocks i want and add that component, then create the texture. for block spread just use vanilla blocks but check for the component.
     // Corruption
     public static final BlockItemRegister CORRUPTED_GRASS = new BlockItemRegister("corrupted_grass", key -> new CorruptedGrass(Properties.ofFullCopy(Blocks.GRASS_BLOCK).setId(key).randomTicks()));
     public static final BlockItemRegister CORRUPTED_GRAVEL = new BlockItemRegister("corrupted_gravel", key -> new CorruptedFallingBlock(Properties.ofFullCopy(Blocks.GRAVEL).setId(key).randomTicks()));

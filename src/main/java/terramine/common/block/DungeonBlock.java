@@ -14,7 +14,6 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import terramine.common.item.equipment.TerrariaToolMaterials;
 import terramine.common.item.equipment.tools.TerrariaPickaxeItem;
 
 public class DungeonBlock extends Block {

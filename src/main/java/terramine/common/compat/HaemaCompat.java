@@ -1,11 +1,5 @@
 package terramine.common.compat;
 
-import net.fabricmc.fabric.api.util.TriState;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.level.Level;
-import org.jetbrains.annotations.NotNull;
-import terramine.common.item.equipment.UmbrellaItem;
-
 public class HaemaCompat implements CompatHandler {
 
 

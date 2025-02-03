@@ -99,7 +99,7 @@ public final class ModConfig extends PartitioningSerializer.GlobalData {
 
 			@ConfigEntry.Gui.Tooltip
 			@ConfigEntry.BoundedDiscrete(max = 319, min = -64)
-			public int maxSurfaceY = 55;
+			public int maxSurfaceY = 150;
 
 			@ConfigEntry.Gui.Tooltip
 			@ConfigEntry.BoundedDiscrete(max = 319, min = -64)

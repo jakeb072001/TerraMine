@@ -2,7 +2,6 @@ package terramine.common.item.equipment.tools;
 
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.PickaxeItem;
 import net.minecraft.world.item.ToolMaterial;
 import org.jetbrains.annotations.NotNull;
 

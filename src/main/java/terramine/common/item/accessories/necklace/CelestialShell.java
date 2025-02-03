@@ -3,7 +3,6 @@ package terramine.common.item.accessories.necklace;
 import be.florens.expandability.api.EventResult;
 import be.florens.expandability.api.fabric.PlayerSwimCallback;
 import com.google.common.collect.Multimap;
-import net.fabricmc.fabric.api.util.TriState;
 import net.minecraft.core.Holder;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerPlayer;

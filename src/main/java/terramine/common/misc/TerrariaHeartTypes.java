@@ -1,6 +1,7 @@
 package terramine.common.misc;
 
 import net.minecraft.resources.ResourceLocation;
+
 import static terramine.TerraMine.id;
 
 public enum TerrariaHeartTypes {

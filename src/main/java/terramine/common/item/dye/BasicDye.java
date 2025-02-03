@@ -8,9 +8,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.TooltipFlag;
-import org.joml.Vector3f;
 import terramine.common.item.TerrariaItem;
-import terramine.common.utility.Utilities;
 
 import java.util.List;
 
@@ -25,10 +23,6 @@ public class BasicDye extends TerrariaItem {
     @Override
     @Environment(EnvType.CLIENT)
     public void appendHoverText(ItemStack itemStack, TooltipContext tooltipContext, List<Component> tooltip, TooltipFlag tooltipFlag) {
-    }
-
-    public Vector3f getColour() {
-        return Utilities.colorFromInt(colour);
     }
 
     public int getColourInt() {

@@ -11,8 +11,6 @@ import terramine.TerraMine;
 import terramine.common.item.accessories.AccessoryTerrariaItem;
 import terramine.common.potions.effects.TerrariaEffect;
 
-import java.util.UUID;
-
 public class IronSkinEffect extends TerrariaEffect {
 
     public static final AttributeModifier IRONSKIN_ARMOR = new AttributeModifier(TerraMine.id("ironskin_armor"), 8, AttributeModifier.Operation.ADD_VALUE);

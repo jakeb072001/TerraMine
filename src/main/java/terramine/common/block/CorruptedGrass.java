@@ -80,9 +80,9 @@ public class CorruptedGrass extends CorruptionHelper implements BonemealableBloc
     }
 
     @Override
-    public void randomTick(@NotNull BlockState blockState, @NotNull ServerLevel serverLevel, @NotNull BlockPos blockPos, @NotNull RandomSource random) {
-        super.randomTick(blockState, serverLevel, blockPos, random);
-        if (canNotBeGrass(blockState, serverLevel, blockPos)) {
+    public void randomTick(@NotNull BlockState blockState, @NotNull ServerLevel serverLevel, @NotNull BlockPos blockPos, @NotNull RandomSource randomSource) {
+        super.randomTick(blockState, serverLevel, blockPos, randomSource);
+        if (!canBeGrass(blockState, serverLevel, blockPos)) {
             serverLevel.setBlockAndUpdate(blockPos, Blocks.DIRT.defaultBlockState());
         }
     }

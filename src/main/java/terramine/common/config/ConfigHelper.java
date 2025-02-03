@@ -11,6 +11,7 @@ import terramine.TerraMine;
 import java.io.IOException;
 import java.nio.file.Path;
 
+// todo: maybe find a way to update values if i change them and they where default (if i changed a default value but player hasn't modified that value)
 public class ConfigHelper {
 
     /**

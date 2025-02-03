@@ -25,7 +25,6 @@ import terramine.common.network.ServerPacketHandler;
 import terramine.common.network.types.ItemNetworkType;
 import terramine.extensions.PlayerStorages;
 
-import java.util.List;
 import java.util.Map;
 
 public class TerrariaInventoryContainerMenu extends AbstractContainerMenu {

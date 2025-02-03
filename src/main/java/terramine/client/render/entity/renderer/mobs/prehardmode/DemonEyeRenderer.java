@@ -1,7 +1,6 @@
 package terramine.client.render.entity.renderer.mobs.prehardmode;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.math.Axis;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -58,12 +57,6 @@ public class DemonEyeRenderer extends MobRenderer<DemonEyeEntity, TerrariaLiving
     protected void scale(TerrariaLivingEntityRenderState terrariaLivingEntityRenderState, PoseStack poseStack) {
         float f = 1.5f;
         poseStack.scale(f, f, f);
-        poseStack.translate(0f, 1.5f - 1.5 * 1.375f, -0.1f); // 1.5f - 1.5 * scale, normally but eye seems to be slightly off center in model so account for that here
-    }
-
-    @Override
-    protected void setupRotations(@NotNull TerrariaLivingEntityRenderState renderState, @NotNull PoseStack poseStack, float f, float g) {
-        super.setupRotations(renderState, poseStack, f, g);
-        poseStack.mulPose(Axis.XP.rotationDegrees(renderState.xRot));
+        poseStack.translate(0f, -0.15f, -0.2f);
     }
 }

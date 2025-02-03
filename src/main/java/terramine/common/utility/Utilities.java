@@ -6,6 +6,7 @@ import com.mojang.math.MatrixUtil;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
+import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.model.ShieldModel;
@@ -16,16 +17,21 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.Sheets;
 import net.minecraft.client.renderer.block.model.BakedQuad;
-import net.minecraft.client.renderer.blockentity.BannerRenderer;
 import net.minecraft.client.renderer.entity.ItemRenderer;
 import net.minecraft.client.renderer.item.ItemStackRenderState;
 import net.minecraft.client.resources.model.Material;
 import net.minecraft.client.resources.model.ModelBakery;
-import net.minecraft.core.Direction;
+import net.minecraft.core.*;
 import net.minecraft.core.component.DataComponentMap;
 import net.minecraft.core.component.DataComponents;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.network.protocol.game.ClientboundLevelChunkWithLightPacket;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerChunkCache;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.ARGB;
+import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.Entity;
@@ -36,26 +42,35 @@ import net.minecraft.world.entity.projectile.ProjectileUtil;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemDisplayContext;
-import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.ClipContext;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.biome.BiomeManager;
 import net.minecraft.world.level.block.entity.BannerPatternLayers;
+import net.minecraft.world.level.chunk.ChunkAccess;
+import net.minecraft.world.level.chunk.ImposterProtoChunk;
+import net.minecraft.world.level.chunk.LevelChunk;
+import net.minecraft.world.level.chunk.PalettedContainer;
+import net.minecraft.world.level.chunk.status.ChunkStatus;
 import net.minecraft.world.phys.*;
 import org.jetbrains.annotations.Nullable;
 import org.joml.Matrix4f;
-import org.joml.Vector3f;
-import terramine.common.item.dye.BasicDye;
+import terramine.TerraMine;
 import terramine.common.network.ServerPacketHandler;
+import terramine.common.network.types.IntBoolUUIDNetworkType;
 import terramine.common.network.types.ItemNetworkType;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Objects;
-import java.util.UUID;
+import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
 public class Utilities { // todo: need to fix bug with magic missile where the projectile will jitter back and forth instead of just staying at its position
+
+    // ---------------------------- server code ----------------------------
+
+    // Magic Missile aiming
     public static BlockHitResult rayTraceBlocks(Entity entity, double length, boolean checkLiquids)
     {
         if (checkLiquids) {
@@ -128,31 +143,93 @@ public class Utilities { // todo: need to fix bug with magic missile where the p
         return  coneAxis.scale(Math.cos(theta)).add(u.scale(Math.cos(phi) * Math.sin(theta))).add(v.scale(Math.sin(phi) * Math.sin(theta)));
     }
 
-    // from Fancy Dyes, I could have easily got this code from elsewhere, but I am using their code to help with my dye system, so I'll give credit where I can
-    // todo: probably don't need anymore
-    public static Vector3f colorFromInt(int color) {
-        float r = (float) (color >> 16 & 0xFF) / 255.0f;
-        float g = (float) (color >> 8 & 0xFF) / 255.0f;
-        float b = (float) (color & 0xFF) / 255.0f;
-        return new Vector3f(r, g, b);
-    }
+    // Change biomes
+    // Copied from EvilCraft, may improve later if possible
+    public static void setBiome(ServerLevel level, BlockPos posIn, ResourceKey<Biome> biome) {
+        BiomeManager biomeManager = level.getBiomeManager();
+        // Worldgen applies some funk "magnifier" position transformation to a "noise position",
+        // which can change the pos into some other internal pos.
+        // We copied the logic in BiomeManager#getBiome below:
+        int i = posIn.getX() - 2;
+        int j = posIn.getY() - 2;
+        int k = posIn.getZ() - 2;
+        int l = i >> 2;
+        int i1 = j >> 2;
+        int j1 = k >> 2;
+        double d0 = (double)(i & 3) / 4.0D;
+        double d1 = (double)(j & 3) / 4.0D;
+        double d2 = (double)(k & 3) / 4.0D;
+        int k1 = 0;
+        double d3 = Double.POSITIVE_INFINITY;
 
-    public static int intFromColor(BasicDye basicDye) {
-        int m = basicDye.getColourInt();
-        int i = ARGB.red(m);
-        int j = ARGB.green(m);
-        int k = ARGB.blue(m);
-        return ARGB.color(i, j, k);
-    }
-
-    public static int getDyeColour(ItemStack itemStack) {
-        if (itemStack.getItem() instanceof BasicDye dyeItem) {
-            return intFromColor(dyeItem);
+        for(int l1 = 0; l1 < 8; ++l1) {
+            boolean flag = (l1 & 4) == 0;
+            boolean flag1 = (l1 & 2) == 0;
+            boolean flag2 = (l1 & 1) == 0;
+            int i2 = flag ? l : l + 1;
+            int j2 = flag1 ? i1 : i1 + 1;
+            int k2 = flag2 ? j1 : j1 + 1;
+            double d4 = flag ? d0 : d0 - 1.0D;
+            double d5 = flag1 ? d1 : d1 - 1.0D;
+            double d6 = flag2 ? d2 : d2 - 1.0D;
+            double d7 = BiomeManager.getFiddledDistance(biomeManager.biomeZoomSeed, i2, j2, k2, d4, d5, d6);
+            if (d3 > d7) {
+                k1 = l1;
+                d3 = d7;
+            }
         }
 
-        return -1;
+        int l2 = (k1 & 4) == 0 ? l : l + 1;
+        int i3 = (k1 & 2) == 0 ? i1 : i1 + 1;
+        int j3 = (k1 & 1) == 0 ? j1 : j1 + 1;
+
+        // Update biome data in chunk
+        ChunkAccess chunk = level.getChunk(QuartPos.toSection(l2), QuartPos.toSection(j3), ChunkStatus.BIOMES, false);
+        if (chunk instanceof ImposterProtoChunk) {
+            chunk = ((ImposterProtoChunk) chunk).getWrapped();
+        }
+        if(chunk != null) {
+            // HACK
+            // Due to some weird thing in MC, different instances of the same biome can exist.
+            // This hack allows us to convert to the biome instance that is required for chunk serialization.
+            // This avoids weird errors in the form of "Received invalid biome id: -1" (#818)
+            Registry<Biome> biomeRegistry = level.registryAccess().lookupOrThrow(Registries.BIOME);
+            Optional<Holder.Reference<Biome>> biomeHack = biomeRegistry.get(biome);
+            if (biomeHack.isEmpty()) {
+                return;
+            }
+
+            // Update biome in chunk
+            // Based on ChunkAccess#getNoiseBiome
+            int minBuildHeight = QuartPos.fromBlock(chunk.getMinY());
+            int maxHeight = minBuildHeight + QuartPos.fromBlock(chunk.getHeight()) - 1;
+            int dummyY = Mth.clamp(i3, minBuildHeight, maxHeight);
+            int sectionIndex = chunk.getSectionIndex(QuartPos.toBlock(dummyY));
+            ((PalettedContainer<Holder<Biome>>) chunk.sections[sectionIndex].getBiomes()).set(l2 & 3, dummyY & 3, j3 & 3, biomeHack.get());
+
+            chunk.markUnsaved();
+        } else {
+            TerraMine.LOGGER.warn("Tried changing biome at non-existing chunk for position " + posIn);
+        }
     }
 
+    // Copied from EvilCraft
+    public static void updateChunkAfterBiomeChange(Level level, ChunkPos chunkPos) {
+        LevelChunk chunkSafe = level.getChunkSource().getChunk(chunkPos.x, chunkPos.z, false);
+        if (chunkSafe == null) {
+            TerraMine.LOGGER.warn("Chunk is null, failed to update chunk after biome change");
+            return;
+        }
+        ((ServerChunkCache) level.getChunkSource()).chunkMap.getPlayers(chunkPos, false).forEach((player) -> {
+            player.connection.send(new ClientboundLevelChunkWithLightPacket(chunkSafe, ((ServerChunkCache) level.getChunkSource()).chunkMap.getLightEngine(), null, null));
+            //NetworkManager.sendToPlayer(player, new IntBoolUUIDNetworkType(chunkPos.x, chunkPos.z, false, UUID.randomUUID()).setCustomType(ServerPacketHandler.UPDATE_BIOME_PACKET_ID));
+            ServerPlayNetworking.send(player, new IntBoolUUIDNetworkType(chunkPos.x, chunkPos.z, false, UUID.randomUUID(), ServerPacketHandler.UPDATE_BIOME_PACKET_ID));
+        });
+    }
+
+    // ---------------------------- client code ----------------------------
+
+    // Auto swing
     private static int swingTimer = 0;
 
     @Environment(EnvType.CLIENT)
@@ -176,6 +253,7 @@ public class Utilities { // todo: need to fix bug with magic missile where the p
         }
     }
 
+    // Dash movement
     private static boolean upPressed, downPressed, leftPressed, rightPressed;
     private static boolean upKeyUnpressed, downKeyUnpressed, leftKeyUnpressed, rightKeyUnpressed;
     private static int dashTimer;
@@ -263,6 +341,7 @@ public class Utilities { // todo: need to fix bug with magic missile where the p
         ClientPlayNetworking.send(new ItemNetworkType(item.getDefaultInstance(), 0, UUID.randomUUID(), ServerPacketHandler.DASH_PACKET_ID));
     }
 
+    // GUI Alpha Blit
     @Environment(EnvType.CLIENT)
     public static void alphaBlit(GuiGraphics guiGraphics, Function<ResourceLocation, RenderType> function, ResourceLocation resourceLocation, int i, int j, float f, float g, int k, int l, int m, int n, float v) {
         RenderType renderType = function.apply(resourceLocation);
@@ -280,6 +359,7 @@ public class Utilities { // todo: need to fix bug with magic missile where the p
         vertexConsumer.addVertex(matrix4f, (float)(i + k), (float)j, 0.0F).setUv(uMax, vMin).setColor(1, 1, 1, v);
     }
 
+    // Custom item renderer w/ dye support
     @Environment(EnvType.CLIENT)
     public static void renderItemCustomDye(ItemStackRenderState itemStackRenderState, PoseStack poseStack, MultiBufferSource multiBufferSource, int i, int j, int dyeColour) {
         for(int k = 0; k < itemStackRenderState.activeLayerCount; ++k) {

@@ -1,41 +1,32 @@
 package terramine.common.utility;
 
 import com.mojang.serialization.MapCodec;
-import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
-import net.minecraft.core.*;
-import net.minecraft.core.registries.Registries;
-import net.minecraft.network.protocol.game.ClientboundLevelChunkWithLightPacket;
-import net.minecraft.resources.ResourceKey;
-import net.minecraft.server.level.ServerChunkCache;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.FluidTags;
-import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.ChunkPos;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
-import net.minecraft.world.level.biome.Biome;
-import net.minecraft.world.level.biome.BiomeManager;
 import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.chunk.ChunkAccess;
-import net.minecraft.world.level.chunk.ImposterProtoChunk;
-import net.minecraft.world.level.chunk.LevelChunk;
-import net.minecraft.world.level.chunk.PalettedContainer;
-import net.minecraft.world.level.chunk.status.ChunkStatus;
 import net.minecraft.world.level.lighting.LightEngine;
 import org.jetbrains.annotations.NotNull;
 import terramine.TerraMine;
 import terramine.common.block.CorruptedSnowLayer;
-import terramine.datagen.ModBiomes;
+import terramine.common.block.CrimsonSnowLayer;
 import terramine.common.init.ModBlocks;
-import terramine.common.network.ServerPacketHandler;
-import terramine.common.network.types.IntBoolUUIDNetworkType;
+import terramine.datagen.ModBiomes;
 
-import java.util.Optional;
-import java.util.UUID;
+import static terramine.common.utility.Utilities.setBiome;
+import static terramine.common.utility.Utilities.updateChunkAfterBiomeChange;
 
+// todo: have a way to increase biome spread speed (for some events such as entering hardcore mode or for killing Plantera slowdown the spread again)
+// todo: have a way for the corruption to spread up trees or something, they remain green at the top while everything else is tinted correctly
+
+// todo: have a way to undo the evil spread (using either a command or using the Clentaminator),
+//  both return blocks to original state (easy, will need a non evil version of evil ores though) and return biome to original biome. Use level().getNoiseBiome(x, y, z) to get the original biome (even replaces original evil biomes!)
 public class CorruptionHelper extends SpreadingSnowyDirtBlock  {
     protected CorruptionHelper(Properties properties) {
         super(properties);
@@ -46,91 +37,97 @@ public class CorruptionHelper extends SpreadingSnowyDirtBlock  {
         return GrassBlock.CODEC;
     }
 
-    public static boolean canNotBeGrass(BlockState blockState, LevelReader levelReader, BlockPos blockPos) {
+    protected static boolean canBeGrass(BlockState blockState, LevelReader levelReader, BlockPos blockPos) {
         BlockPos blockPos2 = blockPos.above();
         BlockState blockState2 = levelReader.getBlockState(blockPos2);
         if (blockState2.is(Blocks.SNOW) && blockState2.getValue(SnowLayerBlock.LAYERS) == 1) {
-            return false;
+            return true;
         }
         if (blockState2.is(ModBlocks.CORRUPTED_SNOW_LAYER.BLOCK) && blockState2.getValue(CorruptedSnowLayer.LAYERS) == 1) {
-            return false;
+            return true;
         }
         if (blockState2.getFluidState().getAmount() == 8) {
-            return true;
+            return false;
         }
         int i = LightEngine.getLightBlockInto(blockState, blockState2, Direction.UP, blockState2.getLightBlock());
         return i < 15;
     }
 
-    private static boolean canNotPropagate(BlockState blockState, LevelReader levelReader, BlockPos blockPos) {
+    protected static boolean canPropagate(BlockState blockState, LevelReader levelReader, BlockPos blockPos) {
         BlockPos blockPos2 = blockPos.above();
-        return canNotBeGrass(blockState, levelReader, blockPos) || levelReader.getFluidState(blockPos2).is(FluidTags.WATER);
+        return canBeGrass(blockState, levelReader, blockPos) && !levelReader.getFluidState(blockPos2).is(FluidTags.WATER);
     }
 
     @Override
-    public void randomTick(@NotNull BlockState blockState, @NotNull ServerLevel serverLevel, @NotNull BlockPos blockPos, @NotNull RandomSource random) {
+    public void randomTick(@NotNull BlockState blockState, @NotNull ServerLevel serverLevel, @NotNull BlockPos blockPos, @NotNull RandomSource randomSource) {
         if (!TerraMine.CONFIG.general.disableEvilSpread) { // allows user to disable spreading in configs
-            BlockState grass = ModBlocks.CORRUPTED_GRASS.BLOCK.defaultBlockState();
             BlockState snow_layer = ModBlocks.CORRUPTED_SNOW_LAYER.BLOCK.defaultBlockState();
 
-            for (int i = 0; i < 4; ++i) { // corrupted grass spread to grass and dirt
-                if (random.nextInt(TerraMine.CONFIG.general.evilSpreadRarity + 1) == 1) {
-                    BlockPos blockPos2 = blockPos.offset(random.nextInt(3) - 1, random.nextInt(3) - 1, random.nextInt(3) - 1);
-                    if ((!serverLevel.getBlockState(blockPos2).is(Blocks.GRASS_BLOCK) && !serverLevel.getBlockState(blockPos2).is(Blocks.DIRT)) || canNotPropagate(grass, serverLevel, blockPos2)) continue;
-                    serverLevel.setBlockAndUpdate(blockPos2, grass.setValue(SNOWY, (serverLevel.getBlockState(blockPos2.above()).is(Blocks.SNOW) || serverLevel.getBlockState(blockPos2.above()).is(ModBlocks.CORRUPTED_SNOW_LAYER.BLOCK))));
-                    spreadBiome(serverLevel, blockPos2, false);
-                }
-            }
             for (int i = 0; i < 4; ++i) { // spread layered snow
-                if (random.nextInt(TerraMine.CONFIG.general.evilSpreadRarity + 1) == 1) {
-                    BlockPos blockPos2 = blockPos.offset(random.nextInt(3) - 1, random.nextInt(3) - 1, random.nextInt(3) - 1);
-                    if (!serverLevel.getBlockState(blockPos2).is(Blocks.SNOW)) continue;
-                    serverLevel.setBlockAndUpdate(blockPos2, snow_layer.setValue(CorruptedSnowLayer.LAYERS, serverLevel.getBlockState(blockPos2).getValue(SnowLayerBlock.LAYERS)));
+                BlockPos blockPos2 = blockPos.offset(randomSource.nextInt(3) - 1, randomSource.nextInt(3) - 1, randomSource.nextInt(3) - 1);
+                if (serverLevel.getBlockState(blockPos2).is(Blocks.SNOW)) {
+                    serverLevel.setBlockAndUpdate(blockPos2, snow_layer.setValue(CrimsonSnowLayer.LAYERS, serverLevel.getBlockState(blockPos2).getValue(SnowLayerBlock.LAYERS)));
                 }
             }
 
-            spreadBlock(ModBlocks.CORRUPTED_GRAVEL, Blocks.GRAVEL, serverLevel, blockPos, random);
-            spreadBlock(ModBlocks.CORRUPTED_SAND, Blocks.SAND, serverLevel, blockPos, random);
-            spreadBlock(ModBlocks.CORRUPTED_GLASS, Blocks.GLASS, serverLevel, blockPos, random);
-            spreadBlock(ModBlocks.CORRUPTED_SANDSTONE, Blocks.SANDSTONE, serverLevel, blockPos, random);
-            spreadBlock(ModBlocks.CORRUPTED_ANDESITE, Blocks.ANDESITE, serverLevel, blockPos, random);
-            spreadBlock(ModBlocks.CORRUPTED_DIORITE, Blocks.DIORITE, serverLevel, blockPos, random);
-            spreadBlock(ModBlocks.CORRUPTED_GRANITE, Blocks.GRANITE, serverLevel, blockPos, random);
-            spreadBlock(ModBlocks.CORRUPTED_STONE, Blocks.STONE, serverLevel, blockPos, random);
-            spreadBlock(ModBlocks.CORRUPTED_DEEPSLATE, Blocks.DEEPSLATE, serverLevel, blockPos, random);
-            spreadBlock(ModBlocks.CORRUPTED_COBBLESTONE, Blocks.COBBLESTONE, serverLevel, blockPos, random);
-            spreadBlock(ModBlocks.CORRUPTED_COBBLED_DEEPSLATE, Blocks.COBBLED_DEEPSLATE, serverLevel, blockPos, random);
-            spreadBlock(ModBlocks.CORRUPTED_COAL_ORE, Blocks.COAL_ORE, serverLevel, blockPos, random);
-            spreadBlock(ModBlocks.CORRUPTED_IRON_ORE, Blocks.IRON_ORE, serverLevel, blockPos, random);
-            spreadBlock(ModBlocks.CORRUPTED_COPPER_ORE, Blocks.COPPER_ORE, serverLevel, blockPos, random);
-            spreadBlock(ModBlocks.CORRUPTED_GOLD_ORE, Blocks.GOLD_ORE, serverLevel, blockPos, random);
-            spreadBlock(ModBlocks.CORRUPTED_LAPIS_ORE, Blocks.LAPIS_ORE, serverLevel, blockPos, random);
-            spreadBlock(ModBlocks.CORRUPTED_REDSTONE_ORE, Blocks.REDSTONE_ORE, serverLevel, blockPos, random);
-            spreadBlock(ModBlocks.CORRUPTED_DIAMOND_ORE, Blocks.DIAMOND_ORE, serverLevel, blockPos, random);
-            spreadBlock(ModBlocks.CORRUPTED_EMERALD_ORE, Blocks.EMERALD_ORE, serverLevel, blockPos, random);
-            spreadBlock(ModBlocks.CORRUPTED_DEEPSLATE_COAL_ORE, Blocks.DEEPSLATE_COAL_ORE, serverLevel, blockPos, random);
-            spreadBlock(ModBlocks.CORRUPTED_DEEPSLATE_IRON_ORE, Blocks.DEEPSLATE_IRON_ORE, serverLevel, blockPos, random);
-            spreadBlock(ModBlocks.CORRUPTED_DEEPSLATE_COPPER_ORE, Blocks.DEEPSLATE_COPPER_ORE, serverLevel, blockPos, random);
-            spreadBlock(ModBlocks.CORRUPTED_DEEPSLATE_GOLD_ORE, Blocks.DEEPSLATE_GOLD_ORE, serverLevel, blockPos, random);
-            spreadBlock(ModBlocks.CORRUPTED_DEEPSLATE_LAPIS_ORE, Blocks.DEEPSLATE_LAPIS_ORE, serverLevel, blockPos, random);
-            spreadBlock(ModBlocks.CORRUPTED_DEEPSLATE_REDSTONE_ORE, Blocks.DEEPSLATE_REDSTONE_ORE, serverLevel, blockPos, random);
-            spreadBlock(ModBlocks.CORRUPTED_DEEPSLATE_DIAMOND_ORE, Blocks.DEEPSLATE_DIAMOND_ORE, serverLevel, blockPos, random);
-            spreadBlock(ModBlocks.CORRUPTED_DEEPSLATE_EMERALD_ORE, Blocks.DEEPSLATE_EMERALD_ORE, serverLevel, blockPos, random);
-            spreadBlock(ModBlocks.CORRUPTED_SNOW, Blocks.SNOW_BLOCK, serverLevel, blockPos, random);
-            spreadBlock(ModBlocks.CORRUPTED_ICE, Blocks.ICE, serverLevel, blockPos, random);
-            spreadBlock(ModBlocks.CORRUPTED_PACKED_ICE, Blocks.PACKED_ICE, serverLevel, blockPos, random);
-            spreadBlock(ModBlocks.CORRUPTED_BLUE_ICE, Blocks.BLUE_ICE, serverLevel, blockPos, random);
+            spreadBlockGrass(ModBlocks.CORRUPTED_GRASS, Blocks.DIRT, serverLevel, blockPos, randomSource);
+            spreadBlockGrass(ModBlocks.CORRUPTED_GRASS, Blocks.GRASS_BLOCK, serverLevel, blockPos, randomSource);
+            spreadBlock(ModBlocks.CORRUPTED_GRAVEL, Blocks.GRAVEL, serverLevel, blockPos, randomSource);
+            spreadBlock(ModBlocks.CORRUPTED_SAND, Blocks.SAND, serverLevel, blockPos, randomSource);
+            spreadBlock(ModBlocks.CORRUPTED_GLASS, Blocks.GLASS, serverLevel, blockPos, randomSource);
+            spreadBlock(ModBlocks.CORRUPTED_SANDSTONE, Blocks.SANDSTONE, serverLevel, blockPos, randomSource);
+            spreadBlock(ModBlocks.CORRUPTED_ANDESITE, Blocks.ANDESITE, serverLevel, blockPos, randomSource);
+            spreadBlock(ModBlocks.CORRUPTED_DIORITE, Blocks.DIORITE, serverLevel, blockPos, randomSource);
+            spreadBlock(ModBlocks.CORRUPTED_GRANITE, Blocks.GRANITE, serverLevel, blockPos, randomSource);
+            spreadBlock(ModBlocks.CORRUPTED_STONE, Blocks.STONE, serverLevel, blockPos, randomSource);
+            spreadBlock(ModBlocks.CORRUPTED_DEEPSLATE, Blocks.DEEPSLATE, serverLevel, blockPos, randomSource);
+            spreadBlock(ModBlocks.CORRUPTED_COBBLESTONE, Blocks.COBBLESTONE, serverLevel, blockPos, randomSource);
+            spreadBlock(ModBlocks.CORRUPTED_COBBLED_DEEPSLATE, Blocks.COBBLED_DEEPSLATE, serverLevel, blockPos, randomSource);
+            spreadBlock(ModBlocks.CORRUPTED_COAL_ORE, Blocks.COAL_ORE, serverLevel, blockPos, randomSource);
+            spreadBlock(ModBlocks.CORRUPTED_IRON_ORE, Blocks.IRON_ORE, serverLevel, blockPos, randomSource);
+            spreadBlock(ModBlocks.CORRUPTED_COPPER_ORE, Blocks.COPPER_ORE, serverLevel, blockPos, randomSource);
+            spreadBlock(ModBlocks.CORRUPTED_GOLD_ORE, Blocks.GOLD_ORE, serverLevel, blockPos, randomSource);
+            spreadBlock(ModBlocks.CORRUPTED_LAPIS_ORE, Blocks.LAPIS_ORE, serverLevel, blockPos, randomSource);
+            spreadBlock(ModBlocks.CORRUPTED_REDSTONE_ORE, Blocks.REDSTONE_ORE, serverLevel, blockPos, randomSource);
+            spreadBlock(ModBlocks.CORRUPTED_DIAMOND_ORE, Blocks.DIAMOND_ORE, serverLevel, blockPos, randomSource);
+            spreadBlock(ModBlocks.CORRUPTED_EMERALD_ORE, Blocks.EMERALD_ORE, serverLevel, blockPos, randomSource);
+            spreadBlock(ModBlocks.CORRUPTED_DEEPSLATE_COAL_ORE, Blocks.DEEPSLATE_COAL_ORE, serverLevel, blockPos, randomSource);
+            spreadBlock(ModBlocks.CORRUPTED_DEEPSLATE_IRON_ORE, Blocks.DEEPSLATE_IRON_ORE, serverLevel, blockPos, randomSource);
+            spreadBlock(ModBlocks.CORRUPTED_DEEPSLATE_COPPER_ORE, Blocks.DEEPSLATE_COPPER_ORE, serverLevel, blockPos, randomSource);
+            spreadBlock(ModBlocks.CORRUPTED_DEEPSLATE_GOLD_ORE, Blocks.DEEPSLATE_GOLD_ORE, serverLevel, blockPos, randomSource);
+            spreadBlock(ModBlocks.CORRUPTED_DEEPSLATE_LAPIS_ORE, Blocks.DEEPSLATE_LAPIS_ORE, serverLevel, blockPos, randomSource);
+            spreadBlock(ModBlocks.CORRUPTED_DEEPSLATE_REDSTONE_ORE, Blocks.DEEPSLATE_REDSTONE_ORE, serverLevel, blockPos, randomSource);
+            spreadBlock(ModBlocks.CORRUPTED_DEEPSLATE_DIAMOND_ORE, Blocks.DEEPSLATE_DIAMOND_ORE, serverLevel, blockPos, randomSource);
+            spreadBlock(ModBlocks.CORRUPTED_DEEPSLATE_EMERALD_ORE, Blocks.DEEPSLATE_EMERALD_ORE, serverLevel, blockPos, randomSource);
+            spreadBlock(ModBlocks.CORRUPTED_SNOW, Blocks.SNOW_BLOCK, serverLevel, blockPos, randomSource);
+            spreadBlock(ModBlocks.CORRUPTED_ICE, Blocks.ICE, serverLevel, blockPos, randomSource);
+            spreadBlock(ModBlocks.CORRUPTED_PACKED_ICE, Blocks.PACKED_ICE, serverLevel, blockPos, randomSource);
+            spreadBlock(ModBlocks.CORRUPTED_BLUE_ICE, Blocks.BLUE_ICE, serverLevel, blockPos, randomSource);
         }
     }
 
-    private void spreadBlock(BlockItemRegister toSpread, Block spreadTo, ServerLevel serverLevel, BlockPos blockPos, RandomSource random) {
+    private void spreadBlock(BlockItemRegister toSpread, Block spreadTo, ServerLevel serverLevel, BlockPos blockPos, RandomSource randomSource) {
         for (int i = 0; i < 4; ++i) {
-            if (random.nextInt(TerraMine.CONFIG.general.evilSpreadRarity + 1) == 1) {
+            if (randomSource.nextInt(TerraMine.CONFIG.general.evilSpreadRarity + 1) == 1) {
                 BlockState block = toSpread.BLOCK.defaultBlockState();
-                BlockPos blockPos2 = blockPos.offset(random.nextInt(3) - 1, random.nextInt(3) - 1, random.nextInt(3) - 1);
-                if (!serverLevel.getBlockState(blockPos2).is(spreadTo)) continue;
-                serverLevel.setBlockAndUpdate(blockPos2, block.setValue(SNOWY, (serverLevel.getBlockState(blockPos2.above()).is(Blocks.SNOW) || serverLevel.getBlockState(blockPos2.above()).is(ModBlocks.CORRUPTED_SNOW_LAYER.BLOCK))));
-                spreadBiome(serverLevel, blockPos2, false);
+                BlockPos blockPos2 = blockPos.offset(randomSource.nextInt(3) - 1, randomSource.nextInt(3) - 1, randomSource.nextInt(3) - 1);
+                if (serverLevel.getBlockState(blockPos2).is(spreadTo)) {
+                    serverLevel.setBlockAndUpdate(blockPos2, block.setValue(SNOWY, isSnowySetting(serverLevel.getBlockState(blockPos2.above()))));
+                    CorruptionHelper.spreadBiome(serverLevel, blockPos2, false);
+                }
+            }
+        }
+    }
+
+    private void spreadBlockGrass(BlockItemRegister toSpread, Block spreadTo, ServerLevel serverLevel, BlockPos blockPos, RandomSource randomSource) {
+        for (int i = 0; i < 4; ++i) {
+            if (randomSource.nextInt(TerraMine.CONFIG.general.evilSpreadRarity / 3 + 1) == 1) {
+                BlockState block = toSpread.BLOCK.defaultBlockState();
+                BlockPos blockPos2 = blockPos.offset(randomSource.nextInt(3) - 1, randomSource.nextInt(3) - 1, randomSource.nextInt(3) - 1);
+                if (serverLevel.getBlockState(blockPos2).is(spreadTo) && canPropagate(block, serverLevel, blockPos2)) {
+                    serverLevel.setBlockAndUpdate(blockPos2, block.setValue(SNOWY, isSnowySetting(serverLevel.getBlockState(blockPos2.above()))));
+                    CorruptionHelper.spreadBiome(serverLevel, blockPos2, true);
+                }
             }
         }
     }
@@ -153,88 +150,5 @@ public class CorruptionHelper extends SpreadingSnowyDirtBlock  {
             }
             updateChunkAfterBiomeChange(serverLevel, new ChunkPos(blockPos));
         }
-    }
-
-    // Copied from EvilCraft, may improve later if possible
-    public static void setBiome(ServerLevel level, BlockPos posIn, ResourceKey<Biome> biome) {
-        BiomeManager biomeManager = level.getBiomeManager();
-        // Worldgen applies some funk "magnifier" position transformation to a "noise position",
-        // which can change the pos into some other internal pos.
-        // We copied the logic in BiomeManager#getBiome below:
-        int i = posIn.getX() - 2;
-        int j = posIn.getY() - 2;
-        int k = posIn.getZ() - 2;
-        int l = i >> 2;
-        int i1 = j >> 2;
-        int j1 = k >> 2;
-        double d0 = (double)(i & 3) / 4.0D;
-        double d1 = (double)(j & 3) / 4.0D;
-        double d2 = (double)(k & 3) / 4.0D;
-        int k1 = 0;
-        double d3 = Double.POSITIVE_INFINITY;
-
-        for(int l1 = 0; l1 < 8; ++l1) {
-            boolean flag = (l1 & 4) == 0;
-            boolean flag1 = (l1 & 2) == 0;
-            boolean flag2 = (l1 & 1) == 0;
-            int i2 = flag ? l : l + 1;
-            int j2 = flag1 ? i1 : i1 + 1;
-            int k2 = flag2 ? j1 : j1 + 1;
-            double d4 = flag ? d0 : d0 - 1.0D;
-            double d5 = flag1 ? d1 : d1 - 1.0D;
-            double d6 = flag2 ? d2 : d2 - 1.0D;
-            double d7 = BiomeManager.getFiddledDistance(biomeManager.biomeZoomSeed, i2, j2, k2, d4, d5, d6);
-            if (d3 > d7) {
-                k1 = l1;
-                d3 = d7;
-            }
-        }
-
-        int l2 = (k1 & 4) == 0 ? l : l + 1;
-        int i3 = (k1 & 2) == 0 ? i1 : i1 + 1;
-        int j3 = (k1 & 1) == 0 ? j1 : j1 + 1;
-
-        // Update biome data in chunk
-        ChunkAccess chunk = level.getChunk(QuartPos.toSection(l2), QuartPos.toSection(j3), ChunkStatus.BIOMES, false);
-        if (chunk instanceof ImposterProtoChunk) {
-            chunk = ((ImposterProtoChunk) chunk).getWrapped();
-        }
-        if(chunk != null) {
-            // HACK
-            // Due to some weird thing in MC, different instances of the same biome can exist.
-            // This hack allows us to convert to the biome instance that is required for chunk serialization.
-            // This avoids weird errors in the form of "Received invalid biome id: -1" (#818)
-            Registry<Biome> biomeRegistry = level.registryAccess().lookupOrThrow(Registries.BIOME);
-            Optional<Holder.Reference<Biome>> biomeHack = biomeRegistry.get(biome);
-            if (biomeHack.isEmpty()) {
-                return;
-            }
-
-            // Update biome in chunk
-            // Based on ChunkAccess#getNoiseBiome
-            int minBuildHeight = QuartPos.fromBlock(chunk.getMinY());
-            int maxHeight = minBuildHeight + QuartPos.fromBlock(chunk.getHeight()) - 1;
-            int dummyY = Mth.clamp(i3, minBuildHeight, maxHeight);
-            int sectionIndex = chunk.getSectionIndex(QuartPos.toBlock(dummyY));
-            ((PalettedContainer<Holder<Biome>>) chunk.sections[sectionIndex].getBiomes()).set(l2 & 3, dummyY & 3, j3 & 3, biomeHack.get());
-
-            chunk.markUnsaved();
-        } else {
-            TerraMine.LOGGER.warn("Tried changing biome at non-existing chunk for position " + posIn);
-        }
-    }
-
-    // Copied from EvilCraft
-    public static void updateChunkAfterBiomeChange(Level level, ChunkPos chunkPos) {
-        LevelChunk chunkSafe = level.getChunkSource().getChunk(chunkPos.x, chunkPos.z, false);
-        if (chunkSafe == null) {
-            TerraMine.LOGGER.warn("Chunk is null, failed to update chunk after biome change");
-            return;
-        }
-        ((ServerChunkCache) level.getChunkSource()).chunkMap.getPlayers(chunkPos, false).forEach((player) -> {
-            player.connection.send(new ClientboundLevelChunkWithLightPacket(chunkSafe, ((ServerChunkCache) level.getChunkSource()).chunkMap.getLightEngine(), null, null));
-            //NetworkManager.sendToPlayer(player, new IntBoolUUIDNetworkType(chunkPos.x, chunkPos.z, false, UUID.randomUUID()).setCustomType(ServerPacketHandler.UPDATE_BIOME_PACKET_ID));
-            ServerPlayNetworking.send(player, new IntBoolUUIDNetworkType(chunkPos.x, chunkPos.z, false, UUID.randomUUID(), ServerPacketHandler.UPDATE_BIOME_PACKET_ID));
-        });
     }
 }

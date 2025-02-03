@@ -14,7 +14,6 @@ import terramine.TerraMine;
 import terramine.client.render.entity.model.misc.MeteoriteModel;
 import terramine.client.render.entity.states.TerrariaEntityRenderState;
 import terramine.common.entity.projectiles.FallingMeteoriteEntity;
-import terramine.common.entity.projectiles.FallingStarEntity;
 import terramine.common.init.ModModelLayers;
 
 public class MeteoriteRenderer extends EntityRenderer<FallingMeteoriteEntity, TerrariaEntityRenderState> {

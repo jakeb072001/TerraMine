@@ -55,7 +55,7 @@ public class ModRecipes extends FabricRecipeProvider {
                 createShapeless(RecipeCategory.MISC, ModItems.LIGHTNING_BOOTS, ModItems.SPECTRE_BOOTS, ModItems.ANKLET, ModItems.AGLET);
                 createShapeless(RecipeCategory.MISC, ModItems.MAGIC_CUFFS, ModItems.MANA_REGENERATION_BAND, ModItems.SHACKLE);
                 createShapeless(RecipeCategory.MISC, ModItems.MAGMA_SKULL, ModItems.OBSIDIAN_SKULL, ModItems.MAGMA_STONE);
-                createShapeless(RecipeCategory.MISC, ModItems.MANA_CRYSTAL, 1, 5, Ingredient.of(ModItems.FALLEN_STAR));
+                createShapeless(RecipeCategory.MISC, ModItems.MANA_CRYSTAL, 1, 5, ModItems.FALLEN_STAR);
                 createShapeless(RecipeCategory.MISC, ModItems.MANA_REGENERATION_BAND, ModItems.BAND_OF_REGENERATION, ModItems.BAND_OF_STARPOWER);
                 createShapeless(RecipeCategory.MISC, ModItems.MASTER_NINJA_GEAR, ModItems.TIGER_CLIMBING_GEAR, ModItems.TABI, ModItems.BLACK_BELT);
                 createShapeless(RecipeCategory.MISC, ModItems.MECHANICAL_GLOVE, ModItems.POWER_GLOVE, ModItems.AVENGER_EMBLEM);

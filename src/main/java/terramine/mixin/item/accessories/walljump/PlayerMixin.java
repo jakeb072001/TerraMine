@@ -71,12 +71,14 @@ public abstract class PlayerMixin extends AbstractClientPlayer {
         }
     }
 
-    private boolean checkAccessories() {
+    @Unique
+    private boolean canStayOnWall() {
         return (AccessoriesHelper.isEquipped(ModItems.SHOE_SPIKES, this) && AccessoriesHelper.isEquipped(ModItems.CLIMBING_CLAWS, this)) || AccessoriesHelper.isEquipped(ModItems.TIGER_CLIMBING_GEAR, this)
                 || AccessoriesHelper.isEquipped(ModItems.MASTER_NINJA_GEAR, this);
     }
 
 
+    @Unique
     private void doWallJump() {
         if(this.onGround() || this.isFallFlying() || !this.level().getFluidState(this.blockPosition()).isEmpty() || this.isImmobile()) {
             this.ticksWallClinged = 0;
@@ -85,12 +87,15 @@ public abstract class PlayerMixin extends AbstractClientPlayer {
             this.lastJumpY = Double.MAX_VALUE;
             this.staleWalls.clear();
 
+            ModComponents.MOVEMENT_ORDER.get(this).setWallJumped(false);
+            ClientPlayNetworking.send(new IntBoolUUIDNetworkType(0, 0,false, UUID.randomUUID(), ServerPacketHandler.WALL_JUMP_PACKET_ID));
+
             return;
         }
 
         this.updateWalls();
         this.ticksKeyDown = InputHandler.isHoldingShift(this) ? this.ticksKeyDown + 1 : 0;
-        boolean accessoryCheck = checkAccessories();
+        boolean accessoryCheck = canStayOnWall();
 
         if(this.ticksWallClinged < 1) {
             if (!accessoryCheck) {
@@ -179,6 +184,7 @@ public abstract class PlayerMixin extends AbstractClientPlayer {
     }
 
 
+    @Unique
     private boolean canWallCling() {
         if(this.onClimbable() || this.getForward().y() > 0.1)
             return false;
@@ -191,6 +197,7 @@ public abstract class PlayerMixin extends AbstractClientPlayer {
     }
 
 
+    @Unique
     private void updateWalls() {
         AABB box = new AABB(
                 this.getX() - 0.001,
@@ -224,12 +231,14 @@ public abstract class PlayerMixin extends AbstractClientPlayer {
     }
 
 
+    @Unique
     private Direction getClingDirection() {
 
         return this.walls.isEmpty() ? Direction.UP : this.walls.iterator().next();
     }
 
 
+    @Unique
     private BlockPos getWallPos() {
 
         BlockPos clingPos = this.blockPosition().relative(this.getClingDirection());
@@ -237,6 +246,7 @@ public abstract class PlayerMixin extends AbstractClientPlayer {
     }
 
 
+    @Unique
     private void wallJump(float up) {
         float strafe = Math.signum(this.getSpeed()) * up * up;
         float forward = Math.signum(this.getSpeed()) * up * up;
@@ -264,18 +274,21 @@ public abstract class PlayerMixin extends AbstractClientPlayer {
     }
 
 
+    @Unique
     private void playHitSound(BlockPos blockPos) {
         BlockState blockState = this.level().getBlockState(blockPos);
         SoundType soundType = blockState.getBlock().defaultBlockState().getSoundType();
         this.playSound(soundType.getHitSound(), soundType.getVolume() * 0.25F, soundType.getPitch());
     }
 
+    @Unique
     private void playBreakSound(BlockPos blockPos) {
         BlockState blockState = this.level().getBlockState(blockPos);
         SoundType soundType = blockState.getBlock().defaultBlockState().getSoundType();
         this.playSound(soundType.getFallSound(), soundType.getVolume() * 0.5F, soundType.getPitch());
     }
 
+    @Unique
     private void spawnWallParticle(BlockPos blockPos) {
         BlockState blockState = this.level().getBlockState(blockPos);
         if(blockState.getRenderShape() != RenderShape.INVISIBLE) {

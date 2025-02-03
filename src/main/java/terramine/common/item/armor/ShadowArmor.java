@@ -12,8 +12,6 @@ import net.minecraft.world.item.equipment.ArmorType;
 import net.minecraft.world.level.Level;
 import terramine.TerraMine;
 
-import java.util.UUID;
-
 public class ShadowArmor extends TerrariaArmor {
     private static final AttributeModifier MOVEMENT_SPEED_BONUS = new AttributeModifier(TerraMine.id("shadow_armor_set_bonus"), 0.15, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL);
 

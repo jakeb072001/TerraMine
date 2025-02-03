@@ -10,6 +10,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Treasure Bags
 - Shield of Cthulhu and Worm Scarf //-- Not yet started
 
+## [1.7.8-1.21.4] - 2025-02-05
+### Changed
+- Surface chests spawn much higher by default (may need to change your max surface chest height in worldgen config)
+- Surface chests also check to make sure they only spawn in caves or water, which is why the first change was made, hopefully chests appear more often
+- Various bad hitboxes (Demon Eyes hitbox was just off entirely, all mobs have had hitboxes expanded, may still be adjusted)
+
+### Fixed
+- Evil biome spread not working correctly (dirt would spread to grass instead of the other way around)
+- Dungeon not generating
+- Mana Crystal only costing 1 fallen star (found a bug mojang)
+- Wall Climbing disabling various other accessories abilities when it shouldn't (oops)
+- Various issues with throwable explosives (grenade, bomb, dynamite)
+
 ## [1.7.7-1.21.4] - 2025-02-01
 ### Fixed
 - Accessories rendering their texture onto the player model

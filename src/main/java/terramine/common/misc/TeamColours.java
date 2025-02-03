@@ -1,8 +1,5 @@
 package terramine.common.misc;
 
-import org.joml.Vector3f;
-import terramine.common.utility.Utilities;
-
 public enum TeamColours {
     NONE(0, "none", 0x000000),
     WHITE(1, "blue", 0xFFFFFF),
@@ -37,7 +34,7 @@ public enum TeamColours {
         return name;
     }
 
-    public Vector3f getTeamColour() {
-        return Utilities.colorFromInt(colour);
+    public int getTeamColour() {
+        return colour;
     }
 }

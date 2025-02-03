@@ -11,7 +11,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ItemUseAnimation;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
-import terramine.common.entity.throwables.GrenadeEntity;
+import terramine.common.entity.projectiles.throwables.GrenadeEntity;
 import terramine.common.init.ModEntities;
 import terramine.common.init.ModSoundEvents;
 import terramine.common.item.TerrariaItemConfigurable;
@@ -28,7 +28,7 @@ public class GrenadeItem extends TerrariaItemConfigurable {
     }
 
     @Override
-    public ItemStack finishUsingItem(@NotNull ItemStack itemStack, @NotNull Level level, @NotNull LivingEntity entity) {
+    public @NotNull ItemStack finishUsingItem(ItemStack itemStack, Level level, LivingEntity entity) {
         Player player = (Player)entity;
         level.playSound(null, player.getX(), player.getY(), player.getZ(), ModSoundEvents.THROW, SoundSource.NEUTRAL, 0.5f, 1f / (level.getRandom().nextFloat() * 0.4f + 0.8f));
         if (!level.isClientSide) {
@@ -55,7 +55,7 @@ public class GrenadeItem extends TerrariaItemConfigurable {
     }
 
     @Override
-    public InteractionResult use(@NotNull Level world, Player user, @NotNull InteractionHand hand) {
+    public @NotNull InteractionResult use(Level world, Player user, InteractionHand hand) {
         user.startUsingItem(hand);
         return InteractionResult.CONSUME;
     }

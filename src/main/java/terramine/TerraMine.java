@@ -1,6 +1,5 @@
 package terramine;
 
-import com.google.common.collect.Lists;
 import dev.architectury.event.events.common.PlayerEvent;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
@@ -15,7 +14,6 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.stats.StatFormatter;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import terrablender.api.RegionType;
@@ -37,7 +35,6 @@ import terramine.common.world.biome.BiomeSurfaceRules;
 import terramine.datagen.ModFeatures;
 import terramine.extensions.PlayerStorages;
 
-import java.util.List;
 import java.util.Optional;
 
 public class TerraMine implements ModInitializer, TerraBlenderApi {

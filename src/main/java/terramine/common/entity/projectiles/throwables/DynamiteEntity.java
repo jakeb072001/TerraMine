@@ -1,4 +1,4 @@
-package terramine.common.entity.throwables;
+package terramine.common.entity.projectiles.throwables;
 
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.projectile.ThrowableProjectile;

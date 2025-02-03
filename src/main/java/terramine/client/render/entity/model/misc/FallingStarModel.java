@@ -1,15 +1,11 @@
 package terramine.client.render.entity.model.misc;
 
-import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.CubeListBuilder;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.model.geom.builders.MeshDefinition;
-import net.minecraft.world.entity.Entity;
-import org.jetbrains.annotations.NotNull;
 import terramine.client.render.entity.states.TerrariaEntityRenderState;
 
 public class FallingStarModel<T extends TerrariaEntityRenderState> extends EntityModel<T> {

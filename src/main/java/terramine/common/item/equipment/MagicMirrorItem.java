@@ -24,8 +24,6 @@ import org.jetbrains.annotations.NotNull;
 import terramine.common.init.ModSoundEvents;
 import terramine.common.item.TerrariaItem;
 
-import java.util.Optional;
-
 public class MagicMirrorItem extends TerrariaItem {
 
 	public MagicMirrorItem(ResourceKey<Item> key) {

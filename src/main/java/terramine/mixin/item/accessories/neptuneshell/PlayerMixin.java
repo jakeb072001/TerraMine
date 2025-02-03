@@ -17,8 +17,6 @@ import terramine.common.init.ModItems;
 import terramine.common.item.accessories.AccessoryTerrariaItem;
 import terramine.common.misc.AccessoriesHelper;
 
-import java.util.UUID;
-
 @Mixin(Player.class)
 public abstract class PlayerMixin  extends LivingEntity {
 

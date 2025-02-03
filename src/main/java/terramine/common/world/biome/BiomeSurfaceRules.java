@@ -3,8 +3,8 @@ package terramine.common.world.biome;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.SurfaceRules;
-import terramine.datagen.ModBiomes;
 import terramine.common.init.ModBlocks;
+import terramine.datagen.ModBiomes;
 
 public class BiomeSurfaceRules extends SurfaceRules {
     private static final RuleSource DIRT = makeStateRule(Blocks.DIRT);

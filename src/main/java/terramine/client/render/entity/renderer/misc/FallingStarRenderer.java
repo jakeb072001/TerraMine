@@ -7,15 +7,12 @@ import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
-import net.minecraft.client.renderer.entity.state.ItemEntityRenderState;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import terramine.TerraMine;
 import terramine.client.render.entity.model.misc.FallingStarModel;
 import terramine.client.render.entity.states.TerrariaEntityRenderState;
-import terramine.common.entity.misc.ClientItemEntity;
 import terramine.common.entity.projectiles.FallingStarEntity;
 import terramine.common.init.ModModelLayers;
 

@@ -20,7 +20,7 @@ import terramine.common.item.accessories.feet.*;
 import terramine.common.item.accessories.hands.*;
 import terramine.common.item.accessories.head.DivingGear;
 import terramine.common.item.accessories.necklace.*;
-import terramine.common.item.armor.*;
+import terramine.common.item.armor.TerrariaArmorMaterials;
 import terramine.common.item.armor.vanity.FamiliarVanity;
 import terramine.common.item.armor.vanity.TopHatVanity;
 import terramine.common.item.dye.BasicDye;
@@ -235,6 +235,7 @@ public class ModItems {
 	public static final Item DEMON_WINGS = registerAccessory("demon_wings", key -> new WingsItem(0.5D, 0.05D, 80, 9, ModSoundEvents.WINGS_FLAP, key));
 	public static final Item LEAF_WINGS = registerAccessory("leaf_wings", key -> new WingsItem(0.5D, 0.05D, 80, 10, ModSoundEvents.WINGS_FLAP, key));
 
+	// todo: add early game materials, their tools, and armour (don't forget copper armour and tools).
 	// Tools
 	public static final Item DEMONITE_PICKAXE = registerTool("demonite_pickaxe", key -> new TerrariaPickaxeItem(TerrariaToolMaterials.DEMONITE, 1F, -2.8F, new Item.Properties().setId(key)));
 	public static final Item DEMONITE_AXE = registerTool("demonite_axe", key -> new AxeItem(TerrariaToolMaterials.DEMONITE, 6F, -3.1F, new Item.Properties().setId(key)));

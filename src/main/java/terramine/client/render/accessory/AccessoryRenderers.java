@@ -38,7 +38,7 @@ public class AccessoryRenderers implements SimpleSynchronousResourceReloadListen
         register(ModItems.TREASURE_MAGNET, new BeltAccessoryRenderer("universal_attractor", BeltModel.createUniversalAttractorModel()));
 
         // hands
-        register(ModItems.FERAL_CLAWS, new GloveAccessoryRenderer("claws/feral_claws", "claws/feral_claws", ArmsModel.createClawsModel(false), ArmsModel.createClawsModel(true)));
+        register(ModItems.FERAL_CLAWS, new GloveAccessoryRenderer("feral_claws", ArmsModel.createClawsModel(false), ArmsModel.createClawsModel(true), true));
         register(ModItems.POWER_GLOVE, new GloveAccessoryRenderer("power_glove", ArmsModel.createGloveModel(false), ArmsModel.createGloveModel(true)));
         register(ModItems.FIRE_GAUNTLET, new GlowingGloveAccessoryRenderer("fire_gauntlet", ArmsModel.createGloveModel(false), ArmsModel.createGloveModel(true)));
 

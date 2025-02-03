@@ -12,8 +12,6 @@ import net.minecraft.world.item.equipment.ArmorType;
 import net.minecraft.world.level.Level;
 import terramine.TerraMine;
 
-import java.util.UUID;
-
 public class MoltenArmor extends TerrariaArmor {
     private static final AttributeModifier ATTACK_DAMAGE_BONUS = new AttributeModifier(TerraMine.id("molten_armor_set_bonus"), 0.10, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL);
 
