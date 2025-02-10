@@ -1,0 +1,14 @@
+{
+  "layers": {
+    "humanoid": [
+      {
+        "texture": "terramine:tin"
+      }
+    ],
+    "humanoid_leggings": [
+      {
+        "texture": "terramine:tin"
+      }
+    ]
+  }
+}

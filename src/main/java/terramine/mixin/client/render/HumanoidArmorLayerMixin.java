@@ -99,7 +99,7 @@ public abstract class HumanoidArmorLayerMixin<S extends HumanoidRenderState, M e
 				if (!list.isEmpty()) {
 					int j = itemStack.is(ItemTags.DYEABLE) ? DyedItemColor.getOrDefault(itemStack, 0) : 0;
 					boolean bl = itemStack.hasFoil();
-					Iterator var12 = list.iterator();
+					Iterator<EquipmentClientInfo.Layer> var12 = list.iterator();
 
 					while(true) {
 						EquipmentClientInfo.Layer layer;
@@ -117,7 +117,7 @@ public abstract class HumanoidArmorLayerMixin<S extends HumanoidRenderState, M e
 							}
 
 							layer = (EquipmentClientInfo.Layer)var12.next();
-							k = instance.getColorForLayer(layer, j);
+							k = EquipmentLayerRenderer.getColorForLayer(layer, j);
 						} while(k == 0);
 
 						ResourceLocation resourceLocation2 = instance.layerTextureLookup.apply(LayerTextureKeyInvoker.create(layerType, layer));

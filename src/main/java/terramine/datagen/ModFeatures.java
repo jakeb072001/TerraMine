@@ -81,6 +81,21 @@ public class ModFeatures {
 	public static final ResourceKey<ConfiguredFeature<?, ?>> DISK_CRIMSON_GRAVEL_FEATURE = registerConfigured("disk_crimson_gravel");
 
 	// Ore
+	public static final List<OreConfiguration.TargetBlockState> ORE_TIN_TARGET_LIST = List.of(OreConfiguration.target(STONE_ORE_REPLACEABLES, ModBlocks.TIN_ORE.BLOCK.defaultBlockState()), OreConfiguration.target(DEEPSLATE_ORE_REPLACEABLES, ModBlocks.DEEPSLATE_TIN_ORE.BLOCK.defaultBlockState()));
+	public static final ResourceKey<ConfiguredFeature<?, ?>> ORE_TIN_FEATURE = registerConfigured("ore_tin");
+	public static final ResourceKey<ConfiguredFeature<?, ?>> ORE_TIN_SMALL_FEATURE = registerConfigured("ore_tin_small");
+	public static final List<OreConfiguration.TargetBlockState> ORE_LEAD_TARGET_LIST = List.of(OreConfiguration.target(STONE_ORE_REPLACEABLES, ModBlocks.LEAD_ORE.BLOCK.defaultBlockState()), OreConfiguration.target(DEEPSLATE_ORE_REPLACEABLES, ModBlocks.DEEPSLATE_LEAD_ORE.BLOCK.defaultBlockState()));
+	public static final ResourceKey<ConfiguredFeature<?, ?>> ORE_LEAD_FEATURE = registerConfigured("ore_lead");
+	public static final ResourceKey<ConfiguredFeature<?, ?>> ORE_LEAD_SMALL_FEATURE = registerConfigured("ore_lead_small");
+	public static final List<OreConfiguration.TargetBlockState> ORE_SILVER_TARGET_LIST = List.of(OreConfiguration.target(STONE_ORE_REPLACEABLES, ModBlocks.SILVER_ORE.BLOCK.defaultBlockState()), OreConfiguration.target(DEEPSLATE_ORE_REPLACEABLES, ModBlocks.DEEPSLATE_SILVER_ORE.BLOCK.defaultBlockState()));
+	public static final ResourceKey<ConfiguredFeature<?, ?>> ORE_SILVER_FEATURE = registerConfigured("ore_silver");
+	public static final ResourceKey<ConfiguredFeature<?, ?>> ORE_SILVER_SMALL_FEATURE = registerConfigured("ore_silver_small");
+	public static final List<OreConfiguration.TargetBlockState> ORE_TUNGSTEN_TARGET_LIST = List.of(OreConfiguration.target(STONE_ORE_REPLACEABLES, ModBlocks.TUNGSTEN_ORE.BLOCK.defaultBlockState()), OreConfiguration.target(DEEPSLATE_ORE_REPLACEABLES, ModBlocks.DEEPSLATE_TUNGSTEN_ORE.BLOCK.defaultBlockState()));
+	public static final ResourceKey<ConfiguredFeature<?, ?>> ORE_TUNGSTEN_FEATURE = registerConfigured("ore_tungsten");
+	public static final ResourceKey<ConfiguredFeature<?, ?>> ORE_TUNGSTEN_SMALL_FEATURE = registerConfigured("ore_tungsten_small");
+	public static final List<OreConfiguration.TargetBlockState> ORE_PLATINUM_TARGET_LIST = List.of(OreConfiguration.target(STONE_ORE_REPLACEABLES, ModBlocks.PLATINUM_ORE.BLOCK.defaultBlockState()), OreConfiguration.target(DEEPSLATE_ORE_REPLACEABLES, ModBlocks.DEEPSLATE_PLATINUM_ORE.BLOCK.defaultBlockState()));
+	public static final ResourceKey<ConfiguredFeature<?, ?>> ORE_PLATINUM_FEATURE = registerConfigured("ore_platinum");
+	public static final ResourceKey<ConfiguredFeature<?, ?>> ORE_PLATINUM_SMALL_FEATURE = registerConfigured("ore_platinum_small");
 	public static final ResourceKey<ConfiguredFeature<?, ?>> HELLSTONE_ORE_CONFIGURED = registerConfigured("hellstone_ore");
 
 	// Demonite
@@ -128,6 +143,16 @@ public class ModFeatures {
 		context.register(SURFACE_CHEST_CONFIGURED, new ConfiguredFeature<>(SURFACE_CHEST, FeatureConfiguration.NONE));
 		context.register(NETHER_CHEST_CONFIGURED, new ConfiguredFeature<>(NETHER_CHEST, FeatureConfiguration.NONE));
 
+		context.register(ORE_TIN_FEATURE, new ConfiguredFeature<>(Feature.ORE, new OreConfiguration(ORE_TIN_TARGET_LIST, 9)));
+		context.register(ORE_TIN_SMALL_FEATURE, new ConfiguredFeature<>(Feature.ORE, new OreConfiguration(ORE_TIN_TARGET_LIST, 4)));
+		context.register(ORE_LEAD_FEATURE, new ConfiguredFeature<>(Feature.ORE, new OreConfiguration(ORE_LEAD_TARGET_LIST, 9)));
+		context.register(ORE_LEAD_SMALL_FEATURE, new ConfiguredFeature<>(Feature.ORE, new OreConfiguration(ORE_LEAD_TARGET_LIST, 4)));
+		context.register(ORE_SILVER_FEATURE, new ConfiguredFeature<>(Feature.ORE, new OreConfiguration(ORE_SILVER_TARGET_LIST, 9)));
+		context.register(ORE_SILVER_SMALL_FEATURE, new ConfiguredFeature<>(Feature.ORE, new OreConfiguration(ORE_SILVER_TARGET_LIST, 4)));
+		context.register(ORE_TUNGSTEN_FEATURE, new ConfiguredFeature<>(Feature.ORE, new OreConfiguration(ORE_TUNGSTEN_TARGET_LIST, 9)));
+		context.register(ORE_TUNGSTEN_SMALL_FEATURE, new ConfiguredFeature<>(Feature.ORE, new OreConfiguration(ORE_TUNGSTEN_TARGET_LIST, 4)));
+		context.register(ORE_PLATINUM_FEATURE, new ConfiguredFeature<>(Feature.ORE, new OreConfiguration(ORE_PLATINUM_TARGET_LIST, 9)));
+		context.register(ORE_PLATINUM_SMALL_FEATURE, new ConfiguredFeature<>(Feature.ORE, new OreConfiguration(ORE_PLATINUM_TARGET_LIST, 4)));
 		context.register(ORE_DEMONITE_FEATURE, new ConfiguredFeature<>(Feature.ORE, new OreConfiguration(ORE_DEMONITE_TARGET_LIST, 9)));
 		context.register(ORE_DEMONITE_SMALL_FEATURE, new ConfiguredFeature<>(Feature.ORE, new OreConfiguration(ORE_DEMONITE_TARGET_LIST, 4)));
 		context.register(ORE_CRIMTANE_FEATURE, new ConfiguredFeature<>(Feature.ORE, new OreConfiguration(ORE_CRIMTANE_TARGET_LIST, 9)));

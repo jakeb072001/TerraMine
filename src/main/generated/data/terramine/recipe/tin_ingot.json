@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "terramine:tin_block"
+  ],
+  "result": {
+    "count": 9,
+    "id": "terramine:tin_ingot"
+  }
+}

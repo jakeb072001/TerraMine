@@ -3,6 +3,11 @@
   "values": [
     "terramine:demonite_ingot",
 	"terramine:crimtane_ingot",
+    "terramine:tin_ingot",
+    "terramine:lead_ingot",
+    "terramine:silver_ingot",
+    "terramine:tungsten_ingot",
+    "terramine:platinum_ingot",
 	"terramine:meteorite_ingot",
 	"terramine:hellstone_ingot"
   ]

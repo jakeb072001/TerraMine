@@ -79,7 +79,11 @@ public abstract class GuiMixin {
 		boolean crimtaneOre = false;
 		boolean lapisOre = false;
 		boolean redstoneOre = false;
+		boolean silverOre = false;
+		boolean tungstenOre = false;
+		boolean leadOre = false;
 		boolean ironOre = false;
+		boolean tinOre = false;
 		boolean copperOre = false;
 		boolean coalOre = false;
 		boolean netherQuartz = false;
@@ -115,10 +119,18 @@ public abstract class GuiMixin {
 					lapisOre = true;
 				} else if (checkBlocks(block, Blocks.REDSTONE_ORE, Blocks.DEEPSLATE_REDSTONE_ORE)) {
 					redstoneOre = true;
+				} else if (checkBlocks(block, ModBlocks.SILVER_ORE.BLOCK, ModBlocks.DEEPSLATE_SILVER_ORE.BLOCK)) {
+					silverOre = true;
+				} else if (checkBlocks(block, ModBlocks.TUNGSTEN_ORE.BLOCK, ModBlocks.DEEPSLATE_TUNGSTEN_ORE.BLOCK)) {
+					tungstenOre = true;
+				} else if (checkBlocks(block, ModBlocks.LEAD_ORE.BLOCK, ModBlocks.DEEPSLATE_LEAD_ORE.BLOCK)) {
+					leadOre = true;
 				} else if (checkBlocks(block, Blocks.IRON_ORE, Blocks.DEEPSLATE_IRON_ORE)) {
 					ironOre = true;
 				} else if (checkBlocks(block, Blocks.COPPER_ORE, Blocks.DEEPSLATE_COPPER_ORE)) {
 					copperOre = true;
+				} else if (checkBlocks(block, ModBlocks.TIN_ORE.BLOCK, ModBlocks.DEEPSLATE_TIN_ORE.BLOCK)) {
+					tinOre = true;
 				} else if (checkBlocks(block, Blocks.COAL_ORE, Blocks.DEEPSLATE_COAL_ORE)) {
 					coalOre = true;
 				} else if (checkBlocks(block, Blocks.NETHER_QUARTZ_ORE)) {
@@ -146,8 +158,16 @@ public abstract class GuiMixin {
 			createText(Blocks.LAPIS_ORE, sb);
 		} else if (redstoneOre) {
 			createText(Blocks.REDSTONE_ORE, sb);
+		} else if (silverOre) {
+			createText(ModBlocks.SILVER_ORE.BLOCK, sb);
+		} else if (tungstenOre) {
+			createText(ModBlocks.TUNGSTEN_ORE.BLOCK, sb);
+		} else if (leadOre) {
+			createText(ModBlocks.LEAD_ORE.BLOCK, sb);
 		} else if (ironOre) {
 			createText(Blocks.IRON_ORE, sb);
+		} else if (tinOre) {
+			createText(ModBlocks.TIN_ORE.BLOCK, sb);
 		} else if (copperOre) {
 			createText(Blocks.COPPER_ORE, sb);
 		} else if (coalOre) {

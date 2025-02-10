@@ -5,11 +5,10 @@ import net.minecraft.core.Holder;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
-import net.minecraft.data.worldgen.placement.MiscOverworldPlacements;
-import net.minecraft.data.worldgen.placement.PlacementUtils;
-import net.minecraft.data.worldgen.placement.VegetationPlacements;
+import net.minecraft.data.worldgen.placement.*;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.util.valueproviders.ConstantInt;
+import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.level.biome.BiomeGenerationSettings;
 import net.minecraft.world.level.levelgen.GenerationStep;
 import net.minecraft.world.level.levelgen.VerticalAnchor;
@@ -17,12 +16,15 @@ import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.placement.*;
 import net.minecraft.world.level.material.Fluids;
+import terramine.common.components.OreComponent;
+import terramine.common.init.ModComponents;
 
 import java.util.List;
 
 import static terramine.TerraMine.CONFIG;
 import static terramine.TerraMine.id;
 
+// todo: need a way to have either copper or tin, iron or lead, etc
 public class ModPlacedFeatures {
 
     // Misc
@@ -40,6 +42,19 @@ public class ModPlacedFeatures {
     public static final ResourceKey<PlacedFeature> DISK_CORRUPT_GRAVEL = registerPlaced("disk_corrupt_gravel");
     public static final ResourceKey<PlacedFeature> DISK_CRIMSON_SAND = registerPlaced("disk_crimson_sand");
     public static final ResourceKey<PlacedFeature> DISK_CRIMSON_GRAVEL = registerPlaced("disk_crimson_gravel");
+
+    // Pre-Hardmode Ores
+    public static final ResourceKey<PlacedFeature> ORE_TIN = registerPlaced("ore_tin");
+    public static final ResourceKey<PlacedFeature> ORE_TIN_LARGE = registerPlaced("ore_tin_large");
+    public static final ResourceKey<PlacedFeature> ORE_LEAD_UPPER = registerPlaced("ore_lead_upper");
+    public static final ResourceKey<PlacedFeature> ORE_LEAD_MIDDLE = registerPlaced("ore_lead_middle");
+    public static final ResourceKey<PlacedFeature> ORE_LEAD_SMALL = registerPlaced("ore_lead_small");
+    public static final ResourceKey<PlacedFeature> ORE_SILVER = registerPlaced("ore_silver");
+    public static final ResourceKey<PlacedFeature> ORE_SILVER_SMALL = registerPlaced("ore_silver_small");
+    public static final ResourceKey<PlacedFeature> ORE_TUNGSTEN = registerPlaced("ore_tungsten");
+    public static final ResourceKey<PlacedFeature> ORE_TUNGSTEN_SMALL = registerPlaced("ore_tungsten_small");
+    public static final ResourceKey<PlacedFeature> ORE_PLATINUM = registerPlaced("ore_platinum");
+    public static final ResourceKey<PlacedFeature> ORE_PLATINUM_LOWER = registerPlaced("ore_platinum_lower");
 
     // Demonite
     public static final ResourceKey<PlacedFeature> ORE_DEMONITE_UPPER = registerPlaced("ore_demonite_upper");
@@ -94,6 +109,27 @@ public class ModPlacedFeatures {
                         BiomeFilter.biome())
         ));
 
+        // Copper Alternative
+        context.register(ORE_TIN, new PlacedFeature(getHolder(holderGetter, ModFeatures.ORE_TIN_FEATURE), commonOrePlacement(16, HeightRangePlacement.triangle(VerticalAnchor.absolute(-16), VerticalAnchor.absolute(112)))));
+        context.register(ORE_TIN_LARGE, new PlacedFeature(getHolder(holderGetter, ModFeatures.ORE_TIN_FEATURE), commonOrePlacement(16, HeightRangePlacement.triangle(VerticalAnchor.absolute(-16), VerticalAnchor.absolute(112)))));
+
+        // Iron Alternative
+        context.register(ORE_LEAD_UPPER, new PlacedFeature(getHolder(holderGetter, ModFeatures.ORE_LEAD_FEATURE), commonOrePlacement(90, HeightRangePlacement.triangle(VerticalAnchor.absolute(80), VerticalAnchor.absolute(380)))));
+        context.register(ORE_LEAD_MIDDLE, new PlacedFeature(getHolder(holderGetter, ModFeatures.ORE_LEAD_FEATURE), commonOrePlacement(10, HeightRangePlacement.triangle(VerticalAnchor.absolute(-10), VerticalAnchor.absolute(55)))));
+        context.register(ORE_LEAD_SMALL, new PlacedFeature(getHolder(holderGetter, ModFeatures.ORE_LEAD_SMALL_FEATURE), commonOrePlacement(10, HeightRangePlacement.uniform(VerticalAnchor.absolute(-10), VerticalAnchor.absolute(70)))));
+
+        // New Tier
+        context.register(ORE_SILVER, new PlacedFeature(getHolder(holderGetter, ModFeatures.ORE_SILVER_FEATURE), commonOrePlacement(5, HeightRangePlacement.triangle(VerticalAnchor.absolute(-50), VerticalAnchor.absolute(55)))));
+        context.register(ORE_SILVER_SMALL, new PlacedFeature(getHolder(holderGetter, ModFeatures.ORE_SILVER_SMALL_FEATURE), commonOrePlacement(5, HeightRangePlacement.uniform(VerticalAnchor.absolute(-50), VerticalAnchor.absolute(70)))));
+
+        context.register(ORE_TUNGSTEN, new PlacedFeature(getHolder(holderGetter, ModFeatures.ORE_TUNGSTEN_FEATURE), commonOrePlacement(5, HeightRangePlacement.triangle(VerticalAnchor.absolute(-50), VerticalAnchor.absolute(55)))));
+        context.register(ORE_TUNGSTEN_SMALL, new PlacedFeature(getHolder(holderGetter, ModFeatures.ORE_TUNGSTEN_SMALL_FEATURE), commonOrePlacement(5, HeightRangePlacement.uniform(VerticalAnchor.absolute(-50), VerticalAnchor.absolute(70)))));
+
+        // Gold Alternative
+        context.register(ORE_PLATINUM, new PlacedFeature(getHolder(holderGetter, ModFeatures.ORE_PLATINUM_FEATURE), commonOrePlacement(4, HeightRangePlacement.triangle(VerticalAnchor.absolute(-64), VerticalAnchor.absolute(32)))));
+        context.register(ORE_PLATINUM_LOWER, new PlacedFeature(getHolder(holderGetter, ModFeatures.ORE_PLATINUM_FEATURE), orePlacement(CountPlacement.of(UniformInt.of(0, 1)), HeightRangePlacement.uniform(VerticalAnchor.absolute(-64), VerticalAnchor.absolute(-48)))));
+
+        // Corruption and Crimson
         context.register(ORE_DEMONITE_UPPER, new PlacedFeature(getHolder(holderGetter, ModFeatures.ORE_DEMONITE_FEATURE), commonOrePlacement(90, HeightRangePlacement.triangle(VerticalAnchor.absolute(80), VerticalAnchor.absolute(380)))));
         context.register(ORE_DEMONITE_MIDDLE, new PlacedFeature(getHolder(holderGetter, ModFeatures.ORE_DEMONITE_FEATURE), commonOrePlacement(10, HeightRangePlacement.triangle(VerticalAnchor.absolute(-10), VerticalAnchor.absolute(55)))));
         context.register(ORE_DEMONITE_SMALL, new PlacedFeature(getHolder(holderGetter, ModFeatures.ORE_DEMONITE_SMALL_FEATURE), commonOrePlacement(10, HeightRangePlacement.uniform(VerticalAnchor.absolute(-10), VerticalAnchor.absolute(70)))));
@@ -108,6 +144,48 @@ public class ModPlacedFeatures {
         context.register(DISK_CRIMSON_GRAVEL, new PlacedFeature(getHolder(holderGetter, ModFeatures.DISK_CRIMSON_GRAVEL_FEATURE), List.of(InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP_TOP_SOLID, BlockPredicateFilter.forPredicate(BlockPredicate.matchesFluids(Fluids.WATER)), BiomeFilter.biome())));
     }
 
+    public static void addTerrariaCommonOres(BiomeGenerationSettings.Builder builder) {
+        addTerrariaCommonOres(builder, false);
+    }
+    // todo: need to find a way to have different ores for worlds like terraria does it, this wont work though as it generates a json file so it cant dynamically change things, need to figure out how the ores are actually placed from that json
+    // todo: probably remove this once the above is done?
+    public static void addTerrariaCommonOres(BiomeGenerationSettings.Builder builder, boolean bl) {
+        builder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, OrePlacements.ORE_COAL_UPPER);
+        builder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, OrePlacements.ORE_COAL_LOWER);
+        //builder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, ModComponents.ORE_TYPES.get(OreComponent.getLevelData()).getIfIron() ? OrePlacements.ORE_IRON_UPPER : ORE_LEAD_UPPER);
+        //builder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, ModComponents.ORE_TYPES.get(OreComponent.getLevelData()).getIfIron() ? OrePlacements.ORE_IRON_MIDDLE : ORE_LEAD_MIDDLE);
+        //builder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, ModComponents.ORE_TYPES.get(OreComponent.getLevelData()).getIfIron() ? OrePlacements.ORE_IRON_SMALL : ORE_LEAD_SMALL);
+        //builder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, ModComponents.ORE_TYPES.get(OreComponent.getLevelData()).getIfSilver() ? ORE_SILVER : ORE_TUNGSTEN);
+        //builder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, ModComponents.ORE_TYPES.get(OreComponent.getLevelData()).getIfSilver() ? ORE_SILVER_SMALL : ORE_TUNGSTEN_SMALL);
+        //builder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, ModComponents.ORE_TYPES.get(OreComponent.getLevelData()).getIfGold() ? OrePlacements.ORE_GOLD : ORE_PLATINUM);
+        //builder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, ModComponents.ORE_TYPES.get(OreComponent.getLevelData()).getIfGold() ? OrePlacements.ORE_GOLD_LOWER : ORE_PLATINUM_LOWER);
+        builder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, OrePlacements.ORE_IRON_UPPER);
+        builder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, OrePlacements.ORE_IRON_MIDDLE);
+        builder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, OrePlacements.ORE_IRON_SMALL);
+        builder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, ORE_SILVER);
+        builder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, ORE_SILVER_SMALL);
+        builder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, ORE_LEAD_UPPER);
+        builder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, ORE_LEAD_MIDDLE);
+        builder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, ORE_LEAD_SMALL);
+        builder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, ORE_TUNGSTEN);
+        builder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, ORE_TUNGSTEN_SMALL);
+        builder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, OrePlacements.ORE_GOLD);
+        builder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, OrePlacements.ORE_GOLD_LOWER);
+        builder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, ORE_PLATINUM);
+        builder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, ORE_PLATINUM_LOWER);
+        builder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, OrePlacements.ORE_REDSTONE);
+        builder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, OrePlacements.ORE_REDSTONE_LOWER);
+        builder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, OrePlacements.ORE_DIAMOND);
+        builder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, OrePlacements.ORE_DIAMOND_MEDIUM);
+        builder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, OrePlacements.ORE_DIAMOND_LARGE);
+        builder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, OrePlacements.ORE_DIAMOND_BURIED);
+        builder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, OrePlacements.ORE_LAPIS);
+        builder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, OrePlacements.ORE_LAPIS_BURIED);
+        //builder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, ModComponents.ORE_TYPES.get(OreComponent.getLevelData()).getIfCopper() ? (bl ? OrePlacements.ORE_COPPER_LARGE : OrePlacements.ORE_COPPER) : (bl ? ORE_TIN_LARGE : ORE_TIN));
+        builder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, bl ? OrePlacements.ORE_COPPER_LARGE : OrePlacements.ORE_COPPER);
+        builder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, bl ? ORE_TIN_LARGE : ORE_TIN);
+        builder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, CavePlacements.UNDERWATER_MAGMA);
+    }
     public static void addDefaultCorruptSoftDisks(BiomeGenerationSettings.Builder builder) {
         builder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, DISK_CORRUPT_SAND);
         builder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, MiscOverworldPlacements.DISK_CLAY);

@@ -26,7 +26,7 @@ public class CrimsonDesertBiome {
         BiomeDefaultFeatures.addDefaultUndergroundVariety(generationSettings);
         BiomeDefaultFeatures.addDefaultSprings(generationSettings);
         BiomeDefaultFeatures.addSurfaceFreezing(generationSettings);
-        BiomeDefaultFeatures.addDefaultOres(generationSettings);
+        ModPlacedFeatures.addTerrariaCommonOres(generationSettings);
         ModPlacedFeatures.addDefaultCrimsonOres(generationSettings);
         ModPlacedFeatures.addDefaultCrimsonSoftDisks(generationSettings);
         BiomeDefaultFeatures.addWaterTrees(generationSettings);

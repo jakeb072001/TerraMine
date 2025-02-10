@@ -15,7 +15,7 @@ public class ArmorSetCheck {
             if (item.getItem() instanceof TerrariaArmor armorItem) {
                 isEquipped = Objects.equals(armorItem.getTerramineArmorType(), armorType);
                 if (!isEquipped) {
-                    break;
+                    return false;
                 }
             } else {
                 return false;

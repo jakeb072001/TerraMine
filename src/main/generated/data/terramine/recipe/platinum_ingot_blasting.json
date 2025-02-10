@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:blasting",
+  "category": "misc",
+  "cookingtime": 100,
+  "experience": 0.7,
+  "ingredient": [
+    "terramine:raw_platinum",
+    "terramine:platinum_ore",
+    "terramine:deepslate_platinum_ore"
+  ],
+  "result": {
+    "id": "terramine:platinum_ingot"
+  }
+}

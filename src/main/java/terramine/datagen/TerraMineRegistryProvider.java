@@ -18,6 +18,7 @@ public class TerraMineRegistryProvider extends FabricDynamicRegistryProvider {
         super(output, registriesFuture);
     }
 
+    // todo: need a better way of doing this
     @Override
     protected void configure(HolderLookup.Provider registries, Entries entries) {
         final HolderLookup.RegistryLookup<ConfiguredFeature<?, ?>> configuredFeatureRegistry = registries.lookupOrThrow(Registries.CONFIGURED_FEATURE);
@@ -40,6 +41,16 @@ public class TerraMineRegistryProvider extends FabricDynamicRegistryProvider {
         entries.add(ModFeatures.ORE_DEMONITE_SMALL_FEATURE, configuredFeatureRegistry.getOrThrow(ModFeatures.ORE_DEMONITE_SMALL_FEATURE).value());
         entries.add(ModFeatures.ORE_CRIMTANE_FEATURE, configuredFeatureRegistry.getOrThrow(ModFeatures.ORE_CRIMTANE_FEATURE).value());
         entries.add(ModFeatures.ORE_CRIMTANE_SMALL_FEATURE, configuredFeatureRegistry.getOrThrow(ModFeatures.ORE_CRIMTANE_SMALL_FEATURE).value());
+        entries.add(ModFeatures.ORE_TIN_FEATURE, configuredFeatureRegistry.getOrThrow(ModFeatures.ORE_TIN_FEATURE).value());
+        entries.add(ModFeatures.ORE_TIN_SMALL_FEATURE, configuredFeatureRegistry.getOrThrow(ModFeatures.ORE_TIN_SMALL_FEATURE).value());
+        entries.add(ModFeatures.ORE_LEAD_FEATURE, configuredFeatureRegistry.getOrThrow(ModFeatures.ORE_LEAD_FEATURE).value());
+        entries.add(ModFeatures.ORE_LEAD_SMALL_FEATURE, configuredFeatureRegistry.getOrThrow(ModFeatures.ORE_LEAD_SMALL_FEATURE).value());
+        entries.add(ModFeatures.ORE_SILVER_FEATURE, configuredFeatureRegistry.getOrThrow(ModFeatures.ORE_SILVER_FEATURE).value());
+        entries.add(ModFeatures.ORE_SILVER_SMALL_FEATURE, configuredFeatureRegistry.getOrThrow(ModFeatures.ORE_SILVER_SMALL_FEATURE).value());
+        entries.add(ModFeatures.ORE_TUNGSTEN_FEATURE, configuredFeatureRegistry.getOrThrow(ModFeatures.ORE_TUNGSTEN_FEATURE).value());
+        entries.add(ModFeatures.ORE_TUNGSTEN_SMALL_FEATURE, configuredFeatureRegistry.getOrThrow(ModFeatures.ORE_TUNGSTEN_SMALL_FEATURE).value());
+        entries.add(ModFeatures.ORE_PLATINUM_FEATURE, configuredFeatureRegistry.getOrThrow(ModFeatures.ORE_PLATINUM_FEATURE).value());
+        entries.add(ModFeatures.ORE_PLATINUM_SMALL_FEATURE, configuredFeatureRegistry.getOrThrow(ModFeatures.ORE_PLATINUM_SMALL_FEATURE).value());
 
         // Placed Features
         entries.add(ModPlacedFeatures.PLACED_HELLSTONE_ORE, placedFeatureRegistry.getOrThrow(ModPlacedFeatures.PLACED_HELLSTONE_ORE).value());
@@ -58,6 +69,17 @@ public class TerraMineRegistryProvider extends FabricDynamicRegistryProvider {
         entries.add(ModPlacedFeatures.ORE_CRIMTANE_UPPER, placedFeatureRegistry.getOrThrow(ModPlacedFeatures.ORE_CRIMTANE_UPPER).value());
         entries.add(ModPlacedFeatures.ORE_CRIMTANE_MIDDLE, placedFeatureRegistry.getOrThrow(ModPlacedFeatures.ORE_CRIMTANE_MIDDLE).value());
         entries.add(ModPlacedFeatures.ORE_CRIMTANE_SMALL, placedFeatureRegistry.getOrThrow(ModPlacedFeatures.ORE_CRIMTANE_SMALL).value());
+        entries.add(ModPlacedFeatures.ORE_TIN, placedFeatureRegistry.getOrThrow(ModPlacedFeatures.ORE_TIN).value());
+        entries.add(ModPlacedFeatures.ORE_TIN_LARGE, placedFeatureRegistry.getOrThrow(ModPlacedFeatures.ORE_TIN_LARGE).value());
+        entries.add(ModPlacedFeatures.ORE_LEAD_UPPER, placedFeatureRegistry.getOrThrow(ModPlacedFeatures.ORE_LEAD_UPPER).value());
+        entries.add(ModPlacedFeatures.ORE_LEAD_MIDDLE, placedFeatureRegistry.getOrThrow(ModPlacedFeatures.ORE_LEAD_MIDDLE).value());
+        entries.add(ModPlacedFeatures.ORE_LEAD_SMALL, placedFeatureRegistry.getOrThrow(ModPlacedFeatures.ORE_LEAD_SMALL).value());
+        entries.add(ModPlacedFeatures.ORE_SILVER, placedFeatureRegistry.getOrThrow(ModPlacedFeatures.ORE_SILVER).value());
+        entries.add(ModPlacedFeatures.ORE_SILVER_SMALL, placedFeatureRegistry.getOrThrow(ModPlacedFeatures.ORE_SILVER_SMALL).value());
+        entries.add(ModPlacedFeatures.ORE_TUNGSTEN, placedFeatureRegistry.getOrThrow(ModPlacedFeatures.ORE_TUNGSTEN).value());
+        entries.add(ModPlacedFeatures.ORE_TUNGSTEN_SMALL, placedFeatureRegistry.getOrThrow(ModPlacedFeatures.ORE_TUNGSTEN_SMALL).value());
+        entries.add(ModPlacedFeatures.ORE_PLATINUM, placedFeatureRegistry.getOrThrow(ModPlacedFeatures.ORE_PLATINUM).value());
+        entries.add(ModPlacedFeatures.ORE_PLATINUM_LOWER, placedFeatureRegistry.getOrThrow(ModPlacedFeatures.ORE_PLATINUM_LOWER).value());
 
         // Carvers
         //entries.add(ModCarvers.CORRUPTION_PIT, carverRegistry.getOrThrow(ModCarvers.CORRUPTION_PIT).value());

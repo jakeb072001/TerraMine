@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "S": "minecraft:stick",
+    "X": "#c:ingots/copper"
+  },
+  "pattern": [
+    "X",
+    "X",
+    "S"
+  ],
+  "result": {
+    "count": 1,
+    "id": "terramine:copper_sword"
+  }
+}

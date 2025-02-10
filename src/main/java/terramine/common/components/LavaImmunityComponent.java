@@ -11,6 +11,7 @@ import org.ladysnake.cca.api.v3.entity.C2SSelfMessagingComponent;
 import terramine.common.init.ModComponents;
 import terramine.common.init.ModItems;
 import terramine.common.misc.AccessoriesHelper;
+import terramine.common.utility.equipmentchecks.ArmorSetCheck;
 
 @SuppressWarnings("UnstableApiUsage")
 public class LavaImmunityComponent implements C2SSelfMessagingComponent, AutoSyncedComponent {
@@ -33,7 +34,7 @@ public class LavaImmunityComponent implements C2SSelfMessagingComponent, AutoSyn
         ModComponents.LAVA_IMMUNITY.sync(provider);
         int maxImmunityTimer = 140;
 
-        if (provider.isInLava() && !provider.hasEffect(MobEffects.FIRE_RESISTANCE)) {
+        if (provider.isInLava() && !provider.hasEffect(MobEffects.FIRE_RESISTANCE) && !ArmorSetCheck.isSetEquipped(provider, "molten")) {
             if (immunityTimer > 0 && getEquippedAccessories(provider)) {
                 --immunityTimer;
             }

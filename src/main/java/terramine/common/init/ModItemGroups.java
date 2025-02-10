@@ -18,11 +18,11 @@ import static terramine.TerraMine.id;
 
 public class ModItemGroups {
     public static final CreativeModeTab ITEM_GROUP_EQUIPMENT = registerCreativeTab("terramine_equipment", FabricItemGroup.builder()
-            .icon(() -> new ItemStack(ModItems.DEMONITE_SWORD))
+            .icon(() -> new ItemStack(ModItems.DEMONITE_TOOLS.SWORD))
             .title(Component.translatable("itemGroup.terramine.terramine_equipment"))
             .build());
     public static final CreativeModeTab ITEM_GROUP_ARMOR = registerCreativeTab("terramine_armor", FabricItemGroup.builder()
-            .icon(() -> new ItemStack(ModItems.SHADOW_ARMOR.getHelmet()))
+            .icon(() -> new ItemStack(ModItems.SHADOW_ARMOR.HELMET))
             .title(Component.translatable("itemGroup.terramine.terramine_armor"))
             .build());
     public static final CreativeModeTab ITEM_GROUP_ACCESSORIES = registerCreativeTab("terramine_accessories", FabricItemGroup.builder()

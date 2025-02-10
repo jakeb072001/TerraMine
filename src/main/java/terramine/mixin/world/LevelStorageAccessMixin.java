@@ -26,5 +26,12 @@ public class LevelStorageAccessMixin {
     public void randomEvilType(RegistryAccess registryAccess, WorldData worldData, CompoundTag compoundTag, CallbackInfo ci) {
         random.setSeed(worldData.worldGenOptions().seed());
         ModComponents.EVIL_TYPE.get(worldData.overworldData()).set(random.nextBoolean());
+        ModComponents.ORE_TYPES.get(worldData.overworldData()).setIsCopper(random.nextBoolean());
+        ModComponents.ORE_TYPES.get(worldData.overworldData()).setIsIron(random.nextBoolean());
+        ModComponents.ORE_TYPES.get(worldData.overworldData()).setIsSilver(random.nextBoolean());
+        ModComponents.ORE_TYPES.get(worldData.overworldData()).setIsGold(random.nextBoolean());
+        ModComponents.ORE_TYPES.get(worldData.overworldData()).setIsCobalt(random.nextBoolean());
+        ModComponents.ORE_TYPES.get(worldData.overworldData()).setIsMythril(random.nextBoolean());
+        ModComponents.ORE_TYPES.get(worldData.overworldData()).setIsAdamantite(random.nextBoolean());
     }
 }

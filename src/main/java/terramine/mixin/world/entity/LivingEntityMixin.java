@@ -2,11 +2,13 @@ package terramine.mixin.world.entity;
 
 import com.llamalad7.mixinextras.injector.wrapmethod.WrapMethod;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
+import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.player.Player;
@@ -22,6 +24,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import terramine.common.init.ModAttributes;
 import terramine.common.init.ModItems;
 import terramine.common.item.accessories.ShieldAccessoryLikeItem;
+import terramine.common.item.armor.vanity.VanityArmor;
 import terramine.common.misc.AccessoriesHelper;
 import terramine.extensions.ItemExtensions;
 import terramine.extensions.PlayerStorages;
@@ -71,5 +74,17 @@ public abstract class LivingEntityMixin extends Entity {
                 this.setRemainingFireTicks(80);
             }
         }
+    }
+
+    @WrapOperation(
+            method = "doHurtEquipment",
+            at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/ItemStack;hurtAndBreak(ILnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/entity/EquipmentSlot;)V")
+    )
+    public void doHurtEquipment(ItemStack instance, int i, LivingEntity livingEntity, EquipmentSlot equipmentSlot, Operation<Void> original) {
+        if (instance.getItem() instanceof VanityArmor) {
+            return;
+        }
+
+        original.call(instance, i, livingEntity, equipmentSlot);
     }
 }

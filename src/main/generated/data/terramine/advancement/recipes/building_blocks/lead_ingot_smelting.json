@@ -1,0 +1,54 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_deepslate_lead_ore": {
+      "conditions": {
+        "items": [
+          {
+            "items": "terramine:deepslate_lead_ore"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_lead_ore": {
+      "conditions": {
+        "items": [
+          {
+            "items": "terramine:lead_ore"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_raw_lead": {
+      "conditions": {
+        "items": [
+          {
+            "items": "terramine:raw_lead"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:lead_ingot_smelting"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_raw_lead",
+      "has_lead_ore",
+      "has_deepslate_lead_ore"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:lead_ingot_smelting"
+    ]
+  }
+}

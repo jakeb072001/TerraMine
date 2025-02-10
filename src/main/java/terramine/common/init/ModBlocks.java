@@ -40,9 +40,26 @@ public class ModBlocks {
     public static final BlockItemRegister SAFE = new BlockItemRegister("safe", key -> new SafeBlock(Properties.ofFullCopy(Blocks.IRON_BLOCK).setId(key), () -> ModBlockEntityType.SAFE));
 
     // Metals
-    public static final BlockItemRegister METEORITE_ORE = new BlockItemRegister("meteorite_ore", key -> new HotFloorBlock(Properties.ofFullCopy(Blocks.MAGMA_BLOCK).setId(key).strength(5f)));
-    public static final BlockItemRegister RAW_METEORITE_BLOCK = new BlockItemRegister("raw_meteorite_block", key -> new Block(Properties.ofFullCopy(Blocks.MAGMA_BLOCK).setId(key).strength(8f)));
-    public static final BlockItemRegister METEORITE_BLOCK = new BlockItemRegister("meteorite_block", key -> new Block(Properties.ofFullCopy(Blocks.RAW_IRON_BLOCK).setId(key)));
+    public static final BlockItemRegister TIN_ORE = new BlockItemRegister("tin_ore", key -> new Block(Properties.ofFullCopy(Blocks.COPPER_ORE).setId(key)));
+    public static final BlockItemRegister DEEPSLATE_TIN_ORE = new BlockItemRegister("deepslate_tin_ore", key -> new Block(Properties.ofFullCopy(Blocks.DEEPSLATE_COPPER_ORE).setId(key)));
+    public static final BlockItemRegister RAW_TIN_BLOCK = new BlockItemRegister("raw_tin_block", key -> new Block(Properties.ofFullCopy(Blocks.RAW_COPPER_BLOCK).setId(key)));
+    public static final BlockItemRegister TIN_BLOCK = new BlockItemRegister("tin_block", key -> new Block(Properties.ofFullCopy(Blocks.COPPER_BLOCK).setId(key)));
+    public static final BlockItemRegister LEAD_ORE = new BlockItemRegister("lead_ore", key -> new Block(Properties.ofFullCopy(Blocks.IRON_ORE).setId(key)));
+    public static final BlockItemRegister DEEPSLATE_LEAD_ORE = new BlockItemRegister("deepslate_lead_ore", key -> new Block(Properties.ofFullCopy(Blocks.DEEPSLATE_IRON_ORE).setId(key)));
+    public static final BlockItemRegister RAW_LEAD_BLOCK = new BlockItemRegister("raw_lead_block", key -> new Block(Properties.ofFullCopy(Blocks.RAW_IRON_BLOCK).setId(key)));
+    public static final BlockItemRegister LEAD_BLOCK = new BlockItemRegister("lead_block", key -> new Block(Properties.ofFullCopy(Blocks.IRON_BLOCK).setId(key)));
+    public static final BlockItemRegister SILVER_ORE = new BlockItemRegister("silver_ore", key -> new Block(Properties.ofFullCopy(Blocks.GOLD_ORE).setId(key)));
+    public static final BlockItemRegister DEEPSLATE_SILVER_ORE = new BlockItemRegister("deepslate_silver_ore", key -> new Block(Properties.ofFullCopy(Blocks.DEEPSLATE_GOLD_ORE).setId(key)));
+    public static final BlockItemRegister RAW_SILVER_BLOCK = new BlockItemRegister("raw_silver_block", key -> new Block(Properties.ofFullCopy(Blocks.RAW_GOLD_BLOCK).setId(key)));
+    public static final BlockItemRegister SILVER_BLOCK = new BlockItemRegister("silver_block", key -> new Block(Properties.ofFullCopy(Blocks.GOLD_BLOCK).setId(key)));
+    public static final BlockItemRegister TUNGSTEN_ORE = new BlockItemRegister("tungsten_ore", key -> new Block(Properties.ofFullCopy(Blocks.GOLD_ORE).setId(key)));
+    public static final BlockItemRegister DEEPSLATE_TUNGSTEN_ORE = new BlockItemRegister("deepslate_tungsten_ore", key -> new Block(Properties.ofFullCopy(Blocks.DEEPSLATE_GOLD_ORE).setId(key)));
+    public static final BlockItemRegister RAW_TUNGSTEN_BLOCK = new BlockItemRegister("raw_tungsten_block", key -> new Block(Properties.ofFullCopy(Blocks.RAW_GOLD_BLOCK).setId(key)));
+    public static final BlockItemRegister TUNGSTEN_BLOCK = new BlockItemRegister("tungsten_block", key -> new Block(Properties.ofFullCopy(Blocks.GOLD_BLOCK).setId(key)));
+    public static final BlockItemRegister PLATINUM_ORE = new BlockItemRegister("platinum_ore", key -> new Block(Properties.ofFullCopy(Blocks.GOLD_ORE).setId(key)));
+    public static final BlockItemRegister DEEPSLATE_PLATINUM_ORE = new BlockItemRegister("deepslate_platinum_ore", key -> new Block(Properties.ofFullCopy(Blocks.DEEPSLATE_GOLD_ORE).setId(key)));
+    public static final BlockItemRegister RAW_PLATINUM_BLOCK = new BlockItemRegister("raw_platinum_block", key -> new Block(Properties.ofFullCopy(Blocks.RAW_GOLD_BLOCK).setId(key)));
+    public static final BlockItemRegister PLATINUM_BLOCK = new BlockItemRegister("platinum_block", key -> new Block(Properties.ofFullCopy(Blocks.GOLD_BLOCK).setId(key)));
     public static final BlockItemRegister DEMONITE_ORE = new BlockItemRegister("demonite_ore", key -> new Block(Properties.ofFullCopy(Blocks.IRON_ORE).setId(key)));
     public static final BlockItemRegister DEEPSLATE_DEMONITE_ORE = new BlockItemRegister("deepslate_demonite_ore", key -> new Block(Properties.ofFullCopy(Blocks.DEEPSLATE_IRON_ORE).setId(key)));
     public static final BlockItemRegister RAW_DEMONITE_BLOCK = new BlockItemRegister("raw_demonite_block", key -> new Block(Properties.ofFullCopy(Blocks.RAW_IRON_BLOCK).setId(key)));
@@ -51,6 +68,9 @@ public class ModBlocks {
     public static final BlockItemRegister DEEPSLATE_CRIMTANE_ORE = new BlockItemRegister("deepslate_crimtane_ore", key -> new Block(Properties.ofFullCopy(Blocks.DEEPSLATE_IRON_ORE).setId(key)));
     public static final BlockItemRegister RAW_CRIMTANE_BLOCK = new BlockItemRegister("raw_crimtane_block", key -> new Block(Properties.ofFullCopy(Blocks.RAW_IRON_BLOCK).setId(key)));
     public static final BlockItemRegister CRIMTANE_BLOCK = new BlockItemRegister("crimtane_block", key -> new Block(Properties.ofFullCopy(Blocks.IRON_BLOCK).setId(key)));
+    public static final BlockItemRegister METEORITE_ORE = new BlockItemRegister("meteorite_ore", key -> new HotFloorBlock(Properties.ofFullCopy(Blocks.MAGMA_BLOCK).setId(key).strength(5f)));
+    public static final BlockItemRegister RAW_METEORITE_BLOCK = new BlockItemRegister("raw_meteorite_block", key -> new Block(Properties.ofFullCopy(Blocks.MAGMA_BLOCK).setId(key).strength(8f)));
+    public static final BlockItemRegister METEORITE_BLOCK = new BlockItemRegister("meteorite_block", key -> new Block(Properties.ofFullCopy(Blocks.RAW_IRON_BLOCK).setId(key)));
     public static final BlockItemRegister HELLSTONE_ORE = new BlockItemRegister("hellstone_ore", key -> new HellstoneBlock(Properties.ofFullCopy(Blocks.MAGMA_BLOCK).setId(key).sound(SoundType.NETHER_GOLD_ORE).strength(7f)), new Item.Properties().fireResistant());
     public static final BlockItemRegister RAW_HELLSTONE_BLOCK = new BlockItemRegister("raw_hellstone_block", key -> new HotFloorBlock(Properties.ofFullCopy(Blocks.MAGMA_BLOCK).setId(key).destroyTime(10f).explosionResistance(1200f), false), new Item.Properties().fireResistant());
     public static final BlockItemRegister HELLSTONE_BLOCK = new BlockItemRegister("hellstone_block", key -> new Block(Properties.ofFullCopy(Blocks.NETHERITE_BLOCK).setId(key)), new Item.Properties().fireResistant());

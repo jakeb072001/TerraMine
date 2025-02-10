@@ -49,6 +49,8 @@ public class ModComponents implements EntityComponentInitializer, LevelComponent
 			ComponentRegistryV3.INSTANCE.getOrCreate(TerraMine.id("hardmode"), SyncedBooleanComponent.class);
 	public static final ComponentKey<SyncedBooleanComponent> EVIL_TYPE =
 			ComponentRegistryV3.INSTANCE.getOrCreate(TerraMine.id("evil_type"), SyncedBooleanComponent.class);
+	public static final ComponentKey<OreComponent> ORE_TYPES =
+			ComponentRegistryV3.INSTANCE.getOrCreate(TerraMine.id("ore_types"), OreComponent.class);
 
 	@Override
 	public void registerEntityComponentFactories(EntityComponentFactoryRegistry registry) {
@@ -73,5 +75,6 @@ public class ModComponents implements EntityComponentInitializer, LevelComponent
 	public void registerLevelComponentFactories(LevelComponentFactoryRegistry registry) {
 		registry.register(HARDMODE, levelData -> new SyncedBooleanComponent("hardmode"));
 		registry.register(EVIL_TYPE, levelData -> new SyncedBooleanComponent("evil_type"));
+		registry.register(ORE_TYPES, levelData -> new OreComponent("ore_types"));
 	}
 }

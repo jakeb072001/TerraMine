@@ -85,17 +85,20 @@ public abstract class LivingEntityMixin extends Entity {
 		return t;
 	}
 
+	@Unique
 	private boolean runningShoesEquipped(LivingEntity self) {
 		return AccessoriesHelper.isEquipped(ModItems.HERMES_BOOTS, self) || AccessoriesHelper.isEquipped(ModItems.SPECTRE_BOOTS, self)
 				|| AccessoriesHelper.isEquipped(ModItems.FAIRY_BOOTS, self) || AccessoriesHelper.isEquipped(ModItems.LIGHTNING_BOOTS, self)
 				|| AccessoriesHelper.isEquipped(ModItems.FROSTSPARK_BOOTS, self) || AccessoriesHelper.isEquipped(ModItems.TERRASPARK_BOOTS, self);
 	}
 
+	@Unique
 	private boolean iceSkatesEquipped(LivingEntity self) {
 		return AccessoriesHelper.isEquipped(ModItems.ICE_SKATES, self) || AccessoriesHelper.isEquipped(ModItems.FROSTSPARK_BOOTS, self)
 				|| AccessoriesHelper.isEquipped(ModItems.TERRASPARK_BOOTS, self);
 	}
 
+	@Unique
 	private boolean isIceBlock() {
 		BlockPos blockPos = this.getBlockPosBelowThatAffectsMyMovement();
 		Block block = this.level().getBlockState(blockPos).getBlock();

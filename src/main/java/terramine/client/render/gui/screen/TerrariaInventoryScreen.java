@@ -13,6 +13,7 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.ImageWidget;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.gui.screens.inventory.CreativeModeInventoryScreen;
+import net.minecraft.client.gui.screens.inventory.EffectsInInventory;
 import net.minecraft.client.gui.screens.inventory.InventoryScreen;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
@@ -43,6 +44,7 @@ import java.util.List;
 import java.util.UUID;
 
 // todo: sometimes when clicking a slot the item isn't picked up or placed down
+// todo: also mouse moves back to center of screen when entering this screen after the first time (first time works fine...)
 @Environment(EnvType.CLIENT)
 public class TerrariaInventoryScreen extends AbstractContainerScreen<TerrariaInventoryContainerMenu> {
     private static final ResourceLocation BUTTON_TEX = TerraMine.id("textures/gui/terraria_slots_button.png");
@@ -54,6 +56,7 @@ public class TerrariaInventoryScreen extends AbstractContainerScreen<TerrariaInv
     private static final ResourceLocation TERRARIA_CONTAINER_5 = TerraMine.id("textures/gui/container/terraria_slots_5.png");
     private static final ResourceLocation TERRARIA_CONTAINER_6 = TerraMine.id("textures/gui/container/terraria_slots_6.png");
     private static final ResourceLocation TERRARIA_CONTAINER_7 = TerraMine.id("textures/gui/container/terraria_slots_7.png");
+    private final EffectsInInventory effects;
     private float xMouse;
     private float yMouse;
     private final int imageWidth = 176;
@@ -63,6 +66,7 @@ public class TerrariaInventoryScreen extends AbstractContainerScreen<TerrariaInv
 
     public TerrariaInventoryScreen(Player player) {
         super(new TerrariaInventoryContainerMenu(player), player.getInventory(), Component.empty());
+        this.effects = new EffectsInInventory(this);
     }
 
     protected void init() {
@@ -119,9 +123,9 @@ public class TerrariaInventoryScreen extends AbstractContainerScreen<TerrariaInv
     }
 
     public void render(@NotNull GuiGraphics guiGraphics, int i, int j, float f) {
-        this.renderBackground(guiGraphics, i, j, f);
         super.render(guiGraphics, i, j, f);
         this.renderTooltip(guiGraphics, i, j);
+        this.effects.render(guiGraphics, i, j, f);
         this.xMouse = (float)i;
         this.yMouse = (float)j;
     }
@@ -209,6 +213,7 @@ public class TerrariaInventoryScreen extends AbstractContainerScreen<TerrariaInv
         return d < (double)i || e < (double)j - 26 || d >= (double)(i + this.imageWidth) || e >= (double)(j + this.imageHeight - 26);
     }
 
+    // todo: this is probably why items don't grab correctly sometimes
     protected void slotClicked(Slot slot, int i, int j, @NotNull ClickType clickType) {
         if (slot != null && this.minecraft != null) {
             i = slot.index;

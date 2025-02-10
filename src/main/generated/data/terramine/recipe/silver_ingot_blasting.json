@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:blasting",
+  "category": "misc",
+  "cookingtime": 100,
+  "experience": 0.7,
+  "ingredient": [
+    "terramine:raw_silver",
+    "terramine:silver_ore",
+    "terramine:deepslate_silver_ore"
+  ],
+  "result": {
+    "id": "terramine:silver_ingot"
+  }
+}

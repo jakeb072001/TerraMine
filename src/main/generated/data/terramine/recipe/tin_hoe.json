@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "S": "minecraft:stick",
+    "X": "#c:ingots/tin"
+  },
+  "pattern": [
+    "XX",
+    " S",
+    " S"
+  ],
+  "result": {
+    "count": 1,
+    "id": "terramine:tin_hoe"
+  }
+}

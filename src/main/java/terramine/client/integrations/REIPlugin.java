@@ -28,7 +28,7 @@ public class REIPlugin implements REIClientPlugin {
 				}).forEach(recipeHelper::add);
 
 		BuiltInRegistries.ITEM.stream()
-				.filter(item -> item instanceof TerrariaArmor && !(item instanceof VanityArmor))
+				.filter(item -> item instanceof TerrariaArmor terrariaArmor && (terrariaArmor.hasTooltip) && !(item instanceof VanityArmor))
 				.map(item -> {
 					DefaultInformationDisplay display = DefaultInformationDisplay.createFromEntry(EntryStack.of(VanillaEntryTypes.ITEM, new ItemStack(item)), Component.translatable(item.getDescriptionId()));
 					for (String string : ((TerrariaArmor) item).getREITooltip()) {

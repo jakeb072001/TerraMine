@@ -7,6 +7,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.levelgen.structure.Structure;
@@ -25,6 +26,12 @@ public final class ModTags extends FabricTagProvider<Item> {
 
     // Item Tags
     public static final TagKey<Item> ACCESSORY = createItemTag("accessory");
+    public static final TagKey<Item> REPAIRS_COPPER_ARMOR = createItemTag("repairs_copper_armor");
+    public static final TagKey<Item> REPAIRS_TIN_ARMOR = createItemTag("repairs_tin_armor");
+    public static final TagKey<Item> REPAIRS_LEAD_ARMOR = createItemTag("repairs_lead_armor");
+    public static final TagKey<Item> REPAIRS_SILVER_ARMOR = createItemTag("repairs_silver_armor");
+    public static final TagKey<Item> REPAIRS_TUNGSTEN_ARMOR = createItemTag("repairs_tungsten_armor");
+    public static final TagKey<Item> REPAIRS_PLATINUM_ARMOR = createItemTag("repairs_platinum_armor");
     public static final TagKey<Item> REPAIRS_SHADOW_ARMOR = createItemTag("repairs_shadow_armor");
     public static final TagKey<Item> REPAIRS_CRIMSON_ARMOR = createItemTag("repairs_crimson_armor");
     public static final TagKey<Item> REPAIRS_METEOR_ARMOR = createItemTag("repairs_meteor_armor");
@@ -32,6 +39,12 @@ public final class ModTags extends FabricTagProvider<Item> {
 
     // Common Item Tags
     public static final TagKey<Item> SLIME_BALLS = createItemTagCommon("slime_balls");
+    public static final TagKey<Item> COPPER = createItemTagCommon("ingots/copper");
+    public static final TagKey<Item> TIN = createItemTagCommon("ingots/tin");
+    public static final TagKey<Item> LEAD = createItemTagCommon("ingots/lead");
+    public static final TagKey<Item> SILVER = createItemTagCommon("ingots/silver");
+    public static final TagKey<Item> TUNGSTEN = createItemTagCommon("ingots/tungsten");
+    public static final TagKey<Item> PLATINUM = createItemTagCommon("ingots/platinum");
 
     // Structure
     public static final TagKey<Structure> DUNGEONS = createStructureTag("dungeon");
@@ -74,6 +87,18 @@ public final class ModTags extends FabricTagProvider<Item> {
         accessoryBuilder.add(ModItems.OBSIDIAN_SHIELD);
         accessoryBuilder.add(ModItems.SHIELD_OF_CTHULHU);
 
+        getOrCreateTagBuilder(REPAIRS_COPPER_ARMOR)
+                .add(Items.COPPER_INGOT);
+        getOrCreateTagBuilder(REPAIRS_TIN_ARMOR)
+                .add(ModItems.TIN_INGOT);
+        getOrCreateTagBuilder(REPAIRS_LEAD_ARMOR)
+                .add(ModItems.LEAD_INGOT);
+        getOrCreateTagBuilder(REPAIRS_SILVER_ARMOR)
+                .add(ModItems.SILVER_INGOT);
+        getOrCreateTagBuilder(REPAIRS_TUNGSTEN_ARMOR)
+                .add(ModItems.TUNGSTEN_INGOT);
+        getOrCreateTagBuilder(REPAIRS_PLATINUM_ARMOR)
+                .add(ModItems.PLATINUM_INGOT);
         getOrCreateTagBuilder(REPAIRS_SHADOW_ARMOR)
                 .add(ModItems.DEMONITE_INGOT);
         getOrCreateTagBuilder(REPAIRS_CRIMSON_ARMOR)

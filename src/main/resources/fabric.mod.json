@@ -88,7 +88,8 @@
       "terramine:accessory_hardcore_check",
       "terramine:accessory_demon_heart_check",
       "terramine:hardmode",
-      "terramine:evil_type"
+      "terramine:evil_type",
+      "terramine:ore_types"
     ],
     "waila:plugins": {
       "id": "terramine:waila_plugin",

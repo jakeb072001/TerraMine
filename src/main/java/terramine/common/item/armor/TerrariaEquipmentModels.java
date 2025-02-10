@@ -13,6 +13,12 @@ import static terramine.TerraMine.id;
 public interface TerrariaEquipmentModels {
     ResourceKey<? extends Registry<EquipmentAsset>> ROOT_ID = ResourceKey.createRegistryKey(ResourceLocation.withDefaultNamespace("equipment_asset"));
     ResourceKey<EquipmentAsset> VANITY = createId("vanity");
+    ResourceKey<EquipmentAsset> COPPER = createId("copper");
+    ResourceKey<EquipmentAsset> TIN = createId("tin");
+    ResourceKey<EquipmentAsset> LEAD = createId("lead");
+    ResourceKey<EquipmentAsset> SILVER = createId("silver");
+    ResourceKey<EquipmentAsset> TUNGSTEN = createId("tungsten");
+    ResourceKey<EquipmentAsset> PLATINUM = createId("platinum");
     ResourceKey<EquipmentAsset> SHADOW = createId("shadow");
     ResourceKey<EquipmentAsset> ANCIENT_SHADOW = createId("ancient_shadow");
     ResourceKey<EquipmentAsset> CRIMSON = createId("crimson");
@@ -25,6 +31,12 @@ public interface TerrariaEquipmentModels {
 
     static void bootstrap(BiConsumer<ResourceKey<EquipmentAsset>, EquipmentClientInfo> biConsumer) {
         biConsumer.accept(VANITY, onlyHumanoid("vanity"));
+        biConsumer.accept(COPPER, onlyHumanoid("copper"));
+        biConsumer.accept(TIN, onlyHumanoid("tin"));
+        biConsumer.accept(LEAD, onlyHumanoid("lead"));
+        biConsumer.accept(SILVER, onlyHumanoid("silver"));
+        biConsumer.accept(TUNGSTEN, onlyHumanoid("tungsten"));
+        biConsumer.accept(PLATINUM, onlyHumanoid("platinum"));
         biConsumer.accept(SHADOW, onlyHumanoid("shadow"));
         biConsumer.accept(ANCIENT_SHADOW, onlyHumanoid("ancient_shadow"));
         biConsumer.accept(CRIMSON, onlyHumanoid("crimson"));

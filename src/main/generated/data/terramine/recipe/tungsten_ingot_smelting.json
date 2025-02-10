@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:smelting",
+  "category": "misc",
+  "cookingtime": 200,
+  "experience": 0.7,
+  "ingredient": [
+    "terramine:raw_tungsten",
+    "terramine:tungsten_ore",
+    "terramine:deepslate_tungsten_ore"
+  ],
+  "result": {
+    "id": "terramine:tungsten_ingot"
+  }
+}

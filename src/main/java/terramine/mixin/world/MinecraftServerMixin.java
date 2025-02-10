@@ -8,6 +8,7 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import terramine.common.components.OreComponent;
 import terramine.common.components.SyncedBooleanComponent;
 
 // priority is one below Terrablender, fixes crash on world load on newer versions of Terrablender
@@ -20,5 +21,6 @@ public class MinecraftServerMixin {
     private void onInit(CallbackInfo ci)
     {
         SyncedBooleanComponent.setLevelData(worldData.overworldData());
+        OreComponent.setLevelData(worldData.overworldData());
     }
 }

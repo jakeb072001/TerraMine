@@ -4,11 +4,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [1.8.0-1.21.4] - 2025-02-28
+## [1.8.0-1.21.4] - 2025-03-31
 ### Added
 - Eye of Cthulhu and Eater of Worlds //-- Not yet started
 - Treasure Bags
 - Shield of Cthulhu and Worm Scarf //-- Not yet started
+- New ores, armour, and tools
+
+### Fixed
+- Accessory inventory button not repositioning when opening or closing recipe book
+- Molten armor immunities not applying
+- All armour sets working as if they were shadow armour
+- Vanity armour breaking instantly (they are now indestructible)
 
 ## [1.7.8-1.21.4] - 2025-02-04
 ### Changed

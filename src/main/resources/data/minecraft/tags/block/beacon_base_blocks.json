@@ -3,6 +3,11 @@
   "values": [
     "terramine:demonite_block",
 	"terramine:crimtane_block",
+    "terramine:tin_block",
+    "terramine:lead_block",
+    "terramine:silver_block",
+    "terramine:tungsten_block",
+    "terramine:platinum_block",
 	"terramine:meteorite_block",
 	"terramine:hellstone_block"
   ]

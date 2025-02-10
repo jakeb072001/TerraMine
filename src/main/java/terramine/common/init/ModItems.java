@@ -20,7 +20,7 @@ import terramine.common.item.accessories.feet.*;
 import terramine.common.item.accessories.hands.*;
 import terramine.common.item.accessories.head.DivingGear;
 import terramine.common.item.accessories.necklace.*;
-import terramine.common.item.armor.TerrariaArmorMaterials;
+import terramine.common.item.armor.*;
 import terramine.common.item.armor.vanity.FamiliarVanity;
 import terramine.common.item.armor.vanity.TopHatVanity;
 import terramine.common.item.dye.BasicDye;
@@ -31,7 +31,6 @@ import terramine.common.item.equipment.UmbrellaItem;
 import terramine.common.item.equipment.swords.CustomSoundSwordItem;
 import terramine.common.item.equipment.swords.VolcanoSwordItem;
 import terramine.common.item.equipment.tools.MoltenPickaxeItem;
-import terramine.common.item.equipment.tools.TerrariaPickaxeItem;
 import terramine.common.item.equipment.tools.TerrariaShaxeItem;
 import terramine.common.item.magic.*;
 import terramine.common.item.misc.BossSpawnItem;
@@ -45,6 +44,7 @@ import terramine.common.item.projectiles.throwables.BombItem;
 import terramine.common.item.projectiles.throwables.DynamiteItem;
 import terramine.common.item.projectiles.throwables.GrenadeItem;
 import terramine.common.utility.ArmorItemRegister;
+import terramine.common.utility.BasicToolSetRegister;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -113,12 +113,22 @@ public class ModItems {
 	public static final Item WORM_TOOTH = registerMisc("worm_tooth", key -> new CraftingItem(new Item.Properties().setId(key).stacksTo(64), false));
 
 	// Ores etc
-	public static final Item RAW_METEORITE = registerMisc("raw_meteorite", key -> new CraftingItem(new Item.Properties().setId(key), false));
-	public static final Item METEORITE_INGOT = registerMisc("meteorite_ingot", key -> new CraftingItem(new Item.Properties().setId(key), true));
+	public static final Item RAW_TIN = registerMisc("raw_tin", key -> new CraftingItem(new Item.Properties().setId(key), false));
+	public static final Item TIN_INGOT = registerMisc("tin_ingot", key -> new CraftingItem(new Item.Properties().setId(key), false));
+	public static final Item RAW_LEAD = registerMisc("raw_lead", key -> new CraftingItem(new Item.Properties().setId(key), false));
+	public static final Item LEAD_INGOT = registerMisc("lead_ingot", key -> new CraftingItem(new Item.Properties().setId(key), false));
+	public static final Item RAW_SILVER = registerMisc("raw_silver", key -> new CraftingItem(new Item.Properties().setId(key), false));
+	public static final Item SILVER_INGOT = registerMisc("silver_ingot", key -> new CraftingItem(new Item.Properties().setId(key), false));
+	public static final Item RAW_TUNGSTEN = registerMisc("raw_tungsten", key -> new CraftingItem(new Item.Properties().setId(key), false));
+	public static final Item TUNGSTEN_INGOT = registerMisc("tungsten_ingot", key -> new CraftingItem(new Item.Properties().setId(key), false));
+	public static final Item RAW_PLATINUM = registerMisc("raw_platinum", key -> new CraftingItem(new Item.Properties().setId(key), false));
+	public static final Item PLATINUM_INGOT = registerMisc("platinum_ingot", key -> new CraftingItem(new Item.Properties().setId(key), false));
 	public static final Item RAW_DEMONITE = registerMisc("raw_demonite", key -> new CraftingItem(new Item.Properties().setId(key), false));
 	public static final Item DEMONITE_INGOT = registerMisc("demonite_ingot", key -> new CraftingItem(new Item.Properties().setId(key), true));
 	public static final Item RAW_CRIMTANE = registerMisc("raw_crimtane", key -> new CraftingItem(new Item.Properties().setId(key), false));
 	public static final Item CRIMTANE_INGOT = registerMisc("crimtane_ingot", key -> new CraftingItem(new Item.Properties().setId(key), false));
+	public static final Item RAW_METEORITE = registerMisc("raw_meteorite", key -> new CraftingItem(new Item.Properties().setId(key), false));
+	public static final Item METEORITE_INGOT = registerMisc("meteorite_ingot", key -> new CraftingItem(new Item.Properties().setId(key), true));
 	public static final Item RAW_HELLSTONE = registerMisc("raw_hellstone", key -> new CraftingItem(new Item.Properties().setId(key).fireResistant(), true));
 	public static final Item RAW_HELLSTONE_HARDENED = registerMisc("raw_hellstone_hardened", key -> new CraftingItem(new Item.Properties().setId(key).fireResistant(), true));
 	public static final Item HELLSTONE_INGOT = registerMisc("hellstone_ingot", key -> new CraftingItem(new Item.Properties().setId(key).fireResistant(), true));
@@ -235,24 +245,21 @@ public class ModItems {
 	public static final Item DEMON_WINGS = registerAccessory("demon_wings", key -> new WingsItem(0.5D, 0.05D, 80, 9, ModSoundEvents.WINGS_FLAP, key));
 	public static final Item LEAF_WINGS = registerAccessory("leaf_wings", key -> new WingsItem(0.5D, 0.05D, 80, 10, ModSoundEvents.WINGS_FLAP, key));
 
-	// todo: add early game materials, their tools, and armour (don't forget copper armour and tools).
 	// Tools
-	public static final Item DEMONITE_PICKAXE = registerTool("demonite_pickaxe", key -> new TerrariaPickaxeItem(TerrariaToolMaterials.DEMONITE, 1F, -2.8F, new Item.Properties().setId(key)));
-	public static final Item DEMONITE_AXE = registerTool("demonite_axe", key -> new AxeItem(TerrariaToolMaterials.DEMONITE, 6F, -3.1F, new Item.Properties().setId(key)));
-	public static final Item DEMONITE_SHOVEL = registerTool("demonite_shovel", key -> new ShovelItem(TerrariaToolMaterials.DEMONITE, 1.5F, -3F, new Item.Properties().setId(key)));
-	public static final Item DEMONITE_HOE = registerTool("demonite_hoe", key -> new HoeItem(TerrariaToolMaterials.DEMONITE, -2F, -1F, new Item.Properties().setId(key)));
-	public static final Item CRIMTANE_PICKAXE = registerTool("crimtane_pickaxe", key -> new TerrariaPickaxeItem(TerrariaToolMaterials.CRIMTANE, 1F, -2.8F, new Item.Properties().setId(key)));
-	public static final Item CRIMTANE_AXE = registerTool("crimtane_axe", key -> new AxeItem(TerrariaToolMaterials.CRIMTANE, 6.5F, -3.1F, new Item.Properties().setId(key)));
-	public static final Item CRIMTANE_SHOVEL = registerTool("crimtane_shovel", key -> new ShovelItem(TerrariaToolMaterials.CRIMTANE, 1.5F, -3F, new Item.Properties().setId(key)));
-	public static final Item CRIMTANE_HOE = registerTool("crimtane_hoe", key -> new HoeItem(TerrariaToolMaterials.CRIMTANE, -2, -1F, new Item.Properties().setId(key)));
+	public static final BasicToolSetRegister COPPER_TOOLS = new BasicToolSetRegister("copper", TerrariaToolMaterials.COPPER);
+	public static final BasicToolSetRegister TIN_TOOLS = new BasicToolSetRegister("tin", TerrariaToolMaterials.TIN);
+	public static final BasicToolSetRegister LEAD_TOOLS = new BasicToolSetRegister("lead", TerrariaToolMaterials.LEAD);
+	public static final BasicToolSetRegister SILVER_TOOLS = new BasicToolSetRegister("silver", TerrariaToolMaterials.SILVER);
+	public static final BasicToolSetRegister TUNGSTEN_TOOLS = new BasicToolSetRegister("tungsten", TerrariaToolMaterials.TUNGSTEN);
+	public static final BasicToolSetRegister PLATINUM_TOOLS = new BasicToolSetRegister("platinum", TerrariaToolMaterials.PLATINUM);
+	public static final BasicToolSetRegister DEMONITE_TOOLS = new BasicToolSetRegister("demonite", TerrariaToolMaterials.DEMONITE);
+	public static final BasicToolSetRegister CRIMTANE_TOOLS = new BasicToolSetRegister("crimtane", TerrariaToolMaterials.CRIMTANE, true);
 	public static final Item METEOR_SHAXE = registerTool("meteor_shaxe", key -> new TerrariaShaxeItem(TerrariaToolMaterials.METEOR, 7F, -3.1F, new Item.Properties().setId(key).fireResistant()));
 	public static final Item MOLTEN_PICKAXE = registerTool("molten_pickaxe", key -> new MoltenPickaxeItem(TerrariaToolMaterials.MOLTEN, 1F, -2.8F, new Item.Properties().setId(key).fireResistant()));
 	public static final Item MOLTEN_SHAXE = registerTool("molten_shaxe", key -> new TerrariaShaxeItem(TerrariaToolMaterials.MOLTEN, true, 7.5F, -3.1F, new Item.Properties().setId(key).fireResistant()));
 	// reminder: any pickaxe better than molten needs a true boolean added after the g float
 
 	// Weapons
-	public static final Item DEMONITE_SWORD = registerWeapon("demonite_sword", key -> new SwordItem(TerrariaToolMaterials.DEMONITE, 3F, -2.4F, new Item.Properties().setId(key)));
-	public static final Item CRIMTANE_SWORD = registerBigWeapon("crimtane_sword", key -> new SwordItem(TerrariaToolMaterials.CRIMTANE, 3F, -2.4F, new Item.Properties().setId(key)));
 	public static final Item PHASEBLADE_WHITE = registerBigWeapon("phaseblade_white", key -> new CustomSoundSwordItem(TerrariaToolMaterials.METEOR, 3F, -1F, ModSoundEvents.PHASEBLADE_SWING, new Item.Properties().setId(key)));
 	public static final Item PHASEBLADE_GREEN = registerBigWeapon("phaseblade_green", key -> new CustomSoundSwordItem(TerrariaToolMaterials.METEOR, 3F, -1F, ModSoundEvents.PHASEBLADE_SWING, new Item.Properties().setId(key)));
 	public static final Item VOLCANO_SWORD = registerBigWeapon("volcano_sword", key -> new VolcanoSwordItem(TerrariaToolMaterials.MOLTEN, 4F, -2.4F, new Item.Properties().setId(key).fireResistant()));
@@ -275,11 +282,17 @@ public class ModItems {
 	public static final Item BOUNCY_DYNAMITE = registerThrowable("bouncy_dynamite", key -> new DynamiteItem(new Item.Properties().setId(key), false, true));
 
 	// Armours
-	public static final ArmorItemRegister SHADOW_ARMOR = new ArmorItemRegister("shadow", "shadow", TerrariaArmorMaterials.SHADOW, ARMORS);
-	public static final ArmorItemRegister ANCIENT_SHADOW_ARMOR = new ArmorItemRegister("ancient_shadow", "shadow", TerrariaArmorMaterials.ANCIENT_SHADOW, ARMORS);
-	public static final ArmorItemRegister CRIMSON_ARMOR = new ArmorItemRegister("crimson", "crimson", TerrariaArmorMaterials.CRIMSON, ARMORS);
-	public static final ArmorItemRegister METEOR_ARMOR = new ArmorItemRegister("meteor", "meteor", TerrariaArmorMaterials.METEOR, ARMORS);
-	public static final ArmorItemRegister MOLTEN_ARMOR = new ArmorItemRegister("molten", "molten", TerrariaArmorMaterials.MOLTEN, ARMORS);
+	public static final ArmorItemRegister COPPER_ARMOR = new ArmorItemRegister("copper", "copper", TerrariaArmorMaterials.COPPER);
+	public static final ArmorItemRegister TIN_ARMOR = new ArmorItemRegister("tin", "tin", TerrariaArmorMaterials.TIN);
+	public static final ArmorItemRegister LEAD_ARMOR = new ArmorItemRegister("lead", "lead", TerrariaArmorMaterials.LEAD);
+	public static final ArmorItemRegister SILVER_ARMOR = new ArmorItemRegister("silver", "silver", TerrariaArmorMaterials.SILVER);
+	public static final ArmorItemRegister TUNGSTEN_ARMOR = new ArmorItemRegister("tungsten", "tungsten", TerrariaArmorMaterials.TUNGSTEN);
+	public static final ArmorItemRegister PLATINUM_ARMOR = new ArmorItemRegister("platinum", "platinum", TerrariaArmorMaterials.PLATINUM);
+	public static final ArmorItemRegister SHADOW_ARMOR = new ArmorItemRegister("shadow", "shadow", TerrariaArmorMaterials.SHADOW, ShadowArmor.class);
+	public static final ArmorItemRegister ANCIENT_SHADOW_ARMOR = new ArmorItemRegister("ancient_shadow", "shadow", TerrariaArmorMaterials.ANCIENT_SHADOW, ShadowArmor.class);
+	public static final ArmorItemRegister CRIMSON_ARMOR = new ArmorItemRegister("crimson", "crimson", TerrariaArmorMaterials.CRIMSON, CrimsonArmor.class);
+	public static final ArmorItemRegister METEOR_ARMOR = new ArmorItemRegister("meteor", "meteor", TerrariaArmorMaterials.METEOR, MeteorArmor.class);
+	public static final ArmorItemRegister MOLTEN_ARMOR = new ArmorItemRegister("molten", "molten", TerrariaArmorMaterials.MOLTEN, MoltenArmor.class);
 
 	// Vanity Armours
 	public static final Item FAMILIAR_WIG = registerArmor("familiar_wig", key -> new FamiliarVanity(TerrariaArmorMaterials.VANITY, ArmorType.HELMET, new Item.Properties().setId(key)));

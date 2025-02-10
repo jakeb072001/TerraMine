@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "terramine:silver_block"
+  ],
+  "result": {
+    "count": 9,
+    "id": "terramine:silver_ingot"
+  }
+}

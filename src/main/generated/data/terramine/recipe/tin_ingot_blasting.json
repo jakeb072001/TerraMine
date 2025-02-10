@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:blasting",
+  "category": "misc",
+  "cookingtime": 100,
+  "experience": 0.7,
+  "ingredient": [
+    "terramine:raw_tin",
+    "terramine:tin_ore",
+    "terramine:deepslate_tin_ore"
+  ],
+  "result": {
+    "id": "terramine:tin_ingot"
+  }
+}

@@ -44,6 +44,7 @@ public class TerrariaArmor extends ArmorItem {
     private final ArmorType armorType;
     protected final int defense;
     protected final float toughness;
+    public final boolean hasTooltip;
     private final Supplier<ItemAttributeModifiers> defaultModifiers;
     protected Multimap<Holder<Attribute>, AttributeModifier> attributeModifiers;
     public static final EnumMap<ArmorType, UUID> ARMOR_MODIFIER_UUID_PER_TYPE = Util.make(new EnumMap<>(ArmorType.class), (enumMap) -> {
@@ -55,11 +56,16 @@ public class TerrariaArmor extends ArmorItem {
     });
 
     public TerrariaArmor(String terramineArmorType, ArmorMaterial armorMaterial, ArmorType armorType, Properties properties) {
+        this(terramineArmorType, armorMaterial, armorType, properties, true);
+    }
+
+    public TerrariaArmor(String terramineArmorType, ArmorMaterial armorMaterial, ArmorType armorType, Properties properties, boolean hasTooltip) {
         super(armorMaterial, armorType, properties);
         this.terramineArmorType = terramineArmorType;
         this.armorType = armorType;
         this.defense = armorMaterial.defense().get(armorType);
         this.toughness = armorMaterial.toughness();
+        this.hasTooltip = hasTooltip;
 
         this.defaultModifiers = Suppliers.memoize(() -> {
             ItemAttributeModifiers.Builder builder = ItemAttributeModifiers.builder();
@@ -144,7 +150,7 @@ public class TerrariaArmor extends ArmorItem {
     @Override
     @Environment(EnvType.CLIENT)
     public void appendHoverText(ItemStack itemStack, TooltipContext tooltipContext, List<Component> tooltip, TooltipFlag tooltipFlag) {
-        if (TerraMine.CONFIG.client.showTooltips) {
+        if (TerraMine.CONFIG.client.showTooltips && this.hasTooltip) {
             appendTooltipDescription(tooltip, this.getDescriptionId() + ".tooltip");
 
             // Checks if the player is wearing a full set of one type of armor, then display the set bonus

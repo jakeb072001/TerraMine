@@ -1,0 +1,32 @@
+{
+  "replace": false,
+  "values": [
+    "terramine:blue_brick",
+    "terramine:cracked_blue_brick",
+    "terramine:fancy_blue_brick",
+    "terramine:green_brick",
+    "terramine:cracked_green_brick",
+    "terramine:fancy_green_brick",
+    "terramine:purple_brick",
+    "terramine:cracked_purple_brick",
+    "terramine:fancy_purple_brick",
+    "terramine:sandstone_chest",
+    "terramine:trapped_sandstone_chest",
+    "terramine:corrupted_iron_ore",
+    "terramine:corrupted_deepslate_iron_ore",
+    "terramine:corrupted_lapis_ore",
+    "terramine:corrupted_deepslate_lapis_ore",
+    "terramine:corrupted_copper_ore",
+    "terramine:corrupted_deepslate_copper_ore",
+	"terramine:crimson_iron_ore",
+    "terramine:crimson_deepslate_iron_ore",
+    "terramine:crimson_lapis_ore",
+    "terramine:crimson_deepslate_lapis_ore",
+    "terramine:crimson_copper_ore",
+    "terramine:crimson_deepslate_copper_ore",
+    "terramine:tin_ore",
+    "terramine:deepslate_tin_ore",
+    "terramine:lead_ore",
+    "terramine:deepslate_lead_ore"
+  ]
+}

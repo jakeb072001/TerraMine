@@ -15,6 +15,7 @@ import org.spongepowered.asm.mixin.Unique;
 import terramine.common.init.ModBlocks;
 import terramine.common.init.ModItems;
 import terramine.common.utility.ArmorItemRegister;
+import terramine.common.utility.BasicToolSetRegister;
 import terramine.common.utility.BlockItemRegister;
 
 import java.util.concurrent.CompletableFuture;
@@ -110,6 +111,11 @@ public class ModRecipes extends FabricRecipeProvider {
                 }, 'X', Items.ARROW, 'C', Ingredient.of(ModItems.WORM_TOOTH, ModItems.VERTEBRA));
 
                 // Blocks
+                createBlock(ModItems.TIN_INGOT, ModBlocks.TIN_BLOCK);
+                createBlock(ModItems.LEAD_INGOT, ModBlocks.LEAD_BLOCK);
+                createBlock(ModItems.SILVER_INGOT, ModBlocks.SILVER_BLOCK);
+                createBlock(ModItems.TUNGSTEN_INGOT, ModBlocks.TUNGSTEN_BLOCK);
+                createBlock(ModItems.PLATINUM_INGOT, ModBlocks.PLATINUM_BLOCK);
                 createBlock(ModItems.DEMONITE_INGOT, ModBlocks.DEMONITE_BLOCK);
                 createBlock(ModItems.CRIMTANE_INGOT, ModBlocks.CRIMTANE_BLOCK);
                 createBlock(ModItems.METEORITE_INGOT, ModBlocks.METEORITE_BLOCK);
@@ -130,14 +136,26 @@ public class ModRecipes extends FabricRecipeProvider {
                 }, 'A', ModTags.ACCESSORY, 'B', Items.BOOK, 'C', Items.CRAFTING_TABLE);
 
                 // Armor Recipes
+                createArmor(ModTags.COPPER, ModItems.COPPER_ARMOR);
+                createArmor(ModTags.TIN, ModItems.TIN_ARMOR);
+                createArmor(ModTags.LEAD, ModItems.LEAD_ARMOR);
+                createArmor(ModTags.SILVER, ModItems.SILVER_ARMOR);
+                createArmor(ModTags.TUNGSTEN, ModItems.TUNGSTEN_ARMOR);
+                createArmor(ModTags.PLATINUM, ModItems.PLATINUM_ARMOR);
                 createArmor(ModItems.DEMONITE_INGOT, ModItems.SHADOW_ARMOR);
                 createArmor(ModItems.CRIMTANE_INGOT, ModItems.CRIMSON_ARMOR);
                 createArmor(ModItems.METEORITE_INGOT, ModItems.METEOR_ARMOR);
                 createArmor(ModItems.HELLSTONE_INGOT, ModItems.MOLTEN_ARMOR);
 
                 // Tools
-                createTools(ModItems.DEMONITE_INGOT, ModItems.DEMONITE_PICKAXE, ModItems.DEMONITE_AXE, ModItems.DEMONITE_SHOVEL, ModItems.DEMONITE_HOE, ModItems.DEMONITE_SWORD);
-                createTools(ModItems.CRIMTANE_INGOT, ModItems.CRIMTANE_PICKAXE, ModItems.CRIMTANE_AXE, ModItems.CRIMTANE_SHOVEL, ModItems.CRIMTANE_HOE, ModItems.CRIMTANE_SWORD);
+                createTools(ModTags.COPPER, ModItems.COPPER_TOOLS);
+                createTools(ModTags.TIN, ModItems.TIN_TOOLS);
+                createTools(ModTags.LEAD, ModItems.LEAD_TOOLS);
+                createTools(ModTags.SILVER, ModItems.SILVER_TOOLS);
+                createTools(ModTags.TUNGSTEN, ModItems.TUNGSTEN_TOOLS);
+                createTools(ModTags.PLATINUM, ModItems.PLATINUM_TOOLS);
+                createTools(ModItems.DEMONITE_INGOT, ModItems.DEMONITE_TOOLS);
+                createTools(ModItems.CRIMTANE_INGOT, ModItems.CRIMTANE_TOOLS);
                 createShaped(RecipeCategory.TOOLS, ModItems.MOLTEN_PICKAXE,
                         new String[]{
                                 "XXX",
@@ -146,12 +164,12 @@ public class ModRecipes extends FabricRecipeProvider {
                         },
                         'X', ModItems.HELLSTONE_INGOT, 'S', Items.STICK
                 );
-                createMirroredShaped(RecipeCategory.TOOLS, ModItems.METEOR_SHAXE, 1, new String[]{
+                createShaped(RecipeCategory.TOOLS, ModItems.METEOR_SHAXE, 1, new String[]{
                         "XX ",
                         "XSX",
                         " S "
                 }, 'X', ModItems.METEORITE_INGOT, 'S', Items.STICK);
-                createMirroredShaped(RecipeCategory.TOOLS, ModItems.MOLTEN_SHAXE, 1, new String[]{
+                createShaped(RecipeCategory.TOOLS, ModItems.MOLTEN_SHAXE, 1, new String[]{
                         "XX ",
                         "XSX",
                         " S "
@@ -180,7 +198,7 @@ public class ModRecipes extends FabricRecipeProvider {
                 }, 'X', ModItems.HELLSTONE_INGOT, 'S', Items.BLAZE_ROD);
 
                 // Ranged
-                createMirroredShaped(RecipeCategory.COMBAT, ModItems.SPACE_GUN, 1, new String[]{
+                createShaped(RecipeCategory.COMBAT, ModItems.SPACE_GUN, 1, new String[]{
                         "X  ",
                         "XXX",
                         " X "
@@ -190,6 +208,16 @@ public class ModRecipes extends FabricRecipeProvider {
                 ///////////////////////////////////// Smelting/Cooking /////////////////////////////////////
 
                 // Terraria Ingots
+                createSmeltingBlasting(ModItems.TIN_INGOT, ModItems.RAW_TIN, ModBlocks.TIN_ORE.getItem(), ModBlocks.DEEPSLATE_TIN_ORE.getItem());
+                createSmeltingBlasting(ModBlocks.TIN_BLOCK.getItem(), 6F, ModBlocks.RAW_TIN_BLOCK.getItem());
+                createSmeltingBlasting(ModItems.LEAD_INGOT, ModItems.RAW_LEAD, ModBlocks.LEAD_ORE.getItem(), ModBlocks.DEEPSLATE_LEAD_ORE.getItem());
+                createSmeltingBlasting(ModBlocks.LEAD_BLOCK.getItem(), 6F, ModBlocks.RAW_LEAD_BLOCK.getItem());
+                createSmeltingBlasting(ModItems.SILVER_INGOT, ModItems.RAW_SILVER, ModBlocks.SILVER_ORE.getItem(), ModBlocks.DEEPSLATE_SILVER_ORE.getItem());
+                createSmeltingBlasting(ModBlocks.SILVER_BLOCK.getItem(), 6F, ModBlocks.RAW_SILVER_BLOCK.getItem());
+                createSmeltingBlasting(ModItems.TUNGSTEN_INGOT, ModItems.RAW_TUNGSTEN, ModBlocks.TUNGSTEN_ORE.getItem(), ModBlocks.DEEPSLATE_TUNGSTEN_ORE.getItem());
+                createSmeltingBlasting(ModBlocks.TUNGSTEN_BLOCK.getItem(), 6F, ModBlocks.RAW_TUNGSTEN_BLOCK.getItem());
+                createSmeltingBlasting(ModItems.PLATINUM_INGOT, ModItems.RAW_PLATINUM, ModBlocks.PLATINUM_ORE.getItem(), ModBlocks.DEEPSLATE_PLATINUM_ORE.getItem());
+                createSmeltingBlasting(ModBlocks.PLATINUM_BLOCK.getItem(), 6F, ModBlocks.RAW_PLATINUM_BLOCK.getItem());
                 createSmeltingBlasting(ModItems.DEMONITE_INGOT, ModItems.RAW_DEMONITE, ModBlocks.DEMONITE_ORE.getItem(), ModBlocks.DEEPSLATE_DEMONITE_ORE.getItem());
                 createSmeltingBlasting(ModBlocks.DEMONITE_BLOCK.getItem(), 6F, ModBlocks.RAW_DEMONITE_BLOCK.getItem());
                 createSmeltingBlasting(ModItems.CRIMTANE_INGOT, ModItems.RAW_CRIMTANE, ModBlocks.CRIMTANE_ORE.getItem(), ModBlocks.DEEPSLATE_CRIMTANE_ORE.getItem());
@@ -334,69 +362,7 @@ public class ModRecipes extends FabricRecipeProvider {
             }
 
             @Unique
-            public void createMirroredShaped(RecipeCategory category, Item result, int count, String[] pattern, Object... ingredientPairs) {
-                createShaped(category, result, count, pattern, ingredientPairs);
-
-                if (pattern.length > 3) {
-                    throw new IllegalArgumentException("Pattern can have a maximum of 3 rows.");
-                }
-
-                if (ingredientPairs.length % 2 != 0) {
-                    throw new IllegalArgumentException("Ingredient pairs must have an even number of arguments (character-item pairs).");
-                }
-
-                ShapedRecipeBuilder builder = shaped(category, result, count);
-
-                // Process ingredient pairs
-                for (int i = 0; i < ingredientPairs.length; i += 2) {
-                    if (!(ingredientPairs[i] instanceof Character)) {
-                        throw new IllegalArgumentException("Expected a Character for ingredient key at index " + i);
-                    }
-                    char key = (Character) ingredientPairs[i];
-
-                    Object ingredient = ingredientPairs[i + 1];
-                    if (ingredient instanceof Item item) {
-                        builder.define(key, item);
-                    } else if (ingredient instanceof TagKey<?>) {
-                        builder.define(key, (TagKey<Item>) ingredient);
-                    } else if (ingredient instanceof Ingredient ingredient1) {
-                        builder.define(key, ingredient1);
-                    } else {
-                        throw new IllegalArgumentException("Expected an Item or TagKey<Item> for ingredient value at index " + (i + 1));
-                    }
-                }
-
-                for (int i = 1; i < ingredientPairs.length; i += 2) {
-                    Object ingredient = ingredientPairs[i];
-                    if (ingredient instanceof Item) {
-                        builder.unlockedBy(
-                                getHasName((Item) ingredient),
-                                has((Item) ingredient)
-                        );
-                    } else if (ingredient instanceof TagKey<?>) {
-                        builder.unlockedBy(
-                                "has_" + ((TagKey<Item>) ingredient).location().getPath(),
-                                has((TagKey<Item>) ingredient)
-                        );
-                    } else if (ingredient instanceof Ingredient ingredient1) {
-                        for (Holder<Item> item : ingredient1.items().toList()) {
-                            builder.unlockedBy(
-                                    getHasName(item.value()),
-                                    has(item.value())
-                            );
-                        }
-                    }
-                }
-
-                for (String row : pattern) {
-                    builder.pattern(new StringBuilder(row).reverse().toString());
-                }
-
-                builder.save(recipeOutput, BuiltInRegistries.ITEM.getKey(result.asItem()).getPath() + "_mirrored");
-            }
-
-            @Unique
-            public void createArmor(Item material, ArmorItemRegister armor) {
+            public void createArmor(Object material, ArmorItemRegister armor) {
                 // Helmet (3x3 pattern)
                 createShaped(RecipeCategory.COMBAT, armor.HELMET, 1,
                         new String[]{
@@ -437,8 +403,8 @@ public class ModRecipes extends FabricRecipeProvider {
             }
 
             @Unique
-            public void createTools(Item material, Item Pickaxe, Item Axe, Item Shovel, Item Hoe, Item Sword) {
-                createShaped(RecipeCategory.TOOLS, Pickaxe, 1,
+            public void createTools(Object material, BasicToolSetRegister toolType) {
+                createShaped(RecipeCategory.TOOLS, toolType.PICKAXE, 1,
                         new String[]{
                                 "XXX",
                                 " S ",
@@ -447,7 +413,13 @@ public class ModRecipes extends FabricRecipeProvider {
                         'X', material, 'S', Items.STICK
                 );
 
-                createMirroredShaped(RecipeCategory.TOOLS, Axe, 1,
+                createShaped(RecipeCategory.COMBAT, toolType.SWORD, 1, new String[]{
+                        "X",
+                        "X",
+                        "S"
+                }, 'X', material, 'S', Items.STICK);
+
+                createShaped(RecipeCategory.TOOLS, toolType.AXE, 1,
                         new String[]{
                                 "XX",
                                 "XS",
@@ -456,7 +428,7 @@ public class ModRecipes extends FabricRecipeProvider {
                         'X', material, 'S', Items.STICK
                 );
 
-                createShaped(RecipeCategory.TOOLS, Shovel, 1,
+                createShaped(RecipeCategory.TOOLS, toolType.SHOVEL, 1,
                         new String[]{
                                 "X",
                                 "S",
@@ -465,7 +437,7 @@ public class ModRecipes extends FabricRecipeProvider {
                         'X', material, 'S', Items.STICK
                 );
 
-                createMirroredShaped(RecipeCategory.TOOLS, Hoe, 1,
+                createShaped(RecipeCategory.TOOLS, toolType.HOE, 1,
                         new String[]{
                                 "XX",
                                 " S",
@@ -473,12 +445,6 @@ public class ModRecipes extends FabricRecipeProvider {
                         },
                         'X', material, 'S', Items.STICK
                 );
-
-                createShaped(RecipeCategory.COMBAT, Sword, 1, new String[]{
-                        "X",
-                        "X",
-                        "S"
-                }, 'X', material, 'S', Items.STICK);
             }
 
             @Unique

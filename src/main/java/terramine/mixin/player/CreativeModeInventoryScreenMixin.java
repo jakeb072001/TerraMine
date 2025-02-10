@@ -1,6 +1,7 @@
 package terramine.mixin.player;
 
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
+import net.minecraft.client.gui.navigation.ScreenPosition;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.gui.screens.inventory.CreativeModeInventoryScreen;
 import net.minecraft.network.chat.Component;
@@ -34,7 +35,8 @@ public abstract class CreativeModeInventoryScreenMixin extends AbstractContainer
     @Inject(method = "init", at = @At("TAIL"))
     protected void onInit(CallbackInfo ci) {
         if (this.minecraft.gameMode.hasInfiniteItems()) {
-            this.addRenderableWidget(terrariaButton = new ToggleImageButton(this.leftPos + 96, this.height / 2 - 28, 8, 8, 0, 0, 8, 0, 0, false, BUTTON_TEX, 8, 16, (buttonWidget) -> {
+            ScreenPosition screenPosition = new ScreenPosition(this.leftPos + 96, this.height / 2 - 28);
+            this.addRenderableWidget(terrariaButton = new ToggleImageButton(screenPosition.x(), screenPosition.y(), 8, 8, 0, 0, 8, 0, 0, false, BUTTON_TEX, 8, 16, (buttonWidget) -> {
                 ClientPlayNetworking.send(new LongNetworkType(0L, ServerPacketHandler.OPEN_INVENTORY_PACKET_ID));
             }));
         }
