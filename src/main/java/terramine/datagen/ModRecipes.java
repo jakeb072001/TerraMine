@@ -209,21 +209,21 @@ public class ModRecipes extends FabricRecipeProvider {
 
                 // Terraria Ingots
                 createSmeltingBlasting(ModItems.TIN_INGOT, ModItems.RAW_TIN, ModBlocks.TIN_ORE.getItem(), ModBlocks.DEEPSLATE_TIN_ORE.getItem());
-                createSmeltingBlasting(ModBlocks.TIN_BLOCK.getItem(), 6F, ModBlocks.RAW_TIN_BLOCK.getItem());
+                createSmeltingBlasting(ModBlocks.TIN_BLOCK.getItem(), 6F, 900, ModBlocks.RAW_TIN_BLOCK.getItem());
                 createSmeltingBlasting(ModItems.LEAD_INGOT, ModItems.RAW_LEAD, ModBlocks.LEAD_ORE.getItem(), ModBlocks.DEEPSLATE_LEAD_ORE.getItem());
-                createSmeltingBlasting(ModBlocks.LEAD_BLOCK.getItem(), 6F, ModBlocks.RAW_LEAD_BLOCK.getItem());
+                createSmeltingBlasting(ModBlocks.LEAD_BLOCK.getItem(), 6F, 900, ModBlocks.RAW_LEAD_BLOCK.getItem());
                 createSmeltingBlasting(ModItems.SILVER_INGOT, ModItems.RAW_SILVER, ModBlocks.SILVER_ORE.getItem(), ModBlocks.DEEPSLATE_SILVER_ORE.getItem());
-                createSmeltingBlasting(ModBlocks.SILVER_BLOCK.getItem(), 6F, ModBlocks.RAW_SILVER_BLOCK.getItem());
+                createSmeltingBlasting(ModBlocks.SILVER_BLOCK.getItem(), 6F, 900, ModBlocks.RAW_SILVER_BLOCK.getItem());
                 createSmeltingBlasting(ModItems.TUNGSTEN_INGOT, ModItems.RAW_TUNGSTEN, ModBlocks.TUNGSTEN_ORE.getItem(), ModBlocks.DEEPSLATE_TUNGSTEN_ORE.getItem());
-                createSmeltingBlasting(ModBlocks.TUNGSTEN_BLOCK.getItem(), 6F, ModBlocks.RAW_TUNGSTEN_BLOCK.getItem());
+                createSmeltingBlasting(ModBlocks.TUNGSTEN_BLOCK.getItem(), 6F, 900, ModBlocks.RAW_TUNGSTEN_BLOCK.getItem());
                 createSmeltingBlasting(ModItems.PLATINUM_INGOT, ModItems.RAW_PLATINUM, ModBlocks.PLATINUM_ORE.getItem(), ModBlocks.DEEPSLATE_PLATINUM_ORE.getItem());
-                createSmeltingBlasting(ModBlocks.PLATINUM_BLOCK.getItem(), 6F, ModBlocks.RAW_PLATINUM_BLOCK.getItem());
+                createSmeltingBlasting(ModBlocks.PLATINUM_BLOCK.getItem(), 6F, 900, ModBlocks.RAW_PLATINUM_BLOCK.getItem());
                 createSmeltingBlasting(ModItems.DEMONITE_INGOT, ModItems.RAW_DEMONITE, ModBlocks.DEMONITE_ORE.getItem(), ModBlocks.DEEPSLATE_DEMONITE_ORE.getItem());
-                createSmeltingBlasting(ModBlocks.DEMONITE_BLOCK.getItem(), 6F, ModBlocks.RAW_DEMONITE_BLOCK.getItem());
+                createSmeltingBlasting(ModBlocks.DEMONITE_BLOCK.getItem(), 6F, 900, ModBlocks.RAW_DEMONITE_BLOCK.getItem());
                 createSmeltingBlasting(ModItems.CRIMTANE_INGOT, ModItems.RAW_CRIMTANE, ModBlocks.CRIMTANE_ORE.getItem(), ModBlocks.DEEPSLATE_CRIMTANE_ORE.getItem());
-                createSmeltingBlasting(ModBlocks.CRIMTANE_BLOCK.getItem(), 6F, ModBlocks.RAW_CRIMTANE_BLOCK.getItem());
+                createSmeltingBlasting(ModBlocks.CRIMTANE_BLOCK.getItem(), 6F, 900, ModBlocks.RAW_CRIMTANE_BLOCK.getItem());
                 createSmeltingBlasting(ModItems.METEORITE_INGOT, ModItems.RAW_METEORITE, ModBlocks.METEORITE_ORE.getItem());
-                createSmeltingBlasting(ModBlocks.METEORITE_BLOCK.getItem(), 6F, ModBlocks.RAW_METEORITE_BLOCK.getItem());
+                createSmeltingBlasting(ModBlocks.METEORITE_BLOCK.getItem(), 6F, 900, ModBlocks.RAW_METEORITE_BLOCK.getItem());
                 createSmeltingBlasting(ModItems.HELLSTONE_INGOT, ModItems.RAW_HELLSTONE_HARDENED);
                 createSmeltingBlasting(ModItems.RAW_HELLSTONE, ModBlocks.HELLSTONE_ORE.getItem());
 
@@ -460,17 +460,22 @@ public class ModRecipes extends FabricRecipeProvider {
 
             @Unique
             public void createSmeltingBlasting(Item result, Item... ingredients) {
-                createSmeltingBlasting(result, 0.7F, ingredients);
+                createSmeltingBlasting(result, 0.7F, 100, ingredients);
+            }
+
+            @Unique
+            public void createSmeltingBlasting(Item result, float experience, Item... ingredients) {
+                createSmeltingBlasting(result, experience, 100, ingredients);
             }
             
             @Unique
-            public void createSmeltingBlasting(Item result, float experience, Item... ingredients) {
+            public void createSmeltingBlasting(Item result, float experience, int cookTime, Item... ingredients) {
                 if (ingredients.length == 0) {
                     throw new IllegalArgumentException("A shapeless recipe must have at least one ingredient.");
                 }
 
-                SimpleCookingRecipeBuilder smelting = SimpleCookingRecipeBuilder.smelting(Ingredient.of(ingredients), RecipeCategory.BUILDING_BLOCKS, result, experience, 200);
-                SimpleCookingRecipeBuilder blasting = SimpleCookingRecipeBuilder.blasting(Ingredient.of(ingredients), RecipeCategory.BUILDING_BLOCKS, result, experience, 100);
+                SimpleCookingRecipeBuilder smelting = SimpleCookingRecipeBuilder.smelting(Ingredient.of(ingredients), RecipeCategory.BUILDING_BLOCKS, result, experience, cookTime * 2);
+                SimpleCookingRecipeBuilder blasting = SimpleCookingRecipeBuilder.blasting(Ingredient.of(ingredients), RecipeCategory.BUILDING_BLOCKS, result, experience, cookTime);
 
                 for (Item ingredient : ingredients) {
                     smelting.unlockedBy(
