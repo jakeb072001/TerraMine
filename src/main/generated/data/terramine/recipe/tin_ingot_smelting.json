@@ -6,7 +6,11 @@
   "ingredient": [
     "terramine:raw_tin",
     "terramine:tin_ore",
-    "terramine:deepslate_tin_ore"
+    "terramine:deepslate_tin_ore",
+    "terramine:corrupted_tin_ore",
+    "terramine:corrupted_deepslate_tin_ore",
+    "terramine:crimson_tin_ore",
+    "terramine:crimson_deepslate_tin_ore"
   ],
   "result": {
     "id": "terramine:tin_ingot"

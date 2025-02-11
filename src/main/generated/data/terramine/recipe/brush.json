@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "F": "minecraft:feather",
+    "S": "minecraft:stick",
+    "X": "terramine:tin_ingot"
+  },
+  "pattern": [
+    "F",
+    "X",
+    "S"
+  ],
+  "result": {
+    "count": 1,
+    "id": "minecraft:brush"
+  }
+}

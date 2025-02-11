@@ -1,5 +1,10 @@
 {
   "values": [
+    "terramine:tin_hoe",
+    "terramine:lead_hoe",
+    "terramine:silver_hoe",
+    "terramine:tungsten_hoe",
+    "terramine:platinum_hoe",
     "terramine:demonite_hoe",
     "terramine:crimtane_hoe"
   ]

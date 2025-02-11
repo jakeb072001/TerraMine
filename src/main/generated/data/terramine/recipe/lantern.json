@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "T": "minecraft:torch",
+    "X": "terramine:lead_nugget"
+  },
+  "pattern": [
+    "XXX",
+    "XTX",
+    "XXX"
+  ],
+  "result": {
+    "count": 1,
+    "id": "minecraft:lantern"
+  }
+}

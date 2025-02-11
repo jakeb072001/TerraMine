@@ -1,5 +1,10 @@
 {
   "values": [
+    "terramine:tin_pickaxe",
+    "terramine:lead_pickaxe",
+    "terramine:silver_pickaxe",
+    "terramine:tungsten_pickaxe",
+    "terramine:platinum_pickaxe",
     "terramine:demonite_pickaxe",
     "terramine:crimtane_pickaxe",
     "terramine:molten_pickaxe"

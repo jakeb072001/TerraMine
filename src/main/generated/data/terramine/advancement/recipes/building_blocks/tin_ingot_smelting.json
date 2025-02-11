@@ -1,6 +1,46 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
+    "has_corrupted_deepslate_tin_ore": {
+      "conditions": {
+        "items": [
+          {
+            "items": "terramine:corrupted_deepslate_tin_ore"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_corrupted_tin_ore": {
+      "conditions": {
+        "items": [
+          {
+            "items": "terramine:corrupted_tin_ore"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_crimson_deepslate_tin_ore": {
+      "conditions": {
+        "items": [
+          {
+            "items": "terramine:crimson_deepslate_tin_ore"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_crimson_tin_ore": {
+      "conditions": {
+        "items": [
+          {
+            "items": "terramine:crimson_tin_ore"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
     "has_deepslate_tin_ore": {
       "conditions": {
         "items": [
@@ -43,7 +83,11 @@
       "has_the_recipe",
       "has_raw_tin",
       "has_tin_ore",
-      "has_deepslate_tin_ore"
+      "has_deepslate_tin_ore",
+      "has_corrupted_tin_ore",
+      "has_corrupted_deepslate_tin_ore",
+      "has_crimson_tin_ore",
+      "has_crimson_deepslate_tin_ore"
     ]
   ],
   "rewards": {

@@ -31,6 +31,16 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
+    "has_platinum_ingot": {
+      "conditions": {
+        "items": [
+          {
+            "items": "terramine:platinum_ingot"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
     "has_the_recipe": {
       "conditions": {
         "recipe": "terramine:magic_mirror"
@@ -43,6 +53,7 @@
       "has_the_recipe",
       "has_diamond",
       "has_gold_ingot",
+      "has_platinum_ingot",
       "has_glass"
     ]
   ],

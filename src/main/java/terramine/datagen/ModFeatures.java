@@ -2,18 +2,22 @@ package terramine.datagen;
 
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
 import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;
+import net.fabricmc.fabric.api.biome.v1.ModificationPhase;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.data.worldgen.features.FeatureUtils;
+import net.minecraft.data.worldgen.placement.OrePlacements;
 import net.minecraft.data.worldgen.placement.PlacementUtils;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.util.random.SimpleWeightedRandomList;
 import net.minecraft.util.valueproviders.UniformInt;
+import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.dimension.LevelStem;
 import net.minecraft.world.level.levelgen.GenerationStep;
 import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
@@ -27,7 +31,9 @@ import net.minecraft.world.level.levelgen.structure.templatesystem.BlockMatchTes
 import net.minecraft.world.level.levelgen.structure.templatesystem.RuleTest;
 import net.minecraft.world.level.levelgen.structure.templatesystem.TagMatchTest;
 import terramine.TerraMine;
+import terramine.common.components.OreComponent;
 import terramine.common.init.ModBlocks;
+import terramine.common.init.ModComponents;
 import terramine.common.world.CaveChestFeature;
 import terramine.common.world.NetherChestFeature;
 import terramine.common.world.SurfaceChestFeature;
@@ -83,7 +89,7 @@ public class ModFeatures {
 	// Ore
 	public static final List<OreConfiguration.TargetBlockState> ORE_TIN_TARGET_LIST = List.of(OreConfiguration.target(STONE_ORE_REPLACEABLES, ModBlocks.TIN_ORE.BLOCK.defaultBlockState()), OreConfiguration.target(DEEPSLATE_ORE_REPLACEABLES, ModBlocks.DEEPSLATE_TIN_ORE.BLOCK.defaultBlockState()));
 	public static final ResourceKey<ConfiguredFeature<?, ?>> ORE_TIN_FEATURE = registerConfigured("ore_tin");
-	public static final ResourceKey<ConfiguredFeature<?, ?>> ORE_TIN_SMALL_FEATURE = registerConfigured("ore_tin_small");
+	public static final ResourceKey<ConfiguredFeature<?, ?>> ORE_TIN_LARGE_FEATURE = registerConfigured("ore_tin_large");
 	public static final List<OreConfiguration.TargetBlockState> ORE_LEAD_TARGET_LIST = List.of(OreConfiguration.target(STONE_ORE_REPLACEABLES, ModBlocks.LEAD_ORE.BLOCK.defaultBlockState()), OreConfiguration.target(DEEPSLATE_ORE_REPLACEABLES, ModBlocks.DEEPSLATE_LEAD_ORE.BLOCK.defaultBlockState()));
 	public static final ResourceKey<ConfiguredFeature<?, ?>> ORE_LEAD_FEATURE = registerConfigured("ore_lead");
 	public static final ResourceKey<ConfiguredFeature<?, ?>> ORE_LEAD_SMALL_FEATURE = registerConfigured("ore_lead_small");
@@ -133,6 +139,64 @@ public class ModFeatures {
 		BiomeModifications.addFeature(BiomeSelectors.foundInTheNether(),
 				GenerationStep.Decoration.UNDERGROUND_ORES, ModPlacedFeatures.PLACED_HELLSTONE_ORE);
 
+		// todo: replace nether gold (need to make nether platinum ore)
+		BiomeModifications.create(id("terraria_ores"))
+				.add(ModificationPhase.REPLACEMENTS,
+						context -> {
+							boolean hasCopper = context.hasPlacedFeature(OrePlacements.ORE_COPPER_LARGE);
+							return context.getBiomeKey().equals(Biomes.DRIPSTONE_CAVES) && context.canGenerateIn(LevelStem.OVERWORLD) && hasCopper;
+						},
+						context -> {
+							OreComponent oreComponent = ModComponents.ORE_TYPES.get(OreComponent.getLevelData());
+							if (!oreComponent.getIfCopper()) {
+								context.getGenerationSettings().removeFeature(OrePlacements.ORE_COPPER_LARGE);
+								context.getGenerationSettings().addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, ModPlacedFeatures.ORE_TIN_LARGE);
+							}
+						}
+				)
+				.add(ModificationPhase.REPLACEMENTS,
+						context -> {
+							boolean hasCopper = context.hasPlacedFeature(OrePlacements.ORE_COPPER);
+							return !context.getBiomeKey().equals(Biomes.DRIPSTONE_CAVES) && context.canGenerateIn(LevelStem.OVERWORLD) && hasCopper;
+						},
+						context -> {
+							OreComponent oreComponent = ModComponents.ORE_TYPES.get(OreComponent.getLevelData());
+							if (!oreComponent.getIfCopper()) {
+								context.getGenerationSettings().removeFeature(OrePlacements.ORE_COPPER);
+								context.getGenerationSettings().addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, ModPlacedFeatures.ORE_TIN);
+							}
+						}
+				)
+				.add(ModificationPhase.REPLACEMENTS, context -> {
+					boolean hasIron = context.hasPlacedFeature(OrePlacements.ORE_IRON_UPPER) && context.hasPlacedFeature(OrePlacements.ORE_IRON_MIDDLE) && context.hasPlacedFeature(OrePlacements.ORE_IRON_SMALL);
+					boolean hasGold = context.hasPlacedFeature(OrePlacements.ORE_GOLD) && context.hasPlacedFeature(OrePlacements.ORE_GOLD_LOWER);
+					return context.canGenerateIn(LevelStem.OVERWORLD) && hasIron && hasGold;
+				}, context -> {
+					OreComponent oreComponent = ModComponents.ORE_TYPES.get(OreComponent.getLevelData());
+
+					if (!oreComponent.getIfIron()) {
+						context.getGenerationSettings().removeFeature(OrePlacements.ORE_IRON_UPPER);
+						context.getGenerationSettings().removeFeature(OrePlacements.ORE_IRON_MIDDLE);
+						context.getGenerationSettings().removeFeature(OrePlacements.ORE_IRON_SMALL);
+						context.getGenerationSettings().addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, ModPlacedFeatures.ORE_LEAD_UPPER);
+						context.getGenerationSettings().addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, ModPlacedFeatures.ORE_LEAD_MIDDLE);
+						context.getGenerationSettings().addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, ModPlacedFeatures.ORE_LEAD_SMALL);
+					}
+					if (!oreComponent.getIfSilver()) {
+						context.getGenerationSettings().addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, ModPlacedFeatures.ORE_TUNGSTEN);
+						context.getGenerationSettings().addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, ModPlacedFeatures.ORE_TUNGSTEN_SMALL);
+					} else {
+						context.getGenerationSettings().addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, ModPlacedFeatures.ORE_SILVER);
+						context.getGenerationSettings().addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, ModPlacedFeatures.ORE_SILVER_SMALL);
+					}
+					if (!oreComponent.getIfGold()) {
+						context.getGenerationSettings().removeFeature(OrePlacements.ORE_GOLD);
+						context.getGenerationSettings().removeFeature(OrePlacements.ORE_GOLD_LOWER);
+						context.getGenerationSettings().addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, ModPlacedFeatures.ORE_PLATINUM);
+						context.getGenerationSettings().addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, ModPlacedFeatures.ORE_PLATINUM_LOWER);
+					}
+				});
+
 		// Structures
 		Registry.register(BuiltInRegistries.STRUCTURE_TYPE, TerraMine.id("terraria_jigsaw_structure"), TERRARIA_JIGSAW_STRUCTURE);
 	}
@@ -143,8 +207,8 @@ public class ModFeatures {
 		context.register(SURFACE_CHEST_CONFIGURED, new ConfiguredFeature<>(SURFACE_CHEST, FeatureConfiguration.NONE));
 		context.register(NETHER_CHEST_CONFIGURED, new ConfiguredFeature<>(NETHER_CHEST, FeatureConfiguration.NONE));
 
-		context.register(ORE_TIN_FEATURE, new ConfiguredFeature<>(Feature.ORE, new OreConfiguration(ORE_TIN_TARGET_LIST, 9)));
-		context.register(ORE_TIN_SMALL_FEATURE, new ConfiguredFeature<>(Feature.ORE, new OreConfiguration(ORE_TIN_TARGET_LIST, 4)));
+		context.register(ORE_TIN_FEATURE, new ConfiguredFeature<>(Feature.ORE, new OreConfiguration(ORE_TIN_TARGET_LIST, 10)));
+		context.register(ORE_TIN_LARGE_FEATURE, new ConfiguredFeature<>(Feature.ORE, new OreConfiguration(ORE_TIN_TARGET_LIST, 20)));
 		context.register(ORE_LEAD_FEATURE, new ConfiguredFeature<>(Feature.ORE, new OreConfiguration(ORE_LEAD_TARGET_LIST, 9)));
 		context.register(ORE_LEAD_SMALL_FEATURE, new ConfiguredFeature<>(Feature.ORE, new OreConfiguration(ORE_LEAD_TARGET_LIST, 4)));
 		context.register(ORE_SILVER_FEATURE, new ConfiguredFeature<>(Feature.ORE, new OreConfiguration(ORE_SILVER_TARGET_LIST, 9)));
@@ -153,10 +217,10 @@ public class ModFeatures {
 		context.register(ORE_TUNGSTEN_SMALL_FEATURE, new ConfiguredFeature<>(Feature.ORE, new OreConfiguration(ORE_TUNGSTEN_TARGET_LIST, 4)));
 		context.register(ORE_PLATINUM_FEATURE, new ConfiguredFeature<>(Feature.ORE, new OreConfiguration(ORE_PLATINUM_TARGET_LIST, 9)));
 		context.register(ORE_PLATINUM_SMALL_FEATURE, new ConfiguredFeature<>(Feature.ORE, new OreConfiguration(ORE_PLATINUM_TARGET_LIST, 4)));
-		context.register(ORE_DEMONITE_FEATURE, new ConfiguredFeature<>(Feature.ORE, new OreConfiguration(ORE_DEMONITE_TARGET_LIST, 9)));
-		context.register(ORE_DEMONITE_SMALL_FEATURE, new ConfiguredFeature<>(Feature.ORE, new OreConfiguration(ORE_DEMONITE_TARGET_LIST, 4)));
-		context.register(ORE_CRIMTANE_FEATURE, new ConfiguredFeature<>(Feature.ORE, new OreConfiguration(ORE_CRIMTANE_TARGET_LIST, 9)));
-		context.register(ORE_CRIMTANE_SMALL_FEATURE, new ConfiguredFeature<>(Feature.ORE, new OreConfiguration(ORE_CRIMTANE_TARGET_LIST, 4)));
+		context.register(ORE_DEMONITE_FEATURE, new ConfiguredFeature<>(Feature.ORE, new OreConfiguration(ORE_DEMONITE_TARGET_LIST, 4)));
+		context.register(ORE_DEMONITE_SMALL_FEATURE, new ConfiguredFeature<>(Feature.ORE, new OreConfiguration(ORE_DEMONITE_TARGET_LIST, 2)));
+		context.register(ORE_CRIMTANE_FEATURE, new ConfiguredFeature<>(Feature.ORE, new OreConfiguration(ORE_CRIMTANE_TARGET_LIST, 4)));
+		context.register(ORE_CRIMTANE_SMALL_FEATURE, new ConfiguredFeature<>(Feature.ORE, new OreConfiguration(ORE_CRIMTANE_TARGET_LIST, 2)));
 		context.register(CORRUPTION_PLANTS, new ConfiguredFeature<>(Feature.FLOWER, grassPatch(new WeightedStateProvider(SimpleWeightedRandomList.single(ModBlocks.VILE_MUSHROOM.BLOCK.defaultBlockState())), 64)));
 		context.register(CRIMSON_PLANTS, new ConfiguredFeature<>(Feature.FLOWER, grassPatch(new WeightedStateProvider(SimpleWeightedRandomList.single(ModBlocks.VICIOUS_MUSHROOM.BLOCK.defaultBlockState())), 64)));
 		context.register(DISK_CORRUPT_SAND_FEATURE, new ConfiguredFeature<>(Feature.DISK, new DiskConfiguration(RuleBasedBlockStateProvider.simple(ModBlocks.CORRUPTED_SAND.BLOCK), BlockPredicate.matchesBlocks(List.of(Blocks.DIRT, ModBlocks.CORRUPTED_GRASS.BLOCK)), UniformInt.of(2, 6), 2)));

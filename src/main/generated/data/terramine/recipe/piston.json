@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "key": {
+    "C": "minecraft:cobblestone",
+    "P": "#minecraft:planks",
+    "R": "minecraft:redstone",
+    "X": "terramine:lead_ingot"
+  },
+  "pattern": [
+    "PPP",
+    "CXC",
+    "CRC"
+  ],
+  "result": {
+    "count": 1,
+    "id": "minecraft:piston"
+  }
+}

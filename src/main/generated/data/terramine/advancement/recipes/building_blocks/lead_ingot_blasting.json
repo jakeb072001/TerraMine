@@ -1,6 +1,46 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
+    "has_corrupted_deepslate_lead_ore": {
+      "conditions": {
+        "items": [
+          {
+            "items": "terramine:corrupted_deepslate_lead_ore"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_corrupted_lead_ore": {
+      "conditions": {
+        "items": [
+          {
+            "items": "terramine:corrupted_lead_ore"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_crimson_deepslate_lead_ore": {
+      "conditions": {
+        "items": [
+          {
+            "items": "terramine:crimson_deepslate_lead_ore"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_crimson_lead_ore": {
+      "conditions": {
+        "items": [
+          {
+            "items": "terramine:crimson_lead_ore"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
     "has_deepslate_lead_ore": {
       "conditions": {
         "items": [
@@ -43,7 +83,11 @@
       "has_the_recipe",
       "has_raw_lead",
       "has_lead_ore",
-      "has_deepslate_lead_ore"
+      "has_deepslate_lead_ore",
+      "has_corrupted_lead_ore",
+      "has_corrupted_deepslate_lead_ore",
+      "has_crimson_lead_ore",
+      "has_crimson_deepslate_lead_ore"
     ]
   ],
   "rewards": {

@@ -1,8 +1,14 @@
 {
-  "type": "minecraft:crafting_shapeless",
-  "category": "misc",
-  "ingredients": [
-    "terramine:gold_watch"
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "R": "minecraft:redstone",
+    "X": "terramine:platinum_ingot"
+  },
+  "pattern": [
+    " X ",
+    "XRX",
+    " X "
   ],
   "result": {
     "count": 1,

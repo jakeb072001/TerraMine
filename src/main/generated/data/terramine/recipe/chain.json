@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "N": "terramine:lead_nugget",
+    "X": "terramine:lead_ingot"
+  },
+  "pattern": [
+    "N",
+    "X",
+    "N"
+  ],
+  "result": {
+    "count": 1,
+    "id": "minecraft:chain"
+  }
+}

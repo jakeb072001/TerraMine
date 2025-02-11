@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "R": "minecraft:redstone",
+    "S": "minecraft:stick",
+    "X": "terramine:lead_ingot"
+  },
+  "pattern": [
+    "XSX",
+    "XRX",
+    "XSX"
+  ],
+  "result": {
+    "count": 6,
+    "id": "minecraft:activator_rail"
+  }
+}

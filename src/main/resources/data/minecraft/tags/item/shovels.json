@@ -1,5 +1,10 @@
 {
   "values": [
+    "terramine:tin_shovel",
+    "terramine:lead_shovel",
+    "terramine:silver_shovel",
+    "terramine:tungsten_shovel",
+    "terramine:platinum_shovel",
     "terramine:demonite_shovel",
     "terramine:crimtane_shovel",
     "terramine:meteor_shaxe",

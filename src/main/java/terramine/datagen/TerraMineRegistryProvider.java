@@ -42,7 +42,7 @@ public class TerraMineRegistryProvider extends FabricDynamicRegistryProvider {
         entries.add(ModFeatures.ORE_CRIMTANE_FEATURE, configuredFeatureRegistry.getOrThrow(ModFeatures.ORE_CRIMTANE_FEATURE).value());
         entries.add(ModFeatures.ORE_CRIMTANE_SMALL_FEATURE, configuredFeatureRegistry.getOrThrow(ModFeatures.ORE_CRIMTANE_SMALL_FEATURE).value());
         entries.add(ModFeatures.ORE_TIN_FEATURE, configuredFeatureRegistry.getOrThrow(ModFeatures.ORE_TIN_FEATURE).value());
-        entries.add(ModFeatures.ORE_TIN_SMALL_FEATURE, configuredFeatureRegistry.getOrThrow(ModFeatures.ORE_TIN_SMALL_FEATURE).value());
+        entries.add(ModFeatures.ORE_TIN_LARGE_FEATURE, configuredFeatureRegistry.getOrThrow(ModFeatures.ORE_TIN_LARGE_FEATURE).value());
         entries.add(ModFeatures.ORE_LEAD_FEATURE, configuredFeatureRegistry.getOrThrow(ModFeatures.ORE_LEAD_FEATURE).value());
         entries.add(ModFeatures.ORE_LEAD_SMALL_FEATURE, configuredFeatureRegistry.getOrThrow(ModFeatures.ORE_LEAD_SMALL_FEATURE).value());
         entries.add(ModFeatures.ORE_SILVER_FEATURE, configuredFeatureRegistry.getOrThrow(ModFeatures.ORE_SILVER_FEATURE).value());

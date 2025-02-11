@@ -4,7 +4,10 @@
   "key": {
     "D": "minecraft:diamond",
     "G": "minecraft:glass",
-    "I": "minecraft:gold_ingot"
+    "I": [
+      "minecraft:gold_ingot",
+      "terramine:platinum_ingot"
+    ]
   },
   "pattern": [
     "IDI",

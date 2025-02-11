@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "terramine:platinum_ingot"
+  ],
+  "result": {
+    "count": 1,
+    "id": "terramine:platinum_nugget"
+  }
+}

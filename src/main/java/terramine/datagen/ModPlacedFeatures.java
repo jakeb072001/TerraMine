@@ -143,49 +143,6 @@ public class ModPlacedFeatures {
         context.register(DISK_CRIMSON_SAND, new PlacedFeature(getHolder(holderGetter, ModFeatures.DISK_CRIMSON_SAND_FEATURE), List.of(CountPlacement.of(3), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP_TOP_SOLID, BlockPredicateFilter.forPredicate(BlockPredicate.matchesFluids(Fluids.WATER)), BiomeFilter.biome())));
         context.register(DISK_CRIMSON_GRAVEL, new PlacedFeature(getHolder(holderGetter, ModFeatures.DISK_CRIMSON_GRAVEL_FEATURE), List.of(InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP_TOP_SOLID, BlockPredicateFilter.forPredicate(BlockPredicate.matchesFluids(Fluids.WATER)), BiomeFilter.biome())));
     }
-
-    public static void addTerrariaCommonOres(BiomeGenerationSettings.Builder builder) {
-        addTerrariaCommonOres(builder, false);
-    }
-    // todo: need to find a way to have different ores for worlds like terraria does it, this wont work though as it generates a json file so it cant dynamically change things, need to figure out how the ores are actually placed from that json
-    // todo: probably remove this once the above is done?
-    public static void addTerrariaCommonOres(BiomeGenerationSettings.Builder builder, boolean bl) {
-        builder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, OrePlacements.ORE_COAL_UPPER);
-        builder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, OrePlacements.ORE_COAL_LOWER);
-        //builder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, ModComponents.ORE_TYPES.get(OreComponent.getLevelData()).getIfIron() ? OrePlacements.ORE_IRON_UPPER : ORE_LEAD_UPPER);
-        //builder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, ModComponents.ORE_TYPES.get(OreComponent.getLevelData()).getIfIron() ? OrePlacements.ORE_IRON_MIDDLE : ORE_LEAD_MIDDLE);
-        //builder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, ModComponents.ORE_TYPES.get(OreComponent.getLevelData()).getIfIron() ? OrePlacements.ORE_IRON_SMALL : ORE_LEAD_SMALL);
-        //builder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, ModComponents.ORE_TYPES.get(OreComponent.getLevelData()).getIfSilver() ? ORE_SILVER : ORE_TUNGSTEN);
-        //builder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, ModComponents.ORE_TYPES.get(OreComponent.getLevelData()).getIfSilver() ? ORE_SILVER_SMALL : ORE_TUNGSTEN_SMALL);
-        //builder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, ModComponents.ORE_TYPES.get(OreComponent.getLevelData()).getIfGold() ? OrePlacements.ORE_GOLD : ORE_PLATINUM);
-        //builder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, ModComponents.ORE_TYPES.get(OreComponent.getLevelData()).getIfGold() ? OrePlacements.ORE_GOLD_LOWER : ORE_PLATINUM_LOWER);
-        builder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, OrePlacements.ORE_IRON_UPPER);
-        builder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, OrePlacements.ORE_IRON_MIDDLE);
-        builder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, OrePlacements.ORE_IRON_SMALL);
-        builder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, ORE_SILVER);
-        builder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, ORE_SILVER_SMALL);
-        builder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, ORE_LEAD_UPPER);
-        builder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, ORE_LEAD_MIDDLE);
-        builder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, ORE_LEAD_SMALL);
-        builder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, ORE_TUNGSTEN);
-        builder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, ORE_TUNGSTEN_SMALL);
-        builder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, OrePlacements.ORE_GOLD);
-        builder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, OrePlacements.ORE_GOLD_LOWER);
-        builder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, ORE_PLATINUM);
-        builder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, ORE_PLATINUM_LOWER);
-        builder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, OrePlacements.ORE_REDSTONE);
-        builder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, OrePlacements.ORE_REDSTONE_LOWER);
-        builder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, OrePlacements.ORE_DIAMOND);
-        builder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, OrePlacements.ORE_DIAMOND_MEDIUM);
-        builder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, OrePlacements.ORE_DIAMOND_LARGE);
-        builder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, OrePlacements.ORE_DIAMOND_BURIED);
-        builder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, OrePlacements.ORE_LAPIS);
-        builder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, OrePlacements.ORE_LAPIS_BURIED);
-        //builder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, ModComponents.ORE_TYPES.get(OreComponent.getLevelData()).getIfCopper() ? (bl ? OrePlacements.ORE_COPPER_LARGE : OrePlacements.ORE_COPPER) : (bl ? ORE_TIN_LARGE : ORE_TIN));
-        builder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, bl ? OrePlacements.ORE_COPPER_LARGE : OrePlacements.ORE_COPPER);
-        builder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, bl ? ORE_TIN_LARGE : ORE_TIN);
-        builder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, CavePlacements.UNDERWATER_MAGMA);
-    }
     public static void addDefaultCorruptSoftDisks(BiomeGenerationSettings.Builder builder) {
         builder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, DISK_CORRUPT_SAND);
         builder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, MiscOverworldPlacements.DISK_CLAY);

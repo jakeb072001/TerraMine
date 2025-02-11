@@ -26,7 +26,7 @@ public class CorruptionBiome {
         BiomeDefaultFeatures.addDefaultUndergroundVariety(generationSettings);
         BiomeDefaultFeatures.addDefaultSprings(generationSettings);
         BiomeDefaultFeatures.addSurfaceFreezing(generationSettings);
-        ModPlacedFeatures.addTerrariaCommonOres(generationSettings);
+        BiomeDefaultFeatures.addDefaultOres(generationSettings);
         ModPlacedFeatures.addDefaultCorruptOres(generationSettings);
         ModPlacedFeatures.addDefaultCorruptSoftDisks(generationSettings);
         BiomeDefaultFeatures.addWaterTrees(generationSettings);

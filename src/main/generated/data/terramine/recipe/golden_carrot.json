@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": "minecraft:carrot",
+    "X": "terramine:platinum_nugget"
+  },
+  "pattern": [
+    "XXX",
+    "XCX",
+    "XXX"
+  ],
+  "result": {
+    "count": 1,
+    "id": "minecraft:golden_carrot"
+  }
+}

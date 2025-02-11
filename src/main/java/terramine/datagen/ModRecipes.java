@@ -6,6 +6,7 @@ import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.recipes.*;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
@@ -50,7 +51,7 @@ public class ModRecipes extends FabricRecipeProvider {
                 createShapeless(RecipeCategory.MISC, ModItems.FROSTSPARK_BOOTS, ModItems.LIGHTNING_BOOTS, ModItems.ICE_SKATES);
                 createShapeless(RecipeCategory.MISC, ModItems.GOBLIN_TECH, ModItems.METAL_DETECTOR, ModItems.STOPWATCH, ModItems.DPS_METER);
                 createShapeless(RecipeCategory.MISC, ModItems.GOLD_WATCH, Items.CLOCK);
-                createShapeless(RecipeCategory.MISC, Items.CLOCK, ModItems.GOLD_WATCH);
+                createShapeless(RecipeCategory.MISC, Items.CLOCK, 1, 1, "clock_from_watch", ModItems.GOLD_WATCH);
                 createShapeless(RecipeCategory.MISC, ModItems.GPS, ModItems.GOLD_WATCH, ModItems.DEPTH_METER, ModItems.COMPASS);
                 createShapeless(RecipeCategory.MISC, ModItems.LAVA_WADERS, 1, 1, Ingredient.of(ModItems.OBSIDIAN_ROSE), Ingredient.of(ModItems.WATER_WALKING_BOOTS, ModItems.OBSIDIAN_WATER_WALKING_BOOTS), Ingredient.of(ModItems.MOLTEN_CHARM, ModItems.LAVA_CHARM));
                 createShapeless(RecipeCategory.MISC, ModItems.LIGHTNING_BOOTS, ModItems.SPECTRE_BOOTS, ModItems.ANKLET, ModItems.AGLET);
@@ -178,7 +179,7 @@ public class ModRecipes extends FabricRecipeProvider {
                         "IDI",
                         "DGD",
                         "IDI"
-                }, 'D', Items.DIAMOND, 'I', Items.GOLD_INGOT, 'G', Items.GLASS);
+                }, 'D', Items.DIAMOND, 'I', Ingredient.of(Items.GOLD_INGOT, ModItems.PLATINUM_INGOT), 'G', Items.GLASS);
 
                 // Weapons
                 createShaped(RecipeCategory.COMBAT, ModItems.PHASEBLADE_WHITE, new String[]{
@@ -208,15 +209,15 @@ public class ModRecipes extends FabricRecipeProvider {
                 ///////////////////////////////////// Smelting/Cooking /////////////////////////////////////
 
                 // Terraria Ingots
-                createSmeltingBlasting(ModItems.TIN_INGOT, ModItems.RAW_TIN, ModBlocks.TIN_ORE.getItem(), ModBlocks.DEEPSLATE_TIN_ORE.getItem());
+                createSmeltingBlasting(ModItems.TIN_INGOT, ModItems.RAW_TIN, ModBlocks.TIN_ORE.getItem(), ModBlocks.DEEPSLATE_TIN_ORE.getItem(), ModBlocks.CORRUPTED_TIN_ORE.getItem(), ModBlocks.CORRUPTED_DEEPSLATE_TIN_ORE.getItem(), ModBlocks.CRIMSON_TIN_ORE.getItem(), ModBlocks.CRIMSON_DEEPSLATE_TIN_ORE.getItem());
                 createSmeltingBlasting(ModBlocks.TIN_BLOCK.getItem(), 6F, 900, ModBlocks.RAW_TIN_BLOCK.getItem());
-                createSmeltingBlasting(ModItems.LEAD_INGOT, ModItems.RAW_LEAD, ModBlocks.LEAD_ORE.getItem(), ModBlocks.DEEPSLATE_LEAD_ORE.getItem());
+                createSmeltingBlasting(ModItems.LEAD_INGOT, ModItems.RAW_LEAD, ModBlocks.LEAD_ORE.getItem(), ModBlocks.DEEPSLATE_LEAD_ORE.getItem(), ModBlocks.CORRUPTED_LEAD_ORE.getItem(), ModBlocks.CORRUPTED_DEEPSLATE_LEAD_ORE.getItem(), ModBlocks.CRIMSON_LEAD_ORE.getItem(), ModBlocks.CRIMSON_DEEPSLATE_LEAD_ORE.getItem());
                 createSmeltingBlasting(ModBlocks.LEAD_BLOCK.getItem(), 6F, 900, ModBlocks.RAW_LEAD_BLOCK.getItem());
-                createSmeltingBlasting(ModItems.SILVER_INGOT, ModItems.RAW_SILVER, ModBlocks.SILVER_ORE.getItem(), ModBlocks.DEEPSLATE_SILVER_ORE.getItem());
+                createSmeltingBlasting(ModItems.SILVER_INGOT, ModItems.RAW_SILVER, ModBlocks.SILVER_ORE.getItem(), ModBlocks.DEEPSLATE_SILVER_ORE.getItem(), ModBlocks.CORRUPTED_SILVER_ORE.getItem(), ModBlocks.CORRUPTED_DEEPSLATE_SILVER_ORE.getItem(), ModBlocks.CRIMSON_SILVER_ORE.getItem(), ModBlocks.CRIMSON_DEEPSLATE_SILVER_ORE.getItem());
                 createSmeltingBlasting(ModBlocks.SILVER_BLOCK.getItem(), 6F, 900, ModBlocks.RAW_SILVER_BLOCK.getItem());
-                createSmeltingBlasting(ModItems.TUNGSTEN_INGOT, ModItems.RAW_TUNGSTEN, ModBlocks.TUNGSTEN_ORE.getItem(), ModBlocks.DEEPSLATE_TUNGSTEN_ORE.getItem());
+                createSmeltingBlasting(ModItems.TUNGSTEN_INGOT, ModItems.RAW_TUNGSTEN, ModBlocks.TUNGSTEN_ORE.getItem(), ModBlocks.DEEPSLATE_TUNGSTEN_ORE.getItem(), ModBlocks.CORRUPTED_TUNGSTEN_ORE.getItem(), ModBlocks.CORRUPTED_DEEPSLATE_TUNGSTEN_ORE.getItem(), ModBlocks.CRIMSON_TUNGSTEN_ORE.getItem(), ModBlocks.CRIMSON_DEEPSLATE_TUNGSTEN_ORE.getItem());
                 createSmeltingBlasting(ModBlocks.TUNGSTEN_BLOCK.getItem(), 6F, 900, ModBlocks.RAW_TUNGSTEN_BLOCK.getItem());
-                createSmeltingBlasting(ModItems.PLATINUM_INGOT, ModItems.RAW_PLATINUM, ModBlocks.PLATINUM_ORE.getItem(), ModBlocks.DEEPSLATE_PLATINUM_ORE.getItem());
+                createSmeltingBlasting(ModItems.PLATINUM_INGOT, ModItems.RAW_PLATINUM, ModBlocks.PLATINUM_ORE.getItem(), ModBlocks.DEEPSLATE_PLATINUM_ORE.getItem(), ModBlocks.CORRUPTED_PLATINUM_ORE.getItem(), ModBlocks.CORRUPTED_DEEPSLATE_PLATINUM_ORE.getItem(), ModBlocks.CRIMSON_PLATINUM_ORE.getItem(), ModBlocks.CRIMSON_DEEPSLATE_PLATINUM_ORE.getItem());
                 createSmeltingBlasting(ModBlocks.PLATINUM_BLOCK.getItem(), 6F, 900, ModBlocks.RAW_PLATINUM_BLOCK.getItem());
                 createSmeltingBlasting(ModItems.DEMONITE_INGOT, ModItems.RAW_DEMONITE, ModBlocks.DEMONITE_ORE.getItem(), ModBlocks.DEEPSLATE_DEMONITE_ORE.getItem());
                 createSmeltingBlasting(ModBlocks.DEMONITE_BLOCK.getItem(), 6F, 900, ModBlocks.RAW_DEMONITE_BLOCK.getItem());
@@ -241,15 +242,208 @@ public class ModRecipes extends FabricRecipeProvider {
                 createSmeltingBlasting(ModBlocks.CRIMSON_STONE.getItem(), 0.1F, ModBlocks.CRIMSON_COBBLESTONE.getItem());
                 createSmeltingBlasting(ModBlocks.CRIMSON_DEEPSLATE.getItem(), 0.1F, ModBlocks.CRIMSON_COBBLED_DEEPSLATE.getItem());
                 createSmeltingBlasting(ModBlocks.CRIMSON_GLASS.getItem(), 0.1F, ModBlocks.CRIMSON_SAND.getItem());
+
+                ///////////////////////////////////// Vanilla Recipes /////////////////////////////////////
+
+                // Copper to Tin
+                createShaped(RecipeCategory.TOOLS, Items.BRUSH, new String[]{
+                        "F",
+                        "X",
+                        "S"
+                }, 'X', ModItems.TIN_INGOT, 'F', Items.FEATHER, 'S', Items.STICK);
+                createShaped(RecipeCategory.TOOLS, Items.SPYGLASS, new String[]{
+                        "C",
+                        "X",
+                        "X"
+                }, 'X', ModItems.TIN_INGOT, 'C', Items.AMETHYST_SHARD);
+                createShaped(RecipeCategory.TOOLS, Items.LIGHTNING_ROD, new String[]{
+                        "X",
+                        "X",
+                        "X"
+                }, 'X', ModItems.TIN_INGOT);
+                createShaped(RecipeCategory.BUILDING_BLOCKS, Items.COPPER_DOOR, new String[]{
+                        "XX",
+                        "XX",
+                        "XX"
+                }, 'X', ModItems.TIN_INGOT);
+                createShaped(RecipeCategory.BUILDING_BLOCKS, Items.COPPER_TRAPDOOR, new String[]{
+                        "XX",
+                        "XX"
+                }, 'X', ModItems.TIN_INGOT);
+
+                // Iron to Lead
+                createShapeless(RecipeCategory.MISC, ModItems.LEAD_NUGGET, ModItems.LEAD_INGOT);
+                createShaped(RecipeCategory.DECORATIONS, Items.SMITHING_TABLE, new String[]{
+                        "XX",
+                        "SS",
+                        "SS"
+                }, 'X', ModItems.LEAD_INGOT, 'S', ItemTags.PLANKS);
+                createShaped(RecipeCategory.DECORATIONS, Items.STONECUTTER, new String[]{
+                        " X ",
+                        "SSS"
+                }, 'X', ModItems.LEAD_INGOT, 'S', Items.STONE);
+                createShaped(RecipeCategory.DECORATIONS, Items.ANVIL, new String[]{
+                        "BBB",
+                        " X ",
+                        "XXX"
+                }, 'X', ModItems.LEAD_INGOT, 'B', ModBlocks.LEAD_BLOCK.getItem());
+                createShaped(RecipeCategory.DECORATIONS, Items.BLAST_FURNACE, new String[]{
+                        "XXX",
+                        "XFX",
+                        "SSS"
+                }, 'X', ModItems.LEAD_INGOT, 'S', Items.SMOOTH_STONE, 'F', Items.FURNACE);
+                createShaped(RecipeCategory.BUILDING_BLOCKS, Items.IRON_BARS, new String[]{
+                        "XXX",
+                        "XXX"
+                }, 'X', ModItems.LEAD_INGOT);
+                createShaped(RecipeCategory.BUILDING_BLOCKS, Items.IRON_DOOR, new String[]{
+                        "XX",
+                        "XX",
+                        "XX"
+                }, 'X', ModItems.LEAD_INGOT);
+                createShaped(RecipeCategory.BUILDING_BLOCKS, Items.IRON_TRAPDOOR, new String[]{
+                        "XX",
+                        "XX"
+                }, 'X', ModItems.LEAD_INGOT);
+                createShaped(RecipeCategory.BUILDING_BLOCKS, Items.CHAIN, new String[]{
+                        "N",
+                        "X",
+                        "N"
+                }, 'X', ModItems.LEAD_INGOT, 'N', ModItems.LEAD_NUGGET);
+                createShaped(RecipeCategory.BUILDING_BLOCKS, Items.LANTERN, new String[]{
+                        "XXX",
+                        "XTX",
+                        "XXX"
+                }, 'X', ModItems.LEAD_NUGGET, 'T', Items.TORCH);
+                createShaped(RecipeCategory.BUILDING_BLOCKS, Items.SOUL_LANTERN, new String[]{
+                        "XXX",
+                        "XTX",
+                        "XXX"
+                }, 'X', ModItems.LEAD_NUGGET, 'T', Items.SOUL_TORCH);
+                createShaped(RecipeCategory.BREWING, Items.CAULDRON, new String[]{
+                        "X X",
+                        "X X",
+                        "XXX"
+                }, 'X', ModItems.LEAD_INGOT);
+                createShaped(RecipeCategory.REDSTONE, Items.HOPPER, new String[]{
+                        "X X",
+                        "XSX",
+                        " X "
+                }, 'X', ModItems.LEAD_INGOT, 'S', Items.CHEST);
+                createShaped(RecipeCategory.REDSTONE, Items.PISTON, new String[]{
+                        "PPP",
+                        "CXC",
+                        "CRC"
+                }, 'X', ModItems.LEAD_INGOT, 'P', ItemTags.PLANKS, 'C', Items.COBBLESTONE, 'R', Items.REDSTONE);
+                createShaped(RecipeCategory.REDSTONE, Items.TRIPWIRE_HOOK, new String[]{
+                        "X",
+                        "S",
+                        "P"
+                }, 'X', ModItems.LEAD_INGOT, 'S', Items.STICK, 'P', ItemTags.PLANKS);
+                createShaped(RecipeCategory.REDSTONE, Items.HEAVY_WEIGHTED_PRESSURE_PLATE, new String[]{
+                        "XX"
+                }, 'X', ModItems.LEAD_INGOT);
+                createShaped(RecipeCategory.REDSTONE, Items.CRAFTER, new String[]{
+                        "XXX",
+                        "XCX",
+                        "RDR"
+                }, 'X', ModItems.LEAD_INGOT, 'C', Items.CRAFTING_TABLE, 'R', Items.REDSTONE, 'D', Items.DROPPER);
+                createShaped(RecipeCategory.TRANSPORTATION, Items.RAIL, 16, new String[]{
+                        "X X",
+                        "XSX",
+                        "X X"
+                }, 'X', ModItems.LEAD_INGOT, 'S', Items.STICK);
+                createShaped(RecipeCategory.TRANSPORTATION, Items.DETECTOR_RAIL, 6, new String[]{
+                        "X X",
+                        "XPX",
+                        "XSX"
+                }, 'X', ModItems.LEAD_INGOT, 'S', Items.REDSTONE, 'P', Items.STONE_PRESSURE_PLATE);
+                createShaped(RecipeCategory.TRANSPORTATION, Items.ACTIVATOR_RAIL, 6, new String[]{
+                        "XSX",
+                        "XRX",
+                        "XSX"
+                }, 'X', ModItems.LEAD_INGOT, 'S', Items.STICK, 'R', Items.REDSTONE);
+                createShaped(RecipeCategory.TOOLS, Items.COMPASS, new String[]{
+                        " X ",
+                        "XSX",
+                        " X "
+                }, 'X', ModItems.LEAD_INGOT, 'S', Items.REDSTONE);
+                createShaped(RecipeCategory.TOOLS, Items.BUCKET, new String[]{
+                        "X X",
+                        " X "
+                }, 'X', ModItems.LEAD_INGOT);
+                createShaped(RecipeCategory.TOOLS, Items.SHEARS, new String[]{
+                        " X",
+                        "X "
+                }, 'X', ModItems.LEAD_INGOT);
+                createShaped(RecipeCategory.TOOLS, Items.FLINT_AND_STEEL, new String[]{
+                        "XS"
+                }, 'X', ModItems.LEAD_INGOT, 'S', Items.FLINT);
+                createShaped(RecipeCategory.TRANSPORTATION, Items.MINECART, new String[]{
+                        "X X",
+                        "XXX"
+                }, 'X', ModItems.LEAD_INGOT);
+                createShaped(RecipeCategory.COMBAT, Items.SHIELD, new String[]{
+                        "SXS",
+                        "SSS",
+                        " S "
+                }, 'X', ModItems.LEAD_INGOT, 'S', ItemTags.PLANKS);
+                createShaped(RecipeCategory.COMBAT, Items.CROSSBOW, new String[]{
+                        "SXS",
+                        "RTR",
+                        " S "
+                }, 'X', ModItems.LEAD_INGOT, 'S', Items.STICK, 'R', Items.STRING, 'T', Items.TRIPWIRE_HOOK);
+
+                // Gold to Platinum
+                createShapeless(RecipeCategory.MISC, ModItems.PLATINUM_NUGGET, ModItems.PLATINUM_INGOT);
+
+                createShaped(RecipeCategory.FOOD, Items.GOLDEN_CARROT, new String[]{
+                        "XXX",
+                        "XCX",
+                        "XXX"
+                }, 'X', ModItems.PLATINUM_NUGGET, 'C', Items.CARROT);
+                createShaped(RecipeCategory.FOOD, Items.GLISTERING_MELON_SLICE, new String[]{
+                        "XXX",
+                        "XCX",
+                        "XXX"
+                }, 'X', ModItems.PLATINUM_NUGGET, 'C', Items.MELON_SLICE);
+                createShaped(RecipeCategory.FOOD, Items.GOLDEN_APPLE, new String[]{
+                        "XXX",
+                        "XCX",
+                        "XXX"
+                }, 'X', ModItems.PLATINUM_INGOT, 'C', Items.APPLE);
+                createShaped(RecipeCategory.TOOLS, Items.CLOCK, new String[]{
+                        " X ",
+                        "XRX",
+                        " X "
+                }, 'X', ModItems.PLATINUM_INGOT, 'R', Items.REDSTONE);
+                createShaped(RecipeCategory.TRANSPORTATION, Items.POWERED_RAIL, 6, new String[]{
+                        "X X",
+                        "XCX",
+                        "XRX"
+                }, 'X', ModItems.PLATINUM_INGOT, 'C', Items.STICK, 'R', Items.REDSTONE);
+                createShaped(RecipeCategory.REDSTONE, Items.LIGHT_WEIGHTED_PRESSURE_PLATE, new String[]{
+                        "XX"
+                }, 'X', ModItems.PLATINUM_INGOT);
+                createShaped(RecipeCategory.REDSTONE, Items.NETHERITE_INGOT, new String[]{
+                        "SSS",
+                        "SXX",
+                        "XX "
+                }, 'X', ModItems.PLATINUM_INGOT, 'S', Items.NETHERITE_SCRAP);
             }
 
             @Unique
             public void createShapeless(RecipeCategory category, Item result, Item... ingredients) {
-                createShapeless(category, result, 1, 1, ingredients);
+                createShapeless(category, result, 1, 1, "", ingredients);
             }
 
             @Unique
             public void createShapeless(RecipeCategory category, Item result, int count, int ingredientCount, Object... ingredients) {
+                createShapeless(category, result, count, ingredientCount, "", ingredients);
+            }
+
+            @Unique
+            public void createShapeless(RecipeCategory category, Item result, int count, int ingredientCount, String customName, Object... ingredients) {
                 if (ingredients.length == 0) {
                     throw new IllegalArgumentException("A shapeless recipe must have at least one ingredient.");
                 }
@@ -291,7 +485,11 @@ public class ModRecipes extends FabricRecipeProvider {
                     }
                 }
 
-                builder.save(recipeOutput);
+                if (!customName.isEmpty()) {
+                    builder.save(recipeOutput, customName);
+                } else {
+                    builder.save(recipeOutput);
+                }
             }
 
             @Unique
@@ -310,7 +508,6 @@ public class ModRecipes extends FabricRecipeProvider {
                 }
 
                 ShapedRecipeBuilder builder = shaped(category, result, count);
-                ShapedRecipeBuilder builderMirrored = shaped(category, result, count);
 
                 // Process ingredient pairs
                 for (int i = 0; i < ingredientPairs.length; i += 2) {

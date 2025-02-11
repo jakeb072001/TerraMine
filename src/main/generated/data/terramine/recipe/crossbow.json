@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "R": "minecraft:string",
+    "S": "minecraft:stick",
+    "T": "minecraft:tripwire_hook",
+    "X": "terramine:lead_ingot"
+  },
+  "pattern": [
+    "SXS",
+    "RTR",
+    " S "
+  ],
+  "result": {
+    "count": 1,
+    "id": "minecraft:crossbow"
+  }
+}

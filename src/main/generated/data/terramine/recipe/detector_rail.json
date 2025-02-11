@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "P": "minecraft:stone_pressure_plate",
+    "S": "minecraft:redstone",
+    "X": "terramine:lead_ingot"
+  },
+  "pattern": [
+    "X X",
+    "XPX",
+    "XSX"
+  ],
+  "result": {
+    "count": 6,
+    "id": "minecraft:detector_rail"
+  }
+}

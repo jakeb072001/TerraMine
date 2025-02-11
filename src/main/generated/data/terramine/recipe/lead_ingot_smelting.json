@@ -6,7 +6,11 @@
   "ingredient": [
     "terramine:raw_lead",
     "terramine:lead_ore",
-    "terramine:deepslate_lead_ore"
+    "terramine:deepslate_lead_ore",
+    "terramine:corrupted_lead_ore",
+    "terramine:corrupted_deepslate_lead_ore",
+    "terramine:crimson_lead_ore",
+    "terramine:crimson_deepslate_lead_ore"
   ],
   "result": {
     "id": "terramine:lead_ingot"

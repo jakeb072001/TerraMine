@@ -102,7 +102,9 @@ public class ModItemGroups {
 
         ItemGroupEvents.modifyEntriesEvent(createKey("terramine_stuff")).register(id("sixth_phase"), entries -> {
             for (Item item : ModItems.MISC) {
-                entries.accept(item);
+                if (!item.equals(ModItems.FAKE_FALLEN_STAR)) {
+                    entries.accept(item);
+                }
             }
             for (Item item : ModBlocks.BLOCK_PLANTS) {
                 entries.accept(item);

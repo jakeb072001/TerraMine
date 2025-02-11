@@ -117,12 +117,14 @@ public class ModItems {
 	public static final Item TIN_INGOT = registerMisc("tin_ingot", key -> new CraftingItem(new Item.Properties().setId(key), false));
 	public static final Item RAW_LEAD = registerMisc("raw_lead", key -> new CraftingItem(new Item.Properties().setId(key), false));
 	public static final Item LEAD_INGOT = registerMisc("lead_ingot", key -> new CraftingItem(new Item.Properties().setId(key), false));
+	public static final Item LEAD_NUGGET = registerMisc("lead_nugget", key -> new CraftingItem(new Item.Properties().setId(key), false));
 	public static final Item RAW_SILVER = registerMisc("raw_silver", key -> new CraftingItem(new Item.Properties().setId(key), false));
 	public static final Item SILVER_INGOT = registerMisc("silver_ingot", key -> new CraftingItem(new Item.Properties().setId(key), false));
 	public static final Item RAW_TUNGSTEN = registerMisc("raw_tungsten", key -> new CraftingItem(new Item.Properties().setId(key), false));
 	public static final Item TUNGSTEN_INGOT = registerMisc("tungsten_ingot", key -> new CraftingItem(new Item.Properties().setId(key), false));
 	public static final Item RAW_PLATINUM = registerMisc("raw_platinum", key -> new CraftingItem(new Item.Properties().setId(key), false));
 	public static final Item PLATINUM_INGOT = registerMisc("platinum_ingot", key -> new CraftingItem(new Item.Properties().setId(key), false));
+	public static final Item PLATINUM_NUGGET = registerMisc("platinum_nugget", key -> new CraftingItem(new Item.Properties().setId(key), false));
 	public static final Item RAW_DEMONITE = registerMisc("raw_demonite", key -> new CraftingItem(new Item.Properties().setId(key), false));
 	public static final Item DEMONITE_INGOT = registerMisc("demonite_ingot", key -> new CraftingItem(new Item.Properties().setId(key), true));
 	public static final Item RAW_CRIMTANE = registerMisc("raw_crimtane", key -> new CraftingItem(new Item.Properties().setId(key), false));

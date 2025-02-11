@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "F": "minecraft:furnace",
+    "S": "minecraft:smooth_stone",
+    "X": "terramine:lead_ingot"
+  },
+  "pattern": [
+    "XXX",
+    "XFX",
+    "SSS"
+  ],
+  "result": {
+    "count": 1,
+    "id": "minecraft:blast_furnace"
+  }
+}

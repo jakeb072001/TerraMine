@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": "terramine:lead_block",
+    "X": "terramine:lead_ingot"
+  },
+  "pattern": [
+    "BBB",
+    " X ",
+    "XXX"
+  ],
+  "result": {
+    "count": 1,
+    "id": "minecraft:anvil"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "key": {
+    "C": "minecraft:crafting_table",
+    "D": "minecraft:dropper",
+    "R": "minecraft:redstone",
+    "X": "terramine:lead_ingot"
+  },
+  "pattern": [
+    "XXX",
+    "XCX",
+    "RDR"
+  ],
+  "result": {
+    "count": 1,
+    "id": "minecraft:crafter"
+  }
+}

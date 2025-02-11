@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "key": {
+    "S": "minecraft:netherite_scrap",
+    "X": "terramine:platinum_ingot"
+  },
+  "pattern": [
+    "SSS",
+    "SXX",
+    "XX "
+  ],
+  "result": {
+    "count": 1,
+    "id": "minecraft:netherite_ingot"
+  }
+}

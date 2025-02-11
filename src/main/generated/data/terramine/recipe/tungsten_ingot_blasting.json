@@ -6,7 +6,11 @@
   "ingredient": [
     "terramine:raw_tungsten",
     "terramine:tungsten_ore",
-    "terramine:deepslate_tungsten_ore"
+    "terramine:deepslate_tungsten_ore",
+    "terramine:corrupted_tungsten_ore",
+    "terramine:corrupted_deepslate_tungsten_ore",
+    "terramine:crimson_tungsten_ore",
+    "terramine:crimson_deepslate_tungsten_ore"
   ],
   "result": {
     "id": "terramine:tungsten_ingot"

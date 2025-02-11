@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "C": "minecraft:amethyst_shard",
+    "X": "terramine:tin_ingot"
+  },
+  "pattern": [
+    "C",
+    "X",
+    "X"
+  ],
+  "result": {
+    "count": 1,
+    "id": "minecraft:spyglass"
+  }
+}
