@@ -1,6 +1,7 @@
 package terramine.mixin.player;
 
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
+import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.server.level.ServerPlayer;
@@ -10,6 +11,9 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.phys.Vec3;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
@@ -17,6 +21,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import terramine.common.init.ModComponents;
+import terramine.common.init.ModFluids;
 import terramine.common.init.ModMobEffects;
 import terramine.common.item.accessories.AccessoryTerrariaItem;
 import terramine.common.misc.TerrariaInventory;
@@ -36,6 +41,8 @@ public abstract class PlayerMixin extends LivingEntity implements PlayerStorages
 	@Shadow public abstract boolean isSpectator();
 
 	@Shadow public abstract boolean isLocalPlayer();
+
+	@Unique private boolean isPhasing = false;
 
 	@Unique
 	TerrariaInventory terrariaInventory = new TerrariaInventory(35);
@@ -68,6 +75,49 @@ public abstract class PlayerMixin extends LivingEntity implements PlayerStorages
 			removeEffect(ModMobEffects.WEREWOLF);
 			removeEffect(ModMobEffects.MERFOLK);
 		}
+	}
+
+	@Inject(method = "travel", at = @At("HEAD"), cancellable = true)
+	public void modifyCollision(Vec3 vec3, CallbackInfo ci) {
+		Player player = (Player) (Object) this;
+		BlockPos pos = player.blockPosition();
+		FluidState fluidState = player.level().getFluidState(pos);
+		FluidState aboveFluidState = player.level().getFluidState(pos.above());
+		BlockState atPlayer = player.level().getBlockState(pos);
+		BlockState above = player.level().getBlockState(pos.above());
+
+		if (!player.isCreative() && !player.isSpectator()) {
+			if (fluidState.is(ModFluids.STILL_SHIMMER) || fluidState.is(ModFluids.FLOWING_SHIMMER)) {
+				isPhasing = true;
+			}
+
+			if (isPhasing) {
+				player.noPhysics = true;
+				player.setPos(player.position().x, player.position().y - 0.10, player.position().z);
+
+				boolean isNonShimmerLiquid = fluidState.isSource() && !fluidState.is(ModFluids.STILL_SHIMMER);
+				boolean isAboveNonShimmerLiquid = aboveFluidState.isSource() && !aboveFluidState.is(ModFluids.STILL_SHIMMER);
+
+				if ((atPlayer.isAir() && above.isAir()) || (isNonShimmerLiquid && isAboveNonShimmerLiquid)) {
+					isPhasing = false;
+					player.noPhysics = false;
+				}
+
+				ci.cancel();
+			}
+		} else {
+			isPhasing = false;
+		}
+	}
+
+	@Override
+	public boolean isPhasing() {
+		return isPhasing;
+	}
+
+	@Override
+	public void setPhasing(boolean phasing) {
+		isPhasing = phasing;
 	}
 
 	@Inject(at = @At("HEAD"), method = "blockUsingShield")
@@ -133,6 +183,7 @@ public abstract class PlayerMixin extends LivingEntity implements PlayerStorages
 		for (int i = 0; i < 7; i++) {
 			tag.putBoolean("slotVisibility/" + i, getSlotVisibility(i));
 		}
+		tag.putBoolean("isPhasing", isPhasing);
 	}
 
 	@Inject(method = "readAdditionalSaveData", at = @At("TAIL"))
@@ -151,6 +202,7 @@ public abstract class PlayerMixin extends LivingEntity implements PlayerStorages
 				setSlotVisibility(i, tag.getBoolean("slotVisibility/" + i));
 			}
 		}
+		isPhasing = tag.getBoolean("isPhasing");
 	}
 
 	@Unique

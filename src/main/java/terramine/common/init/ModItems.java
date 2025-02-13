@@ -50,6 +50,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Function;
 
+import static net.minecraft.world.item.Items.BUCKET;
+
 @SuppressWarnings("unused")
 public class ModItems {
 	// Lists (for datagen)
@@ -76,6 +78,7 @@ public class ModItems {
 	public static final Item UMBRELLA = register("umbrella", UmbrellaItem::new);
 	public static final Item WHOOPEE_CUSHION = registerAccessory("whoopee_cushion", WhoopeeCushionItem::new);
 	public static final Item MAGIC_MIRROR = register("magic_mirror", MagicMirrorItem::new);
+	public static final Item SHIMMER_BUCKET = register("shimmer_bucket", key -> new BucketItem(ModFluids.STILL_SHIMMER, new Item.Properties().setId(key).craftRemainder(BUCKET).stacksTo(1)));
 	public static final Item COBALT_SHIELD = registerShield("cobalt_shield", key -> new ShieldAccessoryLikeItem(new Item.Properties().setId(key).repairable(Items.DIAMOND).durability(2500).fireResistant().rarity(Rarity.RARE)));
 	public static final Item OBSIDIAN_SHIELD = registerShield("obsidian_shield", key -> new ShieldAccessoryLikeItem(new Item.Properties().setId(key).repairable(Items.OBSIDIAN).durability(2500).fireResistant().rarity(Rarity.RARE)));
 	public static final Item SHIELD_OF_CTHULHU = registerShield("shield_of_cthulhu", key -> new ShieldOfCthulhuItem(new Item.Properties().setId(key).repairable(Items.ROTTEN_FLESH).durability(2500).fireResistant().rarity(Rarity.RARE)));

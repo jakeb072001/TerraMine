@@ -13,6 +13,8 @@ import terramine.common.item.armor.TerrariaArmor;
 import terramine.common.item.armor.vanity.VanityArmor;
 import terramine.common.item.dye.BasicDye;
 
+// todo: add shimmer conversions
+// todo: add JEI plugin
 public class REIPlugin implements REIClientPlugin {
 
 	@Override

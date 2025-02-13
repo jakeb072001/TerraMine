@@ -1,24 +1,29 @@
 package terramine.common.init;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.FlowerPotBlock;
-import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
+import terramine.TerraMine;
 import terramine.common.block.*;
 import terramine.common.block.chests.*;
+import terramine.common.block.fluids.ShimmerFluidBlock;
 import terramine.common.block.plants.EvilMushroom;
 import terramine.common.utility.BlockItemRegister;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Function;
 
 public class ModBlocks {
     public static List<Item> BLOCK_ITEMS = new ArrayList<>();
@@ -193,7 +198,18 @@ public class ModBlocks {
     public static final BlockItemRegister CRIMSON_PACKED_ICE = new BlockItemRegister("crimson_packed_ice", key -> new CrimsonBlock(Properties.ofFullCopy(Blocks.PACKED_ICE).setId(key).randomTicks()));
     public static final BlockItemRegister CRIMSON_BLUE_ICE = new BlockItemRegister("crimson_blue_ice", key -> new CrimsonBlock(Properties.ofFullCopy(Blocks.BLUE_ICE).setId(key).randomTicks()));
 
+    // Fluids
+    public static final Block SHIMMER_BLOCK = registerFluid("shimmer", (key) -> new ShimmerFluidBlock(ModFluids.STILL_SHIMMER, Properties.of().setId(key).mapColor(MapColor.COLOR_PURPLE).replaceable().noCollission().strength(100.0F).pushReaction(PushReaction.DESTROY).noLootTable().liquid().sound(SoundType.EMPTY)));
+
     private static boolean always(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos) {
         return true;
+    }
+
+    private static Block registerFluid(String name, Function<ResourceKey<Block>, Block> blockFactory) {
+        ResourceLocation resourceLocation = TerraMine.id(name);
+        ResourceKey<Block> key = ResourceKey.create(Registries.BLOCK, resourceLocation);
+        Block block = blockFactory.apply(key);
+
+        return Registry.register(BuiltInRegistries.BLOCK, key, block);
     }
 }

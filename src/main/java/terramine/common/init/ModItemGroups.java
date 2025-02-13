@@ -53,6 +53,10 @@ public class ModItemGroups {
             }
         });
 
+        ItemGroupEvents.modifyEntriesEvent(CreativeModeTabs.TOOLS_AND_UTILITIES).register(entries -> {
+            entries.accept(ModItems.SHIMMER_BUCKET);
+        });
+
         ItemGroupEvents.modifyEntriesEvent(createKey("terramine_equipment")).register(id("first_phase"), entries -> {
             entries.accept(ModItems.UMBRELLA);
             entries.accept(ModItems.MAGIC_MIRROR);

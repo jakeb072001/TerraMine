@@ -16,6 +16,7 @@ import net.minecraft.world.level.levelgen.Heightmap;
 import terramine.TerraMine;
 import terramine.common.entity.block.InstantPrimedTNTEntity;
 import terramine.common.entity.misc.ClientItemEntity;
+import terramine.common.entity.misc.ShimmerItemEntity;
 import terramine.common.entity.mobs.bosses.TestBoss;
 import terramine.common.entity.mobs.hardmode.MimicEntity;
 import terramine.common.entity.mobs.prehardmode.CrimeraEntity;
@@ -82,6 +83,11 @@ public class ModEntities {
 
 	public static final EntityType<ClientItemEntity> CLIENT_ITEM = register(TerraMine.id("client_item"), EntityType.Builder
 			.of(ClientItemEntity::new, MobCategory.MISC)
+			.sized(0.25F, 0.25F)
+			.noSummon());
+
+	public static final EntityType<ShimmerItemEntity> SHIMMER_ITEM = register(TerraMine.id("shimmer_item"), EntityType.Builder
+			.of(ShimmerItemEntity::new, MobCategory.MISC)
 			.sized(0.25F, 0.25F)
 			.noSummon());
 

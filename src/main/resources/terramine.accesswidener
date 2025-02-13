@@ -8,21 +8,20 @@ accessible field net/minecraft/world/item/ShovelItem FLATTENABLES Ljava/util/Map
 accessible field net/minecraft/world/entity/Mob lootTable Ljava/util/Optional;
 accessible field net/minecraft/world/entity/LivingEntity useItem Lnet/minecraft/world/item/ItemStack;
 accessible field net/minecraft/world/entity/projectile/AbstractArrow firedFromWeapon Lnet/minecraft/world/item/ItemStack;
+accessible field net/minecraft/world/level/block/LiquidBlock fluid Lnet/minecraft/world/level/material/FlowingFluid;
 accessible field net/minecraft/world/level/storage/loot/LootTable randomSequence Ljava/util/Optional;
 accessible field net/minecraft/world/level/storage/loot/LootTable pools Ljava/util/List;
 accessible field net/minecraft/world/level/storage/loot/LootTable compositeFunction Ljava/util/function/BiFunction;
 accessible field net/minecraft/world/level/storage/loot/LootPool compositeCondition Ljava/util/function/Predicate;
 accessible field net/minecraft/world/level/storage/loot/LootPool compositeFunction Ljava/util/function/BiFunction;
+accessible field net/minecraft/client/renderer/CoreShaders PROGRAMS Ljava/util/List;
 accessible field net/minecraft/client/renderer/entity/layers/EquipmentLayerRenderer equipmentAssets Lnet/minecraft/client/resources/model/EquipmentAssetManager;
 accessible field net/minecraft/client/renderer/entity/layers/EquipmentLayerRenderer layerTextureLookup Ljava/util/function/Function;
 accessible field net/minecraft/client/renderer/entity/layers/EquipmentLayerRenderer trimSpriteLookup Ljava/util/function/Function;
-accessible method net/minecraft/client/renderer/entity/ItemRenderer getCompassFoilBuffer (Lnet/minecraft/client/renderer/MultiBufferSource;Lnet/minecraft/client/renderer/RenderType;Lcom/mojang/blaze3d/vertex/PoseStack$Pose;)Lcom/mojang/blaze3d/vertex/VertexConsumer;
-accessible method net/minecraft/client/renderer/entity/ItemRenderer getLayerColorSafe ([II)I
 accessible field net/minecraft/client/renderer/item/ItemStackRenderState isLeftHand Z
 accessible field net/minecraft/client/renderer/item/ItemStackRenderState displayContext Lnet/minecraft/world/item/ItemDisplayContext;
 accessible field net/minecraft/client/renderer/item/ItemStackRenderState layers [Lnet/minecraft/client/renderer/item/ItemStackRenderState$LayerRenderState;
 accessible field net/minecraft/client/renderer/item/ItemStackRenderState activeLayerCount I
-accessible method net/minecraft/client/renderer/item/ItemStackRenderState$LayerRenderState transform ()Lnet/minecraft/client/renderer/block/model/ItemTransform;
 accessible field net/minecraft/client/renderer/item/ItemStackRenderState$LayerRenderState argumentForSpecialRendering Ljava/lang/Object;
 accessible field net/minecraft/client/renderer/item/ItemStackRenderState$LayerRenderState specialRenderer Lnet/minecraft/client/renderer/special/SpecialModelRenderer;
 accessible field net/minecraft/client/renderer/item/ItemStackRenderState$LayerRenderState foilType Lnet/minecraft/client/renderer/item/ItemStackRenderState$FoilType;
@@ -35,8 +34,11 @@ accessible field net/minecraft/client/gui/GuiGraphics sprites Lnet/minecraft/cli
 accessible field net/minecraft/advancements/critereon/AnyBlockInteractionTrigger$TriggerInstance player Ljava/util/Optional;
 
 accessible method net/minecraft/client/renderer/RenderType create (Ljava/lang/String;Lcom/mojang/blaze3d/vertex/VertexFormat;Lcom/mojang/blaze3d/vertex/VertexFormat$Mode;IZZLnet/minecraft/client/renderer/RenderType$CompositeState;)Lnet/minecraft/client/renderer/RenderType$CompositeRenderType;
+accessible method net/minecraft/client/renderer/item/ItemStackRenderState$LayerRenderState transform ()Lnet/minecraft/client/renderer/block/model/ItemTransform;
 accessible method net/minecraft/client/renderer/blockentity/BeaconRenderer renderPart (Lcom/mojang/blaze3d/vertex/PoseStack;Lcom/mojang/blaze3d/vertex/VertexConsumer;IIIFFFFFFFFFFFF)V
 accessible method net/minecraft/client/renderer/entity/layers/EquipmentLayerRenderer getColorForLayer (Lnet/minecraft/client/resources/model/EquipmentClientInfo$Layer;I)I
+accessible method net/minecraft/client/renderer/entity/ItemRenderer getCompassFoilBuffer (Lnet/minecraft/client/renderer/MultiBufferSource;Lnet/minecraft/client/renderer/RenderType;Lcom/mojang/blaze3d/vertex/PoseStack$Pose;)Lcom/mojang/blaze3d/vertex/VertexConsumer;
+accessible method net/minecraft/client/renderer/entity/ItemRenderer getLayerColorSafe ([II)I
 accessible method net/minecraft/client/model/HumanoidModel poseRightArm (Lnet/minecraft/client/renderer/entity/state/HumanoidRenderState;Lnet/minecraft/client/model/HumanoidModel$ArmPose;)V
 accessible method net/minecraft/client/model/HumanoidModel poseLeftArm (Lnet/minecraft/client/renderer/entity/state/HumanoidRenderState;Lnet/minecraft/client/model/HumanoidModel$ArmPose;)V
 accessible method net/minecraft/world/level/biome/BiomeManager getFiddledDistance (JIIIDDD)D

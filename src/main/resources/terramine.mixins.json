@@ -53,6 +53,7 @@
     "client.render.CustomHeadLayerMixin",
     "client.render.ElytraLayerMixin",
     "client.render.EntityRenderStateMixin",
+    "client.render.FogRendererMixin",
     "client.render.HumanoidArmorLayerMixin",
     "client.render.ItemInHandRendererMixin",
     "client.render.LayerTextureKeyInvoker",

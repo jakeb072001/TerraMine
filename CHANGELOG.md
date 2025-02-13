@@ -9,7 +9,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Eye of Cthulhu and Eater of Worlds //-- Not yet started
 - Treasure Bags
 - Shield of Cthulhu and Worm Scarf //-- Not yet started
-- New ores, armour, and tools
+- New ores, armours, and tools
+- Shimmer Fluid (including all functionality)
+
+### Changed
+- Adjusted size of Demonite and Crimtane ore spawns (killing bosses will be the best way to get this material)
 
 ### Fixed
 - Accessory inventory button not repositioning when opening or closing recipe book

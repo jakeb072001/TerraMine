@@ -102,6 +102,7 @@ public class ModItemsBlocksModels extends FabricModelProvider {
             generateFlatItem(itemModelGenerators, item, ModelTemplates.FLAT_ITEM, "misc");
         }
         generateFlatItem(itemModelGenerators, ModItems.MAGIC_MIRROR, ModelTemplates.FLAT_ITEM, "misc");
+        generateFlatItem(itemModelGenerators, ModItems.SHIMMER_BUCKET, ModelTemplates.FLAT_ITEM, "misc");
 
         // Custom Blocks
         generateBlockItem(itemModelGenerators, ModBlocks.CORRUPTED_SNOW_LAYER.ITEM, "corrupted_snow_height2");

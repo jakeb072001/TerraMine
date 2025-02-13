@@ -64,6 +64,7 @@ public class TerraMine implements ModInitializer, TerraBlenderApi {
 		// Entities is loaded by items, loot tables can load lazily (no registration)
 		ModDataComponents.ATTRIBUTE_MODIFIER_COMPONENT.toString();
 		ModItems.TERRASPARK_BOOTS.toString();
+		ModFluids.STILL_SHIMMER.toString();
 		ModItemGroups.ITEM_GROUP_EQUIPMENT.toString();
 		ModItemGroups.registerItemGroups();
 		ModEntities.addToSpawn();
@@ -77,6 +78,7 @@ public class TerraMine implements ModInitializer, TerraBlenderApi {
 		ModProfessions.fillTradeData();
 		ModParticles.BLUE_POOF.toString();
 		ModCommands.registerRules();
+		ShimmerConversions.register();
 		CommandRegistrationCallback.EVENT.register((dispatcher, context, selection) -> {
 			ModCommands.registerCommands(dispatcher);
 		});

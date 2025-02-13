@@ -60,6 +60,13 @@ public abstract class LivingEntityMixin extends Entity {
         original.call();
     }
 
+    @Inject(method = "isInWall", at = @At("HEAD"), cancellable = true)
+    private void preventSuffocation(CallbackInfoReturnable<Boolean> cir) {
+        if ((Object) this instanceof Player player && (player instanceof PlayerStorages tracking && tracking.isPhasing())) {
+            cir.setReturnValue(false);
+        }
+    }
+
     @Inject(at = @At("HEAD"), method = "swing(Lnet/minecraft/world/InteractionHand;)V", cancellable = true)
     public void swing(InteractionHand hand, CallbackInfo info) {
         ItemStack stack = this.getItemInHand(hand);

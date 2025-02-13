@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/water",
+  "textures": {
+    "particle": "terramine:block/fluids/shimmer_overlay"
+  }
+}

@@ -20,4 +20,8 @@ public interface PlayerStorages {
 	void setSafeInventory(SimpleContainer safeInventory);
 
 	void setSlotVisibility(int slot, boolean visible);
+
+	boolean isPhasing();
+
+	void setPhasing(boolean phasing);
 }
