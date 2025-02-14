@@ -2,22 +2,34 @@ package terramine.common.utility;
 
 import net.minecraft.core.NonNullList;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.tags.ItemTags;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.*;
+import net.minecraft.world.level.storage.LevelData;
 import terramine.common.init.ModBlocks;
+import terramine.common.init.ModComponents;
+import terramine.common.init.ModItems;
 
 import java.util.*;
 
+import static java.util.stream.Collectors.toList;
+
 // todo: add more blacklist items if there are any infinite item loops
-// todo: allow tags to work in blacklist, for logs for example
-// todo: add a check when adding to result for ingots, if the world has platinum then a clock should give platinum ingots not gold
-// todo: add custom uncrafts for items such as netherite equipment that are made in other tables
 public class UncraftingHelper {
     public static List<ItemStack> uncraft(ItemStack stack, ServerLevel level) {
         RecipeManager recipeManager = level.recipeAccess();
         List<ItemStack> results = new ArrayList<>();
+
+        // Blacklisted tags
+        Set<TagKey<Item>> blacklistedTags = new HashSet<>();
+        blacklistedTags.add(ItemTags.LOGS);
+        blacklistedTags.add(ItemTags.WOOL);
+        blacklistedTags.add(ItemTags.WOOL_CARPETS);
+
+        // Blacklisted items
         Set<Item> blacklistedItems = new HashSet<>();
         blacklistedItems.add(Items.RAW_COPPER_BLOCK);
         blacklistedItems.add(Items.RAW_IRON_BLOCK);
@@ -78,8 +90,14 @@ public class UncraftingHelper {
 
                     if (!recipeOutput.isEmpty() && ItemStack.isSameItem(stack, recipeOutput)) {
                         for (Ingredient ingredient : ingredients) {
-                            Item item = ingredient.items().toList().getFirst().value();
-                            if (!blacklistedItems.contains(item)) {
+                            for (int i = 0; i < stack.getCount(); i++) {
+                                Item item = ingredient.items().toList().getFirst().value();
+                                Item finalItem = item;
+                                if (blacklistedItems.contains(item) || blacklistedTags.stream().anyMatch(tag -> finalItem.builtInRegistryHolder().is(tag))) {
+                                    continue;
+                                }
+
+                                item = replaceOres(item, level.getLevelData());
                                 results.add(item.getDefaultInstance());
                             }
                         }
@@ -89,9 +107,37 @@ public class UncraftingHelper {
                 } catch (Exception e) {
                     System.err.println("Skipping invalid recipe: " + recipe + " due to error: " + e.getMessage());
                 }
+            } else if (recipeHolder.value() instanceof SmithingRecipe recipe) {
+                SmithingRecipeInput input = new SmithingRecipeInput(stack, stack, stack);
+                List<Ingredient> ingredients = recipe.placementInfo().ingredients();
+
+                try {
+                    ItemStack recipeOutput = recipe.assemble(input, level.registryAccess());
+
+                    if (!recipeOutput.isEmpty() && ItemStack.isSameItem(stack, recipeOutput)) {
+                        for (Ingredient ingredient : ingredients) {
+                            for (int i = 0; i < stack.getCount(); i++) {
+                                Item item = ingredient.items().toList().getFirst().value();
+                                results.add(item.getDefaultInstance());
+                            }
+                        }
+                    }
+                } catch (Exception e) {
+                    System.err.println("Skipping invalid recipe: " + recipe + " due to error: " + e.getMessage());
+                }
             }
         }
 
         return results;
+    }
+
+    private static Item replaceOres(Item item, LevelData levelData) {
+        if (item == Items.COPPER_INGOT && !ModComponents.ORE_TYPES.get(levelData).getIfCopper()) return ModItems.TIN_INGOT;
+        if (item == Items.IRON_INGOT && !ModComponents.ORE_TYPES.get(levelData).getIfIron()) return ModItems.LEAD_INGOT;
+        if (item == Items.IRON_NUGGET && !ModComponents.ORE_TYPES.get(levelData).getIfIron()) return ModItems.LEAD_NUGGET;
+        if (item == ModItems.SILVER_INGOT && !ModComponents.ORE_TYPES.get(levelData).getIfSilver()) return ModItems.TUNGSTEN_INGOT;
+        if (item == Items.GOLD_INGOT && !ModComponents.ORE_TYPES.get(levelData).getIfGold()) return ModItems.PLATINUM_INGOT;
+        if (item == Items.GOLD_NUGGET && !ModComponents.ORE_TYPES.get(levelData).getIfGold()) return ModItems.PLATINUM_NUGGET;
+        return item;
     }
 }

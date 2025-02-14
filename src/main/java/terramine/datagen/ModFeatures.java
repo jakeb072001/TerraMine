@@ -140,6 +140,7 @@ public class ModFeatures {
 				GenerationStep.Decoration.UNDERGROUND_ORES, ModPlacedFeatures.PLACED_HELLSTONE_ORE);
 
 		// todo: replace nether gold (need to make nether platinum ore)
+		// todo: need to also replace massive ore veins, the ones that also place raw blocks, OreVeinifier and NoiseChunk?
 		BiomeModifications.create(id("terraria_ores"))
 				.add(ModificationPhase.REPLACEMENTS,
 						context -> {
@@ -192,8 +193,10 @@ public class ModFeatures {
 					if (!oreComponent.getIfGold()) {
 						context.getGenerationSettings().removeFeature(OrePlacements.ORE_GOLD);
 						context.getGenerationSettings().removeFeature(OrePlacements.ORE_GOLD_LOWER);
+						context.getGenerationSettings().removeFeature(OrePlacements.ORE_GOLD_EXTRA);
 						context.getGenerationSettings().addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, ModPlacedFeatures.ORE_PLATINUM);
 						context.getGenerationSettings().addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, ModPlacedFeatures.ORE_PLATINUM_LOWER);
+						context.getGenerationSettings().addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, ModPlacedFeatures.ORE_PLATINUM_EXTRA);
 					}
 				});
 

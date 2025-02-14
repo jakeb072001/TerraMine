@@ -15,8 +15,8 @@ import net.minecraft.world.level.lighting.LightEngine;
 import org.jetbrains.annotations.NotNull;
 import terramine.TerraMine;
 import terramine.common.block.CorruptedSnowLayer;
-import terramine.common.block.CrimsonSnowLayer;
 import terramine.common.init.ModBlocks;
+import terramine.common.init.ModComponents;
 import terramine.datagen.ModBiomes;
 
 import static terramine.common.utility.Utilities.setBiome;
@@ -66,53 +66,55 @@ public class CorruptionHelper extends SpreadingSnowyDirtBlock  {
             for (int i = 0; i < 4; ++i) { // spread layered snow
                 BlockPos blockPos2 = blockPos.offset(randomSource.nextInt(3) - 1, randomSource.nextInt(3) - 1, randomSource.nextInt(3) - 1);
                 if (serverLevel.getBlockState(blockPos2).is(Blocks.SNOW)) {
-                    serverLevel.setBlockAndUpdate(blockPos2, snow_layer.setValue(CrimsonSnowLayer.LAYERS, serverLevel.getBlockState(blockPos2).getValue(SnowLayerBlock.LAYERS)));
+                    serverLevel.setBlockAndUpdate(blockPos2, snow_layer.setValue(CorruptedSnowLayer.LAYERS, serverLevel.getBlockState(blockPos2).getValue(SnowLayerBlock.LAYERS)));
                 }
             }
 
             spreadBlockGrass(ModBlocks.CORRUPTED_GRASS, Blocks.DIRT, serverLevel, blockPos, randomSource);
             spreadBlockGrass(ModBlocks.CORRUPTED_GRASS, Blocks.GRASS_BLOCK, serverLevel, blockPos, randomSource);
-            spreadBlock(ModBlocks.CORRUPTED_GRAVEL, Blocks.GRAVEL, serverLevel, blockPos, randomSource);
-            spreadBlock(ModBlocks.CORRUPTED_SAND, Blocks.SAND, serverLevel, blockPos, randomSource);
-            spreadBlock(ModBlocks.CORRUPTED_GLASS, Blocks.GLASS, serverLevel, blockPos, randomSource);
-            spreadBlock(ModBlocks.CORRUPTED_SANDSTONE, Blocks.SANDSTONE, serverLevel, blockPos, randomSource);
-            spreadBlock(ModBlocks.CORRUPTED_ANDESITE, Blocks.ANDESITE, serverLevel, blockPos, randomSource);
-            spreadBlock(ModBlocks.CORRUPTED_DIORITE, Blocks.DIORITE, serverLevel, blockPos, randomSource);
-            spreadBlock(ModBlocks.CORRUPTED_GRANITE, Blocks.GRANITE, serverLevel, blockPos, randomSource);
-            spreadBlock(ModBlocks.CORRUPTED_STONE, Blocks.STONE, serverLevel, blockPos, randomSource);
-            spreadBlock(ModBlocks.CORRUPTED_DEEPSLATE, Blocks.DEEPSLATE, serverLevel, blockPos, randomSource);
-            spreadBlock(ModBlocks.CORRUPTED_COBBLESTONE, Blocks.COBBLESTONE, serverLevel, blockPos, randomSource);
-            spreadBlock(ModBlocks.CORRUPTED_COBBLED_DEEPSLATE, Blocks.COBBLED_DEEPSLATE, serverLevel, blockPos, randomSource);
-            spreadBlock(ModBlocks.CORRUPTED_COAL_ORE, Blocks.COAL_ORE, serverLevel, blockPos, randomSource);
-            spreadBlock(ModBlocks.CORRUPTED_IRON_ORE, Blocks.IRON_ORE, serverLevel, blockPos, randomSource);
-            spreadBlock(ModBlocks.CORRUPTED_LEAD_ORE, ModBlocks.LEAD_ORE, serverLevel, blockPos, randomSource);
-            spreadBlock(ModBlocks.CORRUPTED_COPPER_ORE, Blocks.COPPER_ORE, serverLevel, blockPos, randomSource);
-            spreadBlock(ModBlocks.CORRUPTED_TIN_ORE, ModBlocks.TIN_ORE, serverLevel, blockPos, randomSource);
-            spreadBlock(ModBlocks.CORRUPTED_SILVER_ORE, ModBlocks.SILVER_ORE, serverLevel, blockPos, randomSource);
-            spreadBlock(ModBlocks.CORRUPTED_TUNGSTEN_ORE, ModBlocks.TUNGSTEN_ORE, serverLevel, blockPos, randomSource);
-            spreadBlock(ModBlocks.CORRUPTED_GOLD_ORE, Blocks.GOLD_ORE, serverLevel, blockPos, randomSource);
-            spreadBlock(ModBlocks.CORRUPTED_PLATINUM_ORE, ModBlocks.PLATINUM_ORE, serverLevel, blockPos, randomSource);
-            spreadBlock(ModBlocks.CORRUPTED_LAPIS_ORE, Blocks.LAPIS_ORE, serverLevel, blockPos, randomSource);
-            spreadBlock(ModBlocks.CORRUPTED_REDSTONE_ORE, Blocks.REDSTONE_ORE, serverLevel, blockPos, randomSource);
-            spreadBlock(ModBlocks.CORRUPTED_DIAMOND_ORE, Blocks.DIAMOND_ORE, serverLevel, blockPos, randomSource);
-            spreadBlock(ModBlocks.CORRUPTED_EMERALD_ORE, Blocks.EMERALD_ORE, serverLevel, blockPos, randomSource);
-            spreadBlock(ModBlocks.CORRUPTED_DEEPSLATE_COAL_ORE, Blocks.DEEPSLATE_COAL_ORE, serverLevel, blockPos, randomSource);
-            spreadBlock(ModBlocks.CORRUPTED_DEEPSLATE_IRON_ORE, Blocks.DEEPSLATE_IRON_ORE, serverLevel, blockPos, randomSource);
-            spreadBlock(ModBlocks.CORRUPTED_DEEPSLATE_LEAD_ORE, ModBlocks.DEEPSLATE_LEAD_ORE, serverLevel, blockPos, randomSource);
-            spreadBlock(ModBlocks.CORRUPTED_DEEPSLATE_COPPER_ORE, Blocks.DEEPSLATE_COPPER_ORE, serverLevel, blockPos, randomSource);
-            spreadBlock(ModBlocks.CORRUPTED_DEEPSLATE_TIN_ORE, ModBlocks.DEEPSLATE_TIN_ORE, serverLevel, blockPos, randomSource);
-            spreadBlock(ModBlocks.CORRUPTED_DEEPSLATE_SILVER_ORE, ModBlocks.DEEPSLATE_SILVER_ORE, serverLevel, blockPos, randomSource);
-            spreadBlock(ModBlocks.CORRUPTED_DEEPSLATE_TUNGSTEN_ORE, ModBlocks.DEEPSLATE_TUNGSTEN_ORE, serverLevel, blockPos, randomSource);
-            spreadBlock(ModBlocks.CORRUPTED_DEEPSLATE_GOLD_ORE, Blocks.DEEPSLATE_GOLD_ORE, serverLevel, blockPos, randomSource);
-            spreadBlock(ModBlocks.CORRUPTED_DEEPSLATE_PLATINUM_ORE, ModBlocks.DEEPSLATE_PLATINUM_ORE, serverLevel, blockPos, randomSource);
-            spreadBlock(ModBlocks.CORRUPTED_DEEPSLATE_LAPIS_ORE, Blocks.DEEPSLATE_LAPIS_ORE, serverLevel, blockPos, randomSource);
-            spreadBlock(ModBlocks.CORRUPTED_DEEPSLATE_REDSTONE_ORE, Blocks.DEEPSLATE_REDSTONE_ORE, serverLevel, blockPos, randomSource);
-            spreadBlock(ModBlocks.CORRUPTED_DEEPSLATE_DIAMOND_ORE, Blocks.DEEPSLATE_DIAMOND_ORE, serverLevel, blockPos, randomSource);
-            spreadBlock(ModBlocks.CORRUPTED_DEEPSLATE_EMERALD_ORE, Blocks.DEEPSLATE_EMERALD_ORE, serverLevel, blockPos, randomSource);
-            spreadBlock(ModBlocks.CORRUPTED_SNOW, Blocks.SNOW_BLOCK, serverLevel, blockPos, randomSource);
-            spreadBlock(ModBlocks.CORRUPTED_ICE, Blocks.ICE, serverLevel, blockPos, randomSource);
-            spreadBlock(ModBlocks.CORRUPTED_PACKED_ICE, Blocks.PACKED_ICE, serverLevel, blockPos, randomSource);
-            spreadBlock(ModBlocks.CORRUPTED_BLUE_ICE, Blocks.BLUE_ICE, serverLevel, blockPos, randomSource);
+            if (ModComponents.HARDMODE.get(serverLevel.getLevelData()).get()) {
+                spreadBlock(ModBlocks.CORRUPTED_GRAVEL, Blocks.GRAVEL, serverLevel, blockPos, randomSource);
+                spreadBlock(ModBlocks.CORRUPTED_SAND, Blocks.SAND, serverLevel, blockPos, randomSource);
+                spreadBlock(ModBlocks.CORRUPTED_GLASS, Blocks.GLASS, serverLevel, blockPos, randomSource);
+                spreadBlock(ModBlocks.CORRUPTED_SANDSTONE, Blocks.SANDSTONE, serverLevel, blockPos, randomSource);
+                spreadBlock(ModBlocks.CORRUPTED_ANDESITE, Blocks.ANDESITE, serverLevel, blockPos, randomSource);
+                spreadBlock(ModBlocks.CORRUPTED_DIORITE, Blocks.DIORITE, serverLevel, blockPos, randomSource);
+                spreadBlock(ModBlocks.CORRUPTED_GRANITE, Blocks.GRANITE, serverLevel, blockPos, randomSource);
+                spreadBlock(ModBlocks.CORRUPTED_STONE, Blocks.STONE, serverLevel, blockPos, randomSource);
+                spreadBlock(ModBlocks.CORRUPTED_DEEPSLATE, Blocks.DEEPSLATE, serverLevel, blockPos, randomSource);
+                spreadBlock(ModBlocks.CORRUPTED_COBBLESTONE, Blocks.COBBLESTONE, serverLevel, blockPos, randomSource);
+                spreadBlock(ModBlocks.CORRUPTED_COBBLED_DEEPSLATE, Blocks.COBBLED_DEEPSLATE, serverLevel, blockPos, randomSource);
+                spreadBlock(ModBlocks.CORRUPTED_COAL_ORE, Blocks.COAL_ORE, serverLevel, blockPos, randomSource);
+                spreadBlock(ModBlocks.CORRUPTED_IRON_ORE, Blocks.IRON_ORE, serverLevel, blockPos, randomSource);
+                spreadBlock(ModBlocks.CORRUPTED_LEAD_ORE, ModBlocks.LEAD_ORE, serverLevel, blockPos, randomSource);
+                spreadBlock(ModBlocks.CORRUPTED_COPPER_ORE, Blocks.COPPER_ORE, serverLevel, blockPos, randomSource);
+                spreadBlock(ModBlocks.CORRUPTED_TIN_ORE, ModBlocks.TIN_ORE, serverLevel, blockPos, randomSource);
+                spreadBlock(ModBlocks.CORRUPTED_SILVER_ORE, ModBlocks.SILVER_ORE, serverLevel, blockPos, randomSource);
+                spreadBlock(ModBlocks.CORRUPTED_TUNGSTEN_ORE, ModBlocks.TUNGSTEN_ORE, serverLevel, blockPos, randomSource);
+                spreadBlock(ModBlocks.CORRUPTED_GOLD_ORE, Blocks.GOLD_ORE, serverLevel, blockPos, randomSource);
+                spreadBlock(ModBlocks.CORRUPTED_PLATINUM_ORE, ModBlocks.PLATINUM_ORE, serverLevel, blockPos, randomSource);
+                spreadBlock(ModBlocks.CORRUPTED_LAPIS_ORE, Blocks.LAPIS_ORE, serverLevel, blockPos, randomSource);
+                spreadBlock(ModBlocks.CORRUPTED_REDSTONE_ORE, Blocks.REDSTONE_ORE, serverLevel, blockPos, randomSource);
+                spreadBlock(ModBlocks.CORRUPTED_DIAMOND_ORE, Blocks.DIAMOND_ORE, serverLevel, blockPos, randomSource);
+                spreadBlock(ModBlocks.CORRUPTED_EMERALD_ORE, Blocks.EMERALD_ORE, serverLevel, blockPos, randomSource);
+                spreadBlock(ModBlocks.CORRUPTED_DEEPSLATE_COAL_ORE, Blocks.DEEPSLATE_COAL_ORE, serverLevel, blockPos, randomSource);
+                spreadBlock(ModBlocks.CORRUPTED_DEEPSLATE_IRON_ORE, Blocks.DEEPSLATE_IRON_ORE, serverLevel, blockPos, randomSource);
+                spreadBlock(ModBlocks.CORRUPTED_DEEPSLATE_LEAD_ORE, ModBlocks.DEEPSLATE_LEAD_ORE, serverLevel, blockPos, randomSource);
+                spreadBlock(ModBlocks.CORRUPTED_DEEPSLATE_COPPER_ORE, Blocks.DEEPSLATE_COPPER_ORE, serverLevel, blockPos, randomSource);
+                spreadBlock(ModBlocks.CORRUPTED_DEEPSLATE_TIN_ORE, ModBlocks.DEEPSLATE_TIN_ORE, serverLevel, blockPos, randomSource);
+                spreadBlock(ModBlocks.CORRUPTED_DEEPSLATE_SILVER_ORE, ModBlocks.DEEPSLATE_SILVER_ORE, serverLevel, blockPos, randomSource);
+                spreadBlock(ModBlocks.CORRUPTED_DEEPSLATE_TUNGSTEN_ORE, ModBlocks.DEEPSLATE_TUNGSTEN_ORE, serverLevel, blockPos, randomSource);
+                spreadBlock(ModBlocks.CORRUPTED_DEEPSLATE_GOLD_ORE, Blocks.DEEPSLATE_GOLD_ORE, serverLevel, blockPos, randomSource);
+                spreadBlock(ModBlocks.CORRUPTED_DEEPSLATE_PLATINUM_ORE, ModBlocks.DEEPSLATE_PLATINUM_ORE, serverLevel, blockPos, randomSource);
+                spreadBlock(ModBlocks.CORRUPTED_DEEPSLATE_LAPIS_ORE, Blocks.DEEPSLATE_LAPIS_ORE, serverLevel, blockPos, randomSource);
+                spreadBlock(ModBlocks.CORRUPTED_DEEPSLATE_REDSTONE_ORE, Blocks.DEEPSLATE_REDSTONE_ORE, serverLevel, blockPos, randomSource);
+                spreadBlock(ModBlocks.CORRUPTED_DEEPSLATE_DIAMOND_ORE, Blocks.DEEPSLATE_DIAMOND_ORE, serverLevel, blockPos, randomSource);
+                spreadBlock(ModBlocks.CORRUPTED_DEEPSLATE_EMERALD_ORE, Blocks.DEEPSLATE_EMERALD_ORE, serverLevel, blockPos, randomSource);
+                spreadBlock(ModBlocks.CORRUPTED_SNOW, Blocks.SNOW_BLOCK, serverLevel, blockPos, randomSource);
+                spreadBlock(ModBlocks.CORRUPTED_ICE, Blocks.ICE, serverLevel, blockPos, randomSource);
+                spreadBlock(ModBlocks.CORRUPTED_PACKED_ICE, Blocks.PACKED_ICE, serverLevel, blockPos, randomSource);
+                spreadBlock(ModBlocks.CORRUPTED_BLUE_ICE, Blocks.BLUE_ICE, serverLevel, blockPos, randomSource);
+            }
         }
     }
 
@@ -139,7 +141,7 @@ public class CorruptionHelper extends SpreadingSnowyDirtBlock  {
                 BlockPos blockPos2 = blockPos.offset(randomSource.nextInt(3) - 1, randomSource.nextInt(3) - 1, randomSource.nextInt(3) - 1);
                 if (serverLevel.getBlockState(blockPos2).is(spreadTo) && canPropagate(block, serverLevel, blockPos2)) {
                     serverLevel.setBlockAndUpdate(blockPos2, block.setValue(SNOWY, isSnowySetting(serverLevel.getBlockState(blockPos2.above()))));
-                    CorruptionHelper.spreadBiome(serverLevel, blockPos2, true);
+                    CorruptionHelper.spreadBiome(serverLevel, blockPos2, false);
                 }
             }
         }

@@ -80,6 +80,7 @@ public class TerraMineRegistryProvider extends FabricDynamicRegistryProvider {
         entries.add(ModPlacedFeatures.ORE_TUNGSTEN_SMALL, placedFeatureRegistry.getOrThrow(ModPlacedFeatures.ORE_TUNGSTEN_SMALL).value());
         entries.add(ModPlacedFeatures.ORE_PLATINUM, placedFeatureRegistry.getOrThrow(ModPlacedFeatures.ORE_PLATINUM).value());
         entries.add(ModPlacedFeatures.ORE_PLATINUM_LOWER, placedFeatureRegistry.getOrThrow(ModPlacedFeatures.ORE_PLATINUM_LOWER).value());
+        entries.add(ModPlacedFeatures.ORE_PLATINUM_EXTRA, placedFeatureRegistry.getOrThrow(ModPlacedFeatures.ORE_PLATINUM_EXTRA).value());
 
         // Carvers
         //entries.add(ModCarvers.CORRUPTION_PIT, carverRegistry.getOrThrow(ModCarvers.CORRUPTION_PIT).value());

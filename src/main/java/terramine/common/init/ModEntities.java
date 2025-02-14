@@ -33,6 +33,7 @@ import terramine.common.entity.projectiles.throwables.BombEntity;
 import terramine.common.entity.projectiles.throwables.DynamiteEntity;
 import terramine.common.entity.projectiles.throwables.GrenadeEntity;
 
+// todo: create helper method to make cleaner, maybe also find a way to auto add renderer?
 public class ModEntities {
 
 	public static final EntityType<MimicEntity> MIMIC = register(TerraMine.id("mimic"), FabricEntityType.Builder

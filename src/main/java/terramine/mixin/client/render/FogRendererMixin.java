@@ -20,6 +20,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import terramine.common.init.ModBlocks;
 
 // todo: need star particles to make fox look like night sky
+// todo: on world creation caused everything to be black?
 @Mixin(FogRenderer.class)
 public abstract class FogRendererMixin {
     @Unique
