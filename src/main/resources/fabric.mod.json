@@ -44,7 +44,7 @@
       "terramine.common.init.ModComponents"
     ],
     "rei_client": [
-      "terramine.client.integrations.REIPlugin"
+      "terramine.client.integrations.REI.REIPlugin"
     ]
   },
   "mixins": [

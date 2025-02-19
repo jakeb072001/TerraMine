@@ -1,21 +1,25 @@
-package terramine.client.integrations;
+package terramine.client.integrations.REI;
 
 import me.shedaniel.rei.api.client.plugins.REIClientPlugin;
+import me.shedaniel.rei.api.client.registry.category.CategoryRegistry;
 import me.shedaniel.rei.api.client.registry.display.DisplayRegistry;
+import me.shedaniel.rei.api.common.category.CategoryIdentifier;
 import me.shedaniel.rei.api.common.entry.EntryStack;
 import me.shedaniel.rei.api.common.entry.type.VanillaEntryTypes;
 import me.shedaniel.rei.plugin.common.displays.DefaultInformationDisplay;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
+import terramine.TerraMine;
 import terramine.common.item.TerrariaItem;
 import terramine.common.item.armor.TerrariaArmor;
 import terramine.common.item.armor.vanity.VanityArmor;
 import terramine.common.item.dye.BasicDye;
+import terramine.common.utility.ShimmerConversionRegistry;
 
-// todo: add shimmer conversions
 // todo: add JEI plugin
 public class REIPlugin implements REIClientPlugin {
+	public static final CategoryIdentifier<ShimmerConversionDisplay> SHIMMER_CONVERSION_DISPLAY = CategoryIdentifier.of(TerraMine.MOD_ID, "shimmer_conversion");
 
 	@Override
 	public void registerDisplays(DisplayRegistry recipeHelper) {
@@ -43,5 +47,17 @@ public class REIPlugin implements REIClientPlugin {
 					}
 					return display;
 				}).forEach(recipeHelper::add);
+
+		BuiltInRegistries.ITEM.stream()
+				.filter(item -> ShimmerConversionRegistry.hasConversion(item.getDefaultInstance()))
+				.map(item -> {
+					boolean isTwoWay = item.getDefaultInstance().is(ShimmerConversionRegistry.getConvertedItem(ShimmerConversionRegistry.getConvertedItem(item.getDefaultInstance()).getDefaultInstance()));
+                    return new ShimmerConversionDisplay(EntryStack.of(VanillaEntryTypes.ITEM, new ItemStack(item)), EntryStack.of(VanillaEntryTypes.ITEM, new ItemStack(ShimmerConversionRegistry.getConvertedItem(item.getDefaultInstance()))), isTwoWay);
+				}).forEach(recipeHelper::add);
+	}
+
+	@Override
+	public void registerCategories(CategoryRegistry registry) {
+		registry.add(new ShimmerConversionCategory<>());
 	}
 }

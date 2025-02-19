@@ -16,12 +16,23 @@
         "recipe": "terramine:crimson_leggings"
       },
       "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_tissue_sample": {
+      "conditions": {
+        "items": [
+          {
+            "items": "terramine:tissue_sample"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
     }
   },
   "requirements": [
     [
       "has_the_recipe",
-      "has_crimtane_ingot"
+      "has_crimtane_ingot",
+      "has_tissue_sample"
     ]
   ],
   "rewards": {

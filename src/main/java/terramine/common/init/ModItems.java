@@ -106,14 +106,17 @@ public class ModItems {
 	public static final Item JESTER_ARROW = registerArrow("jester_arrow", key -> new JesterArrowItem(new Item.Properties().setId(key)));
 
 	// Treasure Bags
-	public static final Item EYE_OF_CTHULHU_TREASURE_BAG = registerMisc("eye_of_cthulhu_treasure_bag", key -> new TreasureBagItem(new Item.Properties().setId(key).stacksTo(1).rarity(Rarity.EPIC).fireResistant(), ModLootTables.EYE_OF_CTHULHU, Component.translatable("terramine.ui.eye_of_cthulhu_treasure_bag")));
+	public static final Item EYE_OF_CTHULHU_TREASURE_BAG = registerMisc("eye_of_cthulhu_treasure_bag", key -> new TreasureBagItem(key, ModLootTables.EYE_OF_CTHULHU, Component.translatable("terramine.ui.eye_of_cthulhu_treasure_bag")));
+	public static final Item EATER_OF_WORLDS_TREASURE_BAG = registerMisc("eater_of_worlds_treasure_bag", key -> new TreasureBagItem(key, ModLootTables.EATER_OF_WORLDS, Component.translatable("terramine.ui.eater_of_worlds_treasure_bag")));
 
 	// Crafting Items
 	public static final Item LENS = registerMisc("lens", key -> new CraftingItem(new Item.Properties().setId(key), false));
 	public static final Item BLACK_LENS = registerMisc("black_lens", key -> new CraftingItem(new Item.Properties().setId(key), false));
-	public static final Item ROTTEN_CHUNK = registerMisc("rotten_chunk", key -> new CraftingItem(new Item.Properties().setId(key).stacksTo(64), true));
-	public static final Item VERTEBRA = registerMisc("vertebra", key -> new CraftingItem(new Item.Properties().setId(key).stacksTo(64), false));
-	public static final Item WORM_TOOTH = registerMisc("worm_tooth", key -> new CraftingItem(new Item.Properties().setId(key).stacksTo(64), false));
+	public static final Item ROTTEN_CHUNK = registerMisc("rotten_chunk", key -> new CraftingItem(new Item.Properties().setId(key), true));
+	public static final Item VERTEBRA = registerMisc("vertebra", key -> new CraftingItem(new Item.Properties().setId(key), false));
+	public static final Item WORM_TOOTH = registerMisc("worm_tooth", key -> new CraftingItem(new Item.Properties().setId(key), false));
+	public static final Item SHADOW_SCALE = registerMisc("shadow_scale", key -> new CraftingItem(new Item.Properties().setId(key), false));
+	public static final Item TISSUE_SAMPLE = registerMisc("tissue_sample", key -> new CraftingItem(new Item.Properties().setId(key), false));
 
 	// Ores etc
 	public static final Item RAW_TIN = registerMisc("raw_tin", key -> new CraftingItem(new Item.Properties().setId(key), false));
@@ -169,6 +172,7 @@ public class ModItems {
 	// Necklace
 	public static final Item CROSS_NECKLACE = registerAccessory("cross_necklace", CrossNecklaceItem::new);
 	public static final Item PANIC_NECKLACE = registerAccessory("panic_necklace", PanicNecklaceItem::new);
+	public static final Item WORM_SCARF = registerAccessory("worm_scarf", CrossNecklaceItem::new); // todo: actually correctly add
 	public static final Item RANGER_EMBLEM = registerAccessory("ranger_emblem", RangerEmblemItem::new);
 	public static final Item WARRIOR_EMBLEM = registerAccessory("warrior_emblem", WarriorEmblemItem::new);
 	public static final Item SORCERER_EMBLEM = registerAccessory("sorcerer_emblem", SorcererEmblemItem::new);

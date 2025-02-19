@@ -51,6 +51,7 @@ public class TerraMineRegistryProvider extends FabricDynamicRegistryProvider {
         entries.add(ModFeatures.ORE_TUNGSTEN_SMALL_FEATURE, configuredFeatureRegistry.getOrThrow(ModFeatures.ORE_TUNGSTEN_SMALL_FEATURE).value());
         entries.add(ModFeatures.ORE_PLATINUM_FEATURE, configuredFeatureRegistry.getOrThrow(ModFeatures.ORE_PLATINUM_FEATURE).value());
         entries.add(ModFeatures.ORE_PLATINUM_SMALL_FEATURE, configuredFeatureRegistry.getOrThrow(ModFeatures.ORE_PLATINUM_SMALL_FEATURE).value());
+        entries.add(ModFeatures.ORE_NETHER_PLATINUM_FEATURE, configuredFeatureRegistry.getOrThrow(ModFeatures.ORE_NETHER_PLATINUM_FEATURE).value());
 
         // Placed Features
         entries.add(ModPlacedFeatures.PLACED_HELLSTONE_ORE, placedFeatureRegistry.getOrThrow(ModPlacedFeatures.PLACED_HELLSTONE_ORE).value());
@@ -81,6 +82,7 @@ public class TerraMineRegistryProvider extends FabricDynamicRegistryProvider {
         entries.add(ModPlacedFeatures.ORE_PLATINUM, placedFeatureRegistry.getOrThrow(ModPlacedFeatures.ORE_PLATINUM).value());
         entries.add(ModPlacedFeatures.ORE_PLATINUM_LOWER, placedFeatureRegistry.getOrThrow(ModPlacedFeatures.ORE_PLATINUM_LOWER).value());
         entries.add(ModPlacedFeatures.ORE_PLATINUM_EXTRA, placedFeatureRegistry.getOrThrow(ModPlacedFeatures.ORE_PLATINUM_EXTRA).value());
+        entries.add(ModPlacedFeatures.ORE_NETHER_PLATINUM, placedFeatureRegistry.getOrThrow(ModPlacedFeatures.ORE_NETHER_PLATINUM).value());
 
         // Carvers
         //entries.add(ModCarvers.CORRUPTION_PIT, carverRegistry.getOrThrow(ModCarvers.CORRUPTION_PIT).value());

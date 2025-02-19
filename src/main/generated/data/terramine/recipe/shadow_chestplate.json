@@ -2,11 +2,12 @@
   "type": "minecraft:crafting_shaped",
   "category": "equipment",
   "key": {
-    "X": "terramine:demonite_ingot"
+    "X": "terramine:demonite_ingot",
+    "Y": "terramine:shadow_scale"
   },
   "pattern": [
-    "X X",
-    "XXX",
+    "Y Y",
+    "XYX",
     "XXX"
   ],
   "result": {

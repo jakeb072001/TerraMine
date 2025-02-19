@@ -10,7 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Treasure Bags
 - Shield of Cthulhu and Worm Scarf //-- Not yet started
 - New ores, armours, and tools
-- Shimmer Fluid (including all functionality)
+- Shimmer Fluid (including all functionality, visuals will be improved later)
 
 ### Changed
 - Adjusted size of Demonite and Crimtane ore spawns (killing bosses will be the best way to get this material)

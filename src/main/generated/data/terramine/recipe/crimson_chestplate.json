@@ -2,11 +2,12 @@
   "type": "minecraft:crafting_shaped",
   "category": "equipment",
   "key": {
-    "X": "terramine:crimtane_ingot"
+    "X": "terramine:crimtane_ingot",
+    "Y": "terramine:tissue_sample"
   },
   "pattern": [
-    "X X",
-    "XXX",
+    "Y Y",
+    "XYX",
     "XXX"
   ],
   "result": {

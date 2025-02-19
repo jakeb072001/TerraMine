@@ -11,11 +11,11 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "has_stick": {
+    "has_shadow_scale": {
       "conditions": {
         "items": [
           {
-            "items": "minecraft:stick"
+            "items": "terramine:shadow_scale"
           }
         ]
       },
@@ -32,7 +32,7 @@
     [
       "has_the_recipe",
       "has_demonite_ingot",
-      "has_stick"
+      "has_shadow_scale"
     ]
   ],
   "rewards": {

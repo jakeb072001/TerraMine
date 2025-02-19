@@ -143,8 +143,8 @@ public class ModRecipes extends FabricRecipeProvider {
                 createArmor(ModTags.SILVER, ModItems.SILVER_ARMOR);
                 createArmor(ModTags.TUNGSTEN, ModItems.TUNGSTEN_ARMOR);
                 createArmor(ModTags.PLATINUM, ModItems.PLATINUM_ARMOR);
-                createArmor(ModItems.DEMONITE_INGOT, ModItems.SHADOW_ARMOR);
-                createArmor(ModItems.CRIMTANE_INGOT, ModItems.CRIMSON_ARMOR);
+                createArmor(ModItems.DEMONITE_INGOT, ModItems.SHADOW_SCALE, ModItems.SHADOW_ARMOR);
+                createArmor(ModItems.CRIMTANE_INGOT, ModItems.TISSUE_SAMPLE, ModItems.CRIMSON_ARMOR);
                 createArmor(ModItems.METEORITE_INGOT, ModItems.METEOR_ARMOR);
                 createArmor(ModItems.HELLSTONE_INGOT, ModItems.MOLTEN_ARMOR);
 
@@ -155,8 +155,8 @@ public class ModRecipes extends FabricRecipeProvider {
                 createTools(ModTags.SILVER, ModItems.SILVER_TOOLS);
                 createTools(ModTags.TUNGSTEN, ModItems.TUNGSTEN_TOOLS);
                 createTools(ModTags.PLATINUM, ModItems.PLATINUM_TOOLS);
-                createTools(ModItems.DEMONITE_INGOT, ModItems.DEMONITE_TOOLS);
-                createTools(ModItems.CRIMTANE_INGOT, ModItems.CRIMTANE_TOOLS);
+                createTools(ModItems.DEMONITE_INGOT, ModItems.SHADOW_SCALE, ModItems.DEMONITE_TOOLS);
+                createTools(ModItems.CRIMTANE_INGOT, ModItems.TISSUE_SAMPLE, ModItems.CRIMTANE_TOOLS);
                 createShaped(RecipeCategory.TOOLS, ModItems.MOLTEN_PICKAXE,
                         new String[]{
                                 "XXX",
@@ -272,7 +272,9 @@ public class ModRecipes extends FabricRecipeProvider {
                 }, 'X', ModItems.TIN_INGOT);
 
                 // Iron to Lead
-                createShapeless(RecipeCategory.MISC, ModItems.LEAD_NUGGET, ModItems.LEAD_INGOT);
+                createShapeless(RecipeCategory.MISC, ModItems.LEAD_NUGGET, 9, 1, ModItems.LEAD_INGOT);
+                createShapeless(RecipeCategory.MISC, ModItems.LEAD_INGOT, 1, 9, "lead_ingot_from_nuggets", ModItems.LEAD_NUGGET);
+
                 createShaped(RecipeCategory.DECORATIONS, Items.SMITHING_TABLE, new String[]{
                         "XX",
                         "SS",
@@ -395,7 +397,8 @@ public class ModRecipes extends FabricRecipeProvider {
                 }, 'X', ModItems.LEAD_INGOT, 'S', Items.STICK, 'R', Items.STRING, 'T', Items.TRIPWIRE_HOOK);
 
                 // Gold to Platinum
-                createShapeless(RecipeCategory.MISC, ModItems.PLATINUM_NUGGET, ModItems.PLATINUM_INGOT);
+                createShapeless(RecipeCategory.MISC, ModItems.PLATINUM_NUGGET, 9, 1, ModItems.PLATINUM_INGOT);
+                createShapeless(RecipeCategory.MISC, ModItems.PLATINUM_INGOT, 1, 9, "platinum_ingot_from_nuggets", ModItems.PLATINUM_NUGGET);
 
                 createShaped(RecipeCategory.FOOD, Items.GOLDEN_CARROT, new String[]{
                         "XXX",
@@ -560,61 +563,73 @@ public class ModRecipes extends FabricRecipeProvider {
 
             @Unique
             public void createArmor(Object material, ArmorItemRegister armor) {
+                createArmor(material, material, armor);
+            }
+
+            @Unique
+            public void createArmor(Object material, Object material2, ArmorItemRegister armor) {
                 // Helmet (3x3 pattern)
                 createShaped(RecipeCategory.COMBAT, armor.HELMET, 1,
                         new String[]{
-                                "XXX",
+                                "YXY",
                                 "X X"
                         },
-                        'X', material
+                        'X', material, 'Y', material2
                 );
 
                 // Chestplate (3x3 pattern)
                 createShaped(RecipeCategory.COMBAT, armor.CHESTPLATE, 1,
                         new String[]{
-                                "X X",
-                                "XXX",
+                                "Y Y",
+                                "XYX",
                                 "XXX"
                         },
-                        'X', material
+                        'X', material, 'Y', material2
                 );
 
                 // Leggings (3x3 pattern)
                 createShaped(RecipeCategory.COMBAT, armor.LEGGINGS, 1,
                         new String[]{
-                                "XXX",
+                                "YXY",
                                 "X X",
                                 "X X"
                         },
-                        'X', material
+                        'X', material, 'Y', material2
                 );
 
                 // Boots (3x3 pattern)
                 createShaped(RecipeCategory.COMBAT, armor.BOOTS, 1,
                         new String[]{
                                 "X X",
-                                "X X"
+                                "Y Y"
                         },
-                        'X', material
+                        'X', material, 'Y', material2
                 );
             }
 
             @Unique
             public void createTools(Object material, BasicToolSetRegister toolType) {
+                createTools(material, Items.STICK, toolType);
+            }
+
+            @Unique
+            public void createTools(Object material, Object material2, BasicToolSetRegister toolType) {
                 createShaped(RecipeCategory.TOOLS, toolType.PICKAXE, 1,
                         new String[]{
                                 "XXX",
                                 " S ",
                                 " S "
                         },
-                        'X', material, 'S', Items.STICK
+                        'X', material, 'S', material2
                 );
 
-                createShaped(RecipeCategory.COMBAT, toolType.SWORD, 1, new String[]{
-                        "X",
-                        "X",
-                        "S"
-                }, 'X', material, 'S', Items.STICK);
+                createShaped(RecipeCategory.COMBAT, toolType.SWORD, 1,
+                        new String[]{
+                                "X",
+                                "X",
+                                "S"
+                        }, 'X', material, 'S', material2
+                );
 
                 createShaped(RecipeCategory.TOOLS, toolType.AXE, 1,
                         new String[]{
@@ -622,7 +637,7 @@ public class ModRecipes extends FabricRecipeProvider {
                                 "XS",
                                 " S"
                         },
-                        'X', material, 'S', Items.STICK
+                        'X', material, 'S', material2
                 );
 
                 createShaped(RecipeCategory.TOOLS, toolType.SHOVEL, 1,
@@ -631,7 +646,7 @@ public class ModRecipes extends FabricRecipeProvider {
                                 "S",
                                 "S"
                         },
-                        'X', material, 'S', Items.STICK
+                        'X', material, 'S', material2
                 );
 
                 createShaped(RecipeCategory.TOOLS, toolType.HOE, 1,
@@ -640,7 +655,7 @@ public class ModRecipes extends FabricRecipeProvider {
                                 " S",
                                 " S"
                         },
-                        'X', material, 'S', Items.STICK
+                        'X', material, 'S', material2
                 );
             }
 

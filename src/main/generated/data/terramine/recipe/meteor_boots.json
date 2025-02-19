@@ -2,11 +2,12 @@
   "type": "minecraft:crafting_shaped",
   "category": "equipment",
   "key": {
-    "X": "terramine:meteorite_ingot"
+    "X": "terramine:meteorite_ingot",
+    "Y": "terramine:meteorite_ingot"
   },
   "pattern": [
     "X X",
-    "X X"
+    "Y Y"
   ],
   "result": {
     "count": 1,

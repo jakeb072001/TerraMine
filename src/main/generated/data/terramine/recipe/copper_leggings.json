@@ -2,10 +2,11 @@
   "type": "minecraft:crafting_shaped",
   "category": "equipment",
   "key": {
-    "X": "#c:ingots/copper"
+    "X": "#c:ingots/copper",
+    "Y": "#c:ingots/copper"
   },
   "pattern": [
-    "XXX",
+    "YXY",
     "X X",
     "X X"
   ],

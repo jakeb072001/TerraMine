@@ -63,6 +63,7 @@ public class ModBlocks {
     public static final BlockItemRegister TUNGSTEN_BLOCK = new BlockItemRegister("tungsten_block", key -> new Block(Properties.ofFullCopy(Blocks.GOLD_BLOCK).setId(key)));
     public static final BlockItemRegister PLATINUM_ORE = new BlockItemRegister("platinum_ore", key -> new Block(Properties.ofFullCopy(Blocks.GOLD_ORE).setId(key)));
     public static final BlockItemRegister DEEPSLATE_PLATINUM_ORE = new BlockItemRegister("deepslate_platinum_ore", key -> new Block(Properties.ofFullCopy(Blocks.DEEPSLATE_GOLD_ORE).setId(key)));
+    public static final BlockItemRegister NETHER_PLATINUM_ORE = new BlockItemRegister("nether_platinum_ore", key -> new Block(Properties.ofFullCopy(Blocks.NETHER_GOLD_ORE).setId(key)));
     public static final BlockItemRegister RAW_PLATINUM_BLOCK = new BlockItemRegister("raw_platinum_block", key -> new Block(Properties.ofFullCopy(Blocks.RAW_GOLD_BLOCK).setId(key)));
     public static final BlockItemRegister PLATINUM_BLOCK = new BlockItemRegister("platinum_block", key -> new Block(Properties.ofFullCopy(Blocks.GOLD_BLOCK).setId(key)));
     public static final BlockItemRegister DEMONITE_ORE = new BlockItemRegister("demonite_ore", key -> new Block(Properties.ofFullCopy(Blocks.IRON_ORE).setId(key)));

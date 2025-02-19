@@ -2,7 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "equipment",
   "key": {
-    "S": "minecraft:stick",
+    "S": "terramine:shadow_scale",
     "X": "terramine:demonite_ingot"
   },
   "pattern": [

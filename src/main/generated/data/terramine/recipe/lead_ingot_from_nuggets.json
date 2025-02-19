@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "terramine:lead_nugget",
+    "terramine:lead_nugget",
+    "terramine:lead_nugget",
+    "terramine:lead_nugget",
+    "terramine:lead_nugget",
+    "terramine:lead_nugget",
+    "terramine:lead_nugget",
+    "terramine:lead_nugget",
+    "terramine:lead_nugget"
+  ],
+  "result": {
+    "count": 1,
+    "id": "terramine:lead_ingot"
+  }
+}

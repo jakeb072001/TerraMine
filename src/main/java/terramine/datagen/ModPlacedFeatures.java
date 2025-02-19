@@ -55,6 +55,7 @@ public class ModPlacedFeatures {
     public static final ResourceKey<PlacedFeature> ORE_PLATINUM = registerPlaced("ore_platinum");
     public static final ResourceKey<PlacedFeature> ORE_PLATINUM_LOWER = registerPlaced("ore_platinum_lower");
     public static final ResourceKey<PlacedFeature> ORE_PLATINUM_EXTRA = registerPlaced("ore_platinum_extra");
+    public static final ResourceKey<PlacedFeature> ORE_NETHER_PLATINUM = registerPlaced("ore_nether_platinum");
 
     // Demonite
     public static final ResourceKey<PlacedFeature> ORE_DEMONITE_UPPER = registerPlaced("ore_demonite_upper");
@@ -129,6 +130,7 @@ public class ModPlacedFeatures {
         context.register(ORE_PLATINUM, new PlacedFeature(getHolder(holderGetter, ModFeatures.ORE_PLATINUM_FEATURE), commonOrePlacement(4, HeightRangePlacement.triangle(VerticalAnchor.absolute(-64), VerticalAnchor.absolute(32)))));
         context.register(ORE_PLATINUM_LOWER, new PlacedFeature(getHolder(holderGetter, ModFeatures.ORE_PLATINUM_FEATURE), orePlacement(CountPlacement.of(UniformInt.of(0, 1)), HeightRangePlacement.uniform(VerticalAnchor.absolute(-64), VerticalAnchor.absolute(-48)))));
         context.register(ORE_PLATINUM_EXTRA, new PlacedFeature(getHolder(holderGetter, ModFeatures.ORE_PLATINUM_FEATURE), commonOrePlacement(50, HeightRangePlacement.uniform(VerticalAnchor.absolute(32), VerticalAnchor.absolute(256)))));
+        context.register(ORE_NETHER_PLATINUM, new PlacedFeature(getHolder(holderGetter, ModFeatures.ORE_NETHER_PLATINUM_FEATURE), commonOrePlacement(10, PlacementUtils.RANGE_10_10)));
 
         // Corruption and Crimson
         context.register(ORE_DEMONITE_UPPER, new PlacedFeature(getHolder(holderGetter, ModFeatures.ORE_DEMONITE_FEATURE), commonOrePlacement(90, HeightRangePlacement.triangle(VerticalAnchor.absolute(80), VerticalAnchor.absolute(380)))));

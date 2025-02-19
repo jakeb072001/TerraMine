@@ -22,10 +22,15 @@ public class ModLootTables {
 	public static final ResourceKey<LootTable> DEVOURER = ResourceKey.create(Registries.LOOT_TABLE, id("entities/devourer"));
 	public static final ResourceKey<LootTable> CRIMERA = ResourceKey.create(Registries.LOOT_TABLE, id("entities/crimera"));
 
+	// todo: replace familiar_wig with correct mask for both bosses once made
+	// todo: replace gold nuggets with coins once that system is done
 	// Treasure Bags
 	public static final ResourceKey<LootTable> EYE_OF_CTHULHU_CORRUPTION = ResourceKey.create(Registries.LOOT_TABLE, id("items/treasure_bag/eye_of_cthulhu_corruption"));
 	public static final ResourceKey<LootTable> EYE_OF_CTHULHU_CRIMSON = ResourceKey.create(Registries.LOOT_TABLE, id("items/treasure_bag/eye_of_cthulhu_crimson"));
 	public static final ResourceKey<LootTable> EYE_OF_CTHULHU = ResourceKey.create(Registries.LOOT_TABLE, id("items/treasure_bag/eye_of_cthulhu"));
+	public static final ResourceKey<LootTable> EATER_OF_WORLDS_CORRUPTION = ResourceKey.create(Registries.LOOT_TABLE, id("items/treasure_bag/eater_of_worlds_corruption"));
+	public static final ResourceKey<LootTable> EATER_OF_WORLDS_CRIMSON = ResourceKey.create(Registries.LOOT_TABLE, id("items/treasure_bag/eater_of_worlds_crimson"));
+	public static final ResourceKey<LootTable> EATER_OF_WORLDS = ResourceKey.create(Registries.LOOT_TABLE, id("items/treasure_bag/eater_of_worlds"));
 
 	// Chests
 	public static final ResourceKey<LootTable> SURFACE_CHEST = ResourceKey.create(Registries.LOOT_TABLE, id("chests/surface_chest"));

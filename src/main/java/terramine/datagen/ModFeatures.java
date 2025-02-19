@@ -102,6 +102,7 @@ public class ModFeatures {
 	public static final List<OreConfiguration.TargetBlockState> ORE_PLATINUM_TARGET_LIST = List.of(OreConfiguration.target(STONE_ORE_REPLACEABLES, ModBlocks.PLATINUM_ORE.BLOCK.defaultBlockState()), OreConfiguration.target(DEEPSLATE_ORE_REPLACEABLES, ModBlocks.DEEPSLATE_PLATINUM_ORE.BLOCK.defaultBlockState()));
 	public static final ResourceKey<ConfiguredFeature<?, ?>> ORE_PLATINUM_FEATURE = registerConfigured("ore_platinum");
 	public static final ResourceKey<ConfiguredFeature<?, ?>> ORE_PLATINUM_SMALL_FEATURE = registerConfigured("ore_platinum_small");
+	public static final ResourceKey<ConfiguredFeature<?, ?>> ORE_NETHER_PLATINUM_FEATURE = registerConfigured("ore_nether_platinum");
 	public static final ResourceKey<ConfiguredFeature<?, ?>> HELLSTONE_ORE_CONFIGURED = registerConfigured("hellstone_ore");
 
 	// Demonite
@@ -139,9 +140,18 @@ public class ModFeatures {
 		BiomeModifications.addFeature(BiomeSelectors.foundInTheNether(),
 				GenerationStep.Decoration.UNDERGROUND_ORES, ModPlacedFeatures.PLACED_HELLSTONE_ORE);
 
-		// todo: replace nether gold (need to make nether platinum ore)
 		// todo: need to also replace massive ore veins, the ones that also place raw blocks, OreVeinifier and NoiseChunk?
 		BiomeModifications.create(id("terraria_ores"))
+				.add(ModificationPhase.REPLACEMENTS,
+						context -> context.canGenerateIn(LevelStem.NETHER) && context.hasPlacedFeature(OrePlacements.ORE_GOLD_NETHER),
+						context -> {
+							OreComponent oreComponent = ModComponents.ORE_TYPES.get(OreComponent.getLevelData());
+							if (!oreComponent.getIfGold()) {
+								context.getGenerationSettings().removeFeature(OrePlacements.ORE_GOLD_NETHER);
+								context.getGenerationSettings().addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, ModPlacedFeatures.ORE_NETHER_PLATINUM);
+							}
+						}
+				)
 				.add(ModificationPhase.REPLACEMENTS,
 						context -> {
 							boolean hasCopper = context.hasPlacedFeature(OrePlacements.ORE_COPPER_LARGE);
@@ -220,6 +230,7 @@ public class ModFeatures {
 		context.register(ORE_TUNGSTEN_SMALL_FEATURE, new ConfiguredFeature<>(Feature.ORE, new OreConfiguration(ORE_TUNGSTEN_TARGET_LIST, 4)));
 		context.register(ORE_PLATINUM_FEATURE, new ConfiguredFeature<>(Feature.ORE, new OreConfiguration(ORE_PLATINUM_TARGET_LIST, 9)));
 		context.register(ORE_PLATINUM_SMALL_FEATURE, new ConfiguredFeature<>(Feature.ORE, new OreConfiguration(ORE_PLATINUM_TARGET_LIST, 4)));
+		context.register(ORE_NETHER_PLATINUM_FEATURE, new ConfiguredFeature<>(Feature.ORE, new OreConfiguration(new BlockMatchTest(Blocks.NETHERRACK), ModBlocks.NETHER_PLATINUM_ORE.BLOCK.defaultBlockState(), 10)));
 		context.register(ORE_DEMONITE_FEATURE, new ConfiguredFeature<>(Feature.ORE, new OreConfiguration(ORE_DEMONITE_TARGET_LIST, 4)));
 		context.register(ORE_DEMONITE_SMALL_FEATURE, new ConfiguredFeature<>(Feature.ORE, new OreConfiguration(ORE_DEMONITE_TARGET_LIST, 2)));
 		context.register(ORE_CRIMTANE_FEATURE, new ConfiguredFeature<>(Feature.ORE, new OreConfiguration(ORE_CRIMTANE_TARGET_LIST, 4)));

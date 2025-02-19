@@ -47,7 +47,7 @@ public abstract class TerrariaItem extends Item {
 	}
 
 	protected void appendTooltipDescription(List<Component> tooltip, String translKey) {
-		String[] lines = String.format(Language.getInstance().getOrDefault(translKey), getTooltipDescriptionArguments().toArray()).split("\n");
+		String[] lines = Language.getInstance().getOrDefault(translKey).split("\n");
 
 		for (String line : lines) {
 			tooltip.add(Component.literal(line).withStyle(ChatFormatting.GRAY));

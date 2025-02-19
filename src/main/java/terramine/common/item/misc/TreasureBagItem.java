@@ -11,9 +11,7 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.SimpleMenuProvider;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.ItemUseAnimation;
-import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.storage.loot.LootTable;
 import org.jetbrains.annotations.NotNull;
@@ -28,8 +26,8 @@ public class TreasureBagItem extends TerrariaItemConfigurable {
     protected ResourceKey<LootTable> lootTable;
     private final Component title;
 
-    public TreasureBagItem(Properties properties, ResourceKey<LootTable> lootTable, Component title) {
-        super(properties);
+    public TreasureBagItem(ResourceKey<Item> resourceKey, ResourceKey<LootTable> lootTable, Component title) {
+        super(new Item.Properties().setId(resourceKey).stacksTo(1).rarity(Rarity.EPIC).fireResistant());
         this.lootTable = lootTable;
         this.title = title;
     }
