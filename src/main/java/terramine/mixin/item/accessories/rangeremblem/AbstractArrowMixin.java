@@ -13,6 +13,7 @@ import terramine.common.init.ModAttributes;
 @Mixin(AbstractArrow.class)
 public abstract class AbstractArrowMixin {
 
+	@SuppressWarnings("UnreachableCode")
 	@ModifyVariable(method = "onHitEntity", at = @At("STORE"), ordinal = 0)
 	private int moreArrowDamage(int t, EntityHitResult entityHitResult) {
 		Entity owner = ((Projectile)(Object)this).getOwner();

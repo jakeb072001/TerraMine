@@ -19,6 +19,7 @@ public abstract class MobMixin extends LivingEntity {
         super(entityType, level);
     }
 
+    @SuppressWarnings("UnreachableCode")
     @Inject(at = @At("HEAD"), method = "disableShield")
     public void maybeDisableShield(CallbackInfo ci) {
         Player player = (Player) (Object) this;

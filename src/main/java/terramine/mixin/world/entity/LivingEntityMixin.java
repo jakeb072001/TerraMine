@@ -29,6 +29,7 @@ import terramine.common.misc.AccessoriesHelper;
 import terramine.extensions.ItemExtensions;
 import terramine.extensions.PlayerStorages;
 
+@SuppressWarnings("UnreachableCode")
 @Mixin(LivingEntity.class)
 public abstract class LivingEntityMixin extends Entity {
     @Shadow public abstract ItemStack getItemInHand(InteractionHand interactionHand);

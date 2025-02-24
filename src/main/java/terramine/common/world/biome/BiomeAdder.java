@@ -25,16 +25,14 @@ public class BiomeAdder extends Region {
     @Override
     public void addBiomes(Registry<Biome> registry, Consumer<Pair<Climate.ParameterPoint, ResourceKey<Biome>>> mapper)
     {
-        if (TerraMine.CONFIG.worldgen.evilBiomeEnabled) {
-            if (!TerraMine.CONFIG.worldgen.forceCorruption && !TerraMine.CONFIG.worldgen.forceCrimson) {
-                if (!ModComponents.EVIL_TYPE.get(SyncedBooleanComponent.getLevelData()).get()) {
-                    addCorruptionBiomes(mapper);
-                } else {
-                    addCrimsonBiomes(mapper);
-                }
-            } else if (TerraMine.CONFIG.worldgen.forceCorruption) {
+        if (!TerraMine.CONFIG.worldgen.forceCorruption && !TerraMine.CONFIG.worldgen.forceCrimson) {
+            if (!ModComponents.EVIL_TYPE.get(SyncedBooleanComponent.getLevelData()).get()) {
                 addCorruptionBiomes(mapper);
+            } else {
+                addCrimsonBiomes(mapper);
             }
+        } else if (TerraMine.CONFIG.worldgen.forceCorruption) {
+            addCorruptionBiomes(mapper);
         }
     }
 

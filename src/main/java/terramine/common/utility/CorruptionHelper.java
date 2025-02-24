@@ -16,6 +16,7 @@ import org.jetbrains.annotations.NotNull;
 import terramine.TerraMine;
 import terramine.common.block.CorruptedSnowLayer;
 import terramine.common.init.ModBlocks;
+import terramine.common.init.ModCommands;
 import terramine.common.init.ModComponents;
 import terramine.datagen.ModBiomes;
 
@@ -60,7 +61,7 @@ public class CorruptionHelper extends SpreadingSnowyDirtBlock  {
 
     @Override
     public void randomTick(@NotNull BlockState blockState, @NotNull ServerLevel serverLevel, @NotNull BlockPos blockPos, @NotNull RandomSource randomSource) {
-        if (!TerraMine.CONFIG.general.disableEvilSpread) { // allows user to disable spreading in configs
+        if (serverLevel.getGameRules().getBoolean(ModCommands.EVIL_SPREAD)) { // allows user to disable spreading with gamerule
             BlockState snow_layer = ModBlocks.CORRUPTED_SNOW_LAYER.BLOCK.defaultBlockState();
 
             for (int i = 0; i < 4; ++i) { // spread layered snow

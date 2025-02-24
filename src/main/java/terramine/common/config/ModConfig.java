@@ -26,8 +26,6 @@ public final class ModConfig extends PartitioningSerializer.GlobalData {
 		@SuppressWarnings("unused")
 		@ConfigEntry.Gui.Excluded
 		public int configVersion = TerraMine.CONFIG_VERSION;
-		@ConfigEntry.Gui.Tooltip(count = 3)
-		public boolean disableEvilSpread = false;
 		@ConfigEntry.Gui.Tooltip(count = 2)
 		@ConfigEntry.BoundedDiscrete(max = 500, min = 0)
 		public int evilSpreadRarity = 4;
@@ -69,8 +67,6 @@ public final class ModConfig extends PartitioningSerializer.GlobalData {
 		@ConfigEntry.Gui.Tooltip
 		@ConfigEntry.BoundedDiscrete(max = 10, min = 1)
 		public int hellstoneRarity = 3;
-		@ConfigEntry.Gui.Tooltip
-		public boolean evilBiomeEnabled = true;
 		@ConfigEntry.Gui.Tooltip
 		public boolean forceCorruption = false;
 		@ConfigEntry.Gui.Tooltip

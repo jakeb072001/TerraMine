@@ -17,6 +17,7 @@ public abstract class LivingEntityMixin {
 	/**
 	 * Extends the amount of ticks of vulnerability
 	 */
+	@SuppressWarnings("UnreachableCode")
 	@ModifyConstant(method = "hurtServer", constant = @Constant(intValue = 20, ordinal = 0))
 	private int longerInvulnerability(int original) {
 		if (AccessoriesHelper.isEquipped(ModItems.CROSS_NECKLACE, (LivingEntity) (Object) this)) {

@@ -50,7 +50,7 @@ public class TerraMineRegistryProvider extends FabricDynamicRegistryProvider {
         entries.add(ModFeatures.ORE_TUNGSTEN_FEATURE, configuredFeatureRegistry.getOrThrow(ModFeatures.ORE_TUNGSTEN_FEATURE).value());
         entries.add(ModFeatures.ORE_TUNGSTEN_SMALL_FEATURE, configuredFeatureRegistry.getOrThrow(ModFeatures.ORE_TUNGSTEN_SMALL_FEATURE).value());
         entries.add(ModFeatures.ORE_PLATINUM_FEATURE, configuredFeatureRegistry.getOrThrow(ModFeatures.ORE_PLATINUM_FEATURE).value());
-        entries.add(ModFeatures.ORE_PLATINUM_SMALL_FEATURE, configuredFeatureRegistry.getOrThrow(ModFeatures.ORE_PLATINUM_SMALL_FEATURE).value());
+        entries.add(ModFeatures.ORE_PLATINUM_BURIED_FEATURE, configuredFeatureRegistry.getOrThrow(ModFeatures.ORE_PLATINUM_BURIED_FEATURE).value());
         entries.add(ModFeatures.ORE_NETHER_PLATINUM_FEATURE, configuredFeatureRegistry.getOrThrow(ModFeatures.ORE_NETHER_PLATINUM_FEATURE).value());
 
         // Placed Features

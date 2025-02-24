@@ -18,6 +18,7 @@ public abstract class LivingEntityMixin {
 	@Shadow
 	public abstract float getVoicePitch();
 
+	@SuppressWarnings("UnreachableCode")
 	@Inject(method = "handleEntityEvent", at = @At(value = "RETURN", target = "Lnet/minecraft/world/entity/LivingEntity;getHurtSound(Lnet/minecraft/world/damagesource/DamageSource;)Lnet/minecraft/sounds/SoundEvent;"), cancellable = true)
 	private void onClientPlayHurtSound(CallbackInfo info) {
 		if (((LivingEntity) (Object) this) instanceof Player player) {

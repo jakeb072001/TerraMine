@@ -127,8 +127,8 @@ public class ModPlacedFeatures {
         context.register(ORE_TUNGSTEN_SMALL, new PlacedFeature(getHolder(holderGetter, ModFeatures.ORE_TUNGSTEN_SMALL_FEATURE), commonOrePlacement(5, HeightRangePlacement.uniform(VerticalAnchor.absolute(-50), VerticalAnchor.absolute(70)))));
 
         // Gold Alternative
-        context.register(ORE_PLATINUM, new PlacedFeature(getHolder(holderGetter, ModFeatures.ORE_PLATINUM_FEATURE), commonOrePlacement(4, HeightRangePlacement.triangle(VerticalAnchor.absolute(-64), VerticalAnchor.absolute(32)))));
-        context.register(ORE_PLATINUM_LOWER, new PlacedFeature(getHolder(holderGetter, ModFeatures.ORE_PLATINUM_FEATURE), orePlacement(CountPlacement.of(UniformInt.of(0, 1)), HeightRangePlacement.uniform(VerticalAnchor.absolute(-64), VerticalAnchor.absolute(-48)))));
+        context.register(ORE_PLATINUM, new PlacedFeature(getHolder(holderGetter, ModFeatures.ORE_PLATINUM_BURIED_FEATURE), commonOrePlacement(4, HeightRangePlacement.triangle(VerticalAnchor.absolute(-64), VerticalAnchor.absolute(32)))));
+        context.register(ORE_PLATINUM_LOWER, new PlacedFeature(getHolder(holderGetter, ModFeatures.ORE_PLATINUM_BURIED_FEATURE), orePlacement(CountPlacement.of(UniformInt.of(0, 1)), HeightRangePlacement.uniform(VerticalAnchor.absolute(-64), VerticalAnchor.absolute(-48)))));
         context.register(ORE_PLATINUM_EXTRA, new PlacedFeature(getHolder(holderGetter, ModFeatures.ORE_PLATINUM_FEATURE), commonOrePlacement(50, HeightRangePlacement.uniform(VerticalAnchor.absolute(32), VerticalAnchor.absolute(256)))));
         context.register(ORE_NETHER_PLATINUM, new PlacedFeature(getHolder(holderGetter, ModFeatures.ORE_NETHER_PLATINUM_FEATURE), commonOrePlacement(10, PlacementUtils.RANGE_10_10)));
 

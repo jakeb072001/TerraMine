@@ -101,7 +101,7 @@ public class ModFeatures {
 	public static final ResourceKey<ConfiguredFeature<?, ?>> ORE_TUNGSTEN_SMALL_FEATURE = registerConfigured("ore_tungsten_small");
 	public static final List<OreConfiguration.TargetBlockState> ORE_PLATINUM_TARGET_LIST = List.of(OreConfiguration.target(STONE_ORE_REPLACEABLES, ModBlocks.PLATINUM_ORE.BLOCK.defaultBlockState()), OreConfiguration.target(DEEPSLATE_ORE_REPLACEABLES, ModBlocks.DEEPSLATE_PLATINUM_ORE.BLOCK.defaultBlockState()));
 	public static final ResourceKey<ConfiguredFeature<?, ?>> ORE_PLATINUM_FEATURE = registerConfigured("ore_platinum");
-	public static final ResourceKey<ConfiguredFeature<?, ?>> ORE_PLATINUM_SMALL_FEATURE = registerConfigured("ore_platinum_small");
+	public static final ResourceKey<ConfiguredFeature<?, ?>> ORE_PLATINUM_BURIED_FEATURE = registerConfigured("ore_platinum_small");
 	public static final ResourceKey<ConfiguredFeature<?, ?>> ORE_NETHER_PLATINUM_FEATURE = registerConfigured("ore_nether_platinum");
 	public static final ResourceKey<ConfiguredFeature<?, ?>> HELLSTONE_ORE_CONFIGURED = registerConfigured("hellstone_ore");
 
@@ -140,7 +140,6 @@ public class ModFeatures {
 		BiomeModifications.addFeature(BiomeSelectors.foundInTheNether(),
 				GenerationStep.Decoration.UNDERGROUND_ORES, ModPlacedFeatures.PLACED_HELLSTONE_ORE);
 
-		// todo: need to also replace massive ore veins, the ones that also place raw blocks, OreVeinifier and NoiseChunk?
 		BiomeModifications.create(id("terraria_ores"))
 				.add(ModificationPhase.REPLACEMENTS,
 						context -> context.canGenerateIn(LevelStem.NETHER) && context.hasPlacedFeature(OrePlacements.ORE_GOLD_NETHER),
@@ -178,37 +177,51 @@ public class ModFeatures {
 							}
 						}
 				)
-				.add(ModificationPhase.REPLACEMENTS, context -> {
-					boolean hasIron = context.hasPlacedFeature(OrePlacements.ORE_IRON_UPPER) && context.hasPlacedFeature(OrePlacements.ORE_IRON_MIDDLE) && context.hasPlacedFeature(OrePlacements.ORE_IRON_SMALL);
-					boolean hasGold = context.hasPlacedFeature(OrePlacements.ORE_GOLD) && context.hasPlacedFeature(OrePlacements.ORE_GOLD_LOWER);
-					return context.canGenerateIn(LevelStem.OVERWORLD) && hasIron && hasGold;
-				}, context -> {
-					OreComponent oreComponent = ModComponents.ORE_TYPES.get(OreComponent.getLevelData());
+				.add(ModificationPhase.REPLACEMENTS,
+						context -> {
+							boolean hasIron = context.hasPlacedFeature(OrePlacements.ORE_IRON_UPPER) && context.hasPlacedFeature(OrePlacements.ORE_IRON_MIDDLE) && context.hasPlacedFeature(OrePlacements.ORE_IRON_SMALL);
+							boolean hasGold = context.hasPlacedFeature(OrePlacements.ORE_GOLD) && context.hasPlacedFeature(OrePlacements.ORE_GOLD_LOWER);
+							return context.canGenerateIn(LevelStem.OVERWORLD) && hasIron && hasGold;
+						},
+						context -> {
+							OreComponent oreComponent = ModComponents.ORE_TYPES.get(OreComponent.getLevelData());
 
-					if (!oreComponent.getIfIron()) {
-						context.getGenerationSettings().removeFeature(OrePlacements.ORE_IRON_UPPER);
-						context.getGenerationSettings().removeFeature(OrePlacements.ORE_IRON_MIDDLE);
-						context.getGenerationSettings().removeFeature(OrePlacements.ORE_IRON_SMALL);
-						context.getGenerationSettings().addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, ModPlacedFeatures.ORE_LEAD_UPPER);
-						context.getGenerationSettings().addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, ModPlacedFeatures.ORE_LEAD_MIDDLE);
-						context.getGenerationSettings().addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, ModPlacedFeatures.ORE_LEAD_SMALL);
-					}
-					if (!oreComponent.getIfSilver()) {
-						context.getGenerationSettings().addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, ModPlacedFeatures.ORE_TUNGSTEN);
-						context.getGenerationSettings().addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, ModPlacedFeatures.ORE_TUNGSTEN_SMALL);
-					} else {
-						context.getGenerationSettings().addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, ModPlacedFeatures.ORE_SILVER);
-						context.getGenerationSettings().addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, ModPlacedFeatures.ORE_SILVER_SMALL);
-					}
-					if (!oreComponent.getIfGold()) {
-						context.getGenerationSettings().removeFeature(OrePlacements.ORE_GOLD);
-						context.getGenerationSettings().removeFeature(OrePlacements.ORE_GOLD_LOWER);
-						context.getGenerationSettings().removeFeature(OrePlacements.ORE_GOLD_EXTRA);
-						context.getGenerationSettings().addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, ModPlacedFeatures.ORE_PLATINUM);
-						context.getGenerationSettings().addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, ModPlacedFeatures.ORE_PLATINUM_LOWER);
-						context.getGenerationSettings().addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, ModPlacedFeatures.ORE_PLATINUM_EXTRA);
-					}
-				});
+							if (!oreComponent.getIfIron()) {
+								context.getGenerationSettings().removeFeature(OrePlacements.ORE_IRON_UPPER);
+								context.getGenerationSettings().removeFeature(OrePlacements.ORE_IRON_MIDDLE);
+								context.getGenerationSettings().removeFeature(OrePlacements.ORE_IRON_SMALL);
+								context.getGenerationSettings().addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, ModPlacedFeatures.ORE_LEAD_UPPER);
+								context.getGenerationSettings().addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, ModPlacedFeatures.ORE_LEAD_MIDDLE);
+								context.getGenerationSettings().addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, ModPlacedFeatures.ORE_LEAD_SMALL);
+							}
+							if (!oreComponent.getIfSilver()) {
+								context.getGenerationSettings().addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, ModPlacedFeatures.ORE_TUNGSTEN);
+								context.getGenerationSettings().addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, ModPlacedFeatures.ORE_TUNGSTEN_SMALL);
+							} else {
+								context.getGenerationSettings().addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, ModPlacedFeatures.ORE_SILVER);
+								context.getGenerationSettings().addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, ModPlacedFeatures.ORE_SILVER_SMALL);
+							}
+							if (!oreComponent.getIfGold()) {
+								context.getGenerationSettings().removeFeature(OrePlacements.ORE_GOLD);
+								context.getGenerationSettings().removeFeature(OrePlacements.ORE_GOLD_LOWER);
+								context.getGenerationSettings().addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, ModPlacedFeatures.ORE_PLATINUM);
+								context.getGenerationSettings().addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, ModPlacedFeatures.ORE_PLATINUM_LOWER);
+							}
+						}
+				)
+				.add(ModificationPhase.REPLACEMENTS,
+						context -> {
+							boolean hasExtraGold = context.hasPlacedFeature(OrePlacements.ORE_GOLD_EXTRA);
+							return context.canGenerateIn(LevelStem.OVERWORLD) && hasExtraGold;
+						},
+						context -> {
+							OreComponent oreComponent = ModComponents.ORE_TYPES.get(OreComponent.getLevelData());
+
+							if (!oreComponent.getIfGold()) {
+								context.getGenerationSettings().removeFeature(OrePlacements.ORE_GOLD_EXTRA);
+								context.getGenerationSettings().addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, ModPlacedFeatures.ORE_PLATINUM_EXTRA);
+							}
+						});
 
 		// Structures
 		Registry.register(BuiltInRegistries.STRUCTURE_TYPE, TerraMine.id("terraria_jigsaw_structure"), TERRARIA_JIGSAW_STRUCTURE);
@@ -229,7 +242,7 @@ public class ModFeatures {
 		context.register(ORE_TUNGSTEN_FEATURE, new ConfiguredFeature<>(Feature.ORE, new OreConfiguration(ORE_TUNGSTEN_TARGET_LIST, 9)));
 		context.register(ORE_TUNGSTEN_SMALL_FEATURE, new ConfiguredFeature<>(Feature.ORE, new OreConfiguration(ORE_TUNGSTEN_TARGET_LIST, 4)));
 		context.register(ORE_PLATINUM_FEATURE, new ConfiguredFeature<>(Feature.ORE, new OreConfiguration(ORE_PLATINUM_TARGET_LIST, 9)));
-		context.register(ORE_PLATINUM_SMALL_FEATURE, new ConfiguredFeature<>(Feature.ORE, new OreConfiguration(ORE_PLATINUM_TARGET_LIST, 4)));
+		context.register(ORE_PLATINUM_BURIED_FEATURE, new ConfiguredFeature<>(Feature.ORE, new OreConfiguration(ORE_PLATINUM_TARGET_LIST, 9, 0.5F)));
 		context.register(ORE_NETHER_PLATINUM_FEATURE, new ConfiguredFeature<>(Feature.ORE, new OreConfiguration(new BlockMatchTest(Blocks.NETHERRACK), ModBlocks.NETHER_PLATINUM_ORE.BLOCK.defaultBlockState(), 10)));
 		context.register(ORE_DEMONITE_FEATURE, new ConfiguredFeature<>(Feature.ORE, new OreConfiguration(ORE_DEMONITE_TARGET_LIST, 4)));
 		context.register(ORE_DEMONITE_SMALL_FEATURE, new ConfiguredFeature<>(Feature.ORE, new OreConfiguration(ORE_DEMONITE_TARGET_LIST, 2)));

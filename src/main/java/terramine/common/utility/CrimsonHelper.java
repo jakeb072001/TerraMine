@@ -14,6 +14,7 @@ import org.jetbrains.annotations.NotNull;
 import terramine.TerraMine;
 import terramine.common.block.CrimsonSnowLayer;
 import terramine.common.init.ModBlocks;
+import terramine.common.init.ModCommands;
 import terramine.common.init.ModComponents;
 
 // todo: have a way to increase biome spread speed (for some events such as entering hardcore mode or for killing Plantera slowdown the spread again)
@@ -54,7 +55,7 @@ public class CrimsonHelper extends SpreadingSnowyDirtBlock  {
 
     @Override
     public void randomTick(@NotNull BlockState blockState, @NotNull ServerLevel serverLevel, @NotNull BlockPos blockPos, @NotNull RandomSource randomSource) {
-        if (!TerraMine.CONFIG.general.disableEvilSpread) { // allows user to disable spreading in configs
+        if (serverLevel.getGameRules().getBoolean(ModCommands.EVIL_SPREAD)) { // allows user to disable spreading with gamerule
             BlockState snow_layer = ModBlocks.CRIMSON_SNOW_LAYER.BLOCK.defaultBlockState();
 
             for (int i = 0; i < 4; ++i) { // spread layered snow

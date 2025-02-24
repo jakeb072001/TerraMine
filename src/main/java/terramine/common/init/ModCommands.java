@@ -19,6 +19,7 @@ import static net.minecraft.commands.Commands.literal;
 public class ModCommands {
     public static GameRules.Key<GameRules.IntegerValue> MANA_REGEN_SPEED;
     public static GameRules.Key<GameRules.BooleanValue> MANA_INFINITE;
+    public static GameRules.Key<GameRules.BooleanValue> EVIL_SPREAD;
     public static LiteralCommandNode<CommandSourceStack> GETSETMANA;
     public static LiteralCommandNode<CommandSourceStack> GETSETHARDMODE;
     public static LiteralCommandNode<CommandSourceStack> GETSETACCESSORYSLOTS;
@@ -26,6 +27,7 @@ public class ModCommands {
     public static void registerRules() {
         MANA_REGEN_SPEED = GameRuleRegistry.register("manaRegenSpeed", GameRules.Category.PLAYER, GameRuleFactory.createIntRule(3, 0));
         MANA_INFINITE = GameRuleRegistry.register("manaInfinite", GameRules.Category.PLAYER, GameRuleFactory.createBooleanRule(false));
+        EVIL_SPREAD = GameRuleRegistry.register("evilSpread", GameRules.Category.MISC, GameRuleFactory.createBooleanRule(true));
     }
 
     public static void registerCommands(CommandDispatcher<CommandSourceStack> dispatcher) {

@@ -13,6 +13,7 @@ import terramine.common.utility.equipmentchecks.WingsEquippedCheck;
 @Mixin(LivingEntity.class)
 public abstract class LivingEntityMixin {
 
+	@SuppressWarnings("UnreachableCode")
 	@Inject(method = "causeFallDamage", cancellable = true, at = @At("HEAD"))
 	private void cancelFallDamage(float fallDistance, float damageMultiplier, DamageSource damageSource, CallbackInfoReturnable<Boolean> info) {
 		if (AccessoriesHelper.isEquipped(ModItems.LUCKY_HORSESHOE, (LivingEntity) (Object) this) || AccessoriesHelper.isEquipped(ModItems.OBSIDIAN_HORSESHOE, (LivingEntity) (Object) this)

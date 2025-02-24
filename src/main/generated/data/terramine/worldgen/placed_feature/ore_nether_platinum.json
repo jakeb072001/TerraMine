@@ -1,9 +1,9 @@
 {
-  "feature": "terramine:ore_platinum_small",
+  "feature": "terramine:ore_nether_platinum",
   "placement": [
     {
       "type": "minecraft:count",
-      "count": 4
+      "count": 10
     },
     {
       "type": "minecraft:in_square"
@@ -11,12 +11,12 @@
     {
       "type": "minecraft:height_range",
       "height": {
-        "type": "minecraft:trapezoid",
+        "type": "minecraft:uniform",
         "max_inclusive": {
-          "absolute": 32
+          "below_top": 10
         },
         "min_inclusive": {
-          "absolute": -64
+          "above_bottom": 10
         }
       }
     },

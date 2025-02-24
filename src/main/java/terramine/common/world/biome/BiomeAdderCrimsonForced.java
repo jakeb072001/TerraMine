@@ -23,13 +23,11 @@ public class BiomeAdderCrimsonForced extends Region {
     @Override
     public void addBiomes(Registry<Biome> registry, Consumer<Pair<Climate.ParameterPoint, ResourceKey<Biome>>> mapper)
     {
-        if (TerraMine.CONFIG.worldgen.evilBiomeEnabled) {
-            if (TerraMine.CONFIG.worldgen.forceCrimson) {
-                this.addModifiedVanillaOverworldBiomes(mapper, builder -> {
-                    builder.replaceBiome(Biomes.PLAINS, ModBiomes.CRIMSON);
-                    builder.replaceBiome(Biomes.DESERT, ModBiomes.CRIMSON_DESERT);
-                });
-            }
+        if (TerraMine.CONFIG.worldgen.forceCrimson) {
+            this.addModifiedVanillaOverworldBiomes(mapper, builder -> {
+                builder.replaceBiome(Biomes.PLAINS, ModBiomes.CRIMSON);
+                builder.replaceBiome(Biomes.DESERT, ModBiomes.CRIMSON_DESERT);
+            });
         }
     }
 }

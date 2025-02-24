@@ -21,6 +21,7 @@ public abstract class PlayerMixin extends Entity {
 		super(entityType, level);
 	}
 
+	@SuppressWarnings("UnreachableCode")
 	@Inject(method = "hurtServer", at = @At("TAIL"))
 	private void onHurt(ServerLevel serverLevel, DamageSource damageSource, float f, CallbackInfoReturnable<Boolean> cir) {
 		Player player = (Player) (Object) this;

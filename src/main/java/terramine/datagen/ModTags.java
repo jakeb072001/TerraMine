@@ -23,6 +23,8 @@ public final class ModTags extends FabricTagProvider<Item> {
     public static final TagKey<Block> MINEABLE_WITH_SHAXE = createBlockTag("mineable_with_shaxe");
     public static final TagKey<Block> CORRUPTION_MUSHROOM_GROW_BLOCKS = createBlockTag("corruption_mushroom_grow_blocks");
     public static final TagKey<Block> CRIMSON_MUSHROOM_GROW_BLOCKS = createBlockTag("crimson_mushroom_grow_blocks");
+    public static final TagKey<Block> INCORRECT_FOR_EVIL_TOOL = createBlockTag("incorrect_for_evil_tool");
+    public static final TagKey<Block> INCORRECT_FOR_MOLTEN_TOOL = createBlockTag("incorrect_for_molten_tool");
 
     // Item Tags
     public static final TagKey<Item> ACCESSORY = createItemTag("accessory");

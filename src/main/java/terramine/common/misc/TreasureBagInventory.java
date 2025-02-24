@@ -77,12 +77,12 @@ public class TreasureBagInventory implements ImplementedInventory {
             LootTable crimsonLoot = null;
 
             // eye of cthulhu has some different loot in crimson and corruption worlds
-            if (lootTableLocation == ModLootTables.EYE_OF_CTHULHU && TerraMine.CONFIG.worldgen.evilBiomeEnabled) {
+            if (lootTableLocation == ModLootTables.EYE_OF_CTHULHU) {
                 corruptionLoot = lootRegistries.getLootTable(ModLootTables.EYE_OF_CTHULHU_CORRUPTION);
                 crimsonLoot = lootRegistries.getLootTable(ModLootTables.EYE_OF_CTHULHU_CRIMSON);
             }
             // todo: remove once crimson boss is added
-            if (lootTableLocation == ModLootTables.EATER_OF_WORLDS && TerraMine.CONFIG.worldgen.evilBiomeEnabled) {
+            if (lootTableLocation == ModLootTables.EATER_OF_WORLDS) {
                 corruptionLoot = lootRegistries.getLootTable(ModLootTables.EATER_OF_WORLDS_CORRUPTION);
                 crimsonLoot = lootRegistries.getLootTable(ModLootTables.EATER_OF_WORLDS_CRIMSON);
             }

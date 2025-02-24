@@ -30,6 +30,7 @@ public abstract class LivingEntityMixin extends Entity {
 	@Shadow
 	public abstract float getVoicePitch();
 
+	@SuppressWarnings("UnreachableCode")
 	@Inject(method = "playHurtSound", at = @At("HEAD"))
 	private void onServerPlayHurtSound(CallbackInfo info) {
 		if (((LivingEntity) (Object) this) instanceof Player player) {

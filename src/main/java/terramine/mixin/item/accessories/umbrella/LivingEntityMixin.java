@@ -24,6 +24,7 @@ public abstract class LivingEntityMixin extends Entity {
 	@Shadow
 	public abstract boolean hasEffect(Holder<MobEffect> effect);
 
+	@SuppressWarnings("UnreachableCode")
 	@ModifyVariable(method = "travelInAir", ordinal = 0, name = "d", at = @At("STORE"))
 	private double changeGravity(double gravity) {
 		boolean isFalling = !this.onGround() && this.getDeltaMovement().y <= 0.0D;

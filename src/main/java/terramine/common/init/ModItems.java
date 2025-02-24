@@ -172,7 +172,7 @@ public class ModItems {
 	// Necklace
 	public static final Item CROSS_NECKLACE = registerAccessory("cross_necklace", CrossNecklaceItem::new);
 	public static final Item PANIC_NECKLACE = registerAccessory("panic_necklace", PanicNecklaceItem::new);
-	public static final Item WORM_SCARF = registerAccessory("worm_scarf", CrossNecklaceItem::new); // todo: actually correctly add
+	public static final Item WORM_SCARF = registerAccessory("worm_scarf", AccessoryTerrariaItem::new);
 	public static final Item RANGER_EMBLEM = registerAccessory("ranger_emblem", RangerEmblemItem::new);
 	public static final Item WARRIOR_EMBLEM = registerAccessory("warrior_emblem", WarriorEmblemItem::new);
 	public static final Item SORCERER_EMBLEM = registerAccessory("sorcerer_emblem", SorcererEmblemItem::new);

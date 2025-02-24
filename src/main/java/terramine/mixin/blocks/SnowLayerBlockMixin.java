@@ -21,6 +21,7 @@ public class SnowLayerBlockMixin {
     @Shadow
     public static final IntegerProperty LAYERS = BlockStateProperties.LAYERS;
 
+    @SuppressWarnings("UnreachableCode")
     @Inject(method = "canSurvive", at = @At("RETURN"), cancellable = true)
     private void snowLayerSurvive(BlockState blockState, LevelReader levelReader, BlockPos blockPos, CallbackInfoReturnable<Boolean> cir) {
         BlockState blockState2 = levelReader.getBlockState(blockPos.below());

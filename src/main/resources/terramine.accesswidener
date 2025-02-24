@@ -60,6 +60,7 @@ accessible	class	net/minecraft/world/entity/npc/VillagerTrades$SuspiciousStewFor
 accessible	class	net/minecraft/world/item/PickaxeItem
 accessible	class	net/minecraft/world/item/AxeItem
 accessible	class	net/minecraft/world/item/HoeItem
+accessible	class	net/minecraft/world/level/levelgen/OreVeinifier$VeinType
 accessible	class	net/minecraft/client/renderer/entity/layers/EquipmentLayerRenderer$LayerTextureKey
 accessible	class	net/minecraft/client/renderer/entity/layers/EquipmentLayerRenderer$TrimSpriteKey
 accessible	class	net/minecraft/client/gui/Gui$HeartType

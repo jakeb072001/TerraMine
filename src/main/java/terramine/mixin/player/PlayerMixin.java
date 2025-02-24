@@ -33,6 +33,7 @@ import terramine.extensions.PlayerStorages;
 import java.util.HashMap;
 import java.util.Map;
 
+@SuppressWarnings("UnreachableCode")
 @Mixin(Player.class)
 public abstract class PlayerMixin extends LivingEntity implements PlayerStorages {
 

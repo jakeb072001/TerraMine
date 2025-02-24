@@ -17,6 +17,7 @@ import terramine.common.init.ModItems;
 import terramine.common.init.ModMobEffects;
 import terramine.common.misc.AccessoriesHelper;
 
+@SuppressWarnings("UnreachableCode")
 @Mixin(LivingEntity.class)
 public abstract class LivingEntityMixin extends Entity {
 

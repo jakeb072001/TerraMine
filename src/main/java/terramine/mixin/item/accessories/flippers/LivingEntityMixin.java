@@ -31,6 +31,7 @@ public abstract class LivingEntityMixin implements LivingEntityExtensions {
 
 	@Unique
 	@Override
+	@SuppressWarnings("UnreachableCode")
 	public double terramine$getIncreasedSwimSpeed(double speed) {
 		LivingEntity entity = (LivingEntity) (Object) this;
 		if (AccessoriesHelper.isEquipped(ModItems.FLIPPERS, entity) || AccessoriesHelper.isEquipped(ModItems.DIVING_GEAR, entity)

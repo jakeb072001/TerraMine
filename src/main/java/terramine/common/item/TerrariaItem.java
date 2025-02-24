@@ -43,7 +43,7 @@ public abstract class TerrariaItem extends Item {
 	}
 
 	public String[] getREITooltip() {
-		return Language.getInstance().getOrDefault(this.getDescriptionId() + ".tooltip").replace("%%", "%").split("\n");
+		return Language.getInstance().getOrDefault(this.getDescriptionId() + ".tooltip").split("\n");
 	}
 
 	protected void appendTooltipDescription(List<Component> tooltip, String translKey) {
@@ -52,9 +52,5 @@ public abstract class TerrariaItem extends Item {
 		for (String line : lines) {
 			tooltip.add(Component.literal(line).withStyle(ChatFormatting.GRAY));
 		}
-	}
-
-	protected List<String> getTooltipDescriptionArguments() {
-		return Collections.emptyList();
 	}
 }

@@ -1,0 +1,7 @@
+{
+  "replace": false,
+  "values": [
+    "#terramine:needs_evil_tool",
+    "#terramine:needs_molten_tool"
+  ]
+}

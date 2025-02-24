@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "#terramine:lead_ores",
+    "#terramine:tin_ores",
+    "terramine:raw_lead_block",
+    "terramine:raw_tin_block"
+  ]
+}

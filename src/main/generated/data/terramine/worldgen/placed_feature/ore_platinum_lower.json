@@ -1,5 +1,5 @@
 {
-  "feature": "terramine:ore_platinum",
+  "feature": "terramine:ore_platinum_small",
   "placement": [
     {
       "type": "minecraft:count",

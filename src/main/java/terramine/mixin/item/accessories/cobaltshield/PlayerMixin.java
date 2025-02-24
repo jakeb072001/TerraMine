@@ -28,7 +28,8 @@ public abstract class PlayerMixin {
 
 	@Unique
 	private static final AttributeModifier ARMOR_ADD_TWO_CTHULHU = new AttributeModifier(TerraMine.id("shield_of_cthulhu_armor_two"), 2, AttributeModifier.Operation.ADD_VALUE);
-	
+
+	@SuppressWarnings("UnreachableCode")
 	@Inject(method = "tick", at = @At("TAIL"))
 	private void shieldAttributes(CallbackInfo info) {
 		Player self = (Player) (Object) this;

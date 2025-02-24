@@ -40,6 +40,7 @@ public abstract class LivingEntityMixin extends Entity {
 		super(type, world);
 	}
 
+	@SuppressWarnings("UnreachableCode")
 	@Inject(at = @At("TAIL"), method = "tick")
 	private void tick(CallbackInfo info) {
 		LivingEntity entity = (LivingEntity) (Object) this;

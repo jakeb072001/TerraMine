@@ -26,6 +26,7 @@ import terramine.common.init.ModSoundEvents;
 import terramine.common.item.accessories.feet.TerrasparkBootsItem;
 import terramine.common.misc.AccessoriesHelper;
 
+@SuppressWarnings("UnreachableCode")
 @Mixin(Entity.class)
 public abstract class EntityMixin {
 

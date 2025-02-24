@@ -19,7 +19,7 @@ public class OreComponent implements Component, AutoSyncedComponent {
 	protected boolean cobalt_not_palladium;
 	protected boolean mythril_not_orichalcum;
 	protected boolean adamantite_not_titanium;
-	private static LevelData levelData;
+	public static LevelData levelData;
 
 	public OreComponent(String name) {
 		this.name = name;

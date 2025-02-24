@@ -18,6 +18,7 @@ public abstract class EntityMixin {
 
 	@Shadow public Level level;
 
+	@SuppressWarnings("UnreachableCode")
 	@Inject(method = "setShiftKeyDown", at = @At("RETURN"))
 	private void playFartSound(boolean sneaking, CallbackInfo info) {
 		//noinspection ConstantConditions

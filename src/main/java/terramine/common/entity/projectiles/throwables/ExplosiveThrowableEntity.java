@@ -119,7 +119,7 @@ public abstract class ExplosiveThrowableEntity extends ThrowableProjectile {
         this.setXRot(xRotStorage);
 
         if (isSticky()) {
-            if (!this.level().getBlockState(this.blockPosition()).getBlock().equals(Blocks.AIR)) {
+            if (!this.level().getBlockState(this.blockPosition()).getBlock().equals(Blocks.AIR) && !this.level().getBlockState(this.blockPosition()).liquid()) {
                 setDeltaMovement(0, 0, 0);
                 setNoGravity(true);
             } else {

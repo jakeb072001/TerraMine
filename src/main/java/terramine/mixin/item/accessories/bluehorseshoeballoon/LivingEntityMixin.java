@@ -51,7 +51,7 @@ public abstract class LivingEntityMixin extends Entity implements LivingEntityEx
 		ClientPlayNetworking.send(new LongNetworkType(0L, ServerPacketHandler.C2S_DOUBLE_JUMPED_ID));
 	}
 
-	@SuppressWarnings("ConstantConditions")
+	@SuppressWarnings({"ConstantConditions", "UnreachableCode"})
 	@Inject(method = "aiStep", at = @At("HEAD"))
 	private void invokeDoubleJump(CallbackInfo info) {
 		LivingEntity self = (LivingEntity) (Object) this;

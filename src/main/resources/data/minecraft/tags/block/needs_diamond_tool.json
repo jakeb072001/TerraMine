@@ -1,8 +1,8 @@
 {
   "replace": false,
   "values": [
-    "terramine:hellstone_ore",
-	"terramine:raw_hellstone_block",
-	"terramine:hellstone_block"
+    "terramine:meteorite_ore",
+    "terramine:raw_meteorite_block",
+    "terramine:meteorite_block"
   ]
 }

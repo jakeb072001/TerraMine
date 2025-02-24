@@ -30,6 +30,7 @@ public abstract class LivingEntityMixin extends Entity {
         this.damageSource = damageSource;
     }
 
+    @SuppressWarnings("UnreachableCode")
     @ModifyVariable(method = "hurtServer", at = @At("HEAD"), ordinal = 0, argsOnly = true)
     private float reduceLavaDamage(float f) {
         LivingEntity entity = (LivingEntity) (Object) this;
