@@ -22,12 +22,16 @@ import terramine.common.block.plants.EvilMushroom;
 import terramine.common.utility.BlockItemRegister;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.function.Function;
 
 public class ModBlocks {
     public static List<Item> BLOCK_ITEMS = new ArrayList<>();
     public static List<Item> BLOCK_PLANTS = new ArrayList<>();
+    public static final Map<Block, Block> crimsonSpreadBlocks = new HashMap<>();
+    public static final Map<Block, Block> corruptionSpreadBlocks = new HashMap<>();
 
     // Chests
     public static final BlockItemRegister GOLD_CHEST = new BlockItemRegister("gold_chest", key -> new GoldChestBlock(Properties.of().setId(key).mapColor(MapColor.GOLD).strength(3.0f, 6.0f).sound(SoundType.METAL).requiresCorrectToolForDrops(), false, () -> ModBlockEntityType.GOLD_CHEST));
@@ -135,6 +139,7 @@ public class ModBlocks {
     public static final BlockItemRegister CORRUPTED_SILVER_ORE = new BlockItemRegister("corrupted_silver_ore", key -> new CorruptedBlock(Properties.ofFullCopy(SILVER_ORE.BLOCK).setId(key).randomTicks()));
     public static final BlockItemRegister CORRUPTED_TUNGSTEN_ORE = new BlockItemRegister("corrupted_tungsten_ore", key -> new CorruptedBlock(Properties.ofFullCopy(TUNGSTEN_ORE.BLOCK).setId(key).randomTicks()));
     public static final BlockItemRegister CORRUPTED_PLATINUM_ORE = new BlockItemRegister("corrupted_platinum_ore", key -> new CorruptedBlock(Properties.ofFullCopy(PLATINUM_ORE.BLOCK).setId(key).randomTicks()));
+    public static final BlockItemRegister CORRUPTED_DEMONITE_ORE = new BlockItemRegister("corrupted_demonite_ore", key -> new Block(Properties.ofFullCopy(DEMONITE_ORE.BLOCK).setId(key).randomTicks()));
     public static final BlockItemRegister CORRUPTED_DEEPSLATE_COAL_ORE = new BlockItemRegister("corrupted_deepslate_coal_ore", key -> new CorruptedBlock(Properties.ofFullCopy(Blocks.DEEPSLATE_COAL_ORE).setId(key).randomTicks()));
     public static final BlockItemRegister CORRUPTED_DEEPSLATE_IRON_ORE = new BlockItemRegister("corrupted_deepslate_iron_ore", key -> new CorruptedBlock(Properties.ofFullCopy(Blocks.DEEPSLATE_IRON_ORE).setId(key).randomTicks()));
     public static final BlockItemRegister CORRUPTED_DEEPSLATE_COPPER_ORE = new BlockItemRegister("corrupted_deepslate_copper_ore", key -> new CorruptedBlock(Properties.ofFullCopy(Blocks.DEEPSLATE_COPPER_ORE).setId(key).randomTicks()));
@@ -148,6 +153,7 @@ public class ModBlocks {
     public static final BlockItemRegister CORRUPTED_DEEPSLATE_SILVER_ORE = new BlockItemRegister("corrupted_deepslate_silver_ore", key -> new CorruptedBlock(Properties.ofFullCopy(DEEPSLATE_SILVER_ORE.BLOCK).setId(key).randomTicks()));
     public static final BlockItemRegister CORRUPTED_DEEPSLATE_TUNGSTEN_ORE = new BlockItemRegister("corrupted_deepslate_tungsten_ore", key -> new CorruptedBlock(Properties.ofFullCopy(DEEPSLATE_TUNGSTEN_ORE.BLOCK).setId(key).randomTicks()));
     public static final BlockItemRegister CORRUPTED_DEEPSLATE_PLATINUM_ORE = new BlockItemRegister("corrupted_deepslate_platinum_ore", key -> new CorruptedBlock(Properties.ofFullCopy(DEEPSLATE_PLATINUM_ORE.BLOCK).setId(key).randomTicks()));
+    public static final BlockItemRegister CORRUPTED_DEEPSLATE_DEMONITE_ORE = new BlockItemRegister("corrupted_deepslate_demonite_ore", key -> new Block(Properties.ofFullCopy(DEEPSLATE_DEMONITE_ORE.BLOCK).setId(key).randomTicks()));
     public static final BlockItemRegister CORRUPTED_SNOW_LAYER = new BlockItemRegister("corrupted_snow_layer", key -> new CorruptedSnowLayer(Properties.ofFullCopy(Blocks.SNOW).setId(key).randomTicks()));
     public static final BlockItemRegister CORRUPTED_SNOW = new BlockItemRegister("corrupted_snow", key -> new CorruptedBlock(Properties.ofFullCopy(Blocks.SNOW_BLOCK).setId(key).randomTicks()));
     public static final BlockItemRegister CORRUPTED_ICE = new BlockItemRegister("corrupted_ice", key -> new CorruptedBlock(Properties.ofFullCopy(Blocks.ICE).setId(key).randomTicks()));
@@ -180,6 +186,7 @@ public class ModBlocks {
     public static final BlockItemRegister CRIMSON_SILVER_ORE = new BlockItemRegister("crimson_silver_ore", key -> new CrimsonBlock(Properties.ofFullCopy(SILVER_ORE.BLOCK).setId(key).randomTicks()));
     public static final BlockItemRegister CRIMSON_TUNGSTEN_ORE = new BlockItemRegister("crimson_tungsten_ore", key -> new CrimsonBlock(Properties.ofFullCopy(TUNGSTEN_ORE.BLOCK).setId(key).randomTicks()));
     public static final BlockItemRegister CRIMSON_PLATINUM_ORE = new BlockItemRegister("crimson_platinum_ore", key -> new CrimsonBlock(Properties.ofFullCopy(PLATINUM_ORE.BLOCK).setId(key).randomTicks()));
+    public static final BlockItemRegister CRIMSON_CRIMTANE_ORE = new BlockItemRegister("crimson_crimtane_ore", key -> new Block(Properties.ofFullCopy(CRIMTANE_ORE.BLOCK).setId(key).randomTicks()));
     public static final BlockItemRegister CRIMSON_DEEPSLATE_COAL_ORE = new BlockItemRegister("crimson_deepslate_coal_ore", key -> new CrimsonBlock(Properties.ofFullCopy(Blocks.DEEPSLATE_COAL_ORE).setId(key).randomTicks()));
     public static final BlockItemRegister CRIMSON_DEEPSLATE_IRON_ORE = new BlockItemRegister("crimson_deepslate_iron_ore", key -> new CrimsonBlock(Properties.ofFullCopy(Blocks.DEEPSLATE_IRON_ORE).setId(key).randomTicks()));
     public static final BlockItemRegister CRIMSON_DEEPSLATE_COPPER_ORE = new BlockItemRegister("crimson_deepslate_copper_ore", key -> new CrimsonBlock(Properties.ofFullCopy(Blocks.DEEPSLATE_COPPER_ORE).setId(key).randomTicks()));
@@ -193,6 +200,7 @@ public class ModBlocks {
     public static final BlockItemRegister CRIMSON_DEEPSLATE_SILVER_ORE = new BlockItemRegister("crimson_deepslate_silver_ore", key -> new CrimsonBlock(Properties.ofFullCopy(DEEPSLATE_SILVER_ORE.BLOCK).setId(key).randomTicks()));
     public static final BlockItemRegister CRIMSON_DEEPSLATE_TUNGSTEN_ORE = new BlockItemRegister("crimson_deepslate_tungsten_ore", key -> new CrimsonBlock(Properties.ofFullCopy(DEEPSLATE_TUNGSTEN_ORE.BLOCK).setId(key).randomTicks()));
     public static final BlockItemRegister CRIMSON_DEEPSLATE_PLATINUM_ORE = new BlockItemRegister("crimson_deepslate_platinum_ore", key -> new CrimsonBlock(Properties.ofFullCopy(DEEPSLATE_PLATINUM_ORE.BLOCK).setId(key).randomTicks()));
+    public static final BlockItemRegister CRIMSON_DEEPSLATE_CRIMTANE_ORE = new BlockItemRegister("crimson_deepslate_crimtane_ore", key -> new Block(Properties.ofFullCopy(DEEPSLATE_CRIMTANE_ORE.BLOCK).setId(key).randomTicks()));
     public static final BlockItemRegister CRIMSON_SNOW_LAYER = new BlockItemRegister("crimson_snow_layer", key -> new CrimsonSnowLayer(Properties.ofFullCopy(Blocks.SNOW).setId(key).randomTicks()));
     public static final BlockItemRegister CRIMSON_SNOW = new BlockItemRegister("crimson_snow", key -> new CrimsonBlock(Properties.ofFullCopy(Blocks.SNOW_BLOCK).setId(key).randomTicks()));
     public static final BlockItemRegister CRIMSON_ICE = new BlockItemRegister("crimson_ice", key -> new CrimsonBlock(Properties.ofFullCopy(Blocks.ICE).setId(key).randomTicks()));
@@ -212,5 +220,101 @@ public class ModBlocks {
         Block block = blockFactory.apply(key);
 
         return Registry.register(BuiltInRegistries.BLOCK, key, block);
+    }
+
+    public static void registerEvilSpreadables() {
+        // Corruption
+        corruptionSpreadBlocks.put(ModBlocks.CORRUPTED_GRASS.BLOCK, Blocks.GRASS_BLOCK);
+        corruptionSpreadBlocks.put(ModBlocks.CORRUPTED_SNOW_LAYER.BLOCK, Blocks.SNOW);
+        corruptionSpreadBlocks.put(ModBlocks.CORRUPTED_GRAVEL.BLOCK, Blocks.GRAVEL);
+        corruptionSpreadBlocks.put(ModBlocks.CORRUPTED_SAND.BLOCK, Blocks.SAND);
+        corruptionSpreadBlocks.put(ModBlocks.CORRUPTED_GLASS.BLOCK, Blocks.GLASS);
+        corruptionSpreadBlocks.put(ModBlocks.CORRUPTED_SANDSTONE.BLOCK, Blocks.SANDSTONE);
+        corruptionSpreadBlocks.put(ModBlocks.CORRUPTED_ANDESITE.BLOCK, Blocks.ANDESITE);
+        corruptionSpreadBlocks.put(ModBlocks.CORRUPTED_DIORITE.BLOCK, Blocks.DIORITE);
+        corruptionSpreadBlocks.put(ModBlocks.CORRUPTED_GRANITE.BLOCK, Blocks.GRANITE);
+        corruptionSpreadBlocks.put(ModBlocks.CORRUPTED_STONE.BLOCK, Blocks.STONE);
+        corruptionSpreadBlocks.put(ModBlocks.CORRUPTED_DEEPSLATE.BLOCK, Blocks.DEEPSLATE);
+        corruptionSpreadBlocks.put(ModBlocks.CORRUPTED_COBBLESTONE.BLOCK, Blocks.COBBLESTONE);
+        corruptionSpreadBlocks.put(ModBlocks.CORRUPTED_COBBLED_DEEPSLATE.BLOCK, Blocks.COBBLED_DEEPSLATE);
+        corruptionSpreadBlocks.put(ModBlocks.CORRUPTED_COAL_ORE.BLOCK, Blocks.COAL_ORE);
+        corruptionSpreadBlocks.put(ModBlocks.CORRUPTED_IRON_ORE.BLOCK, Blocks.IRON_ORE);
+        corruptionSpreadBlocks.put(ModBlocks.CORRUPTED_LEAD_ORE.BLOCK, ModBlocks.LEAD_ORE.BLOCK);
+        corruptionSpreadBlocks.put(ModBlocks.CORRUPTED_COPPER_ORE.BLOCK, Blocks.COPPER_ORE);
+        corruptionSpreadBlocks.put(ModBlocks.CORRUPTED_TIN_ORE.BLOCK, ModBlocks.TIN_ORE.BLOCK);
+        corruptionSpreadBlocks.put(ModBlocks.CORRUPTED_SILVER_ORE.BLOCK, ModBlocks.SILVER_ORE.BLOCK);
+        corruptionSpreadBlocks.put(ModBlocks.CORRUPTED_TUNGSTEN_ORE.BLOCK, ModBlocks.TUNGSTEN_ORE.BLOCK);
+        corruptionSpreadBlocks.put(ModBlocks.CORRUPTED_GOLD_ORE.BLOCK, Blocks.GOLD_ORE);
+        corruptionSpreadBlocks.put(ModBlocks.CORRUPTED_PLATINUM_ORE.BLOCK, ModBlocks.PLATINUM_ORE.BLOCK);
+        corruptionSpreadBlocks.put(ModBlocks.CORRUPTED_LAPIS_ORE.BLOCK, Blocks.LAPIS_ORE);
+        corruptionSpreadBlocks.put(ModBlocks.CORRUPTED_REDSTONE_ORE.BLOCK, Blocks.REDSTONE_ORE);
+        corruptionSpreadBlocks.put(ModBlocks.CORRUPTED_DIAMOND_ORE.BLOCK, Blocks.DIAMOND_ORE);
+        corruptionSpreadBlocks.put(ModBlocks.CORRUPTED_EMERALD_ORE.BLOCK, Blocks.EMERALD_ORE);
+        corruptionSpreadBlocks.put(ModBlocks.CORRUPTED_DEMONITE_ORE.BLOCK, ModBlocks.DEMONITE_ORE.BLOCK);
+        corruptionSpreadBlocks.put(ModBlocks.CORRUPTED_DEEPSLATE_COAL_ORE.BLOCK, Blocks.DEEPSLATE_COAL_ORE);
+        corruptionSpreadBlocks.put(ModBlocks.CORRUPTED_DEEPSLATE_IRON_ORE.BLOCK, Blocks.DEEPSLATE_IRON_ORE);
+        corruptionSpreadBlocks.put(ModBlocks.CORRUPTED_DEEPSLATE_LEAD_ORE.BLOCK, ModBlocks.DEEPSLATE_LEAD_ORE.BLOCK);
+        corruptionSpreadBlocks.put(ModBlocks.CORRUPTED_DEEPSLATE_COPPER_ORE.BLOCK, Blocks.DEEPSLATE_COPPER_ORE);
+        corruptionSpreadBlocks.put(ModBlocks.CORRUPTED_DEEPSLATE_TIN_ORE.BLOCK, ModBlocks.DEEPSLATE_TIN_ORE.BLOCK);
+        corruptionSpreadBlocks.put(ModBlocks.CORRUPTED_DEEPSLATE_SILVER_ORE.BLOCK, ModBlocks.DEEPSLATE_SILVER_ORE.BLOCK);
+        corruptionSpreadBlocks.put(ModBlocks.CORRUPTED_DEEPSLATE_TUNGSTEN_ORE.BLOCK, ModBlocks.DEEPSLATE_TUNGSTEN_ORE.BLOCK);
+        corruptionSpreadBlocks.put(ModBlocks.CORRUPTED_DEEPSLATE_GOLD_ORE.BLOCK, Blocks.DEEPSLATE_GOLD_ORE);
+        corruptionSpreadBlocks.put(ModBlocks.CORRUPTED_DEEPSLATE_PLATINUM_ORE.BLOCK, ModBlocks.DEEPSLATE_PLATINUM_ORE.BLOCK);
+        corruptionSpreadBlocks.put(ModBlocks.CORRUPTED_DEEPSLATE_LAPIS_ORE.BLOCK, Blocks.DEEPSLATE_LAPIS_ORE);
+        corruptionSpreadBlocks.put(ModBlocks.CORRUPTED_DEEPSLATE_REDSTONE_ORE.BLOCK, Blocks.DEEPSLATE_REDSTONE_ORE);
+        corruptionSpreadBlocks.put(ModBlocks.CORRUPTED_DEEPSLATE_DIAMOND_ORE.BLOCK, Blocks.DEEPSLATE_DIAMOND_ORE);
+        corruptionSpreadBlocks.put(ModBlocks.CORRUPTED_DEEPSLATE_EMERALD_ORE.BLOCK, Blocks.DEEPSLATE_EMERALD_ORE);
+        corruptionSpreadBlocks.put(ModBlocks.CORRUPTED_DEEPSLATE_DEMONITE_ORE.BLOCK, ModBlocks.DEEPSLATE_DEMONITE_ORE.BLOCK);
+        corruptionSpreadBlocks.put(ModBlocks.CORRUPTED_SNOW.BLOCK, Blocks.SNOW_BLOCK);
+        corruptionSpreadBlocks.put(ModBlocks.CORRUPTED_ICE.BLOCK, Blocks.ICE);
+        corruptionSpreadBlocks.put(ModBlocks.CORRUPTED_PACKED_ICE.BLOCK, Blocks.PACKED_ICE);
+        corruptionSpreadBlocks.put(ModBlocks.CORRUPTED_BLUE_ICE.BLOCK, Blocks.BLUE_ICE);
+
+        // Crimson
+        crimsonSpreadBlocks.put(ModBlocks.CRIMSON_GRASS.BLOCK, Blocks.GRASS_BLOCK);
+        crimsonSpreadBlocks.put(ModBlocks.CRIMSON_SNOW_LAYER.BLOCK, Blocks.SNOW);
+        crimsonSpreadBlocks.put(ModBlocks.CRIMSON_GRAVEL.BLOCK, Blocks.GRAVEL);
+        crimsonSpreadBlocks.put(ModBlocks.CRIMSON_SAND.BLOCK, Blocks.SAND);
+        crimsonSpreadBlocks.put(ModBlocks.CRIMSON_GLASS.BLOCK, Blocks.GLASS);
+        crimsonSpreadBlocks.put(ModBlocks.CRIMSON_SANDSTONE.BLOCK, Blocks.SANDSTONE);
+        crimsonSpreadBlocks.put(ModBlocks.CRIMSON_ANDESITE.BLOCK, Blocks.ANDESITE);
+        crimsonSpreadBlocks.put(ModBlocks.CRIMSON_DIORITE.BLOCK, Blocks.DIORITE);
+        crimsonSpreadBlocks.put(ModBlocks.CRIMSON_GRANITE.BLOCK, Blocks.GRANITE);
+        crimsonSpreadBlocks.put(ModBlocks.CRIMSON_STONE.BLOCK, Blocks.STONE);
+        crimsonSpreadBlocks.put(ModBlocks.CRIMSON_DEEPSLATE.BLOCK, Blocks.DEEPSLATE);
+        crimsonSpreadBlocks.put(ModBlocks.CRIMSON_COBBLESTONE.BLOCK, Blocks.COBBLESTONE);
+        crimsonSpreadBlocks.put(ModBlocks.CRIMSON_COBBLED_DEEPSLATE.BLOCK, Blocks.COBBLED_DEEPSLATE);
+        crimsonSpreadBlocks.put(ModBlocks.CRIMSON_COAL_ORE.BLOCK, Blocks.COAL_ORE);
+        crimsonSpreadBlocks.put(ModBlocks.CRIMSON_IRON_ORE.BLOCK, Blocks.IRON_ORE);
+        crimsonSpreadBlocks.put(ModBlocks.CRIMSON_LEAD_ORE.BLOCK, ModBlocks.LEAD_ORE.BLOCK);
+        crimsonSpreadBlocks.put(ModBlocks.CRIMSON_COPPER_ORE.BLOCK, Blocks.COPPER_ORE);
+        crimsonSpreadBlocks.put(ModBlocks.CRIMSON_TIN_ORE.BLOCK, ModBlocks.TIN_ORE.BLOCK);
+        crimsonSpreadBlocks.put(ModBlocks.CRIMSON_SILVER_ORE.BLOCK, ModBlocks.SILVER_ORE.BLOCK);
+        crimsonSpreadBlocks.put(ModBlocks.CRIMSON_TUNGSTEN_ORE.BLOCK, ModBlocks.TUNGSTEN_ORE.BLOCK);
+        crimsonSpreadBlocks.put(ModBlocks.CRIMSON_GOLD_ORE.BLOCK, Blocks.GOLD_ORE);
+        crimsonSpreadBlocks.put(ModBlocks.CRIMSON_PLATINUM_ORE.BLOCK, ModBlocks.PLATINUM_ORE.BLOCK);
+        crimsonSpreadBlocks.put(ModBlocks.CRIMSON_LAPIS_ORE.BLOCK, Blocks.LAPIS_ORE);
+        crimsonSpreadBlocks.put(ModBlocks.CRIMSON_REDSTONE_ORE.BLOCK, Blocks.REDSTONE_ORE);
+        crimsonSpreadBlocks.put(ModBlocks.CRIMSON_DIAMOND_ORE.BLOCK, Blocks.DIAMOND_ORE);
+        crimsonSpreadBlocks.put(ModBlocks.CRIMSON_EMERALD_ORE.BLOCK, Blocks.EMERALD_ORE);
+        crimsonSpreadBlocks.put(ModBlocks.CRIMSON_CRIMTANE_ORE.BLOCK, ModBlocks.CRIMTANE_ORE.BLOCK);
+        crimsonSpreadBlocks.put(ModBlocks.CRIMSON_DEEPSLATE_COAL_ORE.BLOCK, Blocks.DEEPSLATE_COAL_ORE);
+        crimsonSpreadBlocks.put(ModBlocks.CRIMSON_DEEPSLATE_IRON_ORE.BLOCK, Blocks.DEEPSLATE_IRON_ORE);
+        crimsonSpreadBlocks.put(ModBlocks.CRIMSON_DEEPSLATE_LEAD_ORE.BLOCK, ModBlocks.DEEPSLATE_LEAD_ORE.BLOCK);
+        crimsonSpreadBlocks.put(ModBlocks.CRIMSON_DEEPSLATE_COPPER_ORE.BLOCK, Blocks.DEEPSLATE_COPPER_ORE);
+        crimsonSpreadBlocks.put(ModBlocks.CRIMSON_DEEPSLATE_TIN_ORE.BLOCK, ModBlocks.DEEPSLATE_TIN_ORE.BLOCK);
+        crimsonSpreadBlocks.put(ModBlocks.CRIMSON_DEEPSLATE_SILVER_ORE.BLOCK, ModBlocks.DEEPSLATE_SILVER_ORE.BLOCK);
+        crimsonSpreadBlocks.put(ModBlocks.CRIMSON_DEEPSLATE_TUNGSTEN_ORE.BLOCK, ModBlocks.DEEPSLATE_TUNGSTEN_ORE.BLOCK);
+        crimsonSpreadBlocks.put(ModBlocks.CRIMSON_DEEPSLATE_GOLD_ORE.BLOCK, Blocks.DEEPSLATE_GOLD_ORE);
+        crimsonSpreadBlocks.put(ModBlocks.CRIMSON_DEEPSLATE_PLATINUM_ORE.BLOCK, ModBlocks.DEEPSLATE_PLATINUM_ORE.BLOCK);
+        crimsonSpreadBlocks.put(ModBlocks.CRIMSON_DEEPSLATE_LAPIS_ORE.BLOCK, Blocks.DEEPSLATE_LAPIS_ORE);
+        crimsonSpreadBlocks.put(ModBlocks.CRIMSON_DEEPSLATE_REDSTONE_ORE.BLOCK, Blocks.DEEPSLATE_REDSTONE_ORE);
+        crimsonSpreadBlocks.put(ModBlocks.CRIMSON_DEEPSLATE_DIAMOND_ORE.BLOCK, Blocks.DEEPSLATE_DIAMOND_ORE);
+        crimsonSpreadBlocks.put(ModBlocks.CRIMSON_DEEPSLATE_EMERALD_ORE.BLOCK, Blocks.DEEPSLATE_EMERALD_ORE);
+        crimsonSpreadBlocks.put(ModBlocks.CRIMSON_DEEPSLATE_CRIMTANE_ORE.BLOCK, ModBlocks.DEEPSLATE_CRIMTANE_ORE.BLOCK);
+        crimsonSpreadBlocks.put(ModBlocks.CRIMSON_SNOW.BLOCK, Blocks.SNOW_BLOCK);
+        crimsonSpreadBlocks.put(ModBlocks.CRIMSON_ICE.BLOCK, Blocks.ICE);
+        crimsonSpreadBlocks.put(ModBlocks.CRIMSON_PACKED_ICE.BLOCK, Blocks.PACKED_ICE);
+        crimsonSpreadBlocks.put(ModBlocks.CRIMSON_BLUE_ICE.BLOCK, Blocks.BLUE_ICE);
     }
 }

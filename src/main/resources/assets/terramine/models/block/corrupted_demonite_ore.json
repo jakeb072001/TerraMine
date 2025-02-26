@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/cube_all",
   "textures": {
-    "all": "terramine:block/metals/ores/crimtane_ore"
+    "all": "terramine:block/corruption/corrupt_demonite_ore"
   }
 }

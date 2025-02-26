@@ -60,6 +60,7 @@ public class ModItemGroups {
         ItemGroupEvents.modifyEntriesEvent(createKey("terramine_equipment")).register(id("first_phase"), entries -> {
             entries.accept(ModItems.UMBRELLA);
             entries.accept(ModItems.MAGIC_MIRROR);
+            entries.accept(ModItems.CLENTAMINATOR);
             for (Item item : ModItems.TOOLS) {
                 entries.accept(item);
             }

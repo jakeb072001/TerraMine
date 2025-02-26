@@ -6,8 +6,9 @@
   },
   "item.magic_mirror.use": {
     "sounds": [
-      "terramine:magicmirroruse"
-    ]
+      "terramine:items/magicmirroruse"
+    ],
+    "subtitle": "terramine.subtitles.item.magic_mirror.use"
   },
   "generic.bomb": {
     "sounds": [
@@ -42,17 +43,20 @@
   "item.magicmissile.use": {
     "sounds": [
       "terramine:mana/missile/magicshoot"
-    ]
+    ],
+    "subtitle": "terramine.subtitles.item.magic_missile.use"
   },
   "item.flamelash.use": {
     "sounds": [
       "terramine:mana/missile/flameshoot"
-    ]
+    ],
+    "subtitle": "terramine.subtitles.item.flamelash.use"
   },
   "item.rainbowrod.use": {
     "sounds": [
       "terramine:mana/missile/rainbowshoot"
-    ]
+    ],
+    "subtitle": "terramine.subtitles.item.rainbow_rod.use"
   },
   "item.spacegun.use": {
     "sounds": [
@@ -70,27 +74,36 @@
   "item.mana_crystal.use": {
     "sounds": [
       "terramine:mana/crystaluse"
-    ]
+    ],
+    "subtitle": "terramine.subtitles.item.mana_crystal.use"
   },
   "item.phaseblade.swing": {
     "sounds": [
       "terramine:items/phasebladeswing"
     ]
   },
+  "item.clentaminator.use": {
+    "sounds": [
+      "terramine:items/clentaminatoruse"
+    ]
+  },
   "mana.full": {
     "sounds": [
       "terramine:mana/full"
-    ]
+    ],
+    "subtitle": "terramine.subtitles.mana.full"
   },
   "fallingstar.fall": {
     "sounds": [
       "terramine:fallingstar/starfall"
-    ]
+    ],
+    "subtitle": "terramine.subtitles.fallingstar.fall"
   },
   "fallingstar.crash": {
     "sounds": [
       "terramine:fallingstar/starcrash"
-    ]
+    ],
+    "subtitle": "terramine.subtitles.fallingstar.crash"
   },
   "entity.mimic.close": {
     "sounds": [

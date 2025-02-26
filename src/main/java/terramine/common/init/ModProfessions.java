@@ -26,19 +26,20 @@ public class ModProfessions {
         // GOBLIN_TINKERER TRADES
         TradeOfferHelper.registerVillagerOffers(GOBLIN_TINKERER, 1, factories -> factories.addAll(List.of(
                 new VillagerTrades.ItemsForEmeralds(ModItems.ROCKET_BOOTS, 10, 1, 1, 10),
-                new VillagerTrades.EmeraldForItems(Items.DISPENSER, 5, 15, 2)
+                new VillagerTrades.EmeraldForItems(Items.OBSERVER, 10, 15, 15)
         )));
         TradeOfferHelper.registerVillagerOffers(GOBLIN_TINKERER, 2, factories -> factories.addAll(List.of(
                 new VillagerTrades.ItemsForEmeralds(ModItems.STOPWATCH, 5, 1, 1, 10),
-                new VillagerTrades.EmeraldForItems(Items.STICKY_PISTON, 7, 20, 4)
+                new VillagerTrades.ItemsForEmeralds(ModItems.WEATHER_RADIO, 7, 1, 1, 15)
         )));
         TradeOfferHelper.registerVillagerOffers(GOBLIN_TINKERER, 3, factories -> factories.addAll(List.of(
-                new VillagerTrades.ItemsForEmeralds(ModItems.WEATHER_RADIO, 7, 1, 1, 15),
-                new VillagerTrades.ItemsForEmeralds(ModItems.SEXTANT, 10, 1, 1, 15)
+                new VillagerTrades.ItemsForEmeralds(ModItems.SEXTANT, 10, 1, 1, 15),
+                new VillagerTrades.ItemsForEmeralds(ModItems.EXTENDO_GRIP, 20, 1, 1, 15)
+
         )));
         TradeOfferHelper.registerVillagerOffers(GOBLIN_TINKERER, 4, factories -> factories.addAll(List.of(
-                new VillagerTrades.EmeraldForItems(Items.OBSERVER, 10, 15, 15),
-                new VillagerTrades.ItemsForEmeralds(ModItems.EXTENDO_GRIP, 20, 1, 1, 15)
+                new VillagerTrades.ItemsForEmeralds(ModItems.GREEN_SOLUTION, 10, 10, 6, 0),
+                new VillagerTrades.ItemsForEmeralds(ModItems.CLENTAMINATOR, 50, 1, 1, 30)
         )));
         TradeOfferHelper.registerVillagerOffers(GOBLIN_TINKERER, 5, factories -> factories.addAll(List.of(
                 new VillagerTrades.ItemsForEmeralds(ModItems.TOOLBELT, 20, 1, 1, 30),

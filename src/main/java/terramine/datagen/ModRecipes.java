@@ -219,9 +219,9 @@ public class ModRecipes extends FabricRecipeProvider {
                 createSmeltingBlasting(ModBlocks.TUNGSTEN_BLOCK.getItem(), 6F, 900, ModBlocks.RAW_TUNGSTEN_BLOCK.getItem());
                 createSmeltingBlasting(ModItems.PLATINUM_INGOT, ModItems.RAW_PLATINUM, ModBlocks.PLATINUM_ORE.getItem(), ModBlocks.DEEPSLATE_PLATINUM_ORE.getItem(), ModBlocks.CORRUPTED_PLATINUM_ORE.getItem(), ModBlocks.CORRUPTED_DEEPSLATE_PLATINUM_ORE.getItem(), ModBlocks.CRIMSON_PLATINUM_ORE.getItem(), ModBlocks.CRIMSON_DEEPSLATE_PLATINUM_ORE.getItem());
                 createSmeltingBlasting(ModBlocks.PLATINUM_BLOCK.getItem(), 6F, 900, ModBlocks.RAW_PLATINUM_BLOCK.getItem());
-                createSmeltingBlasting(ModItems.DEMONITE_INGOT, ModItems.RAW_DEMONITE, ModBlocks.DEMONITE_ORE.getItem(), ModBlocks.DEEPSLATE_DEMONITE_ORE.getItem());
+                createSmeltingBlasting(ModItems.DEMONITE_INGOT, ModItems.RAW_DEMONITE, ModBlocks.DEMONITE_ORE.getItem(), ModBlocks.DEEPSLATE_DEMONITE_ORE.getItem(), ModBlocks.CORRUPTED_DEMONITE_ORE.getItem(), ModBlocks.CORRUPTED_DEEPSLATE_DEMONITE_ORE.getItem());
                 createSmeltingBlasting(ModBlocks.DEMONITE_BLOCK.getItem(), 6F, 900, ModBlocks.RAW_DEMONITE_BLOCK.getItem());
-                createSmeltingBlasting(ModItems.CRIMTANE_INGOT, ModItems.RAW_CRIMTANE, ModBlocks.CRIMTANE_ORE.getItem(), ModBlocks.DEEPSLATE_CRIMTANE_ORE.getItem());
+                createSmeltingBlasting(ModItems.CRIMTANE_INGOT, ModItems.RAW_CRIMTANE, ModBlocks.CRIMTANE_ORE.getItem(), ModBlocks.DEEPSLATE_CRIMTANE_ORE.getItem(), ModBlocks.CRIMSON_CRIMTANE_ORE.getItem(), ModBlocks.CRIMSON_DEEPSLATE_CRIMTANE_ORE.getItem());
                 createSmeltingBlasting(ModBlocks.CRIMTANE_BLOCK.getItem(), 6F, 900, ModBlocks.RAW_CRIMTANE_BLOCK.getItem());
                 createSmeltingBlasting(ModItems.METEORITE_INGOT, ModItems.RAW_METEORITE, ModBlocks.METEORITE_ORE.getItem());
                 createSmeltingBlasting(ModBlocks.METEORITE_BLOCK.getItem(), 6F, 900, ModBlocks.RAW_METEORITE_BLOCK.getItem());

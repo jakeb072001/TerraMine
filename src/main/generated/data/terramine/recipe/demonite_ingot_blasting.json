@@ -6,7 +6,9 @@
   "ingredient": [
     "terramine:raw_demonite",
     "terramine:demonite_ore",
-    "terramine:deepslate_demonite_ore"
+    "terramine:deepslate_demonite_ore",
+    "terramine:corrupted_demonite_ore",
+    "terramine:corrupted_deepslate_demonite_ore"
   ],
   "result": {
     "id": "terramine:demonite_ingot"

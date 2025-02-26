@@ -24,10 +24,7 @@ import terramine.common.item.armor.*;
 import terramine.common.item.armor.vanity.FamiliarVanity;
 import terramine.common.item.armor.vanity.TopHatVanity;
 import terramine.common.item.dye.BasicDye;
-import terramine.common.item.equipment.CellPhoneItem;
-import terramine.common.item.equipment.MagicMirrorItem;
-import terramine.common.item.equipment.TerrariaToolMaterials;
-import terramine.common.item.equipment.UmbrellaItem;
+import terramine.common.item.equipment.*;
 import terramine.common.item.equipment.swords.CustomSoundSwordItem;
 import terramine.common.item.equipment.swords.VolcanoSwordItem;
 import terramine.common.item.equipment.tools.MoltenPickaxeItem;
@@ -82,6 +79,8 @@ public class ModItems {
 	public static final Item COBALT_SHIELD = registerShield("cobalt_shield", key -> new ShieldAccessoryLikeItem(new Item.Properties().setId(key).repairable(Items.DIAMOND).durability(2500).fireResistant().rarity(Rarity.RARE)));
 	public static final Item OBSIDIAN_SHIELD = registerShield("obsidian_shield", key -> new ShieldAccessoryLikeItem(new Item.Properties().setId(key).repairable(Items.OBSIDIAN).durability(2500).fireResistant().rarity(Rarity.RARE)));
 	public static final Item SHIELD_OF_CTHULHU = registerShield("shield_of_cthulhu", key -> new ShieldOfCthulhuItem(new Item.Properties().setId(key).repairable(Items.ROTTEN_FLESH).durability(2500).fireResistant().rarity(Rarity.RARE)));
+	public static final Item CLENTAMINATOR = register("clentaminator", ClentaminatorItem::new);
+	public static final Item GREEN_SOLUTION = registerMisc("green_solution", key -> new CraftingItem(new Item.Properties().setId(key), true));
 
 	// todo: add many more dyes, need to create a model/item for each one but its just copy paste
 	// todo: also add some custom shader dyes, need to add a system to render the dyes first though

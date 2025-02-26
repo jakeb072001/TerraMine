@@ -1,6 +1,26 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
+    "has_corrupted_deepslate_demonite_ore": {
+      "conditions": {
+        "items": [
+          {
+            "items": "terramine:corrupted_deepslate_demonite_ore"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_corrupted_demonite_ore": {
+      "conditions": {
+        "items": [
+          {
+            "items": "terramine:corrupted_demonite_ore"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
     "has_deepslate_demonite_ore": {
       "conditions": {
         "items": [
@@ -43,7 +63,9 @@
       "has_the_recipe",
       "has_raw_demonite",
       "has_demonite_ore",
-      "has_deepslate_demonite_ore"
+      "has_deepslate_demonite_ore",
+      "has_corrupted_demonite_ore",
+      "has_corrupted_deepslate_demonite_ore"
     ]
   ],
   "rewards": {

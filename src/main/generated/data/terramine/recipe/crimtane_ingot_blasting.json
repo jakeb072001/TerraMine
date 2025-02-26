@@ -6,7 +6,9 @@
   "ingredient": [
     "terramine:raw_crimtane",
     "terramine:crimtane_ore",
-    "terramine:deepslate_crimtane_ore"
+    "terramine:deepslate_crimtane_ore",
+    "terramine:crimson_crimtane_ore",
+    "terramine:crimson_deepslate_crimtane_ore"
   ],
   "result": {
     "id": "terramine:crimtane_ingot"

@@ -44,12 +44,12 @@ public class DemonHeartItem extends TerrariaItemConfigurable {
     }
 
     @Override
-    public @NotNull ItemUseAnimation getUseAnimation(@NotNull ItemStack stack) {
+    public @NotNull ItemUseAnimation getUseAnimation(ItemStack stack) {
         return ItemUseAnimation.BOW;
     }
 
     @Override
-    public InteractionResult use(@NotNull Level world, Player user, @NotNull InteractionHand hand) {
+    public @NotNull InteractionResult use(Level world, Player user, InteractionHand hand) {
         user.startUsingItem(hand);
         return InteractionResult.CONSUME;
     }

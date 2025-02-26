@@ -47,6 +47,7 @@ import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.BiomeManager;
+import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.block.entity.BannerPatternLayers;
 import net.minecraft.world.level.chunk.ChunkAccess;
 import net.minecraft.world.level.chunk.ImposterProtoChunk;
@@ -60,6 +61,7 @@ import terramine.TerraMine;
 import terramine.common.network.ServerPacketHandler;
 import terramine.common.network.types.IntBoolUUIDNetworkType;
 import terramine.common.network.types.ItemNetworkType;
+import terramine.datagen.ModBiomes;
 
 import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
@@ -143,6 +145,19 @@ public class Utilities { // todo: need to fix bug with magic missile where the p
         return  coneAxis.scale(Math.cos(theta)).add(u.scale(Math.cos(phi) * Math.sin(theta))).add(v.scale(Math.sin(phi) * Math.sin(theta)));
     }
 
+    public static void cleanBiome(ServerLevel level, BlockPos blockPos) {
+        ResourceKey<Biome> biome = level.getNoiseBiome(blockPos.getX(), blockPos.getY(), blockPos.getZ()).unwrapKey().orElseThrow();
+        if (biome.equals(ModBiomes.CRIMSON) || biome.equals(ModBiomes.CORRUPTION)) {
+            biome = Biomes.PLAINS;
+        }
+        if (biome.equals(ModBiomes.CRIMSON_DESERT) || biome.equals(ModBiomes.CORRUPTION_DESERT)) {
+            biome = Biomes.DESERT;
+        }
+
+        setBiome(level, blockPos, biome);
+    }
+
+    // todo: doesn't update live visually, grass blocks for example will still be tinted as the old biome (sometimes it does update though, it's a little inconsistent, maybe blocks need update? or maybe updateChunkAfterBiomeChange packet isn't working right)
     // Change biomes
     // Copied from EvilCraft, may improve later if possible
     public static void setBiome(ServerLevel level, BlockPos posIn, ResourceKey<Biome> biome) {

@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Shield of Cthulhu and Worm Scarf //-- Not yet started
 - New ores, armours, and tools
 - Shimmer Fluid (including all functionality, visuals will be improved later)
+- Clentaminator and Green Solution (can for now be obtained by the Goblin Tinkerer Villager at level 4, will change once NPCs are added)
 
 ### Changed
 - Adjusted size of Demonite and Crimtane ore spawns (killing bosses will be the best way to get this material)

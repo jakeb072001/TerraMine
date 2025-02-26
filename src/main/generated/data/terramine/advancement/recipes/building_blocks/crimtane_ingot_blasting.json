@@ -1,6 +1,26 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
+    "has_crimson_crimtane_ore": {
+      "conditions": {
+        "items": [
+          {
+            "items": "terramine:crimson_crimtane_ore"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_crimson_deepslate_crimtane_ore": {
+      "conditions": {
+        "items": [
+          {
+            "items": "terramine:crimson_deepslate_crimtane_ore"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
     "has_crimtane_ore": {
       "conditions": {
         "items": [
@@ -43,7 +63,9 @@
       "has_the_recipe",
       "has_raw_crimtane",
       "has_crimtane_ore",
-      "has_deepslate_crimtane_ore"
+      "has_deepslate_crimtane_ore",
+      "has_crimson_crimtane_ore",
+      "has_crimson_deepslate_crimtane_ore"
     ]
   ],
   "rewards": {

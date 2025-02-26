@@ -36,6 +36,7 @@ public class ModSoundEvents {
 	public static final SoundEvent MAGIC_MIRROR_USE = register("item.magic_mirror.use");
 	public static final SoundEvent MANA_CRYSTAL_USE = register("item.mana_crystal.use");
 	public static final SoundEvent PHASEBLADE_SWING = register("item.phaseblade.swing");
+	public static final SoundEvent CLENTAMINATOR_USE = register("item.clentaminator.use");
 
 	// Music
 	public static final SoundEvent BOSS_MUSIC_1 = register("entity.boss.music.boss_music_1");

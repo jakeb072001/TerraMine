@@ -96,12 +96,21 @@
       },
       {
         "type": "numismatic-overhaul:sell_stack",
-        "price": 50000,
+        "price": 100000,
         "sell": {
-          "item": "terramine:toolbox",
+          "item": "terramine:clentaminator",
           "count": 1
         },
         "max_uses": 1
+      },
+      {
+        "type": "numismatic-overhaul:sell_stack",
+        "price": 25000,
+        "sell": {
+          "item": "terramine:green_solution",
+          "count": 10
+        },
+        "max_uses": 6
       }
     ]
   }
