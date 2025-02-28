@@ -2,8 +2,8 @@
 	"credit": "Made with Blockbench",
 	"texture_size": [128, 128],
 	"textures": {
-		"0": "terramine:block/chests/player/safe/safe",
-		"particle": "terramine:block/chests/player/safe/safe_break"
+		"0": "terramine:block/safe",
+		"particle": "terramine:block/safe_break"
 	},
 	"elements": [
 		{

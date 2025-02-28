@@ -21,7 +21,7 @@ public class GoldChestBlock extends BaseChest {
 
     @Override
     public ResourceLocation getTexture() {
-        return TerraMine.id("block/chests/gold/gold_chest");
+        return TerraMine.id("block/gold_chest");
     }
 
     @Override

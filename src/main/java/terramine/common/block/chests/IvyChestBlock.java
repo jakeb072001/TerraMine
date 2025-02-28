@@ -21,7 +21,7 @@ public class IvyChestBlock extends BaseChest {
 
     @Override
     public ResourceLocation getTexture() {
-        return TerraMine.id("block/chests/ivy/ivy_chest");
+        return TerraMine.id("block/ivy_chest");
     }
 
     @Override

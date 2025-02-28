@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "terramine:block/crimson_snow_height2"
+    "model": "terramine:block/crimson_snow_layer_height2"
   }
 }

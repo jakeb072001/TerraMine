@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "down": "minecraft:block/oak_planks",
+    "east": "terramine:block/tinkerer_workshop_side",
+    "north": "terramine:block/tinkerer_workshop_front",
+    "particle": "terramine:block/tinkerer_workshop_front",
+    "south": "terramine:block/tinkerer_workshop_side",
+    "up": "terramine:block/tinkerer_workshop_top",
+    "west": "terramine:block/tinkerer_workshop_front"
+  }
+}

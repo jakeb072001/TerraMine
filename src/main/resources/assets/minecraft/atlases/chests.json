@@ -2,8 +2,8 @@
     "sources": [
         {
             "type": "directory",
-            "source": "block/chests",
-            "prefix": "block/chests/"
+            "source": "block",
+            "prefix": "block/"
         }
     ]
 }

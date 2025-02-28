@@ -21,7 +21,7 @@ public class FrozenChestBlock extends BaseChest {
 
     @Override
     public ResourceLocation getTexture() {
-        return TerraMine.id("block/chests/frozen/frozen_chest");
+        return TerraMine.id("block/frozen_chest");
     }
 
     @Override

@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:block/cube_all",
-  "textures": {
-    "all": "terramine:block/corruption/corrupt_platinum_ore"
-  }
-}

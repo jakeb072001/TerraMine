@@ -1,0 +1,24 @@
+{
+  "variants": {
+    "snowy=false": [
+      {
+        "model": "terramine:block/crimson_grass"
+      },
+      {
+        "model": "terramine:block/crimson_grass",
+        "y": 90
+      },
+      {
+        "model": "terramine:block/crimson_grass",
+        "y": 180
+      },
+      {
+        "model": "terramine:block/crimson_grass",
+        "y": 270
+      }
+    ],
+    "snowy=true": {
+      "model": "terramine:block/crimson_grass_snow"
+    }
+  }
+}

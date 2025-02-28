@@ -16,7 +16,7 @@ public class TerraMineDataGenerator implements DataGeneratorEntrypoint {
         pack.addProvider(ModTags::new); // todo: have a better way of doing tags (also do the rest of the tags), like have a list of accessories created in ModItems when their registered and use a for loop to add them to the accessories tag
         pack.addProvider(ModAdvancements::new); // todo: make helper methods so its a bit cleaner and easier to work with
         pack.addProvider(ModRecipes::new);
-        pack.addProvider(ModItemsBlocksModels::new); // todo: make, just in general, like tags have Lists for grouping similar item model types
+        pack.addProvider(ModItemsBlocksModels::new);
         pack.addProvider(TerraMineRegistryProvider::new);
         pack.addProvider(TerraMineRegistryProviderRun::new);
     }

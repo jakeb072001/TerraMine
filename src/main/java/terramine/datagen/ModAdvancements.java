@@ -33,7 +33,7 @@ public class ModAdvancements extends FabricAdvancementProvider {
                         ModItems.HERMES_BOOTS, // The display icon
                         Component.translatable("terramine.advancements.root.title"), // The title
                         Component.translatable("terramine.advancements.root.description"), // The description
-                        id("textures/block/corruption/corrupt_stone.png"), // Background image used
+                        id("textures/block/corrupt_stone.png"), // Background image used
                         AdvancementType.TASK, // Options: TASK, CHALLENGE, GOAL
                         false, // Show toast top right
                         false, // Announce to chat

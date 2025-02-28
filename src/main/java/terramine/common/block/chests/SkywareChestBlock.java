@@ -21,7 +21,7 @@ public class SkywareChestBlock extends BaseChest {
 
     @Override
     public ResourceLocation getTexture() {
-        return TerraMine.id("block/chests/skyware/skyware_chest");
+        return TerraMine.id("block/skyware_chest");
     }
 
     @Override

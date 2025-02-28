@@ -42,7 +42,7 @@ public class SafeBlock extends BaseChest {
 
     @Override
     public ResourceLocation getTexture() {
-        return TerraMine.id("block/chests/player/safe/safe");
+        return TerraMine.id("block/safe");
     }
 
     @Override

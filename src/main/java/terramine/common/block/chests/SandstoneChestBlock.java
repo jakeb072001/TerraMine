@@ -21,7 +21,7 @@ public class SandstoneChestBlock extends BaseChest {
 
     @Override
     public ResourceLocation getTexture() {
-        return TerraMine.id("block/chests/sandstone/sandstone_chest");
+        return TerraMine.id("block/sandstone_chest");
     }
 
     @Override

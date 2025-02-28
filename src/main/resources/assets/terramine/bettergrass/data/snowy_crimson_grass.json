@@ -2,8 +2,8 @@
   "layers": [
     {
       "textures": {
-        "top": "terramine:block/crimson/crimson_snow",
-        "side": "terramine:block/crimson/crimson_grass_block_snow"
+        "top": "terramine:block/crimson_snow",
+        "side": "terramine:block/crimson_grass_snow"
       }
     },
     {

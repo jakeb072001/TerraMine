@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "bottom": "terramine:block/corrupted_sandstone_bottom",
+    "side": "terramine:block/corrupted_sandstone_side",
+    "top": "terramine:block/corrupted_sandstone_top"
+  }
+}

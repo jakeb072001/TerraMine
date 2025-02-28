@@ -21,7 +21,7 @@ public class WaterChestBlock extends BaseChest {
 
     @Override
     public ResourceLocation getTexture() {
-        return TerraMine.id("block/chests/water/water_chest");
+        return TerraMine.id("block/water_chest");
     }
 
     @Override

@@ -45,7 +45,7 @@ public class PiggyBankBlock extends BaseChest {
 
     @Override
     public ResourceLocation getTexture() {
-        return TerraMine.id("block/chests/player/piggy_bank/piggy_bank");
+        return TerraMine.id("block/piggy_bank");
     }
 
     @Override

@@ -12,6 +12,7 @@ import net.minecraft.world.level.block.ComposterBlock;
 import terramine.TerraMine;
 import terramine.common.init.ModBlocks;
 
+import java.util.List;
 import java.util.function.Function;
 
 public class BlockItemRegister {
@@ -19,25 +20,37 @@ public class BlockItemRegister {
     public final Item ITEM;
 
     public BlockItemRegister(String registerName, Function<ResourceKey<Block>, Block> blockFactory) {
-        this(registerName, blockFactory, true);
+        this(registerName, blockFactory, null, true);
     }
 
     public BlockItemRegister(String registerName, Function<ResourceKey<Block>, Block> blockFactory, boolean addToList) {
-        BLOCK = registerBlock(registerName, blockFactory, addToList);
+        this(registerName, blockFactory, null, addToList);
+    }
+
+    public BlockItemRegister(String registerName, Function<ResourceKey<Block>, Block> blockFactory, List<Block> list) {
+        this(registerName, blockFactory, list, true);
+    }
+
+    public BlockItemRegister(String registerName, Function<ResourceKey<Block>, Block> blockFactory, List<Block> list, boolean addToList) {
+        BLOCK = registerBlock(registerName, blockFactory, list);
         ITEM = registerItem(BLOCK, new Item.Properties(), addToList);
     }
 
     public BlockItemRegister(String registerName, Function<ResourceKey<Block>, Block> blockFactory, Item.Properties itemProperties) {
-        this(registerName, blockFactory, itemProperties, true);
+        this(registerName, blockFactory, itemProperties, null, true);
     }
 
-    public BlockItemRegister(String registerName, Function<ResourceKey<Block>, Block> blockFactory, Item.Properties itemProperties, boolean addToList) {
-        BLOCK = registerBlock(registerName, blockFactory, addToList);
+    public BlockItemRegister(String registerName, Function<ResourceKey<Block>, Block> blockFactory, List<Block> list, Item.Properties itemProperties) {
+        this(registerName, blockFactory, itemProperties, list, true);
+    }
+
+    public BlockItemRegister(String registerName, Function<ResourceKey<Block>, Block> blockFactory, Item.Properties itemProperties, List<Block> list, boolean addToList) {
+        BLOCK = registerBlock(registerName, blockFactory, list);
         ITEM = registerItem(BLOCK, itemProperties, addToList);
     }
 
     public BlockItemRegister(String registerName, Function<ResourceKey<Block>, Block> blockFactory, float compostable) {
-        BLOCK = registerBlock(registerName, blockFactory, false);
+        BLOCK = registerBlock(registerName, blockFactory, null);
         ITEM = registerPlant(BLOCK, compostable);
     }
 
@@ -49,12 +62,16 @@ public class BlockItemRegister {
         return ITEM;
     }
 
-    private static Block registerBlock(String name, Function<ResourceKey<Block>, Block> blockFactory, boolean addToList) {
+    private static Block registerBlock(String name, Function<ResourceKey<Block>, Block> blockFactory, List<Block> list) {
         ResourceLocation resourceLocation = TerraMine.id(name);
         ResourceKey<Block> key = ResourceKey.create(Registries.BLOCK, resourceLocation);
         Block block = blockFactory.apply(key);
+        Block registeredBlock = Registry.register(BuiltInRegistries.BLOCK, key, block);
+        if (list != null) {
+            list.add(registeredBlock);
+        }
 
-        return Registry.register(BuiltInRegistries.BLOCK, key, block);
+        return registeredBlock;
     }
 
     private static Item registerItem(Block block, Item.Properties properties, boolean addToList) {

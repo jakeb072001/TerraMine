@@ -2,8 +2,8 @@
   "layers": [
     {
       "textures": {
-        "top": "terramine:block/corruption/corrupt_snow",
-        "side": "terramine:block/corruption/corrupt_grass_block_snow"
+        "top": "terramine:block/corrupted_snow",
+        "side": "terramine:block/corrupted_grass_snow"
       }
     },
     {

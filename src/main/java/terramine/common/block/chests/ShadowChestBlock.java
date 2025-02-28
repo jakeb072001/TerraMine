@@ -21,7 +21,7 @@ public class ShadowChestBlock extends BaseChest {
 
     @Override
     public ResourceLocation getTexture() {
-        return TerraMine.id("block/chests/shadow/shadow_chest");
+        return TerraMine.id("block/shadow_chest");
     }
 
     @Override

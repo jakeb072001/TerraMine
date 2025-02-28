@@ -1,8 +1,8 @@
 {
 	"credit": "Made with Blockbench",
 	"textures": {
-		"0": "terramine:block/chests/player/piggy_bank/piggy_bank",
-		"particle": "terramine:block/chests/player/piggy_bank/piggy_bank_break"
+		"0": "terramine:block/piggy_bank",
+		"particle": "terramine:block/piggy_bank_break"
 	},
 	"elements": [
 		{

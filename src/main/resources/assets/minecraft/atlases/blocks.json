@@ -1,19 +1,19 @@
 {
     "sources": [
-		{
-            "type": "single",
-            "source": "entity",
-            "resource": "minecraft:entity/chest/normal"
-		},
-		{
-            "type": "single",
-            "source": "entity",
-            "resource": "terramine:entity/mimic"
-		},
-		{
-            "type": "directory",
-            "source": "gui/slots",
-            "prefix": "gui/slots/"
-        }
+      {
+        "type": "single",
+        "source": "entity",
+        "resource": "minecraft:entity/chest/normal"
+      },
+      {
+        "type": "single",
+        "source": "entity",
+        "resource": "terramine:entity/mimic"
+      },
+      {
+        "type": "directory",
+        "source": "gui/slots",
+        "prefix": "gui/slots/"
+      }
     ]
 }
