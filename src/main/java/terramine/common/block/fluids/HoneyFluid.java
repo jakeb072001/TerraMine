@@ -2,7 +2,10 @@ package terramine.common.block.fluids;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.particles.ParticleOptions;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.tags.FluidTags;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.LevelAccessor;
@@ -18,25 +21,30 @@ import terramine.common.init.ModBlocks;
 import terramine.common.init.ModFluids;
 import terramine.common.init.ModItems;
 
-public abstract class ShimmerFluid extends FlowingFluid {
+public abstract class HoneyFluid extends FlowingFluid {
     @Override
     public @NotNull Fluid getSource() {
-        return ModFluids.SHIMMER;
+    return ModFluids.HONEY;
     }
 
     @Override
     public @NotNull Fluid getFlowing() {
-        return ModFluids.FLOWING_SHIMMER;
+        return ModFluids.FLOWING_HONEY;
     }
 
     @Override
     public @NotNull Item getBucket() {
-        return ModItems.SHIMMER_BUCKET;
+        return ModItems.HONEY_BUCKET;
+    }
+
+    @Override
+    public ParticleOptions getDripParticle() {
+        return ParticleTypes.DRIPPING_HONEY;
     }
 
     @Override
     protected boolean canBeReplacedWith(FluidState fluidState, BlockGetter blockGetter, BlockPos blockPos, Fluid fluid, Direction direction) {
-        return false;
+        return fluidState.getHeight(blockGetter, blockPos) >= 0.44444445F && fluid.is(FluidTags.WATER);
     }
 
     @Override
@@ -44,7 +52,7 @@ public abstract class ShimmerFluid extends FlowingFluid {
 
     @Override
     protected int getSlopeFindDistance(LevelReader world) {
-        return 4;
+        return 2;
     }
 
     @Override
@@ -54,7 +62,7 @@ public abstract class ShimmerFluid extends FlowingFluid {
 
     @Override
     public int getTickDelay(LevelReader levelReader) {
-        return 5;
+        return 40;
     }
 
     @Override
@@ -64,15 +72,15 @@ public abstract class ShimmerFluid extends FlowingFluid {
 
     @Override
     protected @NotNull BlockState createLegacyBlock(FluidState fluidState) {
-        return ModBlocks.SHIMMER_FLUID.defaultBlockState().setValue(LiquidBlock.LEVEL, getLegacyLevel(fluidState));
+        return ModBlocks.HONEY_FLUID.defaultBlockState().setValue(LiquidBlock.LEVEL, getLegacyLevel(fluidState));
     }
 
     @Override
     public boolean isSame(Fluid fluid) {
-        return fluid == ModFluids.SHIMMER || fluid == ModFluids.FLOWING_SHIMMER;
+        return fluid == ModFluids.HONEY || fluid == ModFluids.FLOWING_HONEY;
     }
 
-    public static class Flowing extends ShimmerFluid {
+    public static class Flowing extends HoneyFluid {
         @Override
         protected boolean canConvertToSource(ServerLevel serverLevel) {
             return false;
@@ -92,7 +100,7 @@ public abstract class ShimmerFluid extends FlowingFluid {
         }
     }
 
-    public static class Source extends ShimmerFluid {
+    public static class Source extends HoneyFluid {
         @Override
         protected boolean canConvertToSource(ServerLevel serverLevel) {
             return false;

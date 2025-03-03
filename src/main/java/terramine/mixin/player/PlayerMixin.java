@@ -6,6 +6,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.SimpleContainer;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -27,6 +28,7 @@ import terramine.common.item.accessories.AccessoryTerrariaItem;
 import terramine.common.misc.TerrariaInventory;
 import terramine.common.network.ServerPacketHandler;
 import terramine.common.network.types.IntBoolUUIDNetworkType;
+import terramine.common.utility.dps.DPSManager;
 import terramine.extensions.ItemExtensions;
 import terramine.extensions.PlayerStorages;
 
@@ -88,7 +90,7 @@ public abstract class PlayerMixin extends LivingEntity implements PlayerStorages
 		BlockState above = player.level().getBlockState(pos.above());
 
 		if (!player.isCreative() && !player.isSpectator()) {
-			if (fluidState.is(ModFluids.STILL_SHIMMER) || fluidState.is(ModFluids.FLOWING_SHIMMER)) {
+			if (fluidState.is(ModFluids.SHIMMER) || fluidState.is(ModFluids.FLOWING_SHIMMER)) {
 				isPhasing = true;
 			}
 
@@ -96,8 +98,8 @@ public abstract class PlayerMixin extends LivingEntity implements PlayerStorages
 				player.noPhysics = true;
 				player.setPos(player.position().x, player.position().y - 0.10, player.position().z);
 
-				boolean isNonShimmerLiquid = fluidState.isSource() && !fluidState.is(ModFluids.STILL_SHIMMER);
-				boolean isAboveNonShimmerLiquid = aboveFluidState.isSource() && !aboveFluidState.is(ModFluids.STILL_SHIMMER);
+				boolean isNonShimmerLiquid = fluidState.isSource() && !fluidState.is(ModFluids.SHIMMER);
+				boolean isAboveNonShimmerLiquid = aboveFluidState.isSource() && !aboveFluidState.is(ModFluids.SHIMMER);
 
 				if ((atPlayer.isAir() && above.isAir()) || (isNonShimmerLiquid && isAboveNonShimmerLiquid)) {
 					isPhasing = false;
@@ -126,6 +128,14 @@ public abstract class PlayerMixin extends LivingEntity implements PlayerStorages
 		super.blockUsingShield(attacker);
 		if (((ItemExtensions) attacker.getMainHandItem().getItem()).canDisableShield(attacker.getMainHandItem(), this.getUseItem(), this, attacker)) {
 			(((Player) (Object)this)).disableShield(this.getUseItem());
+		}
+	}
+
+	@Inject(method = "attack", at = @At("HEAD"))
+	private void onAttack(Entity target, CallbackInfo ci) {
+		if (target instanceof LivingEntity livingTarget) {
+			float damage = livingTarget.getHealth() - Math.max(0, livingTarget.getHealth() - 5);
+			DPSManager.getTracker((Player) (Object) this).recordDamage(damage);
 		}
 	}
 

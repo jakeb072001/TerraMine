@@ -2,7 +2,6 @@ package terramine.datagen;
 
 import net.fabricmc.fabric.api.client.datagen.v1.provider.FabricModelProvider;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
-import net.minecraft.client.color.item.GrassColorSource;
 import net.minecraft.client.data.models.BlockModelGenerators;
 import net.minecraft.client.data.models.ItemModelGenerators;
 import net.minecraft.client.data.models.blockstates.*;
@@ -62,7 +61,10 @@ public class ModItemsBlocksModels extends FabricModelProvider {
         copyBlock(blockModelGenerators, Blocks.TNT, ModBlocks.INSTANT_TNT);
         blockModelGenerators.createCraftingTableLike(ModBlocks.TINKERER_TABLE.BLOCK, Blocks.OAK_PLANKS, TextureMapping::craftingTable);
         blockModelGenerators.registerSimpleItemModel(ModBlocks.TINKERER_TABLE.BLOCK, ModelLocationUtils.getModelLocation(ModBlocks.TINKERER_TABLE.BLOCK));
-        blockModelGenerators.createNonTemplateModelBlock(ModBlocks.SHIMMER_BLOCK);
+        blockModelGenerators.createNonTemplateModelBlock(ModBlocks.SHIMMER_FLUID);
+        blockModelGenerators.createNonTemplateModelBlock(ModBlocks.HONEY_FLUID);
+        blockModelGenerators.blockStateOutput.accept(createSimpleBlock(ModBlocks.SHIMMER_CAULDRON.BLOCK, ModelTemplates.CAULDRON_FULL.create(ModBlocks.SHIMMER_CAULDRON.BLOCK, TextureMapping.cauldron(id("block/fluids/shimmer_still")), blockModelGenerators.modelOutput)));
+        blockModelGenerators.blockStateOutput.accept(createSimpleBlock(ModBlocks.HONEY_CAULDRON.BLOCK, ModelTemplates.CAULDRON_FULL.create(ModBlocks.HONEY_CAULDRON.BLOCK, TextureMapping.cauldron(id("block/fluids/honey_still")), blockModelGenerators.modelOutput)));
 
         // Building
         for (Block block : ModBlocks.BUILDING_BLOCKS) {
@@ -232,6 +234,7 @@ public class ModItemsBlocksModels extends FabricModelProvider {
         }
         generateFlatItem(itemModelGenerators, ModItems.MAGIC_MIRROR, ModelTemplates.FLAT_ITEM, "misc");
         generateFlatItem(itemModelGenerators, ModItems.SHIMMER_BUCKET, ModelTemplates.FLAT_ITEM, "misc");
+        generateFlatItem(itemModelGenerators, ModItems.HONEY_BUCKET, ModelTemplates.FLAT_ITEM, "misc");
         generateFlatWithHeldModelItem(itemModelGenerators, ModItems.CLENTAMINATOR, "tools/clentaminator");
 
         // Custom Blocks

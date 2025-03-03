@@ -17,6 +17,10 @@ import net.minecraft.world.level.material.PushReaction;
 import terramine.TerraMine;
 import terramine.common.block.*;
 import terramine.common.block.chests.*;
+import terramine.common.block.evil.*;
+import terramine.common.block.fluids.HoneyCauldronBlock;
+import terramine.common.block.fluids.HoneyFluidBlock;
+import terramine.common.block.fluids.ShimmerCauldronBlock;
 import terramine.common.block.fluids.ShimmerFluidBlock;
 import terramine.common.block.plants.EvilMushroom;
 import terramine.common.utility.BlockItemRegister;
@@ -94,6 +98,8 @@ public class ModBlocks {
     public static final BlockItemRegister REDSTONE_DEEPSLATE = new BlockItemRegister("redstone_deepslate", key -> new RedStoneDeepslateBlock(Properties.ofFullCopy(Blocks.DEEPSLATE).setId(key).strength(3.0f, 1200.0f)));
     public static final BlockItemRegister INSTANT_TNT = new BlockItemRegister("instant_tnt", key -> new InstantTNTBlock(Properties.ofFullCopy(Blocks.TNT).setId(key)));
     public static final BlockItemRegister TINKERER_TABLE = new BlockItemRegister("tinkerer_workshop", key -> new Block(Properties.ofFullCopy(Blocks.CRAFTING_TABLE).setId(key)));
+    public static final BlockItemRegister SHIMMER_CAULDRON = new BlockItemRegister("shimmer_cauldron", key -> new ShimmerCauldronBlock(Properties.ofFullCopy(Blocks.CAULDRON).setId(key)), false);
+    public static final BlockItemRegister HONEY_CAULDRON = new BlockItemRegister("honey_cauldron", key -> new HoneyCauldronBlock(Properties.ofFullCopy(Blocks.CAULDRON).setId(key)), false);
 
     // Building
     public static final BlockItemRegister SUNPLATE_BLOCK = new BlockItemRegister("sunplate_block", key -> new Block(Properties.ofFullCopy(Blocks.GOLD_BLOCK).setId(key)), BUILDING_BLOCKS);
@@ -211,8 +217,10 @@ public class ModBlocks {
     public static final BlockItemRegister CRIMSON_PACKED_ICE = new BlockItemRegister("crimson_packed_ice", key -> new CrimsonBlock(Properties.ofFullCopy(Blocks.PACKED_ICE).setId(key).randomTicks()), CRIMSON_BLOCKS);
     public static final BlockItemRegister CRIMSON_BLUE_ICE = new BlockItemRegister("crimson_blue_ice", key -> new CrimsonBlock(Properties.ofFullCopy(Blocks.BLUE_ICE).setId(key).randomTicks()), CRIMSON_BLOCKS);
 
+    // todo: fluids need better textures, they also need custom physics and visual effects (such as not having water bubbles and water overlay when under the fluids)
     // Fluids
-    public static final Block SHIMMER_BLOCK = registerFluid("shimmer", (key) -> new ShimmerFluidBlock(ModFluids.STILL_SHIMMER, Properties.of().setId(key).mapColor(MapColor.COLOR_PURPLE).replaceable().noCollission().strength(100.0F).pushReaction(PushReaction.DESTROY).noLootTable().liquid().sound(SoundType.EMPTY)));
+    public static final Block SHIMMER_FLUID = registerFluid("shimmer", (key) -> new ShimmerFluidBlock(ModFluids.SHIMMER, Properties.of().setId(key).mapColor(MapColor.COLOR_PURPLE).replaceable().noCollission().strength(100.0F).pushReaction(PushReaction.DESTROY).noLootTable().liquid().sound(SoundType.EMPTY)));
+    public static final Block HONEY_FLUID = registerFluid("honey", (key) -> new HoneyFluidBlock(ModFluids.HONEY, Properties.of().setId(key).mapColor(MapColor.COLOR_ORANGE).replaceable().noCollission().strength(100.0F).pushReaction(PushReaction.DESTROY).noLootTable().liquid().sound(SoundType.HONEY_BLOCK)));
 
     private static boolean always(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos) {
         return true;

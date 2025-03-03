@@ -1,4 +1,4 @@
-package terramine.common.block;
+package terramine.common.block.evil;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
@@ -15,13 +15,13 @@ import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.configurations.RandomPatchConfiguration;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 import org.jetbrains.annotations.NotNull;
-import terramine.common.utility.CrimsonHelper;
+import terramine.common.utility.CorruptionHelper;
 
 import java.util.List;
 import java.util.Optional;
 
-public class CrimsonGrass extends CrimsonHelper implements BonemealableBlock {
-    public CrimsonGrass(Properties properties) {
+public class CorruptedGrass extends CorruptionHelper implements BonemealableBlock {
+    public CorruptedGrass(Properties properties) {
         super(properties);
     }
 

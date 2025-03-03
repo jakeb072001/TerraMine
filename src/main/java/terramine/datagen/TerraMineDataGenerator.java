@@ -8,6 +8,7 @@ import terramine.TerraMine;
 
 public class TerraMineDataGenerator implements DataGeneratorEntrypoint {
     // todo: https://wiki.fabricmc.net/tutorial:datagen_loot
+    // todo: create all the loot tables through datagen, setup blocks to auto create their block drops
 
     @Override
     public void onInitializeDataGenerator(FabricDataGenerator fabricDataGenerator) {

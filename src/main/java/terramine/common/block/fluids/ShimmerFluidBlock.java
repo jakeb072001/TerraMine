@@ -25,16 +25,20 @@ public class ShimmerFluidBlock extends LiquidBlock {
     }
 
     @Override
-    public void entityInside(BlockState state, Level world, BlockPos pos, Entity entity) {
+    public void entityInside(BlockState state, Level level, BlockPos pos, Entity entity) {
+        handleShimmer(level, pos, entity);
+    }
+
+    public static void handleShimmer(Level level, BlockPos pos, Entity entity) {
         if (entity instanceof Player player) {
             if (!player.isCreative() && !player.isSpectator()) {
                 player.setDeltaMovement(player.getDeltaMovement().multiply(1.0, 0.5, 1.0));
 
                 BlockPos below = pos.below();
-                BlockState currentState = world.getBlockState(pos);
-                BlockState belowState = world.getBlockState(below);
+                BlockState currentState = level.getBlockState(pos);
+                BlockState belowState = level.getBlockState(below);
 
-                if ((belowState.isAir() && currentState.isAir()) || below.getY() <= world.getMinY()) {
+                if ((belowState.isAir() && currentState.isAir()) || below.getY() <= level.getMinY()) {
                     player.setDeltaMovement(player.getDeltaMovement().multiply(1.0, 0.0, 1.0));
                 }
             }
@@ -47,20 +51,20 @@ public class ShimmerFluidBlock extends LiquidBlock {
                 Item convertedItem = ShimmerConversionRegistry.getConvertedItem(stack);
                 ItemStack newStack = new ItemStack(convertedItem, stack.getCount());
 
-                ShimmerItemEntity newItemEntity = new ShimmerItemEntity(ModEntities.SHIMMER_ITEM, world);
-                newItemEntity.setValues(world, itemEntity.getX(), itemEntity.getY(), itemEntity.getZ(), newStack);
+                ShimmerItemEntity newItemEntity = new ShimmerItemEntity(ModEntities.SHIMMER_ITEM, level);
+                newItemEntity.setValues(level, itemEntity.getX(), itemEntity.getY(), itemEntity.getZ(), newStack);
                 newItemEntity.setInvulnerable(true);
-                world.addFreshEntity(newItemEntity);
+                level.addFreshEntity(newItemEntity);
 
                 itemEntity.discard();
-            } else if (world instanceof ServerLevel serverLevel) {
+            } else if (level instanceof ServerLevel serverLevel) {
                 List<ItemStack> uncraftedItems = UncraftingHelper.uncraft(stack, serverLevel);
                 if (!uncraftedItems.isEmpty()) {
                     for (ItemStack uncrafted : uncraftedItems) {
-                        ShimmerItemEntity newItemEntity = new ShimmerItemEntity(ModEntities.SHIMMER_ITEM, world);
-                        newItemEntity.setValues(world, itemEntity.getX(), itemEntity.getY(), itemEntity.getZ(), uncrafted);
+                        ShimmerItemEntity newItemEntity = new ShimmerItemEntity(ModEntities.SHIMMER_ITEM, level);
+                        newItemEntity.setValues(level, itemEntity.getX(), itemEntity.getY(), itemEntity.getZ(), uncrafted);
                         newItemEntity.setInvulnerable(true);
-                        world.addFreshEntity(newItemEntity);
+                        level.addFreshEntity(newItemEntity);
                     }
                     itemEntity.discard();
                 }

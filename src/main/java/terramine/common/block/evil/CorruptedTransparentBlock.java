@@ -1,4 +1,4 @@
-package terramine.common.block;
+package terramine.common.block.evil;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;

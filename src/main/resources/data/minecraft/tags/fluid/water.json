@@ -2,6 +2,8 @@
   "replace": false,
   "values": [
     "terramine:shimmer",
-    "terramine:flowing_shimmer"
+    "terramine:flowing_shimmer",
+    "terramine:honey",
+    "terramine:flowing_honey"
   ]
 }

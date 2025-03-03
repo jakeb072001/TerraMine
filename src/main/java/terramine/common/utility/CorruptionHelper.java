@@ -14,14 +14,11 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.lighting.LightEngine;
 import org.jetbrains.annotations.NotNull;
 import terramine.TerraMine;
-import terramine.common.block.CorruptedSnowLayer;
+import terramine.common.block.evil.CorruptedSnowLayer;
 import terramine.common.init.ModBlocks;
 import terramine.common.init.ModCommands;
 import terramine.common.init.ModComponents;
 import terramine.datagen.ModBiomes;
-
-import java.util.HashMap;
-import java.util.Map;
 
 import static terramine.common.utility.Utilities.setBiome;
 import static terramine.common.utility.Utilities.updateChunkAfterBiomeChange;

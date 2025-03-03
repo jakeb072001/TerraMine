@@ -1,4 +1,4 @@
-package terramine.common.block;
+package terramine.common.block.evil;
 
 import terramine.common.utility.CorruptionHelper;
 

@@ -6,7 +6,7 @@
   },
   "display": {
     "announce_to_chat": false,
-    "background": "terramine:textures/block/corrupt_stone.png",
+    "background": "terramine:textures/block/corrupted_stone.png",
     "description": {
       "translate": "terramine.advancements.root.description"
     },

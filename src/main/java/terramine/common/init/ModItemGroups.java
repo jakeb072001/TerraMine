@@ -55,6 +55,7 @@ public class ModItemGroups {
 
         ItemGroupEvents.modifyEntriesEvent(CreativeModeTabs.TOOLS_AND_UTILITIES).register(entries -> {
             entries.accept(ModItems.SHIMMER_BUCKET);
+            entries.accept(ModItems.HONEY_BUCKET);
         });
 
         ItemGroupEvents.modifyEntriesEvent(createKey("terramine_equipment")).register(id("first_phase"), entries -> {

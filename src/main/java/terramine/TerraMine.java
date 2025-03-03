@@ -5,6 +5,7 @@ import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.entity.event.v1.ServerPlayerEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.fabricmc.fabric.api.loot.v2.LootTableEvents;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.fabricmc.loader.api.FabricLoader;
@@ -28,7 +29,9 @@ import terramine.common.init.*;
 import terramine.common.misc.TerrariaInventory;
 import terramine.common.network.ServerPacketHandler;
 import terramine.common.network.types.ItemNetworkType;
+import terramine.common.utility.CustomCauldronInteractions;
 import terramine.common.utility.InputHandler;
+import terramine.common.utility.dps.DPSManager;
 import terramine.common.world.biome.BiomeAdder;
 import terramine.common.world.biome.BiomeAdderCrimsonForced;
 import terramine.common.world.biome.BiomeSurfaceRules;
@@ -65,7 +68,8 @@ public class TerraMine implements ModInitializer, TerraBlenderApi {
 		ModDataComponents.ATTRIBUTE_MODIFIER_COMPONENT.toString();
 		ModItems.TERRASPARK_BOOTS.toString();
 		ModBlocks.registerEvilSpreadables();
-		ModFluids.STILL_SHIMMER.toString();
+		ModFluids.SHIMMER.toString();
+		CustomCauldronInteractions.register();
 		ModItemGroups.ITEM_GROUP_EQUIPMENT.toString();
 		ModItemGroups.registerItemGroups();
 		ModEntities.addToSpawn();
@@ -104,6 +108,7 @@ public class TerraMine implements ModInitializer, TerraBlenderApi {
 		PlayerEvent.PLAYER_RESPAWN.register((player, bl, reason) -> syncInventory(player));
 		PlayerEvent.PLAYER_JOIN.register(this::syncInventory);
 		PlayerEvent.PLAYER_JOIN.register(this::onPlayerJoin);
+		ServerTickEvents.END_SERVER_TICK.register(server -> DPSManager.decayAll());
 
 		// Compat Handlers
 		for (CompatHandler handler : FabricLoader.getInstance().getEntrypoints("terramine:compat_handlers", CompatHandler.class)) {

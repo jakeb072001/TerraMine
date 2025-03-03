@@ -12,13 +12,10 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.lighting.LightEngine;
 import org.jetbrains.annotations.NotNull;
 import terramine.TerraMine;
-import terramine.common.block.CrimsonSnowLayer;
+import terramine.common.block.evil.CrimsonSnowLayer;
 import terramine.common.init.ModBlocks;
 import terramine.common.init.ModCommands;
 import terramine.common.init.ModComponents;
-
-import java.util.HashMap;
-import java.util.Map;
 
 // todo: have a way to increase biome spread speed (for some events such as entering hardcore mode or for killing Plantera slowdown the spread again)
 // todo: have a way for the crimson to spread up trees or something, they remain green at the top while everything else is tinted correctly,

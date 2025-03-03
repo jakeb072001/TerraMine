@@ -11,6 +11,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.levelgen.structure.Structure;
+import net.minecraft.world.level.material.Fluid;
 import terramine.TerraMine;
 import terramine.common.init.ModItems;
 
@@ -25,6 +26,10 @@ public final class ModTags extends FabricTagProvider<Item> {
     public static final TagKey<Block> CRIMSON_MUSHROOM_GROW_BLOCKS = createBlockTag("crimson_mushroom_grow_blocks");
     public static final TagKey<Block> INCORRECT_FOR_EVIL_TOOL = createBlockTag("incorrect_for_evil_tool");
     public static final TagKey<Block> INCORRECT_FOR_MOLTEN_TOOL = createBlockTag("incorrect_for_molten_tool");
+
+    // Fluid Tags
+    public static final TagKey<Fluid> SHIMMER_FLUID = createFluidTag("shimmer");
+    public static final TagKey<Fluid> HONEY_FLUID = createFluidTag("honey");
 
     // Item Tags
     public static final TagKey<Item> ACCESSORY = createItemTag("accessory");
@@ -61,6 +66,10 @@ public final class ModTags extends FabricTagProvider<Item> {
 
     private static TagKey<Block> createBlockTag(String string) {
         return TagKey.create(Registries.BLOCK, TerraMine.id(string));
+    }
+
+    private static TagKey<Fluid> createFluidTag(String string) {
+        return TagKey.create(Registries.FLUID, TerraMine.id(string));
     }
 
     private static TagKey<Item> createItemTag(String string) {

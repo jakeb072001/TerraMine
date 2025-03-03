@@ -52,14 +52,21 @@ public class TerraMineClient implements ClientModInitializer {
 		ModParticles.registerClient();
 
 		// Fluid Render register
-		FluidRenderHandlerRegistry.INSTANCE.register(ModFluids.STILL_SHIMMER, ModFluids.FLOWING_SHIMMER, new SimpleFluidRenderHandler(
+		FluidRenderHandlerRegistry.INSTANCE.register(ModFluids.SHIMMER, ModFluids.FLOWING_SHIMMER, new SimpleFluidRenderHandler(
 				id("block/fluids/shimmer_still"),
 				id("block/fluids/shimmer_flow"),
 				id("block/fluids/shimmer_overlay")
 		));
+		FluidRenderHandlerRegistry.INSTANCE.register(ModFluids.HONEY, ModFluids.FLOWING_HONEY, new SimpleFluidRenderHandler(
+				id("block/fluids/honey_still"),
+				id("block/fluids/honey_flow"),
+				id("block/fluids/honey_overlay")
+		));
 		BlockRenderLayerMap.INSTANCE.putFluids(RenderType.translucent(),
-				ModFluids.STILL_SHIMMER,
-				ModFluids.FLOWING_SHIMMER);
+				ModFluids.SHIMMER,
+				ModFluids.FLOWING_SHIMMER,
+				ModFluids.HONEY,
+				ModFluids.FLOWING_HONEY);
 
 		// Screen Handler
 		ModScreenHandler.register();

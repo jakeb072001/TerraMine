@@ -1,4 +1,4 @@
-package terramine.common.block;
+package terramine.common.block.evil;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -21,12 +21,12 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.NotNull;
-import terramine.common.utility.CrimsonHelper;
+import terramine.common.utility.CorruptionHelper;
 
-public class CrimsonRedstoneOreBlock extends CrimsonHelper {
+public class CorruptedRedstoneOreBlock extends CorruptionHelper {
     public static final BooleanProperty LIT = RedstoneTorchBlock.LIT;
 
-    public CrimsonRedstoneOreBlock(Properties properties) {
+    public CorruptedRedstoneOreBlock(Properties properties) {
         super(properties);
         this.registerDefaultState(this.defaultBlockState().setValue(LIT, false));
     }
@@ -44,7 +44,7 @@ public class CrimsonRedstoneOreBlock extends CrimsonHelper {
     }
 
     @Override
-    public InteractionResult useItemOn(ItemStack itemStack, BlockState blockState, Level level, BlockPos blockPos, Player player, InteractionHand interactionHand, BlockHitResult blockHitResult) {
+    public @NotNull InteractionResult useItemOn(ItemStack itemStack, BlockState blockState, Level level, BlockPos blockPos, Player player, InteractionHand interactionHand, BlockHitResult blockHitResult) {
         if (level.isClientSide) {
             spawnParticles(level, blockPos);
         } else {

@@ -75,14 +75,15 @@ public class ModItems {
 	public static final Item UMBRELLA = register("umbrella", UmbrellaItem::new);
 	public static final Item WHOOPEE_CUSHION = registerAccessory("whoopee_cushion", WhoopeeCushionItem::new);
 	public static final Item MAGIC_MIRROR = register("magic_mirror", MagicMirrorItem::new);
-	public static final Item SHIMMER_BUCKET = register("shimmer_bucket", key -> new BucketItem(ModFluids.STILL_SHIMMER, new Item.Properties().setId(key).craftRemainder(BUCKET).stacksTo(1)));
+	public static final Item SHIMMER_BUCKET = register("shimmer_bucket", key -> new BucketItem(ModFluids.SHIMMER, new Item.Properties().setId(key).craftRemainder(BUCKET).stacksTo(1)));
+	public static final Item HONEY_BUCKET = register("honey_bucket", key -> new BucketItem(ModFluids.HONEY, new Item.Properties().setId(key).craftRemainder(BUCKET).stacksTo(1)));
 	public static final Item COBALT_SHIELD = registerShield("cobalt_shield", key -> new ShieldAccessoryLikeItem(new Item.Properties().setId(key).repairable(Items.DIAMOND).durability(2500).fireResistant().rarity(Rarity.RARE)));
 	public static final Item OBSIDIAN_SHIELD = registerShield("obsidian_shield", key -> new ShieldAccessoryLikeItem(new Item.Properties().setId(key).repairable(Items.OBSIDIAN).durability(2500).fireResistant().rarity(Rarity.RARE)));
 	public static final Item SHIELD_OF_CTHULHU = registerShield("shield_of_cthulhu", key -> new ShieldOfCthulhuItem(new Item.Properties().setId(key).repairable(Items.ROTTEN_FLESH).durability(2500).fireResistant().rarity(Rarity.RARE)));
 	public static final Item CLENTAMINATOR = register("clentaminator", ClentaminatorItem::new);
 	public static final Item GREEN_SOLUTION = registerMisc("green_solution", key -> new CraftingItem(new Item.Properties().setId(key), true));
 
-	// todo: add many more dyes, need to create a model/item for each one but its just copy paste
+	// todo: add many more dyes
 	// todo: also add some custom shader dyes, need to add a system to render the dyes first though
 	// todo: make dye craft-able, some will also be obtainable from enemies and other things
 	// todo: maybe also make work like potions, so only one item is registered and doesn't need a model per item, maybe
@@ -267,6 +268,7 @@ public class ModItems {
 	public static final Item MOLTEN_SHAXE = registerTool("molten_shaxe", key -> new TerrariaShaxeItem(TerrariaToolMaterials.MOLTEN, true, 7.5F, -3.1F, new Item.Properties().setId(key).fireResistant()));
 	// reminder: any pickaxe better than molten needs a true boolean added after the g float
 
+	// todo: add a system to reduce iframes for specific weapons (look into how this mod does it: https://www.curseforge.com/minecraft/mc-mods/configurable-iframes)
 	// Weapons
 	public static final Item PHASEBLADE_WHITE = registerBigWeapon("phaseblade_white", key -> new CustomSoundSwordItem(TerrariaToolMaterials.METEOR, 3F, -1F, ModSoundEvents.PHASEBLADE_SWING, new Item.Properties().setId(key)));
 	public static final Item PHASEBLADE_GREEN = registerBigWeapon("phaseblade_green", key -> new CustomSoundSwordItem(TerrariaToolMaterials.METEOR, 3F, -1F, ModSoundEvents.PHASEBLADE_SWING, new Item.Properties().setId(key)));

@@ -8,8 +8,6 @@ import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.renderer.FogParameters;
 import net.minecraft.client.renderer.FogRenderer;
 import net.minecraft.core.BlockPos;
-import net.minecraft.server.level.ClientInformation;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import org.joml.Vector4f;
 import org.spongepowered.asm.mixin.Mixin;
@@ -21,6 +19,7 @@ import terramine.common.init.ModBlocks;
 
 // todo: need star particles to make fox look like night sky
 // todo: on world creation caused everything to be black?
+// todo: maybe find an alternative way to create the shimmer sky effect
 @Mixin(FogRenderer.class)
 public abstract class FogRendererMixin {
     @Unique
@@ -40,7 +39,7 @@ public abstract class FogRendererMixin {
     private static boolean isNearShimmer(Player player, int range) {
         BlockPos playerPos = player.blockPosition();
         for (BlockPos pos : BlockPos.betweenClosed(playerPos.offset(-range, -range, -range), playerPos.offset(range, range, range))) {
-            if (player.level().getBlockState(pos).getBlock() == ModBlocks.SHIMMER_BLOCK) {
+            if (player.level().getBlockState(pos).getBlock() == ModBlocks.SHIMMER_FLUID) {
                 return true;
             }
         }
